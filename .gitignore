@@ -1,0 +1,49 @@
+Last login: Fri Feb  4 19:21:50 on ttys000
+sangheon@sangheonui-MacBookPro CMC_Hackathon_App % vi .gitignore
+sangheon@sangheonui-MacBookPro CMC_Hackathon_App % cd ..        
+sangheon@sangheonui-MacBookPro CMC_Hackathon_App % vi .gitignore
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+".gitignore" 120L, 2586B
+
