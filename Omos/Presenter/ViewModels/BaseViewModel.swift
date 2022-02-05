@@ -6,3 +6,12 @@
 //
 
 import Foundation
+import RxSwift
+
+class BaseViewModel {
+    var disposeBag:DisposeBag = .init()
+    
+    init() {
+        disposeBag = .init()
+    }
+}

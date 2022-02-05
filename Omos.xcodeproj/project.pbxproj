@@ -13,6 +13,8 @@
 		B609138427AD3A7C00B439C3 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609138327AD3A7C00B439C3 /* BaseViewController.swift */; };
 		B609138927AD3A8000B439C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B609138827AD3A8000B439C3 /* Assets.xcassets */; };
 		B609138C27AD3A8000B439C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B609138A27AD3A8000B439C3 /* LaunchScreen.storyboard */; };
+		B666A90627AED17C00BE7F92 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B666A90527AED17C00BE7F92 /* BaseView.swift */; };
+		B666A90827AED1AA00BE7F92 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B666A90727AED1AA00BE7F92 /* EmptyView.swift */; };
 		B689A9CE27AE94E9005F26E4 /* UIVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9C927AE94E7005F26E4 /* UIVIew.swift */; };
 		B689A9CF27AE94E9005F26E4 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9CA27AE94E8005F26E4 /* UIViewController.swift */; };
 		B689A9D027AE94E9005F26E4 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9CB27AE94E8005F26E4 /* UIImage.swift */; };
@@ -32,6 +34,8 @@
 		B609138827AD3A8000B439C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B609138B27AD3A8000B439C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B609138D27AD3A8000B439C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B666A90527AED17C00BE7F92 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		B666A90727AED1AA00BE7F92 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		B689A9C927AE94E7005F26E4 /* UIVIew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIVIew.swift; sourceTree = "<group>"; };
 		B689A9CA27AE94E8005F26E4 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		B689A9CB27AE94E8005F26E4 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -109,6 +113,8 @@
 		B612199027AE9377006AEAC9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B666A90527AED17C00BE7F92 /* BaseView.swift */,
+				B666A90727AED1AA00BE7F92 /* EmptyView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -320,6 +326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B689A9DC27AEA877005F26E4 /* LoginViewController.swift in Sources */,
+				B666A90627AED17C00BE7F92 /* BaseView.swift in Sources */,
 				B689A9CE27AE94E9005F26E4 /* UIVIew.swift in Sources */,
 				B689A9DA27AEA835005F26E4 /* BaseViewModel.swift in Sources */,
 				B609138427AD3A7C00B439C3 /* BaseViewController.swift in Sources */,
@@ -330,6 +337,7 @@
 				B689A9D027AE94E9005F26E4 /* UIImage.swift in Sources */,
 				B689A9D527AE9627005F26E4 /* CustomToggleView.swift in Sources */,
 				B609138227AD3A7C00B439C3 /* SceneDelegate.swift in Sources */,
+				B666A90827AED1AA00BE7F92 /* EmptyView.swift in Sources */,
 				B689A9CF27AE94E9005F26E4 /* UIViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
