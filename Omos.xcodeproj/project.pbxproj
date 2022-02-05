@@ -7,23 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		21B827FA49CA17F32C953880 /* Pods_Omos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDDD0956E1034CF6BE3CC18 /* Pods_Omos.framework */; };
 		B609138027AD3A7C00B439C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609137F27AD3A7C00B439C3 /* AppDelegate.swift */; };
 		B609138227AD3A7C00B439C3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609138127AD3A7C00B439C3 /* SceneDelegate.swift */; };
-		B609138427AD3A7C00B439C3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609138327AD3A7C00B439C3 /* ViewController.swift */; };
-		B609138727AD3A7C00B439C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B609138527AD3A7C00B439C3 /* Main.storyboard */; };
+		B609138427AD3A7C00B439C3 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609138327AD3A7C00B439C3 /* BaseViewController.swift */; };
 		B609138927AD3A8000B439C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B609138827AD3A8000B439C3 /* Assets.xcassets */; };
 		B609138C27AD3A8000B439C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B609138A27AD3A8000B439C3 /* LaunchScreen.storyboard */; };
+		B689A9CE27AE94E9005F26E4 /* UIVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9C927AE94E7005F26E4 /* UIVIew.swift */; };
+		B689A9CF27AE94E9005F26E4 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9CA27AE94E8005F26E4 /* UIViewController.swift */; };
+		B689A9D027AE94E9005F26E4 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9CB27AE94E8005F26E4 /* UIImage.swift */; };
+		B689A9D127AE94E9005F26E4 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9CC27AE94E8005F26E4 /* Color.swift */; };
+		B689A9D227AE94E9005F26E4 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9CD27AE94E9005F26E4 /* Date.swift */; };
+		B689A9D527AE9627005F26E4 /* CustomToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9D327AE9627005F26E4 /* CustomToggleView.swift */; };
+		B689A9D627AE9627005F26E4 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9D427AE9627005F26E4 /* IndicatorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B609137C27AD3A7C00B439C3 /* Omos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Omos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B609137F27AD3A7C00B439C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B609138127AD3A7C00B439C3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B609138327AD3A7C00B439C3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		B609138627AD3A7C00B439C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B609138327AD3A7C00B439C3 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		B609138827AD3A8000B439C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B609138B27AD3A8000B439C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B609138D27AD3A8000B439C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B689A9C927AE94E7005F26E4 /* UIVIew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIVIew.swift; sourceTree = "<group>"; };
+		B689A9CA27AE94E8005F26E4 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		B689A9CB27AE94E8005F26E4 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		B689A9CC27AE94E8005F26E4 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		B689A9CD27AE94E9005F26E4 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		B689A9D327AE9627005F26E4 /* CustomToggleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomToggleView.swift; sourceTree = "<group>"; };
+		B689A9D427AE9627005F26E4 /* IndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
+		C215C3C79873F26B73F4F037 /* Pods-Omos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Omos.release.xcconfig"; path = "Target Support Files/Pods-Omos/Pods-Omos.release.xcconfig"; sourceTree = "<group>"; };
+		CEBF3DD9CCF3DD38A49D350C /* Pods-Omos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Omos.debug.xcconfig"; path = "Target Support Files/Pods-Omos/Pods-Omos.debug.xcconfig"; sourceTree = "<group>"; };
+		EBDDD0956E1034CF6BE3CC18 /* Pods_Omos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Omos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +47,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21B827FA49CA17F32C953880 /* Pods_Omos.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5A9649AB9D7A8749E6E322D7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EBDDD0956E1034CF6BE3CC18 /* Pods_Omos.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B609137327AD3A7C00B439C3 = {
 			isa = PBXGroup;
 			children = (
 				B609137E27AD3A7C00B439C3 /* Omos */,
 				B609137D27AD3A7C00B439C3 /* Products */,
+				CBC207B625B5E088E6EE1C56 /* Pods */,
+				5A9649AB9D7A8749E6E322D7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +83,118 @@
 		B609137E27AD3A7C00B439C3 /* Omos */ = {
 			isa = PBXGroup;
 			children = (
-				B609137F27AD3A7C00B439C3 /* AppDelegate.swift */,
-				B609138127AD3A7C00B439C3 /* SceneDelegate.swift */,
-				B609138327AD3A7C00B439C3 /* ViewController.swift */,
-				B609138527AD3A7C00B439C3 /* Main.storyboard */,
+				B612199627AE93E4006AEAC9 /* Models */,
+				B612199527AE93D6006AEAC9 /* Managers */,
+				B612199427AE939D006AEAC9 /* Resource */,
+				B612198F27AE9370006AEAC9 /* Presenter */,
+			);
+			path = Omos;
+			sourceTree = "<group>";
+		};
+		B612198F27AE9370006AEAC9 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				B612199227AE9387006AEAC9 /* Controllers */,
+				B612199127AE9380006AEAC9 /* ViewModels */,
+				B612199027AE9377006AEAC9 /* Views */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		B612199027AE9377006AEAC9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B612199127AE9380006AEAC9 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B612199227AE9387006AEAC9 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B612199827AE9420006AEAC9 /* Ohters */,
+				B612199727AE9414006AEAC9 /* Cores */,
+				B609138327AD3A7C00B439C3 /* BaseViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		B612199427AE939D006AEAC9 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				B689A9D727AE9635005F26E4 /* Components */,
+				B689A9C827AE94B4005F26E4 /* Extension */,
 				B609138827AD3A8000B439C3 /* Assets.xcassets */,
 				B609138A27AD3A8000B439C3 /* LaunchScreen.storyboard */,
 				B609138D27AD3A8000B439C3 /* Info.plist */,
+				B609137F27AD3A7C00B439C3 /* AppDelegate.swift */,
+				B609138127AD3A7C00B439C3 /* SceneDelegate.swift */,
 			);
-			path = Omos;
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		B612199527AE93D6006AEAC9 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		B612199627AE93E4006AEAC9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B612199727AE9414006AEAC9 /* Cores */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cores;
+			sourceTree = "<group>";
+		};
+		B612199827AE9420006AEAC9 /* Ohters */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Ohters;
+			sourceTree = "<group>";
+		};
+		B689A9C827AE94B4005F26E4 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				B689A9CC27AE94E8005F26E4 /* Color.swift */,
+				B689A9CD27AE94E9005F26E4 /* Date.swift */,
+				B689A9CB27AE94E8005F26E4 /* UIImage.swift */,
+				B689A9C927AE94E7005F26E4 /* UIVIew.swift */,
+				B689A9CA27AE94E8005F26E4 /* UIViewController.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		B689A9D727AE9635005F26E4 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B689A9D327AE9627005F26E4 /* CustomToggleView.swift */,
+				B689A9D427AE9627005F26E4 /* IndicatorView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		CBC207B625B5E088E6EE1C56 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CEBF3DD9CCF3DD38A49D350C /* Pods-Omos.debug.xcconfig */,
+				C215C3C79873F26B73F4F037 /* Pods-Omos.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +204,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B609139027AD3A8000B439C3 /* Build configuration list for PBXNativeTarget "Omos" */;
 			buildPhases = (
+				C30991860C975885134EA979 /* [CP] Check Pods Manifest.lock */,
 				B609137827AD3A7C00B439C3 /* Sources */,
 				B609137927AD3A7C00B439C3 /* Frameworks */,
 				B609137A27AD3A7C00B439C3 /* Resources */,
+				77902E746488D1AA0A59065A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -127,34 +259,74 @@
 			files = (
 				B609138C27AD3A8000B439C3 /* LaunchScreen.storyboard in Resources */,
 				B609138927AD3A8000B439C3 /* Assets.xcassets in Resources */,
-				B609138727AD3A7C00B439C3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		77902E746488D1AA0A59065A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Omos/Pods-Omos-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Omos/Pods-Omos-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Omos/Pods-Omos-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C30991860C975885134EA979 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Omos-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B609137827AD3A7C00B439C3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B609138427AD3A7C00B439C3 /* ViewController.swift in Sources */,
+				B689A9CE27AE94E9005F26E4 /* UIVIew.swift in Sources */,
+				B609138427AD3A7C00B439C3 /* BaseViewController.swift in Sources */,
+				B689A9D127AE94E9005F26E4 /* Color.swift in Sources */,
+				B689A9D227AE94E9005F26E4 /* Date.swift in Sources */,
+				B689A9D627AE9627005F26E4 /* IndicatorView.swift in Sources */,
 				B609138027AD3A7C00B439C3 /* AppDelegate.swift in Sources */,
+				B689A9D027AE94E9005F26E4 /* UIImage.swift in Sources */,
+				B689A9D527AE9627005F26E4 /* CustomToggleView.swift in Sources */,
 				B609138227AD3A7C00B439C3 /* SceneDelegate.swift in Sources */,
+				B689A9CF27AE94E9005F26E4 /* UIViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		B609138527AD3A7C00B439C3 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B609138627AD3A7C00B439C3 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		B609138A27AD3A8000B439C3 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -284,6 +456,7 @@
 		};
 		B609139127AD3A8000B439C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CEBF3DD9CCF3DD38A49D350C /* Pods-Omos.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -294,7 +467,6 @@
 				INFOPLIST_FILE = Omos/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -312,6 +484,7 @@
 		};
 		B609139227AD3A8000B439C3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C215C3C79873F26B73F4F037 /* Pods-Omos.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -322,7 +495,6 @@
 				INFOPLIST_FILE = Omos/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
