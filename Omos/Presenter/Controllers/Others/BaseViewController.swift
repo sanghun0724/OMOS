@@ -32,8 +32,12 @@ class BaseViewController:UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
         setBarButtonItems()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        configureUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,7 +58,6 @@ class BaseViewController:UIViewController {
         let label = UILabel()
         for titleValue in TabBarViewController.titles {
             if String(describing: type(of: self)) == titleValue.1  {
-                print(titleValue)
                 label.text = titleValue.0
             }
         }
@@ -62,6 +65,7 @@ class BaseViewController:UIViewController {
         label.font = .systemFont(ofSize: 22, weight: .bold)
         label.tintColor = .white
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
+//        self.navigationItem.leftItemsSupplementBackButton = true //backbutton 안숨기기
     }
     
     @objc func didTapCreateButton() {
@@ -71,7 +75,7 @@ class BaseViewController:UIViewController {
     
     @objc func didTapSearchButton() {
         let vc = SearchViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        present(vc,animated: true)
         print("search")
     }
     
