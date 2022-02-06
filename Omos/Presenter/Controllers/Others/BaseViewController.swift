@@ -33,6 +33,50 @@ class BaseViewController:UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        setBarButtonItems()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    func setBarButtonItems() {
+        //rigthBarButtonItems
+        let notiButton = UIBarButtonItem(image: UIImage(systemName: "bell"), style: .plain, target: self, action: #selector(didTapNotification))
+        notiButton.tintColor = .white
+        let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(didTapSearchButton))
+        searchButton.tintColor = .white
+        let createButton = UIBarButtonItem(image: UIImage(systemName: "pencil"), style: .plain, target: self, action: #selector(didTapCreateButton))
+        createButton.tintColor = .white
+        self.navigationItem.rightBarButtonItems = [notiButton,searchButton,createButton]
+        
+        
+        let label = UILabel()
+        for titleValue in TabBarViewController.titles {
+            if String(describing: type(of: self)) == titleValue.1  {
+                print(titleValue)
+                label.text = titleValue.0
+            }
+        }
+        
+        label.font = .systemFont(ofSize: 22, weight: .bold)
+        label.tintColor = .white
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
+    }
+    
+    @objc func didTapCreateButton() {
+        
+        print("create")
+    }
+    
+    @objc func didTapSearchButton() {
+        let vc = SearchViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+        print("search")
+    }
+    
+    @objc func didTapNotification() {
+        print("noti")
     }
     
     func configureUI() {
@@ -55,5 +99,7 @@ class BaseViewController:UIViewController {
         let contentInset:UIEdgeInsets = .zero
         scrollView.contentInset = contentInset
     }
+    
+    
     
 }
