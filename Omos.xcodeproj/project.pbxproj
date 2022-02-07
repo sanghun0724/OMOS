@@ -25,6 +25,7 @@
 		B650874B27AFC5EF0020D2C1 /* AllRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650874A27AFC5EE0020D2C1 /* AllRecordView.swift */; };
 		B666A90627AED17C00BE7F92 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B666A90527AED17C00BE7F92 /* BaseView.swift */; };
 		B666A90827AED1AA00BE7F92 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B666A90727AED1AA00BE7F92 /* EmptyView.swift */; };
+		B683A45327B0DA3500838749 /* AllRecordTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B683A45227B0DA3500838749 /* AllRecordTableCell.swift */; };
 		B689A9CE27AE94E9005F26E4 /* UIVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9C927AE94E7005F26E4 /* UIVIew.swift */; };
 		B689A9CF27AE94E9005F26E4 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9CA27AE94E8005F26E4 /* UIViewController.swift */; };
 		B689A9D027AE94E9005F26E4 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9CB27AE94E8005F26E4 /* UIImage.swift */; };
@@ -56,6 +57,7 @@
 		B650874A27AFC5EE0020D2C1 /* AllRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordView.swift; sourceTree = "<group>"; };
 		B666A90527AED17C00BE7F92 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		B666A90727AED1AA00BE7F92 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
+		B683A45227B0DA3500838749 /* AllRecordTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordTableCell.swift; sourceTree = "<group>"; };
 		B689A9C927AE94E7005F26E4 /* UIVIew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIVIew.swift; sourceTree = "<group>"; };
 		B689A9CA27AE94E8005F26E4 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		B689A9CB27AE94E8005F26E4 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 			children = (
 				B666A90527AED17C00BE7F92 /* BaseView.swift */,
 				B650874A27AFC5EE0020D2C1 /* AllRecordView.swift */,
+				B683A45227B0DA3500838749 /* AllRecordTableCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -191,11 +194,11 @@
 		B612199727AE9414006AEAC9 /* CoreTabs */ = {
 			isa = PBXGroup;
 			children = (
-				B650874827AFC5150020D2C1 /* AllRecord + Table.swift */,
 				B650873A27AF94C60020D2C1 /* TabBarViewController.swift */,
 				B650873827AF948D0020D2C1 /* HomeViewController.swift */,
 				B650873C27AF969C0020D2C1 /* MyRecordViewController.swift */,
 				B650873E27AF96B00020D2C1 /* AllRecordViewController.swift */,
+				B650874827AFC5150020D2C1 /* AllRecord + Table.swift */,
 				B650874027AF96C00020D2C1 /* MyDJViewController.swift */,
 				B650874227AF96E80020D2C1 /* ProfileViewController.swift */,
 			);
@@ -383,6 +386,7 @@
 				B609138427AD3A7C00B439C3 /* BaseViewController.swift in Sources */,
 				B650873927AF948D0020D2C1 /* HomeViewController.swift in Sources */,
 				B689A9D127AE94E9005F26E4 /* Color.swift in Sources */,
+				B683A45327B0DA3500838749 /* AllRecordTableCell.swift in Sources */,
 				B689A9D227AE94E9005F26E4 /* Date.swift in Sources */,
 				B689A9D627AE9627005F26E4 /* IndicatorView.swift in Sources */,
 				B609138027AD3A7C00B439C3 /* AppDelegate.swift in Sources */,

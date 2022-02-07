@@ -26,7 +26,7 @@ class TabBarViewController: UITabBarController {
 //        }
         let home = HomeViewController()
         let myRecord = MyRecordViewController()
-        let allRecord = AllRecordViewController()
+        let allRecord = AllRecordViewController(viewModel: AllRecordViewModel())
         let myDj = MyDJViewController()
         let profile = ProfileViewController()
 
