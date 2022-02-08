@@ -1,11 +1,4 @@
-osx_image: xcode13.2
-language: swift
 os: osx
-cache:
-  directories:
-  - Pods
-xcode_workspace: TravisCITest.xcworkspace
-xcode_scheme: TravisCITest
-xcode_destination: platform=iOS Simulator,OS=13.6,name=iPhone 11
-before_install:
-- pod install
+language: swift
+osx_image: xcode13.2
+script: 'xcodebuild clean test -project Omos.xcodeproj -scheme "Omos" -sdk iphonesimulator -destination "platform=iOS Simulator,OS=13.6,name=iPhone 11" ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO'
