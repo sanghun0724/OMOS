@@ -15,7 +15,7 @@ extension ProfileViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "환결성정"
+        cell.textLabel?.text = "환결성정을 선택"
         cell.accessoryType = .disclosureIndicator
         cell.selectionStyle = .none
         return cell
