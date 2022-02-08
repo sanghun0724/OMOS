@@ -13,6 +13,6 @@ class SearchViewController:BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("search")
-        print("설마..")
+    
     }
 }
