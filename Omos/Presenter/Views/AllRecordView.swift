@@ -17,6 +17,7 @@ class AllRecordView:BaseView {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(AllRecordTableCell.self, forCellReuseIdentifier: AllRecordTableCell.identifier)
         table.register(AllRecordHeaderView.self, forHeaderFooterViewReuseIdentifier: AllRecordHeaderView.identifier)
+        table.showsVerticalScrollIndicator = false 
         return table
     }()
     
@@ -51,7 +52,7 @@ class AllRecordHeaderView:UITableViewHeaderFooterView {
         return label
     }()
     
-    private let button:UIButton = {
+    let button:UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "keyboard_arrow_left"), for: .normal)
         button.tintColor = .white
@@ -61,7 +62,7 @@ class AllRecordHeaderView:UITableViewHeaderFooterView {
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         configureUI()
-        binding()
+
     }
     
     func configureUI() {
@@ -80,12 +81,12 @@ class AllRecordHeaderView:UITableViewHeaderFooterView {
         }
     }
     
-    func binding() {
-        button.rx.tap
-            .subscribe(onNext: {_ in
-                print("click")
-            }).disposed(by: disposeBag)
-    }
+//    func binding() {
+//        button.rx.tap
+//            .subscribe(onNext: {_ in
+//                print("click")
+//            }).disposed(by: disposeBag)
+//    }
     
     override func prepareForReuse() {
         super.prepareForReuse()

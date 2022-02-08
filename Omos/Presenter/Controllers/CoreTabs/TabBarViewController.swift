@@ -37,8 +37,6 @@ class TabBarViewController: UITabBarController {
         let nav4 = UINavigationController(rootViewController: myDj)
         let nav5 = UINavigationController(rootViewController: profile)
         
-        
-        
         nav1.tabBarItem = UITabBarItem(title: "투데이", image: UIImage(systemName: "house"), tag: 1)
         nav2.tabBarItem = UITabBarItem(title: "MY 레코드", image: UIImage(systemName: "house"), tag: 2)
         nav3.tabBarItem = UITabBarItem(title: "전체 레코드", image: UIImage(systemName: "house"), tag: 3)
