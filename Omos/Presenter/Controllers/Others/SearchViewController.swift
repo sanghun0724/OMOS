@@ -13,6 +13,5 @@ class SearchViewController:BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("search")
-        print("what i misiing")
     }
 }
