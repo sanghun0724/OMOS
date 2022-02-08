@@ -37,7 +37,18 @@
 		B689A9D627AE9627005F26E4 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9D427AE9627005F26E4 /* IndicatorView.swift */; };
 		B689A9DA27AEA835005F26E4 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9D927AEA835005F26E4 /* BaseViewModel.swift */; };
 		B689A9DC27AEA877005F26E4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9DB27AEA877005F26E4 /* LoginViewController.swift */; };
+		B6A0299C27B23D3500D3D3C9 /* OmosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B6A0299D27B23D3500D3D3C9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B609137427AD3A7C00B439C3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B609137B27AD3A7C00B439C3;
+			remoteInfo = Omos;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		B609137C27AD3A7C00B439C3 /* Omos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Omos.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +83,8 @@
 		B689A9D927AEA835005F26E4 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		B689A9DB27AEA877005F26E4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B689A9DD27AEAD0C005F26E4 /* Omos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Omos.entitlements; sourceTree = "<group>"; };
+		B6A0299927B23D3500D3D3C9 /* OmosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OmosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmosTests.swift; sourceTree = "<group>"; };
 		C215C3C79873F26B73F4F037 /* Pods-Omos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Omos.release.xcconfig"; path = "Target Support Files/Pods-Omos/Pods-Omos.release.xcconfig"; sourceTree = "<group>"; };
 		CEBF3DD9CCF3DD38A49D350C /* Pods-Omos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Omos.debug.xcconfig"; path = "Target Support Files/Pods-Omos/Pods-Omos.debug.xcconfig"; sourceTree = "<group>"; };
 		EBDDD0956E1034CF6BE3CC18 /* Pods_Omos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Omos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,6 +96,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				21B827FA49CA17F32C953880 /* Pods_Omos.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B6A0299627B23D3500D3D3C9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				B609137E27AD3A7C00B439C3 /* Omos */,
+				B6A0299A27B23D3500D3D3C9 /* OmosTests */,
 				B609137D27AD3A7C00B439C3 /* Products */,
 				CBC207B625B5E088E6EE1C56 /* Pods */,
 				5A9649AB9D7A8749E6E322D7 /* Frameworks */,
@@ -111,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				B609137C27AD3A7C00B439C3 /* Omos.app */,
+				B6A0299927B23D3500D3D3C9 /* OmosTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -257,6 +279,14 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		B6A0299A27B23D3500D3D3C9 /* OmosTests */ = {
+			isa = PBXGroup;
+			children = (
+				B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */,
+			);
+			path = OmosTests;
+			sourceTree = "<group>";
+		};
 		CBC207B625B5E088E6EE1C56 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -288,6 +318,24 @@
 			productReference = B609137C27AD3A7C00B439C3 /* Omos.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B6A0299827B23D3500D3D3C9 /* OmosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B6A029A127B23D3500D3D3C9 /* Build configuration list for PBXNativeTarget "OmosTests" */;
+			buildPhases = (
+				B6A0299527B23D3500D3D3C9 /* Sources */,
+				B6A0299627B23D3500D3D3C9 /* Frameworks */,
+				B6A0299727B23D3500D3D3C9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B6A0299E27B23D3500D3D3C9 /* PBXTargetDependency */,
+			);
+			name = OmosTests;
+			productName = OmosTests;
+			productReference = B6A0299927B23D3500D3D3C9 /* OmosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -300,6 +348,10 @@
 				TargetAttributes = {
 					B609137B27AD3A7C00B439C3 = {
 						CreatedOnToolsVersion = 13.2.1;
+					};
+					B6A0299827B23D3500D3D3C9 = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = B609137B27AD3A7C00B439C3;
 					};
 				};
 			};
@@ -317,6 +369,7 @@
 			projectRoot = "";
 			targets = (
 				B609137B27AD3A7C00B439C3 /* Omos */,
+				B6A0299827B23D3500D3D3C9 /* OmosTests */,
 			);
 		};
 /* End PBXProject section */
@@ -328,6 +381,13 @@
 			files = (
 				B609138C27AD3A8000B439C3 /* LaunchScreen.storyboard in Resources */,
 				B609138927AD3A8000B439C3 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B6A0299727B23D3500D3D3C9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,7 +470,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B6A0299527B23D3500D3D3C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B6A0299C27B23D3500D3D3C9 /* OmosTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B6A0299E27B23D3500D3D3C9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B609137B27AD3A7C00B439C3 /* Omos */;
+			targetProxy = B6A0299D27B23D3500D3D3C9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B609138A27AD3A8000B439C3 /* LaunchScreen.storyboard */ = {
@@ -602,6 +678,44 @@
 			};
 			name = Release;
 		};
+		B6A0299F27B23D3500D3D3C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2L2K3UD2LK;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sangheon.OmosTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Omos.app/Omos";
+			};
+			name = Debug;
+		};
+		B6A029A027B23D3500D3D3C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2L2K3UD2LK;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sangheon.OmosTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Omos.app/Omos";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -619,6 +733,15 @@
 			buildConfigurations = (
 				B609139127AD3A8000B439C3 /* Debug */,
 				B609139227AD3A8000B439C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B6A029A127B23D3500D3D3C9 /* Build configuration list for PBXNativeTarget "OmosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B6A0299F27B23D3500D3D3C9 /* Debug */,
+				B6A029A027B23D3500D3D3C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
