@@ -21,7 +21,7 @@ class AllRecordTableCell:UITableViewCell {
     private func setCollectionView() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 148, height: 174)
+        layout.itemSize = CGSize(width: 148, height: 174) //비율정해서 설정하기 
         layout.minimumLineSpacing = 6
         layout.minimumInteritemSpacing = 6
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
