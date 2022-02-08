@@ -3,6 +3,6 @@ language: swift
 os: osx
 xcode_workspace: Omos.xcworkspace
 xcode_scheme: Omos
-xcode_destination: platform=iOS Simulator,OS=13.6,name=iPhone 11
+xcode_destination: platform=iOS Simulator,OS=13.6,name=iPhone 11,OS=12.1
 before_install:
 - pod install
