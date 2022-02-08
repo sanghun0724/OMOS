@@ -2,7 +2,7 @@ osx_image: xcode13.2
 language: swift
 os: osx
 xcode_workspace: Omos.xcworkspace
-xcode_scheme: Omos
+xcode_scheme: OmosTests
 xcode_destination: platform=iOS Simulator,OS=13.7,name=iPhone 8
 before_install:
 - pod install
