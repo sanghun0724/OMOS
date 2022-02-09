@@ -13,15 +13,18 @@ class SearchViewModel :BaseViewModel{
     let loading = BehaviorSubject<Bool>(value:false)
     let musics = BehaviorSubject<[Stock]>(value:[])
     let isEmpty = BehaviorSubject<Bool>(value:false)
-    let errorMessage = BehaviorSubject<String>(value: "")
+    let errorMessage = BehaviorSubject<String?>(value: nil)
+    var currentMusic:[Stock] = []
     let usecase:MusicUseCase
     
     func searchQeuryChanged(query:String) {
         loading.onNext(true)
         usecase.fetchMusicList(keyword: query)
             .subscribe({ [weak self] event in
+                self?.loading.onNext(false)
                 switch event {
                 case .success(let data):
+                    self?.currentMusic = data.items
                     self?.musics.onNext(data.items)
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)
@@ -46,4 +49,5 @@ class SearchViewModel :BaseViewModel{
                 }
             }).disposed(by: disposeBag)
     }
+    
 }

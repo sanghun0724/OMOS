@@ -34,6 +34,7 @@
 		B682185827B3AA4F00B58E19 /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682185727B3AA4F00B58E19 /* SearchListView.swift */; };
 		B682185A27B3AD5100B58E19 /* Search + Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682185927B3AD5100B58E19 /* Search + Table.swift */; };
 		B682185C27B3C0BB00B58E19 /* MyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682185B27B3C0BB00B58E19 /* MyError.swift */; };
+		B682185E27B3E22900B58E19 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682185D27B3E22900B58E19 /* LoadingView.swift */; };
 		B683A45327B0DA3500838749 /* AllRecordTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B683A45227B0DA3500838749 /* AllRecordTableCell.swift */; };
 		B683A45727B12DD000838749 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B683A45627B12DD000838749 /* ProfileView.swift */; };
 		B683A45927B130D100838749 /* Profile + Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B683A45827B130D100838749 /* Profile + Table.swift */; };
@@ -88,6 +89,7 @@
 		B682185727B3AA4F00B58E19 /* SearchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListView.swift; sourceTree = "<group>"; };
 		B682185927B3AD5100B58E19 /* Search + Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Search + Table.swift"; sourceTree = "<group>"; };
 		B682185B27B3C0BB00B58E19 /* MyError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyError.swift; sourceTree = "<group>"; };
+		B682185D27B3E22900B58E19 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		B683A45227B0DA3500838749 /* AllRecordTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordTableCell.swift; sourceTree = "<group>"; };
 		B683A45627B12DD000838749 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B683A45827B130D100838749 /* Profile + Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile + Table.swift"; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 				B666A90727AED1AA00BE7F92 /* EmptyView.swift */,
 				B689A9D327AE9627005F26E4 /* CustomToggleView.swift */,
 				B689A9D427AE9627005F26E4 /* IndicatorView.swift */,
+				B682185D27B3E22900B58E19 /* LoadingView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				B650874B27AFC5EF0020D2C1 /* AllRecordView.swift in Sources */,
 				B650873B27AF94C60020D2C1 /* TabBarViewController.swift in Sources */,
 				B650874327AF96E80020D2C1 /* ProfileViewController.swift in Sources */,
+				B682185E27B3E22900B58E19 /* LoadingView.swift in Sources */,
 				B666A90627AED17C00BE7F92 /* BaseView.swift in Sources */,
 				B689A9CE27AE94E9005F26E4 /* UIVIew.swift in Sources */,
 				B650874727AFC4CA0020D2C1 /* AllRecordViewModel.swift in Sources */,
