@@ -33,6 +33,7 @@
 		B682185627B3A0BE00B58E19 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682185527B3A0BE00B58E19 /* SearchViewModel.swift */; };
 		B682185827B3AA4F00B58E19 /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682185727B3AA4F00B58E19 /* SearchListView.swift */; };
 		B682185A27B3AD5100B58E19 /* Search + Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682185927B3AD5100B58E19 /* Search + Table.swift */; };
+		B682185C27B3C0BB00B58E19 /* MyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682185B27B3C0BB00B58E19 /* MyError.swift */; };
 		B683A45327B0DA3500838749 /* AllRecordTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B683A45227B0DA3500838749 /* AllRecordTableCell.swift */; };
 		B683A45727B12DD000838749 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B683A45627B12DD000838749 /* ProfileView.swift */; };
 		B683A45927B130D100838749 /* Profile + Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B683A45827B130D100838749 /* Profile + Table.swift */; };
@@ -86,6 +87,7 @@
 		B682185527B3A0BE00B58E19 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		B682185727B3AA4F00B58E19 /* SearchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListView.swift; sourceTree = "<group>"; };
 		B682185927B3AD5100B58E19 /* Search + Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Search + Table.swift"; sourceTree = "<group>"; };
+		B682185B27B3C0BB00B58E19 /* MyError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyError.swift; sourceTree = "<group>"; };
 		B683A45227B0DA3500838749 /* AllRecordTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordTableCell.swift; sourceTree = "<group>"; };
 		B683A45627B12DD000838749 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B683A45827B130D100838749 /* Profile + Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile + Table.swift"; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 				B689A9CB27AE94E8005F26E4 /* UIImage.swift */,
 				B689A9C927AE94E7005F26E4 /* UIVIew.swift */,
 				B689A9CA27AE94E8005F26E4 /* UIViewController.swift */,
+				B682185B27B3C0BB00B58E19 /* MyError.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -504,6 +507,7 @@
 				B682185827B3AA4F00B58E19 /* SearchListView.swift in Sources */,
 				B689A9D027AE94E9005F26E4 /* UIImage.swift in Sources */,
 				B650873D27AF969C0020D2C1 /* MyRecordViewController.swift in Sources */,
+				B682185C27B3C0BB00B58E19 /* MyError.swift in Sources */,
 				B650874527AFAE220020D2C1 /* SearchViewController.swift in Sources */,
 				B683A45927B130D100838749 /* Profile + Table.swift in Sources */,
 				B682185427B39F7200B58E19 /* MusicUseCase.swift in Sources */,

@@ -17,8 +17,13 @@ class SearchViewModel :BaseViewModel{
     func searchQeuryChanged(query:String) {
         loading.onNext(true)
         usecase.fetchMusicList(keyword: query)
-            .subscribe({ _ in
-                    print("this is viewModel")
+            .subscribe({ event in
+                switch event {
+                case .success(let data):
+                    print("data is \(data)")
+                case .failure(let error):
+                    print(error)
+                }
             }).disposed(by: disposeBag)
         
     }
