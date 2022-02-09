@@ -40,7 +40,6 @@ class MusicRepositoryImpl:MusicRepository {
                     ]
                 
                     RxAlamofire.requestJSON(request).subscribe(onNext: { (respone,any) in
-                        print("@@@@@@@@")
                         do {
                             let data = try JSONSerialization.data(withJSONObject: any)
                             let music = try JSONDecoder().decode(StockResult.self, from: data)

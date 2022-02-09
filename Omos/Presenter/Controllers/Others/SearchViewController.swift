@@ -52,18 +52,15 @@ class SearchViewController:BaseViewController {
     func bind() {
         
         selfView.searchViewController.searchBar.rx.text
-            .debounce(.milliseconds(300),scheduler:MainScheduler.instance)
+            .debounce(.milliseconds(300),scheduler:MainScheduler.instance) //요청 오버헤드 방지
             .withUnretained(self)
             .subscribe(onNext: { owner,text in
                 guard let text = text else {
                     return
                 }
-                print(text)
                 owner.viewModel.searchQeuryChanged(query: text)
             }).disposed(by: disposeBag)
-        
     }
-    
 }
 
 
