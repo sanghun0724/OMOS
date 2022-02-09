@@ -30,7 +30,7 @@ class LoginViewController:BaseViewController {
         return bt
     }()
     
-
+    
     @objc func loginKakao() {
         if UserApi.isKakaoTalkLoginAvailable() {
             UserApi.shared.loginWithKakaoTalk { (oauthToken,error) in

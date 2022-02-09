@@ -23,10 +23,12 @@ class SearchViewController:BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.enableScrollWhenKeyboardAppeared(scrollView: selfView.tableView)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         removeListeners()
     }
     
@@ -39,6 +41,12 @@ class SearchViewController:BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         selfView.searchViewController.isActive = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        selfView.searchViewController.isActive = false
+        selfView.searchViewController.searchBar.resignFirstResponder()
     }
     
     override func configureUI() {
@@ -59,8 +67,7 @@ class SearchViewController:BaseViewController {
    
     
     func bind() {
-        selfView.searchViewController.searchBar.rx.setDelegate(self).disposed(by: disposeBag)
-        
+    
         selfView.searchViewController.searchBar.rx.text
             .debounce(.milliseconds(300),scheduler:MainScheduler.instance) //요청 오버헤드 방지
             .withUnretained(self)
@@ -105,16 +112,12 @@ class SearchViewController:BaseViewController {
 
 
 
-extension SearchViewController:UISearchControllerDelegate ,UISearchBarDelegate {
+extension SearchViewController:UISearchControllerDelegate {
     func didPresentSearchController(_ searchController: UISearchController) {
         DispatchQueue.main.async
         { [weak self] in
             self?.selfView.searchViewController.searchBar.becomeFirstResponder()
         }
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        self.navigationController?.popViewController(animated: true)
     }
     
 }

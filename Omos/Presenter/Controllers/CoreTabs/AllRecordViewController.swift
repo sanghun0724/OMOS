@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class AllRecordViewController: BaseViewController {
-
+    
     let viewModel:AllRecordViewModel
     
     init(viewModel:AllRecordViewModel) {
@@ -32,12 +32,10 @@ class AllRecordViewController: BaseViewController {
     }
     
     override func configureUI() {
-        
         view.addSubview(selfView)
-        
+    
         selfView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
     }
 }

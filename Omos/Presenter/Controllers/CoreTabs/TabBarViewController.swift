@@ -20,16 +20,16 @@ class TabBarViewController: UITabBarController {
     }
     
     private func setupControllers() {
-//        guard let currentUserEmail = UserDefaults.standard.string(forKey: "email") else {
-//            print("dont have current user email")
-//            return
-//        }
+        //        guard let currentUserEmail = UserDefaults.standard.string(forKey: "email") else {
+        //            print("dont have current user email")
+        //            return
+        //        }
         let home = HomeViewController()
         let myRecord = MyRecordViewController()
         let allRecord = AllRecordViewController(viewModel: AllRecordViewModel())
         let myDj = MyDJViewController()
         let profile = ProfileViewController()
-
+        
         
         let nav1 = UINavigationController(rootViewController: home)
         let nav2 = UINavigationController(rootViewController: myRecord)
@@ -42,7 +42,7 @@ class TabBarViewController: UITabBarController {
         nav3.tabBarItem = UITabBarItem(title: "전체 레코드", image: UIImage(systemName: "house"), tag: 3)
         nav4.tabBarItem = UITabBarItem(title: "MY DJ", image: UIImage(systemName: "house"), tag: 4)
         nav5.tabBarItem = UITabBarItem(title: "MY 페이지", image: UIImage(systemName: "person.circle"), tag: 5)
-
+        
         let navs = [nav1,nav2,nav3,nav4,nav5]
         setViewControllers(navs, animated: true)
         tabBar.isTranslucent = false
@@ -53,5 +53,4 @@ class TabBarViewController: UITabBarController {
         }
     }
     
-
 }
