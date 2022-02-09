@@ -32,6 +32,7 @@ class SearchViewController:BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.rightBarButtonItems?.removeAll()
         bind()
     }
     
@@ -42,19 +43,20 @@ class SearchViewController:BaseViewController {
     
     override func configureUI() {
         view.addSubview(selfView)
-        
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         
         selfView.searchViewController.delegate = self
         selfView.searchViewController.searchResultsUpdater = self
-       // selfView.searchViewController.searchBar.delegate = self
+        selfView.searchViewController.hidesNavigationBarDuringPresentation = false
+        navigationItem.titleView = selfView.searchViewController.searchBar
+        self.navigationItem.leftItemsSupplementBackButton = true
+        self.navigationController?.navigationBar.tintColor = .white
         
-        navigationItem.searchController = selfView.searchViewController
-        
-        navigationItem.rightBarButtonItems?.removeAll()
         selfView.frame = view.bounds
     }
+    
+   
     
     func bind() {
         selfView.searchViewController.searchBar.rx.setDelegate(self).disposed(by: disposeBag)
@@ -67,7 +69,7 @@ class SearchViewController:BaseViewController {
                     return
                 }
                 print(text)
-                owner.viewModel.searchQeuryChanged(query: text)
+                //owner.viewModel.searchQeuryChanged(query: text)
             }).disposed(by: disposeBag)
         
         viewModel.errorMessage
@@ -108,14 +110,15 @@ extension SearchViewController:UISearchControllerDelegate ,UISearchBarDelegate {
         DispatchQueue.main.async
         { [weak self] in
             self?.selfView.searchViewController.searchBar.becomeFirstResponder()
-
         }
     }
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         self.navigationController?.popViewController(animated: true)
     }
     
 }
+
 extension SearchViewController:UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         

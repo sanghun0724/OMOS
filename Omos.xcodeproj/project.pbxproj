@@ -277,10 +277,10 @@
 		B650873727AF94500020D2C1 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				B682185927B3AD5100B58E19 /* Search + Table.swift */,
 				B650874427AFAE220020D2C1 /* SearchViewController.swift */,
 				B682184B27B3823D00B58E19 /* ShareCustomViewController.swift */,
 				B609138327AD3A7C00B439C3 /* BaseViewController.swift */,
-				B682185927B3AD5100B58E19 /* Search + Table.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";

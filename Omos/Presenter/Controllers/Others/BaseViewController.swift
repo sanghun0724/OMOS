@@ -70,7 +70,8 @@ class BaseViewController:UIViewController {
         label.font = .systemFont(ofSize: 22, weight: .bold)
         label.tintColor = .white
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
-//        self.navigationItem.leftItemsSupplementBackButton = true //backbutton 안숨기기
+       // self.navigationItem.leftItemsSupplementBackButton = true //backbutton 안숨기기
+        self.navigationItem.backButtonTitle = ""
     }
     
     @objc func didTapCreateButton() {

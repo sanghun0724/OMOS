@@ -19,7 +19,9 @@ class SearchListView:BaseView {
     
     let searchViewController:UISearchController = {
         let view = UISearchController(searchResultsController: nil)
-        view.searchBar.placeholder = "Enter a company name or symbol"
+        view.searchBar.placeholder = "음악을 검색해주세요"
+        view.searchBar.tintColor = .white
+        view.searchBar.showsCancelButton = false 
         view.obscuresBackgroundDuringPresentation = false
         return view
     }()
