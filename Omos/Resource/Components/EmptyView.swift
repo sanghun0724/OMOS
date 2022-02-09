@@ -14,6 +14,7 @@ class EmptyView: UIView {
     override init(frame:CGRect) {
         super.init(frame: frame)
         descriptionLabel.text = "There is no any ccontents"
+        descriptionLabel.tintColor = .white
         addSubview(descriptionLabel)
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         

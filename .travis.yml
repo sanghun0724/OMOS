@@ -1,17 +1,14 @@
---- 
-before_install: 
-  - "pod install"
+before_install:
+- pod install
+cache:
+  directories:
+  - Pods
 language: swift
-notifications: 
-  slack: 
-    rooms: 
-      - 
-        secure: BHLebcwfE7NK86YecQK7Fw4oPulZaRMX46Aa+1706SLftqTPK8f9ktU1mi242fS7GWBMn2jwrICqSHbYNwRdoulEk6NrpvSWV2pxjEJk8KBjAKFBO90c5GSFD9/xQBlAP/wYBBfxMFPhF6Iz6YIZb64RcdL2aO7/UGmkywiUPxBPurY6lxRdB2w6giObQDlCCErMy/d0QoZpfuXs5FESmBM4Vh3yDfd9Y5cBOpYG6yZIkW0hsJSmw+kB0dyC5UX7suUeZRHcdSLZ0a7pooCu9U7gNlMXF0a4eqFJEBJb7H1VY8iGPfCE1usjrD2EFC6vFpkD95cq8gXN9HGPpNl5cjhwKuYbhpY1CvX3ZSQ23JBj8wpHQ/XwIZNGN/41i231cCQ/wTVrxKnkaqO9Y6xlS2HSy/ePxbVbgdnTPcmw7IdbVshrOPbq9lrjXUsvBoV54Rk9O4Klf1R4JxrwLYypw60Yfz+So/8nzQv4BgrE2SEWjBXA8HGiDs46i1AuPSjHirEIiBbq0b7fEXqFQGRQSaOmqFUzI8KqiuRdaj47SepEDEbFkD4BZmzks2k37mqbdv0qZ4Axm8hM77/y7CzYdNN5zwd+xU+uIifnTcRexwBA2lCsNy/uVl2bTOk36kkj1ncoTL60Yvvei4HjUd5eJWkcGBTUS0nsaVLdnTQgQwU=
-on_failure: always
-on_success: always
 os: osx
 osx_image: xcode13.2
-xcode_destination: "platform=iOS Simulator,OS=15.0,name=iPhone 11"
+xcode_destination: platform=iOS Simulator,OS=15.0,name=iPhone 11
 xcode_scheme: Omos
 xcode_workspace: Omos.xcworkspace
-
+notifications:
+  slack:
+    secure: pt32xYufGo2XtK+sDoprkIIl50oMPoUqkYFLWtSHnOmJBPEq3NzmQZEr/jFT2eOV7qQdz9Q4gE5eX1XnbdenQCmYv0UeLnXgOpUF3ascZewtrU1FCWM8hYEXadLm7xQVTKy/zGJUN0fqsGl+scEXCftXY1N/9bfmE2Sst4HOmuO0WyZ/D3EpcyUNohKKrHllLig/ft2CWYOktReKQx6BaKniRM9Df+8HFeIkdwQJl+2Npuc7cI+musuKbUXkImbIBfjVDeE2JW1txNhwcPQkwh1K7ojYlp8uoA01GVngTrsLFzfier7t0MIrNWcybOQGJbFLcsh8HaNoy709dOad4NHFC/mjXWLU+lFjQYiN0BHJYUP0b0IwvfYEOi9UBix/NlB6F+cC6YG6Zq7RiZoY/+905jfeu3gj2w6aB2ul5ky6RivZoTIUIPu9Xxi/CsAQ0K+3TArnHS0tRMt8IR8BEb+hg6UotppXtO677etzbAFpJZCeiAmMEjss59kcQ+aXWpVdYpxj9sWTTypNl3y0bLnFNdmkjt5ont+LSFHNwteZT9sMaLzl3IRWkEAxXfGaihWsHIkE5cqLEheo4YKHpKtW8+P+mlOEa5H7ebO1o3vB/lSgiNM0CXfooflYlP/JdSTQKXSuMYQ2wunn4ULAundjMMdqin+TQJhiBhOmkqo=
