@@ -19,6 +19,7 @@ class LoginViewController:BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .mainBackGround
     }
     
     override func configureUI() {
@@ -27,12 +28,13 @@ class LoginViewController:BaseViewController {
         
         topView.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.7)
+            make.height.equalToSuperview().multipliedBy(0.6)
           }
         
         bottomView.snp.makeConstraints { make in
             make.top.equalTo(topView.snp.bottom)
-            make.left.right.bottom.equalToSuperview()
+            make.left.right.equalToSuperview().inset(22)
+            make.bottom.equalToSuperview().inset(40)
         }
     }
         

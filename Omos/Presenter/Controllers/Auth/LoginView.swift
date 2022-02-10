@@ -15,8 +15,7 @@ class LoginView:BaseView {
     let coverView = UIView()
     
     let imageView:UIImageView = {
-        let imageView = UIImageView(image:UIImage(named: ""))
-        imageView.backgroundColor = .blue
+        let imageView = UIImageView(image:UIImage(named: "onboarding_logo"))
         return imageView
     }()
     
@@ -79,14 +78,14 @@ class LoginView:BaseView {
         
         imageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.height.equalTo(60)
-            make.width.equalTo(100)
+            make.height.equalTo(74)
+            make.width.equalTo(77.5)
         }
         
         loginButton.snp.makeConstraints { make in
             make.left.bottom.equalToSuperview()
             make.width.equalTo(100)
-            make.height.equalTo(100)
+            make.height.equalTo(60)
         }
         
         stack.snp.makeConstraints { make in

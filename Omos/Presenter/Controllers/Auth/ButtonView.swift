@@ -24,6 +24,7 @@ class ButtonView:BaseView {
     
     let kakaoButton:UIButton = {
        let bt = UIButton()
+        bt.layer.cornerRadius = 8
        bt.backgroundColor = .yellow
        return bt
    }()
@@ -43,25 +44,25 @@ class ButtonView:BaseView {
         
         loginButton.snp.makeConstraints { make in
             make.left.right.top.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.27)
+            make.height.equalToSuperview().multipliedBy(0.20)
         }
         
         decoView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(loginButton.snp.bottom)
-            make.height.equalToSuperview().multipliedBy(0.18)
+            make.height.equalToSuperview().multipliedBy(0.14)
         }
         
         kakaoButton.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(decoView.snp.bottom)
-            make.height.equalToSuperview().multipliedBy(0.27)
+            make.height.equalToSuperview().multipliedBy(0.20)
         }
         
         appleButton.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
-            make.top.equalTo(kakaoButton.snp.bottom)
-            make.height.equalToSuperview().multipliedBy(0.27)
+            make.top.equalTo(kakaoButton.snp.bottom).offset(14)
+            make.height.equalToSuperview().multipliedBy(0.20)
         }
 
         
