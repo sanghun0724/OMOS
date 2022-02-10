@@ -67,12 +67,11 @@ class LoginView:BaseView {
     
     
     override func configureUI() {
-        backgroundColor = .purple
+        self.backgroundColor = .mainBackGround
         coverView.addSubview(imageView)
         coverView.addSubview(loginButton)
         self.addSubview(coverView)
         self.addSubview(stack)
-        coverView.backgroundColor = .orange
         coverView.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.396)

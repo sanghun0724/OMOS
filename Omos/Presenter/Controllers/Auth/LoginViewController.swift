@@ -14,49 +14,31 @@ import KakaoSDKCommon
 
 class LoginViewController:BaseViewController {
     
-    private let selfView = LoginView()
+    private let topView = LoginView()
+    private let bottomView = ButtonView()
 
-    private let appleButton:ASAuthorizationAppleIDButton = {
-        let button = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: .white)
-        button.cornerRadius = 8
-        button.addTarget(self, action: #selector(loginHandler), for: .touchUpInside)
-        return button
-    }()
-    
-    private let kakaoButton:UIButton = {
-        let bt = UIButton()
-        bt.addTarget(self, action: #selector(loginKakao), for: .touchUpInside)
-        bt.backgroundColor = .yellow
-        return bt
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func configureUI() {
-        view.addSubview(selfView)
-        view.addSubview(appleButton)
-        view.addSubview(kakaoButton)
+        view.addSubview(topView)
+        view.addSubview(bottomView)
         
-        selfView.snp.makeConstraints { make in
+        topView.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.7)
-        }
+          }
         
-        appleButton.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(20)
-            make.top.equalTo(selfView.snp.bottom)
-            make.height.equalTo(60)
+        bottomView.snp.makeConstraints { make in
+            make.top.equalTo(topView.snp.bottom)
+            make.left.right.bottom.equalToSuperview()
         }
-
-        kakaoButton.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(20)
-            make.top.equalTo(appleButton.snp.bottom)
-            make.height.equalTo(60)
-        }
-        
     }
+        
+
+    
+        
     
     
     //MARK: KAKAO LOGIN

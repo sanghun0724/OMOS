@@ -28,6 +28,7 @@
 		B6670FA627B5097000BABF40 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6670FA527B5097000BABF40 /* LoginViewModel.swift */; };
 		B6670FA827B5098200BABF40 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6670FA727B5098200BABF40 /* LoginView.swift */; };
 		B6670FAA27B517DE00BABF40 /* DecoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6670FA927B517DD00BABF40 /* DecoView.swift */; };
+		B6670FAC27B5542100BABF40 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6670FAB27B5542100BABF40 /* ButtonView.swift */; };
 		B682184C27B3823D00B58E19 /* ShareCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682184B27B3823D00B58E19 /* ShareCustomViewController.swift */; };
 		B682184E27B393BF00B58E19 /* MusicRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682184D27B393BF00B58E19 /* MusicRepository.swift */; };
 		B682185027B39ADD00B58E19 /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682184F27B39ADD00B58E19 /* TestModel.swift */; };
@@ -86,6 +87,7 @@
 		B6670FA527B5097000BABF40 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		B6670FA727B5098200BABF40 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		B6670FA927B517DD00BABF40 /* DecoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoView.swift; sourceTree = "<group>"; };
+		B6670FAB27B5542100BABF40 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		B682184B27B3823D00B58E19 /* ShareCustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCustomViewController.swift; sourceTree = "<group>"; };
 		B682184D27B393BF00B58E19 /* MusicRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicRepository.swift; sourceTree = "<group>"; };
 		B682184F27B39ADD00B58E19 /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				B689A9DB27AEA877005F26E4 /* LoginViewController.swift */,
 				B6670FA527B5097000BABF40 /* LoginViewModel.swift */,
 				B6670FA727B5098200BABF40 /* LoginView.swift */,
+				B6670FAB27B5542100BABF40 /* ButtonView.swift */,
 				B6670FA927B517DD00BABF40 /* DecoView.swift */,
 			);
 			path = Auth;
@@ -503,6 +506,7 @@
 				B682185E27B3E22900B58E19 /* LoadingView.swift in Sources */,
 				B666A90627AED17C00BE7F92 /* BaseView.swift in Sources */,
 				B689A9CE27AE94E9005F26E4 /* UIVIew.swift in Sources */,
+				B6670FAC27B5542100BABF40 /* ButtonView.swift in Sources */,
 				B650874727AFC4CA0020D2C1 /* AllRecordViewModel.swift in Sources */,
 				B650874927AFC5150020D2C1 /* AllRecord + Table.swift in Sources */,
 				B689A9DA27AEA835005F26E4 /* BaseViewModel.swift in Sources */,

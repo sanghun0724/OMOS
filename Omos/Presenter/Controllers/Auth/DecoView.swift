@@ -90,6 +90,7 @@ class labels:BaseView {
     
     let dummyView:UIView = {
        let view = UIView()
+        view.backgroundColor = .mainGrey
         return view
     }()
     
@@ -106,11 +107,32 @@ class labels:BaseView {
     }()
     
     override func configureUI() {
-        self.addSubview(findIDButton)
-        self.addSubview(findPWButton)
-        self.addSubview(dummyView)
+//        self.addSubview(findIDButton)
+//        self.addSubview(findPWButton)
+//        self.addSubview(dummyView)
         self.addSubview(signUpButton)
         
+//        findIDButton.snp.makeConstraints { make in
+//            make.left.top.bottom.equalToSuperview()
+//            make.height.equalTo(64)
+//        }
+//
+//        dummyView.snp.makeConstraints { make in
+//            make.top.bottom.equalToSuperview()
+//            make.left.equalTo(findIDButton.snp.right).inset(1)
+//            make.width.equalTo(1)
+//        }
+//
+//        findPWButton.snp.makeConstraints { make in
+//            make.top.bottom.equalToSuperview()
+//            make.left.equalTo(dummyView.snp.right).inset(1)
+//            make.width.equalTo(64)
+//        }
+        
+        signUpButton.snp.makeConstraints { make in
+            make.top.right.bottom.equalToSuperview()
+            make.width.equalTo(64)
+        }
         
     }
     
