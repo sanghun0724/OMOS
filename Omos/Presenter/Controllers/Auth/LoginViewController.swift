@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 import AuthenticationServices
 import KakaoSDKUser
 import KakaoSDKAuth
@@ -13,16 +14,15 @@ import KakaoSDKCommon
 
 class LoginViewController:BaseViewController {
     
+    private let selfView = LoginView()
+
+    private let appleButton:ASAuthorizationAppleIDButton = {
+        let button = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: .white)
+        button.cornerRadius = 8
+        button.addTarget(self, action: #selector(loginHandler), for: .touchUpInside)
+        return button
+    }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setAppleButton()
-        
-        view.addSubview(kakaoButton)
-        kakaoButton.frame = CGRect(x: 100, y: 100, width: 100, height: 100)
-    }
-    
-    //MARK: KAKAO LOGIN
     private let kakaoButton:UIButton = {
         let bt = UIButton()
         bt.addTarget(self, action: #selector(loginKakao), for: .touchUpInside)
@@ -30,7 +30,36 @@ class LoginViewController:BaseViewController {
         return bt
     }()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
     
+    override func configureUI() {
+        view.addSubview(selfView)
+        view.addSubview(appleButton)
+        view.addSubview(kakaoButton)
+        
+        selfView.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.7)
+        }
+        
+        appleButton.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(20)
+            make.top.equalTo(selfView.snp.bottom)
+            make.height.equalTo(60)
+        }
+
+        kakaoButton.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(20)
+            make.top.equalTo(appleButton.snp.bottom)
+            make.height.equalTo(60)
+        }
+        
+    }
+    
+    
+    //MARK: KAKAO LOGIN
     @objc func loginKakao() {
         if UserApi.isKakaoTalkLoginAvailable() {
             UserApi.shared.loginWithKakaoTalk { (oauthToken,error) in
@@ -43,20 +72,14 @@ class LoginViewController:BaseViewController {
                     
                     self.getUserInfo()
                 }
-                
             }
         }
     }
     
     
-    //MARK: APPLE LOGIN
-    func setAppleButton() {
-        let button = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: .black)
-        button.addTarget(self, action: #selector(loginHandler), for: .touchUpInside)
-        self.view.addSubview(button)
-        button.center = self.view.center
-    }
     
+    
+    //MARK: APPLE LOGIN
     @objc func loginHandler() {
         let request = ASAuthorizationAppleIDProvider().createRequest()
         request.requestedScopes = [.fullName,.email]

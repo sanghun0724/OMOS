@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 
 extension AllRecordViewController:UITableViewDelegate,UITableViewDataSource {
@@ -26,10 +27,10 @@ extension AllRecordViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: AllRecordHeaderView.identifier) as! AllRecordHeaderView
-        headerView.button.rx.tap
-            .subscribe(onNext: {
-                print("click")
-            }).disposed(by: disposeBag)
+        headerView.button.rx.tap.asDriver()
+            .drive(onNext: { [weak self] in
+                print("click is here ")
+            }).disposed(by: headerView.disposeBag)
         switch section {
         case 0:
             headerView.label.text = "나만의 가사해석"

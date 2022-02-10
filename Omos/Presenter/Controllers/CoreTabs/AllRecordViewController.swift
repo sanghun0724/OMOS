@@ -33,9 +33,15 @@ class AllRecordViewController: BaseViewController {
     
     override func configureUI() {
         view.addSubview(selfView)
-    
+        
         selfView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.left.equalTo(self.view).inset(16)
+            make.right.equalTo(self.view)
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
         }
+    }
+    
+    func bind() {
     }
 }

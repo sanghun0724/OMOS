@@ -17,7 +17,8 @@ class AllRecordView:BaseView {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(AllRecordTableCell.self, forCellReuseIdentifier: AllRecordTableCell.identifier)
         table.register(AllRecordHeaderView.self, forHeaderFooterViewReuseIdentifier: AllRecordHeaderView.identifier)
-        table.showsVerticalScrollIndicator = false 
+        table.showsVerticalScrollIndicator = false
+        table.automaticallyAdjustsScrollIndicatorInsets = false
         return table
     }()
     
@@ -43,7 +44,7 @@ class AllRecordView:BaseView {
 
 class AllRecordHeaderView:UITableViewHeaderFooterView {
     static let identifier = "headerView"
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     
     let label:UILabel = {
         let label = UILabel()
@@ -62,7 +63,6 @@ class AllRecordHeaderView:UITableViewHeaderFooterView {
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         configureUI()
-
     }
     
     func configureUI() {
@@ -81,15 +81,10 @@ class AllRecordHeaderView:UITableViewHeaderFooterView {
         }
     }
     
-//    func binding() {
-//        button.rx.tap
-//            .subscribe(onNext: {_ in
-//                print("click")
-//            }).disposed(by: disposeBag)
-//    }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
+        disposeBag = DisposeBag()
     }
     
     required init?(coder: NSCoder) {

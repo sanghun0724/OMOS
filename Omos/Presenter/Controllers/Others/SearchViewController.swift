@@ -64,10 +64,10 @@ class SearchViewController:BaseViewController {
         selfView.frame = view.bounds
     }
     
-   
+    
     
     func bind() {
-    
+        
         selfView.searchViewController.searchBar.rx.text
             .debounce(.milliseconds(300),scheduler:MainScheduler.instance) //요청 오버헤드 방지
             .withUnretained(self)
