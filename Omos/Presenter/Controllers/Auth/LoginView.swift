@@ -29,9 +29,6 @@ class LoginView:BaseView {
     let emailField:UITextField = {
         let field = UITextField()
         field.placeholder = "이메일(아이디)를 입력해주세요"
-        field.snp.makeConstraints { make in
-            make.height.equalTo(40)
-        }
         field.textColor = .white
         field.backgroundColor = .black
         return field
@@ -40,26 +37,19 @@ class LoginView:BaseView {
     let passwordField:UITextField = {
         let field = UITextField()
         field.placeholder = "비밀번호를 입력해주세요"
-        field.snp.makeConstraints { make in
-            make.height.equalTo(40)
-        }
         field.textColor = .white
         field.backgroundColor = .black
         return field
     }()
     
-    private let emailLabel:UILabel = {
-        let label = UILabel()
-        label.text = "이메일"
-        label.tintColor = .white
-        return label
+    private let emailLabel:EmailLabelView = {
+        let labelView = EmailLabelView()
+        return labelView
     }()
     
-    private let passwordLabel:UILabel = {
-        let label = UILabel()
-        label.text = "비밀번호"
-        label.tintColor = .white
-        return label
+    private let passwordLabel:PasswordLabelView = {
+        let labelView = PasswordLabelView()
+        return labelView
     }()
     
     private let labelsView:labels = {
@@ -67,9 +57,10 @@ class LoginView:BaseView {
         return view
     }()
     
+    lazy var views = [emailLabel,emailField,passwordLabel,passwordField,labelsView]
     
     private lazy var stack:UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [emailLabel,emailField,passwordLabel,passwordField])
+        let stack = UIStackView(arrangedSubviews: views)
         stack.axis = .vertical
         return stack
     }()
@@ -102,18 +93,14 @@ class LoginView:BaseView {
         stack.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(10)
             make.top.equalTo(coverView.snp.bottom)
-            make.height.equalTo(260)
         }
         
-        emailLabel.snp.makeConstraints { make in
-            make.height.equalTo(40)
+        for view in views {
+            view.snp.makeConstraints { make in
+                make.height.equalTo(self.snp.height).multipliedBy(0.089)
+            }
         }
         
     }
 }
 
-
-
-class labels:BaseView {
-    
-}
