@@ -27,6 +27,12 @@ class LoginView:BaseView {
     let emailField:UITextField = {
         let field = UITextField()
         field.placeholder = "이메일(아이디)를 입력해주세요"
+        field.autocorrectionType = .no
+        field.autocapitalizationType = .none
+        field.layer.cornerRadius = Constant.loginCorner
+        field.layer.masksToBounds = true
+        field.leftViewMode = .always
+        field.leftView = UIView(frame:CGRect(x: 0, y: 0, width: 10, height: 50))
         field.textColor = .white
         field.backgroundColor = .black
         return field
@@ -35,9 +41,22 @@ class LoginView:BaseView {
     let passwordField:UITextField = {
         let field = UITextField()
         field.placeholder = "비밀번호를 입력해주세요"
+        field.autocorrectionType = .no
+        field.autocapitalizationType = .none
+        field.isSecureTextEntry = true
+        field.layer.cornerRadius = Constant.loginCorner
+        field.layer.masksToBounds = true
+        field.leftViewMode = .always
+        field.leftView = UIView(frame:CGRect(x: 0, y: 0, width: 10, height: 50))
         field.textColor = .white
         field.backgroundColor = .black
+        field.rightViewMode = .always
         return field
+    }()
+    
+    private let passwordDecoView:UIImageView = {
+        let imageView = UIImageView(image:UIImage(named: "visible2" ))
+        return imageView
     }()
     
     private let emailLabel:EmailLabelView = {
@@ -66,6 +85,7 @@ class LoginView:BaseView {
     
     override func configureUI() {
         self.backgroundColor = .mainBackGround
+        passwordField.addSubview(passwordDecoView)
         coverView.addSubview(imageView)
         coverView.addSubview(titleLabel)
         self.addSubview(coverView)
@@ -82,14 +102,14 @@ class LoginView:BaseView {
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(10)
+            make.left.equalToSuperview().offset(16)
             make.bottom.equalToSuperview()
             make.width.equalTo(100)
             make.height.equalTo(60)
         }
         
         stack.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(10)
+            make.left.right.equalToSuperview().inset(16)
             make.top.equalTo(coverView.snp.bottom)
         }
         
@@ -97,6 +117,12 @@ class LoginView:BaseView {
             view.snp.makeConstraints { make in
                 make.height.equalTo(self.snp.height).multipliedBy(0.089)
             }
+        }
+        
+        passwordDecoView.snp.makeConstraints { make in
+            make.right.equalToSuperview().inset(16)
+            make.centerY.equalToSuperview()
+            make.width.greaterThanOrEqualTo(24)
         }
         
     }

@@ -11,20 +11,20 @@ import UIKit
 class DecoView:BaseView {
     private let view1:UIView = {
         let view = UIView()
-        view.backgroundColor = .mainGrey
+        view.backgroundColor = .mainGrey7
         return view
     }()
     
     private let label:UILabel = {
         let label = UILabel()
         label.text = "or"
-        label.textColor = .mainGrey
+        label.textColor = .mainGrey7
         return label
     }()
     
     private let view2:UIView = {
         let view = UIView()
-        view.backgroundColor = .mainGrey
+        view.backgroundColor = .mainGrey7
         return view
     }()
     
@@ -41,14 +41,14 @@ class DecoView:BaseView {
             make.left.equalToSuperview()
             make.centerY.equalToSuperview()
             make.height.equalTo(1)
-            make.right.equalTo(label.left).offset(14)
+            make.right.equalTo(label.snp.left).offset(-14)
         }
         
         view2.snp.makeConstraints { make in
             make.right.equalToSuperview()
             make.centerY.equalToSuperview()
             make.height.equalTo(1)
-            make.left.equalTo(label.right).offset(14)
+            make.left.equalTo(label.snp.right).offset(14)
         }
         
         
@@ -137,7 +137,7 @@ class labels:BaseView {
     
     let dummyView:UIView = {
        let view = UIView()
-        view.backgroundColor = .mainGrey
+        view.backgroundColor = .mainGrey7
         return view
     }()
     
@@ -151,7 +151,7 @@ class labels:BaseView {
         let button = UIButton()
         button.setTitle("회원가입", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14)
-        button.setTitleColor(.systemGray4, for: .normal)
+        button.setTitleColor(.mainGrey4, for: .normal)
         return button
     }()
     
