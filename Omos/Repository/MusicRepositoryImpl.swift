@@ -12,7 +12,7 @@ import RxAlamofire
 class MusicRepositoryImpl:MusicRepository {
     
     let disposeBag = DisposeBag()
-    let apiKey:String = "H4ZRG44U4X1T6VSV"
+    let apiKey:String = ""
     
     func fetchMusicList(keyword: String) -> Single<StockResult> {
         /// 1.parse query String

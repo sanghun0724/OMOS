@@ -5,10 +5,7 @@
 //  Created by sangheon on 2022/02/10.
 //
 
-import Foundation
 import UIKit
-import SnapKit
-import SwiftUI
 
 class LoginView:BaseView {
     
@@ -19,10 +16,12 @@ class LoginView:BaseView {
         return imageView
     }()
     
-    let loginButton:UIButton  = {
-       let button = UIButton()
-        button.backgroundColor = .blue
-        return button
+    let titleLabel:UILabel = {
+        let label = UILabel()
+        label.text = "로그인"
+        label.font = .systemFont(ofSize: 22)
+        label.textColor = .mainOrange
+        return label
     }()
     
     let emailField:UITextField = {
@@ -52,7 +51,7 @@ class LoginView:BaseView {
     }()
     
     private let labelsView:labels = {
-       let view = labels()
+        let view = labels()
         return view
     }()
     
@@ -68,7 +67,7 @@ class LoginView:BaseView {
     override func configureUI() {
         self.backgroundColor = .mainBackGround
         coverView.addSubview(imageView)
-        coverView.addSubview(loginButton)
+        coverView.addSubview(titleLabel)
         self.addSubview(coverView)
         self.addSubview(stack)
         coverView.snp.makeConstraints { make in
@@ -82,8 +81,9 @@ class LoginView:BaseView {
             make.width.equalTo(77.5)
         }
         
-        loginButton.snp.makeConstraints { make in
-            make.left.bottom.equalToSuperview()
+        titleLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(10)
+            make.bottom.equalToSuperview()
             make.width.equalTo(100)
             make.height.equalTo(60)
         }

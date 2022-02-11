@@ -6,10 +6,53 @@
 //
 
 import UIKit
-
+//import snapKit  << ???????
 
 class DecoView:BaseView {
+    private let view1:UIView = {
+        let view = UIView()
+        view.backgroundColor = .mainGrey
+        return view
+    }()
     
+    private let label:UILabel = {
+        let label = UILabel()
+        label.text = "or"
+        label.textColor = .mainGrey
+        return label
+    }()
+    
+    private let view2:UIView = {
+        let view = UIView()
+        view.backgroundColor = .mainGrey
+        return view
+    }()
+    
+    override func configureUI() {
+        self.addSubview(label)
+        self.addSubview(view1)
+        self.addSubview(view2)
+        
+        label.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        
+        view1.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.height.equalTo(1)
+            make.right.equalTo(label.left).offset(14)
+        }
+        
+        view2.snp.makeConstraints { make in
+            make.right.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.height.equalTo(1)
+            make.left.equalTo(label.right).offset(14)
+        }
+        
+        
+    }
     
 }
 
@@ -17,7 +60,7 @@ class EmailLabelView:BaseView {
     let emailLabel:UILabel = {
        let label = UILabel()
         label.text = "이메일"
-        //label.font = .systemFont(ofSize: <#T##CGFloat#>, weight: <#T##UIFont.Weight#>)
+        label.font = .systemFont(ofSize: 14)
         label.tintColor = .white
         return label
     }()
@@ -25,7 +68,9 @@ class EmailLabelView:BaseView {
     
     let warningLabel:UILabel = {
        let label = UILabel()
-        label.text = "wdqwdwqdwqd"
+        label.text = "이메일을 입력해주세요"
+        label.font = .systemFont(ofSize:12)
+        label.textColor = .mainOrange
         label.textAlignment = .right
         return label
     }()
@@ -51,7 +96,7 @@ class PasswordLabelView:BaseView {
     let passwordLabel:UILabel = {
        let label = UILabel()
         label.text = "비밀번호"
-        //label.font = .systemFont(ofSize: <#T##CGFloat#>, weight: <#T##UIFont.Weight#>)
+        label.font = .systemFont(ofSize: 14)
         label.tintColor = .white
         return label
     }()
@@ -59,7 +104,9 @@ class PasswordLabelView:BaseView {
     
     let warningLabel:UILabel = {
        let label = UILabel()
-        label.text = "wdqwdq"
+        label.text = "비밀번호를 입력해주세요"
+        label.font = .systemFont(ofSize:12)
+        label.textColor = .mainOrange
         label.textAlignment = .right
         return label
     }()
@@ -103,6 +150,8 @@ class labels:BaseView {
     let signUpButton:UIButton = {
         let button = UIButton()
         button.setTitle("회원가입", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 14)
+        button.setTitleColor(.systemGray4, for: .normal)
         return button
     }()
     
@@ -137,3 +186,4 @@ class labels:BaseView {
     }
     
 }
+

@@ -37,11 +37,6 @@ class LoginViewController:BaseViewController {
             make.bottom.equalToSuperview().inset(40)
         }
     }
-        
-
-    
-        
-    
     
     //MARK: KAKAO LOGIN
     @objc func loginKakao() {
