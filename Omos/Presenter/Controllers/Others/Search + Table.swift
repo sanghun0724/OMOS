@@ -20,10 +20,5 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource {
             cell.textLabel?.text = item.name
             return cell
         
-     
     }
-    
-    
-    
-    
 }

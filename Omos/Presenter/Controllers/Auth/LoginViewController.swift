@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 import AuthenticationServices
 import KakaoSDKUser
 import KakaoSDKAuth
@@ -13,24 +14,31 @@ import KakaoSDKCommon
 
 class LoginViewController:BaseViewController {
     
-    
+    private let topView = LoginView()
+    private let bottomView = ButtonView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        setAppleButton()
+        self.view.backgroundColor = .mainBackGround
+    }
+    
+    override func configureUI() {
+        view.addSubview(topView)
+        view.addSubview(bottomView)
         
-        view.addSubview(kakaoButton)
-        kakaoButton.frame = CGRect(x: 100, y: 100, width: 100, height: 100)
+        topView.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.6)
+          }
+        
+        bottomView.snp.makeConstraints { make in
+            make.top.equalTo(topView.snp.bottom)
+            make.left.right.equalToSuperview().inset(22)
+            make.bottom.equalToSuperview().inset(40)
+        }
     }
     
     //MARK: KAKAO LOGIN
-    private let kakaoButton:UIButton = {
-        let bt = UIButton()
-        bt.addTarget(self, action: #selector(loginKakao), for: .touchUpInside)
-        bt.backgroundColor = .yellow
-        return bt
-    }()
-    
-
     @objc func loginKakao() {
         if UserApi.isKakaoTalkLoginAvailable() {
             UserApi.shared.loginWithKakaoTalk { (oauthToken,error) in
@@ -43,20 +51,14 @@ class LoginViewController:BaseViewController {
                     
                     self.getUserInfo()
                 }
-                
             }
         }
     }
     
     
-    //MARK: APPLE LOGIN
-    func setAppleButton() {
-        let button = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: .black)
-        button.addTarget(self, action: #selector(loginHandler), for: .touchUpInside)
-        self.view.addSubview(button)
-        button.center = self.view.center
-    }
     
+    
+    //MARK: APPLE LOGIN
     @objc func loginHandler() {
         let request = ASAuthorizationAppleIDProvider().createRequest()
         request.requestedScopes = [.fullName,.email]

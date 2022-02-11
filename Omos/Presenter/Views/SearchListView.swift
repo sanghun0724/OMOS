@@ -19,7 +19,11 @@ class SearchListView:BaseView {
     
     let searchViewController:UISearchController = {
         let view = UISearchController(searchResultsController: nil)
-        view.searchBar.placeholder = "Enter a company name or symbol"
+        view.searchBar.placeholder = "음악을 검색해주세요"
+        view.searchBar.tintColor = .white
+        view.searchBar.showsCancelButton = false
+        view.searchBar.autocapitalizationType = .none
+        view.searchBar.autocorrectionType = .no
         view.obscuresBackgroundDuringPresentation = false
         return view
     }()
@@ -28,8 +32,8 @@ class SearchListView:BaseView {
     let loadingView = LoadingView()
     
     override func configureUI() {
-        self.addSubview(emptyView)
         self.addSubview(tableView)
+        self.addSubview(emptyView)
         self.addSubview(loadingView)
         
         emptyView.snp.makeConstraints { make in
