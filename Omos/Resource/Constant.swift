@@ -9,4 +9,5 @@ import Foundation
 
 struct Constant {
    static let loginCorner = 4.0
+   static let LoginTopViewHeight = 0.6
 }

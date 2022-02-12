@@ -20,6 +20,7 @@ class LoginViewController:BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .mainBackGround
+        bind()
     }
     
     override func configureUI() {
@@ -28,7 +29,7 @@ class LoginViewController:BaseViewController {
         
         topView.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.6)
+            make.height.equalToSuperview().multipliedBy(Constant.LoginTopViewHeight)
           }
         
         bottomView.snp.makeConstraints { make in
@@ -44,7 +45,13 @@ class LoginViewController:BaseViewController {
 //        topView.emailField.rx.text
 //            .map{ $0 ?? ""}
 //            .
-        
+        topView.labelsView.signUpButton.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                print("asd")
+                let vc = SignUpViewController()
+                self?.present(vc,animated:true)
+            }).disposed(by: disposeBag)
         
         //BottomView
         bottomView.loginButton.rx.tap
@@ -60,6 +67,7 @@ class LoginViewController:BaseViewController {
             }).disposed(by: disposeBag)
         
         bottomView.appleButton.addTarget(self, action: #selector(loginApple), for: .touchUpInside)
+        
         
         
         
