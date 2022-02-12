@@ -16,17 +16,17 @@ class LoginVeiwModel {
     let pwPublishSubject = PublishSubject<String>()
     
     //MARK: Local Login
-    func idValid() -> Observable<Bool> {
-        
-    }
-    
-    func pwValid() -> Observable<Bool> {
-        
-    }
-    
-    func isValid() -> Observable<Bool> {
-        
-    }
+//    func idValid() -> Observable<Bool> {
+//
+//    }
+//    
+//    func pwValid() -> Observable<Bool> {
+//
+//    }
+//
+//    func isValid() -> Observable<Bool> {
+//
+//    }
     
     func loginLocal() {
         //set LoginActionLogic

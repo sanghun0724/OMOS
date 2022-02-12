@@ -29,6 +29,9 @@
 		B6670FA827B5098200BABF40 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6670FA727B5098200BABF40 /* LoginView.swift */; };
 		B6670FAA27B517DE00BABF40 /* DecoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6670FA927B517DD00BABF40 /* DecoView.swift */; };
 		B6670FAC27B5542100BABF40 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6670FAB27B5542100BABF40 /* ButtonView.swift */; };
+		B67EF45027B7A9B80023D5D4 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67EF44F27B7A9B80023D5D4 /* SignUpView.swift */; };
+		B67EF45527B7AA000023D5D4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67EF45427B7AA000023D5D4 /* SignUpViewController.swift */; };
+		B67EF45727B7AA220023D5D4 /* PrivateLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67EF45627B7AA220023D5D4 /* PrivateLabelView.swift */; };
 		B682184C27B3823D00B58E19 /* ShareCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682184B27B3823D00B58E19 /* ShareCustomViewController.swift */; };
 		B682184E27B393BF00B58E19 /* MusicRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682184D27B393BF00B58E19 /* MusicRepository.swift */; };
 		B682185027B39ADD00B58E19 /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682184F27B39ADD00B58E19 /* TestModel.swift */; };
@@ -52,6 +55,7 @@
 		B689A9DA27AEA835005F26E4 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9D927AEA835005F26E4 /* BaseViewModel.swift */; };
 		B689A9DC27AEA877005F26E4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9DB27AEA877005F26E4 /* LoginViewController.swift */; };
 		B6A0299C27B23D3500D3D3C9 /* OmosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */; };
+		B6D3685627B7A510008B5635 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D3685527B7A510008B5635 /* NicknameViewController.swift */; };
 		B6E8C91527B6AEFC00C32752 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E8C91427B6AEFC00C32752 /* Constant.swift */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +94,9 @@
 		B6670FA927B517DD00BABF40 /* DecoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoView.swift; sourceTree = "<group>"; };
 		B6670FAB27B5542100BABF40 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		B6670FAD27B5654900BABF40 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		B67EF44F27B7A9B80023D5D4 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		B67EF45427B7AA000023D5D4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		B67EF45627B7AA220023D5D4 /* PrivateLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateLabelView.swift; sourceTree = "<group>"; };
 		B682184B27B3823D00B58E19 /* ShareCustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCustomViewController.swift; sourceTree = "<group>"; };
 		B682184D27B393BF00B58E19 /* MusicRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicRepository.swift; sourceTree = "<group>"; };
 		B682184F27B39ADD00B58E19 /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
@@ -115,6 +122,7 @@
 		B689A9DD27AEAD0C005F26E4 /* Omos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Omos.entitlements; sourceTree = "<group>"; };
 		B6A0299927B23D3500D3D3C9 /* OmosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OmosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmosTests.swift; sourceTree = "<group>"; };
+		B6D3685527B7A510008B5635 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
 		B6E8C91427B6AEFC00C32752 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		C215C3C79873F26B73F4F037 /* Pods-Omos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Omos.release.xcconfig"; path = "Target Support Files/Pods-Omos/Pods-Omos.release.xcconfig"; sourceTree = "<group>"; };
 		CEBF3DD9CCF3DD38A49D350C /* Pods-Omos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Omos.debug.xcconfig"; path = "Target Support Files/Pods-Omos/Pods-Omos.debug.xcconfig"; sourceTree = "<group>"; };
@@ -274,11 +282,9 @@
 		B612199827AE9420006AEAC9 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				B689A9DB27AEA877005F26E4 /* LoginViewController.swift */,
-				B6670FA527B5097000BABF40 /* LoginViewModel.swift */,
-				B6670FA727B5098200BABF40 /* LoginView.swift */,
-				B6670FAB27B5542100BABF40 /* ButtonView.swift */,
-				B6670FA927B517DD00BABF40 /* DecoView.swift */,
+				B67EF45327B7A9D70023D5D4 /* Controllers */,
+				B67EF45227B7A9CA0023D5D4 /* ViewModels */,
+				B67EF45127B7A9BE0023D5D4 /* Views */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -299,6 +305,36 @@
 				B609138327AD3A7C00B439C3 /* BaseViewController.swift */,
 			);
 			path = Others;
+			sourceTree = "<group>";
+		};
+		B67EF45127B7A9BE0023D5D4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B6670FA727B5098200BABF40 /* LoginView.swift */,
+				B6670FAB27B5542100BABF40 /* ButtonView.swift */,
+				B6670FA927B517DD00BABF40 /* DecoView.swift */,
+				B67EF44F27B7A9B80023D5D4 /* SignUpView.swift */,
+				B67EF45627B7AA220023D5D4 /* PrivateLabelView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B67EF45227B7A9CA0023D5D4 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B6670FA527B5097000BABF40 /* LoginViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B67EF45327B7A9D70023D5D4 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B689A9DB27AEA877005F26E4 /* LoginViewController.swift */,
+				B6D3685527B7A510008B5635 /* NicknameViewController.swift */,
+				B67EF45427B7AA000023D5D4 /* SignUpViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		B682184927B37F9200B58E19 /* Entity */ = {
@@ -509,6 +545,7 @@
 				B650874B27AFC5EF0020D2C1 /* AllRecordView.swift in Sources */,
 				B650873B27AF94C60020D2C1 /* TabBarViewController.swift in Sources */,
 				B650874327AF96E80020D2C1 /* ProfileViewController.swift in Sources */,
+				B6D3685627B7A510008B5635 /* NicknameViewController.swift in Sources */,
 				B682185E27B3E22900B58E19 /* LoadingView.swift in Sources */,
 				B666A90627AED17C00BE7F92 /* BaseView.swift in Sources */,
 				B689A9CE27AE94E9005F26E4 /* UIVIew.swift in Sources */,
@@ -519,6 +556,8 @@
 				B609138427AD3A7C00B439C3 /* BaseViewController.swift in Sources */,
 				B682184E27B393BF00B58E19 /* MusicRepository.swift in Sources */,
 				B650873927AF948D0020D2C1 /* HomeViewController.swift in Sources */,
+				B67EF45027B7A9B80023D5D4 /* SignUpView.swift in Sources */,
+				B67EF45727B7AA220023D5D4 /* PrivateLabelView.swift in Sources */,
 				B689A9D127AE94E9005F26E4 /* Color.swift in Sources */,
 				B683A45327B0DA3500838749 /* AllRecordTableCell.swift in Sources */,
 				B682184C27B3823D00B58E19 /* ShareCustomViewController.swift in Sources */,
@@ -526,6 +565,7 @@
 				B682185A27B3AD5100B58E19 /* Search + Table.swift in Sources */,
 				B683A45727B12DD000838749 /* ProfileView.swift in Sources */,
 				B689A9D627AE9627005F26E4 /* IndicatorView.swift in Sources */,
+				B67EF45527B7AA000023D5D4 /* SignUpViewController.swift in Sources */,
 				B609138027AD3A7C00B439C3 /* AppDelegate.swift in Sources */,
 				B682185827B3AA4F00B58E19 /* SearchListView.swift in Sources */,
 				B6670FAA27B517DE00BABF40 /* DecoView.swift in Sources */,

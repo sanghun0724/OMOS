@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoginView:BaseView {
+class LoginTopView:BaseView {
     
     let coverView = UIView()
     

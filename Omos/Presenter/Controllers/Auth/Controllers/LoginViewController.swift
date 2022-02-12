@@ -8,14 +8,13 @@
 import UIKit
 import SnapKit
 import AuthenticationServices
-
 import RxSwift
 import RxCocoa
 
 class LoginViewController:BaseViewController {
     
     private let viewModel = LoginVeiwModel()
-    private let topView = LoginView()
+    private let topView = LoginTopView()
     private let bottomView = ButtonView()
 
     override func viewDidLoad() {
