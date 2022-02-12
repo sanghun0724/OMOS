@@ -86,7 +86,7 @@ class ButtonView:BaseView {
         kakaoImageView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.centerX.equalToSuperview().multipliedBy(0.54)
-            make.height.width.equalTo(20)
+            make.height.width.equalTo(16)
         }
         
     }
