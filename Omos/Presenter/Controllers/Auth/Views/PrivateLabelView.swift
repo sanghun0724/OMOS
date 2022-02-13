@@ -10,7 +10,6 @@ import Foundation
 class PrivateLabelView:BaseView {
     
     
-    
     override func configureUI() {
         
     }

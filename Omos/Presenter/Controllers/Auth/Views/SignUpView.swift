@@ -9,6 +9,8 @@ import UIKit
 
 class SignUpView:BaseView {
     
+    let coverView = CoverView()
+    
     let emailField:UITextField = {
         let field = UITextField()
         field.placeholder = "이메일(아이디)를 입력해주세요"
@@ -41,7 +43,7 @@ class SignUpView:BaseView {
     
     let repasswordField:UITextField = {
         let field = UITextField()
-        field.placeholder = "비밀번호를 입력해주세요"
+        field.placeholder = "비밀번호를 다시 입력해주세요"
         field.autocorrectionType = .no
         field.autocapitalizationType = .none
         field.isSecureTextEntry = true
@@ -67,8 +69,21 @@ class SignUpView:BaseView {
     
     let repaswwordLabel:PasswordLabelView = {
         let view = PasswordLabelView()
+        view.passwordLabel.text = "비밀번호 재확인"
         return view
     }()
+    
+    let passwordDecoView:UIImageView = {
+        let imageView = UIImageView(image:UIImage(named: "visible2" ))
+        return imageView
+    }()
+    
+    let repasswordDecoView:UIImageView = {
+        let imageView = UIImageView(image:UIImage(named: "visible2" ))
+        return imageView
+    }()
+    
+    
     
     lazy var views = [emailLabel,emailField,passwordLabel,passwordField,repaswwordLabel,repasswordField]
     
@@ -81,9 +96,18 @@ class SignUpView:BaseView {
     
     override func configureUI() {
         self.addSubview(stack)
+        self.addSubview(coverView)
+        passwordField.addSubview(passwordDecoView)
+        repasswordField.addSubview(repasswordDecoView)
+        
+        coverView.snp.makeConstraints { make in
+            make.left.right.top.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.42)
+        }
+        
         stack.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(16)
-            make.top.bottom.equalToSuperview()
+            make.top.equalTo(coverView.snp.bottom)
         }
         
         for view in views {
@@ -91,6 +115,20 @@ class SignUpView:BaseView {
                 make.height.equalTo(self.snp.height).multipliedBy(0.089)
             }
         }
+        
+        passwordDecoView.snp.makeConstraints { make in
+            make.right.equalToSuperview().inset(16)
+            make.centerY.equalToSuperview()
+            make.width.greaterThanOrEqualTo(24)
+        }
+        
+        repasswordDecoView.snp.makeConstraints { make in
+            make.right.equalToSuperview().inset(16)
+            make.centerY.equalToSuperview()
+            make.width.greaterThanOrEqualTo(24)
+        }
+        
+        
     }
     
 }

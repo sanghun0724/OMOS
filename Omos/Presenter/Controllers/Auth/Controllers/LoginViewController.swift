@@ -11,8 +11,9 @@ import AuthenticationServices
 import RxSwift
 import RxCocoa
 
-class LoginViewController:BaseViewController {
+class LoginViewController:UIViewController {
     
+    private let disposeBag = DisposeBag()
     private let viewModel = LoginVeiwModel()
     private let topView = LoginTopView()
     private let bottomView = ButtonView()
@@ -20,15 +21,22 @@ class LoginViewController:BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .mainBackGround
+        topView.coverView.backButton.isHidden = true
         bind()
     }
     
-    override func configureUI() {
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        configureUI()
+    }
+    
+    func configureUI() {
         view.addSubview(topView)
         view.addSubview(bottomView)
         
         topView.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
+            make.left.right.equalToSuperview()
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.height.equalToSuperview().multipliedBy(Constant.LoginTopViewHeight)
           }
         
@@ -48,9 +56,9 @@ class LoginViewController:BaseViewController {
         topView.labelsView.signUpButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in
-                print("asd")
                 let vc = SignUpViewController()
-                self?.present(vc,animated:true)
+                vc.modalPresentationStyle = .fullScreen
+                self?.present(vc,animated:false)
             }).disposed(by: disposeBag)
         
         //BottomView

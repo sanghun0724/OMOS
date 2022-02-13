@@ -54,6 +54,7 @@
 		B689A9D627AE9627005F26E4 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9D427AE9627005F26E4 /* IndicatorView.swift */; };
 		B689A9DA27AEA835005F26E4 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9D927AEA835005F26E4 /* BaseViewModel.swift */; };
 		B689A9DC27AEA877005F26E4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9DB27AEA877005F26E4 /* LoginViewController.swift */; };
+		B69860BD27B8E85600E83DB9 /* NickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69860BC27B8E85600E83DB9 /* NickNameView.swift */; };
 		B6A0299C27B23D3500D3D3C9 /* OmosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */; };
 		B6D3685627B7A510008B5635 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D3685527B7A510008B5635 /* NicknameViewController.swift */; };
 		B6E8C91527B6AEFC00C32752 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E8C91427B6AEFC00C32752 /* Constant.swift */; };
@@ -120,6 +121,7 @@
 		B689A9D927AEA835005F26E4 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		B689A9DB27AEA877005F26E4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B689A9DD27AEAD0C005F26E4 /* Omos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Omos.entitlements; sourceTree = "<group>"; };
+		B69860BC27B8E85600E83DB9 /* NickNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameView.swift; sourceTree = "<group>"; };
 		B6A0299927B23D3500D3D3C9 /* OmosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OmosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmosTests.swift; sourceTree = "<group>"; };
 		B6D3685527B7A510008B5635 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 				B6670FA927B517DD00BABF40 /* DecoView.swift */,
 				B67EF44F27B7A9B80023D5D4 /* SignUpView.swift */,
 				B67EF45627B7AA220023D5D4 /* PrivateLabelView.swift */,
+				B69860BC27B8E85600E83DB9 /* NickNameView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -331,8 +334,8 @@
 			isa = PBXGroup;
 			children = (
 				B689A9DB27AEA877005F26E4 /* LoginViewController.swift */,
-				B6D3685527B7A510008B5635 /* NicknameViewController.swift */,
 				B67EF45427B7AA000023D5D4 /* SignUpViewController.swift */,
+				B6D3685527B7A510008B5635 /* NicknameViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -560,6 +563,7 @@
 				B67EF45727B7AA220023D5D4 /* PrivateLabelView.swift in Sources */,
 				B689A9D127AE94E9005F26E4 /* Color.swift in Sources */,
 				B683A45327B0DA3500838749 /* AllRecordTableCell.swift in Sources */,
+				B69860BD27B8E85600E83DB9 /* NickNameView.swift in Sources */,
 				B682184C27B3823D00B58E19 /* ShareCustomViewController.swift in Sources */,
 				B689A9D227AE94E9005F26E4 /* Date.swift in Sources */,
 				B682185A27B3AD5100B58E19 /* Search + Table.swift in Sources */,

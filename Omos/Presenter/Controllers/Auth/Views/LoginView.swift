@@ -77,7 +77,7 @@ class LoginTopView:BaseView {
         self.addSubview(stack)
         coverView.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.396)
+            make.height.equalToSuperview().multipliedBy(0.42)
         }
         
         stack.snp.makeConstraints { make in
@@ -96,8 +96,8 @@ class LoginTopView:BaseView {
             make.centerY.equalToSuperview()
             make.width.greaterThanOrEqualTo(24)
         }
-        
     }
+    
 }
 
 class CoverView:BaseView {
@@ -115,9 +115,16 @@ class CoverView:BaseView {
         return label
     }()
     
+    let backButton:UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "arrow-left"), for: .normal)
+        return button
+    }()
+    
     override func configureUI() {
         self.addSubview(imageView)
         self.addSubview(titleLabel)
+        self.addSubview(backButton)
         
         imageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
@@ -130,6 +137,11 @@ class CoverView:BaseView {
             make.bottom.equalToSuperview()
             make.width.equalTo(100)
             make.height.equalTo(60)
+        }
+        
+        backButton.snp.makeConstraints { make in
+            make.left.top.equalToSuperview().inset(6)
+            make.width.height.greaterThanOrEqualTo(18)
         }
     }
 }

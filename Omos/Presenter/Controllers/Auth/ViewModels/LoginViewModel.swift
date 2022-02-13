@@ -16,6 +16,13 @@ class LoginVeiwModel {
     let pwPublishSubject = PublishSubject<String>()
     
     //MARK: Local Login
+//    func isEqualLoginInfo() -> Observable<Bool> {
+//        //기존의 회원가입 하였고 새로 로그인 하려고 할때
+//        
+//        
+//    }
+    
+    
 //    func idValid() -> Observable<Bool> {
 //
 //    }
@@ -24,9 +31,7 @@ class LoginVeiwModel {
 //
 //    }
 //
-//    func isValid() -> Observable<Bool> {
-//
-//    }
+
     
     func loginLocal() {
         //set LoginActionLogic

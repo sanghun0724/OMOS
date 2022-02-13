@@ -36,7 +36,7 @@ class BaseViewController:UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.layoutIfNeeded()
-        self.view.backgroundColor = .black
+        self.view.backgroundColor = .mainBackGround
         setBarButtonItems()
     }
     
