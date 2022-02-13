@@ -56,6 +56,7 @@
 		B689A9DC27AEA877005F26E4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9DB27AEA877005F26E4 /* LoginViewController.swift */; };
 		B69860BD27B8E85600E83DB9 /* NickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69860BC27B8E85600E83DB9 /* NickNameView.swift */; };
 		B6A0299C27B23D3500D3D3C9 /* OmosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */; };
+		B6C3AD4527B95B1E00D5D69D /* AttributedStirng.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C3AD4427B95B1E00D5D69D /* AttributedStirng.swift */; };
 		B6D3685627B7A510008B5635 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D3685527B7A510008B5635 /* NicknameViewController.swift */; };
 		B6E8C91527B6AEFC00C32752 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E8C91427B6AEFC00C32752 /* Constant.swift */; };
 /* End PBXBuildFile section */
@@ -124,6 +125,7 @@
 		B69860BC27B8E85600E83DB9 /* NickNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameView.swift; sourceTree = "<group>"; };
 		B6A0299927B23D3500D3D3C9 /* OmosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OmosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmosTests.swift; sourceTree = "<group>"; };
+		B6C3AD4427B95B1E00D5D69D /* AttributedStirng.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedStirng.swift; sourceTree = "<group>"; };
 		B6D3685527B7A510008B5635 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
 		B6E8C91427B6AEFC00C32752 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		C215C3C79873F26B73F4F037 /* Pods-Omos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Omos.release.xcconfig"; path = "Target Support Files/Pods-Omos/Pods-Omos.release.xcconfig"; sourceTree = "<group>"; };
@@ -193,7 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				B6C3AD4227B949FC00D5D69D /* Base */,
-				B612199227AE9387006AEAC9 /* Controllers */,
+				B612199227AE9387006AEAC9 /* UI */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -218,7 +220,7 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		B612199227AE9387006AEAC9 /* Controllers */ = {
+		B612199227AE9387006AEAC9 /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				B650873727AF94500020D2C1 /* Others */,
@@ -226,7 +228,7 @@
 				B612199827AE9420006AEAC9 /* Auth */,
 				B612199727AE9414006AEAC9 /* CoreTabs */,
 			);
-			path = Controllers;
+			path = UI;
 			sourceTree = "<group>";
 		};
 		B612199427AE939D006AEAC9 /* Resource */ = {
@@ -356,6 +358,7 @@
 				B689A9C927AE94E7005F26E4 /* UIVIew.swift */,
 				B689A9CA27AE94E8005F26E4 /* UIViewController.swift */,
 				B682185B27B3C0BB00B58E19 /* MyError.swift */,
+				B6C3AD4427B95B1E00D5D69D /* AttributedStirng.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -559,6 +562,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6C3AD4527B95B1E00D5D69D /* AttributedStirng.swift in Sources */,
 				B682185627B3A0BE00B58E19 /* SearchViewModel.swift in Sources */,
 				B689A9DC27AEA877005F26E4 /* LoginViewController.swift in Sources */,
 				B650874B27AFC5EF0020D2C1 /* AllRecordView.swift in Sources */,

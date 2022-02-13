@@ -10,6 +10,8 @@ import UIKit
 class NickNameView:BaseView {
     
     let coverView = CoverView()
+    let privateLabel1 = PrivateLabelView()
+    let privateLabel2 = PrivateLabelView()
     
     let nickNameLabel:EmailLabelView = {
         let view = EmailLabelView()
@@ -32,11 +34,20 @@ class NickNameView:BaseView {
         return field
     }()
     
+    let dummyView:UIView = {
+        let view = UIView()
+        view.backgroundColor = .mainGrey7
+        return view
+    }()
+    
     
     override func configureUI() {
         self.addSubview(coverView)
         self.addSubview(nickNameLabel)
         self.addSubview(nickNameField)
+        self.addSubview(privateLabel1)
+        self.addSubview(privateLabel2)
+        self.addSubview(dummyView)
                 
         coverView.snp.makeConstraints { make in
             make.left.top.right.equalToSuperview()
@@ -54,6 +65,26 @@ class NickNameView:BaseView {
             make.top.equalTo(nickNameLabel.snp.bottom)
             make.height.equalTo(self.snp.height).multipliedBy(0.089)
         }
+        
+        dummyView.snp.makeConstraints { make in
+            make.height.equalTo(1)
+            make.left.right.equalToSuperview().inset(16)
+            make.top.equalTo(nickNameField.snp.bottom).offset(26)
+        }
+        
+        privateLabel1.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(16)
+            make.top.equalTo(dummyView.snp.bottom).offset(26)
+            make.height.equalTo(self.snp.height).multipliedBy(0.089)
+        }
+        
+        privateLabel2.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(16)
+            make.top.equalTo(privateLabel1.snp.bottom)
+            make.height.equalTo(self.snp.height).multipliedBy(0.089)
+        }
+        privateLabel2.label.text = "(필수) 개인정보 보호정책에 동의합니다."
+        
     }
 
 }
