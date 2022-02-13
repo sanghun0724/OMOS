@@ -32,7 +32,7 @@ class BaseViewController:UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.backgroundColor = .black
+        self.navigationController?.navigationBar.backgroundColor = .mainBackGround
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.layoutIfNeeded()

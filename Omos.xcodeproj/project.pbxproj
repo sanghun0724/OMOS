@@ -192,9 +192,8 @@
 		B612198F27AE9370006AEAC9 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				B6C3AD4227B949FC00D5D69D /* Base */,
 				B612199227AE9387006AEAC9 /* Controllers */,
-				B612199127AE9380006AEAC9 /* ViewModels */,
-				B612199027AE9377006AEAC9 /* Views */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -202,7 +201,6 @@
 		B612199027AE9377006AEAC9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B666A90527AED17C00BE7F92 /* BaseView.swift */,
 				B650874A27AFC5EE0020D2C1 /* AllRecordView.swift */,
 				B683A45227B0DA3500838749 /* AllRecordTableCell.swift */,
 				B683A45627B12DD000838749 /* ProfileView.swift */,
@@ -214,7 +212,6 @@
 		B612199127AE9380006AEAC9 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				B689A9D927AEA835005F26E4 /* BaseViewModel.swift */,
 				B650874627AFC4CA0020D2C1 /* AllRecordViewModel.swift */,
 				B682185527B3A0BE00B58E19 /* SearchViewModel.swift */,
 			);
@@ -269,14 +266,9 @@
 		B612199727AE9414006AEAC9 /* CoreTabs */ = {
 			isa = PBXGroup;
 			children = (
-				B650873A27AF94C60020D2C1 /* TabBarViewController.swift */,
-				B650873827AF948D0020D2C1 /* HomeViewController.swift */,
-				B650873C27AF969C0020D2C1 /* MyRecordViewController.swift */,
-				B650873E27AF96B00020D2C1 /* AllRecordViewController.swift */,
-				B650874827AFC5150020D2C1 /* AllRecord + Table.swift */,
-				B650874027AF96C00020D2C1 /* MyDJViewController.swift */,
-				B650874227AF96E80020D2C1 /* ProfileViewController.swift */,
-				B683A45827B130D100838749 /* Profile + Table.swift */,
+				B6C3AD4327B94A2B00D5D69D /* Controllers */,
+				B612199027AE9377006AEAC9 /* Views */,
+				B612199127AE9380006AEAC9 /* ViewModels */,
 			);
 			path = CoreTabs;
 			sourceTree = "<group>";
@@ -304,7 +296,6 @@
 				B682185927B3AD5100B58E19 /* Search + Table.swift */,
 				B650874427AFAE220020D2C1 /* SearchViewController.swift */,
 				B682184B27B3823D00B58E19 /* ShareCustomViewController.swift */,
-				B609138327AD3A7C00B439C3 /* BaseViewController.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -386,6 +377,31 @@
 				B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */,
 			);
 			path = OmosTests;
+			sourceTree = "<group>";
+		};
+		B6C3AD4227B949FC00D5D69D /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				B666A90527AED17C00BE7F92 /* BaseView.swift */,
+				B689A9D927AEA835005F26E4 /* BaseViewModel.swift */,
+				B609138327AD3A7C00B439C3 /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		B6C3AD4327B94A2B00D5D69D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B650873A27AF94C60020D2C1 /* TabBarViewController.swift */,
+				B650873827AF948D0020D2C1 /* HomeViewController.swift */,
+				B650873C27AF969C0020D2C1 /* MyRecordViewController.swift */,
+				B650873E27AF96B00020D2C1 /* AllRecordViewController.swift */,
+				B650874827AFC5150020D2C1 /* AllRecord + Table.swift */,
+				B650874027AF96C00020D2C1 /* MyDJViewController.swift */,
+				B650874227AF96E80020D2C1 /* ProfileViewController.swift */,
+				B683A45827B130D100838749 /* Profile + Table.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		CBC207B625B5E088E6EE1C56 /* Pods */ = {

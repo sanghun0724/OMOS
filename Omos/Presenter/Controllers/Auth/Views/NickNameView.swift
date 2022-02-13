@@ -14,12 +14,13 @@ class NickNameView:BaseView {
     let nickNameLabel:EmailLabelView = {
         let view = EmailLabelView()
         view.emailLabel.text = "닉네임"
+        view.warningLabel.text = "닉네임을 입력해주세요"
         return view
     }()
     
     let nickNameField:UITextField = {
         let field = UITextField()
-        field.placeholder = "이메일(아이디)를 입력해주세요"
+        field.placeholder = "닉네임을 입력해주세요"
         field.autocorrectionType = .no
         field.autocapitalizationType = .none
         field.layer.cornerRadius = Constant.loginCorner
@@ -53,8 +54,6 @@ class NickNameView:BaseView {
             make.top.equalTo(nickNameLabel.snp.bottom)
             make.height.equalTo(self.snp.height).multipliedBy(0.089)
         }
-        
     }
-    
-    
+
 }

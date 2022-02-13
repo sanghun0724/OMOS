@@ -97,7 +97,6 @@ class LoginTopView:BaseView {
             make.width.greaterThanOrEqualTo(24)
         }
     }
-    
 }
 
 class CoverView:BaseView {
