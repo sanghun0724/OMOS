@@ -23,10 +23,12 @@ class LoginViewController:UIViewController {
         self.view.backgroundColor = .mainBackGround
         topView.coverView.backButton.isHidden = true
         bind()
+        dismissKeyboardWhenTappedAround()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+
         configureUI()
     }
     
@@ -81,7 +83,6 @@ class LoginViewController:UIViewController {
         
     }
     
-    
     //MARK: APPLE LOGIN
     @objc func loginApple() {
         let request = ASAuthorizationAppleIDProvider().createRequest()
@@ -111,8 +112,3 @@ extension LoginViewController:ASAuthorizationControllerDelegate {
     }
 }
 
-
-//Kakao
-extension LoginViewController {
-   
-}

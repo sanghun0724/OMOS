@@ -83,7 +83,10 @@ class NickNameView:BaseView {
             make.top.equalTo(privateLabel1.snp.bottom)
             make.height.equalTo(self.snp.height).multipliedBy(0.089)
         }
-        privateLabel2.label.text = "(필수) 개인정보 보호정책에 동의합니다."
+        privateLabel2.label.attributedText = NSMutableAttributedString()
+            .regular(string: "(필수) ", fontSize: 16)
+            .orangeHighlight("개인정보 보호정책")
+            .regular(string: "에 동의합니다", fontSize: 16)
         
     }
 

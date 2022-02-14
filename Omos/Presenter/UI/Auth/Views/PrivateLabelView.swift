@@ -11,20 +11,25 @@ class PrivateLabelView:BaseView {
     
     let checkButton:UIButton = {
        let button = UIButton()
-        button.backgroundColor = .mainOrange
+        button.backgroundColor = .white
         return button
     }()
     
     let label:UILabel = {
        let label = UILabel()
-        label.text = "(필수) 이용약관에 동의합니다"
+        label.attributedText = NSMutableAttributedString()
+            .regular(string: "(필수) ", fontSize: 16)
+            .orangeHighlight("이용약관")
+            .regular(string: "에 동의합니다.", fontSize: 16)
         return label
     }()
     
     let subButton:UIButton = {
         let button = UIButton()
         button.setTitle("보기", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 16)
         button.titleLabel?.textAlignment = .right
+        button.titleLabel?.attributedText = NSMutableAttributedString().underlined("보기")
         return button
     }()
     

@@ -39,7 +39,7 @@ class ButtonView:BaseView {
         bt.setTitle("    Kakao로 로그인", for: .normal)
         bt.titleLabel?.textAlignment = .right
         bt.setTitleColor(.buttonLabel, for: .normal)
-        bt.titleLabel?.font = .systemFont(ofSize: 24,weight: .semibold)
+        bt.titleLabel?.font = .systemFont(ofSize: 20,weight: .semibold)
         bt.backgroundColor = .yellow
         
         return bt
@@ -85,7 +85,7 @@ class ButtonView:BaseView {
         
         kakaoImageView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.centerX.equalToSuperview().multipliedBy(0.54)
+            make.centerX.equalToSuperview().multipliedBy(0.62)
             make.height.width.equalTo(16)
         }
         

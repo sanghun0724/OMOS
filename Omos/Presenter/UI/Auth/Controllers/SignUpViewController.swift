@@ -18,11 +18,15 @@ class SignUpViewController:UIViewController {
        let button = UIButton()
         button.setTitle("다음", for: .normal)
         button.backgroundColor = .mainGrey4
+        button.setTitleColor(.mainGrey7, for: .normal)
+        button.layer.cornerRadius = Constant.loginCorner
+        button.layer.masksToBounds = true
         return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dismissKeyboardWhenTappedAround()
         bind()
     }
     

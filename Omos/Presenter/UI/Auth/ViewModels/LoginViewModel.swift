@@ -9,11 +9,14 @@ import KakaoSDKAuth
 import KakaoSDKCommon
 import Foundation
 import RxSwift
+import RxRelay
+import UIKit
 
 class LoginVeiwModel {
     
     let idPublishSubject = PublishSubject<String>()
     let pwPublishSubject = PublishSubject<String>()
+    let ischeckedSubject = BehaviorRelay<Bool>(value:false)
     
     //MARK: Local Login
 //    func isEqualLoginInfo() -> Observable<Bool> {
@@ -31,12 +34,28 @@ class LoginVeiwModel {
 //
 //    }
 //
-
-    
     func loginLocal() {
         //set LoginActionLogic
     }
     
+    
+    
+    //MARK: Check Button Logic
+    func isChecked(_ button:UIButton) {
+        if button.backgroundColor == .white {
+            button.backgroundColor = .mainOrange
+        } else  {
+            button.backgroundColor = .white
+        }
+    }
+    
+    func isAllChecked(_ button1:UIButton,_ button2:UIButton) {
+        if button1.backgroundColor == .mainOrange && button2.backgroundColor == .mainOrange {
+            ischeckedSubject.accept(true)
+        } else {
+            ischeckedSubject.accept(false)
+        }
+    }
     
     
     //MARK: KAKAO LOGIN
@@ -48,8 +67,8 @@ class LoginVeiwModel {
                     return
                 } else {
                     print("kakao login success")
-                    UserDefaults.standard.set(oauthToken, forKey: "kakao")
-                    
+                    UserDefaults.standard.set(oauthToken?.accessToken, forKey: "kakaoAccess")
+                    UserDefaults.standard.set(oauthToken?.refreshToken, forKey: "kakaoRefresh")
                     self.getUserInfo()
                 }
             }

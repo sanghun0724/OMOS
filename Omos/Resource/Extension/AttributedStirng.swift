@@ -10,13 +10,13 @@ import UIKit
 extension NSMutableAttributedString {
 
     var fontSize: CGFloat {
-        return 14
+        return 16
     }
     var boldFont: UIFont {
         return UIFont(name: "AvenirNext-Bold", size: fontSize) ?? UIFont.boldSystemFont(ofSize: fontSize)
     }
     var normalFont: UIFont {
-        return UIFont(name: "AvenirNext-Regular", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
+        return UIFont(name: "AppleSDGothicNeo-Regular", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
     }
 
     func bold(string: String, fontSize: CGFloat) -> NSMutableAttributedString {
@@ -34,11 +34,9 @@ extension NSMutableAttributedString {
     }
 
     func orangeHighlight(_ value:String) -> NSMutableAttributedString {
-
         let attributes:[NSAttributedString.Key : Any] = [
             .font: normalFont,
-            .foregroundColor: UIColor.white,
-            .backgroundColor: UIColor.orange
+            .foregroundColor: UIColor.mainOrange
         ]
 
         self.append(NSAttributedString(string: value, attributes:attributes))

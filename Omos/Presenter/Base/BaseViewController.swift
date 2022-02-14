@@ -38,6 +38,7 @@ class BaseViewController:UIViewController {
         self.navigationController?.navigationBar.layoutIfNeeded()
         self.view.backgroundColor = .mainBackGround
         setBarButtonItems()
+        dismissKeyboardWhenTappedAround()
     }
     
     override func viewDidLayoutSubviews() {
@@ -92,7 +93,7 @@ class BaseViewController:UIViewController {
     }
     
     func configureUI() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .mainBackGround
     }
     
     @objc private func keyboardWillShow(notification:NSNotification) {

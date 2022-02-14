@@ -30,6 +30,7 @@ class SignUpView:BaseView {
         field.placeholder = "비밀번호를 입력해주세요"
         field.autocorrectionType = .no
         field.autocapitalizationType = .none
+        field.textContentType = .password
         field.isSecureTextEntry = true
         field.layer.cornerRadius = Constant.loginCorner
         field.layer.masksToBounds = true
@@ -46,6 +47,7 @@ class SignUpView:BaseView {
         field.placeholder = "비밀번호를 다시 입력해주세요"
         field.autocorrectionType = .no
         field.autocapitalizationType = .none
+        field.textContentType = .password
         field.isSecureTextEntry = true
         field.layer.cornerRadius = Constant.loginCorner
         field.layer.masksToBounds = true
