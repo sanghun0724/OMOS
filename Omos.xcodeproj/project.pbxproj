@@ -29,6 +29,9 @@
 		B6670FA827B5098200BABF40 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6670FA727B5098200BABF40 /* LoginView.swift */; };
 		B6670FAA27B517DE00BABF40 /* DecoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6670FA927B517DD00BABF40 /* DecoView.swift */; };
 		B6670FAC27B5542100BABF40 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6670FAB27B5542100BABF40 /* ButtonView.swift */; };
+		B67EF45027B7A9B80023D5D4 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67EF44F27B7A9B80023D5D4 /* SignUpView.swift */; };
+		B67EF45527B7AA000023D5D4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67EF45427B7AA000023D5D4 /* SignUpViewController.swift */; };
+		B67EF45727B7AA220023D5D4 /* PrivateLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67EF45627B7AA220023D5D4 /* PrivateLabelView.swift */; };
 		B682184C27B3823D00B58E19 /* ShareCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682184B27B3823D00B58E19 /* ShareCustomViewController.swift */; };
 		B682184E27B393BF00B58E19 /* MusicRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682184D27B393BF00B58E19 /* MusicRepository.swift */; };
 		B682185027B39ADD00B58E19 /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682184F27B39ADD00B58E19 /* TestModel.swift */; };
@@ -51,7 +54,15 @@
 		B689A9D627AE9627005F26E4 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9D427AE9627005F26E4 /* IndicatorView.swift */; };
 		B689A9DA27AEA835005F26E4 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9D927AEA835005F26E4 /* BaseViewModel.swift */; };
 		B689A9DC27AEA877005F26E4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9DB27AEA877005F26E4 /* LoginViewController.swift */; };
+		B69860BD27B8E85600E83DB9 /* NickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69860BC27B8E85600E83DB9 /* NickNameView.swift */; };
 		B6A0299C27B23D3500D3D3C9 /* OmosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */; };
+		B6C3AD4527B95B1E00D5D69D /* AttributedStirng.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C3AD4427B95B1E00D5D69D /* AttributedStirng.swift */; };
+		B6CC1D7227BA42C300B5EE7E /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CC1D7127BA42C300B5EE7E /* Label.swift */; };
+		B6CC1D7427BA437A00B5EE7E /* InfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CC1D7327BA437A00B5EE7E /* InfoController.swift */; };
+		B6CC1D7627BA475900B5EE7E /* UseInfoText.rtf in Resources */ = {isa = PBXBuildFile; fileRef = B6CC1D7527BA475900B5EE7E /* UseInfoText.rtf */; };
+		B6CC1D7827BA536A00B5EE7E /* PrivateInfoText.rtf in Resources */ = {isa = PBXBuildFile; fileRef = B6CC1D7727BA536A00B5EE7E /* PrivateInfoText.rtf */; };
+		B6D3685627B7A510008B5635 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D3685527B7A510008B5635 /* NicknameViewController.swift */; };
+		B6E8C91527B6AEFC00C32752 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E8C91427B6AEFC00C32752 /* Constant.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +100,9 @@
 		B6670FA927B517DD00BABF40 /* DecoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoView.swift; sourceTree = "<group>"; };
 		B6670FAB27B5542100BABF40 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		B6670FAD27B5654900BABF40 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		B67EF44F27B7A9B80023D5D4 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		B67EF45427B7AA000023D5D4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		B67EF45627B7AA220023D5D4 /* PrivateLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateLabelView.swift; sourceTree = "<group>"; };
 		B682184B27B3823D00B58E19 /* ShareCustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCustomViewController.swift; sourceTree = "<group>"; };
 		B682184D27B393BF00B58E19 /* MusicRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicRepository.swift; sourceTree = "<group>"; };
 		B682184F27B39ADD00B58E19 /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
@@ -112,8 +126,17 @@
 		B689A9D927AEA835005F26E4 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		B689A9DB27AEA877005F26E4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B689A9DD27AEAD0C005F26E4 /* Omos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Omos.entitlements; sourceTree = "<group>"; };
+		B69860BC27B8E85600E83DB9 /* NickNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameView.swift; sourceTree = "<group>"; };
 		B6A0299927B23D3500D3D3C9 /* OmosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OmosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmosTests.swift; sourceTree = "<group>"; };
+		B6AC277027BA28BB00A1FA5B /* OmosRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OmosRelease.entitlements; sourceTree = "<group>"; };
+		B6C3AD4427B95B1E00D5D69D /* AttributedStirng.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedStirng.swift; sourceTree = "<group>"; };
+		B6CC1D7127BA42C300B5EE7E /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		B6CC1D7327BA437A00B5EE7E /* InfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoController.swift; sourceTree = "<group>"; };
+		B6CC1D7527BA475900B5EE7E /* UseInfoText.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = UseInfoText.rtf; sourceTree = "<group>"; };
+		B6CC1D7727BA536A00B5EE7E /* PrivateInfoText.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = PrivateInfoText.rtf; sourceTree = "<group>"; };
+		B6D3685527B7A510008B5635 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
+		B6E8C91427B6AEFC00C32752 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		C215C3C79873F26B73F4F037 /* Pods-Omos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Omos.release.xcconfig"; path = "Target Support Files/Pods-Omos/Pods-Omos.release.xcconfig"; sourceTree = "<group>"; };
 		CEBF3DD9CCF3DD38A49D350C /* Pods-Omos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Omos.debug.xcconfig"; path = "Target Support Files/Pods-Omos/Pods-Omos.debug.xcconfig"; sourceTree = "<group>"; };
 		EBDDD0956E1034CF6BE3CC18 /* Pods_Omos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Omos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -169,6 +192,7 @@
 		B609137E27AD3A7C00B439C3 /* Omos */ = {
 			isa = PBXGroup;
 			children = (
+				B6AC277027BA28BB00A1FA5B /* OmosRelease.entitlements */,
 				B612199627AE93E4006AEAC9 /* Domain */,
 				B612199527AE93D6006AEAC9 /* Repository */,
 				B612199427AE939D006AEAC9 /* Resource */,
@@ -180,9 +204,8 @@
 		B612198F27AE9370006AEAC9 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				B612199227AE9387006AEAC9 /* Controllers */,
-				B612199127AE9380006AEAC9 /* ViewModels */,
-				B612199027AE9377006AEAC9 /* Views */,
+				B6C3AD4227B949FC00D5D69D /* Base */,
+				B612199227AE9387006AEAC9 /* UI */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -190,7 +213,6 @@
 		B612199027AE9377006AEAC9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B666A90527AED17C00BE7F92 /* BaseView.swift */,
 				B650874A27AFC5EE0020D2C1 /* AllRecordView.swift */,
 				B683A45227B0DA3500838749 /* AllRecordTableCell.swift */,
 				B683A45627B12DD000838749 /* ProfileView.swift */,
@@ -202,14 +224,13 @@
 		B612199127AE9380006AEAC9 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				B689A9D927AEA835005F26E4 /* BaseViewModel.swift */,
 				B650874627AFC4CA0020D2C1 /* AllRecordViewModel.swift */,
 				B682185527B3A0BE00B58E19 /* SearchViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		B612199227AE9387006AEAC9 /* Controllers */ = {
+		B612199227AE9387006AEAC9 /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				B650873727AF94500020D2C1 /* Others */,
@@ -217,7 +238,7 @@
 				B612199827AE9420006AEAC9 /* Auth */,
 				B612199727AE9414006AEAC9 /* CoreTabs */,
 			);
-			path = Controllers;
+			path = UI;
 			sourceTree = "<group>";
 		};
 		B612199427AE939D006AEAC9 /* Resource */ = {
@@ -231,6 +252,7 @@
 				B609138D27AD3A8000B439C3 /* Info.plist */,
 				B609137F27AD3A7C00B439C3 /* AppDelegate.swift */,
 				B609138127AD3A7C00B439C3 /* SceneDelegate.swift */,
+				B6E8C91427B6AEFC00C32752 /* Constant.swift */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -256,14 +278,9 @@
 		B612199727AE9414006AEAC9 /* CoreTabs */ = {
 			isa = PBXGroup;
 			children = (
-				B650873A27AF94C60020D2C1 /* TabBarViewController.swift */,
-				B650873827AF948D0020D2C1 /* HomeViewController.swift */,
-				B650873C27AF969C0020D2C1 /* MyRecordViewController.swift */,
-				B650873E27AF96B00020D2C1 /* AllRecordViewController.swift */,
-				B650874827AFC5150020D2C1 /* AllRecord + Table.swift */,
-				B650874027AF96C00020D2C1 /* MyDJViewController.swift */,
-				B650874227AF96E80020D2C1 /* ProfileViewController.swift */,
-				B683A45827B130D100838749 /* Profile + Table.swift */,
+				B6C3AD4327B94A2B00D5D69D /* Controllers */,
+				B612199027AE9377006AEAC9 /* Views */,
+				B612199127AE9380006AEAC9 /* ViewModels */,
 			);
 			path = CoreTabs;
 			sourceTree = "<group>";
@@ -271,11 +288,9 @@
 		B612199827AE9420006AEAC9 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				B689A9DB27AEA877005F26E4 /* LoginViewController.swift */,
-				B6670FA527B5097000BABF40 /* LoginViewModel.swift */,
-				B6670FA727B5098200BABF40 /* LoginView.swift */,
-				B6670FAB27B5542100BABF40 /* ButtonView.swift */,
-				B6670FA927B517DD00BABF40 /* DecoView.swift */,
+				B67EF45327B7A9D70023D5D4 /* Controllers */,
+				B67EF45227B7A9CA0023D5D4 /* ViewModels */,
+				B67EF45127B7A9BE0023D5D4 /* Views */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -293,9 +308,40 @@
 				B682185927B3AD5100B58E19 /* Search + Table.swift */,
 				B650874427AFAE220020D2C1 /* SearchViewController.swift */,
 				B682184B27B3823D00B58E19 /* ShareCustomViewController.swift */,
-				B609138327AD3A7C00B439C3 /* BaseViewController.swift */,
 			);
 			path = Others;
+			sourceTree = "<group>";
+		};
+		B67EF45127B7A9BE0023D5D4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B6670FA727B5098200BABF40 /* LoginView.swift */,
+				B6670FAB27B5542100BABF40 /* ButtonView.swift */,
+				B6670FA927B517DD00BABF40 /* DecoView.swift */,
+				B67EF44F27B7A9B80023D5D4 /* SignUpView.swift */,
+				B67EF45627B7AA220023D5D4 /* PrivateLabelView.swift */,
+				B69860BC27B8E85600E83DB9 /* NickNameView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B67EF45227B7A9CA0023D5D4 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B6670FA527B5097000BABF40 /* LoginViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B67EF45327B7A9D70023D5D4 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B689A9DB27AEA877005F26E4 /* LoginViewController.swift */,
+				B67EF45427B7AA000023D5D4 /* SignUpViewController.swift */,
+				B6D3685527B7A510008B5635 /* NicknameViewController.swift */,
+				B6CC1D7327BA437A00B5EE7E /* InfoController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		B682184927B37F9200B58E19 /* Entity */ = {
@@ -323,6 +369,8 @@
 				B689A9C927AE94E7005F26E4 /* UIVIew.swift */,
 				B689A9CA27AE94E8005F26E4 /* UIViewController.swift */,
 				B682185B27B3C0BB00B58E19 /* MyError.swift */,
+				B6C3AD4427B95B1E00D5D69D /* AttributedStirng.swift */,
+				B6CC1D7127BA42C300B5EE7E /* Label.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -334,6 +382,8 @@
 				B689A9D327AE9627005F26E4 /* CustomToggleView.swift */,
 				B689A9D427AE9627005F26E4 /* IndicatorView.swift */,
 				B682185D27B3E22900B58E19 /* LoadingView.swift */,
+				B6CC1D7527BA475900B5EE7E /* UseInfoText.rtf */,
+				B6CC1D7727BA536A00B5EE7E /* PrivateInfoText.rtf */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -344,6 +394,31 @@
 				B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */,
 			);
 			path = OmosTests;
+			sourceTree = "<group>";
+		};
+		B6C3AD4227B949FC00D5D69D /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				B666A90527AED17C00BE7F92 /* BaseView.swift */,
+				B689A9D927AEA835005F26E4 /* BaseViewModel.swift */,
+				B609138327AD3A7C00B439C3 /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		B6C3AD4327B94A2B00D5D69D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B650873A27AF94C60020D2C1 /* TabBarViewController.swift */,
+				B650873827AF948D0020D2C1 /* HomeViewController.swift */,
+				B650873C27AF969C0020D2C1 /* MyRecordViewController.swift */,
+				B650873E27AF96B00020D2C1 /* AllRecordViewController.swift */,
+				B650874827AFC5150020D2C1 /* AllRecord + Table.swift */,
+				B650874027AF96C00020D2C1 /* MyDJViewController.swift */,
+				B650874227AF96E80020D2C1 /* ProfileViewController.swift */,
+				B683A45827B130D100838749 /* Profile + Table.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		CBC207B625B5E088E6EE1C56 /* Pods */ = {
@@ -419,6 +494,7 @@
 			developmentRegion = Korea;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				Korea,
 				en,
 				Base,
 				ko,
@@ -440,6 +516,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B609138C27AD3A8000B439C3 /* LaunchScreen.storyboard in Resources */,
+				B6CC1D7827BA536A00B5EE7E /* PrivateInfoText.rtf in Resources */,
+				B6CC1D7627BA475900B5EE7E /* UseInfoText.rtf in Resources */,
 				B609138927AD3A8000B439C3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -500,11 +578,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6C3AD4527B95B1E00D5D69D /* AttributedStirng.swift in Sources */,
 				B682185627B3A0BE00B58E19 /* SearchViewModel.swift in Sources */,
 				B689A9DC27AEA877005F26E4 /* LoginViewController.swift in Sources */,
 				B650874B27AFC5EF0020D2C1 /* AllRecordView.swift in Sources */,
 				B650873B27AF94C60020D2C1 /* TabBarViewController.swift in Sources */,
 				B650874327AF96E80020D2C1 /* ProfileViewController.swift in Sources */,
+				B6D3685627B7A510008B5635 /* NicknameViewController.swift in Sources */,
 				B682185E27B3E22900B58E19 /* LoadingView.swift in Sources */,
 				B666A90627AED17C00BE7F92 /* BaseView.swift in Sources */,
 				B689A9CE27AE94E9005F26E4 /* UIVIew.swift in Sources */,
@@ -515,13 +595,18 @@
 				B609138427AD3A7C00B439C3 /* BaseViewController.swift in Sources */,
 				B682184E27B393BF00B58E19 /* MusicRepository.swift in Sources */,
 				B650873927AF948D0020D2C1 /* HomeViewController.swift in Sources */,
+				B67EF45027B7A9B80023D5D4 /* SignUpView.swift in Sources */,
+				B67EF45727B7AA220023D5D4 /* PrivateLabelView.swift in Sources */,
 				B689A9D127AE94E9005F26E4 /* Color.swift in Sources */,
 				B683A45327B0DA3500838749 /* AllRecordTableCell.swift in Sources */,
+				B69860BD27B8E85600E83DB9 /* NickNameView.swift in Sources */,
 				B682184C27B3823D00B58E19 /* ShareCustomViewController.swift in Sources */,
 				B689A9D227AE94E9005F26E4 /* Date.swift in Sources */,
 				B682185A27B3AD5100B58E19 /* Search + Table.swift in Sources */,
 				B683A45727B12DD000838749 /* ProfileView.swift in Sources */,
+				B6CC1D7227BA42C300B5EE7E /* Label.swift in Sources */,
 				B689A9D627AE9627005F26E4 /* IndicatorView.swift in Sources */,
+				B67EF45527B7AA000023D5D4 /* SignUpViewController.swift in Sources */,
 				B609138027AD3A7C00B439C3 /* AppDelegate.swift in Sources */,
 				B682185827B3AA4F00B58E19 /* SearchListView.swift in Sources */,
 				B6670FAA27B517DE00BABF40 /* DecoView.swift in Sources */,
@@ -532,9 +617,11 @@
 				B683A45927B130D100838749 /* Profile + Table.swift in Sources */,
 				B682185427B39F7200B58E19 /* MusicUseCase.swift in Sources */,
 				B650874127AF96C00020D2C1 /* MyDJViewController.swift in Sources */,
+				B6CC1D7427BA437A00B5EE7E /* InfoController.swift in Sources */,
 				B689A9D527AE9627005F26E4 /* CustomToggleView.swift in Sources */,
 				B609138227AD3A7C00B439C3 /* SceneDelegate.swift in Sources */,
 				B666A90827AED1AA00BE7F92 /* EmptyView.swift in Sources */,
+				B6E8C91527B6AEFC00C32752 /* Constant.swift in Sources */,
 				B682185227B39F6500B58E19 /* MusicRepositoryImpl.swift in Sources */,
 				B682185027B39ADD00B58E19 /* TestModel.swift in Sources */,
 				B689A9CF27AE94E9005F26E4 /* UIViewController.swift in Sources */,
@@ -730,6 +817,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Omos/OmosRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2L2K3UD2LK;
