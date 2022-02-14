@@ -13,6 +13,7 @@ class SignUpViewController:UIViewController {
     
     private let disposeBag = DisposeBag()
     private let topView = SignUpView()
+    var passwordFlag = false
     
     private let nextButton:UIButton = {
        let button = UIButton()
@@ -62,6 +63,36 @@ class SignUpViewController:UIViewController {
                 self?.dismiss(animated: false, completion: nil)
                 print("back")
             }).disposed(by: disposeBag)
+        
+        topView.passwordDecoView.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                if !(self?.passwordFlag)! {
+                    self?.topView.passwordField.isSecureTextEntry = false
+                    self?.topView.passwordDecoView.setImage(UIImage(named: "visible1" ), for: .normal)
+                        self?.passwordFlag = true
+                } else {
+                    self?.topView.passwordField.isSecureTextEntry = true
+                    self?.topView.passwordDecoView.setImage(UIImage(named: "visible2" ), for: .normal)
+                    self?.passwordFlag = false
+                }
+            }).disposed(by: disposeBag)
+        
+        topView.repasswordDecoView.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                if !(self?.passwordFlag)! {
+                    self?.topView.repasswordField.isSecureTextEntry = false
+                    self?.topView.repasswordDecoView.setImage(UIImage(named: "visible1" ), for: .normal)
+                        self?.passwordFlag = true
+                } else {
+                    self?.topView.repasswordField.isSecureTextEntry = true
+                    self?.topView.repasswordDecoView.setImage(UIImage(named: "visible2" ), for: .normal)
+                    self?.passwordFlag = false
+                }
+            }).disposed(by: disposeBag)
+        
+        
         
         nextButton.rx.tap
             .asDriver()

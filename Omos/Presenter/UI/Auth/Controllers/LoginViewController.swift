@@ -17,7 +17,8 @@ class LoginViewController:UIViewController {
     private let viewModel = LoginVeiwModel()
     private let topView = LoginTopView()
     private let bottomView = ButtonView()
-
+    var passwordFlag = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .mainBackGround
@@ -47,6 +48,7 @@ class LoginViewController:UIViewController {
             make.left.right.equalToSuperview().inset(22)
             make.bottom.equalToSuperview().inset(40)
         }
+        
     }
     
     private func bind() {
@@ -55,6 +57,22 @@ class LoginViewController:UIViewController {
 //        topView.emailField.rx.text
 //            .map{ $0 ?? ""}
 //            .
+        topView.passwordDecoView.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                if !(self?.passwordFlag)! {
+                    self?.topView.passwordField.isSecureTextEntry = false
+                    self?.topView.passwordDecoView.setImage(UIImage(named: "visible1" ), for: .normal)
+                        self?.passwordFlag = true
+                } else {
+                    self?.topView.passwordField.isSecureTextEntry = true
+                    self?.topView.passwordDecoView.setImage(UIImage(named: "visible2" ), for: .normal)
+                    self?.passwordFlag = false
+                }
+            }).disposed(by: disposeBag)
+        
+       
+        
         topView.labelsView.signUpButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in
