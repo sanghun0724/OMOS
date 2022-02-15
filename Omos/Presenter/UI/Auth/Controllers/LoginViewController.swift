@@ -57,6 +57,34 @@ class LoginViewController:UIViewController {
 //        topView.emailField.rx.text
 //            .map{ $0 ?? ""}
 //            .
+        let isEmailEmpty = topView.passwordField.rx.text
+             .throttle(RxTimeInterval.milliseconds(1), scheduler: MainScheduler.instance)
+             .map { text -> Bool in
+                 return !(text?.isEmpty ?? true)
+             }.distinctUntilChanged()
+        
+        
+        let isPassWordEmpty = topView.passwordField.rx.text
+            .throttle(RxTimeInterval.milliseconds(100), scheduler: MainScheduler.instance)
+            .map { text -> Bool in
+                return !(text?.isEmpty ?? true)
+            }.distinctUntilChanged()
+        
+        Observable.combineLatest(isEmailEmpty, isPassWordEmpty)
+            .map { $0 && $1 }
+            .distinctUntilChanged()
+            .withUnretained(self)
+            .subscribe(onNext: { owner,info in
+                if info {
+                    owner.bottomView.loginButton.backgroundColor = .mainOrange
+                    owner.bottomView.loginButton.setTitleColor(.white, for: .normal)
+                    owner.bottomView.loginButton.isEnabled = true
+                } else  {
+                    owner.bottomView.loginButton.backgroundColor = .mainGrey4
+                    owner.bottomView.loginButton.setTitleColor(.mainGrey7, for: .normal)
+                    owner.bottomView.loginButton.isEnabled = false
+                }
+            }).disposed(by: disposeBag)
         
         topView.passwordDecoView.rx.tap
             .asDriver()

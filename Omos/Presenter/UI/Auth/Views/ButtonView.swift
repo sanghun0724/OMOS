@@ -17,8 +17,9 @@ class ButtonView:BaseView {
         button.backgroundColor = .mainGrey4
         button.setTitle("로그인", for: .normal)
         button.setTitleColor(.mainGrey7, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .semibold)
+        button.titleLabel?.font = .systemFont(ofSize: 18, weight: .medium)
         button.layer.masksToBounds = true
+        button.isEnabled = false
         return button
     }()
     
@@ -37,12 +38,11 @@ class ButtonView:BaseView {
     let kakaoButton:UIButton = {
         let bt = UIButton()
         bt.layer.cornerRadius = Constant.loginCorner
-        bt.setTitle("    Kakao로 로그인", for: .normal)
+        bt.setTitle("  Kakao로 로그인", for: .normal)
         bt.titleLabel?.textAlignment = .right
         bt.setTitleColor(.buttonLabel, for: .normal)
-        bt.titleLabel?.font = .systemFont(ofSize: 20,weight: .semibold)
+        bt.titleLabel?.font = .systemFont(ofSize: 18,weight: .medium)
         bt.backgroundColor = .kakaoYellow
-        
         return bt
     }()
     
@@ -86,8 +86,10 @@ class ButtonView:BaseView {
         
         kakaoImageView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.centerX.equalToSuperview().multipliedBy(0.62)
-            make.height.width.equalTo(16)
+           // make.centerX.equalToSuperview().multipliedBy(0.62)
+            kakaoImageView.translatesAutoresizingMaskIntoConstraints = false
+            kakaoImageView.rightAnchor.constraint(equalTo: kakaoButton.titleLabel!.leftAnchor).isActive = true
+            make.height.width.equalTo(12)
         }
         
     }
