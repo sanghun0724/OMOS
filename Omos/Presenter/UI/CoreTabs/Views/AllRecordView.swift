@@ -17,7 +17,7 @@ class AllRecordView:BaseView {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(AllRecordTableCell.self, forCellReuseIdentifier: AllRecordTableCell.identifier)
         table.register(AllRecordHeaderView.self, forHeaderFooterViewReuseIdentifier: AllRecordHeaderView.identifier)
-        table.backgroundColor = .black
+        table.backgroundColor = .mainBlack
         table.showsVerticalScrollIndicator = false
         table.automaticallyAdjustsScrollIndicatorInsets = false
         //table.contentInsetAdjustmentBehavior = .never
@@ -40,7 +40,6 @@ class AllRecordView:BaseView {
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
     }
 }
 

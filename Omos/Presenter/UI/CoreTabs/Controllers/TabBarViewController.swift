@@ -52,8 +52,8 @@ class TabBarViewController: UITabBarController {
         
         let navs = [nav1,nav2,nav3,nav4,nav5]
         setViewControllers(navs, animated: true)
-        tabBar.isTranslucent = false
-        
+        //tabBar.isTranslucent = false
+        self.tabBar.backgroundColor = .mainBackGround
         
         navs.forEach { nav in
             TabBarViewController.titles.append((nav.tabBarItem.title ?? "nil",String(describing: type(of: nav.viewControllers.first.self!))))

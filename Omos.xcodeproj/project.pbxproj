@@ -57,6 +57,8 @@
 		B69860BD27B8E85600E83DB9 /* NickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69860BC27B8E85600E83DB9 /* NickNameView.swift */; };
 		B6A0299C27B23D3500D3D3C9 /* OmosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */; };
 		B6B1BB5727BB7E1900DF2528 /* AllRecordCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B1BB5627BB7E1900DF2528 /* AllRecordCollectionCell.swift */; };
+		B6B1BB5A27BBCE1000DF2528 /* MyRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B1BB5927BBCE1000DF2528 /* MyRecordView.swift */; };
+		B6B1BB5C27BBCF6000DF2528 /* MyRecordTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B1BB5B27BBCF6000DF2528 /* MyRecordTableCell.swift */; };
 		B6C3AD4527B95B1E00D5D69D /* AttributedStirng.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C3AD4427B95B1E00D5D69D /* AttributedStirng.swift */; };
 		B6CC1D7227BA42C300B5EE7E /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CC1D7127BA42C300B5EE7E /* Label.swift */; };
 		B6CC1D7427BA437A00B5EE7E /* InfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CC1D7327BA437A00B5EE7E /* InfoController.swift */; };
@@ -132,6 +134,8 @@
 		B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmosTests.swift; sourceTree = "<group>"; };
 		B6AC277027BA28BB00A1FA5B /* OmosRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OmosRelease.entitlements; sourceTree = "<group>"; };
 		B6B1BB5627BB7E1900DF2528 /* AllRecordCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordCollectionCell.swift; sourceTree = "<group>"; };
+		B6B1BB5927BBCE1000DF2528 /* MyRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordView.swift; sourceTree = "<group>"; };
+		B6B1BB5B27BBCF6000DF2528 /* MyRecordTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordTableCell.swift; sourceTree = "<group>"; };
 		B6C3AD4427B95B1E00D5D69D /* AttributedStirng.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedStirng.swift; sourceTree = "<group>"; };
 		B6CC1D7127BA42C300B5EE7E /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		B6CC1D7327BA437A00B5EE7E /* InfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoController.swift; sourceTree = "<group>"; };
@@ -215,11 +219,11 @@
 		B612199027AE9377006AEAC9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B6B1BB5827BBCDF500DF2528 /* Cells */,
 				B650874A27AFC5EE0020D2C1 /* AllRecordView.swift */,
-				B683A45227B0DA3500838749 /* AllRecordTableCell.swift */,
 				B683A45627B12DD000838749 /* ProfileView.swift */,
 				B682185727B3AA4F00B58E19 /* SearchListView.swift */,
-				B6B1BB5627BB7E1900DF2528 /* AllRecordCollectionCell.swift */,
+				B6B1BB5927BBCE1000DF2528 /* MyRecordView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -397,6 +401,16 @@
 				B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */,
 			);
 			path = OmosTests;
+			sourceTree = "<group>";
+		};
+		B6B1BB5827BBCDF500DF2528 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B683A45227B0DA3500838749 /* AllRecordTableCell.swift */,
+				B6B1BB5627BB7E1900DF2528 /* AllRecordCollectionCell.swift */,
+				B6B1BB5B27BBCF6000DF2528 /* MyRecordTableCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		B6C3AD4227B949FC00D5D69D /* Base */ = {
@@ -582,6 +596,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6C3AD4527B95B1E00D5D69D /* AttributedStirng.swift in Sources */,
+				B6B1BB5A27BBCE1000DF2528 /* MyRecordView.swift in Sources */,
 				B682185627B3A0BE00B58E19 /* SearchViewModel.swift in Sources */,
 				B689A9DC27AEA877005F26E4 /* LoginViewController.swift in Sources */,
 				B650874B27AFC5EF0020D2C1 /* AllRecordView.swift in Sources */,
@@ -627,6 +642,7 @@
 				B6E8C91527B6AEFC00C32752 /* Constant.swift in Sources */,
 				B682185227B39F6500B58E19 /* MusicRepositoryImpl.swift in Sources */,
 				B682185027B39ADD00B58E19 /* TestModel.swift in Sources */,
+				B6B1BB5C27BBCF6000DF2528 /* MyRecordTableCell.swift in Sources */,
 				B689A9CF27AE94E9005F26E4 /* UIViewController.swift in Sources */,
 				B6B1BB5727BB7E1900DF2528 /* AllRecordCollectionCell.swift in Sources */,
 				B6670FA827B5098200BABF40 /* LoginView.swift in Sources */,
@@ -822,7 +838,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Omos/OmosRelease.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2L2K3UD2LK;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -839,6 +856,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sangheon.Omos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = OmosProfile;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -868,6 +886,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2L2K3UD2LK;
@@ -876,6 +896,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sangheon.OmosTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

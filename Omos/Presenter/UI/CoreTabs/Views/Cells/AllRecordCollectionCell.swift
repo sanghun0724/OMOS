@@ -18,18 +18,27 @@ class AllRecordCollectionCell:UICollectionViewCell {
     
     let backGroundView:UIView = {
         let view = UIView()
-        view.backgroundColor = .black
-        view.layer.opacity = 0.13
+        view.layer.backgroundColor = UIColor(red: 0.129, green: 0.129, blue: 0.129, alpha: 0.87).cgColor
+
+        return view
+    }()
+    
+    private let labelCoverView:UIView = {
+        let view = UIView()
+        view.layer.cornerCurve = .continuous
+        view.layer.cornerRadius = 18
+        view.layer.backgroundColor = UIColor(red: 0.388, green: 0.388, blue: 0.4, alpha: 0.5).cgColor
+        view.layer.masksToBounds = true
+        view.clipsToBounds = true
         return view
     }()
     
     let titleLabel:UILabel = {
         let label = UILabel()
-        label.backgroundColor = .mainGrey4
-        label.layer.cornerRadius = 28
-        label.layer.masksToBounds = true
         label.textColor = .white
+        label.textAlignment = .center
         label.text = "노래제목이 들어갑니다.노래제목이 들어갑니다.노래제목이 들어갑니다."
+        label.font = .systemFont(ofSize: 12)
         return label
     }()
     
@@ -71,7 +80,8 @@ class AllRecordCollectionCell:UICollectionViewCell {
    private func configureUI() {
         self.addSubview(albumImageView)
         self.addSubview(backGroundView)
-       backGroundView.addSubview(titleLabel)
+       labelCoverView.addSubview(titleLabel)
+       backGroundView.addSubview(labelCoverView)
        backGroundView.addSubview(descLabel)
        backGroundView.addSubview(nameLabel)
        backGroundView.addSubview(dummyView)
@@ -92,10 +102,15 @@ class AllRecordCollectionCell:UICollectionViewCell {
             make.right.bottom.top.equalToSuperview()
         }
        
-       titleLabel.snp.makeConstraints { make in
+       labelCoverView.snp.makeConstraints { make in
            make.left.right.equalToSuperview().inset(14)
            make.top.equalToSuperview().inset(12)
            make.height.equalToSuperview().multipliedBy(0.157)
+       }
+       
+       titleLabel.snp.makeConstraints { make in
+           make.right.left.equalToSuperview().inset(10)
+           make.top.bottom.equalToSuperview()
        }
        
        descLabel.snp.makeConstraints { make in

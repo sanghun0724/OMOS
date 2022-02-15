@@ -50,8 +50,12 @@ extension AllRecordTableCell: UICollectionViewDelegate,UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AllRecordCollectionCell.identifier, for: indexPath) as! AllRecordCollectionCell
-        cell.backgroundColor = .black
+        cell.backgroundColor = .mainBlack
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: false)
     }
 
 }

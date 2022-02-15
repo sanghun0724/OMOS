@@ -9,11 +9,12 @@ import UIKit
 import SnapKit
 
 class ProfileView:BaseView {
-    
+     
     let tableView:UITableView = {
        let table = UITableView()
         table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         table.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: ProfileHeaderView.identifier)
+        table.backgroundColor = .mainBackGround
        return table
     }()
 
