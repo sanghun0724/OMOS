@@ -24,6 +24,7 @@ class TabBarViewController: UITabBarController {
         //            print("dont have current user email")
         //            return
         //        }
+        
         let home = HomeViewController()
         let myRecord = MyRecordViewController()
         let allRecord = AllRecordViewController(viewModel: AllRecordViewModel())
@@ -37,11 +38,17 @@ class TabBarViewController: UITabBarController {
         let nav4 = UINavigationController(rootViewController: myDj)
         let nav5 = UINavigationController(rootViewController: profile)
         
-        nav1.tabBarItem = UITabBarItem(title: "투데이", image: UIImage(systemName: "house"), tag: 1)
-        nav2.tabBarItem = UITabBarItem(title: "MY 레코드", image: UIImage(systemName: "house"), tag: 2)
-        nav3.tabBarItem = UITabBarItem(title: "전체 레코드", image: UIImage(systemName: "house"), tag: 3)
-        nav4.tabBarItem = UITabBarItem(title: "MY DJ", image: UIImage(systemName: "house"), tag: 4)
-        nav5.tabBarItem = UITabBarItem(title: "MY 페이지", image: UIImage(systemName: "person.circle"), tag: 5)
+        nav1.tabBarItem = UITabBarItem(title: "투데이", image: UIImage(named: "home"), selectedImage: UIImage(named: "home2"))
+        nav2.tabBarItem = UITabBarItem(title: "MY 레코드", image: UIImage(named: "myrecord"), selectedImage: UIImage(named:"myrecord2" ))
+        nav3.tabBarItem = UITabBarItem(title: "전체 레코드", image: UIImage(named: "allrecord"), selectedImage: UIImage(named:"allrecord2" ))
+        nav4.tabBarItem = UITabBarItem(title: "MY DJ", image:UIImage(named: "mydj"), selectedImage: UIImage(named:"mydj2" ))
+        nav5.tabBarItem = UITabBarItem(title: "MY 페이지", image: UIImage(named: "mypage"), selectedImage: UIImage(named:"mypage2" ))
+        self.tabBar.selectedImageTintColor = .mainOrange
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.mainGrey5], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.mainOrange], for: .selected)
+       
+        //UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().backgroundColor = .mainBackGround
         
         let navs = [nav1,nav2,nav3,nav4,nav5]
         setViewControllers(navs, animated: true)

@@ -17,6 +17,7 @@ class ButtonView:BaseView {
         button.backgroundColor = .mainGrey4
         button.setTitle("로그인", for: .normal)
         button.setTitleColor(.mainGrey7, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .semibold)
         button.layer.masksToBounds = true
         return button
     }()
@@ -40,13 +41,13 @@ class ButtonView:BaseView {
         bt.titleLabel?.textAlignment = .right
         bt.setTitleColor(.buttonLabel, for: .normal)
         bt.titleLabel?.font = .systemFont(ofSize: 20,weight: .semibold)
-        bt.backgroundColor = .yellow
+        bt.backgroundColor = .kakaoYellow
         
         return bt
     }()
     
     let appleButton:ASAuthorizationAppleIDButton = {
-        let button = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: .black)
+        let button = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: .white)
         button.cornerRadius = Constant.loginCorner
         return button
     }()

@@ -57,6 +57,7 @@ class LoginViewController:UIViewController {
 //        topView.emailField.rx.text
 //            .map{ $0 ?? ""}
 //            .
+        
         topView.passwordDecoView.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in
@@ -71,7 +72,6 @@ class LoginViewController:UIViewController {
                 }
             }).disposed(by: disposeBag)
         
-       
         
         topView.labelsView.signUpButton.rx.tap
             .asDriver()

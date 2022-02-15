@@ -11,6 +11,7 @@ import Foundation
 import RxSwift
 import RxRelay
 import UIKit
+import RxAlamofire
 
 class LoginVeiwModel {
     
@@ -36,6 +37,7 @@ class LoginVeiwModel {
 //
     func loginLocal() {
         //set LoginActionLogic
+        
     }
     
     

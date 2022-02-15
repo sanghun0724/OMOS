@@ -61,7 +61,6 @@ class SignUpViewController:UIViewController {
             .asDriver()
             .drive(onNext: { [weak self] in
                 self?.dismiss(animated: false, completion: nil)
-                print("back")
             }).disposed(by: disposeBag)
         
         topView.passwordDecoView.rx.tap

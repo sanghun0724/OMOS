@@ -35,7 +35,7 @@ class AllRecordViewController: BaseViewController {
         view.addSubview(selfView)
         
         selfView.snp.makeConstraints { make in
-            make.left.equalTo(self.view).inset(16)
+            make.left.equalTo(self.view)
             make.right.equalTo(self.view)
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)

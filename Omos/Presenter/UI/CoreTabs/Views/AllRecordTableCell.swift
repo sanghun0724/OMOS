@@ -20,12 +20,12 @@ class AllRecordTableCell:UITableViewCell {
     
     private func setCollectionView() {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 148, height: 174) //비율정해서 설정하기 
+        layout.scrollDirection = .horizontal//UIScreen.main.bounds.height / 4.72)
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width / 1.22 , height: UIScreen.main.bounds.height / 4.74) //비율정해서 설정하기
         layout.minimumLineSpacing = 6
         layout.minimumInteritemSpacing = 6
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(AllRecordCollectionCell.self, forCellWithReuseIdentifier: AllRecordCollectionCell.identifier)
         collectionView.dataSource = self
         collectionView.delegate = self
         contentView.addSubview(collectionView)
@@ -49,8 +49,8 @@ extension AllRecordTableCell: UICollectionViewDelegate,UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .mainGrey
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AllRecordCollectionCell.identifier, for: indexPath) as! AllRecordCollectionCell
+        cell.backgroundColor = .black
         return cell
     }
 

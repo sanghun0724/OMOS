@@ -27,8 +27,11 @@ extension UIColor {
     class var mainOrange: UIColor {UIColor(hex: 0xD35E32)}
     class var mainGrey: UIColor {UIColor(hex: 0x636363)}
     class var mainGrey4: UIColor {UIColor(hex: 0xAEAEB2)}
+    class var mainGrey5: UIColor {UIColor(hex: 0x8E8E93)}
     class var mainGrey7: UIColor {UIColor(hex: 0x48484A)}
     class var buttonLabel: UIColor {UIColor(hex: 0x341F20)}
+    class var kakaoYellow: UIColor {UIColor(hex: 0xFEE500)}
+    class var mainGrey1: UIColor {UIColor(hex: 0xE5E5EA)}
 
     
     class var mainLikeLabelColor: UIColor {UIColor(hex: 0x858585)}
