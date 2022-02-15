@@ -46,17 +46,27 @@ class MyRecordTableCell:UITableViewCell {
         return label
     }()
     
+    let recordLabel:UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.text = "노래제목이 들어갑니다.노래제목이 들어갑니다.노래제목이 들어갑니다."
+        label.font = .systemFont(ofSize: 18)
+        return label
+    }()
+    
     let descLabel:UILabel = {
         let label = UILabel()
         label.text = "record main title here..노래제목이 들어갑니다.노래제목이 들어갑니다.노래제목이 들어갑니다.노래제목이 들어갑니다"
         label.numberOfLines = 2
+        
         return label
     }()
     
     let nameLabel:UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.text = "by. nickname"
+        label.text = "2022 00 00 카테코리가 들어갑니다"
+        label.font = .systemFont(ofSize: 12)
         return label
     }()
     
@@ -93,6 +103,7 @@ class MyRecordTableCell:UITableViewCell {
         backCoverView.addSubview(albumImageView)
         backCoverView.addSubview(backGroundView)
         labelCoverView.addSubview(titleLabel)
+        backGroundView.addSubview(recordLabel)
         backGroundView.addSubview(labelCoverView)
         backGroundView.addSubview(descLabel)
         backGroundView.addSubview(nameLabel)
@@ -103,10 +114,9 @@ class MyRecordTableCell:UITableViewCell {
         }
         
         albumImageView.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(16)
-            make.centerY.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.4)
-            make.height.equalTo(albumImageView.snp.width)
+            make.left.bottom.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.64)
+            make.width.equalTo(albumImageView.snp.height)
         }
         
         backGroundView.snp.makeConstraints { make in
@@ -116,7 +126,7 @@ class MyRecordTableCell:UITableViewCell {
         
         labelCoverView.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(14)
-            make.top.equalToSuperview().inset(12)
+            make.top.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.157)
         }
         
@@ -125,16 +135,23 @@ class MyRecordTableCell:UITableViewCell {
             make.top.bottom.equalToSuperview()
         }
         
-        descLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom)
+        recordLabel.snp.makeConstraints { make in
             make.left.right.equalTo(titleLabel)
-            make.height.equalToSuperview().multipliedBy(0.25)
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
         }
+        recordLabel.sizeToFit()
+        
+        descLabel.snp.makeConstraints { make in
+            make.top.equalTo(recordLabel.snp.bottom).offset(10)
+            make.left.right.equalTo(recordLabel)
+        }
+        descLabel.sizeToFit()
         
         nameLabel.snp.makeConstraints { make in
-            make.left.right.bottom.equalToSuperview().inset(14)
-            make.top.equalTo(descLabel.snp.bottom)
+            make.left.right.equalTo(descLabel)
+            make.bottom.equalToSuperview()
         }
+        nameLabel.sizeToFit()
         
         dummyView.snp.makeConstraints { make in
             make.left.bottom.top.equalToSuperview()
