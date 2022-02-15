@@ -26,10 +26,7 @@ class AllRecordCollectionCell:UICollectionViewCell {
     private let labelCoverView:UIView = {
         let view = UIView()
         view.layer.cornerCurve = .continuous
-        view.layer.cornerRadius = 18
         view.layer.backgroundColor = UIColor(red: 0.388, green: 0.388, blue: 0.4, alpha: 0.5).cgColor
-        view.layer.masksToBounds = true
-        view.clipsToBounds = true
         return view
     }()
     
@@ -74,6 +71,11 @@ class AllRecordCollectionCell:UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         configureUI()
+        labelCoverView.layer.cornerRadius = labelCoverView.height / 2
+        labelCoverView.layer.masksToBounds = true
+        
+        albumImageView.layer.cornerRadius = albumImageView.width / 2
+        albumImageView.layer.masksToBounds = true
     }
     
     
@@ -92,10 +94,6 @@ class AllRecordCollectionCell:UICollectionViewCell {
             make.width.equalToSuperview().multipliedBy(0.4)
             make.height.equalTo(albumImageView.snp.width)
         }
-       
-        layoutIfNeeded()
-        albumImageView.layer.cornerRadius = albumImageView.width / 2
-        albumImageView.layer.masksToBounds = true
         
         backGroundView.snp.makeConstraints { make in
             make.left.equalTo(albumImageView.snp.centerX)
@@ -128,6 +126,8 @@ class AllRecordCollectionCell:UICollectionViewCell {
            make.right.bottom.top.equalToSuperview()
            make.width.equalTo(2)
        }
+       
+       layoutIfNeeded()
     }
     
 }

@@ -14,7 +14,7 @@ class MyRecordView:BaseView {
     
     let tableView:UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
-        table.register(AllRecordTableCell.self, forCellReuseIdentifier: AllRecordTableCell.identifier)
+        table.register(MyRecordTableCell.self, forCellReuseIdentifier: MyRecordTableCell.identifier)
         table.backgroundColor = .mainBlack
         table.showsVerticalScrollIndicator = false
         table.automaticallyAdjustsScrollIndicatorInsets = false
