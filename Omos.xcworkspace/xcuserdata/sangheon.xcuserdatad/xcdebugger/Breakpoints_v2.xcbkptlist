@@ -14,8 +14,8 @@
             filePath = "Omos/Presenter/UI/Auth/Controllers/LoginViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
             landmarkName = "loginApple()"
             landmarkType = "7">
          </BreakpointContent>

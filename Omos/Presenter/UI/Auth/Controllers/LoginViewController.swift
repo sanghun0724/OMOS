@@ -53,12 +53,23 @@ class LoginViewController:UIViewController {
     
     private func bind() {
         
-        //TopView
-//        topView.emailField.rx.text
-//            .map{ $0 ?? ""}
-//            .
-        let isEmailEmpty = topView.passwordField.rx.text
-             .throttle(RxTimeInterval.milliseconds(1), scheduler: MainScheduler.instance)
+        
+        bottomView.loginButton.rx
+            .tap
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                print("tap")
+                // if some logic id
+                self?.topView.emailField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
+                self?.topView.emailLabel.warningLabel.text = "블라블라블라블라"
+                //if some logic pw
+                self?.topView.passwordField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
+                self?.topView.passwordLabel.warningLabel.text = "블라블라블라블라"
+            }).disposed(by: disposeBag)
+        
+        
+        let isEmailEmpty = topView.emailField.rx.text
+             .throttle(RxTimeInterval.milliseconds(100), scheduler: MainScheduler.instance)
              .map { text -> Bool in
                  return !(text?.isEmpty ?? true)
              }.distinctUntilChanged()
@@ -71,20 +82,27 @@ class LoginViewController:UIViewController {
             }.distinctUntilChanged()
         
         Observable.combineLatest(isEmailEmpty, isPassWordEmpty)
-            .map { $0 && $1 }
-            .distinctUntilChanged()
+             { $0 && $1 }
             .withUnretained(self)
             .subscribe(onNext: { owner,info in
                 if info {
                     owner.bottomView.loginButton.backgroundColor = .mainOrange
                     owner.bottomView.loginButton.setTitleColor(.white, for: .normal)
                     owner.bottomView.loginButton.isEnabled = true
-                } else  {
+                } else {
                     owner.bottomView.loginButton.backgroundColor = .mainGrey4
                     owner.bottomView.loginButton.setTitleColor(.mainGrey7, for: .normal)
                     owner.bottomView.loginButton.isEnabled = false
                 }
             }).disposed(by: disposeBag)
+        
+         
+        
+        
+        
+        
+        
+        
         
         topView.passwordDecoView.rx.tap
             .asDriver()

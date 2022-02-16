@@ -48,12 +48,12 @@ class LoginTopView:BaseView {
         return button
     }()
     
-    private let emailLabel:EmailLabelView = {
+    let emailLabel:EmailLabelView = {
         let labelView = EmailLabelView()
         return labelView
     }()
     
-    private let passwordLabel:PasswordLabelView = {
+    let passwordLabel:PasswordLabelView = {
         let labelView = PasswordLabelView()
         return labelView
     }()

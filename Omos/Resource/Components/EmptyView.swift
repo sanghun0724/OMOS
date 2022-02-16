@@ -10,19 +10,27 @@ import UIKit
 class EmptyView: UIView {
     
     let descriptionLabel = UILabel()
+    let imageView = UIImageView(image:UIImage(named: "empty"))
     
     override init(frame:CGRect) {
         super.init(frame: frame)
-        descriptionLabel.text = "There is no any ccontents"
+        descriptionLabel.text = "작성된 레코드가 없어요"
         descriptionLabel.tintColor = .white
         addSubview(descriptionLabel)
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        descriptionLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        descriptionLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        descriptionLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        
+//        imageView.snp.makeConstraints { make in
+//            make.centerX.equalToSuperview()
+//            make.bottom.equalTo(descriptionLabel.snp.top)
+//            make.width.height.equalTo(72)
+//        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }
