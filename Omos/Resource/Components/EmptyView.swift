@@ -17,16 +17,18 @@ class EmptyView: UIView {
         descriptionLabel.text = "작성된 레코드가 없어요"
         descriptionLabel.tintColor = .white
         addSubview(descriptionLabel)
+        addSubview(imageView)
         
         descriptionLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
         
-//        imageView.snp.makeConstraints { make in
-//            make.centerX.equalToSuperview()
-//            make.bottom.equalTo(descriptionLabel.snp.top)
-//            make.width.height.equalTo(72)
-//        }
+        imageView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(descriptionLabel.snp.top)
+            make.width.height.equalTo(72)
+        }
+        
     }
     
     required init?(coder: NSCoder) {

@@ -29,7 +29,7 @@ class LoginViewController:UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
+        
         configureUI()
     }
     
@@ -41,7 +41,7 @@ class LoginViewController:UIViewController {
             make.left.right.equalToSuperview()
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.height.equalToSuperview().multipliedBy(Constant.LoginTopViewHeight)
-          }
+        }
         
         bottomView.snp.makeConstraints { make in
             make.top.equalTo(topView.snp.bottom)
@@ -53,7 +53,6 @@ class LoginViewController:UIViewController {
     
     private func bind() {
         
-        
         bottomView.loginButton.rx
             .tap
             .asDriver()
@@ -62,17 +61,19 @@ class LoginViewController:UIViewController {
                 // if some logic id
                 self?.topView.emailField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
                 self?.topView.emailLabel.warningLabel.text = "블라블라블라블라"
+                self?.topView.emailLabel.warningLabel.isHidden = false
                 //if some logic pw
                 self?.topView.passwordField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
                 self?.topView.passwordLabel.warningLabel.text = "블라블라블라블라"
+                self?.topView.passwordLabel.warningLabel.isHidden = false
             }).disposed(by: disposeBag)
         
         
         let isEmailEmpty = topView.emailField.rx.text
-             .throttle(RxTimeInterval.milliseconds(100), scheduler: MainScheduler.instance)
-             .map { text -> Bool in
-                 return !(text?.isEmpty ?? true)
-             }.distinctUntilChanged()
+            .throttle(RxTimeInterval.milliseconds(100), scheduler: MainScheduler.instance)
+            .map { text -> Bool in
+                return !(text?.isEmpty ?? true)
+            }.distinctUntilChanged()
         
         
         let isPassWordEmpty = topView.passwordField.rx.text
@@ -82,27 +83,19 @@ class LoginViewController:UIViewController {
             }.distinctUntilChanged()
         
         Observable.combineLatest(isEmailEmpty, isPassWordEmpty)
-             { $0 && $1 }
-            .withUnretained(self)
-            .subscribe(onNext: { owner,info in
-                if info {
-                    owner.bottomView.loginButton.backgroundColor = .mainOrange
-                    owner.bottomView.loginButton.setTitleColor(.white, for: .normal)
-                    owner.bottomView.loginButton.isEnabled = true
-                } else {
-                    owner.bottomView.loginButton.backgroundColor = .mainGrey4
-                    owner.bottomView.loginButton.setTitleColor(.mainGrey7, for: .normal)
-                    owner.bottomView.loginButton.isEnabled = false
-                }
-            }).disposed(by: disposeBag)
-        
-         
-        
-        
-        
-        
-        
-        
+        { $0 && $1 }
+        .withUnretained(self)
+        .subscribe(onNext: { owner,info in
+            if info {
+                owner.bottomView.loginButton.backgroundColor = .mainOrange
+                owner.bottomView.loginButton.setTitleColor(.white, for: .normal)
+                owner.bottomView.loginButton.isEnabled = true
+            } else {
+                owner.bottomView.loginButton.backgroundColor = .mainGrey4
+                owner.bottomView.loginButton.setTitleColor(.mainGrey7, for: .normal)
+                owner.bottomView.loginButton.isEnabled = false
+            }
+        }).disposed(by: disposeBag)
         
         topView.passwordDecoView.rx.tap
             .asDriver()
@@ -110,7 +103,7 @@ class LoginViewController:UIViewController {
                 if !(self?.passwordFlag)! {
                     self?.topView.passwordField.isSecureTextEntry = false
                     self?.topView.passwordDecoView.setImage(UIImage(named: "visible1" ), for: .normal)
-                        self?.passwordFlag = true
+                    self?.passwordFlag = true
                 } else {
                     self?.topView.passwordField.isSecureTextEntry = true
                     self?.topView.passwordDecoView.setImage(UIImage(named: "visible2" ), for: .normal)
