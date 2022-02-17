@@ -13,11 +13,19 @@ import RxRelay
 import UIKit
 import RxAlamofire
 
-class LoginVeiwModel {
+class LoginVeiwModel: BaseViewModel {
     
     let idPublishSubject = PublishSubject<String>()
     let pwPublishSubject = PublishSubject<String>()
     let ischeckedSubject = BehaviorRelay<Bool>(value:false)
+//    let usecase:MusicUseCase
+//    
+//    init(usecase:MusicUseCase) {
+//        self.usecase = usecase
+//        super.init()
+//    }
+    
+    
     
     //MARK: Local Login
 //    func isEqualLoginInfo() -> Observable<Bool> {
@@ -75,7 +83,6 @@ class LoginVeiwModel {
                 }
             }
         }
-         
     }
     
     func getUserInfo() {

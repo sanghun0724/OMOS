@@ -56,11 +56,6 @@ class MusicRepositoryImpl:MusicRepository {
                 
             }
         }
-        
-    
-    
-    
-    
     
     private func parseURL(urlString:String) -> Result<URL,Error> {
         if let url = URL(string: urlString) {
@@ -78,6 +73,30 @@ class MusicRepositoryImpl:MusicRepository {
             let error:MyError = .encoding
             return .failure(error)
         }
+    }
+    
+    //MARK: Login API Caller
+    func signIn(_ email: String, _ password: String) {
+        let username = "username"
+        let password = "password"
+        let loginString = "\(username):\(password)"
+
+        guard let loginData = loginString.data(using: String.Encoding.utf8) else {
+            return
+        }
+        let base64LoginString = loginData.base64EncodedString()
+        var request = URLRequest(url: URL(string: "")!)
+        request.httpMethod = "GET"
+        request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+        
+        RxAlamofire.requestJSON(request).subscribe(onNext: { (respone,any) in
+            do {
+                let data = try JSONSerialization.data(withJSONObject: any)
+                print(data)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }).disposed(by: disposeBag)
     }
     
 }

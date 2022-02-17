@@ -59,10 +59,12 @@ class LoginViewController:UIViewController {
             .drive(onNext: { [weak self] in
                 print("tap")
                 // if some logic id
+                self?.topView.emailField.layer.borderWidth = 1
                 self?.topView.emailField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
                 self?.topView.emailLabel.warningLabel.text = "블라블라블라블라"
                 self?.topView.emailLabel.warningLabel.isHidden = false
                 //if some logic pw
+                self?.topView.passwordField.layer.borderWidth = 1
                 self?.topView.passwordField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
                 self?.topView.passwordLabel.warningLabel.text = "블라블라블라블라"
                 self?.topView.passwordLabel.warningLabel.isHidden = false
@@ -131,6 +133,8 @@ class LoginViewController:UIViewController {
             .asDriver()
             .drive(onNext: { [weak self] in
                 self?.viewModel.loginKakao()
+                let vc = NickNameViewController()
+                self?.present(vc,animated: true)
             }).disposed(by: disposeBag)
         
         bottomView.appleButton.addTarget(self, action: #selector(loginApple), for: .touchUpInside)
@@ -162,6 +166,8 @@ extension LoginViewController:ASAuthorizationControllerDelegate {
                 print("email:\(email)")
             }
         }
+        let vc = NickNameViewController()
+        present(vc,animated: true)
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
