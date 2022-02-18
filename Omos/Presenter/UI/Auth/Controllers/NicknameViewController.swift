@@ -72,6 +72,17 @@ class NickNameViewController:BaseViewController {
     
     private func bind() {
         
+        viewModel.validSignUp.subscribe(onNext: { [weak self] event in
+            if event {
+                self?.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
+            } else {
+                self?.topView.nickNameField.layer.borderWidth = 1
+                self?.topView.nickNameField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
+                self?.topView.nickNameLabel.warningLabel.text = "이미 쓰고 있는 닉네임 이에요."
+                self?.topView.nickNameLabel.warningLabel.isHidden = false
+            }
+        }).disposed(by: disposeBag)
+        
         nextButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in
@@ -81,15 +92,9 @@ class NickNameViewController:BaseViewController {
                     self?.topView.nickNameField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
                     self?.topView.nickNameLabel.warningLabel.text = "닉네임은 12자리 이하로 해주세요."
                     self?.topView.nickNameLabel.warningLabel.isHidden = false
-                } else if (self?.viewModel.hasSameName())! {
-                    self?.topView.nickNameField.layer.borderWidth = 1
-                    self?.topView.nickNameField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
-                    self?.topView.nickNameLabel.warningLabel.text = "이미 쓰고 있는 닉네임 이에요."
-                    self?.topView.nickNameLabel.warningLabel.isHidden = false
                 } else {
                     UserDefaults.standard.set(text, forKey: "nickname")
                     self?.viewModel.signUp()
-                    self?.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
                 }
                 
             }).disposed(by: disposeBag)

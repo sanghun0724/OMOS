@@ -104,13 +104,6 @@ class MusicRepositoryImpl:MusicRepository {
     
     func localSignUp(_ email: String, _ password: String, _ nickname: String) -> Single<SignUpRespone> {
         
-        guard let email = UserDefaults.standard.string(forKey: "email"),
-                let password = UserDefaults.standard.string(forKey: "password"),
-                let nickname = UserDefaults.standard.string(forKey: "nickname") else {
-                    fatalError()
-                }
-        print("sign \(email),\(password),\(nickname)")
-        
         return Single<SignUpRespone>.create { single in
             LoginAPI.signUp(request: .init(email: email, nickname: nickname, password: password)) { result in
                 switch result {

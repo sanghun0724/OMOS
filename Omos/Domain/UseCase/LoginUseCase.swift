@@ -16,8 +16,8 @@ class LoginUseCase {
         return musicRepository.signIn(email, password)
     }
     
-    func signUp(email:String,password:String,nickname:String) -> Void {
-        musicRepository.localSignUp(email, password, nickname)
+    func signUp(email:String,password:String,nickname:String) -> Single<SignUpRespone> {
+       return musicRepository.localSignUp(email, password, nickname)
     }
     
     init(musicRepository:MusicRepository) {

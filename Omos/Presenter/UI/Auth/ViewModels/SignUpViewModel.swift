@@ -12,7 +12,7 @@ import RxRelay
 class SignUpViewModel:BaseViewModel {
     
     
-    var signInfo = [String]()
+    let validSignUp = BehaviorRelay<Bool>(value: false)
     let usecase:LoginUseCase
     
     init(usecase:LoginUseCase) {
@@ -22,8 +22,22 @@ class SignUpViewModel:BaseViewModel {
     
     //SignUP API Caller
     func signUp() {
-    
+        guard let email = UserDefaults.standard.string(forKey: "email"),
+                let password = UserDefaults.standard.string(forKey: "password"),
+                let nickname = UserDefaults.standard.string(forKey: "nickname") else {
+                    return
+                }
+        print("sign \(email),\(password),\(nickname)")
         
+        usecase.signUp(email: email, password: password, nickname: nickname)
+            .subscribe( { [weak self] event in
+                switch event {
+                case .success:
+                    self?.validSignUp.accept(true)
+                case .failure:
+                    self?.validSignUp.accept(false)
+                }
+            }).disposed(by: disposeBag)
     }
     
     //MARK: Check Button Logic

@@ -156,17 +156,13 @@ class LoginViewController:UIViewController {
             .drive(onNext: { [weak self] in
                 self?.viewModel.loginKakao()
                 let rp = MusicRepositoryImpl()
-                let uc = MusicUseCase(musicRepository: rp)
+                let uc = LoginUseCase(musicRepository: rp)
                 let vm = SignUpViewModel(usecase: uc)
                 let vc = NickNameViewController(viewModel: vm)
                 self?.present(vc,animated: true)
             }).disposed(by: disposeBag)
         
         bottomView.appleButton.addTarget(self, action: #selector(loginApple), for: .touchUpInside)
-        
-        
-        
-        
     }
     
     //MARK: APPLE LOGIN
