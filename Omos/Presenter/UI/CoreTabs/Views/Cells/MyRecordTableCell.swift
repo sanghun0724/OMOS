@@ -76,6 +76,11 @@ class MyRecordTableCell:UITableViewCell {
         return view
     }()
     
+    let lockImageView:UIImageView = {
+        let imageView = UIImageView(image:UIImage(named: "lock"))
+        return imageView
+    }()
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -108,6 +113,7 @@ class MyRecordTableCell:UITableViewCell {
         backGroundView.addSubview(descLabel)
         backGroundView.addSubview(nameLabel)
         backGroundView.addSubview(dummyView)
+        backCoverView.addSubview(lockImageView)
         
         backCoverView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(16)
@@ -157,6 +163,11 @@ class MyRecordTableCell:UITableViewCell {
             make.left.bottom.top.equalToSuperview()
             make.width.equalTo(2)
         }
+        
+        lockImageView.snp.makeConstraints { make in
+            make.right.bottom.equalToSuperview()
+        }
+        lockImageView.sizeToFit()
         
         layoutIfNeeded()
         
