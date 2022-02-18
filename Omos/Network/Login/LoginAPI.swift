@@ -15,10 +15,11 @@ struct LoginAPI {
         let authenticator = MyAuthenticator()
         let credential = MyAuthenticationCredential(accessToken: "",
                                                     refreshToken: "",
-                                                    expiredAt: Date(timeIntervalSinceNow: 60 * 120))
+                                                    expiredAt: Date(timeIntervalSinceNow: 60 * 1200))
         let myAuthencitationInterceptor = AuthenticationInterceptor(authenticator: authenticator,
                                                                     credential: credential)
         
+        print(LoginTarget.login(request))
         AF.request(LoginTarget.login(request),interceptor: myAuthencitationInterceptor)
             .responseDecodable { (response: AFDataResponse<LoginResponse>) in
                 switch response.result {
@@ -31,4 +32,6 @@ struct LoginAPI {
                 }
             }
     }
+    
+
 }

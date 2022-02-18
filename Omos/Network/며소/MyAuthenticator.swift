@@ -27,7 +27,7 @@ class MyAuthenticator:Authenticator {
     
     func refresh(_ credential: Credential, for session: Session, completion: @escaping (Result<MyAuthenticationCredential, Error>) -> Void) {
         
-        
+        //refresh 토큰 넣어서 post해주면 됨 그리고 오는 데이터 -ㅡ access token 
         
         //        NetworkManager.shared.oauth.doRefreshToken { (jsonDict, error) in
         //                   if let jsonDict = jsonDict {

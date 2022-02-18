@@ -91,9 +91,10 @@ class LoginVeiwModel: BaseViewModel {
             if let error = error {
                 print(error.localizedDescription)
             } else {
-                
+                let id = user?.id
                 let nickName = user?.kakaoAccount?.profile?.nickname
                 let email = user?.kakaoAccount?.email
+                
                 
                 print("user info \(nickName),\(email)")
             }

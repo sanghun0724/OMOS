@@ -56,7 +56,6 @@ class SignUpViewController:UIViewController {
     }
     
     func bind() {
-        
         topView.coverView.backButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in
@@ -91,14 +90,113 @@ class SignUpViewController:UIViewController {
                 }
             }).disposed(by: disposeBag)
         
-        
-        
         nextButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in
-                let vc = NickNameViewController()
-                vc.modalPresentationStyle = .fullScreen
-                self?.present(vc,animated: false)
+                guard let text1 = self?.topView.emailField.text else { return }
+                guard let text2 = self?.topView.passwordField.text else { return }
+                guard let text3 = self?.topView.repasswordField.text else { return }
+                if !(text1.validateEmail()) {
+                    self?.topView.emailField.layer.borderWidth = 1
+                    self?.topView.emailField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
+                    self?.topView.emailLabel.warningLabel.text = "올바른 이메일 형식이 아니에요."
+                    self?.topView.emailLabel.warningLabel.isHidden = false
+                } else {
+                    self?.topView.emailField.layer.borderWidth = 0
+                    self?.topView.emailLabel.warningLabel.isHidden = true
+                }
+                
+                if !(text2.count >= 8 && text2.count <= 16) {
+                    self?.topView.passwordField.layer.borderWidth = 1
+                    self?.topView.passwordField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
+                    self?.topView.passwordLabel.warningLabel.text = "8~16자의 영문 대소문자,숫자,특수문자만 가능해요"
+                    self?.topView.passwordLabel.warningLabel.isHidden = false
+                } else {
+                    self?.topView.passwordField.layer.borderWidth = 0
+                    self?.topView.passwordLabel.warningLabel.isHidden = true
+                }
+                
+                if !(text3 == text2) {
+                    self?.topView.repasswordField.layer.borderWidth = 1
+                    self?.topView.repasswordField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
+                    self?.topView.repaswwordLabel.warningLabel.text = "비밀번호가 일치하지 않아요"
+                    self?.topView.repaswwordLabel.warningLabel.isHidden = false
+                } else {
+                    self?.topView.repasswordField.layer.borderWidth = 0
+                    self?.topView.repaswwordLabel.warningLabel.isHidden = true
+                }
+                
+                if self?.topView.emailField.layer.borderWidth == 0 &&
+                    self?.topView.passwordField.layer.borderWidth == 0 &&
+                    self?.topView.repasswordField.layer.borderWidth == 0 {
+                    let vc = NickNameViewController()
+                    vc.modalPresentationStyle = .fullScreen
+                    self?.present(vc,animated: false)
+                }
+            }).disposed(by: disposeBag)
+            isAllEmptyBind()
+    }
+    
+    
+    func isAllEmptyBind() {
+        let isEmailEmpty = topView.emailField.rx.text
+            .throttle(RxTimeInterval.milliseconds(100), scheduler: MainScheduler.instance)
+            .map { text -> Bool in
+                return !(text?.isEmpty ?? true)
+            }.distinctUntilChanged()
+        
+        let isPassWordEmpty = topView.passwordField.rx.text
+            .throttle(RxTimeInterval.milliseconds(100), scheduler: MainScheduler.instance)
+            .map { text -> Bool in
+                return !(text?.isEmpty ?? true)
+            }.distinctUntilChanged()
+        
+        let isRepasswordEmpty = topView.repasswordField.rx.text
+            .throttle(RxTimeInterval.milliseconds(100), scheduler: MainScheduler.instance)
+            .map { text -> Bool in
+                return !(text?.isEmpty ?? true)
+            }.distinctUntilChanged()
+        
+        Observable.combineLatest(isEmailEmpty, isPassWordEmpty,isRepasswordEmpty)
+        { $0 && $1 && $2 }
+        .withUnretained(self)
+        .subscribe(onNext: { owner,info in
+            if info {
+                owner.nextButton.backgroundColor = .mainOrange
+                owner.nextButton.setTitleColor(.white, for: .normal)
+                owner.nextButton.isEnabled = true
+            } else {
+                owner.nextButton.backgroundColor = .mainGrey4
+                owner.nextButton.setTitleColor(.mainGrey7, for: .normal)
+                owner.nextButton.isEnabled = false
+            }
+        }).disposed(by: disposeBag)
+        
+        isEmailEmpty
+            .withUnretained(self)
+            .subscribe(onNext: { owner,info in
+                if !info {
+                    owner.topView.emailField.layer.borderWidth = 0
+                    owner.topView.emailLabel.warningLabel.isHidden = true
+                }
+            }).disposed(by: disposeBag)
+        
+        isPassWordEmpty
+            .withUnretained(self)
+            .subscribe(onNext: { owner,info in
+                if !info {
+                    owner.topView.emailField.layer.borderWidth = 0
+                    owner.topView.emailLabel.warningLabel.isHidden = true
+                }
+            }).disposed(by: disposeBag)
+        
+        isRepasswordEmpty
+            .withUnretained(self)
+            .subscribe(onNext: { owner,info in
+                if !info {
+                    owner.topView.emailField.layer.borderWidth = 0
+                    owner.topView.emailLabel.warningLabel.isHidden = true
+                }
             }).disposed(by: disposeBag)
     }
 }

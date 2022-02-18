@@ -22,6 +22,7 @@ class LoginTopView:BaseView {
         field.leftView = UIView(frame:CGRect(x: 0, y: 0, width: 10, height: 50))
         field.textColor = .white
         field.backgroundColor = .black
+        field.layer.borderColor = .some(UIColor.mainOrange.cgColor)
         return field
     }()
     

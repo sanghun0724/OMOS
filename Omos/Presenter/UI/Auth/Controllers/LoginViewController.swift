@@ -61,12 +61,12 @@ class LoginViewController:UIViewController {
                 // if some logic id
                 self?.topView.emailField.layer.borderWidth = 1
                 self?.topView.emailField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
-                self?.topView.emailLabel.warningLabel.text = "블라블라블라블라"
+                self?.topView.emailLabel.warningLabel.text = "입력하신 내용을 다시 확인해주세요."
                 self?.topView.emailLabel.warningLabel.isHidden = false
                 //if some logic pw
                 self?.topView.passwordField.layer.borderWidth = 1
                 self?.topView.passwordField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
-                self?.topView.passwordLabel.warningLabel.text = "블라블라블라블라"
+                self?.topView.passwordLabel.warningLabel.text = "입력하신 내용을 다시 확인해주세요."
                 self?.topView.passwordLabel.warningLabel.isHidden = false
             }).disposed(by: disposeBag)
         
@@ -76,7 +76,15 @@ class LoginViewController:UIViewController {
             .map { text -> Bool in
                 return !(text?.isEmpty ?? true)
             }.distinctUntilChanged()
-        
+            
+        isEmailEmpty
+            .withUnretained(self)
+            .subscribe(onNext: { owner,info in
+                if !info {
+                    owner.topView.emailField.layer.borderWidth = 0
+                    owner.topView.emailLabel.warningLabel.isHidden = true
+                }
+            }).disposed(by: disposeBag)
         
         let isPassWordEmpty = topView.passwordField.rx.text
             .throttle(RxTimeInterval.milliseconds(100), scheduler: MainScheduler.instance)
@@ -98,6 +106,17 @@ class LoginViewController:UIViewController {
                 owner.bottomView.loginButton.isEnabled = false
             }
         }).disposed(by: disposeBag)
+        
+        isPassWordEmpty
+            .withUnretained(self)
+            .subscribe(onNext: { owner,info in
+                if !info {
+                    owner.topView.passwordField.layer.borderWidth = 0
+                    owner.topView.passwordLabel.warningLabel.isHidden = true
+                }
+            }).disposed(by: disposeBag)
+        
+        
         
         topView.passwordDecoView.rx.tap
             .asDriver()

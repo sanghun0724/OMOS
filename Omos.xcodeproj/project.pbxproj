@@ -55,6 +55,7 @@
 		B68454FA27BE375000F1E6B5 /* LoginTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68454F927BE375000F1E6B5 /* LoginTarget.swift */; };
 		B68454FC27BE378700F1E6B5 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68454FB27BE378700F1E6B5 /* Login.swift */; };
 		B68454FE27BE380800F1E6B5 /* UserDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68454FD27BE380800F1E6B5 /* UserDetail.swift */; };
+		B684550227BE703700F1E6B5 /* RefreshTokenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B684550127BE703700F1E6B5 /* RefreshTokenAPI.swift */; };
 		B689A9CE27AE94E9005F26E4 /* UIVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9C927AE94E7005F26E4 /* UIVIew.swift */; };
 		B689A9CF27AE94E9005F26E4 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9CA27AE94E8005F26E4 /* UIViewController.swift */; };
 		B689A9D027AE94E9005F26E4 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9CB27AE94E8005F26E4 /* UIImage.swift */; };
@@ -70,7 +71,7 @@
 		B6B1BB5A27BBCE1000DF2528 /* MyRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B1BB5927BBCE1000DF2528 /* MyRecordView.swift */; };
 		B6B1BB5C27BBCF6000DF2528 /* MyRecordTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B1BB5B27BBCF6000DF2528 /* MyRecordTableCell.swift */; };
 		B6B1BB5E27BBD06600DF2528 /* MyRecord + Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B1BB5D27BBD06600DF2528 /* MyRecord + Table.swift */; };
-		B6C3AD4527B95B1E00D5D69D /* AttributedStirng.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C3AD4427B95B1E00D5D69D /* AttributedStirng.swift */; };
+		B6C3AD4527B95B1E00D5D69D /* Attributed + Stirng.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C3AD4427B95B1E00D5D69D /* Attributed + Stirng.swift */; };
 		B6CC1D7427BA437A00B5EE7E /* InfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CC1D7327BA437A00B5EE7E /* InfoController.swift */; };
 		B6CC1D7627BA475900B5EE7E /* UseInfoText.rtf in Resources */ = {isa = PBXBuildFile; fileRef = B6CC1D7527BA475900B5EE7E /* UseInfoText.rtf */; };
 		B6CC1D7827BA536A00B5EE7E /* PrivateInfoText.rtf in Resources */ = {isa = PBXBuildFile; fileRef = B6CC1D7727BA536A00B5EE7E /* PrivateInfoText.rtf */; };
@@ -140,6 +141,7 @@
 		B68454F927BE375000F1E6B5 /* LoginTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTarget.swift; sourceTree = "<group>"; };
 		B68454FB27BE378700F1E6B5 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		B68454FD27BE380800F1E6B5 /* UserDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetail.swift; sourceTree = "<group>"; };
+		B684550127BE703700F1E6B5 /* RefreshTokenAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenAPI.swift; sourceTree = "<group>"; };
 		B689A9C927AE94E7005F26E4 /* UIVIew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIVIew.swift; sourceTree = "<group>"; };
 		B689A9CA27AE94E8005F26E4 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		B689A9CB27AE94E8005F26E4 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -158,7 +160,7 @@
 		B6B1BB5927BBCE1000DF2528 /* MyRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordView.swift; sourceTree = "<group>"; };
 		B6B1BB5B27BBCF6000DF2528 /* MyRecordTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordTableCell.swift; sourceTree = "<group>"; };
 		B6B1BB5D27BBD06600DF2528 /* MyRecord + Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyRecord + Table.swift"; sourceTree = "<group>"; };
-		B6C3AD4427B95B1E00D5D69D /* AttributedStirng.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedStirng.swift; sourceTree = "<group>"; };
+		B6C3AD4427B95B1E00D5D69D /* Attributed + Stirng.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attributed + Stirng.swift"; sourceTree = "<group>"; };
 		B6CC1D7327BA437A00B5EE7E /* InfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoController.swift; sourceTree = "<group>"; };
 		B6CC1D7527BA475900B5EE7E /* UseInfoText.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = UseInfoText.rtf; sourceTree = "<group>"; };
 		B6CC1D7727BA536A00B5EE7E /* PrivateInfoText.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = PrivateInfoText.rtf; sourceTree = "<group>"; };
@@ -428,6 +430,7 @@
 			children = (
 				B68454F727BE374600F1E6B5 /* LoginAPI.swift */,
 				B68454F927BE375000F1E6B5 /* LoginTarget.swift */,
+				B684550127BE703700F1E6B5 /* RefreshTokenAPI.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -441,7 +444,7 @@
 				B689A9C927AE94E7005F26E4 /* UIVIew.swift */,
 				B689A9CA27AE94E8005F26E4 /* UIViewController.swift */,
 				B682185B27B3C0BB00B58E19 /* MyError.swift */,
-				B6C3AD4427B95B1E00D5D69D /* AttributedStirng.swift */,
+				B6C3AD4427B95B1E00D5D69D /* Attributed + Stirng.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -661,7 +664,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6C3AD4527B95B1E00D5D69D /* AttributedStirng.swift in Sources */,
+				B6C3AD4527B95B1E00D5D69D /* Attributed + Stirng.swift in Sources */,
 				B68454F527BE310100F1E6B5 /* MyAuthenticator.swift in Sources */,
 				B6B1BB5A27BBCE1000DF2528 /* MyRecordView.swift in Sources */,
 				B682185627B3A0BE00B58E19 /* SearchViewModel.swift in Sources */,
@@ -700,6 +703,7 @@
 				B689A9D627AE9627005F26E4 /* IndicatorView.swift in Sources */,
 				B67EF45527B7AA000023D5D4 /* SignUpViewController.swift in Sources */,
 				B609138027AD3A7C00B439C3 /* AppDelegate.swift in Sources */,
+				B684550227BE703700F1E6B5 /* RefreshTokenAPI.swift in Sources */,
 				B682185827B3AA4F00B58E19 /* SearchListView.swift in Sources */,
 				B6670FAA27B517DE00BABF40 /* DecoView.swift in Sources */,
 				B689A9D027AE94E9005F26E4 /* UIImage.swift in Sources */,
