@@ -27,22 +27,7 @@ class LoginVeiwModel: BaseViewModel {
     
     
     
-    //MARK: Local Login
-//    func isEqualLoginInfo() -> Observable<Bool> {
-//        //기존의 회원가입 하였고 새로 로그인 하려고 할때
-//        
-//        
-//    }
-    
-    
-//    func idValid() -> Observable<Bool> {
-//
-//    }
-//    
-//    func pwValid() -> Observable<Bool> {
-//
-//    }
-//
+
     func loginLocal() {
         //set LoginActionLogic
         
@@ -59,12 +44,8 @@ class LoginVeiwModel: BaseViewModel {
         }
     }
     
-    func isAllChecked(_ button1:UIButton,_ button2:UIButton) {
-        if button1.backgroundColor == .mainOrange && button2.backgroundColor == .mainOrange {
-            ischeckedSubject.accept(true)
-        } else {
-            ischeckedSubject.accept(false)
-        }
+    func hasSameName() -> Bool {
+        return false 
     }
     
     

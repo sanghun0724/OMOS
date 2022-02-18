@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LoginRequest: Encodable {
+struct LoginRequest: Codable {
     let userName: String
     let password: String
 }
@@ -21,3 +21,5 @@ struct LoginResponse:Codable {
     let accessToken:String
     let refreshToken:String
 }
+
+

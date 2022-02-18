@@ -26,34 +26,23 @@ class MyAuthenticator:Authenticator {
     }
     
     func refresh(_ credential: Credential, for session: Session, completion: @escaping (Result<MyAuthenticationCredential, Error>) -> Void) {
-        
-        //refresh 토큰 넣어서 post해주면 됨 그리고 오는 데이터 -ㅡ access token 
-        
-        //        NetworkManager.shared.oauth.doRefreshToken { (jsonDict, error) in
-        //                   if let jsonDict = jsonDict {
-        //                       let json = JSON(jsonDict)
-        //                       let accessToken = json["access_token"].stringValue
-        //                       let refreshToken = json["refresh_token"].stringValue
-        //                       let expiration = json["expires_in"].doubleValue
-        //                       let newCredential = OAuthCredential(accessToken: accessToken, refreshToken: refreshToken, expiration: Date(timeIntervalSinceNow: expiration))
-        //                       completion(.success(newCredential))
-        //                   }
-        //               }
-        
-        /* TODO: 여기서 리프레쉬 받아오면 되유
-        RefreshTokenAPI.refreshToken { result in
-            switch result {
-            case .success(let accessToken):
-                KeychainServiceImpl.shared.accessToken = accessToken
-                completion(.retry)
+        let requeust = RefreshRequest(accessToken: "asdsad", refreshToken: "123", userId: 2)
+        LoginAPI.doRefresh(request: requeust) { response in
+            switch response {
+            case .success(let data):
+                print("success sisisisi")
+                print(data)
+                let accessToken = ""
+                let refreshToken = ""
+                let expiration = Date()
+                let newCredential = MyAuthenticationCredential(accessToken: accessToken, refreshToken: refreshToken, expiredAt: expiration)
+                completion(.success(newCredential))
             case .failure(let error):
-                completion(.doNotRetryWithError(error))
+                completion(.failure(error))
+                print(error)
             }
         }
-        */
 
     }
-    
-    
-    
+
 }

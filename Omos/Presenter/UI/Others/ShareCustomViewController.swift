@@ -23,9 +23,6 @@ class ShareCustomViewController:UIViewController {
         super.viewDidLoad()
         view.addSubview(customView)
         view.addSubview(button)
-        
-       
-        
     }
     
     override func viewDidLayoutSubviews() {
