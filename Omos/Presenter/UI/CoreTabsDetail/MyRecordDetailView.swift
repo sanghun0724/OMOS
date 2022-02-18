@@ -12,6 +12,7 @@ class MyRecordDetailView:BaseView {
     /// 1
     let titleLabelView:UIView = {
         let view = UIView()
+        view.backgroundColor = .green
         return view
     }()
     
@@ -33,10 +34,11 @@ class MyRecordDetailView:BaseView {
     /// 2
     let titleImageView:UIImageView = {
         let view = UIImageView()
+        view.backgroundColor = .blue
         return view
     }()
     
-    let TitleLabel:UILabel = {
+    let titleLabel:UILabel = {
         let label = UILabel()
         return label
     }()
@@ -47,8 +49,9 @@ class MyRecordDetailView:BaseView {
     }()
     
     /// 3
-    let textCoverlView:UIView = {
+    let textCoverView:UIView = {
         let view = UIView()
+        view.backgroundColor = .yellow
         return view
     }()
     
@@ -60,6 +63,7 @@ class MyRecordDetailView:BaseView {
     ///4
     let lastView:UIView = {
         let view = UIView()
+        view.backgroundColor = .red
         return view
     }()
     
@@ -90,6 +94,58 @@ class MyRecordDetailView:BaseView {
     
     
     override func configureUI() {
+        addSubviews()
+        
+        titleLabelView.snp.makeConstraints { make in
+            make.left.right.top.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.11)
+        }
+        
+        titleImageView.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(titleLabelView.snp.bottom)
+            make.height.equalToSuperview().multipliedBy(0.32)
+        }
+        
+        lastView.snp.makeConstraints { make in
+            make.left.right.bottom.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.124)
+        }
+        
+        textCoverView.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(titleImageView.snp.bottom)
+            make.bottom.equalTo(lastView.snp.top)
+        }
+        
+        
+        
         
     }
+    
+    
+    func addSubviews() {
+        self.addSubview(titleLabelView)
+        self.addSubview(titleImageView)
+        self.addSubview(textCoverView)
+        self.addSubview(lastView)
+        
+        titleLabelView.addSubview(circleImageView)
+        titleLabelView.addSubview(musicTitleLabel)
+        titleLabelView.addSubview(subMusicInfoLabel)
+        
+        titleImageView.addSubview(titleLabel)
+        titleImageView.addSubview(createdLabel)
+        
+        textCoverView.addSubview(mainTextView)
+        
+        lastView.addSubview(nicknameLabel)
+        lastView.addSubview(loveImageView)
+        lastView.addSubview(loveCountLabel)
+        lastView.addSubview(starImageView)
+        lastView.addSubview(starCountLabel)
+    }
+    
+    
+    
 }
