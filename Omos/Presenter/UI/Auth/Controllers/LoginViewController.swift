@@ -136,7 +136,10 @@ class LoginViewController:UIViewController {
         topView.labelsView.signUpButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in
-                let vc = SignUpViewController()
+                let rp = MusicRepositoryImpl()
+                let uc = LoginUseCase(musicRepository: rp)
+                let vm = SignUpViewModel(usecase: uc)
+                let vc = SignUpViewController(viewModel: vm)
                 vc.modalPresentationStyle = .fullScreen
                 self?.present(vc,animated:false)
             }).disposed(by: disposeBag)
@@ -152,7 +155,10 @@ class LoginViewController:UIViewController {
             .asDriver()
             .drive(onNext: { [weak self] in
                 self?.viewModel.loginKakao()
-                let vc = NickNameViewController()
+                let rp = MusicRepositoryImpl()
+                let uc = MusicUseCase(musicRepository: rp)
+                let vm = SignUpViewModel(usecase: uc)
+                let vc = NickNameViewController(viewModel: vm)
                 self?.present(vc,animated: true)
             }).disposed(by: disposeBag)
         
@@ -185,7 +191,10 @@ extension LoginViewController:ASAuthorizationControllerDelegate {
                 print("email:\(email)")
             }
         }
-        let vc = NickNameViewController()
+        let rp = MusicRepositoryImpl()
+        let uc = LoginUseCase(musicRepository: rp)
+        let vm = SignUpViewModel(usecase: uc)
+        let vc = NickNameViewController(viewModel: vm)
         present(vc,animated: true)
     }
     

@@ -11,8 +11,17 @@ import RxCocoa
 
 class NickNameViewController:BaseViewController {
     
-    private let viewModel = LoginVeiwModel()
+    private let viewModel:SignUpViewModel
     private let topView = NickNameView()
+    
+    init(viewModel:SignUpViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private let nextButton:UIButton = {
        let button = UIButton()
@@ -30,15 +39,15 @@ class NickNameViewController:BaseViewController {
         dismissKeyboardWhenTappedAround()
         bind()
         
-        LoginAPI.signUp(request: .init(email: "test2@email.com", nickname: "12345", password: "12345678")) { response in
-            switch response {
-            case .success(let data):
-                
-                print(data)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
+//        LoginAPI.signUp(request: .init(email: "test2@email.com", nickname: "12345", password: "12345678")) { response in
+//            switch response {
+//            case .success(let data):
+//
+//                print(data)
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
         
     }
     
@@ -78,9 +87,9 @@ class NickNameViewController:BaseViewController {
                     self?.topView.nickNameLabel.warningLabel.text = "이미 쓰고 있는 닉네임 이에요."
                     self?.topView.nickNameLabel.warningLabel.isHidden = false
                 } else {
-                    let vc = TabBarViewController()
-                    vc.modalPresentationStyle = .fullScreen
-                    self?.present(vc,animated: true)
+                    UserDefaults.standard.set(text, forKey: "nickname")
+                    self?.viewModel.signUp()
+                    self?.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
                 }
                 
             }).disposed(by: disposeBag)

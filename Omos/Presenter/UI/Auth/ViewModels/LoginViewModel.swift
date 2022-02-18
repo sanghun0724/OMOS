@@ -32,21 +32,7 @@ class LoginVeiwModel: BaseViewModel {
         //set LoginActionLogic
         
     }
-    
-    
-    
-    //MARK: Check Button Logic
-    func isChecked(_ button:UIButton) {
-        if button.backgroundColor == .white {
-            button.backgroundColor = .mainOrange
-        } else  {
-            button.backgroundColor = .white
-        }
-    }
-    
-    func hasSameName() -> Bool {
-        return false 
-    }
+
     
     
     //MARK: KAKAO LOGIN

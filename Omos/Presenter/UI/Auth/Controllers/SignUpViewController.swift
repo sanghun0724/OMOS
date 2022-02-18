@@ -11,9 +11,19 @@ import RxCocoa
 
 class SignUpViewController:UIViewController {
     
+    private let viewModel:SignUpViewModel
     private let disposeBag = DisposeBag()
     private let topView = SignUpView()
     var passwordFlag = false
+    
+    init(viewModel:SignUpViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private let nextButton:UIButton = {
        let button = UIButton()
@@ -52,7 +62,7 @@ class SignUpViewController:UIViewController {
             make.height.equalToSuperview().multipliedBy(0.06)
             make.bottom.equalToSuperview().offset(-40)
         }
-        
+
     }
     
     func bind() {
@@ -129,7 +139,12 @@ class SignUpViewController:UIViewController {
                 if self?.topView.emailField.layer.borderWidth == 0 &&
                     self?.topView.passwordField.layer.borderWidth == 0 &&
                     self?.topView.repasswordField.layer.borderWidth == 0 {
-                    let vc = NickNameViewController()
+                    UserDefaults.standard.set(text1, forKey: "email")
+                    UserDefaults.standard.set(text2,forKey: "password")
+                    let rp = MusicRepositoryImpl()
+                    let uc = LoginUseCase(musicRepository: rp)
+                    let vm = SignUpViewModel(usecase: uc)
+                    let vc = NickNameViewController(viewModel: vm)
                     vc.modalPresentationStyle = .fullScreen
                     self?.present(vc,animated: false)
                 }
