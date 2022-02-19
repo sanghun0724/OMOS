@@ -17,3 +17,10 @@ struct SignUpRequest :Codable {
 struct SignUpRespone:Codable {
     let email:String
 }
+
+
+struct CheckEmailRequest:Codable {
+    let email:String
+}
+
+

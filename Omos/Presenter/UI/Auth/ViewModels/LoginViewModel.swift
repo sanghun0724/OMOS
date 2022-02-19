@@ -15,21 +15,30 @@ import RxAlamofire
 
 class LoginVeiwModel: BaseViewModel {
     
-    let idPublishSubject = PublishSubject<String>()
-    let pwPublishSubject = PublishSubject<String>()
+    let validSignIn = BehaviorRelay<Bool>(value: false)
     let ischeckedSubject = BehaviorRelay<Bool>(value:false)
-//    let usecase:MusicUseCase
-//    
-//    init(usecase:MusicUseCase) {
-//        self.usecase = usecase
-//        super.init()
-//    }
+    let usecase:LoginUseCase
+    
+    init(usecase:LoginUseCase) {
+        self.usecase = usecase
+        super.init()
+    }
     
     
     
 
-    func loginLocal() {
-        //set LoginActionLogic
+    func loginLocal(email:String,password:String) {
+        usecase.signIn(email: email, password: password).subscribe({ [weak self] result in
+            switch result {
+            case .success(let data):
+                UserDefaults.standard.set(data.accessToken, forKey: "access")
+                UserDefaults.standard.set(data.refreshToken, forKey: "refresh")
+                self?.validSignIn.accept(true)
+            case .failure(let error):
+                print(error)
+                self?.validSignIn.accept(false)
+            }
+        }).disposed(by: disposeBag)
         
     }
 

@@ -32,6 +32,7 @@ extension UIColor {
     class var buttonLabel: UIColor {UIColor(hex: 0x341F20)}
     class var kakaoYellow: UIColor {UIColor(hex: 0xFEE500)}
     class var mainGrey1: UIColor {UIColor(hex: 0xE5E5EA)}
+    class var mainGrey3: UIColor {UIColor(hex: 0xC7C7CC)}
 
     
     class var mainLikeLabelColor: UIColor {UIColor(hex: 0x858585)}

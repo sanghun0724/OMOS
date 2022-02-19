@@ -77,27 +77,18 @@ class MusicRepositoryImpl:MusicRepository {
     
     //MARK: Login API Caller
     func signIn(_ email: String, _ password: String) -> Single<LoginResponse> {
-        let username = "username"
-        let password = "password"
-        let loginString = "\(username):\(password)"
-
-        guard let loginData = loginString.data(using: String.Encoding.utf8) else {
-            fatalError()
-        }
-        let base64LoginString = loginData.base64EncodedString()
-        var request = URLRequest(url: URL(string: "")!)
-        request.httpMethod = "GET"
-        request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
-
-        RxAlamofire.requestJSON(request).subscribe(onNext: { (respone,any) in
-            do {
-                let data = try JSONSerialization.data(withJSONObject: any)
-                print(data)
-            } catch {
-                print(error.localizedDescription)
+        return Single<LoginResponse>.create { single in
+            LoginAPI.login(request: .init(email: email, password: password)) { result in
+                switch result {
+                case .success(let data):
+                    print("sign Up success \(data)")
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
             }
-        }).disposed(by: disposeBag)
-        return Single.create { single in
+            
             return Disposables.create()
         }
     }

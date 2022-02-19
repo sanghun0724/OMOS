@@ -49,8 +49,15 @@ class SignUpViewModel:BaseViewModel {
         }
     }
     
-    func hasSameName() -> Bool {
-        return false
+    func hasSameName(email:String,completion:@escaping(Bool) -> Void) {
+        LoginAPI.checkEmail(email:email) { result in
+            switch result {
+            case .success(let data):
+                completion(data)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     

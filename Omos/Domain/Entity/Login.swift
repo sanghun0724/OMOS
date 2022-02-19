@@ -8,7 +8,7 @@
 import Foundation
 
 struct LoginRequest: Codable {
-    let userName: String
+    let email: String
     let password: String
 }
 
@@ -17,7 +17,7 @@ struct Login:Codable {
 }
 
 struct LoginResponse:Codable {
-    let name:String
+    let userId:Int
     let accessToken:String
     let refreshToken:String
 }

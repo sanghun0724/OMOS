@@ -26,16 +26,18 @@ class MyAuthenticator:Authenticator {
     }
     
     func refresh(_ credential: Credential, for session: Session, completion: @escaping (Result<MyAuthenticationCredential, Error>) -> Void) {
-        let requeust = RefreshRequest(accessToken: "asdsad", refreshToken: "123", userId: 2)
+        
+        print("refresh token here@@")
+        let requeust = RefreshRequest(accessToken:UserDefaults.standard.string(forKey: "access") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refresh") ?? "", userId: 0)
         LoginAPI.doRefresh(request: requeust) { response in
             switch response {
             case .success(let data):
-                print("success sisisisi")
+                print("is successssss")
                 print(data)
-                let accessToken = ""
-                let refreshToken = ""
-                let expiration = Date()
-                let newCredential = MyAuthenticationCredential(accessToken: accessToken, refreshToken: refreshToken, expiredAt: expiration)
+                let accessToken = data.accessToken
+                let refreshToken = data.refreshToken
+                let userId = data.userId
+                let newCredential = MyAuthenticationCredential(accessToken: accessToken, refreshToken: refreshToken,userID: userId)
                 completion(.success(newCredential))
             case .failure(let error):
                 completion(.failure(error))

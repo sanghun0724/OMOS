@@ -26,7 +26,7 @@ class SignUpViewController:UIViewController {
     }
     
     private let nextButton:UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.setTitle("다음", for: .normal)
         button.backgroundColor = .mainGrey4
         button.setTitleColor(.mainGrey7, for: .normal)
@@ -39,6 +39,7 @@ class SignUpViewController:UIViewController {
         super.viewDidLoad()
         dismissKeyboardWhenTappedAround()
         bind()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -62,7 +63,7 @@ class SignUpViewController:UIViewController {
             make.height.equalToSuperview().multipliedBy(0.06)
             make.bottom.equalToSuperview().offset(-40)
         }
-
+        
     }
     
     func bind() {
@@ -78,7 +79,7 @@ class SignUpViewController:UIViewController {
                 if !(self?.passwordFlag)! {
                     self?.topView.passwordField.isSecureTextEntry = false
                     self?.topView.passwordDecoView.setImage(UIImage(named: "visible1" ), for: .normal)
-                        self?.passwordFlag = true
+                    self?.passwordFlag = true
                 } else {
                     self?.topView.passwordField.isSecureTextEntry = true
                     self?.topView.passwordDecoView.setImage(UIImage(named: "visible2" ), for: .normal)
@@ -92,7 +93,7 @@ class SignUpViewController:UIViewController {
                 if !(self?.passwordFlag)! {
                     self?.topView.repasswordField.isSecureTextEntry = false
                     self?.topView.repasswordDecoView.setImage(UIImage(named: "visible1" ), for: .normal)
-                        self?.passwordFlag = true
+                    self?.passwordFlag = true
                 } else {
                     self?.topView.repasswordField.isSecureTextEntry = true
                     self?.topView.repasswordDecoView.setImage(UIImage(named: "visible2" ), for: .normal)
@@ -106,50 +107,56 @@ class SignUpViewController:UIViewController {
                 guard let text1 = self?.topView.emailField.text else { return }
                 guard let text2 = self?.topView.passwordField.text else { return }
                 guard let text3 = self?.topView.repasswordField.text else { return }
-                if !(text1.validateEmail()) {
-                    self?.topView.emailField.layer.borderWidth = 1
-                    self?.topView.emailField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
-                    self?.topView.emailLabel.warningLabel.text = "올바른 이메일 형식이 아니에요."
-                    self?.topView.emailLabel.warningLabel.isHidden = false
-                } else {
-                    self?.topView.emailField.layer.borderWidth = 0
-                    self?.topView.emailLabel.warningLabel.isHidden = true
-                }
-                
-                if !(text2.count >= 8 && text2.count <= 16) {
-                    self?.topView.passwordField.layer.borderWidth = 1
-                    self?.topView.passwordField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
-                    self?.topView.passwordLabel.warningLabel.text = "8~16자의 영문 대소문자,숫자,특수문자만 가능해요"
-                    self?.topView.passwordLabel.warningLabel.isHidden = false
-                } else {
-                    self?.topView.passwordField.layer.borderWidth = 0
-                    self?.topView.passwordLabel.warningLabel.isHidden = true
-                }
-                
-                if !(text3 == text2) {
-                    self?.topView.repasswordField.layer.borderWidth = 1
-                    self?.topView.repasswordField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
-                    self?.topView.repaswwordLabel.warningLabel.text = "비밀번호가 일치하지 않아요"
-                    self?.topView.repaswwordLabel.warningLabel.isHidden = false
-                } else {
-                    self?.topView.repasswordField.layer.borderWidth = 0
-                    self?.topView.repaswwordLabel.warningLabel.isHidden = true
-                }
-                
-                if self?.topView.emailField.layer.borderWidth == 0 &&
-                    self?.topView.passwordField.layer.borderWidth == 0 &&
-                    self?.topView.repasswordField.layer.borderWidth == 0 {
-                    UserDefaults.standard.set(text1, forKey: "email")
-                    UserDefaults.standard.set(text2,forKey: "password")
-                    let rp = MusicRepositoryImpl()
-                    let uc = LoginUseCase(musicRepository: rp)
-                    let vm = SignUpViewModel(usecase: uc)
-                    let vc = NickNameViewController(viewModel: vm)
-                    vc.modalPresentationStyle = .fullScreen
-                    self?.present(vc,animated: false)
-                }
+                self?.viewModel.hasSameName(email: text1, completion: { bool in
+                    if !(text1.validateEmail()) {
+                        self?.topView.emailField.layer.borderWidth = 1
+                        self?.topView.emailField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
+                        self?.topView.emailLabel.warningLabel.text = "올바른 이메일 형식이 아니에요."
+                        self?.topView.emailLabel.warningLabel.isHidden = false
+                    } else if !bool {
+                        self?.topView.emailField.layer.borderWidth = 1
+                        self?.topView.emailField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
+                        self?.topView.emailLabel.warningLabel.text = "중복된 이메일이 존재해요."
+                        self?.topView.emailLabel.warningLabel.isHidden = false
+                    } else {
+                        self?.topView.emailField.layer.borderWidth = 0
+                        self?.topView.emailLabel.warningLabel.isHidden = true
+                    }
+                    if !(text2.count >= 8 && text2.count <= 16) {
+                        self?.topView.passwordField.layer.borderWidth = 1
+                        self?.topView.passwordField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
+                        self?.topView.passwordLabel.warningLabel.text = "8~16자의 영문 대소문자,숫자,특수문자만 가능해요"
+                        self?.topView.passwordLabel.warningLabel.isHidden = false
+                    } else {
+                        self?.topView.passwordField.layer.borderWidth = 0
+                        self?.topView.passwordLabel.warningLabel.isHidden = true
+                    }
+                    
+                    if !(text3 == text2) {
+                        self?.topView.repasswordField.layer.borderWidth = 1
+                        self?.topView.repasswordField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
+                        self?.topView.repaswwordLabel.warningLabel.text = "비밀번호가 일치하지 않아요"
+                        self?.topView.repaswwordLabel.warningLabel.isHidden = false
+                    } else {
+                        self?.topView.repasswordField.layer.borderWidth = 0
+                        self?.topView.repaswwordLabel.warningLabel.isHidden = true
+                    }
+                    
+                    if self?.topView.emailField.layer.borderWidth == 0 &&
+                        self?.topView.passwordField.layer.borderWidth == 0 &&
+                        self?.topView.repasswordField.layer.borderWidth == 0 {
+                        UserDefaults.standard.set(text1, forKey: "email")
+                        UserDefaults.standard.set(text2,forKey: "password")
+                        let rp = MusicRepositoryImpl()
+                        let uc = LoginUseCase(musicRepository: rp)
+                        let vm = SignUpViewModel(usecase: uc)
+                        let vc = NickNameViewController(viewModel: vm)
+                        vc.modalPresentationStyle = .fullScreen
+                        self?.present(vc,animated: false)
+                    }
+                })
             }).disposed(by: disposeBag)
-            isAllEmptyBind()
+        isAllEmptyBind()
     }
     
     

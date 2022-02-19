@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		21B827FA49CA17F32C953880 /* Pods_Omos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDDD0956E1034CF6BE3CC18 /* Pods_Omos.framework */; };
+		B601C53B27C0F50100DCD2AF /* Cafe24Oneprettynight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B601C53A27C0F50100DCD2AF /* Cafe24Oneprettynight.ttf */; };
 		B609138027AD3A7C00B439C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609137F27AD3A7C00B439C3 /* AppDelegate.swift */; };
 		B609138227AD3A7C00B439C3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609138127AD3A7C00B439C3 /* SceneDelegate.swift */; };
 		B609138427AD3A7C00B439C3 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609138327AD3A7C00B439C3 /* BaseViewController.swift */; };
@@ -96,6 +97,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B601C53A27C0F50100DCD2AF /* Cafe24Oneprettynight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Cafe24Oneprettynight.ttf; sourceTree = "<group>"; };
 		B609137C27AD3A7C00B439C3 /* Omos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Omos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B609137F27AD3A7C00B439C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B609138127AD3A7C00B439C3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -466,6 +468,7 @@
 		B689A9D727AE9635005F26E4 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				B601C53A27C0F50100DCD2AF /* Cafe24Oneprettynight.ttf */,
 				B666A90727AED1AA00BE7F92 /* EmptyView.swift */,
 				B689A9D327AE9627005F26E4 /* CustomToggleView.swift */,
 				B689A9D427AE9627005F26E4 /* IndicatorView.swift */,
@@ -626,6 +629,7 @@
 			files = (
 				B609138C27AD3A8000B439C3 /* LaunchScreen.storyboard in Resources */,
 				B6CC1D7827BA536A00B5EE7E /* PrivateInfoText.rtf in Resources */,
+				B601C53B27C0F50100DCD2AF /* Cafe24Oneprettynight.ttf in Resources */,
 				B6CC1D7627BA475900B5EE7E /* UseInfoText.rtf in Resources */,
 				B609138927AD3A8000B439C3 /* Assets.xcassets in Resources */,
 			);

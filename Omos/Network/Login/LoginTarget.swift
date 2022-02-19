@@ -11,6 +11,7 @@ enum LoginTarget {
     case login(LoginRequest)
     case getUserDetails(UserDetailRequest)
     //case kakaoLogin()
+    case checkEmail(CheckEmailRequest)
     case signUp(SignUpRequest)
     case doRefresh(RefreshRequest)
 }
@@ -26,6 +27,7 @@ extension LoginTarget:TargetType {
         case .getUserDetails: return .get
         case .signUp: return .post
         case .doRefresh: return .post
+        case .checkEmail: return .post
         }
     }
     
@@ -35,6 +37,7 @@ extension LoginTarget:TargetType {
         case .getUserDetails: return "/details" //it could be changed
         case .signUp: return "/signup"
         case .doRefresh: return "/post"
+        case .checkEmail: return "/check-email"
         }
     }
     
@@ -44,6 +47,7 @@ extension LoginTarget:TargetType {
         case .getUserDetails(let request): return .body(request)
         case .signUp(let request): return .body(request)
         case .doRefresh(let request): return .body(request)
+        case .checkEmail(let request): return .body(request)
         }
     }
     
