@@ -26,7 +26,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         self.window = UIWindow(windowScene: scene)
-        window?.rootViewController = LoginViewController()
+        let uc = LoginUseCase(musicRepository: MusicRepositoryImpl())
+        let vm = LoginVeiwModel(usecase: uc)
+        window?.rootViewController = LoginViewController(viewModel: vm)
         window?.makeKeyAndVisible()
         window?.backgroundColor = .mainBackGround
        

@@ -11,51 +11,37 @@ import Foundation
 import RxSwift
 import RxRelay
 import UIKit
+import RxAlamofire
 
-class LoginVeiwModel {
+class LoginVeiwModel: BaseViewModel {
     
-    let idPublishSubject = PublishSubject<String>()
-    let pwPublishSubject = PublishSubject<String>()
+    let validSignIn = BehaviorRelay<Bool>(value: false)
     let ischeckedSubject = BehaviorRelay<Bool>(value:false)
+    let usecase:LoginUseCase
     
-    //MARK: Local Login
-//    func isEqualLoginInfo() -> Observable<Bool> {
-//        //기존의 회원가입 하였고 새로 로그인 하려고 할때
-//        
-//        
-//    }
-    
-    
-//    func idValid() -> Observable<Bool> {
-//
-//    }
-//    
-//    func pwValid() -> Observable<Bool> {
-//
-//    }
-//
-    func loginLocal() {
-        //set LoginActionLogic
+    init(usecase:LoginUseCase) {
+        self.usecase = usecase
+        super.init()
     }
     
     
     
-    //MARK: Check Button Logic
-    func isChecked(_ button:UIButton) {
-        if button.backgroundColor == .white {
-            button.backgroundColor = .mainOrange
-        } else  {
-            button.backgroundColor = .white
-        }
+
+    func loginLocal(email:String,password:String) {
+        usecase.signIn(email: email, password: password).subscribe({ [weak self] result in
+            switch result {
+            case .success(let data):
+                UserDefaults.standard.set(data.accessToken, forKey: "access")
+                UserDefaults.standard.set(data.refreshToken, forKey: "refresh")
+                self?.validSignIn.accept(true)
+            case .failure(let error):
+                print(error)
+                self?.validSignIn.accept(false)
+            }
+        }).disposed(by: disposeBag)
+        
     }
-    
-    func isAllChecked(_ button1:UIButton,_ button2:UIButton) {
-        if button1.backgroundColor == .mainOrange && button2.backgroundColor == .mainOrange {
-            ischeckedSubject.accept(true)
-        } else {
-            ischeckedSubject.accept(false)
-        }
-    }
+
     
     
     //MARK: KAKAO LOGIN
@@ -73,7 +59,6 @@ class LoginVeiwModel {
                 }
             }
         }
-         
     }
     
     func getUserInfo() {
@@ -82,9 +67,10 @@ class LoginVeiwModel {
             if let error = error {
                 print(error.localizedDescription)
             } else {
-                
+                let id = user?.id
                 let nickName = user?.kakaoAccount?.profile?.nickname
                 let email = user?.kakaoAccount?.email
+                
                 
                 print("user info \(nickName),\(email)")
             }

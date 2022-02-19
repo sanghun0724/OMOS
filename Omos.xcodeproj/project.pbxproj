@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		21B827FA49CA17F32C953880 /* Pods_Omos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDDD0956E1034CF6BE3CC18 /* Pods_Omos.framework */; };
+		B601C53B27C0F50100DCD2AF /* Cafe24Oneprettynight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B601C53A27C0F50100DCD2AF /* Cafe24Oneprettynight.ttf */; };
 		B609138027AD3A7C00B439C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609137F27AD3A7C00B439C3 /* AppDelegate.swift */; };
 		B609138227AD3A7C00B439C3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609138127AD3A7C00B439C3 /* SceneDelegate.swift */; };
 		B609138427AD3A7C00B439C3 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609138327AD3A7C00B439C3 /* BaseViewController.swift */; };
@@ -45,6 +46,17 @@
 		B683A45327B0DA3500838749 /* AllRecordTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B683A45227B0DA3500838749 /* AllRecordTableCell.swift */; };
 		B683A45727B12DD000838749 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B683A45627B12DD000838749 /* ProfileView.swift */; };
 		B683A45927B130D100838749 /* Profile + Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B683A45827B130D100838749 /* Profile + Table.swift */; };
+		B68454E827BE027500F1E6B5 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68454E727BE027500F1E6B5 /* LoginUseCase.swift */; };
+		B68454EC27BE1D9800F1E6B5 /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68454EB27BE1D9800F1E6B5 /* TargetType.swift */; };
+		B68454EE27BE228800F1E6B5 /* HTTPHeaderField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68454ED27BE228800F1E6B5 /* HTTPHeaderField.swift */; };
+		B68454F027BE2D7B00F1E6B5 /* MyRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68454EF27BE2D7B00F1E6B5 /* MyRequestInterceptor.swift */; };
+		B68454F327BE30EE00F1E6B5 /* MyAuthenticationCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68454F227BE30EE00F1E6B5 /* MyAuthenticationCredential.swift */; };
+		B68454F527BE310100F1E6B5 /* MyAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68454F427BE310100F1E6B5 /* MyAuthenticator.swift */; };
+		B68454F827BE374600F1E6B5 /* LoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68454F727BE374600F1E6B5 /* LoginAPI.swift */; };
+		B68454FA27BE375000F1E6B5 /* LoginTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68454F927BE375000F1E6B5 /* LoginTarget.swift */; };
+		B68454FC27BE378700F1E6B5 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68454FB27BE378700F1E6B5 /* Login.swift */; };
+		B68454FE27BE380800F1E6B5 /* UserDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68454FD27BE380800F1E6B5 /* UserDetail.swift */; };
+		B684550227BE703700F1E6B5 /* RefreshTokenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B684550127BE703700F1E6B5 /* RefreshTokenAPI.swift */; };
 		B689A9CE27AE94E9005F26E4 /* UIVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9C927AE94E7005F26E4 /* UIVIew.swift */; };
 		B689A9CF27AE94E9005F26E4 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9CA27AE94E8005F26E4 /* UIViewController.swift */; };
 		B689A9D027AE94E9005F26E4 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9CB27AE94E8005F26E4 /* UIImage.swift */; };
@@ -56,13 +68,22 @@
 		B689A9DC27AEA877005F26E4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9DB27AEA877005F26E4 /* LoginViewController.swift */; };
 		B69860BD27B8E85600E83DB9 /* NickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69860BC27B8E85600E83DB9 /* NickNameView.swift */; };
 		B6A0299C27B23D3500D3D3C9 /* OmosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */; };
-		B6C3AD4527B95B1E00D5D69D /* AttributedStirng.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C3AD4427B95B1E00D5D69D /* AttributedStirng.swift */; };
-		B6CC1D7227BA42C300B5EE7E /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CC1D7127BA42C300B5EE7E /* Label.swift */; };
+		B6B1BB5727BB7E1900DF2528 /* AllRecordCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B1BB5627BB7E1900DF2528 /* AllRecordCollectionCell.swift */; };
+		B6B1BB5A27BBCE1000DF2528 /* MyRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B1BB5927BBCE1000DF2528 /* MyRecordView.swift */; };
+		B6B1BB5C27BBCF6000DF2528 /* MyRecordTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B1BB5B27BBCF6000DF2528 /* MyRecordTableCell.swift */; };
+		B6B1BB5E27BBD06600DF2528 /* MyRecord + Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B1BB5D27BBD06600DF2528 /* MyRecord + Table.swift */; };
+		B6BC147B27BF98FD0067D8FB /* Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BC147A27BF98FD0067D8FB /* Refresh.swift */; };
+		B6BC147D27BFAC330067D8FB /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BC147C27BFAC330067D8FB /* SignUp.swift */; };
+		B6BC148427BFC8FE0067D8FB /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BC148327BFC8FE0067D8FB /* SignUpViewModel.swift */; };
+		B6BC148727BFF6C50067D8FB /* MyRecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BC148627BFF6C40067D8FB /* MyRecordDetailViewController.swift */; };
+		B6BC148927BFF6F80067D8FB /* MyRecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BC148827BFF6F80067D8FB /* MyRecordDetailView.swift */; };
+		B6C3AD4527B95B1E00D5D69D /* Attributed + Stirng.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C3AD4427B95B1E00D5D69D /* Attributed + Stirng.swift */; };
 		B6CC1D7427BA437A00B5EE7E /* InfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CC1D7327BA437A00B5EE7E /* InfoController.swift */; };
 		B6CC1D7627BA475900B5EE7E /* UseInfoText.rtf in Resources */ = {isa = PBXBuildFile; fileRef = B6CC1D7527BA475900B5EE7E /* UseInfoText.rtf */; };
 		B6CC1D7827BA536A00B5EE7E /* PrivateInfoText.rtf in Resources */ = {isa = PBXBuildFile; fileRef = B6CC1D7727BA536A00B5EE7E /* PrivateInfoText.rtf */; };
 		B6D3685627B7A510008B5635 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D3685527B7A510008B5635 /* NicknameViewController.swift */; };
 		B6E8C91527B6AEFC00C32752 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E8C91427B6AEFC00C32752 /* Constant.swift */; };
+		B6EF88A927BD3AC2006F6A8F /* EmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EF88A827BD3AC2006F6A8F /* EmptyCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +97,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B601C53A27C0F50100DCD2AF /* Cafe24Oneprettynight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Cafe24Oneprettynight.ttf; sourceTree = "<group>"; };
 		B609137C27AD3A7C00B439C3 /* Omos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Omos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B609137F27AD3A7C00B439C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B609138127AD3A7C00B439C3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +138,17 @@
 		B683A45227B0DA3500838749 /* AllRecordTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordTableCell.swift; sourceTree = "<group>"; };
 		B683A45627B12DD000838749 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B683A45827B130D100838749 /* Profile + Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile + Table.swift"; sourceTree = "<group>"; };
+		B68454E727BE027500F1E6B5 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		B68454EB27BE1D9800F1E6B5 /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
+		B68454ED27BE228800F1E6B5 /* HTTPHeaderField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaderField.swift; sourceTree = "<group>"; };
+		B68454EF27BE2D7B00F1E6B5 /* MyRequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRequestInterceptor.swift; sourceTree = "<group>"; };
+		B68454F227BE30EE00F1E6B5 /* MyAuthenticationCredential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAuthenticationCredential.swift; sourceTree = "<group>"; };
+		B68454F427BE310100F1E6B5 /* MyAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAuthenticator.swift; sourceTree = "<group>"; };
+		B68454F727BE374600F1E6B5 /* LoginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAPI.swift; sourceTree = "<group>"; };
+		B68454F927BE375000F1E6B5 /* LoginTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTarget.swift; sourceTree = "<group>"; };
+		B68454FB27BE378700F1E6B5 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		B68454FD27BE380800F1E6B5 /* UserDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetail.swift; sourceTree = "<group>"; };
+		B684550127BE703700F1E6B5 /* RefreshTokenAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenAPI.swift; sourceTree = "<group>"; };
 		B689A9C927AE94E7005F26E4 /* UIVIew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIVIew.swift; sourceTree = "<group>"; };
 		B689A9CA27AE94E8005F26E4 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		B689A9CB27AE94E8005F26E4 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -130,13 +163,22 @@
 		B6A0299927B23D3500D3D3C9 /* OmosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OmosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmosTests.swift; sourceTree = "<group>"; };
 		B6AC277027BA28BB00A1FA5B /* OmosRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OmosRelease.entitlements; sourceTree = "<group>"; };
-		B6C3AD4427B95B1E00D5D69D /* AttributedStirng.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedStirng.swift; sourceTree = "<group>"; };
-		B6CC1D7127BA42C300B5EE7E /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		B6B1BB5627BB7E1900DF2528 /* AllRecordCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordCollectionCell.swift; sourceTree = "<group>"; };
+		B6B1BB5927BBCE1000DF2528 /* MyRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordView.swift; sourceTree = "<group>"; };
+		B6B1BB5B27BBCF6000DF2528 /* MyRecordTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordTableCell.swift; sourceTree = "<group>"; };
+		B6B1BB5D27BBD06600DF2528 /* MyRecord + Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyRecord + Table.swift"; sourceTree = "<group>"; };
+		B6BC147A27BF98FD0067D8FB /* Refresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Refresh.swift; sourceTree = "<group>"; };
+		B6BC147C27BFAC330067D8FB /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
+		B6BC148327BFC8FE0067D8FB /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		B6BC148627BFF6C40067D8FB /* MyRecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordDetailViewController.swift; sourceTree = "<group>"; };
+		B6BC148827BFF6F80067D8FB /* MyRecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordDetailView.swift; sourceTree = "<group>"; };
+		B6C3AD4427B95B1E00D5D69D /* Attributed + Stirng.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attributed + Stirng.swift"; sourceTree = "<group>"; };
 		B6CC1D7327BA437A00B5EE7E /* InfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoController.swift; sourceTree = "<group>"; };
 		B6CC1D7527BA475900B5EE7E /* UseInfoText.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = UseInfoText.rtf; sourceTree = "<group>"; };
 		B6CC1D7727BA536A00B5EE7E /* PrivateInfoText.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = PrivateInfoText.rtf; sourceTree = "<group>"; };
 		B6D3685527B7A510008B5635 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
 		B6E8C91427B6AEFC00C32752 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		B6EF88A827BD3AC2006F6A8F /* EmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCell.swift; sourceTree = "<group>"; };
 		C215C3C79873F26B73F4F037 /* Pods-Omos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Omos.release.xcconfig"; path = "Target Support Files/Pods-Omos/Pods-Omos.release.xcconfig"; sourceTree = "<group>"; };
 		CEBF3DD9CCF3DD38A49D350C /* Pods-Omos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Omos.debug.xcconfig"; path = "Target Support Files/Pods-Omos/Pods-Omos.debug.xcconfig"; sourceTree = "<group>"; };
 		EBDDD0956E1034CF6BE3CC18 /* Pods_Omos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Omos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +234,7 @@
 		B609137E27AD3A7C00B439C3 /* Omos */ = {
 			isa = PBXGroup;
 			children = (
+				B68454E927BE1D7A00F1E6B5 /* Network */,
 				B6AC277027BA28BB00A1FA5B /* OmosRelease.entitlements */,
 				B612199627AE93E4006AEAC9 /* Domain */,
 				B612199527AE93D6006AEAC9 /* Repository */,
@@ -213,10 +256,11 @@
 		B612199027AE9377006AEAC9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B6B1BB5827BBCDF500DF2528 /* Cells */,
 				B650874A27AFC5EE0020D2C1 /* AllRecordView.swift */,
-				B683A45227B0DA3500838749 /* AllRecordTableCell.swift */,
 				B683A45627B12DD000838749 /* ProfileView.swift */,
 				B682185727B3AA4F00B58E19 /* SearchListView.swift */,
+				B6B1BB5927BBCE1000DF2528 /* MyRecordView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -233,6 +277,7 @@
 		B612199227AE9387006AEAC9 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				B6BC148527BFF6A50067D8FB /* CoreTabsDetail */,
 				B650873727AF94500020D2C1 /* Others */,
 				B650873627AF94400020D2C1 /* Posts */,
 				B612199827AE9420006AEAC9 /* Auth */,
@@ -329,6 +374,7 @@
 			isa = PBXGroup;
 			children = (
 				B6670FA527B5097000BABF40 /* LoginViewModel.swift */,
+				B6BC148327BFC8FE0067D8FB /* SignUpViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -348,6 +394,10 @@
 			isa = PBXGroup;
 			children = (
 				B682184F27B39ADD00B58E19 /* TestModel.swift */,
+				B68454FB27BE378700F1E6B5 /* Login.swift */,
+				B68454FD27BE380800F1E6B5 /* UserDetail.swift */,
+				B6BC147A27BF98FD0067D8FB /* Refresh.swift */,
+				B6BC147C27BFAC330067D8FB /* SignUp.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -356,8 +406,49 @@
 			isa = PBXGroup;
 			children = (
 				B682185327B39F7200B58E19 /* MusicUseCase.swift */,
+				B68454E727BE027500F1E6B5 /* LoginUseCase.swift */,
 			);
 			path = UseCase;
+			sourceTree = "<group>";
+		};
+		B68454E927BE1D7A00F1E6B5 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				B68454F627BE35FC00F1E6B5 /* Login */,
+				B68454F127BE30CD00F1E6B5 /* Auth */,
+				B68454EA27BE1D8A00F1E6B5 /* Base */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		B68454EA27BE1D8A00F1E6B5 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				B68454EB27BE1D9800F1E6B5 /* TargetType.swift */,
+				B68454ED27BE228800F1E6B5 /* HTTPHeaderField.swift */,
+				B68454EF27BE2D7B00F1E6B5 /* MyRequestInterceptor.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		B68454F127BE30CD00F1E6B5 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				B68454F227BE30EE00F1E6B5 /* MyAuthenticationCredential.swift */,
+				B68454F427BE310100F1E6B5 /* MyAuthenticator.swift */,
+			);
+			name = Auth;
+			path = "며소";
+			sourceTree = "<group>";
+		};
+		B68454F627BE35FC00F1E6B5 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				B68454F727BE374600F1E6B5 /* LoginAPI.swift */,
+				B68454F927BE375000F1E6B5 /* LoginTarget.swift */,
+				B684550127BE703700F1E6B5 /* RefreshTokenAPI.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		B689A9C827AE94B4005F26E4 /* Extension */ = {
@@ -369,8 +460,7 @@
 				B689A9C927AE94E7005F26E4 /* UIVIew.swift */,
 				B689A9CA27AE94E8005F26E4 /* UIViewController.swift */,
 				B682185B27B3C0BB00B58E19 /* MyError.swift */,
-				B6C3AD4427B95B1E00D5D69D /* AttributedStirng.swift */,
-				B6CC1D7127BA42C300B5EE7E /* Label.swift */,
+				B6C3AD4427B95B1E00D5D69D /* Attributed + Stirng.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -378,6 +468,7 @@
 		B689A9D727AE9635005F26E4 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				B601C53A27C0F50100DCD2AF /* Cafe24Oneprettynight.ttf */,
 				B666A90727AED1AA00BE7F92 /* EmptyView.swift */,
 				B689A9D327AE9627005F26E4 /* CustomToggleView.swift */,
 				B689A9D427AE9627005F26E4 /* IndicatorView.swift */,
@@ -396,6 +487,26 @@
 			path = OmosTests;
 			sourceTree = "<group>";
 		};
+		B6B1BB5827BBCDF500DF2528 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B683A45227B0DA3500838749 /* AllRecordTableCell.swift */,
+				B6B1BB5627BB7E1900DF2528 /* AllRecordCollectionCell.swift */,
+				B6B1BB5B27BBCF6000DF2528 /* MyRecordTableCell.swift */,
+				B6EF88A827BD3AC2006F6A8F /* EmptyCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		B6BC148527BFF6A50067D8FB /* CoreTabsDetail */ = {
+			isa = PBXGroup;
+			children = (
+				B6BC148627BFF6C40067D8FB /* MyRecordDetailViewController.swift */,
+				B6BC148827BFF6F80067D8FB /* MyRecordDetailView.swift */,
+			);
+			path = CoreTabsDetail;
+			sourceTree = "<group>";
+		};
 		B6C3AD4227B949FC00D5D69D /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -412,6 +523,7 @@
 				B650873A27AF94C60020D2C1 /* TabBarViewController.swift */,
 				B650873827AF948D0020D2C1 /* HomeViewController.swift */,
 				B650873C27AF969C0020D2C1 /* MyRecordViewController.swift */,
+				B6B1BB5D27BBD06600DF2528 /* MyRecord + Table.swift */,
 				B650873E27AF96B00020D2C1 /* AllRecordViewController.swift */,
 				B650874827AFC5150020D2C1 /* AllRecord + Table.swift */,
 				B650874027AF96C00020D2C1 /* MyDJViewController.swift */,
@@ -517,6 +629,7 @@
 			files = (
 				B609138C27AD3A8000B439C3 /* LaunchScreen.storyboard in Resources */,
 				B6CC1D7827BA536A00B5EE7E /* PrivateInfoText.rtf in Resources */,
+				B601C53B27C0F50100DCD2AF /* Cafe24Oneprettynight.ttf in Resources */,
 				B6CC1D7627BA475900B5EE7E /* UseInfoText.rtf in Resources */,
 				B609138927AD3A8000B439C3 /* Assets.xcassets in Resources */,
 			);
@@ -578,17 +691,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6C3AD4527B95B1E00D5D69D /* AttributedStirng.swift in Sources */,
+				B6C3AD4527B95B1E00D5D69D /* Attributed + Stirng.swift in Sources */,
+				B68454F527BE310100F1E6B5 /* MyAuthenticator.swift in Sources */,
+				B6B1BB5A27BBCE1000DF2528 /* MyRecordView.swift in Sources */,
+				B6BC147B27BF98FD0067D8FB /* Refresh.swift in Sources */,
+				B6BC147D27BFAC330067D8FB /* SignUp.swift in Sources */,
 				B682185627B3A0BE00B58E19 /* SearchViewModel.swift in Sources */,
 				B689A9DC27AEA877005F26E4 /* LoginViewController.swift in Sources */,
+				B68454EE27BE228800F1E6B5 /* HTTPHeaderField.swift in Sources */,
 				B650874B27AFC5EF0020D2C1 /* AllRecordView.swift in Sources */,
 				B650873B27AF94C60020D2C1 /* TabBarViewController.swift in Sources */,
 				B650874327AF96E80020D2C1 /* ProfileViewController.swift in Sources */,
 				B6D3685627B7A510008B5635 /* NicknameViewController.swift in Sources */,
 				B682185E27B3E22900B58E19 /* LoadingView.swift in Sources */,
+				B68454F327BE30EE00F1E6B5 /* MyAuthenticationCredential.swift in Sources */,
 				B666A90627AED17C00BE7F92 /* BaseView.swift in Sources */,
+				B68454FE27BE380800F1E6B5 /* UserDetail.swift in Sources */,
 				B689A9CE27AE94E9005F26E4 /* UIVIew.swift in Sources */,
 				B6670FAC27B5542100BABF40 /* ButtonView.swift in Sources */,
+				B6BC148427BFC8FE0067D8FB /* SignUpViewModel.swift in Sources */,
 				B650874727AFC4CA0020D2C1 /* AllRecordViewModel.swift in Sources */,
 				B650874927AFC5150020D2C1 /* AllRecord + Table.swift in Sources */,
 				B689A9DA27AEA835005F26E4 /* BaseViewModel.swift in Sources */,
@@ -597,24 +718,32 @@
 				B650873927AF948D0020D2C1 /* HomeViewController.swift in Sources */,
 				B67EF45027B7A9B80023D5D4 /* SignUpView.swift in Sources */,
 				B67EF45727B7AA220023D5D4 /* PrivateLabelView.swift in Sources */,
+				B68454F827BE374600F1E6B5 /* LoginAPI.swift in Sources */,
+				B68454FA27BE375000F1E6B5 /* LoginTarget.swift in Sources */,
+				B68454EC27BE1D9800F1E6B5 /* TargetType.swift in Sources */,
 				B689A9D127AE94E9005F26E4 /* Color.swift in Sources */,
+				B6B1BB5E27BBD06600DF2528 /* MyRecord + Table.swift in Sources */,
 				B683A45327B0DA3500838749 /* AllRecordTableCell.swift in Sources */,
 				B69860BD27B8E85600E83DB9 /* NickNameView.swift in Sources */,
 				B682184C27B3823D00B58E19 /* ShareCustomViewController.swift in Sources */,
 				B689A9D227AE94E9005F26E4 /* Date.swift in Sources */,
 				B682185A27B3AD5100B58E19 /* Search + Table.swift in Sources */,
+				B68454F027BE2D7B00F1E6B5 /* MyRequestInterceptor.swift in Sources */,
 				B683A45727B12DD000838749 /* ProfileView.swift in Sources */,
-				B6CC1D7227BA42C300B5EE7E /* Label.swift in Sources */,
 				B689A9D627AE9627005F26E4 /* IndicatorView.swift in Sources */,
 				B67EF45527B7AA000023D5D4 /* SignUpViewController.swift in Sources */,
 				B609138027AD3A7C00B439C3 /* AppDelegate.swift in Sources */,
+				B684550227BE703700F1E6B5 /* RefreshTokenAPI.swift in Sources */,
 				B682185827B3AA4F00B58E19 /* SearchListView.swift in Sources */,
 				B6670FAA27B517DE00BABF40 /* DecoView.swift in Sources */,
 				B689A9D027AE94E9005F26E4 /* UIImage.swift in Sources */,
+				B6BC148927BFF6F80067D8FB /* MyRecordDetailView.swift in Sources */,
 				B650873D27AF969C0020D2C1 /* MyRecordViewController.swift in Sources */,
 				B682185C27B3C0BB00B58E19 /* MyError.swift in Sources */,
 				B650874527AFAE220020D2C1 /* SearchViewController.swift in Sources */,
 				B683A45927B130D100838749 /* Profile + Table.swift in Sources */,
+				B68454E827BE027500F1E6B5 /* LoginUseCase.swift in Sources */,
+				B6EF88A927BD3AC2006F6A8F /* EmptyCell.swift in Sources */,
 				B682185427B39F7200B58E19 /* MusicUseCase.swift in Sources */,
 				B650874127AF96C00020D2C1 /* MyDJViewController.swift in Sources */,
 				B6CC1D7427BA437A00B5EE7E /* InfoController.swift in Sources */,
@@ -622,11 +751,15 @@
 				B609138227AD3A7C00B439C3 /* SceneDelegate.swift in Sources */,
 				B666A90827AED1AA00BE7F92 /* EmptyView.swift in Sources */,
 				B6E8C91527B6AEFC00C32752 /* Constant.swift in Sources */,
+				B68454FC27BE378700F1E6B5 /* Login.swift in Sources */,
 				B682185227B39F6500B58E19 /* MusicRepositoryImpl.swift in Sources */,
 				B682185027B39ADD00B58E19 /* TestModel.swift in Sources */,
+				B6B1BB5C27BBCF6000DF2528 /* MyRecordTableCell.swift in Sources */,
 				B689A9CF27AE94E9005F26E4 /* UIViewController.swift in Sources */,
+				B6B1BB5727BB7E1900DF2528 /* AllRecordCollectionCell.swift in Sources */,
 				B6670FA827B5098200BABF40 /* LoginView.swift in Sources */,
 				B6670FA627B5097000BABF40 /* LoginViewModel.swift in Sources */,
+				B6BC148727BFF6C50067D8FB /* MyRecordDetailViewController.swift in Sources */,
 				B650873F27AF96B00020D2C1 /* AllRecordViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -793,6 +926,7 @@
 				DEVELOPMENT_TEAM = 2L2K3UD2LK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Omos/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -818,11 +952,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Omos/OmosRelease.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2L2K3UD2LK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Omos/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -835,6 +971,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sangheon.Omos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = OmosProfile;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -864,6 +1001,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2L2K3UD2LK;
@@ -872,6 +1011,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sangheon.OmosTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -889,7 +1030,7 @@
 				B609138F27AD3A8000B439C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		B609139027AD3A8000B439C3 /* Build configuration list for PBXNativeTarget "Omos" */ = {
 			isa = XCConfigurationList;
@@ -898,7 +1039,7 @@
 				B609139227AD3A8000B439C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		B6A029A127B23D3500D3D3C9 /* Build configuration list for PBXNativeTarget "OmosTests" */ = {
 			isa = XCConfigurationList;
@@ -907,7 +1048,7 @@
 				B6A029A027B23D3500D3D3C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

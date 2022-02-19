@@ -50,7 +50,6 @@ class DecoView:BaseView {
             make.left.equalTo(label.snp.right).offset(14)
         }
         
-        
     }
     
 }
@@ -71,6 +70,7 @@ class EmailLabelView:BaseView {
         label.font = .systemFont(ofSize:12)
         label.textColor = .mainOrange
         label.textAlignment = .right
+        label.isHidden = true
         return label
     }()
     
@@ -85,7 +85,7 @@ class EmailLabelView:BaseView {
         
         warningLabel.snp.makeConstraints { make in
             make.top.right.bottom.equalToSuperview()
-            make.width.equalTo(200)
+            warningLabel.sizeToFit()
         }
     }
 }
@@ -107,6 +107,7 @@ class PasswordLabelView:BaseView {
         label.font = .systemFont(ofSize:12)
         label.textColor = .mainOrange
         label.textAlignment = .right
+        label.isHidden = true
         return label
     }()
     
@@ -121,7 +122,7 @@ class PasswordLabelView:BaseView {
         
         warningLabel.snp.makeConstraints { make in
             make.top.right.bottom.equalToSuperview()
-            make.width.equalTo(200)
+            warningLabel.sizeToFit()
         }
     }
 }

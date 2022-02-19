@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        KakaoSDK.initSDK(appKey: "f028c96adeba3fae53c5e13aa44c8cd6")
+        KakaoSDK.initSDK(appKey: "1f092bd328c26debda9b7fa8dfa44b5c")
         
         let appleIDProvider = ASAuthorizationAppleIDProvider()
           appleIDProvider.getCredentialState(forUserID: ""/* 로그인에 사용한 User Identifier */) { (credentialState, error) in

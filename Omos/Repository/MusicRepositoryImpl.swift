@@ -56,11 +56,6 @@ class MusicRepositoryImpl:MusicRepository {
                 
             }
         }
-        
-    
-    
-    
-    
     
     private func parseURL(urlString:String) -> Result<URL,Error> {
         if let url = URL(string: urlString) {
@@ -77,6 +72,42 @@ class MusicRepositoryImpl:MusicRepository {
         } else {
             let error:MyError = .encoding
             return .failure(error)
+        }
+    }
+    
+    //MARK: Login API Caller
+    func signIn(_ email: String, _ password: String) -> Single<LoginResponse> {
+        return Single<LoginResponse>.create { single in
+            LoginAPI.login(request: .init(email: email, password: password)) { result in
+                switch result {
+                case .success(let data):
+                    print("sign Up success \(data)")
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    func localSignUp(_ email: String, _ password: String, _ nickname: String) -> Single<SignUpRespone> {
+        
+        return Single<SignUpRespone>.create { single in
+            LoginAPI.signUp(request: .init(email: email, nickname: nickname, password: password)) { result in
+                switch result {
+                case .success(let data):
+                    print("sign Up success \(data)")
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            }
+            
+            return Disposables.create()
         }
     }
     

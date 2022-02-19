@@ -22,6 +22,7 @@ class LoginTopView:BaseView {
         field.leftView = UIView(frame:CGRect(x: 0, y: 0, width: 10, height: 50))
         field.textColor = .white
         field.backgroundColor = .black
+        field.layer.borderColor = .some(UIColor.mainOrange.cgColor)
         return field
     }()
     
@@ -42,17 +43,18 @@ class LoginTopView:BaseView {
         return field
     }()
     
-    private let passwordDecoView:UIImageView = {
-        let imageView = UIImageView(image:UIImage(named: "visible2" ))
-        return imageView
+    let passwordDecoView:UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "visible2" ), for: .normal)
+        return button
     }()
     
-    private let emailLabel:EmailLabelView = {
+    let emailLabel:EmailLabelView = {
         let labelView = EmailLabelView()
         return labelView
     }()
     
-    private let passwordLabel:PasswordLabelView = {
+    let passwordLabel:PasswordLabelView = {
         let labelView = PasswordLabelView()
         return labelView
     }()

@@ -23,6 +23,7 @@ class InfoController:UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .mainBackGround
         self.view.addSubview(infoView)
     }
     

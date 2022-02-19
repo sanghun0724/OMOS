@@ -21,7 +21,7 @@ extension AllRecordViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordTableCell.identifier,for:indexPath) as! AllRecordTableCell
-        cell.backgroundColor = .orange
+       
         return cell
     }
     
@@ -49,15 +49,16 @@ extension AllRecordViewController:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        view.tintColor = .mainGrey
+        (view as! UITableViewHeaderFooterView).contentView.backgroundColor = UIColor.mainBackGround
+        (view as! UITableViewHeaderFooterView).textLabel?.textColor = UIColor.white
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 180
+        return UIScreen.main.bounds.height / 4.72
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
+        return UIScreen.main.bounds.height / 17
     }
     
 }

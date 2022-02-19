@@ -75,14 +75,16 @@ class SignUpView:BaseView {
         return view
     }()
     
-    let passwordDecoView:UIImageView = {
-        let imageView = UIImageView(image:UIImage(named: "visible2" ))
-        return imageView
+    let passwordDecoView:UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "visible2" ), for: .normal)
+        return button
     }()
     
-    let repasswordDecoView:UIImageView = {
-        let imageView = UIImageView(image:UIImage(named: "visible2" ))
-        return imageView
+    let repasswordDecoView:UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "visible2" ), for: .normal)
+        return button
     }()
     
     

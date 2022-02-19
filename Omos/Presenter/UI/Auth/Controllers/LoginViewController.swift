@@ -14,21 +14,32 @@ import RxCocoa
 class LoginViewController:UIViewController {
     
     private let disposeBag = DisposeBag()
-    private let viewModel = LoginVeiwModel()
+    private let viewModel:LoginVeiwModel
     private let topView = LoginTopView()
     private let bottomView = ButtonView()
-
+    var passwordFlag = false
+    
+    init(viewModel:LoginVeiwModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .mainBackGround
         topView.coverView.backButton.isHidden = true
         bind()
         dismissKeyboardWhenTappedAround()
+        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
+        
         configureUI()
     }
     
@@ -40,47 +51,127 @@ class LoginViewController:UIViewController {
             make.left.right.equalToSuperview()
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.height.equalToSuperview().multipliedBy(Constant.LoginTopViewHeight)
-          }
+        }
         
         bottomView.snp.makeConstraints { make in
             make.top.equalTo(topView.snp.bottom)
             make.left.right.equalToSuperview().inset(22)
             make.bottom.equalToSuperview().inset(40)
         }
+        
     }
     
     private func bind() {
         
-        //TopView
-//        topView.emailField.rx.text
-//            .map{ $0 ?? ""}
-//            .
+        let isEmailEmpty = topView.emailField.rx.text
+            .throttle(RxTimeInterval.milliseconds(100), scheduler: MainScheduler.instance)
+            .map { text -> Bool in
+                return !(text?.isEmpty ?? true)
+            }.distinctUntilChanged()
+            
+        isEmailEmpty
+            .withUnretained(self)
+            .subscribe(onNext: { owner,info in
+                if !info {
+                    owner.topView.emailField.layer.borderWidth = 0
+                    owner.topView.emailLabel.warningLabel.isHidden = true
+                }
+            }).disposed(by: disposeBag)
+        
+        let isPassWordEmpty = topView.passwordField.rx.text
+            .throttle(RxTimeInterval.milliseconds(100), scheduler: MainScheduler.instance)
+            .map { text -> Bool in
+                return !(text?.isEmpty ?? true)
+            }.distinctUntilChanged()
+        
+        Observable.combineLatest(isEmailEmpty, isPassWordEmpty)
+        { $0 && $1 }
+        .withUnretained(self)
+        .subscribe(onNext: { owner,info in
+            if info {
+                owner.bottomView.loginButton.backgroundColor = .mainOrange
+                owner.bottomView.loginButton.setTitleColor(.white, for: .normal)
+                owner.bottomView.loginButton.isEnabled = true
+            } else {
+                owner.bottomView.loginButton.backgroundColor = .mainGrey4
+                owner.bottomView.loginButton.setTitleColor(.mainGrey7, for: .normal)
+                owner.bottomView.loginButton.isEnabled = false
+            }
+        }).disposed(by: disposeBag)
+        
+        isPassWordEmpty
+            .withUnretained(self)
+            .subscribe(onNext: { owner,info in
+                if !info {
+                    owner.topView.passwordField.layer.borderWidth = 0
+                    owner.topView.passwordLabel.warningLabel.isHidden = true
+                }
+            }).disposed(by: disposeBag)
+        
+        
+        
+        topView.passwordDecoView.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                if !(self?.passwordFlag)! {
+                    self?.topView.passwordField.isSecureTextEntry = false
+                    self?.topView.passwordDecoView.setImage(UIImage(named: "visible1" ), for: .normal)
+                    self?.passwordFlag = true
+                } else {
+                    self?.topView.passwordField.isSecureTextEntry = true
+                    self?.topView.passwordDecoView.setImage(UIImage(named: "visible2" ), for: .normal)
+                    self?.passwordFlag = false
+                }
+            }).disposed(by: disposeBag)
+        
+        
         topView.labelsView.signUpButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in
-                let vc = SignUpViewController()
+                let rp = MusicRepositoryImpl()
+                let uc = LoginUseCase(musicRepository: rp)
+                let vm = SignUpViewModel(usecase: uc)
+                let vc = SignUpViewController(viewModel: vm)
                 vc.modalPresentationStyle = .fullScreen
                 self?.present(vc,animated:false)
             }).disposed(by: disposeBag)
         
         //BottomView
-        bottomView.loginButton.rx.tap
+        bottomView.loginButton.rx
+            .tap
             .asDriver()
             .drive(onNext: { [weak self] in
-                self?.viewModel.loginLocal()
+                self?.viewModel.loginLocal(email: (self?.topView.emailField.text)!, password: (self?.topView.passwordField.text)!)
+                
+                self?.viewModel.validSignIn.subscribe(onNext: { [weak self] valid in
+                    if valid {
+                        let vc = TabBarViewController()
+                        self?.present(vc,animated: true)
+                    } else {
+                        self?.topView.emailField.layer.borderWidth = 1
+                        self?.topView.emailField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
+                        self?.topView.emailLabel.warningLabel.text = "입력하신 내용을 다시 확인해주세요."
+                        self?.topView.emailLabel.warningLabel.isHidden = false
+                        self?.topView.passwordField.layer.borderWidth = 1
+                        self?.topView.passwordField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
+                        self?.topView.passwordLabel.warningLabel.text = "입력하신 내용을 다시 확인해주세요."
+                        self?.topView.passwordLabel.warningLabel.isHidden = false
+                    }
+                }).disposed(by: self!.disposeBag)
             }).disposed(by: disposeBag)
         
         bottomView.kakaoButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in
                 self?.viewModel.loginKakao()
+                let rp = MusicRepositoryImpl()
+                let uc = LoginUseCase(musicRepository: rp)
+                let vm = SignUpViewModel(usecase: uc)
+                let vc = NickNameViewController(viewModel: vm)
+                self?.present(vc,animated: true)
             }).disposed(by: disposeBag)
         
         bottomView.appleButton.addTarget(self, action: #selector(loginApple), for: .touchUpInside)
-        
-        
-        
-        
     }
     
     //MARK: APPLE LOGIN
@@ -105,6 +196,11 @@ extension LoginViewController:ASAuthorizationControllerDelegate {
                 print("email:\(email)")
             }
         }
+        let rp = MusicRepositoryImpl()
+        let uc = LoginUseCase(musicRepository: rp)
+        let vm = SignUpViewModel(usecase: uc)
+        let vc = NickNameViewController(viewModel: vm)
+        present(vc,animated: true)
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
