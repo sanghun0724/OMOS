@@ -7,6 +7,13 @@
 
 import Foundation
 
-class MyRecordViewModel {
+class MyRecordViewModel:BaseViewModel {
+    
+    let currentRecords = [String]()
+    
+    
+    
+    
+    
     
 }

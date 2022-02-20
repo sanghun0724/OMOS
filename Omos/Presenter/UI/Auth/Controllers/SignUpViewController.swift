@@ -108,6 +108,7 @@ class SignUpViewController:UIViewController {
                 guard let text2 = self?.topView.passwordField.text else { return }
                 guard let text3 = self?.topView.repasswordField.text else { return }
                 self?.viewModel.hasSameName(email: text1)
+                //밑에거 따로빼서 zip으로 묶어주자
                 self?.viewModel.validEmail.subscribe(onNext: { [weak self] valid in
                     if !(text1.validateEmail()) {
                         self?.topView.emailField.layer.borderWidth = 1
