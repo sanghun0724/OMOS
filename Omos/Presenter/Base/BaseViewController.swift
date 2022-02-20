@@ -59,6 +59,9 @@ class BaseViewController:UIViewController {
         let createButton = UIBarButtonItem(image: UIImage(systemName: "pencil"), style: .plain, target: self, action: #selector(didTapCreateButton))
         createButton.tintColor = .white
         self.navigationItem.rightBarButtonItems = [notiButton,searchButton,createButton]
+        UINavigationBar.appearance().backIndicatorImage = UIImage(named: "arrow-left")?.withTintColor(.white, renderingMode: .alwaysOriginal)
+        UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage(named: "arrow-left")
+        
         
         
         let label = UILabel()
@@ -71,7 +74,7 @@ class BaseViewController:UIViewController {
         label.font = .systemFont(ofSize: 22, weight: .bold)
         label.tintColor = .white
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
-       // self.navigationItem.leftItemsSupplementBackButton = true //backbutton 안숨기기
+        self.navigationItem.leftItemsSupplementBackButton = true //backbutton 안숨기기
         self.navigationItem.backButtonTitle = ""
     }
     

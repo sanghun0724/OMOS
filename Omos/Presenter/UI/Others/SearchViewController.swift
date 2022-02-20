@@ -58,7 +58,6 @@ class SearchViewController:BaseViewController {
         selfView.searchViewController.searchResultsUpdater = self
         selfView.searchViewController.hidesNavigationBarDuringPresentation = false
         navigationItem.titleView = selfView.searchViewController.searchBar
-        self.navigationItem.leftItemsSupplementBackButton = true
         self.navigationController?.navigationBar.tintColor = .white
         
         selfView.frame = view.bounds

@@ -24,7 +24,9 @@ extension MyRecordViewController: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        
+        let item = "test"// viewModel.currentRecords[indexPath.row] ??
+        let vc = MyRecordDetailViewController(myRecord: item)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
