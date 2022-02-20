@@ -12,7 +12,8 @@ import RxRelay
 class SignUpViewModel:BaseViewModel {
     
     
-    let validSignUp = BehaviorRelay<Bool>(value: false)
+    let validSignUp = PublishRelay<Bool>()
+    let validEmail = PublishRelay<Bool>()
     let usecase:LoginUseCase
     
     init(usecase:LoginUseCase) {
@@ -49,15 +50,17 @@ class SignUpViewModel:BaseViewModel {
         }
     }
     
-    func hasSameName(email:String,completion:@escaping(Bool) -> Void) {
-        LoginAPI.checkEmail(email:email) { result in
-            switch result {
+    func hasSameName(email:String) {
+        usecase.checkEmail(email: email).subscribe({ [weak self] event in
+            switch event {
             case .success(let data):
-                completion(data)
+                print(data)
+                self?.validEmail.accept(data.state)
             case .failure(let error):
-                print(error)
+                self?.validEmail.accept(false)
+                print(error.localizedDescription)
             }
-        }
+        }).disposed(by: disposeBag)
     }
     
     

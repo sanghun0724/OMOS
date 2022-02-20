@@ -66,6 +66,7 @@
 		B689A9D627AE9627005F26E4 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9D427AE9627005F26E4 /* IndicatorView.swift */; };
 		B689A9DA27AEA835005F26E4 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9D927AEA835005F26E4 /* BaseViewModel.swift */; };
 		B689A9DC27AEA877005F26E4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9DB27AEA877005F26E4 /* LoginViewController.swift */; };
+		B693049D27C1F84200DC3E90 /* MyRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B693049C27C1F84200DC3E90 /* MyRecordViewModel.swift */; };
 		B69860BD27B8E85600E83DB9 /* NickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69860BC27B8E85600E83DB9 /* NickNameView.swift */; };
 		B6A0299C27B23D3500D3D3C9 /* OmosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */; };
 		B6B1BB5727BB7E1900DF2528 /* AllRecordCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B1BB5627BB7E1900DF2528 /* AllRecordCollectionCell.swift */; };
@@ -159,6 +160,7 @@
 		B689A9D927AEA835005F26E4 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		B689A9DB27AEA877005F26E4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B689A9DD27AEAD0C005F26E4 /* Omos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Omos.entitlements; sourceTree = "<group>"; };
+		B693049C27C1F84200DC3E90 /* MyRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordViewModel.swift; sourceTree = "<group>"; };
 		B69860BC27B8E85600E83DB9 /* NickNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameView.swift; sourceTree = "<group>"; };
 		B6A0299927B23D3500D3D3C9 /* OmosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OmosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmosTests.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 			children = (
 				B650874627AFC4CA0020D2C1 /* AllRecordViewModel.swift */,
 				B682185527B3A0BE00B58E19 /* SearchViewModel.swift */,
+				B693049C27C1F84200DC3E90 /* MyRecordViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -697,6 +700,7 @@
 				B6BC147B27BF98FD0067D8FB /* Refresh.swift in Sources */,
 				B6BC147D27BFAC330067D8FB /* SignUp.swift in Sources */,
 				B682185627B3A0BE00B58E19 /* SearchViewModel.swift in Sources */,
+				B693049D27C1F84200DC3E90 /* MyRecordViewModel.swift in Sources */,
 				B689A9DC27AEA877005F26E4 /* LoginViewController.swift in Sources */,
 				B68454EE27BE228800F1E6B5 /* HTTPHeaderField.swift in Sources */,
 				B650874B27AFC5EF0020D2C1 /* AllRecordView.swift in Sources */,

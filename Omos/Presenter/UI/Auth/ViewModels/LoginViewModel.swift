@@ -13,10 +13,10 @@ import RxRelay
 import UIKit
 import RxAlamofire
 
-class LoginVeiwModel: BaseViewModel {
+class LoginViewModel: BaseViewModel {
     
-    let validSignIn = BehaviorRelay<Bool>(value: false)
-    let ischeckedSubject = BehaviorRelay<Bool>(value:false)
+    let validSignIn = PublishRelay<Bool>()
+    let ischeckedSubject = PublishRelay<Bool>()
     let usecase:LoginUseCase
     
     init(usecase:LoginUseCase) {
@@ -72,7 +72,7 @@ class LoginVeiwModel: BaseViewModel {
                 let email = user?.kakaoAccount?.email
                 
                 
-                print("user info \(nickName),\(email)")
+                print("user info \(id),\(email)")
             }
         }
     }

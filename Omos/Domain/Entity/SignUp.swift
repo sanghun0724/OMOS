@@ -15,7 +15,7 @@ struct SignUpRequest :Codable {
 }
 
 struct SignUpRespone:Codable {
-    let email:String
+    let state:Bool
 }
 
 
@@ -23,4 +23,6 @@ struct CheckEmailRequest:Codable {
     let email:String
 }
 
-
+struct CheckEmailRespone:Codable {
+    let state:Bool
+}

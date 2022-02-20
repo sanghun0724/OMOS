@@ -14,12 +14,12 @@ import RxCocoa
 class LoginViewController:UIViewController {
     
     private let disposeBag = DisposeBag()
-    private let viewModel:LoginVeiwModel
+    private let viewModel:LoginViewModel
     private let topView = LoginTopView()
     private let bottomView = ButtonView()
     var passwordFlag = false
     
-    init(viewModel:LoginVeiwModel) {
+    init(viewModel:LoginViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -128,7 +128,7 @@ class LoginViewController:UIViewController {
         topView.labelsView.signUpButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in
-                let rp = MusicRepositoryImpl()
+                let rp = MusicRepositoryImpl(loginAPI: LoginAPI())
                 let uc = LoginUseCase(musicRepository: rp)
                 let vm = SignUpViewModel(usecase: uc)
                 let vc = SignUpViewController(viewModel: vm)
@@ -146,6 +146,7 @@ class LoginViewController:UIViewController {
                 self?.viewModel.validSignIn.subscribe(onNext: { [weak self] valid in
                     if valid {
                         let vc = TabBarViewController()
+                        vc.modalPresentationStyle = .fullScreen
                         self?.present(vc,animated: true)
                     } else {
                         self?.topView.emailField.layer.borderWidth = 1
@@ -164,7 +165,7 @@ class LoginViewController:UIViewController {
             .asDriver()
             .drive(onNext: { [weak self] in
                 self?.viewModel.loginKakao()
-                let rp = MusicRepositoryImpl()
+                let rp = MusicRepositoryImpl(loginAPI: LoginAPI())
                 let uc = LoginUseCase(musicRepository: rp)
                 let vm = SignUpViewModel(usecase: uc)
                 let vc = NickNameViewController(viewModel: vm)
@@ -196,7 +197,7 @@ extension LoginViewController:ASAuthorizationControllerDelegate {
                 print("email:\(email)")
             }
         }
-        let rp = MusicRepositoryImpl()
+        let rp = MusicRepositoryImpl(loginAPI: LoginAPI())
         let uc = LoginUseCase(musicRepository: rp)
         let vm = SignUpViewModel(usecase: uc)
         let vc = NickNameViewController(viewModel: vm)

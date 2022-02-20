@@ -81,7 +81,7 @@ class BaseViewController:UIViewController {
     }
     
     @objc func didTapSearchButton() {
-        let uc = MusicUseCase(musicRepository:MusicRepositoryImpl())
+        let uc = MusicUseCase(musicRepository:MusicRepositoryImpl(loginAPI: LoginAPI()))
         let vm = SearchViewModel(usecase: uc)
         let vc = SearchViewController(viewModel: vm)
         self.navigationController?.pushViewController(vc, animated: true)

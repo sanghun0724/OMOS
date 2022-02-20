@@ -20,6 +20,10 @@ class LoginUseCase {
        return musicRepository.localSignUp(email, password, nickname)
     }
     
+    func checkEmail(email:String) -> Single<CheckEmailRespone> {
+        return musicRepository.checkEmail(email: email)
+    }
+    
     init(musicRepository:MusicRepository) {
         self.musicRepository = musicRepository
     }
