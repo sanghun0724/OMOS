@@ -30,6 +30,7 @@ class CreateViewController:BaseViewController {
     
     override func configureUI() {
         super.configureUI()
+        self.view.addSubview(selfView)
         
         selfView.snp.makeConstraints { make in
             make.left.right.bottom.equalToSuperview()

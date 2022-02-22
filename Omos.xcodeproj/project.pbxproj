@@ -24,6 +24,7 @@
 		B650874727AFC4CA0020D2C1 /* AllRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650874627AFC4CA0020D2C1 /* AllRecordViewModel.swift */; };
 		B650874927AFC5150020D2C1 /* AllRecord + Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650874827AFC5150020D2C1 /* AllRecord + Table.swift */; };
 		B650874B27AFC5EF0020D2C1 /* AllRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650874A27AFC5EE0020D2C1 /* AllRecordView.swift */; };
+		B6540F6327C50F79002B1696 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6540F6227C50F79002B1696 /* CategoryViewController.swift */; };
 		B666A90627AED17C00BE7F92 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B666A90527AED17C00BE7F92 /* BaseView.swift */; };
 		B666A90827AED1AA00BE7F92 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B666A90727AED1AA00BE7F92 /* EmptyView.swift */; };
 		B6670FA627B5097000BABF40 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6670FA527B5097000BABF40 /* LoginViewModel.swift */; };
@@ -120,6 +121,7 @@
 		B650874627AFC4CA0020D2C1 /* AllRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordViewModel.swift; sourceTree = "<group>"; };
 		B650874827AFC5150020D2C1 /* AllRecord + Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AllRecord + Table.swift"; sourceTree = "<group>"; };
 		B650874A27AFC5EE0020D2C1 /* AllRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordView.swift; sourceTree = "<group>"; };
+		B6540F6227C50F79002B1696 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		B666A90527AED17C00BE7F92 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		B666A90727AED1AA00BE7F92 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		B6670FA527B5097000BABF40 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 				B6E12E7F27C210B4008644B5 /* CreateView.swift */,
 				B6E12E8127C210E6008644B5 /* CreateViewModel.swift */,
 				B6F0596D27C3490E00CCB242 /* CategoryView.swift */,
+				B6540F6227C50F79002B1696 /* CategoryViewController.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -774,6 +777,7 @@
 				B682185427B39F7200B58E19 /* MusicUseCase.swift in Sources */,
 				B650874127AF96C00020D2C1 /* MyDJViewController.swift in Sources */,
 				B6E12E7E27C21050008644B5 /* CreateViewController.swift in Sources */,
+				B6540F6327C50F79002B1696 /* CategoryViewController.swift in Sources */,
 				B6CC1D7427BA437A00B5EE7E /* InfoController.swift in Sources */,
 				B689A9D527AE9627005F26E4 /* CustomToggleView.swift in Sources */,
 				B609138227AD3A7C00B439C3 /* SceneDelegate.swift in Sources */,
