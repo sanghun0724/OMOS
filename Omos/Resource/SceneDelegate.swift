@@ -35,21 +35,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let vm = LoginViewModel(usecase: uc)
         //let localValid = PublishRelay<Bool>()
         
+//        if $2  {
+//            if let local = UserDefaults.standard.string(forKey: "email") { //생략해도되겠다
+//                //탭바
+//            } else if !($0 || $1) {
+//                //로그인뷰
+//            } else {
+//                //탭바
+//            }
+//        } else {
+//            무조건 로그인뷰
+//        }
+        
         
         Observable.combineLatest(kakaoValid, appleValid)
         { $0 || $1 }
         .observe(on: MainScheduler.instance)
         .subscribe(onNext: { [weak self] valid in
             print("is it valid? \(valid)")
-            if valid {
-                self?.window?.rootViewController = TabBarViewController()
-                self?.window?.makeKeyAndVisible()
-                self?.window?.backgroundColor = .mainBackGround
-            } else {
-                self?.window?.rootViewController = LoginViewController(viewModel: vm)
-                self?.window?.makeKeyAndVisible()
-                self?.window?.backgroundColor = .mainBackGround
-            }
+//            if valid {
+//                self?.window?.rootViewController = TabBarViewController()
+//                self?.window?.makeKeyAndVisible()
+//                self?.window?.backgroundColor = .mainBackGround
+//            } else {
+//                self?.window?.rootViewController = LoginViewController(viewModel: vm)
+//                self?.window?.makeKeyAndVisible()
+//                self?.window?.backgroundColor = .mainBackGround
+//            }
         }).disposed(by: disposeBag)
         
         //local 확인  -> accesstoken 필요한 API 호출해봄
@@ -89,7 +101,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                   break
               }
           }
-        self.window?.rootViewController = LoginViewController(viewModel: vm)
+        self.window?.rootViewController = TabBarViewController()
         self.window?.makeKeyAndVisible()
         self.window?.backgroundColor = .mainBackGround
        
