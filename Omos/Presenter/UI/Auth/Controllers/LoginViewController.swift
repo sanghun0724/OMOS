@@ -165,11 +165,20 @@ class LoginViewController:UIViewController {
             .asDriver()
             .drive(onNext: { [weak self] in
                 self?.viewModel.loginKakao()
-                let rp = MusicRepositoryImpl(loginAPI: LoginAPI())
-                let uc = LoginUseCase(musicRepository: rp)
-                let vm = SignUpViewModel(usecase: uc)
-                let vc = NickNameViewController(viewModel: vm)
-                self?.present(vc,animated: true)
+                self?.viewModel.hasKakaoEmail.subscribe(onNext: { [weak self] valid in
+                    if valid {
+                        let vc = TabBarViewController()
+                        vc.modalPresentationStyle = .fullScreen
+                        self?.present(vc,animated: true)
+                    } else {
+                        let rp = MusicRepositoryImpl(loginAPI: LoginAPI())
+                        let uc = LoginUseCase(musicRepository: rp)
+                        let vm = SignUpViewModel(usecase: uc)
+                        let vc = NickNameViewController(viewModel: vm)
+                        vc.modalPresentationStyle = .fullScreen
+                        self?.present(vc,animated: true)
+                    }
+                }).disposed(by: self!.disposeBag)
             }).disposed(by: disposeBag)
         
         bottomView.appleButton.addTarget(self, action: #selector(loginApple), for: .touchUpInside)
@@ -193,15 +202,30 @@ extension LoginViewController:ASAuthorizationControllerDelegate {
         if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
             let user = credential.user
             print("user:\(user)")
+            UserDefaults.standard.set(user, forKey: "appleUser")
             if let email = credential.email {
                 print("email:\(email)")
+                UserDefaults.standard.set(email, forKey: "appleEmail")
+
+                LoginAPI.SNSLogin(request: .init(email: email, type: .APPLE)) { [weak self] result in
+                    switch result {
+                    case .success(let token):
+                        UserDefaults.standard.set(token.accessToken, forKey: "access")
+                        UserDefaults.standard.set(token.refreshToken, forKey: "refresh")
+                        let vc = TabBarViewController()
+                        vc.modalPresentationStyle = .fullScreen
+                        self?.present(vc,animated: true)
+                    case .failure:
+                        let rp = MusicRepositoryImpl(loginAPI: LoginAPI())
+                        let uc = LoginUseCase(musicRepository: rp)
+                        let vm = SignUpViewModel(usecase: uc)
+                        let vc = NickNameViewController(viewModel: vm)
+                        vc.modalPresentationStyle = .fullScreen
+                        self?.present(vc,animated: true)
+                    }
+                }
             }
         }
-        let rp = MusicRepositoryImpl(loginAPI: LoginAPI())
-        let uc = LoginUseCase(musicRepository: rp)
-        let vm = SignUpViewModel(usecase: uc)
-        let vc = NickNameViewController(viewModel: vm)
-        present(vc,animated: true)
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {

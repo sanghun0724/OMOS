@@ -17,7 +17,7 @@ class ButtonView:BaseView {
         button.backgroundColor = .mainGrey4
         button.setTitle("로그인", for: .normal)
         button.setTitleColor(.mainGrey7, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 18, weight: .medium)
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .medium)
         button.layer.masksToBounds = true
         button.isEnabled = false
         return button
@@ -41,7 +41,7 @@ class ButtonView:BaseView {
         bt.setTitle("  Kakao로 로그인", for: .normal)
         bt.titleLabel?.textAlignment = .right
         bt.setTitleColor(.buttonLabel, for: .normal)
-        bt.titleLabel?.font = .systemFont(ofSize: 18,weight: .medium)
+        bt.titleLabel?.font = .systemFont(ofSize: 20,weight: .medium)
         bt.backgroundColor = .kakaoYellow
         return bt
     }()

@@ -74,7 +74,11 @@ class NickNameViewController:BaseViewController {
         
         viewModel.validSignUp.subscribe(onNext: { [weak self] event in
             if event {
-                self?.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
+                self?.view.window?.rootViewController?.dismiss(animated: false, completion: {
+                  let homeVC = TabBarViewController()
+                  homeVC.modalPresentationStyle = .fullScreen
+                    self?.present(homeVC,animated: true)
+                })
             } else {
                 self?.topView.nickNameField.layer.borderWidth = 1
                 self?.topView.nickNameField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
@@ -95,6 +99,8 @@ class NickNameViewController:BaseViewController {
                 } else {
                     UserDefaults.standard.set(text, forKey: "nickname")
                     self?.viewModel.signUp()
+                    self?.viewModel.kakaoSignUp()
+                    self?.viewModel.appleSignUp()
                 }
                 
             }).disposed(by: disposeBag)

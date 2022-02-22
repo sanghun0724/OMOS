@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
-class MyRecordDetailViewController:BaseViewController {
+class MyRecordDetailViewController:BaseViewController,UITextViewDelegate {
     
     private let selfView = MyRecordDetailView()
     let myRecord:String
@@ -24,6 +26,8 @@ class MyRecordDetailViewController:BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationItems()
+        self.selfView.mainTextView.delegate = self
+        bind()
     }
     
     private func setNavigationItems() {
@@ -51,5 +55,17 @@ class MyRecordDetailViewController:BaseViewController {
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.height.equalToSuperview().multipliedBy(0.7)
         }
+    }
+    
+    func bind() {
+    }
+    
+}
+
+
+extension MyRecordDetailViewController {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
+          return newText.count <= 52
     }
 }

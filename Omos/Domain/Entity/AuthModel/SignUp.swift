@@ -26,3 +26,15 @@ struct CheckEmailRequest:Codable {
 struct CheckEmailRespone:Codable {
     let state:Bool
 }
+
+struct SNSSignUpRequest: Codable {
+    let email:String
+    let nickname:String
+    let type:SNSType
+}
+
+struct SNSSignUpResponse: Codable {
+    let userId:Int
+    let accessToken:String
+    let refreshToken:String
+}

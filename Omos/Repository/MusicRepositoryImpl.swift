@@ -131,8 +131,40 @@ class MusicRepositoryImpl:MusicRepository {
             
             return Disposables.create()
         }
-
     }
     
+    func snsLogin(email:String,type:SNSType) -> Single<SNSLoginResponse> {
+         return Single<SNSLoginResponse>.create { single in
+             LoginAPI.SNSLogin(request:.init(email: email, type: type) ) { result in
+                switch result {
+                case .success(let data):
+                    print("sign Up success \(data)")
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    func snsSignUp(email:String,nickName:String,type:SNSType) -> Single<SNSSignUpResponse> {
+        return Single<SNSSignUpResponse>.create { [weak self] single in
+            self?.loginAPI.SNSSignUp(request: .init(email: email, nickname: nickName, type: type)) { result in
+               switch result {
+               case .success(let data):
+                   print("sign Up success \(data)")
+                   single(.success(data))
+               case .failure(let error):
+                   print(error.localizedDescription)
+                   single(.failure(error))
+               }
+           }
+           
+           return Disposables.create()
+       }
+    }
     
 }

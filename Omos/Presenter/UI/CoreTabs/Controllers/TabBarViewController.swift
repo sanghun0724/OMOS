@@ -60,4 +60,9 @@ class TabBarViewController: UITabBarController {
         }
     }
     
+    func checkAutoLogin() {
+        //토큰 필요한 API 호출 실패시 error -> loginView로
+        
+    }
+    
 }

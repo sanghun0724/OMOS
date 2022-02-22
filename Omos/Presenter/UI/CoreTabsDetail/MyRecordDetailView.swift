@@ -69,8 +69,12 @@ class MyRecordDetailView:BaseView {
     
     let mainTextView:UITextView = {
         let view = UITextView()
-        view.text = "백에린 노래 좋아"
+        view.text = #""  ""#
         view.font = UIFont(name: "Cafe24Oneprettynight", size: 22)
+        view.isScrollEnabled = false
+        view.textAlignment = .center
+        view.backgroundColor = .mainBlack
+       
         return view
     }()
     
@@ -124,6 +128,7 @@ class MyRecordDetailView:BaseView {
         circleImageView.layer.cornerCurve = .circular
         circleImageView.layer.cornerRadius = circleImageView.height / 2
         circleImageView.layer.masksToBounds = true
+       
     }
     
     
@@ -190,12 +195,12 @@ class MyRecordDetailView:BaseView {
             make.top.equalToSuperview().offset(12)
             make.height.equalToSuperview().multipliedBy(0.3)
             make.width.equalTo(starImageView.snp.height)
-            make.right.equalToSuperview().offset(-16)
+            make.right.equalToSuperview().offset(-10)
         }
 
         starCountLabel.snp.makeConstraints { make in
             make.centerX.equalTo(starImageView.snp.centerX)
-            make.top.equalTo(starImageView.snp.bottom)
+            make.top.equalTo(starImageView.snp.bottom).offset(3)
             starCountLabel.sizeToFit()
         }
 
@@ -204,12 +209,12 @@ class MyRecordDetailView:BaseView {
             make.top.equalToSuperview().offset(12)
             make.height.equalToSuperview().multipliedBy(0.3)
             make.width.equalTo(loveImageView.snp.height)
-            make.right.equalTo(starImageView.snp.left).offset(-6)
+            make.right.equalTo(starImageView.snp.left).offset(-30)
         }
 
         loveCountLabel.snp.makeConstraints { make in
             make.centerX.equalTo(loveImageView.snp.centerX)
-            make.top.equalTo(loveImageView.snp.bottom)
+            make.top.equalTo(loveImageView.snp.bottom).offset(3)
             starCountLabel.sizeToFit()
         }
         
@@ -224,7 +229,8 @@ class MyRecordDetailView:BaseView {
         }
         
         mainTextView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.left.right.equalToSuperview()
+            make.centerY.equalToSuperview()
         }
         
         

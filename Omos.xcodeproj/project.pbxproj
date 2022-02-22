@@ -372,6 +372,17 @@
 			path = Others;
 			sourceTree = "<group>";
 		};
+		B6540F6127C4A7F9002B1696 /* AuthModel */ = {
+			isa = PBXGroup;
+			children = (
+				B68454FB27BE378700F1E6B5 /* Login.swift */,
+				B68454FD27BE380800F1E6B5 /* UserDetail.swift */,
+				B6BC147A27BF98FD0067D8FB /* Refresh.swift */,
+				B6BC147C27BFAC330067D8FB /* SignUp.swift */,
+			);
+			path = AuthModel;
+			sourceTree = "<group>";
+		};
 		B67EF45127B7A9BE0023D5D4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -408,11 +419,8 @@
 		B682184927B37F9200B58E19 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				B6540F6127C4A7F9002B1696 /* AuthModel */,
 				B682184F27B39ADD00B58E19 /* TestModel.swift */,
-				B68454FB27BE378700F1E6B5 /* Login.swift */,
-				B68454FD27BE380800F1E6B5 /* UserDetail.swift */,
-				B6BC147A27BF98FD0067D8FB /* Refresh.swift */,
-				B6BC147C27BFAC330067D8FB /* SignUp.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -972,8 +980,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Omos/OmosRelease.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2L2K3UD2LK;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -991,7 +999,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sangheon.Omos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = OmosProfile;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

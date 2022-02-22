@@ -75,4 +75,32 @@ class LoginAPI {
             }
         }
     }
+    
+    static func SNSLogin(request:SNSLoginRequest,completion:@escaping(Result<SNSLoginResponse,Error>) -> Void) {
+       
+       AF.request(LoginTarget.SNSLogin(request)).responseDecodable { (response:AFDataResponse<SNSLoginResponse>) in
+           switch response.result {
+           case .success(let data):
+               print(data)
+               completion(.success(data))
+           case .failure(let error):
+               print(error.localizedDescription)
+               completion(.failure(error))
+           }
+       }
+   }
+    
+    func SNSSignUp(request:SNSSignUpRequest,completion:@escaping(Result<SNSSignUpResponse,Error>) -> Void) {
+       
+       AF.request(LoginTarget.SNSSignUp(request)).responseDecodable { (response:AFDataResponse<SNSSignUpResponse>) in
+           switch response.result {
+           case .success(let data):
+               print(data)
+               completion(.success(data))
+           case .failure(let error):
+               print(error.localizedDescription) //같은 닉네임
+               completion(.failure(error))
+           }
+       }
+   }
 }

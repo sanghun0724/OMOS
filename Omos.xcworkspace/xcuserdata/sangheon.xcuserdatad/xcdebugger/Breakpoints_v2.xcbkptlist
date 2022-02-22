@@ -14,8 +14,8 @@
             filePath = "Omos/Presenter/UI/Auth/Controllers/LoginViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
             landmarkName = "loginApple()"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "Omos/Presenter/UI/Auth/ViewModels/SignUpViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "hasSameName(email:)"
             landmarkType = "7">
          </BreakpointContent>
