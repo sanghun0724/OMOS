@@ -34,8 +34,9 @@ class CategoryViewController:BaseViewController {
         self.view.addSubview(selfView)
         
         selfView.snp.makeConstraints { make in
-            make.left.right.bottom.equalToSuperview().inset(16)
+            make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(20)
+            make.bottom.equalToSuperview().offset(40).priority(1)
         }
         
     }
