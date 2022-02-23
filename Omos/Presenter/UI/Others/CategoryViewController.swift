@@ -49,6 +49,8 @@ class CategoryViewController:BaseViewController {
             .drive(onNext: { [weak self] _ in
                 self?.selfView.oneLineView.layer.borderWidth = 1
                 self?.selfView.oneLineView.layer.borderColor = UIColor.mainOrange.cgColor
+                let vc = CreateViewController()
+                self?.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: disposeBag)
         

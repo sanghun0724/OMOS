@@ -17,4 +17,5 @@ pod 'Firebase/Messaging'
 pod 'SnapKit'
 pod "RxGesture"
 pod 'YPImagePicker'
+pod 'Mantis', '~> 1.9.0'
 end

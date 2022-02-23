@@ -16,12 +16,6 @@ class MyRecordDetailView:BaseView {
         return view
     }()
     
-    let dummyView1:UIView = {
-        let view = UIView()
-        view.backgroundColor = .mainBlack1
-        return view
-    }()
-    
     let circleImageView:UIImageView = {
         let view = UIImageView(image:UIImage(systemName: "person"))
         view.backgroundColor = .brown
@@ -101,7 +95,7 @@ class MyRecordDetailView:BaseView {
     let nicknameLabel:UILabel = {
         let label = UILabel()
         label.text = "DJ닉네임이들어갑니다다다"
-        label.font = .systemFont(ofSize: 14)
+        label.font = .systemFont(ofSize: 14,weight: .light)
         label.textColor = .mainGrey3
         return label
     }()
@@ -151,11 +145,6 @@ class MyRecordDetailView:BaseView {
         topLabelView.snp.makeConstraints { make in
             make.left.right.top.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.11)
-        }
-        
-        dummyView1.snp.makeConstraints { make in
-            make.leading.trailing.top.equalToSuperview()
-            make.height.equalTo(0.5)
         }
         
         circleImageView.snp.makeConstraints { make in
@@ -215,7 +204,7 @@ class MyRecordDetailView:BaseView {
         }
         
         starImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(12)
+            make.top.equalToSuperview().offset(16)
             make.height.equalToSuperview().multipliedBy(0.3)
             make.width.equalTo(starImageView.snp.height)
             make.right.equalToSuperview().offset(-10)
@@ -229,7 +218,7 @@ class MyRecordDetailView:BaseView {
 
 
         loveImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(12)
+            make.top.equalToSuperview().offset(16)
             make.height.equalToSuperview().multipliedBy(0.3)
             make.width.equalTo(loveImageView.snp.height)
             make.right.equalTo(starImageView.snp.left).offset(-30)
@@ -266,7 +255,6 @@ class MyRecordDetailView:BaseView {
         self.addSubview(textCoverView)
         self.addSubview(lastView)
         
-        topLabelView.addSubview(dummyView1)
         topLabelView.addSubview(circleImageView)
         topLabelView.addSubview(musicTitleLabel)
         topLabelView.addSubview(subMusicInfoLabel)

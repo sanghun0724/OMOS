@@ -45,12 +45,11 @@ class CreateView: BaseView {
     ///2
     let titleImageView:UIView = {
         let view = UIView()
-        let image = UIImage(named:"albumCover")
-        let imageView = UIImageView(image: image!)
-        imageView.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
-        view.addSubview(imageView)
-        view.bringSubviewToFront(imageView)
-        
+        return view
+    }()
+    
+    let imageView:UIImageView = {
+       let view = UIImageView()
         return view
     }()
     
@@ -64,7 +63,7 @@ class CreateView: BaseView {
         let textView = UITextView()
         textView.text = "레코드 제목을 입력해주세요"
         textView.font = .systemFont(ofSize: 22)
-        textView.textColor = .lightGray
+        textView.textColor = .secondarySystemFill
         textView.isScrollEnabled = false
         textView.isEditable = true
         textView.backgroundColor = nil
@@ -88,6 +87,12 @@ class CreateView: BaseView {
         label.font = .systemFont(ofSize: 12)
         label.textColor = .mainGrey1
         return label
+    }()
+    
+    let lockButton:UIButton = {
+       let button = UIButton()
+        button.setImage(UIImage(named: "unlock"), for: .normal)
+        return button
     }()
     
     /// 3
@@ -175,11 +180,6 @@ class CreateView: BaseView {
             make.height.equalToSuperview().multipliedBy(0.077)
         }
         
-        dummyView1.snp.makeConstraints { make in
-            make.leading.trailing.top.equalToSuperview()
-            make.height.equalTo(0.5)
-        }
-        
         circleImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
             make.centerY.equalToSuperview()
@@ -207,6 +207,10 @@ class CreateView: BaseView {
             make.height.equalToSuperview().multipliedBy(0.227)
         }
         
+        imageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
         imageAddButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(-16)
             make.top.equalToSuperview().offset(10)
@@ -230,6 +234,13 @@ class CreateView: BaseView {
             make.leading.equalTo(createdField.snp.trailing)
             make.centerY.equalTo(createdField)
             cateLabel.sizeToFit()
+        }
+        
+        lockButton.snp.makeConstraints { make in
+            make.top.equalTo(cateLabel.snp.top).offset(-4)
+            make.bottom.equalTo(cateLabel.snp.bottom)
+            make.centerX.equalTo(imageAddButton)
+            make.width.equalTo(lockButton.snp.height)
         }
         
         ///4
@@ -279,8 +290,6 @@ class CreateView: BaseView {
             stickerLabel.sizeToFit()
         }
         
-
-
         ///3
         textCoverView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
@@ -303,15 +312,16 @@ class CreateView: BaseView {
         self.addSubview(textCoverView)
         self.addSubview(lastView)
         
-        topLabelView.addSubview(dummyView1)
         topLabelView.addSubview(circleImageView)
         topLabelView.addSubview(musicTitleLabel)
         topLabelView.addSubview(subMusicInfoLabel)
         
+        titleImageView.addSubview(imageView)
         titleImageView.addSubview(titleTextView)
         titleImageView.addSubview(createdField)
         titleImageView.addSubview(cateLabel)
         titleImageView.addSubview(imageAddButton)
+        titleImageView.addSubview(lockButton)
         
         textCoverView.addSubview(mainTextView)
         

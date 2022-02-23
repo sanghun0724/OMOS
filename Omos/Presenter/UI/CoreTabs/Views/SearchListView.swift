@@ -21,7 +21,6 @@ class SearchListView:BaseView {
         let view = UISearchController(searchResultsController: nil)
         view.searchBar.placeholder = "음악을 검색해주세요"
         view.searchBar.tintColor = .white
-        view.searchBar.showsCancelButton = false
         view.searchBar.autocapitalizationType = .none
         view.searchBar.autocorrectionType = .no
         view.obscuresBackgroundDuringPresentation = false

@@ -33,9 +33,9 @@ class BaseViewController:UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.backgroundColor = .mainBackGround
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.layoutIfNeeded()
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
+//        self.navigationController?.navigationBar.shadowImage = UIImage()
+//        self.navigationController?.navigationBar.layoutIfNeeded()
         self.view.backgroundColor = .mainBackGround
         setBarButtonItems()
         dismissKeyboardWhenTappedAround()
@@ -56,7 +56,7 @@ class BaseViewController:UIViewController {
         notiButton.tintColor = .white
         let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(didTapSearchButton))
         searchButton.tintColor = .white
-        let createButton = UIBarButtonItem(image: UIImage(systemName: "pencil"), style: .plain, target: self, action: #selector(didTapCreateButton))
+        let createButton = UIBarButtonItem(image: UIImage(named: "plus-square"), style: .plain, target: self, action: #selector(didTapCreateButton))
         createButton.tintColor = .white
         self.navigationItem.rightBarButtonItems = [notiButton,searchButton,createButton]
         UINavigationBar.appearance().backIndicatorImage = UIImage(named: "arrow-left")?.withTintColor(.white, renderingMode: .alwaysOriginal)
@@ -80,7 +80,8 @@ class BaseViewController:UIViewController {
     
     @objc func didTapCreateButton() {
         
-        print("create")
+        let vc = CategoryViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func didTapSearchButton() {

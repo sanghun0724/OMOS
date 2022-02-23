@@ -101,7 +101,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //                  break
 //              }
 //          }
-        self.window?.rootViewController = CreateViewController()
+        self.window?.rootViewController = TabBarViewController()
         self.window?.makeKeyAndVisible()
         self.window?.backgroundColor = .mainBackGround
        

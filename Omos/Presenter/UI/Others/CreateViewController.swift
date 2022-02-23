@@ -10,8 +10,10 @@ import RxSwift
 import RxCocoa
 import SnapKit
 import YPImagePicker
+import Mantis
 
 class CreateViewController:BaseViewController {
+    
     
     private let selfView = CreateView()
 //    let viewModel:CreateViewModel
@@ -30,7 +32,14 @@ class CreateViewController:BaseViewController {
         selfView.titleTextView.delegate = self
         selfView.mainTextView.delegate = self
         bind()
+        self.tabBarController?.tabBar.isHidden = true
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     
     override func configureUI() {
         super.configureUI()
@@ -58,22 +67,21 @@ class CreateViewController:BaseViewController {
         config.wordings.libraryTitle = "보관함"
         config.wordings.cameraTitle = "카메라"
         config.wordings.next = "다음"
-        config.colors.tintColor = .black
-        UINavigationBar.appearance().tintColor = .black
+        config.colors.tintColor = .white
         let picker = YPImagePicker(configuration: config)
         picker.didFinishPicking { [unowned picker] items, cancelled in
             if let photo = items.singlePhoto {
                 print(photo.image) // Final image selected by the user
-                picker.dismiss(animated: true, completion: {
-                    
-                })
-//                let vc = CreateVC(postImage: photo.image)
-//                vc.title = "기록하기"
-//                self.navigationController?.pushViewController(vc, animated: true)
+                let cropViewController = Mantis.cropViewController(image: photo.image)
+                    cropViewController.delegate = self
+                    cropViewController.modalPresentationStyle = .fullScreen
+                    picker.dismiss(animated: true, completion: nil)
+                    self.present(cropViewController, animated: true)
             }
             if cancelled {
                 print("Picker was canceled")
                 picker.dismiss(animated: true, completion: nil)
+                self.tabBarController?.tabBar.isHidden = true
             }
         }
         
@@ -133,8 +141,34 @@ extension CreateViewController: UITextViewDelegate {
             selfView.remainTextCount.text = "\(characterCount)/50"
         }
        
-       
-
         return true
     }
+}
+
+
+extension CreateViewController:CropViewControllerDelegate {
+    func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation, cropInfo: CropInfo) {
+        selfView.imageView.image = cropped
+        self.dismiss(animated: true,completion: nil)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    func cropViewControllerDidFailToCrop(_ cropViewController: CropViewController, original: UIImage) {
+        
+    }
+    
+    func cropViewControllerDidCancel(_ cropViewController: CropViewController, original: UIImage) {
+        self.dismiss(animated: true, completion: nil)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    func cropViewControllerDidBeginResize(_ cropViewController: CropViewController) {
+        
+    }
+    
+    func cropViewControllerDidEndResize(_ cropViewController: CropViewController, original: UIImage, cropInfo: CropInfo) {
+        
+    }
+    
+    
 }

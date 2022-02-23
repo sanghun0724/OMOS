@@ -30,10 +30,12 @@ class SearchViewController:BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         removeListeners()
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        selfView.searchViewController.searchBar.delegate = self
         navigationItem.rightBarButtonItems?.removeAll()
         bind()
     }
@@ -41,6 +43,7 @@ class SearchViewController:BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         selfView.searchViewController.isActive = true
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -59,6 +62,7 @@ class SearchViewController:BaseViewController {
         selfView.searchViewController.hidesNavigationBarDuringPresentation = false
         navigationItem.titleView = selfView.searchViewController.searchBar
         self.navigationController?.navigationBar.tintColor = .white
+        self.navigationItem.hidesBackButton = true 
         
         selfView.frame = view.bounds
     }
@@ -124,5 +128,12 @@ extension SearchViewController:UISearchControllerDelegate {
 extension SearchViewController:UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         
+    }
+}
+
+extension SearchViewController:UISearchBarDelegate {
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.navigationController?.popViewController(animated: true)
     }
 }
