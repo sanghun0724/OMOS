@@ -23,21 +23,20 @@ class CreateView: BaseView {
     }()
     
     let circleImageView:UIImageView = {
-        let view = UIImageView(image:UIImage(systemName: "person"))
-        view.backgroundColor = .brown
+        let view = UIImageView(image:UIImage(named:"albumCover"))
         return view
     }()
     
     let musicTitleLabel:UITextField = {
         let label = UITextField()
-        label.text = "노래 제목이 들어있습니다"
+        label.placeholder = "노래 제목이 들어있습니다"
         label.font = .systemFont(ofSize: 14)
         return label
     }()
     
     let subMusicInfoLabel:UITextField = {
         let label = UITextField()
-        label.text = "가수이름이 들어갑니다. 앨범제목이 들어갑니다."
+        label.placeholder = "가수이름이 들어갑니다. 앨범제목이 들어갑니다."
         label.font = .systemFont(ofSize: 12)
         label.textColor = .mainGrey4
         return label
@@ -46,12 +45,19 @@ class CreateView: BaseView {
     ///2
     let titleImageView:UIView = {
         let view = UIView()
-        let image = UIImage(systemName: "person")
+        let image = UIImage(named:"albumCover")
         let imageView = UIImageView(image: image!)
         imageView.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         view.addSubview(imageView)
         view.bringSubviewToFront(imageView)
+        
         return view
+    }()
+    
+    let imageAddButton:UIButton = {
+       let button = UIButton()
+        button.setBackgroundImage(UIImage(named: "addImage"), for: .normal)
+        return button
     }()
     
     let titleTextView:UITextView = {
@@ -61,13 +67,24 @@ class CreateView: BaseView {
         textView.textColor = .lightGray
         textView.isScrollEnabled = false
         textView.isEditable = true
-        textView.translatesAutoresizingMaskIntoConstraints = true
+        textView.backgroundColor = nil
+        textView.autocorrectionType = .no
+        textView.autocapitalizationType = .none
         return textView
     }()
     
     let createdField:UITextField = {
         let label = UITextField()
-        label.text = "2020 00 00 한줄감상"
+        label.placeholder = "2020 00 00 "
+        label.font = .systemFont(ofSize: 12)
+        label.textColor = .mainGrey1
+        label.keyboardType = .numberPad
+        return label
+    }()
+    
+    let cateLabel:UILabel = {
+       let label = UILabel()
+        label.text = " | 한줄감상"
         label.font = .systemFont(ofSize: 12)
         label.textColor = .mainGrey1
         return label
@@ -87,7 +104,9 @@ class CreateView: BaseView {
         view.isScrollEnabled = false
         view.textAlignment = .center
         view.backgroundColor = .mainBlack
-       
+        view.textColor = .mainGrey7
+        view.autocorrectionType = .no
+        view.autocapitalizationType = .none
         return view
     }()
     
@@ -121,19 +140,19 @@ class CreateView: BaseView {
     let remainTitleCount:UILabel = {
        let label = UILabel()
         label.text = "0/36"
-        label.textColor = .mainGrey7
+        label.textColor = .mainGrey4
         return label
     }()
     
     let remainTextCount:UILabel = {
        let label = UILabel()
         label.text = "0/50"
-        label.textColor = .mainGrey7
+        label.textColor = .mainGrey4
         return label
     }()
     
     let stickerImageView:UIImageView = {
-        let view = UIImageView(image:UIImage(named: "emptyStar"))
+        let view = UIImageView(image:UIImage(named: "sticker"))
         return view
     }()
     
@@ -142,6 +161,7 @@ class CreateView: BaseView {
         label.text = "스티커"
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 12)
+        label.textColor = .mainGrey3
         return label
     }()
     
@@ -187,6 +207,12 @@ class CreateView: BaseView {
             make.height.equalToSuperview().multipliedBy(0.227)
         }
         
+        imageAddButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-16)
+            make.top.equalToSuperview().offset(10)
+            make.height.width.equalTo(24)
+        }
+        
         createdField.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
             make.bottom.equalToSuperview().offset(-16)
@@ -194,9 +220,16 @@ class CreateView: BaseView {
         }
 
         titleTextView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.trailing.equalToSuperview().inset(16)
+            make.leading.equalTo(createdField)
             make.bottom.equalTo(createdField.snp.top)
             titleTextView.sizeToFit()
+        }
+        
+        cateLabel.snp.makeConstraints { make in
+            make.leading.equalTo(createdField.snp.trailing)
+            make.centerY.equalTo(createdField)
+            cateLabel.sizeToFit()
         }
         
         ///4
@@ -222,19 +255,31 @@ class CreateView: BaseView {
             remainTitleCount.sizeToFit()
         }
         
+        remainText.snp.makeConstraints { make in
+            make.leading.equalTo(remainTitleCount.snp.trailing).offset(40)
+            make.centerY.equalTo(remainTitle)
+            remainText.sizeToFit()
+        }
+        
+        remainTextCount.snp.makeConstraints { make in
+            make.leading.equalTo(remainText)
+            make.top.equalTo(remainText.snp.bottom)
+            remainTextCount.sizeToFit()
+        }
         
         stickerImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(12)
-            make.height.equalToSuperview().multipliedBy(0.3)
-            make.width.equalTo(stickerImageView.snp.height)
-            make.trailing.equalToSuperview().offset(-10)
+            make.trailing.equalToSuperview().offset(-24)
+            make.height.width.equalTo(20)
+            make.top.equalToSuperview().offset(10)
         }
-
+        
         stickerLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(stickerImageView.snp.centerX)
             make.top.equalTo(stickerImageView.snp.bottom).offset(3)
+            make.centerX.equalTo(stickerImageView)
             stickerLabel.sizeToFit()
         }
+        
+
 
         ///3
         textCoverView.snp.makeConstraints { make in
@@ -265,6 +310,8 @@ class CreateView: BaseView {
         
         titleImageView.addSubview(titleTextView)
         titleImageView.addSubview(createdField)
+        titleImageView.addSubview(cateLabel)
+        titleImageView.addSubview(imageAddButton)
         
         textCoverView.addSubview(mainTextView)
         

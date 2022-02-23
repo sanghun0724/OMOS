@@ -80,6 +80,7 @@ class MyRecordDetailView:BaseView {
         view.isScrollEnabled = false
         view.textAlignment = .center
         view.backgroundColor = .mainBlack
+        view.isUserInteractionEnabled = false 
        
         return view
     }()
