@@ -16,6 +16,12 @@ class MyRecordDetailView:BaseView {
         return view
     }()
     
+    let dummyView1:UIView = {
+        let view = UIView()
+        view.backgroundColor = .mainBlack1
+        return view
+    }()
+    
     let circleImageView:UIImageView = {
         let view = UIImageView(image:UIImage(systemName: "person"))
         view.backgroundColor = .brown
@@ -85,6 +91,12 @@ class MyRecordDetailView:BaseView {
         return view
     }()
     
+    let dummyView2:UIView = {
+        let view = UIView()
+        view.backgroundColor = .mainBlack1
+        return view
+    }()
+    
     let nicknameLabel:UILabel = {
         let label = UILabel()
         label.text = "DJ닉네임이들어갑니다다다"
@@ -140,6 +152,11 @@ class MyRecordDetailView:BaseView {
             make.height.equalToSuperview().multipliedBy(0.11)
         }
         
+        dummyView1.snp.makeConstraints { make in
+            make.leading.trailing.top.equalToSuperview()
+            make.height.equalTo(0.5)
+        }
+        
         circleImageView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(16)
             make.centerY.equalToSuperview()
@@ -183,6 +200,11 @@ class MyRecordDetailView:BaseView {
         lastView.snp.makeConstraints { make in
             make.left.right.bottom.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.124)
+        }
+        
+        dummyView2.snp.makeConstraints { make in
+            make.leading.trailing.top.equalToSuperview()
+            make.height.equalTo(0.5)
         }
         
         nicknameLabel.snp.makeConstraints { make in
@@ -243,6 +265,7 @@ class MyRecordDetailView:BaseView {
         self.addSubview(textCoverView)
         self.addSubview(lastView)
         
+        topLabelView.addSubview(dummyView1)
         topLabelView.addSubview(circleImageView)
         topLabelView.addSubview(musicTitleLabel)
         topLabelView.addSubview(subMusicInfoLabel)
@@ -253,6 +276,7 @@ class MyRecordDetailView:BaseView {
         textCoverView.addSubview(mainTextView)
         
         lastView.addSubview(nicknameLabel)
+        lastView.addSubview(dummyView2)
         lastView.addSubview(loveImageView)
         lastView.addSubview(loveCountLabel)
         lastView.addSubview(starImageView)

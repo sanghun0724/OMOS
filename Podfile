@@ -15,4 +15,6 @@ pod 'Firebase/Analytics'
 pod 'Firebase/Core'
 pod 'Firebase/Messaging'
 pod 'SnapKit'
+pod "RxGesture"
+pod 'YPImagePicker'
 end

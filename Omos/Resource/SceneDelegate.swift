@@ -69,39 +69,39 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         //snsToken 확인
-        LoginViewModel.hasKaKaoToken { [weak self] valid in
-            if valid {
-                self?.kakaoValid.accept(true)
-                print("kakaoValid true")
-            } else {
-                self?.kakaoValid.accept(false)
-                print("kakaoValid false")
-            }
-            
-        }
-        
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-        print(UserDefaults.standard.string(forKey: "appleUser") ?? "XX")
-          appleIDProvider.getCredentialState(forUserID:UserDefaults.standard.string(forKey: "appleUser") ?? "") { [weak self] (credentialState, error) in
-              print(credentialState)
-              switch credentialState {
-              case .authorized:
-                  self?.appleValid.accept(true)
-                  // The Apple ID credential is valid.
-                  print("해당 ID는 연동되어있습니다.")
-              case .revoked:
-                  self?.appleValid.accept(false)
-                  // The Apple ID credential is either revoked or was not found, so show the sign-in UI.
-                  print("해당 ID는 연동되어있지않습니다.")
-              case .notFound:
-                  self?.appleValid.accept(false)
-                  // The Apple ID credential is either was not found, so show the sign-in UI.
-                  print("해당 ID를 찾을 수 없습니다.")
-              default:
-                  break
-              }
-          }
-        self.window?.rootViewController = CategoryViewController()
+//        LoginViewModel.hasKaKaoToken { [weak self] valid in
+//            if valid {
+//                self?.kakaoValid.accept(true)
+//                print("kakaoValid true")
+//            } else {
+//                self?.kakaoValid.accept(false)
+//                print("kakaoValid false")
+//            }
+//
+//        }
+//
+//        let appleIDProvider = ASAuthorizationAppleIDProvider()
+//        print(UserDefaults.standard.string(forKey: "appleUser") ?? "XX")
+//          appleIDProvider.getCredentialState(forUserID:UserDefaults.standard.string(forKey: "appleUser") ?? "") { [weak self] (credentialState, error) in
+//              print(credentialState)
+//              switch credentialState {
+//              case .authorized:
+//                  self?.appleValid.accept(true)
+//                  // The Apple ID credential is valid.
+//                  print("해당 ID는 연동되어있습니다.")
+//              case .revoked:
+//                  self?.appleValid.accept(false)
+//                  // The Apple ID credential is either revoked or was not found, so show the sign-in UI.
+//                  print("해당 ID는 연동되어있지않습니다.")
+//              case .notFound:
+//                  self?.appleValid.accept(false)
+//                  // The Apple ID credential is either was not found, so show the sign-in UI.
+//                  print("해당 ID를 찾을 수 없습니다.")
+//              default:
+//                  break
+//              }
+//          }
+        self.window?.rootViewController = CreateViewController()
         self.window?.makeKeyAndVisible()
         self.window?.backgroundColor = .mainBackGround
        
