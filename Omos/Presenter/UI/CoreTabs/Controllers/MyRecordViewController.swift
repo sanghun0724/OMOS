@@ -26,7 +26,6 @@ class MyRecordViewController: BaseViewController {
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         configureUI()
-        print(self.navigationItem.rightBarButtonItems![0])
     }
     
     override func configureUI() {

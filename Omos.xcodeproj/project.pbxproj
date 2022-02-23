@@ -31,6 +31,8 @@
 		B6670FA827B5098200BABF40 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6670FA727B5098200BABF40 /* LoginView.swift */; };
 		B6670FAA27B517DE00BABF40 /* DecoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6670FA927B517DD00BABF40 /* DecoView.swift */; };
 		B6670FAC27B5542100BABF40 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6670FAB27B5542100BABF40 /* ButtonView.swift */; };
+		B66AD44E27C6963B0012686B /* MydjView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66AD44D27C6963B0012686B /* MydjView.swift */; };
+		B66AD45027C6983F0012686B /* MydjCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66AD44F27C6983F0012686B /* MydjCollectionCell.swift */; };
 		B67EF45027B7A9B80023D5D4 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67EF44F27B7A9B80023D5D4 /* SignUpView.swift */; };
 		B67EF45527B7AA000023D5D4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67EF45427B7AA000023D5D4 /* SignUpViewController.swift */; };
 		B67EF45727B7AA220023D5D4 /* PrivateLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67EF45627B7AA220023D5D4 /* PrivateLabelView.swift */; };
@@ -129,6 +131,8 @@
 		B6670FA927B517DD00BABF40 /* DecoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoView.swift; sourceTree = "<group>"; };
 		B6670FAB27B5542100BABF40 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		B6670FAD27B5654900BABF40 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		B66AD44D27C6963B0012686B /* MydjView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MydjView.swift; sourceTree = "<group>"; };
+		B66AD44F27C6983F0012686B /* MydjCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MydjCollectionCell.swift; sourceTree = "<group>"; };
 		B67EF44F27B7A9B80023D5D4 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		B67EF45427B7AA000023D5D4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B67EF45627B7AA220023D5D4 /* PrivateLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateLabelView.swift; sourceTree = "<group>"; };
@@ -273,6 +277,7 @@
 				B683A45627B12DD000838749 /* ProfileView.swift */,
 				B682185727B3AA4F00B58E19 /* SearchListView.swift */,
 				B6B1BB5927BBCE1000DF2528 /* MyRecordView.swift */,
+				B66AD44D27C6963B0012686B /* MydjView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -520,6 +525,7 @@
 				B6B1BB5627BB7E1900DF2528 /* AllRecordCollectionCell.swift */,
 				B6B1BB5B27BBCF6000DF2528 /* MyRecordTableCell.swift */,
 				B6EF88A827BD3AC2006F6A8F /* EmptyCell.swift */,
+				B66AD44F27C6983F0012686B /* MydjCollectionCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -746,6 +752,7 @@
 				B67EF45027B7A9B80023D5D4 /* SignUpView.swift in Sources */,
 				B67EF45727B7AA220023D5D4 /* PrivateLabelView.swift in Sources */,
 				B68454F827BE374600F1E6B5 /* LoginAPI.swift in Sources */,
+				B66AD45027C6983F0012686B /* MydjCollectionCell.swift in Sources */,
 				B68454FA27BE375000F1E6B5 /* LoginTarget.swift in Sources */,
 				B68454EC27BE1D9800F1E6B5 /* TargetType.swift in Sources */,
 				B689A9D127AE94E9005F26E4 /* Color.swift in Sources */,
@@ -786,6 +793,7 @@
 				B68454FC27BE378700F1E6B5 /* Login.swift in Sources */,
 				B682185227B39F6500B58E19 /* MusicRepositoryImpl.swift in Sources */,
 				B682185027B39ADD00B58E19 /* TestModel.swift in Sources */,
+				B66AD44E27C6963B0012686B /* MydjView.swift in Sources */,
 				B6B1BB5C27BBCF6000DF2528 /* MyRecordTableCell.swift in Sources */,
 				B689A9CF27AE94E9005F26E4 /* UIViewController.swift in Sources */,
 				B6B1BB5727BB7E1900DF2528 /* AllRecordCollectionCell.swift in Sources */,
