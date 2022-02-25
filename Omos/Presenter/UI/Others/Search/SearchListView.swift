@@ -17,6 +17,16 @@ class SearchListView:BaseView {
         return table
     }()
     
+    
+    let bestTableView:UITableView = {
+        let table = UITableView()
+        table.register(BestSearchTableCell.self, forCellReuseIdentifier: BestSearchTableCell.identifier)
+        table.register(BestHeaderView.self, forHeaderFooterViewReuseIdentifier: BestHeaderView.identtifier)
+        table.separatorStyle = .none
+        return table
+    }()
+    
+    
     let searchViewController:UISearchController = {
         let view = UISearchController(searchResultsController: nil)
         view.searchBar.placeholder = "음악을 검색해주세요"
@@ -32,6 +42,7 @@ class SearchListView:BaseView {
     
     override func configureUI() {
         self.addSubview(tableView)
+        self.addSubview(bestTableView)
         self.addSubview(emptyView)
         self.addSubview(loadingView)
         
@@ -44,6 +55,10 @@ class SearchListView:BaseView {
         }
         
         tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        bestTableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }

@@ -25,6 +25,7 @@ class SearchViewController:BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.enableScrollWhenKeyboardAppeared(scrollView: selfView.tableView)
+        self.enableScrollWhenKeyboardAppeared(scrollView: selfView.bestTableView)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -56,6 +57,8 @@ class SearchViewController:BaseViewController {
         view.addSubview(selfView)
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
+        selfView.bestTableView.delegate = self
+        selfView.bestTableView.dataSource = self
         
         selfView.searchViewController.delegate = self
         selfView.searchViewController.searchResultsUpdater = self
@@ -78,6 +81,7 @@ class SearchViewController:BaseViewController {
                 guard let text = text else {
                     return
                 }
+                
                 print(text)
                 //owner.viewModel.searchQeuryChanged(query: text)
             }).disposed(by: disposeBag)
@@ -107,7 +111,17 @@ class SearchViewController:BaseViewController {
         viewModel.isEmpty
             .withUnretained(self)
             .subscribe(onNext: { owner,empty in
-                owner.selfView.emptyView.isHidden = !empty
+                guard let isTextEmpty = owner.selfView.searchViewController.searchBar.text?.isEmpty else { return }
+                if isTextEmpty {
+                    print("check")
+                    owner.selfView.bestTableView.isHidden = !isTextEmpty
+                    owner.selfView.emptyView.isHidden = true 
+                } else {
+                    owner.selfView.emptyView.isHidden = !empty
+                }
+                    
+                
+                
             }).disposed(by: disposeBag)
     }
     

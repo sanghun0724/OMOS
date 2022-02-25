@@ -14,6 +14,9 @@
 		B609138427AD3A7C00B439C3 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609138327AD3A7C00B439C3 /* BaseViewController.swift */; };
 		B609138927AD3A8000B439C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B609138827AD3A8000B439C3 /* Assets.xcassets */; };
 		B609138C27AD3A8000B439C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B609138A27AD3A8000B439C3 /* LaunchScreen.storyboard */; };
+		B630D2FA27C7756A00E66F22 /* MydjTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2F927C7756A00E66F22 /* MydjTableCell.swift */; };
+		B630D2FC27C7761D00E66F22 /* Mydj + Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2FB27C7761D00E66F22 /* Mydj + Table.swift */; };
+		B630D2FF27C78C0E00E66F22 /* BestSearchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2FE27C78C0E00E66F22 /* BestSearchTableCell.swift */; };
 		B650873927AF948D0020D2C1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650873827AF948D0020D2C1 /* HomeViewController.swift */; };
 		B650873B27AF94C60020D2C1 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650873A27AF94C60020D2C1 /* TabBarViewController.swift */; };
 		B650873D27AF969C0020D2C1 /* MyRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650873C27AF969C0020D2C1 /* MyRecordViewController.swift */; };
@@ -113,6 +116,9 @@
 		B609138827AD3A8000B439C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B609138B27AD3A8000B439C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B609138D27AD3A8000B439C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B630D2F927C7756A00E66F22 /* MydjTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MydjTableCell.swift; sourceTree = "<group>"; };
+		B630D2FB27C7761D00E66F22 /* Mydj + Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mydj + Table.swift"; sourceTree = "<group>"; };
+		B630D2FE27C78C0E00E66F22 /* BestSearchTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSearchTableCell.swift; sourceTree = "<group>"; };
 		B650873827AF948D0020D2C1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B650873A27AF94C60020D2C1 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		B650873C27AF969C0020D2C1 /* MyRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordViewController.swift; sourceTree = "<group>"; };
@@ -275,7 +281,6 @@
 				B6B1BB5827BBCDF500DF2528 /* Cells */,
 				B650874A27AFC5EE0020D2C1 /* AllRecordView.swift */,
 				B683A45627B12DD000838749 /* ProfileView.swift */,
-				B682185727B3AA4F00B58E19 /* SearchListView.swift */,
 				B6B1BB5927BBCE1000DF2528 /* MyRecordView.swift */,
 				B66AD44D27C6963B0012686B /* MydjView.swift */,
 			);
@@ -358,6 +363,17 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
+		B630D2FD27C78BDE00E66F22 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				B682185927B3AD5100B58E19 /* Search + Table.swift */,
+				B650874427AFAE220020D2C1 /* SearchViewController.swift */,
+				B682185727B3AA4F00B58E19 /* SearchListView.swift */,
+				B630D2FE27C78C0E00E66F22 /* BestSearchTableCell.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		B650873627AF94400020D2C1 /* Posts */ = {
 			isa = PBXGroup;
 			children = (
@@ -368,14 +384,13 @@
 		B650873727AF94500020D2C1 /* Others */ = {
 			isa = PBXGroup;
 			children = (
-				B682185927B3AD5100B58E19 /* Search + Table.swift */,
-				B650874427AFAE220020D2C1 /* SearchViewController.swift */,
-				B682184B27B3823D00B58E19 /* ShareCustomViewController.swift */,
+				B630D2FD27C78BDE00E66F22 /* Search */,
 				B6E12E7D27C21050008644B5 /* CreateViewController.swift */,
 				B6E12E7F27C210B4008644B5 /* CreateView.swift */,
 				B6E12E8127C210E6008644B5 /* CreateViewModel.swift */,
 				B6F0596D27C3490E00CCB242 /* CategoryView.swift */,
 				B6540F6227C50F79002B1696 /* CategoryViewController.swift */,
+				B682184B27B3823D00B58E19 /* ShareCustomViewController.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -526,6 +541,7 @@
 				B6B1BB5B27BBCF6000DF2528 /* MyRecordTableCell.swift */,
 				B6EF88A827BD3AC2006F6A8F /* EmptyCell.swift */,
 				B66AD44F27C6983F0012686B /* MydjCollectionCell.swift */,
+				B630D2F927C7756A00E66F22 /* MydjTableCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -559,6 +575,7 @@
 				B650873E27AF96B00020D2C1 /* AllRecordViewController.swift */,
 				B650874827AFC5150020D2C1 /* AllRecord + Table.swift */,
 				B650874027AF96C00020D2C1 /* MyDJViewController.swift */,
+				B630D2FB27C7761D00E66F22 /* Mydj + Table.swift */,
 				B650874227AF96E80020D2C1 /* ProfileViewController.swift */,
 				B683A45827B130D100838749 /* Profile + Table.swift */,
 			);
@@ -727,6 +744,7 @@
 				B68454F527BE310100F1E6B5 /* MyAuthenticator.swift in Sources */,
 				B6B1BB5A27BBCE1000DF2528 /* MyRecordView.swift in Sources */,
 				B6BC147B27BF98FD0067D8FB /* Refresh.swift in Sources */,
+				B630D2FC27C7761D00E66F22 /* Mydj + Table.swift in Sources */,
 				B6BC147D27BFAC330067D8FB /* SignUp.swift in Sources */,
 				B682185627B3A0BE00B58E19 /* SearchViewModel.swift in Sources */,
 				B693049D27C1F84200DC3E90 /* MyRecordViewModel.swift in Sources */,
@@ -777,6 +795,7 @@
 				B650873D27AF969C0020D2C1 /* MyRecordViewController.swift in Sources */,
 				B682185C27B3C0BB00B58E19 /* MyError.swift in Sources */,
 				B650874527AFAE220020D2C1 /* SearchViewController.swift in Sources */,
+				B630D2FA27C7756A00E66F22 /* MydjTableCell.swift in Sources */,
 				B683A45927B130D100838749 /* Profile + Table.swift in Sources */,
 				B6F0596E27C3490E00CCB242 /* CategoryView.swift in Sources */,
 				B68454E827BE027500F1E6B5 /* LoginUseCase.swift in Sources */,
@@ -796,6 +815,7 @@
 				B66AD44E27C6963B0012686B /* MydjView.swift in Sources */,
 				B6B1BB5C27BBCF6000DF2528 /* MyRecordTableCell.swift in Sources */,
 				B689A9CF27AE94E9005F26E4 /* UIViewController.swift in Sources */,
+				B630D2FF27C78C0E00E66F22 /* BestSearchTableCell.swift in Sources */,
 				B6B1BB5727BB7E1900DF2528 /* AllRecordCollectionCell.swift in Sources */,
 				B6670FA827B5098200BABF40 /* LoginView.swift in Sources */,
 				B6670FA627B5097000BABF40 /* LoginViewModel.swift in Sources */,

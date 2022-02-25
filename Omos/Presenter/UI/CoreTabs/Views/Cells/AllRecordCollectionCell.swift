@@ -10,18 +10,19 @@ import UIKit
 class AllRecordCollectionCell:UICollectionViewCell {
     static let identifier = "AllRecordCollectionCell"
     
+    let backImageView:UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: ""))
+        imageView.contentMode = .scaleAspectFill
+        imageView.backgroundColor = .mainBackGround
+        return imageView
+    }()
+    
     let albumImageView:UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "albumCover"))
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
-    let backGroundView:UIView = {
-        let view = UIView()
-        view.layer.backgroundColor = UIColor(red: 0.129, green: 0.129, blue: 0.129, alpha: 0.87).cgColor
-
-        return view
-    }()
     
     private let labelCoverView:UIView = {
         let view = UIView()
@@ -31,6 +32,15 @@ class AllRecordCollectionCell:UICollectionViewCell {
     }()
     
     let titleLabel:UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.textAlignment = .center
+        label.text = "노래제목이 들어갑니다.노래제목이 들어갑니다.노래제목이 들어갑니다."
+        label.font = .systemFont(ofSize: 12)
+        return label
+    }()
+    
+    let subTitleLabel:UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .center
@@ -74,57 +84,57 @@ class AllRecordCollectionCell:UICollectionViewCell {
         labelCoverView.layer.cornerRadius = labelCoverView.height / 2
         labelCoverView.layer.masksToBounds = true
         
-        albumImageView.layer.cornerRadius = albumImageView.width / 2
+        albumImageView.layer.cornerRadius = albumImageView.height / 2
         albumImageView.layer.masksToBounds = true
     }
     
     
    private func configureUI() {
-        self.addSubview(albumImageView)
-        self.addSubview(backGroundView)
+        self.addSubview(backImageView)
        labelCoverView.addSubview(titleLabel)
-       backGroundView.addSubview(labelCoverView)
-       backGroundView.addSubview(descLabel)
-       backGroundView.addSubview(nameLabel)
-       backGroundView.addSubview(dummyView)
+       labelCoverView.addSubview(albumImageView)
+       labelCoverView.addSubview(subTitleLabel)
+       backImageView.addSubview(labelCoverView)
+       backImageView.addSubview(descLabel)
+       backImageView.addSubview(nameLabel)
         
-        albumImageView.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(16)
-            make.centerY.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.4)
-            make.height.equalTo(albumImageView.snp.width)
+       backImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
         
-        backGroundView.snp.makeConstraints { make in
-            make.left.equalTo(albumImageView.snp.centerX)
-            make.right.bottom.top.equalToSuperview()
-        }
-       
-       labelCoverView.snp.makeConstraints { make in
-           make.left.right.equalToSuperview().inset(14)
-           make.top.equalToSuperview().inset(12)
-           make.height.equalToSuperview().multipliedBy(0.157)
-       }
-       
-       titleLabel.snp.makeConstraints { make in
-           make.right.left.equalToSuperview().inset(10)
-           make.top.bottom.equalToSuperview()
+       nameLabel.snp.makeConstraints { make in
+           make.leading.trailing.bottom.equalToSuperview().inset(14)
+           nameLabel.sizeToFit()
        }
        
        descLabel.snp.makeConstraints { make in
-           make.top.equalTo(titleLabel.snp.bottom).offset(36)
-           make.left.right.equalTo(titleLabel)
-           make.height.equalToSuperview().multipliedBy(0.25)
+           make.leading.trailing.equalToSuperview().inset(14)
+           make.bottom.equalTo(nameLabel.snp.top).offset(-8)
+           descLabel.sizeToFit()
        }
-
-       nameLabel.snp.makeConstraints { make in
-           make.left.right.bottom.equalToSuperview().inset(14)
-           make.top.equalTo(descLabel.snp.bottom).offset(12)
+       
+       labelCoverView.snp.makeConstraints { make in
+           make.leading.trailing.equalToSuperview().inset(12)
+           make.top.equalToSuperview().offset(10)
+           make.bottom.equalTo(descLabel.snp.top).offset(-40).priority(2)
        }
-        
-       dummyView.snp.makeConstraints { make in
-           make.right.bottom.top.equalToSuperview()
-           make.width.equalTo(2)
+       
+       albumImageView.snp.makeConstraints { make in
+           make.leading.top.bottom.equalToSuperview()
+           make.width.equalTo(albumImageView.snp.height)
+       }
+       
+       titleLabel.snp.makeConstraints { make in
+           make.leading.equalTo(albumImageView.snp.trailing).offset(10)
+           make.trailing.equalToSuperview().offset(-6)
+           make.top.equalToSuperview().offset(4)
+           make.bottom.equalTo(albumImageView.snp.centerY)
+       }
+       
+       subTitleLabel.snp.makeConstraints { make in
+           make.top.equalTo(titleLabel.snp.bottom).offset(4)
+           make.trailing.leading.equalTo(titleLabel)
+           make.bottom.equalToSuperview().offset(-6)
        }
        
        layoutIfNeeded()

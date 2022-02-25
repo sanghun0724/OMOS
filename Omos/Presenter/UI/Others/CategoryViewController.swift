@@ -47,10 +47,13 @@ class CategoryViewController:BaseViewController {
             .when(.recognized)
             .asDriver{_ in .never()}
             .drive(onNext: { [weak self] _ in
-                self?.selfView.oneLineView.layer.borderWidth = 1
-                self?.selfView.oneLineView.layer.borderColor = UIColor.mainOrange.cgColor
-                let vc = CreateViewController()
-                self?.navigationController?.pushViewController(vc, animated: true)
+                if true {
+                    self?.selfView.oneLineView.layer.borderWidth = 1
+                    self?.selfView.oneLineView.layer.borderColor = UIColor.mainOrange.cgColor
+                    let vc = CreateViewController()
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }
+                
             })
             .disposed(by: disposeBag)
         
@@ -92,4 +95,31 @@ class CategoryViewController:BaseViewController {
         
     }
     
+    func checkOther(_ selectedView:reactangleView) -> Bool {
+        var views = [
+            selfView.oneLineView,
+            selfView.myOstView,
+            selfView.myStoryView,
+            selfView.lyricsView,
+            selfView.freeView
+        ]
+        
+        for idx in 0...4 {
+            if views[idx] == selectedView {
+                
+            }
+        }
+        
+        
+        selfView.oneLineView.layer.borderWidth = 0
+        selfView.myOstView.layer.borderWidth = 0
+        selfView.myStoryView.layer.borderWidth = 0
+        selfView.lyricsView.layer.borderWidth = 0
+        selfView.freeView.layer.borderWidth = 0
+        
+        return false
+    }
+    
 }
+//1.false시 체크
+//2.false시 ㅊ

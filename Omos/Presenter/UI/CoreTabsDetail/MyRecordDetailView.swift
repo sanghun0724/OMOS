@@ -17,8 +17,7 @@ class MyRecordDetailView:BaseView {
     }()
     
     let circleImageView:UIImageView = {
-        let view = UIImageView(image:UIImage(systemName: "person"))
-        view.backgroundColor = .brown
+        let view = UIImageView(image:UIImage(named: "albumCover"))
         return view
     }()
     
