@@ -72,12 +72,11 @@ class CreateView: BaseView {
         return textView
     }()
     
-    let createdField:UITextField = {
-        let label = UITextField()
-        label.placeholder = "2020 00 00 "
+    let createdField:UILabel = {
+        let label = UILabel()
+        label.text = "2020 00 00"
         label.font = .systemFont(ofSize: 12)
         label.textColor = .mainGrey1
-        label.keyboardType = .numberPad
         return label
     }()
     
@@ -108,6 +107,19 @@ class CreateView: BaseView {
         view.font = UIFont(name: "Cafe24Oneprettynight", size: 22)
         view.isScrollEnabled = false
         view.textAlignment = .center
+        view.backgroundColor = .mainBlack
+        view.textColor = .mainGrey7
+        view.autocorrectionType = .no
+        view.autocapitalizationType = .none
+        return view
+    }()
+    
+    let mainfullTextView:UITextView = {
+        let view = UITextView()
+        view.text = "레코드 내용을 입력해주세요"
+        view.font = UIFont(name: "Cafe24Oneprettynight", size: 20)
+        view.isScrollEnabled = false
+        view.textAlignment = .left
         view.backgroundColor = .mainBlack
         view.textColor = .mainGrey7
         view.autocorrectionType = .no
@@ -302,6 +314,10 @@ class CreateView: BaseView {
             make.centerY.equalToSuperview()
         }
         
+        mainfullTextView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
         
     }
     
@@ -324,6 +340,7 @@ class CreateView: BaseView {
         titleImageView.addSubview(lockButton)
         
         textCoverView.addSubview(mainTextView)
+        textCoverView.addSubview(mainfullTextView)
         
         lastView.addSubview(remainTitle)
         lastView.addSubview(remainText)

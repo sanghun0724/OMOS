@@ -28,8 +28,18 @@ class CategoryViewController:BaseViewController {
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.rightBarButtonItems?.removeAll()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "다음", style: .plain, target: self, action: #selector(createPresent))
+        self.navigationItem.rightBarButtonItem?.tintColor = .white
         bind()
+        self.tabBarController?.tabBar.isHidden = true
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     
     override func configureUI() {
         super.configureUI()
@@ -47,13 +57,9 @@ class CategoryViewController:BaseViewController {
             .when(.recognized)
             .asDriver{_ in .never()}
             .drive(onNext: { [weak self] _ in
-                if true {
-                    self?.selfView.oneLineView.layer.borderWidth = 1
-                    self?.selfView.oneLineView.layer.borderColor = UIColor.mainOrange.cgColor
-                    let vc = CreateViewController()
-                    self?.navigationController?.pushViewController(vc, animated: true)
-                }
-                
+                self?.checkOther((self?.selfView.oneLineView)!)
+                self?.selfView.oneLineView.layer.borderWidth = 1
+                self?.selfView.oneLineView.layer.borderColor = UIColor.mainOrange.cgColor
             })
             .disposed(by: disposeBag)
         
@@ -61,6 +67,7 @@ class CategoryViewController:BaseViewController {
             .when(.recognized)
             .asDriver{_ in .never()}
             .drive(onNext: { [weak self] _ in
+                self?.checkOther((self?.selfView.myOstView)!)
                 self?.selfView.myOstView.layer.borderWidth = 1
                 self?.selfView.myOstView.layer.borderColor = UIColor.mainOrange.cgColor
             })
@@ -70,6 +77,7 @@ class CategoryViewController:BaseViewController {
             .when(.recognized)
             .asDriver{_ in .never()}
             .drive(onNext: { [weak self] _ in
+                self?.checkOther((self?.selfView.myStoryView)!)
                 self?.selfView.myStoryView.layer.borderWidth = 1
                 self?.selfView.myStoryView.layer.borderColor = UIColor.mainOrange.cgColor
             })
@@ -79,6 +87,7 @@ class CategoryViewController:BaseViewController {
             .when(.recognized)
             .asDriver{_ in .never()}
             .drive(onNext: { [weak self] _ in
+                self?.checkOther((self?.selfView.lyricsView)!)
                 self?.selfView.lyricsView.layer.borderWidth = 1
                 self?.selfView.lyricsView.layer.borderColor = UIColor.mainOrange.cgColor
             })
@@ -88,6 +97,7 @@ class CategoryViewController:BaseViewController {
             .when(.recognized)
             .asDriver{_ in .never()}
             .drive(onNext: { [weak self] _ in
+                self?.checkOther((self?.selfView.freeView)!)
                 self?.selfView.freeView.layer.borderWidth = 1
                 self?.selfView.freeView.layer.borderColor = UIColor.mainOrange.cgColor
             })
@@ -95,7 +105,8 @@ class CategoryViewController:BaseViewController {
         
     }
     
-    func checkOther(_ selectedView:reactangleView) -> Bool {
+    //MARK: Local Func
+    private func checkOther(_ selectedView:reactangleView) {
         var views = [
             selfView.oneLineView,
             selfView.myOstView,
@@ -106,20 +117,37 @@ class CategoryViewController:BaseViewController {
         
         for idx in 0...4 {
             if views[idx] == selectedView {
-                
+                views.remove(at: idx)
+                break;
             }
         }
         
+        for view in views {
+            view.layer.borderWidth = 0
+        }
         
-        selfView.oneLineView.layer.borderWidth = 0
-        selfView.myOstView.layer.borderWidth = 0
-        selfView.myStoryView.layer.borderWidth = 0
-        selfView.lyricsView.layer.borderWidth = 0
-        selfView.freeView.layer.borderWidth = 0
+    }
+    
+    @objc func createPresent() {
+        let views = [
+            selfView.oneLineView,
+            selfView.myOstView,
+            selfView.myStoryView,
+            selfView.lyricsView,
+            selfView.freeView
+        ]
         
-        return false
+        for view in views {
+            if view.layer.borderWidth == 1 {
+                if view == selfView.lyricsView {
+                    print("this is lyrics view")
+                } else {
+                    let vc = CreateViewController(category: view.titleLabel.text!)
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+        }
     }
     
 }
-//1.false시 체크
-//2.false시 ㅊ
+
