@@ -27,6 +27,7 @@
 		B650874727AFC4CA0020D2C1 /* AllRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650874627AFC4CA0020D2C1 /* AllRecordViewModel.swift */; };
 		B650874927AFC5150020D2C1 /* AllRecord + Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650874827AFC5150020D2C1 /* AllRecord + Table.swift */; };
 		B650874B27AFC5EF0020D2C1 /* AllRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650874A27AFC5EE0020D2C1 /* AllRecordView.swift */; };
+		B651E8CA27CA87F500996CC3 /* MydjProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B651E8C927CA87F500996CC3 /* MydjProfileView.swift */; };
 		B6540F6327C50F79002B1696 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6540F6227C50F79002B1696 /* CategoryViewController.swift */; };
 		B666A90627AED17C00BE7F92 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B666A90527AED17C00BE7F92 /* BaseView.swift */; };
 		B666A90827AED1AA00BE7F92 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B666A90727AED1AA00BE7F92 /* EmptyView.swift */; };
@@ -94,6 +95,7 @@
 		B6D4BB2427CA7FBF00D6741B /* MySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D4BB2327CA7FBF00D6741B /* MySearchView.swift */; };
 		B6D4BB2627CA801300D6741B /* MySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D4BB2527CA801300D6741B /* MySearchViewController.swift */; };
 		B6D4BB2827CA804000D6741B /* MySearch + Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D4BB2727CA804000D6741B /* MySearch + Table.swift */; };
+		B6D4BB2C27CA86FB00D6741B /* SearchResultDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D4BB2B27CA86FB00D6741B /* SearchResultDetailView.swift */; };
 		B6E12E7E27C21050008644B5 /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E12E7D27C21050008644B5 /* CreateViewController.swift */; };
 		B6E12E8027C210B4008644B5 /* CreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E12E7F27C210B4008644B5 /* CreateView.swift */; };
 		B6E12E8227C210E6008644B5 /* CreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E12E8127C210E6008644B5 /* CreateViewModel.swift */; };
@@ -134,6 +136,7 @@
 		B650874627AFC4CA0020D2C1 /* AllRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordViewModel.swift; sourceTree = "<group>"; };
 		B650874827AFC5150020D2C1 /* AllRecord + Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AllRecord + Table.swift"; sourceTree = "<group>"; };
 		B650874A27AFC5EE0020D2C1 /* AllRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordView.swift; sourceTree = "<group>"; };
+		B651E8C927CA87F500996CC3 /* MydjProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MydjProfileView.swift; sourceTree = "<group>"; };
 		B6540F6227C50F79002B1696 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		B666A90527AED17C00BE7F92 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		B666A90727AED1AA00BE7F92 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
@@ -205,6 +208,7 @@
 		B6D4BB2327CA7FBF00D6741B /* MySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySearchView.swift; sourceTree = "<group>"; };
 		B6D4BB2527CA801300D6741B /* MySearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySearchViewController.swift; sourceTree = "<group>"; };
 		B6D4BB2727CA804000D6741B /* MySearch + Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MySearch + Table.swift"; sourceTree = "<group>"; };
+		B6D4BB2B27CA86FB00D6741B /* SearchResultDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDetailView.swift; sourceTree = "<group>"; };
 		B6E12E7D27C21050008644B5 /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
 		B6E12E7F27C210B4008644B5 /* CreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateView.swift; sourceTree = "<group>"; };
 		B6E12E8127C210E6008644B5 /* CreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewModel.swift; sourceTree = "<group>"; };
@@ -383,6 +387,7 @@
 				B6D4BB2327CA7FBF00D6741B /* MySearchView.swift */,
 				B6D4BB2527CA801300D6741B /* MySearchViewController.swift */,
 				B6D4BB2727CA804000D6741B /* MySearch + Table.swift */,
+				B6D4BB2B27CA86FB00D6741B /* SearchResultDetailView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -566,6 +571,7 @@
 				B6BC148827BFF6F80067D8FB /* MyRecordDetailView.swift */,
 				B6D4BB1D27CA48CD00D6741B /* AllRecordDetailViewController.swift */,
 				B6D4BB2127CA5D7C00D6741B /* AllRecordDetailView.swift */,
+				B651E8C927CA87F500996CC3 /* MydjProfileView.swift */,
 			);
 			path = CoreTabsDetail;
 			sourceTree = "<group>";
@@ -777,6 +783,7 @@
 				B689A9CE27AE94E9005F26E4 /* UIVIew.swift in Sources */,
 				B6670FAC27B5542100BABF40 /* ButtonView.swift in Sources */,
 				B6BC148427BFC8FE0067D8FB /* SignUpViewModel.swift in Sources */,
+				B6D4BB2C27CA86FB00D6741B /* SearchResultDetailView.swift in Sources */,
 				B650874727AFC4CA0020D2C1 /* AllRecordViewModel.swift in Sources */,
 				B650874927AFC5150020D2C1 /* AllRecord + Table.swift in Sources */,
 				B689A9DA27AEA835005F26E4 /* BaseViewModel.swift in Sources */,
@@ -818,6 +825,7 @@
 				B630D2FA27C7756A00E66F22 /* MydjTableCell.swift in Sources */,
 				B683A45927B130D100838749 /* Profile + Table.swift in Sources */,
 				B6F0596E27C3490E00CCB242 /* CategoryView.swift in Sources */,
+				B651E8CA27CA87F500996CC3 /* MydjProfileView.swift in Sources */,
 				B68454E827BE027500F1E6B5 /* LoginUseCase.swift in Sources */,
 				B6EF88A927BD3AC2006F6A8F /* EmptyCell.swift in Sources */,
 				B682185427B39F7200B58E19 /* MusicUseCase.swift in Sources */,

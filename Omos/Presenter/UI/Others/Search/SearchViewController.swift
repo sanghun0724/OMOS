@@ -8,6 +8,10 @@
 import UIKit
 import RxSwift
 
+enum SearchType {
+
+}
+
 class SearchViewController:BaseViewController {
     
     let viewModel:SearchViewModel
@@ -119,9 +123,7 @@ class SearchViewController:BaseViewController {
                 } else {
                     owner.selfView.emptyView.isHidden = !empty
                 }
-                    
-                
-                
+
             }).disposed(by: disposeBag)
     }
     
