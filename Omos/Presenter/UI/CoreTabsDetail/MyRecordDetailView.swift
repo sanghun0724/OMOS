@@ -66,15 +66,14 @@ class MyRecordDetailView:BaseView {
         return view
     }()
     
-    let mainTextView:UITextView = {
-        let view = UITextView()
-        view.text = #""  ""#
+    let mainLabelView:UILabel = {
+        let view = UILabel()
+        view.text = #"“한줄감상이나옵니다글자수는50자이내여야합니다한줄감상이나옵니다글자수는50자이내여야합니다한줄감상”"#
         view.font = UIFont(name: "Cafe24Oneprettynight", size: 22)
-        view.isScrollEnabled = false
         view.textAlignment = .center
         view.backgroundColor = .mainBlack
-        view.isUserInteractionEnabled = false 
-       
+        view.numberOfLines = 0
+        view.textColor = .mainGrey1
         return view
     }()
     
@@ -239,7 +238,7 @@ class MyRecordDetailView:BaseView {
             make.bottom.equalTo(lastView.snp.top)
         }
         
-        mainTextView.snp.makeConstraints { make in
+        mainLabelView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.centerY.equalToSuperview()
         }
@@ -261,7 +260,7 @@ class MyRecordDetailView:BaseView {
         titleImageView.addSubview(titleLabel)
         titleImageView.addSubview(createdLabel)
         
-        textCoverView.addSubview(mainTextView)
+        textCoverView.addSubview(mainLabelView)
         
         lastView.addSubview(nicknameLabel)
         lastView.addSubview(dummyView2)

@@ -1,17 +1,16 @@
 //
-//  MyRecordDetailViewController.swift
+//  AllRecordDetailViewController.swift
 //  Omos
 //
-//  Created by sangheon on 2022/02/19.
+//  Created by sangheon on 2022/02/26.
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
 
-class MyRecordDetailViewController:BaseViewController,UITextViewDelegate {
+class AllRecordDetailViewController:BaseViewController {
     
-    private let selfView = MyRecordDetailView()
+    let scrollView = UIScrollView()
+    private let selfView = AllRecordDetailView()
     let myRecord:String
     
     init(myRecord:String) {
@@ -31,15 +30,9 @@ class MyRecordDetailViewController:BaseViewController,UITextViewDelegate {
     
     private func setNavigationItems() {
         self.navigationItem.rightBarButtonItems?.removeAll()
-        let InstaButton = UIBarButtonItem(image: UIImage(named: "instagram"), style: .plain, target: self, action: #selector(didTapInstagram))
-        InstaButton.tintColor = .white
         let moreButton = UIBarButtonItem(image: UIImage(named: "more"), style: .plain, target: self, action: #selector(didTapMoreButton))
         moreButton.tintColor = .white
-        self.navigationItem.rightBarButtonItems = [moreButton,InstaButton]
-    }
-    
-    @objc func didTapInstagram() {
-        
+        self.navigationItem.rightBarButtonItems = [moreButton]
     }
     
     @objc func didTapMoreButton() {
@@ -47,16 +40,25 @@ class MyRecordDetailViewController:BaseViewController,UITextViewDelegate {
     }
     
     override func configureUI() {
-        self.view.addSubview(selfView)
+        self.view.addSubview(scrollView)
+        scrollView.addSubview(selfView)
+        scrollView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+        }
         
         selfView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-            make.height.equalToSuperview().multipliedBy(0.7)
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
     }
     
     func bind() {
+        
     }
     
 }

@@ -89,6 +89,8 @@
 		B6CC1D7627BA475900B5EE7E /* UseInfoText.rtf in Resources */ = {isa = PBXBuildFile; fileRef = B6CC1D7527BA475900B5EE7E /* UseInfoText.rtf */; };
 		B6CC1D7827BA536A00B5EE7E /* PrivateInfoText.rtf in Resources */ = {isa = PBXBuildFile; fileRef = B6CC1D7727BA536A00B5EE7E /* PrivateInfoText.rtf */; };
 		B6D3685627B7A510008B5635 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D3685527B7A510008B5635 /* NicknameViewController.swift */; };
+		B6D4BB1E27CA48CD00D6741B /* AllRecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D4BB1D27CA48CD00D6741B /* AllRecordDetailViewController.swift */; };
+		B6D4BB2227CA5D7C00D6741B /* AllRecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D4BB2127CA5D7C00D6741B /* AllRecordDetailView.swift */; };
 		B6E12E7E27C21050008644B5 /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E12E7D27C21050008644B5 /* CreateViewController.swift */; };
 		B6E12E8027C210B4008644B5 /* CreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E12E7F27C210B4008644B5 /* CreateView.swift */; };
 		B6E12E8227C210E6008644B5 /* CreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E12E8127C210E6008644B5 /* CreateViewModel.swift */; };
@@ -195,6 +197,8 @@
 		B6CC1D7527BA475900B5EE7E /* UseInfoText.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = UseInfoText.rtf; sourceTree = "<group>"; };
 		B6CC1D7727BA536A00B5EE7E /* PrivateInfoText.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = PrivateInfoText.rtf; sourceTree = "<group>"; };
 		B6D3685527B7A510008B5635 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
+		B6D4BB1D27CA48CD00D6741B /* AllRecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordDetailViewController.swift; sourceTree = "<group>"; };
+		B6D4BB2127CA5D7C00D6741B /* AllRecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordDetailView.swift; sourceTree = "<group>"; };
 		B6E12E7D27C21050008644B5 /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
 		B6E12E7F27C210B4008644B5 /* CreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateView.swift; sourceTree = "<group>"; };
 		B6E12E8127C210E6008644B5 /* CreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewModel.swift; sourceTree = "<group>"; };
@@ -551,6 +555,8 @@
 			children = (
 				B6BC148627BFF6C40067D8FB /* MyRecordDetailViewController.swift */,
 				B6BC148827BFF6F80067D8FB /* MyRecordDetailView.swift */,
+				B6D4BB1D27CA48CD00D6741B /* AllRecordDetailViewController.swift */,
+				B6D4BB2127CA5D7C00D6741B /* AllRecordDetailView.swift */,
 			);
 			path = CoreTabsDetail;
 			sourceTree = "<group>";
@@ -780,6 +786,7 @@
 				B682184C27B3823D00B58E19 /* ShareCustomViewController.swift in Sources */,
 				B6E12E8227C210E6008644B5 /* CreateViewModel.swift in Sources */,
 				B689A9D227AE94E9005F26E4 /* Date.swift in Sources */,
+				B6D4BB1E27CA48CD00D6741B /* AllRecordDetailViewController.swift in Sources */,
 				B682185A27B3AD5100B58E19 /* Search + Table.swift in Sources */,
 				B68454F027BE2D7B00F1E6B5 /* MyRequestInterceptor.swift in Sources */,
 				B683A45727B12DD000838749 /* ProfileView.swift in Sources */,
@@ -791,6 +798,7 @@
 				B682185827B3AA4F00B58E19 /* SearchListView.swift in Sources */,
 				B6670FAA27B517DE00BABF40 /* DecoView.swift in Sources */,
 				B689A9D027AE94E9005F26E4 /* UIImage.swift in Sources */,
+				B6D4BB2227CA5D7C00D6741B /* AllRecordDetailView.swift in Sources */,
 				B6BC148927BFF6F80067D8FB /* MyRecordDetailView.swift in Sources */,
 				B650873D27AF969C0020D2C1 /* MyRecordViewController.swift in Sources */,
 				B682185C27B3C0BB00B58E19 /* MyError.swift in Sources */,

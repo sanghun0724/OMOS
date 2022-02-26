@@ -140,7 +140,7 @@ class CreateViewController:BaseViewController {
         }
         
         selfView.mainfullTextView.translatesAutoresizingMaskIntoConstraints = false
-        selfView.mainfullTextView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.49).isActive = true
+        selfView.mainfullTextView.heightAnchor.constraint(equalToConstant: Constant.mainHeight * 0.49).isActive = true
     }
 }
 
@@ -226,35 +226,22 @@ extension CreateViewController: UITextViewDelegate {
         let size = CGSize(width: view.frame.width, height: .infinity)
         let estimatedSize = textView.sizeThatFits(size)
         
-        
-//        textView.constraints.forEach { (constraint) in
-//            if constraint.firstAttribute == .height {
-//                print("ff")
-//                constraint.constant = estimatedSize.height
-//            }
-//        }
-        
         textView.constraints.forEach { constraint in
-              if constraint.firstAttribute == .height {
+            if constraint.firstAttribute == .height {
                 guard constraint.constant != estimatedSize.height else {
-                   return
+                    return
                 }
                 // Disable the scroll
-                if estimatedSize.height <  UIScreen.main.bounds.height * 0.49 {
-                  constraint.constant =  UIScreen.main.bounds.height * 0.49
+                if estimatedSize.height <  Constant.mainHeight * 0.49 {
+                    constraint.constant =  Constant.mainHeight * 0.49
                 } else {
-                  constraint.constant = estimatedSize.height
-                  scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height-scrollView.bounds.height), animated: true)
-
-               
+                    constraint.constant = estimatedSize.height
+                    scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height-scrollView.bounds.height), animated: true)
+                    
                 }
-             }
-           }
-        
-        
-        
+            }
+        }
     }
-    
 }
 
 
