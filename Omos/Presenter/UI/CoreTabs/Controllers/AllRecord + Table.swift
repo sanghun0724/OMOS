@@ -21,7 +21,22 @@ extension AllRecordViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordTableCell.identifier,for:indexPath) as! AllRecordTableCell
-       
+//        var vc = UIViewController()
+//        switch indexPath.row {
+//        case 0:
+//            //            cell.configure()
+//        case 1:
+//            //            cell.configure()
+//        case 2:
+//            //            cell.configure()
+//        case 3:
+//            //            cell.configure()
+//        case 4:
+//            //            cell.configure()
+//        default:
+//            print("default")
+//        }
+        cell.cellDelegate = self 
         return cell
     }
     
@@ -60,5 +75,6 @@ extension AllRecordViewController:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return UIScreen.main.bounds.height / 17
     }
+    
     
 }

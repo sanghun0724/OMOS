@@ -6,9 +6,16 @@
 //
 
 import UIKit
+import RxGesture
+import RxSwift
+protocol AllRecordCellProtocol:AnyObject {
+    func collecCellTap(cate:String)
+}
 
 class AllRecordCollectionCell:UICollectionViewCell {
     static let identifier = "AllRecordCollectionCell"
+    let disposeBag = DisposeBag()
+    var delegate:AllRecordCellProtocol?
     
     let backImageView:UIImageView = {
         let imageView = UIImageView(image: UIImage(named: ""))
@@ -88,6 +95,10 @@ class AllRecordCollectionCell:UICollectionViewCell {
         albumImageView.layer.masksToBounds = true
     }
     
+    func configureModel() {
+        
+    }
+    
     
    private func configureUI() {
         self.addSubview(backImageView)
@@ -137,7 +148,22 @@ class AllRecordCollectionCell:UICollectionViewCell {
            make.bottom.equalToSuperview().offset(-6)
        }
        
+//       self.rx.tapGesture()
+//           .when(.recognized)
+//           .asDriver{_ in .never()}
+//           .drive(onNext: { [weak self] _ in
+//               self?.delegate?.collecCellTap(cate: "두 줄 감상")
+//               print("tap")
+//           })
+//           .disposed(by: disposeBag)
+       
+       
+       
        layoutIfNeeded()
+       
+       
+       
+       
     }
     
 }

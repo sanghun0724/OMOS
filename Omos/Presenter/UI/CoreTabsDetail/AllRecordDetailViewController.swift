@@ -11,10 +11,10 @@ class AllRecordDetailViewController:BaseViewController {
     
     let scrollView = UIScrollView()
     private let selfView = AllRecordDetailView()
-    let myRecord:String
+    let category:String
     
-    init(myRecord:String) {
-        self.myRecord = myRecord
+    init(category:String) {
+        self.category = category
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -42,6 +42,7 @@ class AllRecordDetailViewController:BaseViewController {
     override func configureUI() {
         self.view.addSubview(scrollView)
         scrollView.addSubview(selfView)
+        selfView.myView.cateLabel.text = " | \(category)"
         scrollView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.equalToSuperview()

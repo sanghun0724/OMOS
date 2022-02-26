@@ -25,8 +25,7 @@ class MyRecordTableCell:UITableViewCell {
     
     let backGroundView:UIView = {
         let view = UIView()
-        view.layer.backgroundColor = UIColor(red: 0.129, green: 0.129, blue: 0.129, alpha: 0.87).cgColor
-        
+        view.backgroundColor = .mainBackGround
         return view
     }()
     
@@ -70,12 +69,6 @@ class MyRecordTableCell:UITableViewCell {
         return label
     }()
     
-    private let dummyView:UIView = {
-        let view = UIView()
-        view.backgroundColor = .mainOrange
-        return view
-    }()
-    
     let lockImageView:UIImageView = {
         let imageView = UIImageView(image:UIImage(named: "lock"))
         return imageView
@@ -112,7 +105,6 @@ class MyRecordTableCell:UITableViewCell {
         backGroundView.addSubview(labelCoverView)
         backGroundView.addSubview(descLabel)
         backGroundView.addSubview(nameLabel)
-        backGroundView.addSubview(dummyView)
         backCoverView.addSubview(lockImageView)
         
         backCoverView.snp.makeConstraints { make in
@@ -126,7 +118,7 @@ class MyRecordTableCell:UITableViewCell {
         }
         
         backGroundView.snp.makeConstraints { make in
-            make.left.equalTo(albumImageView.snp.centerX)
+            make.left.equalTo(albumImageView.snp.centerX).multipliedBy(1.5)
             make.right.bottom.top.equalToSuperview()
         }
         
@@ -158,11 +150,6 @@ class MyRecordTableCell:UITableViewCell {
             make.bottom.equalToSuperview()
         }
         nameLabel.sizeToFit()
-        
-        dummyView.snp.makeConstraints { make in
-            make.left.bottom.top.equalToSuperview()
-            make.width.equalTo(2)
-        }
         
         lockImageView.snp.makeConstraints { make in
             make.right.bottom.equalToSuperview()

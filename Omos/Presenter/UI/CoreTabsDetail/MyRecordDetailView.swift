@@ -53,7 +53,15 @@ class MyRecordDetailView:BaseView {
     
     let createdLabel:UILabel = {
         let label = UILabel()
-        label.text = "2020 00 00 한줄감상"
+        label.text = "2020 00 00"
+        label.font = .systemFont(ofSize: 12)
+        label.textColor = .mainGrey1
+        return label
+    }()
+    
+    let cateLabel:UILabel = {
+        let label = UILabel()
+        label.text = " | 한줄감상"
         label.font = .systemFont(ofSize: 12)
         label.textColor = .mainGrey1
         return label
@@ -177,6 +185,12 @@ class MyRecordDetailView:BaseView {
             make.bottom.equalToSuperview().offset(-16)
             createdLabel.sizeToFit()
         }
+        
+        cateLabel.snp.makeConstraints { make in
+            make.leading.equalTo(createdLabel.snp.trailing)
+            make.centerY.equalTo(createdLabel)
+            cateLabel.sizeToFit()
+        }
 
         titleLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(16)
@@ -259,6 +273,7 @@ class MyRecordDetailView:BaseView {
         
         titleImageView.addSubview(titleLabel)
         titleImageView.addSubview(createdLabel)
+        titleImageView.addSubview(cateLabel)
         
         textCoverView.addSubview(mainLabelView)
         
