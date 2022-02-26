@@ -182,14 +182,20 @@ class CreateView: BaseView {
         return label
     }()
     
+    let dummyView:UIView = {
+        let view = UIView()
+        return view
+    }()
     
     override func configureUI() {
         super.configureUI()
         addSubviews()
         ///1
+        let mainHeight = UIScreen.main.bounds.height
+        
         topLabelView.snp.makeConstraints { make in
             make.leading.trailing.top.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.077)
+            make.height.equalTo(mainHeight * 0.077)
         }
         
         circleImageView.snp.makeConstraints { make in
@@ -216,7 +222,7 @@ class CreateView: BaseView {
         titleImageView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(topLabelView.snp.bottom)
-            make.height.equalToSuperview().multipliedBy(0.227)
+            make.height.equalTo(mainHeight * 0.227)
         }
         
         imageView.snp.makeConstraints { make in
@@ -254,11 +260,18 @@ class CreateView: BaseView {
             make.centerX.equalTo(imageAddButton)
             make.width.equalTo(lockButton.snp.height)
         }
+        /// ++
+        dummyView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(titleImageView.snp.top)
+            make.height.equalTo(mainHeight * 0.5)
+        }
         
         ///4
         lastView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.13)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.height.equalTo(mainHeight * 0.13)
         }
         
         dummyView2.snp.makeConstraints { make in
@@ -303,6 +316,8 @@ class CreateView: BaseView {
         }
         
         ///3
+        
+        
         textCoverView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(titleImageView.snp.bottom)
@@ -323,11 +338,11 @@ class CreateView: BaseView {
     
     
     func addSubviews() {
+        self.addSubview(dummyView)
         self.addSubview(topLabelView)
         self.addSubview(titleImageView)
         self.addSubview(textCoverView)
         self.addSubview(lastView)
-        
         topLabelView.addSubview(circleImageView)
         topLabelView.addSubview(musicTitleLabel)
         topLabelView.addSubview(subMusicInfoLabel)

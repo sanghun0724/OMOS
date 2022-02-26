@@ -14,6 +14,7 @@ import Mantis
 
 class CreateViewController:BaseViewController {
     
+    let scrollView = UIScrollView()
     let category:String
     private let selfView = CreateView()
     //    let viewModel:CreateViewModel
@@ -29,8 +30,14 @@ class CreateViewController:BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         bind()
         setViewinfo()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setlongTextView(category)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,7 +72,6 @@ class CreateViewController:BaseViewController {
     
     override func configureUI() {
         super.configureUI()
-        setlongTextView(category)
     }
     
     private func bind() {
@@ -104,33 +110,39 @@ class CreateViewController:BaseViewController {
         present(picker, animated: true, completion: nil)
     }
     
-    
     func setlongTextView(_ category:String) {
         if category == "한 줄 감상" {
             selfView.mainfullTextView.isHidden = true
             self.view.addSubview(selfView)
-            selfView.frame = view.bounds
+            selfView.snp.makeConstraints { make in
+                make.leading.trailing.bottom.equalToSuperview()
+                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            }
             return
         }
         
-        let scrollView = UIScrollView()
-        selfView.mainTextView.isHidden = true
         selfView.remainTextCount.text = "0/796"
+        selfView.mainTextView.isHidden = true
+        self.view.addSubview(scrollView)
         scrollView.addSubview(selfView)
-        scrollView.frame = view.bounds
+        scrollView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+        }
+        
+        selfView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
+        selfView.mainfullTextView.translatesAutoresizingMaskIntoConstraints = false
+        selfView.mainfullTextView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.49).isActive = true
     }
-    
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -213,17 +225,33 @@ extension CreateViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         let size = CGSize(width: view.frame.width, height: .infinity)
         let estimatedSize = textView.sizeThatFits(size)
-        selfView.textCoverView.constraints.forEach { (constraint) in
-            if constraint.firstAttribute == .height {
-                constraint.constant = estimatedSize.height
-            }
-        }
         
-        textView.constraints.forEach { (constraint) in
-            if constraint.firstAttribute == .height {
-                constraint.constant = estimatedSize.height
-            }
-        }
+        
+//        textView.constraints.forEach { (constraint) in
+//            if constraint.firstAttribute == .height {
+//                print("ff")
+//                constraint.constant = estimatedSize.height
+//            }
+//        }
+        
+        textView.constraints.forEach { constraint in
+              if constraint.firstAttribute == .height {
+                guard constraint.constant != estimatedSize.height else {
+                   return
+                }
+                // Disable the scroll
+                if estimatedSize.height <  UIScreen.main.bounds.height * 0.49 {
+                  constraint.constant =  UIScreen.main.bounds.height * 0.49
+                } else {
+                  constraint.constant = estimatedSize.height
+                  scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height-scrollView.bounds.height), animated: true)
+
+               
+                }
+             }
+           }
+        
+        
         
     }
     
