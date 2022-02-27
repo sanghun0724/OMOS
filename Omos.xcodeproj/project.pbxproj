@@ -17,6 +17,8 @@
 		B630D2FA27C7756A00E66F22 /* MydjTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2F927C7756A00E66F22 /* MydjTableCell.swift */; };
 		B630D2FC27C7761D00E66F22 /* Mydj + Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2FB27C7761D00E66F22 /* Mydj + Table.swift */; };
 		B630D2FF27C78C0E00E66F22 /* BestSearchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2FE27C78C0E00E66F22 /* BestSearchTableCell.swift */; };
+		B646051027CB3A530022E062 /* MydjProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646050F27CB3A530022E062 /* MydjProfileViewController.swift */; };
+		B646051227CB3BEA0022E062 /* MydjProfile + Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646051127CB3BEA0022E062 /* MydjProfile + Table.swift */; };
 		B650873927AF948D0020D2C1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650873827AF948D0020D2C1 /* HomeViewController.swift */; };
 		B650873B27AF94C60020D2C1 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650873A27AF94C60020D2C1 /* TabBarViewController.swift */; };
 		B650873D27AF969C0020D2C1 /* MyRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650873C27AF969C0020D2C1 /* MyRecordViewController.swift */; };
@@ -126,6 +128,8 @@
 		B630D2F927C7756A00E66F22 /* MydjTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MydjTableCell.swift; sourceTree = "<group>"; };
 		B630D2FB27C7761D00E66F22 /* Mydj + Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mydj + Table.swift"; sourceTree = "<group>"; };
 		B630D2FE27C78C0E00E66F22 /* BestSearchTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSearchTableCell.swift; sourceTree = "<group>"; };
+		B646050F27CB3A530022E062 /* MydjProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MydjProfileViewController.swift; sourceTree = "<group>"; };
+		B646051127CB3BEA0022E062 /* MydjProfile + Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MydjProfile + Table.swift"; sourceTree = "<group>"; };
 		B650873827AF948D0020D2C1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B650873A27AF94C60020D2C1 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		B650873C27AF969C0020D2C1 /* MyRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordViewController.swift; sourceTree = "<group>"; };
@@ -572,6 +576,8 @@
 				B6D4BB1D27CA48CD00D6741B /* AllRecordDetailViewController.swift */,
 				B6D4BB2127CA5D7C00D6741B /* AllRecordDetailView.swift */,
 				B651E8C927CA87F500996CC3 /* MydjProfileView.swift */,
+				B646050F27CB3A530022E062 /* MydjProfileViewController.swift */,
+				B646051127CB3BEA0022E062 /* MydjProfile + Table.swift */,
 			);
 			path = CoreTabsDetail;
 			sourceTree = "<group>";
@@ -774,6 +780,7 @@
 				B68454EE27BE228800F1E6B5 /* HTTPHeaderField.swift in Sources */,
 				B650874B27AFC5EF0020D2C1 /* AllRecordView.swift in Sources */,
 				B650873B27AF94C60020D2C1 /* TabBarViewController.swift in Sources */,
+				B646051027CB3A530022E062 /* MydjProfileViewController.swift in Sources */,
 				B650874327AF96E80020D2C1 /* ProfileViewController.swift in Sources */,
 				B6D3685627B7A510008B5635 /* NicknameViewController.swift in Sources */,
 				B682185E27B3E22900B58E19 /* LoadingView.swift in Sources */,
@@ -788,6 +795,7 @@
 				B650874927AFC5150020D2C1 /* AllRecord + Table.swift in Sources */,
 				B689A9DA27AEA835005F26E4 /* BaseViewModel.swift in Sources */,
 				B609138427AD3A7C00B439C3 /* BaseViewController.swift in Sources */,
+				B646051227CB3BEA0022E062 /* MydjProfile + Table.swift in Sources */,
 				B682184E27B393BF00B58E19 /* MusicRepository.swift in Sources */,
 				B650873927AF948D0020D2C1 /* HomeViewController.swift in Sources */,
 				B67EF45027B7A9B80023D5D4 /* SignUpView.swift in Sources */,

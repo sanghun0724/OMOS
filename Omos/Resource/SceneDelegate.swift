@@ -101,7 +101,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //                  break
 //              }
 //          }
-        self.window?.rootViewController = TabBarViewController()
+        self.window?.rootViewController = MydjProfileViewController()
         self.window?.makeKeyAndVisible()
         self.window?.backgroundColor = .mainBackGround
        
