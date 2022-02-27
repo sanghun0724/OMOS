@@ -33,6 +33,7 @@
 		B646052C27CBAA0D0022E062 /* ArtistTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646052B27CBAA0D0022E062 /* ArtistTableCell.swift */; };
 		B646052E27CBAD2F0022E062 /* SearchAlbumDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646052D27CBAD2F0022E062 /* SearchAlbumDetailViewController.swift */; };
 		B646053027CBAF510022E062 /* SearchAlbumDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646052F27CBAF510022E062 /* SearchAlbumDetailView.swift */; };
+		B646053227CBBF050022E062 /* SearchAlbumDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646053127CBBF050022E062 /* SearchAlbumDetailCell.swift */; };
 		B650873927AF948D0020D2C1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650873827AF948D0020D2C1 /* HomeViewController.swift */; };
 		B650873B27AF94C60020D2C1 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650873A27AF94C60020D2C1 /* TabBarViewController.swift */; };
 		B650873D27AF969C0020D2C1 /* MyRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650873C27AF969C0020D2C1 /* MyRecordViewController.swift */; };
@@ -158,6 +159,7 @@
 		B646052B27CBAA0D0022E062 /* ArtistTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistTableCell.swift; sourceTree = "<group>"; };
 		B646052D27CBAD2F0022E062 /* SearchAlbumDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAlbumDetailViewController.swift; sourceTree = "<group>"; };
 		B646052F27CBAF510022E062 /* SearchAlbumDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAlbumDetailView.swift; sourceTree = "<group>"; };
+		B646053127CBBF050022E062 /* SearchAlbumDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAlbumDetailCell.swift; sourceTree = "<group>"; };
 		B650873827AF948D0020D2C1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B650873A27AF94C60020D2C1 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		B650873C27AF969C0020D2C1 /* MyRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordViewController.swift; sourceTree = "<group>"; };
@@ -450,6 +452,7 @@
 			children = (
 				B646052D27CBAD2F0022E062 /* SearchAlbumDetailViewController.swift */,
 				B646052F27CBAF510022E062 /* SearchAlbumDetailView.swift */,
+				B646053127CBBF050022E062 /* SearchAlbumDetailCell.swift */,
 			);
 			path = SearchDetail;
 			sourceTree = "<group>";
@@ -877,6 +880,7 @@
 				B69860BD27B8E85600E83DB9 /* NickNameView.swift in Sources */,
 				B6D4BB2627CA801300D6741B /* MySearchViewController.swift in Sources */,
 				B682184C27B3823D00B58E19 /* ShareCustomViewController.swift in Sources */,
+				B646053227CBBF050022E062 /* SearchAlbumDetailCell.swift in Sources */,
 				B6E12E8227C210E6008644B5 /* CreateViewModel.swift in Sources */,
 				B689A9D227AE94E9005F26E4 /* Date.swift in Sources */,
 				B6D4BB1E27CA48CD00D6741B /* AllRecordDetailViewController.swift in Sources */,

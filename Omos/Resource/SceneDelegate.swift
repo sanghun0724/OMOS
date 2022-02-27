@@ -101,7 +101,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //                  break
 //              }
 //          }
-        self.window?.rootViewController = TopTabViewController()
+        self.window?.rootViewController = SearchAlbumDetailViewController()
         self.window?.makeKeyAndVisible()
         self.window?.backgroundColor = .mainBackGround
        

@@ -9,7 +9,7 @@ import UIKit
 
 class SearchAlbumDetailViewController:BaseViewController {
     
-    let selfView = SongView()
+    let selfView = SearchAlbumDetailView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,11 +34,11 @@ class SearchAlbumDetailViewController:BaseViewController {
 extension SearchAlbumDetailViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        return 6
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: AlbumTableCell.identifier, for: indexPath) as! AlbumTableCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchAlbumDetailCell.identifier, for: indexPath) as! SearchAlbumDetailCell
         cell.selectionStyle = . none
         return cell
     }
@@ -48,8 +48,21 @@ extension SearchAlbumDetailViewController:UITableViewDelegate,UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Constant.mainHeight * 0.108
+        return Constant.mainHeight * 0.06
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: SearchAlbumDetailHeader.identifier) as! SearchAlbumDetailHeader
+       
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        (view as! UITableViewHeaderFooterView).contentView.backgroundColor = UIColor.mainBackGround
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return UIScreen.main.bounds.height * 0.365
+    }
     
 }

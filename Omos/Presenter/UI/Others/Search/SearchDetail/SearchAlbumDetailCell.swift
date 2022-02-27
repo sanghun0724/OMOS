@@ -1,5 +1,5 @@
 //
-//  SongTableCell.swift
+//  SearchAlbumDetailCell.swift
 //  Omos
 //
 //  Created by sangheon on 2022/02/27.
@@ -8,16 +8,15 @@
 import Foundation
 import UIKit
 
-
-class SongTableCell:UITableViewCell {
-    static let identifier = "SongTableCell"
+class SearchAlbumDetailCell:UITableViewCell {
+    static let identifier = "SearchAlbumDetailCell"
     
-    
-    let songImageView:UIImageView = {
-        let view = UIImageView(image:UIImage(named: "albumCover"))
-        view.clipsToBounds = true
-        view.contentMode = .scaleAspectFill
-        return view
+    let countLabel:UILabel = {
+        let label = UILabel()
+        label.text = "01"
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 16, weight: .regular)
+        return label
     }()
     
     let titleLabel:UILabel = {
@@ -46,46 +45,48 @@ class SongTableCell:UITableViewCell {
         super.layoutSubviews()
         confgirueUI()
         
-        layoutIfNeeded()
-        songImageView.layer.cornerCurve = .circular
-        songImageView.layer.cornerRadius = songImageView.height / 2
-        songImageView.layer.masksToBounds = true
     }
     
     func confgirueUI() {
-        self.addSubview(songImageView)
+        self.backgroundColor = .mainBackGround
+        self.addSubview(countLabel)
         self.addSubview(titleLabel)
         self.addSubview(subTitleLabel)
         self.addSubview(createdButton)
         
-        songImageView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
+        countLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(16)
             make.leading.equalToSuperview().offset(16)
-            make.height.equalToSuperview().multipliedBy(0.571)
-            make.width.equalTo(songImageView.snp.height)
+            make.height.width.equalTo(20)
         }
         
         createdButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().offset(-16)
-            make.height.equalToSuperview().multipliedBy(0.6)
+            make.height.equalToSuperview().multipliedBy(0.5)
             make.width.equalTo(createdButton.snp.height)
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.leading.equalTo(songImageView.snp.trailing).offset(14)
-            make.centerY.equalToSuperview().multipliedBy(0.75)
-            make.trailing.equalTo(createdButton.snp.leading).offset(-16)
+            make.centerY.equalTo(countLabel)
+            make.leading.equalTo(countLabel.snp.trailing).offset(12)
+            make.trailing.equalTo(createdButton.snp.leading).offset(-12)
             titleLabel.sizeToFit()
         }
         
         subTitleLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(titleLabel)
-            make.centerY.equalToSuperview().multipliedBy(1.25)
-            make.trailing.equalTo(createdButton.snp.leading).offset(-16)
+            make.top.equalTo(titleLabel.snp.bottom).offset(2)
+            make.leading.trailing.equalTo(titleLabel)
             subTitleLabel.sizeToFit()
         }
         
-        
     }
+    
+    
+    
+    
+    
+    
+    
+    
 }
