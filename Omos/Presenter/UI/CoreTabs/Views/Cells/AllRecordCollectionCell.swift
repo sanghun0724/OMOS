@@ -18,7 +18,7 @@ class AllRecordCollectionCell:UICollectionViewCell {
     var delegate:AllRecordCellProtocol?
     
     let backImageView:UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: ""))
+        let imageView = UIImageView(image: UIImage(named: "test"))
         imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .mainBackGround
         return imageView
@@ -148,22 +148,6 @@ class AllRecordCollectionCell:UICollectionViewCell {
            make.bottom.equalToSuperview().offset(-6)
        }
        
-//       self.rx.tapGesture()
-//           .when(.recognized)
-//           .asDriver{_ in .never()}
-//           .drive(onNext: { [weak self] _ in
-//               self?.delegate?.collecCellTap(cate: "두 줄 감상")
-//               print("tap")
-//           })
-//           .disposed(by: disposeBag)
-       
-       
-       
        layoutIfNeeded()
-       
-       
-       
-       
     }
-    
 }

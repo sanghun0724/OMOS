@@ -26,8 +26,8 @@ class MydjView:BaseView {
     
     override func configureUI() {
         super.configureUI()
-        setUpCollection()
         addSubview(tableView)
+        setUpCollection()
         
         collectionView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
@@ -41,44 +41,20 @@ class MydjView:BaseView {
         
     }
     
-    
-
-}
-
-
-extension MydjView:UICollectionViewDataSource,UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //if model.count == 0 {} else {}
-        
-        return 20
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //if model.count == 0 {empty cell } else { }
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MydjCollectionCell.identifier, for: indexPath) as! MydjCollectionCell
-        cell.backgroundColor = .mainBackGround
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: false)
-    }
-
     func setUpCollection() {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal//UIScreen.main.bounds.height / 4.72)
-        //if ~~~~ emptycell here
+        layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: cellSize , height: cellSize) //비율정해서 설정하기
         layout.minimumLineSpacing = 6
         layout.minimumInteritemSpacing = 6
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(MydjCollectionCell.self, forCellWithReuseIdentifier: MydjCollectionCell.identifier)
         collectionView.register(EmptyCell.self, forCellWithReuseIdentifier: EmptyCell.identifier)
-        collectionView.dataSource = self
-        collectionView.delegate = self
         self.addSubview(collectionView)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .mainBackGround
     }
+
 }
+
+

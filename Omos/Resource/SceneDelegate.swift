@@ -101,7 +101,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //                  break
 //              }
 //          }
-        self.window?.rootViewController = MydjProfileViewController()
+        self.window?.rootViewController = SongViewController()
         self.window?.makeKeyAndVisible()
         self.window?.backgroundColor = .mainBackGround
        

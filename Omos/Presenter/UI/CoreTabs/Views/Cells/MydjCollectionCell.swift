@@ -5,11 +5,19 @@
 //  Created by sangheon on 2022/02/24.
 //
 
-import Foundation
 import UIKit
+import RxSwift
+import RxGesture
+
+//protocol MydjCollectionCellProtocol:AnyObject {
+//    func didTapMydjCell()
+//}
+
 
 class MydjCollectionCell:UICollectionViewCell {
     static let identifier = "MydjCollectionCell"
+    
+    let disposeBag = DisposeBag()
     
     
     let djImageView:UIImageView = {
@@ -31,6 +39,8 @@ class MydjCollectionCell:UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+            
         contentView.addSubview(djImageView)
         contentView.addSubview(djLabel)
         configureUI()

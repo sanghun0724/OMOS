@@ -112,6 +112,7 @@ PODS:
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
+  - Pageboy (3.6.2)
   - PromisesObjC (2.0.0)
   - PryntTrimmerView (4.0.2)
   - RxAlamofire (6.1.1):
@@ -130,6 +131,8 @@ PODS:
   - RxSwift (6.5.0)
   - SnapKit (5.0.1)
   - SteviaLayout (4.7.3)
+  - Tabman (2.11.1):
+    - Pageboy (~> 3.6.0)
   - YPImagePicker (5.2.1):
     - PryntTrimmerView (= 4.0.2)
     - SteviaLayout (= 4.7.3)
@@ -146,6 +149,7 @@ DEPENDENCIES:
   - RxGesture
   - RxSwift
   - SnapKit
+  - Tabman (~> 2.11)
   - YPImagePicker
 
 SPEC REPOS:
@@ -166,6 +170,7 @@ SPEC REPOS:
     - Kingfisher
     - Mantis
     - nanopb
+    - Pageboy
     - PromisesObjC
     - PryntTrimmerView
     - RxAlamofire
@@ -175,6 +180,7 @@ SPEC REPOS:
     - RxSwift
     - SnapKit
     - SteviaLayout
+    - Tabman
     - YPImagePicker
 
 SPEC CHECKSUMS:
@@ -194,6 +200,7 @@ SPEC CHECKSUMS:
   Kingfisher: 44ed6a8504763f27bab46163adfac83f5deb240c
   Mantis: 5dea32ad49addabb3247112f5b1282a6e0964bb0
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
+  Pageboy: cf121b9dd48c63f3f281b2a9ec93d02e0f23879b
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   PryntTrimmerView: 6a43cc90df5d99addeabd33d4ba09b1365322130
   RxAlamofire: beb75a1c452d0de225651db4903f5d29d034a620
@@ -203,8 +210,9 @@ SPEC CHECKSUMS:
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SteviaLayout: c2ecdcff57d44e38fd2f65e54ad52aeae28ca0c4
+  Tabman: 792ac76fd1ec95af175c93db880a3c47cabedc91
   YPImagePicker: f36043210c10b0783034eb1947d6e06e31c461e4
 
-PODFILE CHECKSUM: 50eecf9b178e4ad513743e5dbf634a84664f989f
+PODFILE CHECKSUM: 35a75bc623bfd4085868b95dde0bddbde40f4e62
 
 COCOAPODS: 1.11.2

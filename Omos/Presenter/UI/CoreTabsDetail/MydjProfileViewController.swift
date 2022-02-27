@@ -5,7 +5,7 @@
 //  Created by sangheon on 2022/02/27.
 //
 
-import Foundation
+import UIKit
 
 class MydjProfileViewController:BaseViewController {
     
@@ -14,9 +14,9 @@ class MydjProfileViewController:BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         selfView.tableView.delegate = self
-        selfView.tableView.dataSource = self 
+        selfView.tableView.dataSource = self
+        self.navigationItem.rightBarButtonItems?.removeAll()
     }
-    
     
     override func configureUI() {
         super.configureUI()

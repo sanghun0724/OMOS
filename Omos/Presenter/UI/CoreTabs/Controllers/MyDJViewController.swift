@@ -14,7 +14,9 @@ class MyDJViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         selfView.tableView.delegate = self
-        selfView.tableView.dataSource = self 
+        selfView.tableView.dataSource = self
+        selfView.collectionView.delegate = self
+        selfView.collectionView.dataSource = self
     }
     
     override func configureUI() {
