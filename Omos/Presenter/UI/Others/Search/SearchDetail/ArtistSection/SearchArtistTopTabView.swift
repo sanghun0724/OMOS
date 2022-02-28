@@ -1,17 +1,16 @@
 //
-//  TopTabViewController.swift
+//  SearchArtistTopTabView.swift
 //  Omos
 //
-//  Created by sangheon on 2022/02/27.
+//  Created by sangheon on 2022/02/28.
 //
-
 import UIKit
 import Tabman
 import Pageboy
 
-class TopTabViewController:TabmanViewController {
+class SearchArtistTopTabViewController:TabmanViewController {
     
-    var viewControllers:Array<UIViewController> = [EntireViewController(),SongViewController(),AlbumViewController(),ArtistViewController()]
+    var viewControllers:Array<UIViewController> = [SongViewController(),AlbumViewController()]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +20,6 @@ class TopTabViewController:TabmanViewController {
         settingTabBar(ctBar:bar)
         addBar(bar, dataSource: self, at: .top)
     }
-    
     
     func settingTabBar(ctBar:TMBar.ButtonBar) {
         ctBar.layout.transitionStyle = .snap
@@ -50,7 +48,7 @@ class TopTabViewController:TabmanViewController {
 }
 
 
-extension TopTabViewController: PageboyViewControllerDataSource,TMBarDataSource {
+extension SearchArtistTopTabViewController: PageboyViewControllerDataSource,TMBarDataSource {
     func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
        
             // MARK: -Tab 안 글씨들

@@ -62,3 +62,11 @@ extension UITextView {
         contentOffset.y = -offset
     }
 }
+
+
+class tabBarBackgroundView:BaseView {
+    
+    override func configureUI() {
+        super.configureUI()
+    }
+}
