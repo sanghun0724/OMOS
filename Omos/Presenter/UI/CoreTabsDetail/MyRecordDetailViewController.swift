@@ -54,6 +54,7 @@ class MyRecordDetailViewController:BaseViewController,UITextViewDelegate {
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.height.equalToSuperview().multipliedBy(0.7)
         }
+       
     }
     
     func bind() {

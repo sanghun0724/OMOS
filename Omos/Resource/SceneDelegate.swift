@@ -101,7 +101,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //                  break
 //              }
 //          }
-        self.window?.rootViewController = SearchArtistViewController()
+        self.window?.rootViewController = AllRecordCateDetailViewController()
         self.window?.makeKeyAndVisible()
         self.window?.backgroundColor = .mainBackGround
        

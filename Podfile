@@ -19,4 +19,5 @@ pod "RxGesture"
 pod 'YPImagePicker'
 pod 'Mantis', '~> 1.9.0'
 pod 'Tabman', '~> 2.11'
+pod 'ReadMoreTextView'
 end

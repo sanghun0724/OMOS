@@ -15,6 +15,9 @@ class MydjProfieView:BaseView {
         table.register(MyRecordTableCell.self, forCellReuseIdentifier: MyRecordTableCell.identifier)
         table.register(MydjProfileHeader.self, forHeaderFooterViewReuseIdentifier: MydjProfileHeader.identifier)
         table.backgroundColor = .mainBackGround
+        table.separatorStyle = .none
+        table.showsVerticalScrollIndicator = false
+        table.automaticallyAdjustsScrollIndicatorInsets = false
        return table
     }()
 

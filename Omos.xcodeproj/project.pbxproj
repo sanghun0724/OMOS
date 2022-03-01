@@ -116,6 +116,9 @@
 		B6D4BB2827CA804000D6741B /* MySearch + Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D4BB2727CA804000D6741B /* MySearch + Table.swift */; };
 		B6D4BB2C27CA86FB00D6741B /* SearchResultDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D4BB2B27CA86FB00D6741B /* SearchResultDetailView.swift */; };
 		B6DFD2CB27CC93EE00645F52 /* SearchArtistTopTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DFD2CA27CC93EE00645F52 /* SearchArtistTopTabView.swift */; };
+		B6DFD2CE27CCAEF100645F52 /* AllRecordCateDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DFD2CD27CCAEF100645F52 /* AllRecordCateDetailView.swift */; };
+		B6DFD2D027CCAF0800645F52 /* AllRecordCateDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DFD2CF27CCAF0800645F52 /* AllRecordCateDetailViewController.swift */; };
+		B6DFD2D227CCB4D800645F52 /* AllRecordCateDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DFD2D127CCB4D800645F52 /* AllRecordCateDetailCell.swift */; };
 		B6E12E7E27C21050008644B5 /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E12E7D27C21050008644B5 /* CreateViewController.swift */; };
 		B6E12E8027C210B4008644B5 /* CreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E12E7F27C210B4008644B5 /* CreateView.swift */; };
 		B6E12E8227C210E6008644B5 /* CreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E12E8127C210E6008644B5 /* CreateViewModel.swift */; };
@@ -249,6 +252,9 @@
 		B6D4BB2727CA804000D6741B /* MySearch + Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MySearch + Table.swift"; sourceTree = "<group>"; };
 		B6D4BB2B27CA86FB00D6741B /* SearchResultDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDetailView.swift; sourceTree = "<group>"; };
 		B6DFD2CA27CC93EE00645F52 /* SearchArtistTopTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtistTopTabView.swift; sourceTree = "<group>"; };
+		B6DFD2CD27CCAEF100645F52 /* AllRecordCateDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordCateDetailView.swift; sourceTree = "<group>"; };
+		B6DFD2CF27CCAF0800645F52 /* AllRecordCateDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordCateDetailViewController.swift; sourceTree = "<group>"; };
+		B6DFD2D127CCB4D800645F52 /* AllRecordCateDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordCateDetailCell.swift; sourceTree = "<group>"; };
 		B6E12E7D27C21050008644B5 /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
 		B6E12E7F27C210B4008644B5 /* CreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateView.swift; sourceTree = "<group>"; };
 		B6E12E8127C210E6008644B5 /* CreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewModel.swift; sourceTree = "<group>"; };
@@ -646,6 +652,9 @@
 				B651E8C927CA87F500996CC3 /* MydjProfileView.swift */,
 				B646050F27CB3A530022E062 /* MydjProfileViewController.swift */,
 				B646051127CB3BEA0022E062 /* MydjProfile + Table.swift */,
+				B6DFD2CD27CCAEF100645F52 /* AllRecordCateDetailView.swift */,
+				B6DFD2CF27CCAF0800645F52 /* AllRecordCateDetailViewController.swift */,
+				B6DFD2D127CCB4D800645F52 /* AllRecordCateDetailCell.swift */,
 			);
 			path = CoreTabsDetail;
 			sourceTree = "<group>";
@@ -889,7 +898,9 @@
 				B67EF45027B7A9B80023D5D4 /* SignUpView.swift in Sources */,
 				B67EF45727B7AA220023D5D4 /* PrivateLabelView.swift in Sources */,
 				B68454F827BE374600F1E6B5 /* LoginAPI.swift in Sources */,
+				B6DFD2D227CCB4D800645F52 /* AllRecordCateDetailCell.swift in Sources */,
 				B646052327CB79D60022E062 /* AlbumView.swift in Sources */,
+				B6DFD2D027CCAF0800645F52 /* AllRecordCateDetailViewController.swift in Sources */,
 				B66AD45027C6983F0012686B /* MydjCollectionCell.swift in Sources */,
 				B68454FA27BE375000F1E6B5 /* LoginTarget.swift in Sources */,
 				B68454EC27BE1D9800F1E6B5 /* TargetType.swift in Sources */,
@@ -947,6 +958,7 @@
 				B6B1BB5C27BBCF6000DF2528 /* MyRecordTableCell.swift in Sources */,
 				B689A9CF27AE94E9005F26E4 /* UIViewController.swift in Sources */,
 				B630D2FF27C78C0E00E66F22 /* BestSearchTableCell.swift in Sources */,
+				B6DFD2CE27CCAEF100645F52 /* AllRecordCateDetailView.swift in Sources */,
 				B6B1BB5727BB7E1900DF2528 /* AllRecordCollectionCell.swift in Sources */,
 				B646053027CBAF510022E062 /* SearchAlbumDetailView.swift in Sources */,
 				B6670FA827B5098200BABF40 /* LoginView.swift in Sources */,

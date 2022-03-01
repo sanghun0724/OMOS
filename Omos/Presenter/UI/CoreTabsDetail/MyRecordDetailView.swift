@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import ReadMoreTextView
 
 class MyRecordDetailView:BaseView {
     /// 1
@@ -74,14 +75,14 @@ class MyRecordDetailView:BaseView {
         return view
     }()
     
-    let mainLabelView:UILabel = {
-        let view = UILabel()
+    var mainLabelView:UITextView = {
+        let view = UITextView()
         view.text = #"“한줄감상이나옵니다글자수는50자이내여야합니다한줄감상이나옵니다글자수는50자이내여야합니다한줄감상”"#
         view.font = UIFont(name: "Cafe24Oneprettynight", size: 22)
         view.textAlignment = .center
         view.backgroundColor = .mainBlack
-        view.numberOfLines = 0
         view.textColor = .mainGrey1
+        view.isScrollEnabled = false
         return view
     }()
     

@@ -115,6 +115,7 @@ PODS:
   - Pageboy (3.6.2)
   - PromisesObjC (2.0.0)
   - PryntTrimmerView (4.0.2)
+  - ReadMoreTextView (3.0.1)
   - RxAlamofire (6.1.1):
     - RxAlamofire/Core (= 6.1.1)
   - RxAlamofire/Core (6.1.1):
@@ -144,6 +145,7 @@ DEPENDENCIES:
   - KakaoSDKUser
   - Kingfisher
   - Mantis (~> 1.9.0)
+  - ReadMoreTextView
   - RxAlamofire
   - RxCocoa
   - RxGesture
@@ -173,6 +175,7 @@ SPEC REPOS:
     - Pageboy
     - PromisesObjC
     - PryntTrimmerView
+    - ReadMoreTextView
     - RxAlamofire
     - RxCocoa
     - RxGesture
@@ -203,6 +206,7 @@ SPEC CHECKSUMS:
   Pageboy: cf121b9dd48c63f3f281b2a9ec93d02e0f23879b
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   PryntTrimmerView: 6a43cc90df5d99addeabd33d4ba09b1365322130
+  ReadMoreTextView: 19147adf93abce6d7271e14031a00303fe28720d
   RxAlamofire: beb75a1c452d0de225651db4903f5d29d034a620
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxGesture: abadd243fc36db74df43dfc893829ddde94f1a3d
@@ -213,6 +217,6 @@ SPEC CHECKSUMS:
   Tabman: 792ac76fd1ec95af175c93db880a3c47cabedc91
   YPImagePicker: f36043210c10b0783034eb1947d6e06e31c461e4
 
-PODFILE CHECKSUM: 35a75bc623bfd4085868b95dde0bddbde40f4e62
+PODFILE CHECKSUM: 3a4e37628fb966ce2488238ec662cf44929cfc47
 
 COCOAPODS: 1.11.2

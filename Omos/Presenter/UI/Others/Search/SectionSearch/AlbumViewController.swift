@@ -50,5 +50,12 @@ extension AlbumViewController:UITableViewDelegate,UITableViewDataSource {
         return Constant.mainHeight * 0.108
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
     
 }

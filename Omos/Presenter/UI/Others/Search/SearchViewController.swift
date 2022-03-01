@@ -43,6 +43,7 @@ class SearchViewController:BaseViewController {
         selfView.searchViewController.searchBar.delegate = self
         navigationItem.rightBarButtonItems?.removeAll()
         bind()
+        selfView.emptyView.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -78,6 +79,16 @@ class SearchViewController:BaseViewController {
     
     func bind() {
         
+        let isSearchEmpty = selfView.searchViewController.searchBar.rx.text
+            .throttle(RxTimeInterval.milliseconds(100), scheduler: MainScheduler.instance)
+            .map { text -> Bool in
+                return !(text?.isEmpty ?? true)
+            }.distinctUntilChanged()
+        
+        isSearchEmpty.subscribe(onNext: { [weak self] valid in
+                self?.selfView.bestTableView.isHidden = valid
+        }).disposed(by: disposeBag)
+        
         selfView.searchViewController.searchBar.rx.text
             .debounce(.milliseconds(300),scheduler:MainScheduler.instance) //요청 오버헤드 방지
             .withUnretained(self)
@@ -85,7 +96,6 @@ class SearchViewController:BaseViewController {
                 guard let text = text else {
                     return
                 }
-                
                 print(text)
                 //owner.viewModel.searchQeuryChanged(query: text)
             }).disposed(by: disposeBag)
@@ -116,14 +126,10 @@ class SearchViewController:BaseViewController {
             .withUnretained(self)
             .subscribe(onNext: { owner,empty in
                 guard let isTextEmpty = owner.selfView.searchViewController.searchBar.text?.isEmpty else { return }
-                if isTextEmpty {
-                    print("check")
-                    owner.selfView.bestTableView.isHidden = !isTextEmpty
-                    owner.selfView.emptyView.isHidden = true 
-                } else {
+                if !isTextEmpty {
+                    print("test")
                     owner.selfView.emptyView.isHidden = !empty
                 }
-
             }).disposed(by: disposeBag)
     }
     

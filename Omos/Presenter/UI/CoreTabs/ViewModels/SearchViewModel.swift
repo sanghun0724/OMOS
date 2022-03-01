@@ -12,7 +12,7 @@ class SearchViewModel :BaseViewModel{
     
     let loading = BehaviorSubject<Bool>(value:false)
     let musics = BehaviorSubject<[Stock]>(value:[])
-    let isEmpty = BehaviorSubject<Bool>(value:false)
+    let isEmpty = PublishSubject<Bool>()
     let errorMessage = BehaviorSubject<String?>(value: nil)
     var currentMusic:[Stock] = []
     let usecase:MusicUseCase
