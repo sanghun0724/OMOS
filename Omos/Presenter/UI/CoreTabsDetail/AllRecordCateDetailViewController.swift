@@ -6,17 +6,19 @@
 //
 
 import UIKit
-import ReadMoreTextView
+import RxSwift
+import RxCocoa
 
 class AllRecordCateDetailViewController:BaseViewController {
     
     let selfView = AllRecordCateDetailView()
-    var expandedCells = Set<Int>()
+    var expandedIndexSet : IndexSet = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
+        
     }
     
     
@@ -42,11 +44,16 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateDetailCell.identifier, for: indexPath) as! AllRecordCateDetailCell
+        if expandedIndexSet.contains(indexPath.row) {
+                cell.myView.myView.mainLabelView.numberOfLines = 0
+                cell.myView.myView.mainLabelView.sizeToFit()
+           } else {
+                cell.myView.myView.mainLabelView.numberOfLines = 3
+                cell.myView.myView.mainLabelView.sizeToFit()
+           }
+
+        cell.delegate = self
         cell.selectionStyle = . none
-        let test = cell.myView.myView.mainLabelView as! ReadMoreTextView
-        test.onSizeChange = { [unowned tableView, unowned self] r in
-                    tableView.reloadData()
-                }
         return cell
     }
     
@@ -58,20 +65,33 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
         return UITableView.automaticDimension
     }
     
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateDetailCell.identifier, for: indexPath) as! AllRecordCateDetailCell
-//        let readMoreTextView = cell.myView.myView.mainLabelView as! ReadMoreTextView
-//        readMoreTextView.onSizeChange = { [unowned tableView, unowned self] r in
-//            tableView.reloadData()
-//        }
-//    }
-
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-       return UIView()
+        return UIView()
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
+    }
+    
+}
+
+extension AllRecordCateDetailViewController:MyCellDelegate {
+    func readMoreTapped(cell: AllRecordCateDetailCell) {
+        let indexPath = selfView.tableView.indexPath(for: cell)!
+        print(indexPath)
+        if(expandedIndexSet.contains(indexPath.row)){
+            expandedIndexSet.remove(indexPath.row)
+        } else {
+            expandedIndexSet.insert(indexPath.row)
+        }
+        selfView.tableView.reloadRows(at: [indexPath], with: .none)
     }
     
 }

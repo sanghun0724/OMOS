@@ -26,9 +26,6 @@ class MydjProfileViewController:BaseViewController {
             make.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
         }
-        
-        
-        
+
     }
-    
 }

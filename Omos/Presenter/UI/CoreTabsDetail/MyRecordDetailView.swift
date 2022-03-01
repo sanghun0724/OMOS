@@ -68,6 +68,12 @@ class MyRecordDetailView:BaseView {
         return label
     }()
     
+    let reportButton:UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "report"), for: .normal)
+        return button
+    }()
+    
     /// 3
     let textCoverView:UIView = {
         let view = UIView()
@@ -75,14 +81,14 @@ class MyRecordDetailView:BaseView {
         return view
     }()
     
-    var mainLabelView:UITextView = {
-        let view = UITextView()
+    var mainLabelView:UILabel = {
+        let view = UILabel()
         view.text = #"“한줄감상이나옵니다글자수는50자이내여야합니다한줄감상이나옵니다글자수는50자이내여야합니다한줄감상”"#
         view.font = UIFont(name: "Cafe24Oneprettynight", size: 22)
         view.textAlignment = .center
         view.backgroundColor = .mainBlack
         view.textColor = .mainGrey1
-        view.isScrollEnabled = false
+        view.numberOfLines = 0
         return view
     }()
     
@@ -133,6 +139,12 @@ class MyRecordDetailView:BaseView {
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 12)
         return label
+    }()
+    
+    let dummyView3:UIView = {
+        let view = UIView()
+        view.backgroundColor = .mainBlack1
+        return view
     }()
     
     override func layoutSubviews() {
@@ -199,6 +211,11 @@ class MyRecordDetailView:BaseView {
             titleLabel.sizeToFit()
         }
         
+        reportButton.snp.makeConstraints { make in
+            make.trailing.top.equalToSuperview().inset(16)
+            make.height.width.equalTo(20)
+        }
+        
         ///4
         lastView.snp.makeConstraints { make in
             make.left.right.bottom.equalToSuperview()
@@ -243,6 +260,11 @@ class MyRecordDetailView:BaseView {
             starCountLabel.sizeToFit()
         }
         
+        dummyView3.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(4)
+        }
+        
 
 
 
@@ -275,6 +297,7 @@ class MyRecordDetailView:BaseView {
         titleImageView.addSubview(titleLabel)
         titleImageView.addSubview(createdLabel)
         titleImageView.addSubview(cateLabel)
+        titleImageView.addSubview(reportButton)
         
         textCoverView.addSubview(mainLabelView)
         
@@ -284,6 +307,7 @@ class MyRecordDetailView:BaseView {
         lastView.addSubview(loveCountLabel)
         lastView.addSubview(starImageView)
         lastView.addSubview(starCountLabel)
+        lastView.addSubview(dummyView3)
     }
     
     
