@@ -8,9 +8,14 @@
 import Foundation
 import UIKit
 
+protocol AllCollectCellprotocol:AnyObject {
+    func collectionView(collectionViewCell:AllRecordCollectionCell?,index:Int,didTappedInTableViewCell:AllRecordTableCell)
+}
+
 class AllRecordTableCell:UITableViewCell {
     static let identifier = "AllRecordTableCell"
     
+    weak var cellDelegate: AllCollectCellprotocol?
     private var collectionView:UICollectionView!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -43,6 +48,10 @@ class AllRecordTableCell:UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configureModel() {
+        
+    }
+    
 }
 
 extension AllRecordTableCell: UICollectionViewDelegate,UICollectionViewDataSource {
@@ -54,14 +63,16 @@ extension AllRecordTableCell: UICollectionViewDelegate,UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         //if model.count == 0 {empty cell } else { }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AllRecordCollectionCell.identifier, for: indexPath) as! AllRecordCollectionCell
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyCell.identifier, for: indexPath) as! EmptyCell
         cell.backgroundColor = .mainBlack
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: false)
+        let cell = collectionView.cellForItem(at: indexPath) as? AllRecordCollectionCell
+        self.cellDelegate?.collectionView(collectionViewCell: cell, index: indexPath.item, didTappedInTableViewCell: self)
     }
 
 }

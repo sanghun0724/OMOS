@@ -45,3 +45,15 @@ class AllRecordViewController: BaseViewController {
     func bind() {
     }
 }
+
+extension AllRecordViewController:AllCollectCellprotocol {
+    func collectionView(collectionViewCell: AllRecordCollectionCell?, index: Int, didTappedInTableViewCell: AllRecordTableCell) {
+        let cate = collectionViewCell?.titleLabel.text
+        let vc = AllRecordDetailViewController(category: cate ?? "empty")
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
+    
+    
+}

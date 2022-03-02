@@ -47,11 +47,17 @@ extension UIViewController {
                       with actions: UIAlertAction ...) {
         self.dismissIndicator()
         let alert = UIAlertController(title: title, message: message, preferredStyle: style)
+        alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = UIColor.mainBackGround
+//        alert.setValue(NSAttributedString(string: alert.message!, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16,weight: UIFont.Weight.regular),NSAttributedString.Key.foregroundColor :UIColor.white]), forKey: "attributedMessage")
+        alert.view.tintColor = .mainGrey3
         actions.forEach { alert.addAction($0) }
+        
         if isCancelActionIncluded {
             let actionCancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
             alert.addAction(actionCancel)
         }
+//        var height:NSLayoutConstraint = NSLayoutConstraint(item: alert.view, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 200)
+//            alert.view.addConstraint(height)
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -117,13 +123,7 @@ extension UIViewController {
         IndicatorView.shared.dismiss()
     }
     
-    // MARK: 네비게이션 pushViewController
-    func navigationPushViewController(storyboard : String, identifier : String){
-        let storyboard = UIStoryboard(name: storyboard, bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: identifier)
-        vc.navigationItem.largeTitleDisplayMode = .never
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
+ 
     func setBlurEffect(view : UIView){
         let blur = UIBlurEffect(style: .regular)
         let blurView = UIVisualEffectView(effect: blur)

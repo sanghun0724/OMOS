@@ -37,11 +37,13 @@ class MyAuthenticator:Authenticator {
                 let accessToken = data.accessToken
                 let refreshToken = data.refreshToken
                 let userId = data.userId
+                UserDefaults.standard.set(accessToken, forKey: "access")
+                UserDefaults.standard.set(refreshToken, forKey: "refresh")
                 let newCredential = MyAuthenticationCredential(accessToken: accessToken, refreshToken: refreshToken,userID: userId)
                 completion(.success(newCredential))
             case .failure(let error):
                 completion(.failure(error))
-                print(error)
+                print("기존의 가지고 있던 토큰정보가 잘못되었음")
             }
         }
 

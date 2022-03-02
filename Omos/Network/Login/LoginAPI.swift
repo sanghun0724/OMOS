@@ -8,9 +8,9 @@
 import Foundation
 import Alamofire
 
-struct LoginAPI {
+class LoginAPI {
     
-    static func login(request:LoginRequest,completion:@escaping(Result<LoginResponse,MyError>) -> Void) {
+     func login(request:LoginRequest,completion:@escaping(Result<LoginResponse,MyError>) -> Void) {
         // AuthenticationInterceptor 적용
 //        let authenticator = MyAuthenticator()
 //        let credential = MyAuthenticationCredential(accessToken:UserDefaults.standard.string(forKey: "access") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refresh") ?? "", userID: 0)
@@ -44,7 +44,7 @@ struct LoginAPI {
         }
     }
     
-    static func signUp(request:SignUpRequest,completion:@escaping(Result<SignUpRespone,Error>) -> Void) {
+     func signUp(request:SignUpRequest,completion:@escaping(Result<SignUpRespone,Error>) -> Void) {
         
         AF.request(LoginTarget.signUp(request)).responseDecodable { (response:AFDataResponse<SignUpRespone>) in
             switch response.result {
@@ -58,33 +58,49 @@ struct LoginAPI {
         }
     }
     
-    static func checkEmail(email:String,completion:@escaping(Result<Bool,Error>) -> Void) {
+     func checkEmail(email:String,completion:@escaping(Result<CheckEmailRespone,Error>) -> Void) {
       
         let params:[String:Any] = [
             "email":email
         ]
         
         let url = URL(string: "http://ec2-3-37-146-80.ap-northeast-2.compute.amazonaws.com:8080/api/auth/check-email")!
-        AF.request(url, method: .get, parameters: params , encoding:URLEncoding.default, headers: nil).responseString { response in
-                        switch response.result {
-                        case .success(let data):
-                            print(data)
-                            data == "true" ? completion(.success(true)) : completion(.success(false))
-                        case .failure(let error):
-                            print(error.localizedDescription) //같은 닉네임
-                            completion(.failure(error))
-                        }
+        AF.request(url, method: .get, parameters: params , encoding:URLEncoding.default, headers: nil).responseDecodable(of:CheckEmailRespone.self) { response in
+            switch response.result {
+            case .success(let data):
+                print("success data is coming")
+                completion(.success(data))
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
-        
-//        AF.request(LoginTarget.checkEmail(request)).responseString { response in
-//            switch response.result {
-//            case .success(let data):
-//                print(data)
-//                completion(.success(data))
-//            case .failure(let error):
-//                print(error.localizedDescription) //같은 닉네임
-//                completion(.failure(error))
-//            }
-//        }
     }
+    
+    static func SNSLogin(request:SNSLoginRequest,completion:@escaping(Result<SNSLoginResponse,Error>) -> Void) {
+       
+       AF.request(LoginTarget.SNSLogin(request)).responseDecodable { (response:AFDataResponse<SNSLoginResponse>) in
+           switch response.result {
+           case .success(let data):
+               print(data)
+               completion(.success(data))
+           case .failure(let error):
+               print(error.localizedDescription)
+               completion(.failure(error))
+           }
+       }
+   }
+    
+    func SNSSignUp(request:SNSSignUpRequest,completion:@escaping(Result<SNSSignUpResponse,Error>) -> Void) {
+       
+       AF.request(LoginTarget.SNSSignUp(request)).responseDecodable { (response:AFDataResponse<SNSSignUpResponse>) in
+           switch response.result {
+           case .success(let data):
+               print(data)
+               completion(.success(data))
+           case .failure(let error):
+               print(error.localizedDescription) //같은 닉네임
+               completion(.failure(error))
+           }
+       }
+   }
 }

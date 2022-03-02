@@ -7,7 +7,7 @@
 
 import UIKit
 import KakaoSDKCommon
-import AuthenticationServices
+
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,24 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        KakaoSDK.initSDK(appKey: "1f092bd328c26debda9b7fa8dfa44b5c")
+        KakaoSDK.initSDK(appKey: "23c5d162c97e7eb015313dc36f3b3794")
         
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-          appleIDProvider.getCredentialState(forUserID: ""/* 로그인에 사용한 User Identifier */) { (credentialState, error) in
-              switch credentialState {
-              case .authorized:
-                  // The Apple ID credential is valid.
-                  print("해당 ID는 연동되어있습니다.")
-              case .revoked:
-                  // The Apple ID credential is either revoked or was not found, so show the sign-in UI.
-                  print("해당 ID는 연동되어있지않습니다.")
-              case .notFound:
-                  // The Apple ID credential is either was not found, so show the sign-in UI.
-                  print("해당 ID를 찾을 수 없습니다.")
-              default:
-                  break
-              }
-          }
         
         return true
     }

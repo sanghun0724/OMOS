@@ -106,12 +106,16 @@ PODS:
   - KakaoSDKUser (2.8.5):
     - KakaoSDKAuth (= 2.8.5)
   - Kingfisher (7.1.2)
+  - Mantis (1.9.0)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
+  - Pageboy (3.6.2)
   - PromisesObjC (2.0.0)
+  - PryntTrimmerView (4.0.2)
+  - ReadMoreTextView (3.0.1)
   - RxAlamofire (6.1.1):
     - RxAlamofire/Core (= 6.1.1)
   - RxAlamofire/Core (6.1.1):
@@ -120,10 +124,19 @@ PODS:
   - RxCocoa (6.5.0):
     - RxRelay (= 6.5.0)
     - RxSwift (= 6.5.0)
+  - RxGesture (4.0.3):
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
   - RxRelay (6.5.0):
     - RxSwift (= 6.5.0)
   - RxSwift (6.5.0)
   - SnapKit (5.0.1)
+  - SteviaLayout (4.7.3)
+  - Tabman (2.11.1):
+    - Pageboy (~> 3.6.0)
+  - YPImagePicker (5.2.1):
+    - PryntTrimmerView (= 4.0.2)
+    - SteviaLayout (= 4.7.3)
 
 DEPENDENCIES:
   - Firebase/Analytics
@@ -131,10 +144,15 @@ DEPENDENCIES:
   - Firebase/Messaging
   - KakaoSDKUser
   - Kingfisher
+  - Mantis (~> 1.9.0)
+  - ReadMoreTextView
   - RxAlamofire
   - RxCocoa
+  - RxGesture
   - RxSwift
   - SnapKit
+  - Tabman (~> 2.11)
+  - YPImagePicker
 
 SPEC REPOS:
   trunk:
@@ -152,13 +170,21 @@ SPEC REPOS:
     - KakaoSDKCommon
     - KakaoSDKUser
     - Kingfisher
+    - Mantis
     - nanopb
+    - Pageboy
     - PromisesObjC
+    - PryntTrimmerView
+    - ReadMoreTextView
     - RxAlamofire
     - RxCocoa
+    - RxGesture
     - RxRelay
     - RxSwift
     - SnapKit
+    - SteviaLayout
+    - Tabman
+    - YPImagePicker
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
@@ -175,14 +201,22 @@ SPEC CHECKSUMS:
   KakaoSDKCommon: b98d08cf838effdc9b82aca7dee3e50c048880ca
   KakaoSDKUser: a76667bb06c1d5072178eea5cee4ac9fdba94679
   Kingfisher: 44ed6a8504763f27bab46163adfac83f5deb240c
+  Mantis: 5dea32ad49addabb3247112f5b1282a6e0964bb0
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
+  Pageboy: cf121b9dd48c63f3f281b2a9ec93d02e0f23879b
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  PryntTrimmerView: 6a43cc90df5d99addeabd33d4ba09b1365322130
+  ReadMoreTextView: 19147adf93abce6d7271e14031a00303fe28720d
   RxAlamofire: beb75a1c452d0de225651db4903f5d29d034a620
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxGesture: abadd243fc36db74df43dfc893829ddde94f1a3d
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SteviaLayout: c2ecdcff57d44e38fd2f65e54ad52aeae28ca0c4
+  Tabman: 792ac76fd1ec95af175c93db880a3c47cabedc91
+  YPImagePicker: f36043210c10b0783034eb1947d6e06e31c461e4
 
-PODFILE CHECKSUM: 81dea72d340e51ad6412239532dfbab75c4afc2b
+PODFILE CHECKSUM: 3a4e37628fb966ce2488238ec662cf44929cfc47
 
 COCOAPODS: 1.11.2

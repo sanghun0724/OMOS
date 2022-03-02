@@ -107,13 +107,15 @@ class SignUpViewController:UIViewController {
                 guard let text1 = self?.topView.emailField.text else { return }
                 guard let text2 = self?.topView.passwordField.text else { return }
                 guard let text3 = self?.topView.repasswordField.text else { return }
-                self?.viewModel.hasSameName(email: text1, completion: { bool in
+                self?.viewModel.hasSameName(email: text1)
+                //밑에거 따로빼서 zip으로 묶어주자
+                self?.viewModel.validEmail.subscribe(onNext: { [weak self] valid in
                     if !(text1.validateEmail()) {
                         self?.topView.emailField.layer.borderWidth = 1
                         self?.topView.emailField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
                         self?.topView.emailLabel.warningLabel.text = "올바른 이메일 형식이 아니에요."
                         self?.topView.emailLabel.warningLabel.isHidden = false
-                    } else if !bool {
+                    } else if !valid {
                         self?.topView.emailField.layer.borderWidth = 1
                         self?.topView.emailField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
                         self?.topView.emailLabel.warningLabel.text = "중복된 이메일이 존재해요."
@@ -147,14 +149,14 @@ class SignUpViewController:UIViewController {
                         self?.topView.repasswordField.layer.borderWidth == 0 {
                         UserDefaults.standard.set(text1, forKey: "email")
                         UserDefaults.standard.set(text2,forKey: "password")
-                        let rp = MusicRepositoryImpl()
+                        let rp = MusicRepositoryImpl(loginAPI: LoginAPI())
                         let uc = LoginUseCase(musicRepository: rp)
                         let vm = SignUpViewModel(usecase: uc)
                         let vc = NickNameViewController(viewModel: vm)
                         vc.modalPresentationStyle = .fullScreen
                         self?.present(vc,animated: false)
                     }
-                })
+                }).disposed(by: self!.disposeBag)
             }).disposed(by: disposeBag)
         isAllEmptyBind()
     }

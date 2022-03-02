@@ -20,6 +20,19 @@ class LoginUseCase {
        return musicRepository.localSignUp(email, password, nickname)
     }
     
+    func checkEmail(email:String) -> Single<CheckEmailRespone> {
+        return musicRepository.checkEmail(email: email)
+    }
+    
+    func snsLogin(email:String,type:SNSType) -> Single<SNSLoginResponse> {
+        return musicRepository.snsLogin(email: email, type: type)
+    }
+    
+    func snsSignUp(email:String,nickName:String,type:SNSType) -> Single<SNSSignUpResponse> {
+        return musicRepository.snsSignUp(email: email, nickName: nickName, type: type)
+    }
+    
+    
     init(musicRepository:MusicRepository) {
         self.musicRepository = musicRepository
     }

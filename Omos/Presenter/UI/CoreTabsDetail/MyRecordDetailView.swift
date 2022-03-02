@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import ReadMoreTextView
 
 class MyRecordDetailView:BaseView {
     /// 1
@@ -17,8 +18,7 @@ class MyRecordDetailView:BaseView {
     }()
     
     let circleImageView:UIImageView = {
-        let view = UIImageView(image:UIImage(systemName: "person"))
-        view.backgroundColor = .brown
+        let view = UIImageView(image:UIImage(named: "albumCover"))
         return view
     }()
     
@@ -38,7 +38,13 @@ class MyRecordDetailView:BaseView {
     }()
     
     /// 2
-    let titleImageView:UIImageView = {
+    let titleImageView:UIView = {
+        let view = UIView()
+        view.backgroundColor = .mainBackGround
+        return view
+    }()
+    
+    let backImageView:UIImageView = {
         let view = UIImageView()
         view.backgroundColor = .mainBackGround
         return view
@@ -54,10 +60,24 @@ class MyRecordDetailView:BaseView {
     
     let createdLabel:UILabel = {
         let label = UILabel()
-        label.text = "2020 00 00 한줄감상"
+        label.text = "2020 00 00"
         label.font = .systemFont(ofSize: 12)
         label.textColor = .mainGrey1
         return label
+    }()
+    
+    let cateLabel:UILabel = {
+        let label = UILabel()
+        label.text = " | 한줄감상"
+        label.font = .systemFont(ofSize: 12)
+        label.textColor = .mainGrey1
+        return label
+    }()
+    
+    let reportButton:UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "report"), for: .normal)
+        return button
     }()
     
     /// 3
@@ -67,10 +87,14 @@ class MyRecordDetailView:BaseView {
         return view
     }()
     
-    let mainTextView:UITextView = {
-        let view = UITextView()
-        view.text = "백에린 노래 좋아"
+    var mainLabelView:UILabel = {
+        let view = UILabel()
+        view.text = #"“한줄감상이나옵니다글자수는50자이내여야합니다한줄감상이나옵니다글자수는50자이내여야합니다한줄감상”"#
         view.font = UIFont(name: "Cafe24Oneprettynight", size: 22)
+        view.textAlignment = .center
+        view.backgroundColor = .mainBlack
+        view.textColor = .mainGrey1
+        view.numberOfLines = 0
         return view
     }()
     
@@ -81,15 +105,19 @@ class MyRecordDetailView:BaseView {
         return view
     }()
     
+    let dummyView2:UIView = {
+        let view = UIView()
+        view.backgroundColor = .mainBlack1
+        return view
+    }()
+    
     let nicknameLabel:UILabel = {
         let label = UILabel()
         label.text = "DJ닉네임이들어갑니다다다"
-        label.font = .systemFont(ofSize: 14)
+        label.font = .systemFont(ofSize: 14,weight: .light)
         label.textColor = .mainGrey3
         return label
     }()
-    
-    
     
     let loveImageView:UIImageView = {
         let view = UIImageView(image:UIImage(named: "emptyLove"))
@@ -117,6 +145,12 @@ class MyRecordDetailView:BaseView {
         return label
     }()
     
+    let dummyView3:UIView = {
+        let view = UIView()
+        view.backgroundColor = .mainBlack1
+        return view
+    }()
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -124,6 +158,7 @@ class MyRecordDetailView:BaseView {
         circleImageView.layer.cornerCurve = .circular
         circleImageView.layer.cornerRadius = circleImageView.height / 2
         circleImageView.layer.masksToBounds = true
+       
     }
     
     
@@ -162,10 +197,20 @@ class MyRecordDetailView:BaseView {
             make.height.equalToSuperview().multipliedBy(0.32)
         }
         
+        backImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
         createdLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(16)
             make.bottom.equalToSuperview().offset(-16)
             createdLabel.sizeToFit()
+        }
+        
+        cateLabel.snp.makeConstraints { make in
+            make.leading.equalTo(createdLabel.snp.trailing)
+            make.centerY.equalTo(createdLabel)
+            cateLabel.sizeToFit()
         }
 
         titleLabel.snp.makeConstraints { make in
@@ -174,10 +219,20 @@ class MyRecordDetailView:BaseView {
             titleLabel.sizeToFit()
         }
         
+        reportButton.snp.makeConstraints { make in
+            make.trailing.top.equalToSuperview().inset(16)
+            make.height.width.equalTo(20)
+        }
+        
         ///4
         lastView.snp.makeConstraints { make in
             make.left.right.bottom.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.124)
+        }
+        
+        dummyView2.snp.makeConstraints { make in
+            make.leading.trailing.top.equalToSuperview()
+            make.height.equalTo(0.5)
         }
         
         nicknameLabel.snp.makeConstraints { make in
@@ -187,35 +242,37 @@ class MyRecordDetailView:BaseView {
         }
         
         starImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(12)
+            make.top.equalToSuperview().offset(16)
             make.height.equalToSuperview().multipliedBy(0.3)
             make.width.equalTo(starImageView.snp.height)
-            make.right.equalToSuperview().offset(-16)
+            make.right.equalToSuperview().offset(-10)
         }
 
         starCountLabel.snp.makeConstraints { make in
             make.centerX.equalTo(starImageView.snp.centerX)
-            make.top.equalTo(starImageView.snp.bottom)
+            make.top.equalTo(starImageView.snp.bottom).offset(3)
             starCountLabel.sizeToFit()
         }
 
 
         loveImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(12)
+            make.top.equalToSuperview().offset(16)
             make.height.equalToSuperview().multipliedBy(0.3)
             make.width.equalTo(loveImageView.snp.height)
-            make.right.equalTo(starImageView.snp.left).offset(-6)
+            make.right.equalTo(starImageView.snp.left).offset(-30)
         }
 
         loveCountLabel.snp.makeConstraints { make in
             make.centerX.equalTo(loveImageView.snp.centerX)
-            make.top.equalTo(loveImageView.snp.bottom)
+            make.top.equalTo(loveImageView.snp.bottom).offset(3)
             starCountLabel.sizeToFit()
         }
         
-
-
-
+        dummyView3.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(4)
+        }
+        
         ///3
         textCoverView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
@@ -223,8 +280,9 @@ class MyRecordDetailView:BaseView {
             make.bottom.equalTo(lastView.snp.top)
         }
         
-        mainTextView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+        mainLabelView.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.centerY.equalToSuperview()
         }
         
         
@@ -241,16 +299,21 @@ class MyRecordDetailView:BaseView {
         topLabelView.addSubview(musicTitleLabel)
         topLabelView.addSubview(subMusicInfoLabel)
         
+        titleImageView.addSubview(backImageView)
         titleImageView.addSubview(titleLabel)
         titleImageView.addSubview(createdLabel)
+        titleImageView.addSubview(cateLabel)
+        titleImageView.addSubview(reportButton)
         
-        textCoverView.addSubview(mainTextView)
+        textCoverView.addSubview(mainLabelView)
         
         lastView.addSubview(nicknameLabel)
+        lastView.addSubview(dummyView2)
         lastView.addSubview(loveImageView)
         lastView.addSubview(loveCountLabel)
         lastView.addSubview(starImageView)
         lastView.addSubview(starCountLabel)
+        lastView.addSubview(dummyView3)
     }
     
     

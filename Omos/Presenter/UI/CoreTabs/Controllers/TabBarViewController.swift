@@ -26,7 +26,7 @@ class TabBarViewController: UITabBarController {
         //        }
         
         let home = HomeViewController()
-        let myRecord = MyRecordViewController()
+        let myRecord = MyRecordViewController(viewModel: MyRecordViewModel())
         let allRecord = AllRecordViewController(viewModel: AllRecordViewModel())
         let myDj = MyDJViewController()
         let profile = ProfileViewController()
@@ -58,6 +58,12 @@ class TabBarViewController: UITabBarController {
         navs.forEach { nav in
             TabBarViewController.titles.append((nav.tabBarItem.title ?? "nil",String(describing: type(of: nav.viewControllers.first.self!))))
         }
+    }
+    
+    func checkAutoLogin() {
+        //토큰 필요한 API 호출 실패시 error -> loginView로
+        
+        
     }
     
 }

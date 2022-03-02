@@ -24,6 +24,7 @@ extension UIColor {
     // ex. label.textColor = .mainOrange
     class var mainBackGround: UIColor { UIColor(hex: 0x212121)}
     class var mainBlack: UIColor { UIColor(hex: 0x1A1A1A)}
+    class var mainBlack1: UIColor { UIColor(hex: 0x3A3A3C)}
     class var mainOrange: UIColor {UIColor(hex: 0xD35E32)}
     class var mainGrey: UIColor {UIColor(hex: 0x636363)}
     class var mainGrey4: UIColor {UIColor(hex: 0xAEAEB2)}
@@ -33,7 +34,8 @@ extension UIColor {
     class var kakaoYellow: UIColor {UIColor(hex: 0xFEE500)}
     class var mainGrey1: UIColor {UIColor(hex: 0xE5E5EA)}
     class var mainGrey3: UIColor {UIColor(hex: 0xC7C7CC)}
-
+    class var mainGrey6: UIColor {UIColor(hex: 0x8E8E93)}
+    class var mainBlack2: UIColor {UIColor(hex: 0x2C2C2E)}
     
     class var mainLikeLabelColor: UIColor {UIColor(hex: 0x858585)}
     class var mainLikeImageColor: UIColor {UIColor(hex: 0xD7D7D7)}
