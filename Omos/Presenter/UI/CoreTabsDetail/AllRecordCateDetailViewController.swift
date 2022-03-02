@@ -47,9 +47,11 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
         if expandedIndexSet.contains(indexPath.row) {
                 cell.myView.myView.mainLabelView.numberOfLines = 0
                 cell.myView.myView.mainLabelView.sizeToFit()
+                cell.myView.dummyLabel.text = "접기"
            } else {
                 cell.myView.myView.mainLabelView.numberOfLines = 3
                 cell.myView.myView.mainLabelView.sizeToFit()
+               cell.myView.dummyLabel.text = " 더보기"
            }
 
         cell.delegate = self

@@ -44,6 +44,7 @@ class SearchViewController:BaseViewController {
         navigationItem.rightBarButtonItems?.removeAll()
         bind()
         selfView.emptyView.isHidden = true
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -91,6 +92,7 @@ class SearchViewController:BaseViewController {
         
         selfView.searchViewController.searchBar.rx.text
             .debounce(.milliseconds(300),scheduler:MainScheduler.instance) //요청 오버헤드 방지
+            .distinctUntilChanged()
             .withUnretained(self)
             .subscribe(onNext: { owner,text in
                 guard let text = text else {
@@ -133,6 +135,20 @@ class SearchViewController:BaseViewController {
             }).disposed(by: disposeBag)
     }
     
+    private func addContentsView() {
+        let topTabView = TopTabViewController()
+        addChild(topTabView)
+        self.view.addSubview(topTabView.view)
+        topTabView.view.snp.makeConstraints { make in
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
+        topTabView.didMove(toParent: self)
+    }
+    
+    private func removeContentsView() {
+      
+    }
 }
 
 
@@ -158,4 +174,11 @@ extension SearchViewController:UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print("search")
+        addContentsView()
+        selfView.isHidden = true 
+    }
+    
 }

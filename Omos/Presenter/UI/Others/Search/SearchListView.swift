@@ -26,7 +26,6 @@ class SearchListView:BaseView {
         return table
     }()
     
-    
     let searchViewController:UISearchController = {
         let view = UISearchController(searchResultsController: nil)
         view.searchBar.placeholder = "음악을 검색해주세요"

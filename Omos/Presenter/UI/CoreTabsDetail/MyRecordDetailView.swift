@@ -38,7 +38,13 @@ class MyRecordDetailView:BaseView {
     }()
     
     /// 2
-    let titleImageView:UIImageView = {
+    let titleImageView:UIView = {
+        let view = UIView()
+        view.backgroundColor = .mainBackGround
+        return view
+    }()
+    
+    let backImageView:UIImageView = {
         let view = UIImageView()
         view.backgroundColor = .mainBackGround
         return view
@@ -112,8 +118,6 @@ class MyRecordDetailView:BaseView {
         label.textColor = .mainGrey3
         return label
     }()
-    
-    
     
     let loveImageView:UIImageView = {
         let view = UIImageView(image:UIImage(named: "emptyLove"))
@@ -193,6 +197,10 @@ class MyRecordDetailView:BaseView {
             make.height.equalToSuperview().multipliedBy(0.32)
         }
         
+        backImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
         createdLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(16)
             make.bottom.equalToSuperview().offset(-16)
@@ -265,9 +273,6 @@ class MyRecordDetailView:BaseView {
             make.height.equalTo(4)
         }
         
-
-
-
         ///3
         textCoverView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
@@ -294,6 +299,7 @@ class MyRecordDetailView:BaseView {
         topLabelView.addSubview(musicTitleLabel)
         topLabelView.addSubview(subMusicInfoLabel)
         
+        titleImageView.addSubview(backImageView)
         titleImageView.addSubview(titleLabel)
         titleImageView.addSubview(createdLabel)
         titleImageView.addSubview(cateLabel)

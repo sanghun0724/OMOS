@@ -12,7 +12,7 @@ protocol TargetType: URLRequestConvertible {
     var baseURL: String { get }
     var method: HTTPMethod { get }
     var path: String { get }
-    var parameters: RequestParams { get }
+    var parameters: RequestParams? { get }
 }
 
 extension TargetType {
@@ -29,11 +29,12 @@ extension TargetType {
             let queryParams = params.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
             var components = URLComponents(string: url.appendingPathComponent(path).absoluteString)
             components?.queryItems = queryParams
-            print(components?.url)
             urlRequest.url = components?.url
         case .body(let request):
             let params = request?.toDictionary() ?? [:]
             urlRequest.httpBody = try JSONSerialization.data(withJSONObject: params, options: [])
+        default:
+            print("param is nil")
         }
 
         return urlRequest

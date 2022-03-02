@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class MyRecordDetailViewController:BaseViewController,UITextViewDelegate {
+class MyRecordDetailViewController:BaseViewController {
     
     private let selfView = MyRecordDetailView()
     let myRecord:String
@@ -58,6 +58,16 @@ class MyRecordDetailViewController:BaseViewController,UITextViewDelegate {
     }
     
     func bind() {
+        selfView.reportButton.rx.tap
+            .asDriver()
+            .drive(onNext:{ [weak self] _ in
+                let action = UIAlertAction(title: "신고", style: .default) { alert in
+                    print(alert)
+                }
+                action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
+                self?.presentAlert(title: "신고하기", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
+            }).disposed(by: disposeBag)
+        
     }
     
 }

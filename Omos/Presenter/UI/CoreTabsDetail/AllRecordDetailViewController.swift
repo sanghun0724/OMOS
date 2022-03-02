@@ -59,7 +59,7 @@ class AllRecordDetailViewController:BaseViewController {
     }
     
     func bind() {
-        
+       
     }
     
 }

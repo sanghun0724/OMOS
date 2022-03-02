@@ -47,7 +47,7 @@ extension LoginTarget:TargetType {
         }
     }
     
-    var parameters: RequestParams {
+    var parameters: RequestParams? {
         switch self {
         case .login(let request): return .body(request)
         case .getUserDetails(let request): return .body(request)
@@ -56,6 +56,8 @@ extension LoginTarget:TargetType {
         case .checkEmail(let request): return .body(request)
         case .SNSLogin(let request): return .body(request)
         case .SNSSignUp(let request): return .body(request)
+        default:
+            return nil
         }
     }
     

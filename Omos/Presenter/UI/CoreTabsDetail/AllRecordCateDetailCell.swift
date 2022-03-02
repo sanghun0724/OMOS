@@ -66,7 +66,7 @@ class CellContainerView:BaseView {
     
     let dummyLabel:UILabel = {
         let label = UILabel()
-        label.text = "... 더보기"
+        label.text = " 더보기"
         label.font = .systemFont(ofSize: 14,weight:.medium)
         label.backgroundColor = .mainBlack
         return label
@@ -128,7 +128,7 @@ class CellContainerView:BaseView {
         }
         
         dummyLabel.snp.makeConstraints { make in
-            make.trailing.bottom.equalTo(myView.mainLabelView)
+            make.bottom.trailing.equalToSuperview()
             dummyLabel.sizeToFit()
         }
         
