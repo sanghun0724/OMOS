@@ -6,29 +6,41 @@
 //
 
 import Foundation
-
-struct test {
-    let testThing:[String]
-}
+import RxSwift
 
 
-class AllRecordViewModel {
+class AllRecordViewModel:BaseViewModel {
     
-    private(set) var model:[test] = []
+    let loading = BehaviorSubject<Bool>(value:false)
+    let selectRecords = BehaviorSubject<SelectResponse>(value:.init(aLine: [], ost: [], free: []))
+    var currentSelectRecords:SelectResponse = .init(aLine: [], ost: [], free: [])
+    let errorMessage = BehaviorSubject<String?>(value: nil)
+    let usecase:RecordsUseCase
     
-    func viewDidLoad() {
-        model.append(test(testThing: ["12345"]))
-        model.append(test(testThing: ["4234"]))
-        model.append(test(testThing: ["42342222"]))
-        model.append(test(testThing: ["145"]))
-        model.append(test(testThing: ["878989789789"]))
+    
+    func selectRecordsShow() {
+        usecase.selectRecord()
+            .subscribe({ [weak self] event in
+                switch event {
+                case .success(let data):
+                    print("success")
+                    self?.currentSelectRecords = data
+                    self?.selectRecords.onNext(data)
+                case .failure(let error):
+                    self?.errorMessage.onNext(error.localizedDescription)
+                }
+            }).disposed(by: disposeBag)
+    }
+    
+    func numberofRows() -> Int {
+        return 5
     }
     
     
-    func numberofSection() -> Int {
-        return 5 // 5 <- 카테 종류
+    init(usecase:RecordsUseCase) {
+        self.usecase = usecase
+        super.init()
     }
-    
     
     
 }

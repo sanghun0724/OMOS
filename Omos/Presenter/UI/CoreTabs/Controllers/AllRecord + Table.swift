@@ -11,31 +11,32 @@ import RxSwift
 
 
 extension AllRecordViewController:UITableViewDelegate,UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.numberofSection()
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.numberofRows()
+    }
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordTableCell.identifier,for:indexPath) as! AllRecordTableCell
-//        var vc = UIViewController()
-//        switch indexPath.row {
-//        case 0:
-//            //            cell.configure()
-//        case 1:
-//            //            cell.configure()
-//        case 2:
-//            //            cell.configure()
-//        case 3:
-//            //            cell.configure()
-//        case 4:
-//            //            cell.configure()
-//        default:
-//            print("default")
-//        }
+        guard let model = self.selectedRecords else { return  AllRecordTableCell() }
+        switch indexPath.row {
+        case 0:
+            cell.configureModel(records: model.aLine)
+        case 1:
+            cell.configureModel(records: model.ost)
+        case 2:
+            cell.configureModel(records: model.free)
+        case 3:
+            cell.configureModel(records: model.aLine)
+        case 4:
+            cell.configureModel(records: model.aLine)
+        default:
+            print("default")
+        }
         cell.cellDelegate = self 
         return cell
     }

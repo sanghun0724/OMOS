@@ -5,8 +5,8 @@
 //  Created by sangheon on 2022/03/02.
 //
 
-import Foundation
+import RxSwift
 
 protocol RecordsRepository {
-    
+    func selectRecord() -> Single<SelectResponse>
 }

@@ -16,6 +16,7 @@ class AllRecordCollectionCell:UICollectionViewCell {
     static let identifier = "AllRecordCollectionCell"
     let disposeBag = DisposeBag()
     var delegate:AllRecordCellProtocol?
+    var detailInfo:ALine?
     
     let backImageView:UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "test"))
@@ -27,6 +28,7 @@ class AllRecordCollectionCell:UICollectionViewCell {
     let albumImageView:UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "albumCover"))
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -95,8 +97,14 @@ class AllRecordCollectionCell:UICollectionViewCell {
         albumImageView.layer.masksToBounds = true
     }
     
-    func configureModel() {
-        
+    func configureModel(record:ALine) {
+        self.detailInfo = record
+        descLabel.text = record.recordTitle
+        albumImageView.setImage(with: record.music.albumImageURL)
+        backImageView.setImage(with: record.music.albumImageURL)
+        nameLabel.text = record.nickname
+        titleLabel.text = record.music.albumTitle
+        subTitleLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}
     }
     
     
@@ -127,7 +135,7 @@ class AllRecordCollectionCell:UICollectionViewCell {
        labelCoverView.snp.makeConstraints { make in
            make.leading.trailing.equalToSuperview().inset(12)
            make.top.equalToSuperview().offset(10)
-           make.bottom.equalTo(descLabel.snp.top).offset(-40).priority(2)
+           make.height.equalTo(44)
        }
        
        albumImageView.snp.makeConstraints { make in

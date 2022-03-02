@@ -8,4 +8,20 @@
 import Foundation
 import RxSwift
 
-
+class RecordsUseCase {
+    
+    private let recordsRepository:RecordsRepository
+    
+    init(recordsRepository:RecordsRepository) {
+        self.recordsRepository = recordsRepository
+    }
+    
+    func selectRecord() -> Single<SelectResponse> {
+        return recordsRepository.selectRecord()
+    }
+    
+    
+    
+    
+    
+}

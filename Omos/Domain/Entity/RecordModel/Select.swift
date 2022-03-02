@@ -8,7 +8,8 @@
 import Foundation
 
 struct SelectResponse: Codable {
-    let aLine, ost: [ALine]
+    let aLine: [ALine]
+    let ost: [ALine]
    // let lyrics: [Any]
     let free: [ALine]
     //let story: [Any]

@@ -21,15 +21,10 @@ class RecordAPI {
     
     
     func select(completion:@escaping(Result<SelectResponse,Error>) -> Void) {
-        let authenticator = MyAuthenticator()
-        let credential = MyAuthenticationCredential(accessToken:UserDefaults.standard.string(forKey: "access") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refresh") ?? "", userID: 0)
-        let myAuthencitationInterceptor = AuthenticationInterceptor(authenticator: authenticator,
-                                                                    credential: credential)
         
-        AF.request(RecordTarget.select,interceptor: myAuthencitationInterceptor).responseDecodable { (response:AFDataResponse<SelectResponse>) in
+        AF.request(RecordTarget.select,interceptor: getInterceptor()).responseDecodable { (response:AFDataResponse<SelectResponse>) in
             switch response.result {
             case .success(let data):
-                print(data)
                 completion(.success(data))
             case .failure(let error):
                 print(error.localizedDescription)

@@ -10,6 +10,7 @@ import SnapKit
 
 class AllRecordViewController: BaseViewController {
     
+    var selectedRecords:SelectResponse?
     let viewModel:AllRecordViewModel
     
     init(viewModel:AllRecordViewModel) {
@@ -28,6 +29,8 @@ class AllRecordViewController: BaseViewController {
         super.viewDidLoad()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
+        bind()
+        viewModel.selectRecordsShow()
         
     }
     
@@ -43,6 +46,12 @@ class AllRecordViewController: BaseViewController {
     }
     
     func bind() {
+        viewModel.selectRecords
+            .withUnretained(self)
+            .subscribe(onNext: { owner,info in
+                owner.selectedRecords = info
+                owner.selfView.tableView.reloadData()
+            }).disposed(by: disposeBag)
     }
 }
 
