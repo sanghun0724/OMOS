@@ -153,14 +153,25 @@ class CellContainerView:BaseView {
    }
 }
 
-class LoddingCell:UITableViewCell {
+class LoadingCell:UITableViewCell {
+    static let identifier = "LoadingCell"
+    
+    let selfView = LoadingView()
     
     func start() {
-        self.showIndicator()
+        selfView.isHidden = false
     }
     
     func dismiss(){
-        self.dismissIndicator()
+        selfView.isHidden = true
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.addSubview(selfView)
+        selfView.backgroundColor = .mainBackGround
+        selfView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
 }
