@@ -28,7 +28,7 @@ extension RecordTarget:TargetType {
     var path: String {
         switch self {
         case .select: return "/select"
-        case .category(let cate, _): return "/category/\(cate)"
+        case .category(let cate, _): return "/select/category/\(cate)"
         }
     }
     

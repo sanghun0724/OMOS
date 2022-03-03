@@ -12,7 +12,8 @@ class AllRecordCateDetailView:BaseView {
     
     let tableView:UITableView = {
        let table = UITableView()
-        table.register(AllRecordCateDetailCell.self, forCellReuseIdentifier: AllRecordCateDetailCell.identifier)
+        table.register(AllRecordCateLongDetailCell.self, forCellReuseIdentifier: AllRecordCateLongDetailCell.identifier)
+        table.register(AllRecordCateShortDetailCell.self, forCellReuseIdentifier: AllRecordCateShortDetailCell.identifier)
         table.backgroundColor = .mainBackGround
         table.rowHeight = UITableView.automaticDimension
         table.estimatedRowHeight = UITableView.automaticDimension

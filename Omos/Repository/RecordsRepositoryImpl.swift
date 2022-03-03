@@ -33,9 +33,10 @@ class RecordsRepositoryImpl:RecordsRepository {
         }
     }
     
-    func cateFetch() -> Single<CategoryRespone> {
-        return Single<CategoryRespone>.create { [weak self] single in
-            self?.recordAPI.categoryFetch(cateType: cateType, request: <#T##CateRequest#>) { result in
+    
+    func cateFetch(type: cateType, page: Int, size: Int, sort: String, userid: Int) -> Single<[CategoryRespone]> {
+        return Single<[CategoryRespone]>.create { [weak self] single in
+            self?.recordAPI.categoryFetch(cateType: type, request: .init(page: page, size: size, sort: sort, userid: userid), completion: { result in
                 switch result {
                 case .success(let data):
                     single(.success(data))
@@ -43,7 +44,7 @@ class RecordsRepositoryImpl:RecordsRepository {
                     print(error.localizedDescription)
                     single(.failure(error))
                 }
-            }
+            })
             
             return Disposables.create()
         }

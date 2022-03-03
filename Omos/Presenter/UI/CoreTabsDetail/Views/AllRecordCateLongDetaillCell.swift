@@ -9,10 +9,10 @@ import Foundation
 import UIKit
 import RxSwift
 protocol MyCellDelegate: AnyObject {
-    func readMoreTapped(cell: AllRecordCateDetailCell)
+    func readMoreTapped(cell: AllRecordCateLongDetailCell)
 }
 
-class AllRecordCateDetailCell:UITableViewCell {
+class AllRecordCateLongDetailCell:UITableViewCell {
     static let identifier = "AllRecordCateDetailCell"
     let disposeBag = DisposeBag()
     
@@ -51,11 +51,26 @@ class AllRecordCateDetailCell:UITableViewCell {
             })
             .disposed(by: disposeBag)
     }
+    
 
     
     override func prepareForReuse() {
         super.prepareForReuse()
-      
+        //myView.myView.backImageView.image = nil
+    }
+    
+    func configureModel(record:CategoryRespone) {
+        myView.myView.musicTitleLabel.text = record.music.musicTitle
+        myView.myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
+        myView.myView.circleImageView.setImage(with: record.music.albumImageURL)
+        //myView.myView.backImageView.setImage(with: ) 추후 추가되면 삽입
+        myView.myView.titleLabel.text = record.recordTitle
+        myView.myView.createdLabel.text = record.createdDate
+        myView.myView.mainLabelView.text = record.recordContents
+        myView.myView.nicknameLabel.text = record.nickname
+        myView.myView.loveCountLabel.text = String(record.likeCnt)
+        myView.myView.starCountLabel.text = String(record.scrapCnt)
+        /// 추후에 자기가 스크랩 눌렀는지 좋아요 눌렀는지 체크하는 로직. ㄱ
     }
     
 }

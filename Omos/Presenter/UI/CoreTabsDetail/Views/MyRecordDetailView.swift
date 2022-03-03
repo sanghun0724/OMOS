@@ -186,6 +186,7 @@ class MyRecordDetailView:BaseView {
         
         subMusicInfoLabel.snp.makeConstraints { make in
             make.left.equalTo(musicTitleLabel)
+            make.trailing.equalToSuperview().offset(-16)
             make.bottom.equalTo(circleImageView.snp.bottom)
             subMusicInfoLabel.sizeToFit()
         }

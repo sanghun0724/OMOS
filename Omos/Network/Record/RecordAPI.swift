@@ -33,12 +33,13 @@ class RecordAPI {
         }
     }
     
-    func categoryFetch(cateType:cateType,request:CateRequest,completion:@escaping(Result<CategoryRespone,Error>) -> Void) {
+    func categoryFetch(cateType:cateType,request:CateRequest,completion:@escaping(Result<[CategoryRespone],Error>) -> Void) {
         
-        AF.request(RecordTarget.category(cate: cateType, request: request),interceptor: getInterceptor()).responseDecodable { (response:AFDataResponse<CategoryRespone>) in
+        AF.request(RecordTarget.category(cate: cateType, request: request),interceptor: getInterceptor()).responseDecodable { (response:AFDataResponse<[CategoryRespone]>) in
             switch response.result {
             case .success(let data):
                 print(data)
+                
                 completion(.success(data))
             case .failure(let error):
                 print(error.localizedDescription)
@@ -46,4 +47,5 @@ class RecordAPI {
             }
         }
     }
+    
 }

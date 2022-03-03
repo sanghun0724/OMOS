@@ -43,21 +43,44 @@ extension AllRecordViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: AllRecordHeaderView.identifier) as! AllRecordHeaderView
-        headerView.button.rx.tap.asDriver()
-            .drive(onNext: { [weak self] in
-                print("click is here ")
-            }).disposed(by: headerView.disposeBag)
+        let uc = RecordsUseCase(recordsRepository: RecordsRepositoryImpl(recordAPI: RecordAPI()))
+        let vm = AllRecordCateDetailViewModel(usecase: uc)
         switch section {
         case 0:
-            headerView.label.text = "나만의 가사해석"
+            headerView.label.text = "한 줄 감상"
+            headerView.button.rx.tap.asDriver()
+                .drive(onNext: { [weak self] in
+                    let vc = AllRecordCateDetailViewController(viewModel: vm, cateType: .A_LINE)
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }).disposed(by: headerView.disposeBag)
         case 1:
             headerView.label.text = "내인생의 OST"
+            headerView.button.rx.tap.asDriver()
+                .drive(onNext: { [weak self] in
+                    let vc = AllRecordCateDetailViewController(viewModel: vm, cateType: .OST)
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }).disposed(by: headerView.disposeBag)
         case 2:
             headerView.label.text = "노래속 나의 이야기"
+            headerView.button.rx.tap.asDriver()
+                .drive(onNext: { [weak self] in
+                    let vc = AllRecordCateDetailViewController(viewModel: vm, cateType: .STORY)
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }).disposed(by: headerView.disposeBag)
         case 3:
-            headerView.label.text = "어떤 카테코리 등등"
+            headerView.label.text = "나만의 가사 해석"
+            headerView.button.rx.tap.asDriver()
+                .drive(onNext: { [weak self] in
+                    let vc = AllRecordCateDetailViewController(viewModel: vm, cateType: .LYRICS)
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }).disposed(by: headerView.disposeBag)
         case 4:
-            headerView.label.text = "테스트 입니다"
+            headerView.label.text = "자유 공간"
+            headerView.button.rx.tap.asDriver()
+                .drive(onNext: { [weak self] in
+                    let vc = AllRecordCateDetailViewController(viewModel: vm, cateType: .FREE)
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }).disposed(by: headerView.disposeBag)
         default:
             print("you need to add section case")
         }
@@ -76,6 +99,5 @@ extension AllRecordViewController:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return UIScreen.main.bounds.height / 17
     }
-    
     
 }
