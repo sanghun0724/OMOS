@@ -9,4 +9,5 @@ import RxSwift
 
 protocol RecordsRepository {
     func selectRecord() -> Single<SelectResponse>
+    func cateFetch(type:cateType,page:Int,size:Int,sort:[cateType],userid:Int) -> Single<CategoryRespone>
 }

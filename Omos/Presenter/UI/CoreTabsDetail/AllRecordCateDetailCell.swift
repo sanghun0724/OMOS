@@ -74,12 +74,6 @@ class CellContainerView:BaseView {
     
     let readMoreButton:UIButton = {
         let button = UIButton()
-//        button.setTitle("... 더보기", for: .normal)
-//        button.titleLabel?.font = .systemFont(ofSize: 16)
-//        button.titleLabel?.minimumScaleFactor = 0.0
-//        button.titleLabel?.numberOfLines = 1
-    //button.backgroundColor = .red
-//        button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
     }()
    
@@ -141,5 +135,17 @@ class CellContainerView:BaseView {
             make.height.equalTo(Constant.mainHeight * 0.077)
         }
        
+   }
 }
+
+class LoddingCell:UITableViewCell {
+    
+    func start() {
+        self.showIndicator()
+    }
+    
+    func dismiss(){
+        self.dismissIndicator()
+    }
+    
 }

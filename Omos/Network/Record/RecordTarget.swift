@@ -10,6 +10,7 @@ import Alamofire
 
 enum RecordTarget {
     case select
+    case category(cate:cateType,request:CateRequest)
 }
 
 extension RecordTarget:TargetType {
@@ -20,20 +21,21 @@ extension RecordTarget:TargetType {
     var method: HTTPMethod {
         switch self {
         case .select: return .get
-
+        case .category: return .get
         }
     }
     
     var path: String {
         switch self {
         case .select: return "/select"
+        case .category(let cate, _): return "/category/\(cate)"
         }
     }
     
     var parameters: RequestParams? {
         switch self {
         case .select: return nil
-
+        case .category(_,let request): return .query(request)
         }
     }
     

@@ -20,6 +20,9 @@ class RecordsUseCase {
         return recordsRepository.selectRecord()
     }
     
+    func cateFetch(type:cateType,page:Int,size:Int,sort:[cateType],userid:Int) -> Single<CategoryRespone> {
+        return recordsRepository.cateFetch(type:type,page:page,size:size,sort:sort,userid:userid)
+    }
     
     
     

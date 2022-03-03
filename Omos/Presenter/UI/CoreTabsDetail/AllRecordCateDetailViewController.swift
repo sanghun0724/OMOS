@@ -14,6 +14,9 @@ class AllRecordCateDetailViewController:BaseViewController {
     let selfView = AllRecordCateDetailView()
     var expandedIndexSet : IndexSet = []
     
+    var isPaiging = false
+    var hasNextPage = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         selfView.tableView.delegate = self
@@ -37,6 +40,10 @@ class AllRecordCateDetailViewController:BaseViewController {
 
 
 extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 6
@@ -71,8 +78,6 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
         return UITableView.automaticDimension
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return UIView()

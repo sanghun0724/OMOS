@@ -50,3 +50,4 @@ class AllRecordDetailView:BaseView {
         
     }
 }
+

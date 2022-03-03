@@ -62,7 +62,4 @@ extension AllRecordViewController:AllCollectCellprotocol {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    
-    
-    
 }
