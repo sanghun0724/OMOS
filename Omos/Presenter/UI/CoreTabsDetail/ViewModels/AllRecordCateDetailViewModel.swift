@@ -19,8 +19,10 @@ class AllRecordCateDetailViewModel:BaseViewModel {
     
     
     func selectRecordsShow(type: cateType, page: Int, size: Int, sort: String, userid: Int) {
+        loading.onNext(true)
         usecase.cateFetch(type: type, page: page, size: size, sort: sort, userid: userid)
             .subscribe({ [weak self] event in
+                self?.loading.onNext(false)
                 switch event {
                 case .success(let data):
                     self?.currentCateRecords = data

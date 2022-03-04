@@ -11,6 +11,7 @@ import Alamofire
 enum RecordTarget {
     case select
     case category(cate:cateType,request:CateRequest)
+    case myRecord(userid:Int)
 }
 
 extension RecordTarget:TargetType {
@@ -22,6 +23,7 @@ extension RecordTarget:TargetType {
         switch self {
         case .select: return .get
         case .category: return .get
+        case .myRecord: return .get
         }
     }
     
@@ -29,6 +31,7 @@ extension RecordTarget:TargetType {
         switch self {
         case .select: return "/select"
         case .category(let cate, _): return "/select/category/\(cate)"
+        case .myRecord(let user): return "/\(user)"
         }
     }
     
@@ -36,6 +39,7 @@ extension RecordTarget:TargetType {
         switch self {
         case .select: return nil
         case .category(_,let request): return .query(request)
+        case .myRecord: return nil
         }
     }
     

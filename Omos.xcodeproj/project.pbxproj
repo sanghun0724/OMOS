@@ -111,6 +111,7 @@
 		B6BC148727BFF6C50067D8FB /* MyRecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BC148627BFF6C40067D8FB /* MyRecordDetailViewController.swift */; };
 		B6BC148927BFF6F80067D8FB /* MyRecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BC148827BFF6F80067D8FB /* MyRecordDetailView.swift */; };
 		B6C3AD4527B95B1E00D5D69D /* Attributed + Stirng.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C3AD4427B95B1E00D5D69D /* Attributed + Stirng.swift */; };
+		B6C969B727D1B7C100BA4E58 /* MyRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C969B627D1B7C100BA4E58 /* MyRecord.swift */; };
 		B6CC1D7427BA437A00B5EE7E /* InfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CC1D7327BA437A00B5EE7E /* InfoController.swift */; };
 		B6CC1D7627BA475900B5EE7E /* UseInfoText.rtf in Resources */ = {isa = PBXBuildFile; fileRef = B6CC1D7527BA475900B5EE7E /* UseInfoText.rtf */; };
 		B6CC1D7827BA536A00B5EE7E /* PrivateInfoText.rtf in Resources */ = {isa = PBXBuildFile; fileRef = B6CC1D7727BA536A00B5EE7E /* PrivateInfoText.rtf */; };
@@ -257,6 +258,7 @@
 		B6BC148627BFF6C40067D8FB /* MyRecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordDetailViewController.swift; sourceTree = "<group>"; };
 		B6BC148827BFF6F80067D8FB /* MyRecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordDetailView.swift; sourceTree = "<group>"; };
 		B6C3AD4427B95B1E00D5D69D /* Attributed + Stirng.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attributed + Stirng.swift"; sourceTree = "<group>"; };
+		B6C969B627D1B7C100BA4E58 /* MyRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecord.swift; sourceTree = "<group>"; };
 		B6CC1D7327BA437A00B5EE7E /* InfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoController.swift; sourceTree = "<group>"; };
 		B6CC1D7527BA475900B5EE7E /* UseInfoText.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = UseInfoText.rtf; sourceTree = "<group>"; };
 		B6CC1D7727BA536A00B5EE7E /* PrivateInfoText.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = PrivateInfoText.rtf; sourceTree = "<group>"; };
@@ -660,6 +662,7 @@
 			children = (
 				B6ABCCF227CF44880003B47A /* Select.swift */,
 				B6FE837927D07CE700401FC5 /* Category.swift */,
+				B6C969B627D1B7C100BA4E58 /* MyRecord.swift */,
 			);
 			path = RecordModel;
 			sourceTree = "<group>";
@@ -1020,6 +1023,7 @@
 				B650874127AF96C00020D2C1 /* MyDJViewController.swift in Sources */,
 				B646052727CB7DE70022E062 /* ArtistViewController.swift in Sources */,
 				B6E12E7E27C21050008644B5 /* CreateViewController.swift in Sources */,
+				B6C969B727D1B7C100BA4E58 /* MyRecord.swift in Sources */,
 				B6540F6327C50F79002B1696 /* CategoryViewController.swift in Sources */,
 				B6CC1D7427BA437A00B5EE7E /* InfoController.swift in Sources */,
 				B646051727CB5E8C0022E062 /* EntireViewController.swift in Sources */,

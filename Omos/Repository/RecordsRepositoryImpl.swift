@@ -50,6 +50,21 @@ class RecordsRepositoryImpl:RecordsRepository {
         }
     }
     
+    func myRecordFetch(userid: Int) -> Single<[MyRecordRespone]> {
+        return Single<[MyRecordRespone]>.create { [weak self] single in
+            self?.recordAPI.myRecordFetch(userid:userid ,completion: { result in
+                switch result {
+                case .success(let data):
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            })
+            
+            return Disposables.create()
+        }
+    }
     
     
     

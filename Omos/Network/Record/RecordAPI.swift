@@ -48,4 +48,19 @@ class RecordAPI {
         }
     }
     
+    func myRecordFetch(userid:Int,completion:@escaping(Result<[MyRecordRespone],Error>) -> Void) {
+        
+        AF.request(RecordTarget.myRecord(userid: userid),interceptor: getInterceptor()).responseDecodable { (response:AFDataResponse<[MyRecordRespone]>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+        
+    }
+    
 }

@@ -19,8 +19,10 @@ class AllRecordViewModel:BaseViewModel {
     
     
     func selectRecordsShow() {
+        loading.onNext(true)
         usecase.selectRecord()
             .subscribe({ [weak self] event in
+                self?.loading.onNext(false)
                 switch event {
                 case .success(let data):
                     print("success")
