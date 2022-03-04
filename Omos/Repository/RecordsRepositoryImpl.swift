@@ -66,6 +66,22 @@ class RecordsRepositoryImpl:RecordsRepository {
         }
     }
     
+    func save(cate: String, content: String, isPublic: Bool, musicId: String, title: String, userid: Int) -> Single<SaveRespone> {
+        
+        return Single<SaveRespone>.create { [weak self] single in
+            self?.recordAPI.saveFetch(request:.init(category: cate, contents: content, isPublic: isPublic, musicID: musicId, title: title, userID: userid) ,completion: { result in
+                switch result {
+                case .success(let data):
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            })
+            
+            return Disposables.create()
+        }
+    }
     
     
     

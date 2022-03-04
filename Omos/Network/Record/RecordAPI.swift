@@ -53,7 +53,6 @@ class RecordAPI {
         AF.request(RecordTarget.myRecord(userid: userid),interceptor: getInterceptor()).responseDecodable { (response:AFDataResponse<[MyRecordRespone]>) in
             switch response.result {
             case .success(let data):
-                print(data)
                 completion(.success(data))
             case .failure(let error):
                 print(error.localizedDescription)
@@ -62,5 +61,19 @@ class RecordAPI {
         }
         
     }
+    
+    func saveFetch(request:SaveRequest,completion:@escaping(Result<SaveRespone,Error>) -> Void) {
+        AF.request(RecordTarget.save(request),interceptor: getInterceptor()).responseDecodable { (response:AFDataResponse<SaveRespone>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
+    
     
 }

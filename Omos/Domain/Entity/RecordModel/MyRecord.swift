@@ -22,3 +22,27 @@ struct MyRecordRespone: Codable {
         case recordTitle
     }
 }
+
+
+// MARK: - MyRecord
+struct SaveRequest: Codable {
+    let category, contents: String
+    let isPublic: Bool
+    let musicID, title: String
+    let userID: Int
+
+    enum CodingKeys: String, CodingKey {
+        case category, contents, isPublic
+        case musicID = "musicId"
+        case title
+        case userID = "userId"
+    }
+}
+
+struct SaveRespone:Codable {
+    let postID: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case postID = "postId"
+    }
+}

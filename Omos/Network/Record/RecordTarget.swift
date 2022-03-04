@@ -12,6 +12,7 @@ enum RecordTarget {
     case select
     case category(cate:cateType,request:CateRequest)
     case myRecord(userid:Int)
+    case save(SaveRequest)
 }
 
 extension RecordTarget:TargetType {
@@ -24,6 +25,7 @@ extension RecordTarget:TargetType {
         case .select: return .get
         case .category: return .get
         case .myRecord: return .get
+        case .save: return .post
         }
     }
     
@@ -32,6 +34,7 @@ extension RecordTarget:TargetType {
         case .select: return "/select"
         case .category(let cate, _): return "/select/category/\(cate)"
         case .myRecord(let user): return "/\(user)"
+        case .save: return "save"
         }
     }
     
@@ -40,6 +43,7 @@ extension RecordTarget:TargetType {
         case .select: return nil
         case .category(_,let request): return .query(request)
         case .myRecord: return nil
+        case .save(let request): return .body(request)
         }
     }
     
