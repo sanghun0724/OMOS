@@ -12,9 +12,9 @@ import RxCocoa
 class MyRecordDetailViewController:BaseViewController {
     
     private let selfView = MyRecordDetailView()
-    let myRecord:String
+    let myRecord:MyRecordRespone
     
-    init(myRecord:String) {
+    init(myRecord:MyRecordRespone) {
         self.myRecord = myRecord
         super.init(nibName: nil, bundle: nil)
     }
@@ -27,6 +27,7 @@ class MyRecordDetailViewController:BaseViewController {
         super.viewDidLoad()
         setNavigationItems()
         bind()
+        setData()
     }
     
     private func setNavigationItems() {
@@ -67,6 +68,18 @@ class MyRecordDetailViewController:BaseViewController {
                 action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
                 self?.presentAlert(title: "신고하기", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
             }).disposed(by: disposeBag)
+        
+    }
+    
+    func setData() {
+        selfView.musicTitleLabel.text = myRecord.music.musicTitle
+        selfView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
+        selfView.circleImageView.setImage(with: myRecord.music.albumImageURL)
+//        selfView.backImageView.setImage(with: <#T##String#>)
+        selfView.titleLabel.text = myRecord.recordTitle
+        selfView.createdLabel.text = myRecord.createdDate
+        
+        selfView.mainLabelView.text = myRecord.recordContents
         
     }
     

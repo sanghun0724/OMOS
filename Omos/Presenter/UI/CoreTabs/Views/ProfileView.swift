@@ -30,7 +30,6 @@ class ProfileView:BaseView {
 class ProfileHeaderView:UITableViewHeaderFooterView {
     static let identifier = "ProfileHeaderView"
     
-    
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
 
