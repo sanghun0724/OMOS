@@ -17,3 +17,4 @@ struct MyAuthenticationCredential: AuthenticationCredential {
     var requiresRefresh = false
     //자동으로 해주는듯?
 }
+
