@@ -137,12 +137,15 @@ class CategoryViewController:BaseViewController {
             selfView.freeView
         ]
         
+        let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+        let uc = RecordsUseCase(recordsRepository: rp)
+        let vm = CreateViewModel(usecase: uc)
         for view in views {
             if view.layer.borderWidth == 1 {
                 if view == selfView.lyricsView {
                     print("this is lyrics view")
                 } else {
-                    let vc = CreateViewController(category: view.titleLabel.text!)
+                    let vc = CreateViewController(viewModel:vm,category: view.titleLabel.text!)
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             }

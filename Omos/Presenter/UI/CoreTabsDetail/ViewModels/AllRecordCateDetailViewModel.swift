@@ -1,41 +1,41 @@
 //
-//  AllRecordViewModel.swift
+//  AllRecordDetailViewModel.swift
 //  Omos
 //
-//  Created by sangheon on 2022/02/06.
+//  Created by sangheon on 2022/03/03.
 //
 
 import Foundation
 import RxSwift
 
 
-class AllRecordViewModel:BaseViewModel {
+class AllRecordCateDetailViewModel:BaseViewModel {
     
     let loading = BehaviorSubject<Bool>(value:false)
-    let selectRecords = BehaviorSubject<SelectResponse>(value:.init(aLine: [], ost: [], lyrics: [], free: [], story: []))
-    var currentSelectRecords:SelectResponse = .init(aLine: [], ost: [], lyrics: [], free: [], story: [])
+    let cateRecords = BehaviorSubject<[CategoryRespone]>(value: [])
+    var currentCateRecords:[CategoryRespone] = []
     let errorMessage = BehaviorSubject<String?>(value: nil)
     let usecase:RecordsUseCase
     
     
-    func selectRecordsShow() {
+    func selectRecordsShow(type: cateType, page: Int, size: Int, sort: String, userid: Int) {
         loading.onNext(true)
-        usecase.selectRecord()
+        usecase.cateFetch(type: type, page: page, size: size, sort: sort, userid: userid)
             .subscribe({ [weak self] event in
                 self?.loading.onNext(false)
                 switch event {
                 case .success(let data):
-                    print("success")
-                    self?.currentSelectRecords = data
-                    self?.selectRecords.onNext(data)
+                    self?.currentCateRecords = data
+                    self?.cateRecords.onNext(data)
                 case .failure(let error):
+                    print(error.localizedDescription)
                     self?.errorMessage.onNext(error.localizedDescription)
                 }
             }).disposed(by: disposeBag)
     }
     
     func numberofRows() -> Int {
-        return 5
+        return currentCateRecords.count
     }
     
     

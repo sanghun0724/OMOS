@@ -112,9 +112,9 @@ class MyRecordTableCell:UITableViewCell {
         }
         
         albumImageView.snp.makeConstraints { make in
-            make.left.bottom.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.64)
-            make.width.equalTo(albumImageView.snp.height)
+            make.leading.bottom.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.64).priority(999)
+            make.width.equalTo(albumImageView.snp.height).priority(999)
         }
         
         backGroundView.snp.makeConstraints { make in
@@ -157,6 +157,16 @@ class MyRecordTableCell:UITableViewCell {
         lockImageView.sizeToFit()
         
         layoutIfNeeded()
+        
+    }
+    
+    func configureModel(record:MyRecordRespone) {
+        albumImageView.setImage(with: record.music.albumImageURL)
+        titleLabel.text = record.music.musicTitle +  record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}
+        recordLabel.text = record.recordTitle
+        descLabel.text = record.recordContents
+        nameLabel.text = record.createdDate + " | " + record.category
+        record.isPublic ? (lockImageView.setImage(with: "lock")) : (lockImageView.setImage(with: "unlock"))
         
     }
     

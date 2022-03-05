@@ -18,4 +18,3 @@ struct MyAuthenticationCredential: AuthenticationCredential {
     //자동으로 해주는듯?
 }
 
-

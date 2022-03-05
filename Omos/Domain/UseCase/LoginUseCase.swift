@@ -32,7 +32,6 @@ class LoginUseCase {
         return musicRepository.snsSignUp(email: email, nickName: nickName, type: type)
     }
     
-    
     init(musicRepository:MusicRepository) {
         self.musicRepository = musicRepository
     }

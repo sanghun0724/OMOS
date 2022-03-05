@@ -21,12 +21,49 @@ class RecordAPI {
     
     
     func select(completion:@escaping(Result<SelectResponse,Error>) -> Void) {
-        let authenticator = MyAuthenticator()
-        let credential = MyAuthenticationCredential(accessToken:UserDefaults.standard.string(forKey: "access") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refresh") ?? "", userID: 0)
-        let myAuthencitationInterceptor = AuthenticationInterceptor(authenticator: authenticator,
-                                                                    credential: credential)
         
-        AF.request(RecordTarget.select,interceptor: myAuthencitationInterceptor).responseDecodable { (response:AFDataResponse<SelectResponse>) in
+        AF.request(RecordTarget.select,interceptor: getInterceptor()).responseDecodable { (response:AFDataResponse<SelectResponse>) in
+            switch response.result {
+            case .success(let data):
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func categoryFetch(cateType:cateType,request:CateRequest,completion:@escaping(Result<[CategoryRespone],Error>) -> Void) {
+        
+        AF.request(RecordTarget.category(cate: cateType, request: request),interceptor: getInterceptor()).responseDecodable { (response:AFDataResponse<[CategoryRespone]>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func myRecordFetch(userid:Int,completion:@escaping(Result<[MyRecordRespone],Error>) -> Void) {
+        
+        AF.request(RecordTarget.myRecord(userid: userid),interceptor: getInterceptor()).responseDecodable { (response:AFDataResponse<[MyRecordRespone]>) in
+            switch response.result {
+            case .success(let data):
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+        
+    }
+    
+    func saveFetch(request:SaveRequest,completion:@escaping(Result<SaveRespone,Error>) -> Void) {
+        AF.request(RecordTarget.save(request),interceptor: getInterceptor()).responseDecodable { (response:AFDataResponse<SaveRespone>) in
             switch response.result {
             case .success(let data):
                 print(data)
@@ -37,4 +74,6 @@ class RecordAPI {
             }
         }
     }
+    
+    
 }

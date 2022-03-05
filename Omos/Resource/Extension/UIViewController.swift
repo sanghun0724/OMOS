@@ -119,7 +119,7 @@ extension UIViewController {
     }
     
     // MARK: 인디케이터 숨김
-    @objc func dismissIndicator() {
+    func dismissIndicator() {
         IndicatorView.shared.dismiss()
     }
     
@@ -156,3 +156,5 @@ extension UIViewController {
         navigationController?.navigationBar.backgroundColor = .clear
      }
 }
+
+

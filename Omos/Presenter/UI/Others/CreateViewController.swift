@@ -17,9 +17,10 @@ class CreateViewController:BaseViewController {
     let scrollView = UIScrollView()
     let category:String
     private let selfView = CreateView()
-    //    let viewModel:CreateViewModel
-    //
-    init(category:String) {
+    let viewModel:CreateViewModel
+    
+    init(viewModel:CreateViewModel,category:String) {
+        self.viewModel = viewModel
         self.category = category
         super.init(nibName: nil, bundle: nil)
     }
@@ -43,6 +44,30 @@ class CreateViewController:BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
+        self.navigationItem.rightBarButtonItems?.removeAll()
+        let doneButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(didTapDone))
+        doneButton.tintColor = .white
+        self.navigationItem.rightBarButtonItem = doneButton
+    }
+    
+    @objc func didTapDone() {
+        var mainText:String?
+        if category == "한 줄 감상" {
+            mainText = selfView.mainTextView.text
+        } else {
+            mainText = selfView.mainfullTextView.text
+        }
+        
+        guard let backImage = selfView.imageView.image,
+              let titleText = selfView.titleTextView.text,
+              let text = mainText else {
+                    //alert
+                  print("alert here")
+                  return
+              }
+        
+        viewModel.saveRecord(cate: category, content: text, isPublic: true, musicId: "0pYacDCZuRhcrwGUA5nTBe artistId : 3HqSLMAZ3g3d5poNaI7GOU", title: titleText, userid: 1)
+        
     }
     
     private func setViewinfo() {
@@ -80,6 +105,18 @@ class CreateViewController:BaseViewController {
             .drive(onNext: { [weak self] _ in
                 self?.configureImagePicker()
             }).disposed(by: disposeBag)
+        
+        viewModel.postID
+            .subscribe(onNext: { [weak self] info in
+                //info is postid
+               self?.navigationController?.popViewController(animated: true)
+            }).disposed(by: disposeBag)
+        
+        viewModel.loading
+            .subscribe(onNext: { [weak self] loading in
+            
+            }).disposed(by: disposeBag)
+        
         
     }
     
@@ -141,7 +178,10 @@ class CreateViewController:BaseViewController {
         
         selfView.mainfullTextView.translatesAutoresizingMaskIntoConstraints = false
         selfView.mainfullTextView.heightAnchor.constraint(equalToConstant: Constant.mainHeight * 0.49).isActive = true
+        scrollView.showsVerticalScrollIndicator = false
     }
+    
+
 }
 
 

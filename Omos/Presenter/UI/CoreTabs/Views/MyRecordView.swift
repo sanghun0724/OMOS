@@ -11,6 +11,7 @@ import UIKit
 class MyRecordView:BaseView {
     
     let emptyView = EmptyView()
+    let loadingView = LoadingView()
     
     let tableView:UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
@@ -18,24 +19,31 @@ class MyRecordView:BaseView {
         table.backgroundColor = .mainBlack
         table.showsVerticalScrollIndicator = false
         table.automaticallyAdjustsScrollIndicatorInsets = false
-        //table.contentInsetAdjustmentBehavior = .never
-        //table.insetsContentViewsToSafeArea = false
+//        table.contentInsetAdjustmentBehavior = .never
+//        table.insetsContentViewsToSafeArea = false
         return table
     }()
     
     override func configureUI() {
-        
-        self.addSubview(emptyView)
         self.addSubview(tableView)
+        self.addSubview(loadingView)
+        self.addSubview(emptyView)
+        emptyView.isHidden = true
+        loadingView.isHidden = true
+        
+        loadingView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         
         emptyView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        emptyView.isHidden = true
         
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        tableView.tableHeaderView = UIView(frame:CGRect(x: 0, y: 0, width: tableView.contentSize.width, height: CGFloat.leastNormalMagnitude))
     }
     
 }

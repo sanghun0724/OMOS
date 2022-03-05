@@ -50,6 +50,8 @@ class CreateView: BaseView {
     
     let imageView:UIImageView = {
        let view = UIImageView()
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true  
         return view
     }()
     
@@ -186,6 +188,7 @@ class CreateView: BaseView {
         let view = UIView()
         return view
     }()
+    
     
     override func configureUI() {
         super.configureUI()

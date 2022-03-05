@@ -11,6 +11,7 @@ class MyRecordViewController: BaseViewController {
     
     private let selfView = MyRecordView()
     let viewModel:MyRecordViewModel
+    var myRecord:[MyRecordRespone] = []
     
     init(viewModel:MyRecordViewModel) {
         self.viewModel = viewModel
@@ -23,9 +24,11 @@ class MyRecordViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         configureUI()
+        viewModel.myRecordFetch(userid: 1)
     }
     
     override func configureUI() {
@@ -37,7 +40,25 @@ class MyRecordViewController: BaseViewController {
         }
         
     }
-
-   
+    
+    func bind() {
+        viewModel.myRecords.subscribe(onNext: { [weak self] info in
+            self?.myRecord = info
+            self?.selfView.tableView.reloadData()
+        }).disposed(by: disposeBag)
+        
+        viewModel.isEmpty
+            .subscribe(onNext: { [weak self] empty in
+                self?.selfView.emptyView.isHidden = !empty
+            }).disposed(by: disposeBag)
+        
+        viewModel.loading
+            .withUnretained(self)
+            .subscribe(onNext: { owner,loading in
+                print("loading\(loading)")
+                owner.selfView.loadingView.isHidden = !loading
+            }).disposed(by: disposeBag)
+    }
+    
 
 }

@@ -15,6 +15,11 @@ protocol AllCollectCellprotocol:AnyObject {
 class AllRecordTableCell:UITableViewCell {
     static let identifier = "AllRecordTableCell"
     
+    var selectedRecords:[ALine]? {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     weak var cellDelegate: AllCollectCellprotocol?
     private var collectionView:UICollectionView!
     
@@ -48,23 +53,25 @@ class AllRecordTableCell:UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureModel() {
-        
+    func configureModel(records:[ALine]) {
+        self.selectedRecords = records
     }
     
 }
 
 extension AllRecordTableCell: UICollectionViewDelegate,UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //if model.count == 0 {} else {}
-        
-        return 20
+        return self.selectedRecords?.count ?? 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //if model.count == 0 {empty cell } else { }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AllRecordCollectionCell.identifier, for: indexPath) as! AllRecordCollectionCell
+        guard let data = self.selectedRecords?[indexPath.row] else {
+            print("data 없어요")
+            return AllRecordCollectionCell()
+        }
         
+        cell.configureModel(record: data)
         cell.backgroundColor = .mainBlack
         return cell
     }
