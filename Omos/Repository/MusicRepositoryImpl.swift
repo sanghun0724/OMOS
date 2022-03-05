@@ -15,7 +15,7 @@ class MusicRepositoryImpl:MusicRepository {
     let apiKey:String = ""
     let loginAPI:LoginAPI
     
-    init(loginAPI:LoginAPI) {
+    required init(loginAPI:LoginAPI) {
         self.loginAPI = loginAPI
     }
     

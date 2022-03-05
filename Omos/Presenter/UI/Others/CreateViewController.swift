@@ -51,7 +51,23 @@ class CreateViewController:BaseViewController {
     }
     
     @objc func didTapDone() {
-        viewModel.saveRecord(cate: <#T##String#>, content: <#T##String#>, isPublic: <#T##Bool#>, musicId: <#T##String#>, title: <#T##String#>, userid: <#T##Int#>)
+        var mainText:String?
+        if category == "한 줄 감상" {
+            mainText = selfView.mainTextView.text
+        } else {
+            mainText = selfView.mainfullTextView.text
+        }
+        
+        guard let backImage = selfView.imageView.image,
+              let titleText = selfView.titleTextView.text,
+              let text = mainText else {
+                    //alert
+                  print("alert here")
+                  return
+              }
+        
+        viewModel.saveRecord(cate: category, content: text, isPublic: true, musicId: "0pYacDCZuRhcrwGUA5nTBe artistId : 3HqSLMAZ3g3d5poNaI7GOU", title: titleText, userid: 1)
+        
     }
     
     private func setViewinfo() {
@@ -98,7 +114,7 @@ class CreateViewController:BaseViewController {
         
         viewModel.loading
             .subscribe(onNext: { [weak self] loading in
-                loading ? (self?.showIndicator()) : (self?.dismissIndicator())
+            
             }).disposed(by: disposeBag)
         
         
@@ -165,9 +181,7 @@ class CreateViewController:BaseViewController {
         scrollView.showsVerticalScrollIndicator = false
     }
     
-    private func checkIsFull() {
-        
-    }
+
 }
 
 

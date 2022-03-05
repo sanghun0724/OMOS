@@ -13,7 +13,7 @@ class RecordsRepositoryImpl:RecordsRepository {
     let disposeBag = DisposeBag()
     private let recordAPI:RecordAPI
     
-    init(recordAPI:RecordAPI) {
+    required init(recordAPI:RecordAPI) {
         self.recordAPI = recordAPI
     }
     

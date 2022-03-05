@@ -34,7 +34,7 @@ extension RecordTarget:TargetType {
         case .select: return "/select"
         case .category(let cate, _): return "/select/category/\(cate)"
         case .myRecord(let user): return "/\(user)"
-        case .save: return "save"
+        case .save: return "/save"
         }
     }
     

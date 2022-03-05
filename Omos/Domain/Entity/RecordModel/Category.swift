@@ -7,11 +7,13 @@
 
 import Foundation
 
-// MARK: - CategoryElement
+// MARK: cate
 struct CategoryRespone: Codable {
     let music: Music
     let recordID: Int
-    let recordTitle, recordContents, createdDate, category: String
+    let recordTitle, recordContents: String
+    let recordImageURL: String?
+    let createdDate, category: String
     let viewsCnt, userID: Int
     let nickname: String
     let likeCnt, scrapCnt: Int
@@ -20,12 +22,13 @@ struct CategoryRespone: Codable {
     enum CodingKeys: String, CodingKey {
         case music
         case recordID = "recordId"
-        case recordTitle, recordContents, createdDate, category, viewsCnt
+        case recordTitle, recordContents
+        case recordImageURL = "recordImageUrl"
+        case createdDate, category, viewsCnt
         case userID = "userId"
         case nickname, likeCnt, scrapCnt, isLiked, isScraped
     }
 }
-
 
 typealias Category = [CategoryRespone]
 

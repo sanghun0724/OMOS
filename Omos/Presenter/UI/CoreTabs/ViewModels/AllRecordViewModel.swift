@@ -12,8 +12,8 @@ import RxSwift
 class AllRecordViewModel:BaseViewModel {
     
     let loading = BehaviorSubject<Bool>(value:false)
-    let selectRecords = BehaviorSubject<SelectResponse>(value:.init(aLine: [], ost: [], free: []))
-    var currentSelectRecords:SelectResponse = .init(aLine: [], ost: [], free: [])
+    let selectRecords = BehaviorSubject<SelectResponse>(value:.init(aLine: [], ost: [], lyrics: [], free: [], story: []))
+    var currentSelectRecords:SelectResponse = .init(aLine: [], ost: [], lyrics: [], free: [], story: [])
     let errorMessage = BehaviorSubject<String?>(value: nil)
     let usecase:RecordsUseCase
     

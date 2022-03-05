@@ -50,6 +50,8 @@ class CreateView: BaseView {
     
     let imageView:UIImageView = {
        let view = UIImageView()
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true  
         return view
     }()
     

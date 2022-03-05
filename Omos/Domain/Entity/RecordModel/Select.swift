@@ -10,16 +10,16 @@ import Foundation
 struct SelectResponse: Codable {
     let aLine: [ALine]
     let ost: [ALine]
-   // let lyrics: [Any]
+    let lyrics: [ALine]
     let free: [ALine]
-    //let story: [Any]
+    let story: [ALine]
 
     enum CodingKeys: String, CodingKey {
         case aLine = "A_LINE"
         case ost = "OST"
-        //case lyrics = "LYRICS"
+        case lyrics = "LYRICS"
         case free = "FREE"
-        //case story = "STORY"
+        case story = "STORY"
     }
 }
 
