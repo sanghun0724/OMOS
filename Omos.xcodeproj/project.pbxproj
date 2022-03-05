@@ -609,8 +609,7 @@
 				B68454F227BE30EE00F1E6B5 /* MyAuthenticationCredential.swift */,
 				B68454F427BE310100F1E6B5 /* MyAuthenticator.swift */,
 			);
-			name = Auth;
-			path = "며소";
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		B68454F627BE35FC00F1E6B5 /* Login */ = {
