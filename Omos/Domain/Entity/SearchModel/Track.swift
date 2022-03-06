@@ -1,5 +1,5 @@
 //
-//  Album.swift
+//  Track.swift
 //  Omos
 //
 //  Created by sangheon on 2022/03/06.
@@ -7,23 +7,16 @@
 
 import Foundation
 
-
-
-struct musicRequest:Codable {
-    let keyword:String
-    let limit:Int
-    let offset:Int
-}
-
-/// album
-struct AlbumRespone:Codable {
+struct TrackRespone:Codable {
     let albumID, albumImageURL, albumTitle: String
     let artists: [Artist]
-    let releaseDate: String
-
+    let musicID, musicTitle, releaseDate: String
+    
     enum CodingKeys: String, CodingKey {
         case albumID = "albumId"
         case albumImageURL = "albumImageUrl"
-        case albumTitle, artists, releaseDate
+        case albumTitle, artists
+        case musicID = "musicId"
+        case musicTitle, releaseDate
     }
 }
