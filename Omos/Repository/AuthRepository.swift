@@ -7,7 +7,7 @@
 
 import RxSwift
 
-protocol MusicRepository {
+protocol AuthRepository {
     init(loginAPI:LoginAPI)
     func fetchMusicList(keyword:String) -> Single<StockResult>
     func signIn(_ email:String,_ password:String) -> Single<LoginResponse>

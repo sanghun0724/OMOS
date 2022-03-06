@@ -79,8 +79,11 @@ class BaseViewController:UIViewController {
     }
     
     @objc func didTapCreateButton() {
-        
-        let vc = CategoryViewController()
+       
+        let uc = MusicUseCase(musicRepository: <#T##MusicRepository#>)
+        let vm = SearchViewModel(usecase: <#T##MusicUseCase#>)
+        let vc = SearchViewController(viewModel: <#T##SearchViewModel#>)
+//        let vc = CategoryViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

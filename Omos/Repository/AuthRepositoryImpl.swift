@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxAlamofire
 
-class MusicRepositoryImpl:MusicRepository {
+class MusicRepositoryImpl:AuthRepository {
     
     let disposeBag = DisposeBag()
     let apiKey:String = ""

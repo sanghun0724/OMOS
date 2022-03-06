@@ -18,6 +18,4 @@ enum ContentType:String {
     case json = "Application/json"
 }
 
-enum test {
-    
-}
+

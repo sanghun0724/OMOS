@@ -8,16 +8,16 @@
 import Foundation
 import RxSwift
 
-class MusicUseCase {
+class SearchUseCase {
     
-    private let musicRepository:MusicRepository
+    private let searchRepository:SearchRepository
     
     func fetchMusicList(keyword:String) -> Single<StockResult> {
-        musicRepository.fetchMusicList(keyword: keyword)
+        searchRepository.fetchMusicList(keyword: keyword)
     }
     
-    init(musicRepository:MusicRepository) {
-        self.musicRepository = musicRepository
+    init(searchRepository:SearchRepository) {
+        self.searchRepository = searchRepository
     }
     
 }

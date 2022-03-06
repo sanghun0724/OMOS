@@ -7,7 +7,8 @@
 
 import Foundation
 
-// MARK: cate
+// MARK: CategoryRespone
+
 struct CategoryRespone: Codable {
     let music: Music
     let recordID: Int
@@ -29,8 +30,6 @@ struct CategoryRespone: Codable {
         case nickname, likeCnt, scrapCnt, isLiked, isScraped
     }
 }
-
-typealias Category = [CategoryRespone]
 
 enum cateType:String,Codable {
     case A_LINE
