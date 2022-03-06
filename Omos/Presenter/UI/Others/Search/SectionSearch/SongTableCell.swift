@@ -75,20 +75,17 @@ class SongTableCell:UITableViewCell {
         titleLabel.snp.makeConstraints { make in
             make.leading.equalTo(songImageView.snp.trailing).offset(14)
             make.centerY.equalToSuperview().multipliedBy(0.75)
-            make.trailing.equalTo(createdButton.snp.leading).offset(-16)
-            titleLabel.sizeToFit()
+            make.trailing.equalTo(createdButton.snp.leading)
         }
         
         subTitleLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(titleLabel)
+            make.leading.trailing.equalTo(titleLabel)
             make.centerY.equalToSuperview().multipliedBy(1.25)
-            make.trailing.equalTo(createdButton.snp.leading).offset(-16)
-            subTitleLabel.sizeToFit()
         }
     }
     
     func configureModel(track:TrackRespone) {
-        songImageView.setImage(with: track.albumImageURL ?? "")
+        songImageView.setImage(with: track.albumImageURL)
         titleLabel.text = track.musicTitle
         subTitleLabel.text = track.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
     }

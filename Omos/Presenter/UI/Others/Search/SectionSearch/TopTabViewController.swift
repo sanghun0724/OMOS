@@ -15,7 +15,6 @@ class TopTabViewController:TabmanViewController {
     let disposeBag = DisposeBag()
     let viewModel:SearchViewModel
     var viewControllers:Array<UIViewController> = []
-    let loadingView = LoadingView()
         
     init(viewModel:SearchViewModel) {
         self.viewModel = viewModel
@@ -35,13 +34,6 @@ class TopTabViewController:TabmanViewController {
         settingTabBar(ctBar:bar)
         addBar(bar, dataSource: self, at: .top)
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        view.addSubview(loadingView)
-        loadingView.frame = view.bounds
-    }
-    
     
     func settingTabBar(ctBar:TMBar.ButtonBar) {
         ctBar.layout.transitionStyle = .snap
@@ -87,13 +79,6 @@ class TopTabViewController:TabmanViewController {
                 self.reloadData()
             }).disposed(by: disposeBag)
         
-        viewModel.allLoading
-            .distinctUntilChanged()
-            .withUnretained(self)
-            .subscribe(onNext: { owner,loading in
-                print("loading\(loading)")
-                owner.loadingView.isHidden = !loading
-            }).disposed(by: disposeBag)
         
     }
     

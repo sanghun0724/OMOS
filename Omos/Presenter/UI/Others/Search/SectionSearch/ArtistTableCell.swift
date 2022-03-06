@@ -59,14 +59,13 @@ class ArtistTableCell:UITableViewCell {
         
         titleLabel.snp.makeConstraints { make in
             make.leading.equalTo(songImageView.snp.trailing).offset(14)
+            make.trailing.equalToSuperview().offset(-14)
             make.centerY.equalToSuperview().multipliedBy(0.75)
-            titleLabel.sizeToFit()
         }
         
         subTitleLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(titleLabel)
+            make.leading.trailing.equalTo(titleLabel)
             make.centerY.equalToSuperview().multipliedBy(1.25)
-            subTitleLabel.sizeToFit()
         }
         
     }
