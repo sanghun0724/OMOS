@@ -34,10 +34,13 @@ class SearchViewModel :BaseViewModel{
         albumLoading.onNext(true)
         artistLoading.onNext(true)
         
-        Observable.combineLatest(trackLoading, albumLoading, artistLoading)
+        Observable.zip(trackLoading, albumLoading, artistLoading)
         { !($0 || $1 || $2) }
-        .subscribe(onNext:{ [weak self] _ in
-            self?.allLoading.onNext(false)
+       //.throttle(RxTimeInterval.seconds(3), scheduler: MainScheduler.instance)
+        .subscribe(onNext:{ [weak self] event in
+            if event {
+                self?.allLoading.onNext(false)
+            }
         }).disposed(by: disposeBag)
         
         usecase.albumFetch(request: request)
