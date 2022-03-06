@@ -74,6 +74,7 @@ class NickNameViewController:BaseViewController {
         
         viewModel.validSignUp.subscribe(onNext: { [weak self] event in
             if event {
+                
                 self?.view.window?.rootViewController?.dismiss(animated: false, completion: {
                   let homeVC = TabBarViewController()
                   homeVC.modalPresentationStyle = .fullScreen

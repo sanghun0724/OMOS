@@ -149,8 +149,8 @@ class SignUpViewController:UIViewController {
                         self?.topView.repasswordField.layer.borderWidth == 0 {
                         UserDefaults.standard.set(text1, forKey: "email")
                         UserDefaults.standard.set(text2,forKey: "password")
-                        let rp = MusicRepositoryImpl(loginAPI: LoginAPI())
-                        let uc = LoginUseCase(musicRepository: rp)
+                        let rp = AuthRepositoryImpl(loginAPI: LoginAPI())
+                        let uc = LoginUseCase(authRepository: rp)
                         let vm = SignUpViewModel(usecase: uc)
                         let vc = NickNameViewController(viewModel: vm)
                         vc.modalPresentationStyle = .fullScreen

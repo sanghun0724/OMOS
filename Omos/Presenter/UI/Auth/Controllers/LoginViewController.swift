@@ -128,8 +128,8 @@ class LoginViewController:UIViewController {
         topView.labelsView.signUpButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in
-                let rp = MusicRepositoryImpl(loginAPI: LoginAPI())
-                let uc = LoginUseCase(musicRepository: rp)
+                let rp = AuthRepositoryImpl(loginAPI: LoginAPI())
+                let uc = LoginUseCase(authRepository: rp)
                 let vm = SignUpViewModel(usecase: uc)
                 let vc = SignUpViewController(viewModel: vm)
                 vc.modalPresentationStyle = .fullScreen
@@ -171,8 +171,8 @@ class LoginViewController:UIViewController {
                         vc.modalPresentationStyle = .fullScreen
                         self?.present(vc,animated: true)
                     } else {
-                        let rp = MusicRepositoryImpl(loginAPI: LoginAPI())
-                        let uc = LoginUseCase(musicRepository: rp)
+                        let rp = AuthRepositoryImpl(loginAPI: LoginAPI())
+                        let uc = LoginUseCase(authRepository: rp)
                         let vm = SignUpViewModel(usecase: uc)
                         let vc = NickNameViewController(viewModel: vm)
                         vc.modalPresentationStyle = .fullScreen
@@ -207,24 +207,30 @@ extension LoginViewController:ASAuthorizationControllerDelegate {
                 print("email:\(email)")
                 UserDefaults.standard.set(email, forKey: "appleEmail")
 
-                LoginAPI.SNSLogin(request: .init(email: email, type: .APPLE)) { [weak self] result in
-                    switch result {
-                    case .success(let token):
-                        UserDefaults.standard.set(token.accessToken, forKey: "access")
-                        UserDefaults.standard.set(token.refreshToken, forKey: "refresh")
-                        let vc = TabBarViewController()
-                        vc.modalPresentationStyle = .fullScreen
-                        self?.present(vc,animated: true)
-                    case .failure:
-                        let rp = MusicRepositoryImpl(loginAPI: LoginAPI())
-                        let uc = LoginUseCase(musicRepository: rp)
-                        let vm = SignUpViewModel(usecase: uc)
-                        let vc = NickNameViewController(viewModel: vm)
-                        vc.modalPresentationStyle = .fullScreen
-                        self?.present(vc,animated: true)
-                    }
+            }
+            guard let appleEmail = UserDefaults.standard.string(forKey: "appleEmail") else {
+                print("애플 이메일이 없습니다")
+                return
+            }
+            LoginAPI.SNSLogin(request: .init(email:appleEmail , type: .APPLE)) { [weak self] result in
+                switch result {
+                case .success(let token):
+                    UserDefaults.standard.set(token.accessToken, forKey: "access")
+                    UserDefaults.standard.set(token.refreshToken, forKey: "refresh")
+                    UserDefaults.standard.set(token.userId, forKey: "user")
+                    let vc = TabBarViewController()
+                    vc.modalPresentationStyle = .fullScreen
+                    self?.present(vc,animated: true)
+                case .failure:
+                    let rp = AuthRepositoryImpl(loginAPI: LoginAPI())
+                    let uc = LoginUseCase(authRepository: rp)
+                    let vm = SignUpViewModel(usecase: uc)
+                    let vc = NickNameViewController(viewModel: vm)
+                    vc.modalPresentationStyle = .fullScreen
+                    self?.present(vc,animated: true)
                 }
             }
+            
         }
     }
     

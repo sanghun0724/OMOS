@@ -80,18 +80,18 @@ class BaseViewController:UIViewController {
     
     @objc func didTapCreateButton() {
        
-        let uc = MusicUseCase(musicRepository: <#T##MusicRepository#>)
-        let vm = SearchViewModel(usecase: <#T##MusicUseCase#>)
-        let vc = SearchViewController(viewModel: <#T##SearchViewModel#>)
-//        let vc = CategoryViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let uc = MusicUseCase(musicRepository: <#T##MusicRepository#>)
+//        let vm = SearchViewModel(usecase: <#T##MusicUseCase#>)
+//        let vc = SearchViewController(viewModel: <#T##SearchViewModel#>)
+////        let vc = CategoryViewController()
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func didTapSearchButton() {
-        let uc = MusicUseCase(musicRepository:MusicRepositoryImpl(loginAPI: LoginAPI()))
-        let vm = SearchViewModel(usecase: uc)
-        let vc = SearchViewController(viewModel: vm)
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let uc = AuthUseCase(authRepository:AuthRepositoryImpl(loginAPI: LoginAPI()))
+//        let vm = SearchViewModel(usecase: uc)
+//        let vc = SearchViewController(viewModel: vm)
+//        self.navigationController?.pushViewController(vc, animated: true)
         print("search")
     }
     

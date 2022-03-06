@@ -28,7 +28,7 @@ class MyAuthenticator:Authenticator {
     func refresh(_ credential: Credential, for session: Session, completion: @escaping (Result<MyAuthenticationCredential, Error>) -> Void) {
         
         print("refresh token here@@")
-        let requeust = RefreshRequest(accessToken:UserDefaults.standard.string(forKey: "access") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refresh") ?? "", userId: 0)
+        let requeust = RefreshRequest(accessToken:UserDefaults.standard.string(forKey: "access") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refresh") ?? "", userId: UserDefaults.standard.integer(forKey: "user") )
         LoginAPI.doRefresh(request: requeust) { response in
             switch response {
             case .success(let data):
@@ -39,6 +39,7 @@ class MyAuthenticator:Authenticator {
                 let userId = data.userId
                 UserDefaults.standard.set(accessToken, forKey: "access")
                 UserDefaults.standard.set(refreshToken, forKey: "refresh")
+                UserDefaults.standard.set(userId ,forKey: "user")
                 let newCredential = MyAuthenticationCredential(accessToken: accessToken, refreshToken: refreshToken,userID: userId)
                 completion(.success(newCredential))
             case .failure(let error):

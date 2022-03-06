@@ -13,7 +13,7 @@ class RecordAPI {
     func getInterceptor() -> AuthenticationInterceptor<MyAuthenticator> {
         //  AuthenticationInterceptor 적용
         let authenticator = MyAuthenticator()
-        let credential = MyAuthenticationCredential(accessToken:UserDefaults.standard.string(forKey: "access") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refresh") ?? "", userID: 0)
+        let credential = MyAuthenticationCredential(accessToken:UserDefaults.standard.string(forKey: "access") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refresh") ?? "", userID: UserDefaults.standard.integer(forKey: "user"))
         let myAuthencitationInterceptor = AuthenticationInterceptor(authenticator: authenticator,
                                                                     credential: credential)
         return myAuthencitationInterceptor
