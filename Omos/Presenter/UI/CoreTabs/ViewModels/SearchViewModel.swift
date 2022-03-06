@@ -10,44 +10,89 @@ import RxSwift
 
 class SearchViewModel :BaseViewModel{
     
-    let loading = BehaviorSubject<Bool>(value:false)
-    let musics = BehaviorSubject<[Stock]>(value:[])
-    let isEmpty = PublishSubject<Bool>()
+    let allLoading = BehaviorSubject<Bool>(value:false)
+    let trackLoading = BehaviorSubject<Bool>(value:false)
+    let albumLoading = BehaviorSubject<Bool>(value:false)
+    let artistLoading = BehaviorSubject<Bool>(value:false)
+    let album = PublishSubject<[AlbumRespone]>()
+    let artist = PublishSubject<[ArtistRespone]>()
+    let track = PublishSubject<[TrackRespone]>()
+    var currentAlbum:[AlbumRespone] = []
+    var currentArtist:[ArtistRespone] = []
+    var currentTrack:[TrackRespone] = []
+    var isEmpty = PublishSubject<Bool>()
     let errorMessage = BehaviorSubject<String?>(value: nil)
-    var currentMusic:[Stock] = []
-//    let usecase:MusicUseCase
+    let isReload = BehaviorSubject<Bool>(value:false)
+    let usecase:SearchUseCase
     
-    func searchQeuryChanged(query:String) {
-        loading.onNext(true)
-//        usecase.fetchMusicList(keyword: query)
-//            .subscribe({ [weak self] event in
-//                self?.loading.onNext(false)
-//                switch event {
-//                case .success(let data):
-//                    self?.currentMusic = data.items
-//                    self?.musics.onNext(data.items)
-//                case .failure(let error):
-//                    self?.errorMessage.onNext(error.localizedDescription)
-//                }
-//            }).disposed(by: disposeBag)
-    }
     
-//    init(usecase:MusicUseCase) {
-//        self.usecase = usecase
-//        super.init()
-//        self.reduce()
-//    }
     
-    func reduce() {
-        musics
-            .withUnretained(self)
-            .subscribe(onNext: { owner,musics in
-                if musics.isEmpty {
-                    owner.isEmpty.onNext(true)
-                } else {
-                    owner.isEmpty.onNext(false)
+    
+    func searchAllResult(request:musicRequest) {
+        allLoading.onNext(true)
+        trackLoading.onNext(true)
+        albumLoading.onNext(true)
+        artistLoading.onNext(true)
+        
+        Observable.combineLatest(trackLoading, albumLoading, artistLoading)
+        { !($0 || $1 || $2) }
+        .subscribe(onNext:{ [weak self] _ in
+            self?.allLoading.onNext(false)
+        }).disposed(by: disposeBag)
+        
+        usecase.albumFetch(request: request)
+            .subscribe({ [weak self] event in
+                self?.albumLoading.onNext(false)
+                switch event {
+                case .success(let data):
+                    self?.currentAlbum = data
+                    self?.album.onNext(data)
+                case .failure(let error):
+                    self?.errorMessage.onNext(error.localizedDescription)
+                }
+            }).disposed(by: disposeBag)
+        
+        usecase.artistFetch(request: request)
+            .subscribe({ [weak self] event in
+                self?.artistLoading.onNext(false)
+                switch event {
+                case .success(let data):
+                    self?.currentArtist = data
+                    self?.artist.onNext(data)
+                case .failure(let error):
+                    self?.errorMessage.onNext(error.localizedDescription)
+                }
+            }).disposed(by: disposeBag)
+        
+        usecase.trackFetch(request: request)
+            .subscribe({ [weak self] event in
+                self?.trackLoading.onNext(false)
+                switch event {
+                case .success(let data):
+                    self?.currentTrack = data
+                    self?.track.onNext(data)
+                case .failure(let error):
+                    self?.errorMessage.onNext(error.localizedDescription)
                 }
             }).disposed(by: disposeBag)
     }
+    
+    init(usecase:SearchUseCase) {
+        self.usecase = usecase
+        super.init()
+        //self.reduce()
+    }
+    
+//    func reduce() {
+//        musics
+//            .withUnretained(self)
+//            .subscribe(onNext: { owner,musics in
+//                if musics.isEmpty {
+//                    owner.isEmpty.onNext(true)
+//                } else {
+//                    owner.isEmpty.onNext(false)
+//                }
+//            }).disposed(by: disposeBag)
+//    }
     
 }

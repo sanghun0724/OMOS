@@ -10,19 +10,12 @@ import Alamofire
 
 class RecordAPI {
     
-    func getInterceptor() -> AuthenticationInterceptor<MyAuthenticator> {
-        //  AuthenticationInterceptor 적용
-        let authenticator = MyAuthenticator()
-        let credential = MyAuthenticationCredential(accessToken:UserDefaults.standard.string(forKey: "access") ?? "", refreshToken: UserDefaults.standard.string(forKey: "refresh") ?? "", userID: UserDefaults.standard.integer(forKey: "user"))
-        let myAuthencitationInterceptor = AuthenticationInterceptor(authenticator: authenticator,
-                                                                    credential: credential)
-        return myAuthencitationInterceptor
-    }
+   
     
     
     func select(completion:@escaping(Result<SelectResponse,Error>) -> Void) {
         
-        AF.request(RecordTarget.select,interceptor: getInterceptor()).responseDecodable { (response:AFDataResponse<SelectResponse>) in
+        AF.request(RecordTarget.select,interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<SelectResponse>) in
             switch response.result {
             case .success(let data):
                 completion(.success(data))
@@ -35,7 +28,7 @@ class RecordAPI {
     
     func categoryFetch(cateType:cateType,request:CateRequest,completion:@escaping(Result<[CategoryRespone],Error>) -> Void) {
         
-        AF.request(RecordTarget.category(cate: cateType, request: request),interceptor: getInterceptor()).responseDecodable { (response:AFDataResponse<[CategoryRespone]>) in
+        AF.request(RecordTarget.category(cate: cateType, request: request),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[CategoryRespone]>) in
             switch response.result {
             case .success(let data):
                 print(data)
@@ -50,7 +43,7 @@ class RecordAPI {
     
     func myRecordFetch(userid:Int,completion:@escaping(Result<[MyRecordRespone],Error>) -> Void) {
         
-        AF.request(RecordTarget.myRecord(userid: userid),interceptor: getInterceptor()).responseDecodable { (response:AFDataResponse<[MyRecordRespone]>) in
+        AF.request(RecordTarget.myRecord(userid: userid),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[MyRecordRespone]>) in
             switch response.result {
             case .success(let data):
                 completion(.success(data))
@@ -63,7 +56,7 @@ class RecordAPI {
     }
     
     func saveFetch(request:SaveRequest,completion:@escaping(Result<SaveRespone,Error>) -> Void) {
-        AF.request(RecordTarget.save(request),interceptor: getInterceptor()).responseDecodable { (response:AFDataResponse<SaveRespone>) in
+        AF.request(RecordTarget.save(request),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<SaveRespone>) in
             switch response.result {
             case .success(let data):
                 print(data)

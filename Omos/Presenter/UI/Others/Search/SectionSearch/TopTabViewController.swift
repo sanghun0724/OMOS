@@ -8,18 +8,38 @@
 import UIKit
 import Tabman
 import Pageboy
+import RxSwift
 
 class TopTabViewController:TabmanViewController {
+
+    let disposeBag = DisposeBag()
+    let viewModel:SearchViewModel
+    var viewControllers:Array<UIViewController> = []
+    let loadingView = LoadingView()
+        
+    init(viewModel:SearchViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
     
-    var viewControllers:Array<UIViewController> = [EntireViewController(),SongViewController(),AlbumViewController(),ArtistViewController()]
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataSource = self
+        bind()
         
         let bar = TMBar.ButtonBar()
         settingTabBar(ctBar:bar)
         addBar(bar, dataSource: self, at: .top)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        view.addSubview(loadingView)
+        loadingView.frame = view.bounds
     }
     
     
@@ -45,6 +65,36 @@ class TopTabViewController:TabmanViewController {
               // 인디케이터 (영상에서 주황색 아래 바 부분)
               ctBar.indicator.weight = .custom(value: 4)
               ctBar.indicator.tintColor = .mainOrange
+    }
+    
+    func bind() {
+        //relaod
+        viewModel.isReload
+            .withUnretained(self)
+            .subscribe(onNext: { owner,info in
+          
+            }).disposed(by:disposeBag)
+        
+        Observable.zip(viewModel.album, viewModel.track, viewModel.artist)
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner,musics in
+                let entireVC = EntireViewController(album: owner.viewModel.currentAlbum, artist: owner.viewModel.currentArtist, track: owner.viewModel.currentTrack)
+                let songVC = SongViewController()
+                let albumVC = AlbumViewController()
+                let artistVC = ArtistViewController()
+                owner.viewControllers = [entireVC,songVC,albumVC,artistVC]
+                self.reloadData()
+            }).disposed(by: disposeBag)
+        
+        viewModel.allLoading
+            .distinctUntilChanged()
+            .withUnretained(self)
+            .subscribe(onNext: { owner,loading in
+                print("loading\(loading)")
+                owner.loadingView.isHidden = !loading
+            }).disposed(by: disposeBag)
+        
     }
     
 }

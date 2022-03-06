@@ -85,7 +85,12 @@ class SongTableCell:UITableViewCell {
             make.trailing.equalTo(createdButton.snp.leading).offset(-16)
             subTitleLabel.sizeToFit()
         }
-        
-        
     }
+    
+    func configureModel(track:TrackRespone) {
+        songImageView.setImage(with: track.albumImageURL ?? "")
+        titleLabel.text = track.musicTitle
+        subTitleLabel.text = track.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
+    }
+    
 }

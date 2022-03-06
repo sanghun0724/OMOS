@@ -8,15 +8,17 @@
 import Foundation
 
 struct TrackRespone:Codable {
-    let albumID, albumImageURL, albumTitle: String
+    let musicID, musicTitle: String
     let artists: [Artist]
-    let musicID, musicTitle, releaseDate: String
+    let albumImageURL: String
+    let releaseDate, albumTitle, albumID: String
     
     enum CodingKeys: String, CodingKey {
-        case albumID = "albumId"
-        case albumImageURL = "albumImageUrl"
-        case albumTitle, artists
         case musicID = "musicId"
-        case musicTitle, releaseDate
+        case musicTitle, artists
+        case albumImageURL = "albumImageUrl"
+        case releaseDate, albumTitle
+        case albumID = "albumId"
     }
 }
+

@@ -10,6 +10,20 @@ import UIKit
 class EntireViewController:BaseViewController {
     
     let selfView = EntireView()
+    var album:[AlbumRespone] = []
+    var artist:[ArtistRespone] = []
+    var track:[TrackRespone] = []
+    
+    init(album:[AlbumRespone],artist:[ArtistRespone],track:[TrackRespone]) {
+        super.init(nibName: nil, bundle: nil)
+        self.album = album
+        self.artist = artist
+        self.track = track
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,21 +54,36 @@ extension EntireViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //모델에 따라 여기서 분리
-       return 5
+        switch section {
+        case 0:
+            return track.count
+        case 1:
+            return album.count
+        case 2:
+            return artist.count
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: SongTableCell.identifier, for: indexPath) as! SongTableCell
+            let cellData = self.track[indexPath.row]
             cell.selectionStyle = . none
+            cell.configureModel(track: cellData)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: AlbumTableCell.identifier, for: indexPath) as! AlbumTableCell
+            let cellData = self.album[indexPath.row]
+            cell.configureModel(album: cellData)
             cell.selectionStyle = . none
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier:  ArtistTableCell.identifier, for: indexPath) as! ArtistTableCell
+            let cellData = self.artist[indexPath.row]
+            cell.configureModel(artist: cellData)
             cell.selectionStyle = . none
             return cell
         default:

@@ -37,19 +37,14 @@ class SearchListView:BaseView {
     }()
     
     let emptyView = EmptyView()
-    let loadingView = LoadingView()
+  
     
     override func configureUI() {
         self.addSubview(tableView)
         self.addSubview(bestTableView)
         self.addSubview(emptyView)
-        self.addSubview(loadingView)
         
         emptyView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
-        loadingView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         

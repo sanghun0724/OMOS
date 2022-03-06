@@ -70,4 +70,11 @@ class ArtistTableCell:UITableViewCell {
         }
         
     }
+    
+    func configureModel(artist:ArtistRespone) {
+        songImageView.setImage(with:artist.artistImageURL ?? "")
+        titleLabel.text = artist.artistName
+        subTitleLabel.text = artist.genres.reduce("") { $0 + " \($1)" }
+    
+    }
 }

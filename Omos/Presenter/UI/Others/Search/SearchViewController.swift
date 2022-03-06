@@ -9,13 +9,14 @@ import UIKit
 import RxSwift
 
 enum SearchType {
-
+    
 }
 
 class SearchViewController:BaseViewController {
     
     let viewModel:SearchViewModel
     let selfView = SearchListView()
+    let loadingView = LoadingView()
     
     init(viewModel:SearchViewModel) {
         self.viewModel = viewModel
@@ -44,7 +45,7 @@ class SearchViewController:BaseViewController {
         navigationItem.rightBarButtonItems?.removeAll()
         bind()
         selfView.emptyView.isHidden = true
-
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -61,6 +62,7 @@ class SearchViewController:BaseViewController {
     
     override func configureUI() {
         view.addSubview(selfView)
+        view.addSubview(loadingView)
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         selfView.bestTableView.delegate = self
@@ -71,9 +73,10 @@ class SearchViewController:BaseViewController {
         selfView.searchViewController.hidesNavigationBarDuringPresentation = false
         navigationItem.titleView = selfView.searchViewController.searchBar
         self.navigationController?.navigationBar.tintColor = .white
-        self.navigationItem.hidesBackButton = true 
+        self.navigationItem.hidesBackButton = true
         
         selfView.frame = view.bounds
+        loadingView.frame = view.bounds
     }
     
     
@@ -87,7 +90,7 @@ class SearchViewController:BaseViewController {
             }.distinctUntilChanged()
         
         isSearchEmpty.subscribe(onNext: { [weak self] valid in
-                self?.selfView.bestTableView.isHidden = valid
+            self?.selfView.bestTableView.isHidden = valid
         }).disposed(by: disposeBag)
         
         selfView.searchViewController.searchBar.rx.text
@@ -110,18 +113,12 @@ class SearchViewController:BaseViewController {
                 print("search Error: \(errorMessage)")
             }).disposed(by: disposeBag)
         
-        viewModel.musics
-            .withUnretained(self)
-            .subscribe(onNext: { owner,musics in
-                owner.selfView.tableView.reloadData()
-            }).disposed(by: disposeBag)
-        
-        
-        viewModel.loading
+        viewModel.allLoading
+            .distinctUntilChanged()
             .withUnretained(self)
             .subscribe(onNext: { owner,loading in
                 print("loading\(loading)")
-                owner.selfView.loadingView.isHidden = !loading
+                owner.loadingView.isHidden = !loading
             }).disposed(by: disposeBag)
         
         viewModel.isEmpty
@@ -136,18 +133,20 @@ class SearchViewController:BaseViewController {
     }
     
     private func addContentsView() {
-        let topTabView = TopTabViewController()
+        let topTabView = TopTabViewController(viewModel: self.viewModel)
         addChild(topTabView)
         self.view.addSubview(topTabView.view)
         topTabView.view.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.leading.trailing.bottom.equalToSuperview()
+            topTabView.didMove(toParent: self)
         }
-        topTabView.didMove(toParent: self)
+        
+        
     }
     
     private func removeContentsView() {
-      
+        
     }
 }
 
@@ -177,8 +176,11 @@ extension SearchViewController:UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("search")
-        addContentsView()
-        selfView.isHidden = true 
+        viewModel.searchAllResult(request: .init(keyword: searchBar.text ?? "", limit: 5, offset: 0))
+        if self.children.isEmpty {
+            self.addContentsView()
+            self.selfView.isHidden = true
+        }
     }
     
 }

@@ -8,12 +8,14 @@
 import Foundation
 
 struct ArtistRespone:Codable {
-    let artistID, artistImageURL, artistName: String
+    let artistName, artistID: String
+    let artistImageURL: String?
     let genres: [String]
     
     enum CodingKeys: String, CodingKey {
+        case artistName
         case artistID = "artistId"
         case artistImageURL = "artistImageUrl"
-        case artistName, genres
+        case genres
     }
 }
