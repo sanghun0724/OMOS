@@ -10,7 +10,7 @@ import Pageboy
 
 class SearchArtistTopTabViewController:TabmanViewController {
     
-    var viewControllers:Array<UIViewController> = [SongViewController(),AlbumViewController()]
+    var viewControllers:Array<UIViewController> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()

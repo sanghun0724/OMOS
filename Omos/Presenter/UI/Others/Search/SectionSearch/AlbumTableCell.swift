@@ -86,7 +86,7 @@ class AlbumTableCell:UITableViewCell {
     
     func configureModel(album:AlbumRespone) {
         songImageView.setImage(with: album.albumImageURL)
-        titleLabel.text = "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+        titleLabel.text = album.albumTitle
         subTitleLabel.text = album.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
         createdLabel.text = album.releaseDate
     }

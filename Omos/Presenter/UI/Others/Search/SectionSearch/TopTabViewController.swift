@@ -72,9 +72,9 @@ class TopTabViewController:TabmanViewController {
             .withUnretained(self)
             .subscribe(onNext: { owner,musics in
                 let entireVC = EntireViewController(album: owner.viewModel.currentAlbum, artist: owner.viewModel.currentArtist, track: owner.viewModel.currentTrack)
-                let songVC = SongViewController()
-                let albumVC = AlbumViewController()
-                let artistVC = ArtistViewController()
+                let songVC = SongViewController(viewModel: owner.viewModel)
+                let albumVC = AlbumViewController(viewModel: owner.viewModel)
+                let artistVC = ArtistViewController(viewModel: owner.viewModel)
                 owner.viewControllers = [entireVC,songVC,albumVC,artistVC]
                 self.reloadData()
             }).disposed(by: disposeBag)

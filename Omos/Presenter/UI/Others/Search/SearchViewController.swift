@@ -176,7 +176,7 @@ extension SearchViewController:UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("search")
-        viewModel.searchAllResult(request: .init(keyword: searchBar.text ?? "", limit: 5, offset: 0))
+        viewModel.searchAllResult(request: .init(keyword: searchBar.text ?? "", limit: 20, offset: 0))
         if self.children.isEmpty {
             self.addContentsView()
             self.selfView.isHidden = true

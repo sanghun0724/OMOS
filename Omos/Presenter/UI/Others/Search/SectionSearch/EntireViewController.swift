@@ -1,4 +1,4 @@
-//
+/ /
 //  entireViewController.swift
 //  Omos
 //
@@ -56,11 +56,11 @@ extension EntireViewController:UITableViewDelegate,UITableViewDataSource {
         //모델에 따라 여기서 분리
         switch section {
         case 0:
-            return track.count
+            return track.count > 5 ? 5 : track.count
         case 1:
-            return album.count
+            return album.count > 5 ? 5 : album.count
         case 2:
-            return artist.count
+            return artist.count > 5 ? 5 : artist.count
         default:
             return 0
         }
@@ -73,6 +73,11 @@ extension EntireViewController:UITableViewDelegate,UITableViewDataSource {
             let cellData = self.track[indexPath.row]
             cell.selectionStyle = . none
             cell.configureModel(track: cellData)
+            cell.createdButton.rx.tap
+                .asDriver()
+                .drive(onNext: { [weak self] _ in
+                    print(cellData.musicID)
+                }).disposed(by: cell.disposeBag)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: AlbumTableCell.identifier, for: indexPath) as! AlbumTableCell

@@ -7,11 +7,11 @@
 
 import Foundation
 import UIKit
-
+import RxSwift
 
 class SongTableCell:UITableViewCell {
     static let identifier = "SongTableCell"
-    
+    let disposeBag = DisposeBag()
     
     let songImageView:UIImageView = {
         let view = UIImageView(image:UIImage(named: "albumCover"))
@@ -82,6 +82,7 @@ class SongTableCell:UITableViewCell {
             make.leading.trailing.equalTo(titleLabel)
             make.centerY.equalToSuperview().multipliedBy(1.25)
         }
+        
     }
     
     func configureModel(track:TrackRespone) {

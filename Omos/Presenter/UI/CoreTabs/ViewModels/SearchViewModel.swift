@@ -43,6 +43,12 @@ class SearchViewModel :BaseViewModel{
             }
         }).disposed(by: disposeBag)
         
+        albumFetch(request: request)
+        trackFetch(request: request)
+        artistFetch(request: request)
+    }
+    
+    func albumFetch(request:musicRequest) {
         usecase.albumFetch(request: request)
             .subscribe({ [weak self] event in
                 self?.albumLoading.onNext(false)
@@ -54,7 +60,9 @@ class SearchViewModel :BaseViewModel{
                     self?.errorMessage.onNext(error.localizedDescription)
                 }
             }).disposed(by: disposeBag)
-        
+    }
+    
+    func trackFetch(request:musicRequest) {
         usecase.artistFetch(request: request)
             .subscribe({ [weak self] event in
                 self?.artistLoading.onNext(false)
@@ -66,7 +74,9 @@ class SearchViewModel :BaseViewModel{
                     self?.errorMessage.onNext(error.localizedDescription)
                 }
             }).disposed(by: disposeBag)
-        
+    }
+    
+    func artistFetch(request:musicRequest) {
         usecase.trackFetch(request: request)
             .subscribe({ [weak self] event in
                 self?.trackLoading.onNext(false)
@@ -79,6 +89,7 @@ class SearchViewModel :BaseViewModel{
                 }
             }).disposed(by: disposeBag)
     }
+    
     
     init(usecase:SearchUseCase) {
         self.usecase = usecase
