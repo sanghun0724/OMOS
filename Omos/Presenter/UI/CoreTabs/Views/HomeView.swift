@@ -22,12 +22,35 @@ class HomeView:BaseView {
         return table
     }()
     
+    let floatingButton:UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .mainGrey4
+        button.setImage(UIImage(named: "edit2"), for: .normal)
+        return button
+    }()
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layoutIfNeeded()
+        floatingButton.layer.cornerCurve = .circular
+        floatingButton.layer.masksToBounds = true
+        floatingButton.layer.cornerRadius = floatingButton.height / 2
+    }
+    
     override func configureUI() {
         self.addSubview(tableView)
+        self.addSubview(floatingButton)
         
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        floatingButton.snp.makeConstraints { make in
+            make.trailing.bottom.equalToSuperview().inset(16)
+            make.width.equalToSuperview().multipliedBy(0.17)
+            make.height.equalTo(floatingButton.snp.width)
+        }
+        
     }
     
 }

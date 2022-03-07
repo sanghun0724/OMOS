@@ -25,7 +25,8 @@ class HomeViewController:BaseViewController {
         self.view.addSubview(selfView)
         
         selfView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.trailing.leading.equalToSuperview()
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
         }
         
     }
