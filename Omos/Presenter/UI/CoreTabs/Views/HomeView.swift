@@ -7,22 +7,25 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 class HomeView:BaseView {
     
-    let backImageView:UIImageView = {
-        let view = UIImageView()
-        view.contentMode = .scaleAspectFill
-        return view
+    let tableView:UITableView = {
+        let table = UITableView(frame: .zero, style: .grouped)
+        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        table.register(HomeHeaderView.self, forHeaderFooterViewReuseIdentifier: HomeHeaderView.identifier)
+        table.showsVerticalScrollIndicator = false
+        table.automaticallyAdjustsScrollIndicatorInsets = false
+        table.insetsContentViewsToSafeArea = true
+        table.contentInsetAdjustmentBehavior = .never
+        return table
     }()
     
-    let homeHeaderView = HomeHeaderView()
-    
-
     override func configureUI() {
-        self.addSubview(homeHeaderView)
+        self.addSubview(tableView)
         
-        homeHeaderView.snp.makeConstraints { make in
+        tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
@@ -30,16 +33,25 @@ class HomeView:BaseView {
 }
 
 
-
-
-
-
-
-class HomeHeaderView:BaseView {
-   // static let identifier = "HomeHeaderView"
+class HomeHeaderView:UITableViewHeaderFooterView {
+    static let identifier = "HomeHeaderView"
+    let disposeBag = DisposeBag()
+    
+    let groundView:UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    let backImageView:UIImageView = {
+        let view = UIImageView(image:UIImage(named:"photo1"))
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
+        return view
+    }()
     
     let backView:UIView = {
         let view = UIView()
+        view.backgroundColor = .clear
         return view
     }()
     
@@ -120,9 +132,16 @@ class HomeHeaderView:BaseView {
         button.setImage(UIImage(named: "edit"), for: .normal)
         return button
     }()
-   
-   override func configureUI() {
-        self.addSubview(backView)
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        configureUI()
+    }
+    
+    func configureUI() {
+        self.addSubview(groundView)
+        groundView.addSubview(backImageView)
+        groundView.addSubview(backView)
         backView.addSubview(omosImageView)
         backView.addSubview(notiButton)
         backView.addSubview(decoLabel1)
@@ -134,10 +153,20 @@ class HomeHeaderView:BaseView {
         backView.addSubview(albumTitleLabel)
         backView.addSubview(albumLabelImageView)
         backView.addSubview(createdButton)
-       
-       backView.snp.makeConstraints { make in
-           make.edges.equalToSuperview()
-       }
+        
+        groundView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        backImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        backView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.bottom.equalToSuperview()
+            make.top.equalToSuperview().offset(44)
+        }
         
         omosImageView.snp.makeConstraints { make in
             make.leading.top.equalToSuperview()

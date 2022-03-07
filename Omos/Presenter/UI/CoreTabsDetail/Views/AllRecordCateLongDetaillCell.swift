@@ -169,7 +169,7 @@ class LoadingCell:UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         self.addSubview(selfView)
-        selfView.backgroundColor = .mainBackGround
+        selfView.backgroundColor = .red
         selfView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }

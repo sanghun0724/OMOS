@@ -15,7 +15,8 @@ class TopTabViewController:TabmanViewController {
     let disposeBag = DisposeBag()
     let viewModel:SearchViewModel
     var viewControllers:Array<UIViewController> = []
-        
+    
+    
     init(viewModel:SearchViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)

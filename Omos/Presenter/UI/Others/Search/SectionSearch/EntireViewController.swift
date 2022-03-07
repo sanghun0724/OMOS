@@ -1,4 +1,4 @@
-/ /
+
 //  entireViewController.swift
 //  Omos
 //
@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class EntireViewController:BaseViewController {
     
@@ -76,7 +78,8 @@ extension EntireViewController:UITableViewDelegate,UITableViewDataSource {
             cell.createdButton.rx.tap
                 .asDriver()
                 .drive(onNext: { [weak self] _ in
-                    print(cellData.musicID)
+                    let vc = CategoryViewController(musicId: cellData.musicID)
+                    self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: cell.disposeBag)
             return cell
         case 1:

@@ -133,7 +133,7 @@ class SearchViewController:BaseViewController {
     }
     
     private func addContentsView() {
-        let topTabView = TopTabViewController(viewModel: self.viewModel)
+        let topTabView = TopTabViewController(viewModel: self.viewModel )
         addChild(topTabView)
         self.view.addSubview(topTabView.view)
         topTabView.view.snp.makeConstraints { make in
@@ -175,8 +175,11 @@ extension SearchViewController:UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("search")
+        viewModel.currentTrack = []
+        viewModel.currentArtist = []
+        viewModel.currentAlbum = []
         viewModel.searchAllResult(request: .init(keyword: searchBar.text ?? "", limit: 20, offset: 0))
+        viewModel.currentKeyword = searchBar.text ?? ""
         if self.children.isEmpty {
             self.addContentsView()
             self.selfView.isHidden = true

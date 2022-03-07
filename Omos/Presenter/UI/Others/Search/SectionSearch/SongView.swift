@@ -13,6 +13,7 @@ class SongView:BaseView {
     let tableView:UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(SongTableCell.self, forCellReuseIdentifier: SongTableCell.identifier)
+        table.register(LoadingCell.self, forCellReuseIdentifier: LoadingCell.identifier)
         table.separatorStyle = .none
         table.backgroundColor = .mainBlack
         table.showsVerticalScrollIndicator = false

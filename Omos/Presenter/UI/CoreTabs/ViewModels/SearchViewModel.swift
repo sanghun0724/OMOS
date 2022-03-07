@@ -23,6 +23,7 @@ class SearchViewModel :BaseViewModel{
     var isEmpty = PublishSubject<Bool>()
     let errorMessage = BehaviorSubject<String?>(value: nil)
     let isReload = BehaviorSubject<Bool>(value:false)
+    var currentKeyword = ""
     let usecase:SearchUseCase
     
     
@@ -54,7 +55,7 @@ class SearchViewModel :BaseViewModel{
                 self?.albumLoading.onNext(false)
                 switch event {
                 case .success(let data):
-                    self?.currentAlbum = data
+                    self?.currentAlbum += data
                     self?.album.onNext(data)
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)
@@ -62,13 +63,13 @@ class SearchViewModel :BaseViewModel{
             }).disposed(by: disposeBag)
     }
     
-    func trackFetch(request:musicRequest) {
+    func artistFetch(request:musicRequest) {
         usecase.artistFetch(request: request)
             .subscribe({ [weak self] event in
                 self?.artistLoading.onNext(false)
                 switch event {
                 case .success(let data):
-                    self?.currentArtist = data
+                    self?.currentArtist += data
                     self?.artist.onNext(data)
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)
@@ -76,13 +77,13 @@ class SearchViewModel :BaseViewModel{
             }).disposed(by: disposeBag)
     }
     
-    func artistFetch(request:musicRequest) {
+    func trackFetch(request:musicRequest) {
         usecase.trackFetch(request: request)
             .subscribe({ [weak self] event in
                 self?.trackLoading.onNext(false)
                 switch event {
                 case .success(let data):
-                    self?.currentTrack = data
+                    self?.currentTrack += data
                     self?.track.onNext(data)
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)

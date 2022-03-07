@@ -11,7 +11,7 @@ import RxSwift
 
 class SongTableCell:UITableViewCell {
     static let identifier = "SongTableCell"
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     
     let songImageView:UIImageView = {
         let view = UIImageView(image:UIImage(named: "albumCover"))
@@ -89,6 +89,12 @@ class SongTableCell:UITableViewCell {
         songImageView.setImage(with: track.albumImageURL)
         titleLabel.text = track.musicTitle
         subTitleLabel.text = track.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        songImageView.image = nil
+        disposeBag = DisposeBag()
     }
     
 }

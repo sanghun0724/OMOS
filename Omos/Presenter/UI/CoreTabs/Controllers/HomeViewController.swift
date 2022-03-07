@@ -15,7 +15,9 @@ class HomeViewController:BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.isHidden = true 
+        selfView.tableView.dataSource = self
+        selfView.tableView.delegate = self
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     override func configureUI() {
@@ -23,10 +25,9 @@ class HomeViewController:BaseViewController {
         self.view.addSubview(selfView)
         
         selfView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(12)
-            make.height.equalTo(320)
+            make.edges.equalToSuperview()
         }
+        
     }
     
 }
