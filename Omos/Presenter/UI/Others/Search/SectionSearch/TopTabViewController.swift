@@ -34,7 +34,10 @@ class TopTabViewController:TabmanViewController {
         let bar = TMBar.ButtonBar()
         settingTabBar(ctBar:bar)
         addBar(bar, dataSource: self, at: .top)
+        
     }
+    
+    
     
     func settingTabBar(ctBar:TMBar.ButtonBar) {
         ctBar.layout.transitionStyle = .snap
@@ -59,6 +62,8 @@ class TopTabViewController:TabmanViewController {
               ctBar.indicator.weight = .custom(value: 4)
               ctBar.indicator.tintColor = .mainOrange
     }
+    
+ 
     
     func bind() {
         //relaod
@@ -119,5 +124,7 @@ extension TopTabViewController: PageboyViewControllerDataSource,TMBarDataSource 
         func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
             return nil
         }
+    
+        
     
 }

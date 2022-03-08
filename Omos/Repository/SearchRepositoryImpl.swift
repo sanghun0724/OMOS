@@ -65,4 +65,70 @@ class SearchRepositoryImpl:SearchRepository {
         }
     }
     
+    func albumDetailFetch(albumId:String) -> Single<[AlbumDetailRespone]> {
+        return Single<[AlbumDetailRespone]>.create { [weak self] single in
+            self?.searchAPI.albumDetailFetch(albumId:albumId , completion: { result in
+                switch result {
+                case .success(let data):
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            })
+            
+            return Disposables.create()
+        }
+    }
+    
+    func trackDetailFetch(trackId:String) -> Single<TrackRespone> {
+        return Single<TrackRespone>.create { [weak self] single in
+            self?.searchAPI.trackDetailFetch(trackId:trackId , completion: { result in
+                switch result {
+                case .success(let data):
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            })
+            
+            return Disposables.create()
+        }
+    }
+    
+    func artistDetailTrackFetch(artistId:String) -> Single<[ArtistDetailRespone]> {
+        return Single<[ArtistDetailRespone]>.create { [weak self] single in
+            self?.searchAPI.ArtistDetailTrackFetch(artistId:artistId , completion: { result in
+                switch result {
+                case .success(let data):
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            })
+            
+            return Disposables.create()
+        }
+    }
+    
+    
+    
+    func artistDetailAlbumFetch(artistId:String,request:musicRequest) -> Single<[AlbumRespone]> {
+        return Single<[AlbumRespone]>.create { [weak self] single in
+            self?.searchAPI.ArtistDetailAlbumFetch(artistId: artistId, request: request, completion: { result in
+                switch result {
+                case .success(let data):
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            })
+            
+            return Disposables.create()
+        }
+    }
+    
 }

@@ -99,10 +99,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //              }
 //          }
         
-        UserDefaults.standard.set("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvcmlnaW5AbmF2ZXIuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY0NjY2MzA1Nn0.cMUJIb6aMFBC5aI1qMjOWrcIhM6uhnUrftfh7R1EIp7rmgfmLMCh7KpQJYpwFNdkgMHijXMvtRZjSWemnigcwQ",forKey:"access")
+        UserDefaults.standard.set("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvcmlnaW5AbmF2ZXIuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY3ODI0OTg1OX0.35vegavlz_zqJiWjx9AUWx_WZ2qtCAn9GSSSEkunoNtLOFvfsbJJtWRVhGF8U2c45QfR2F5CwJuMb3oOwzX1Gg",forKey:"access")
         UserDefaults.standard.set("eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NDY4MDM3MDV9.ZImb_c8Q6WSl2KaIDjMGs_tKfQPbgM57qDL6LFQFFnSksh0tGLxdflBVHQ4Ll76PglZg8ez86_QfyR6Jc75Lmw",forKey: "refresh")
 
-        self.window?.rootViewController = TabBarViewController()
+        self.window?.rootViewController = SearchArtistViewController()
         self.window?.makeKeyAndVisible()
         self.window?.backgroundColor = .mainBackGround
        

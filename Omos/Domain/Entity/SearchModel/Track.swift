@@ -7,6 +7,7 @@
 
 import Foundation
 
+///  Track + TrackDetail
 struct TrackRespone:Codable {
     let musicID, musicTitle: String
     let artists: [Artist]

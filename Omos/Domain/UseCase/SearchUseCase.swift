@@ -22,7 +22,25 @@ class SearchUseCase {
     func artistFetch(request:musicRequest) -> Single<[ArtistRespone]> {
         return searchRepository.artistFetch(request: request)
     }
+    
+    func albumDetialFetch(albumId:String) -> Single<[AlbumDetailRespone]> {
+        return searchRepository.albumDetailFetch(albumId: albumId)
+    }
+    
     func trackFetch(request:musicRequest) -> Single<[TrackRespone]> {
         return searchRepository.trackFetch(request: request)
     }
+    
+    func trackDetailFetch(trackId:String) -> Single<TrackRespone> {
+        return searchRepository.trackDetailFetch(trackId: trackId)
+    }
+    
+    func artistDetailTrackFetch(artistId:String) -> Single<[ArtistDetailRespone]> {
+        return searchRepository.artistDetailTrackFetch(artistId: artistId)
+    }
+    
+    func artistDetailAlbumFetch(artistId:String,request:musicRequest) -> Single<[AlbumRespone]> {
+        return searchRepository.artistDetailAlbumFetch(artistId: artistId, request: request)
+    }
+    
 }

@@ -5,12 +5,25 @@
 //  Created by sangheon on 2022/02/28.
 //
 import UIKit
+import RxSwift
 import Tabman
 import Pageboy
 
 class SearchArtistTopTabViewController:TabmanViewController {
     
     var viewControllers:Array<UIViewController> = []
+    let viewModel:SearchArtistDetailViewModel
+    
+    init(viewModel:SearchArtistDetailViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +57,7 @@ class SearchArtistTopTabViewController:TabmanViewController {
               ctBar.indicator.weight = .custom(value: 4)
               ctBar.indicator.tintColor = .mainOrange
     }
+    
     
 }
 

@@ -10,13 +10,31 @@ import UIKit
 class SearchAlbumDetailViewController:BaseViewController {
     
     let selfView = SearchAlbumDetailView()
+    let viewModel:SearchAlbumDetailViewModel
+    let albumInfo:AlbumRespone
+    
+    init(viewModel:SearchAlbumDetailViewModel,albumInfo:AlbumRespone) {
+        self.viewModel = viewModel
+        self.albumInfo = albumInfo
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
+        viewModel.albumDetailFetch(albumId: albumInfo.albumID)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
     
     override func configureUI() {
         super.configureUI()
@@ -28,18 +46,27 @@ class SearchAlbumDetailViewController:BaseViewController {
         }
         
     }
+    
+    func bind() {
+        viewModel.albumDetails
+            .subscribe(onNext: { [weak self] data in
+                self?.selfView.tableView.reloadData()
+            }).disposed(by: disposeBag)
+    }
 }
 
 
 extension SearchAlbumDetailViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return viewModel.currentAlbumDetails.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchAlbumDetailCell.identifier, for: indexPath) as! SearchAlbumDetailCell
-        cell.selectionStyle = . none
+        let cellData = viewModel.currentAlbumDetails[indexPath.row]
+        cell.configureModel(albumDetail: cellData,count:indexPath.row+1)
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -53,7 +80,10 @@ extension SearchAlbumDetailViewController:UITableViewDelegate,UITableViewDataSou
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: SearchAlbumDetailHeader.identifier) as! SearchAlbumDetailHeader
-       
+        headerView.titleLabel.text = albumInfo.albumTitle
+        headerView.subTitleLabel.text = albumInfo.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}
+        headerView.createdLabel.text = albumInfo.releaseDate
+        headerView.albumImageView.setImage(with: albumInfo.albumImageURL)
         return headerView
     }
     

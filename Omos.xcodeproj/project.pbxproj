@@ -22,6 +22,10 @@
 		B611826927D46D7F004217E2 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = B611826827D46D7F004217E2 /* Album.swift */; };
 		B611826B27D4B104004217E2 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = B611826A27D4B104004217E2 /* Artist.swift */; };
 		B611826F27D4B125004217E2 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = B611826E27D4B125004217E2 /* Track.swift */; };
+		B6183CBF27D7245D0035AA06 /* AlbumDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CBE27D7245D0035AA06 /* AlbumDetail.swift */; };
+		B6183CC327D733350035AA06 /* SearchAlbumDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CC227D733350035AA06 /* SearchAlbumDetailViewModel.swift */; };
+		B6183CC527D755150035AA06 /* ArtistDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CC427D755140035AA06 /* ArtistDetail.swift */; };
+		B6183CC727D76ADF0035AA06 /* SearchArtistDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CC627D76ADF0035AA06 /* SearchArtistDetailViewModel.swift */; };
 		B630D2FA27C7756A00E66F22 /* MydjTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2F927C7756A00E66F22 /* MydjTableCell.swift */; };
 		B630D2FC27C7761D00E66F22 /* Mydj + Table + Collect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2FB27C7761D00E66F22 /* Mydj + Table + Collect.swift */; };
 		B630D2FF27C78C0E00E66F22 /* BestSearchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2FE27C78C0E00E66F22 /* BestSearchTableCell.swift */; };
@@ -174,6 +178,10 @@
 		B611826827D46D7F004217E2 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		B611826A27D4B104004217E2 /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		B611826E27D4B125004217E2 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		B6183CBE27D7245D0035AA06 /* AlbumDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetail.swift; sourceTree = "<group>"; };
+		B6183CC227D733350035AA06 /* SearchAlbumDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAlbumDetailViewModel.swift; sourceTree = "<group>"; };
+		B6183CC427D755140035AA06 /* ArtistDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistDetail.swift; sourceTree = "<group>"; };
+		B6183CC627D76ADF0035AA06 /* SearchArtistDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtistDetailViewModel.swift; sourceTree = "<group>"; };
 		B630D2F927C7756A00E66F22 /* MydjTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MydjTableCell.swift; sourceTree = "<group>"; };
 		B630D2FB27C7761D00E66F22 /* Mydj + Table + Collect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mydj + Table + Collect.swift"; sourceTree = "<group>"; };
 		B630D2FE27C78C0E00E66F22 /* BestSearchTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSearchTableCell.swift; sourceTree = "<group>"; };
@@ -379,7 +387,9 @@
 			isa = PBXGroup;
 			children = (
 				B611826827D46D7F004217E2 /* Album.swift */,
+				B6183CBE27D7245D0035AA06 /* AlbumDetail.swift */,
 				B611826A27D4B104004217E2 /* Artist.swift */,
+				B6183CC427D755140035AA06 /* ArtistDetail.swift */,
 				B611826E27D4B125004217E2 /* Track.swift */,
 			);
 			path = SearchModel;
@@ -530,6 +540,7 @@
 				B646052D27CBAD2F0022E062 /* SearchAlbumDetailViewController.swift */,
 				B646052F27CBAF510022E062 /* SearchAlbumDetailView.swift */,
 				B646053127CBBF050022E062 /* SearchAlbumDetailCell.swift */,
+				B6183CC227D733350035AA06 /* SearchAlbumDetailViewModel.swift */,
 			);
 			path = SearchDetail;
 			sourceTree = "<group>";
@@ -774,6 +785,7 @@
 				B646053327CBE1A10022E062 /* SearchArtistViewController.swift */,
 				B646053527CBE1B40022E062 /* SearchArtistHeaderView.swift */,
 				B6DFD2CA27CC93EE00645F52 /* SearchArtistTopTabView.swift */,
+				B6183CC627D76ADF0035AA06 /* SearchArtistDetailViewModel.swift */,
 			);
 			path = ArtistSection;
 			sourceTree = "<group>";
@@ -989,6 +1001,7 @@
 				B646051027CB3A530022E062 /* MydjProfileViewController.swift in Sources */,
 				B650874327AF96E80020D2C1 /* ProfileViewController.swift in Sources */,
 				B6D3685627B7A510008B5635 /* NicknameViewController.swift in Sources */,
+				B6183CBF27D7245D0035AA06 /* AlbumDetail.swift in Sources */,
 				B646052C27CBAA0D0022E062 /* ArtistTableCell.swift in Sources */,
 				B646052E27CBAD2F0022E062 /* SearchAlbumDetailViewController.swift in Sources */,
 				B646051527CB5E7A0022E062 /* EntireView.swift in Sources */,
@@ -1007,6 +1020,7 @@
 				B6D4BB2C27CA86FB00D6741B /* SearchResultDetailView.swift in Sources */,
 				B650874727AFC4CA0020D2C1 /* AllRecordViewModel.swift in Sources */,
 				B650874927AFC5150020D2C1 /* AllRecord + Table.swift in Sources */,
+				B6183CC527D755150035AA06 /* ArtistDetail.swift in Sources */,
 				B689A9DA27AEA835005F26E4 /* BaseViewModel.swift in Sources */,
 				B646051F27CB6EA60022E062 /* TopTabViewController.swift in Sources */,
 				B609138427AD3A7C00B439C3 /* BaseViewController.swift in Sources */,
@@ -1039,6 +1053,7 @@
 				B682185A27B3AD5100B58E19 /* Search + Table.swift in Sources */,
 				B6FE837A27D07CE700401FC5 /* Category.swift in Sources */,
 				B68454F027BE2D7B00F1E6B5 /* MyRequestInterceptor.swift in Sources */,
+				B6183CC727D76ADF0035AA06 /* SearchArtistDetailViewModel.swift in Sources */,
 				B683A45727B12DD000838749 /* ProfileView.swift in Sources */,
 				B6E12E8027C210B4008644B5 /* CreateView.swift in Sources */,
 				B689A9D627AE9627005F26E4 /* IndicatorView.swift in Sources */,
@@ -1050,6 +1065,7 @@
 				B682185827B3AA4F00B58E19 /* SearchListView.swift in Sources */,
 				B6670FAA27B517DE00BABF40 /* DecoView.swift in Sources */,
 				B689A9D027AE94E9005F26E4 /* UIImage.swift in Sources */,
+				B6183CC327D733350035AA06 /* SearchAlbumDetailViewModel.swift in Sources */,
 				B646052127CB79C50022E062 /* AlbumViewController.swift in Sources */,
 				B6D4BB2227CA5D7C00D6741B /* AllRecordDetailView.swift in Sources */,
 				B6ABCCFC27CF5E650003B47A /* RecordsRepositoryImpl.swift in Sources */,

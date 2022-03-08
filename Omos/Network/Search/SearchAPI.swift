@@ -50,5 +50,57 @@ class SearchAPI {
         }
     }
     
+    func albumDetailFetch(albumId:String,completion:@escaping(Result<[AlbumDetailRespone],Error>) -> Void) {
+        AF.request(SearchTarget.searchAlbumDetail(albumId: albumId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[AlbumDetailRespone]>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func trackDetailFetch(trackId:String,completion:@escaping(Result<TrackRespone,Error>) -> Void) {
+        AF.request(SearchTarget.searchTrackDetail(trackId: trackId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<TrackRespone>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func ArtistDetailTrackFetch(artistId:String,completion:@escaping(Result<[ArtistDetailRespone],Error>) -> Void) {
+        AF.request(SearchTarget.searchArtistTrack(artistId: artistId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[ArtistDetailRespone]>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func ArtistDetailAlbumFetch(artistId:String,request:musicRequest,completion:@escaping(Result<[AlbumRespone],Error>) -> Void) {
+        AF.request(SearchTarget.searchArtistAlbum(artistId: artistId, request),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[AlbumRespone]>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
+    
     
 }

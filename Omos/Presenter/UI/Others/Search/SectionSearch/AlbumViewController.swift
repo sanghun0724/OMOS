@@ -66,6 +66,12 @@ extension AlbumViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let cellData = viewModel.currentAlbum[indexPath.row]
+        let rp = SearchRepositoryImpl(searchAPI: SearchAPI())
+        let uc = SearchUseCase(searchRepository: rp)
+        let vm = SearchAlbumDetailViewModel(usecase: uc)
+        let vc = SearchAlbumDetailViewController(viewModel:vm ,albumInfo:cellData)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

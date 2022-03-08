@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Pageboy
 import RxSwift
 import RxCocoa
 
@@ -44,8 +45,6 @@ class EntireViewController:BaseViewController {
         }
         
     }
-    
-    
 }
 
 extension EntireViewController:UITableViewDelegate,UITableViewDataSource {
@@ -125,17 +124,25 @@ extension EntireViewController:UITableViewDelegate,UITableViewDataSource {
         headerView.button.setTitle("더보기", for: .normal)
         headerView.button.setTitleColor(.mainGrey3, for: .normal)
         headerView.button.titleLabel?.font = .systemFont(ofSize: 12, weight: .regular)
-        headerView.button.rx.tap.asDriver()
-            .drive(onNext: { [weak self] in
-                print("click is here ")
-            }).disposed(by: headerView.disposeBag)
         switch section {
         case 0:
             headerView.label.text = "노래"
+            headerView.button.rx.tap.asDriver()
+                .drive(onNext: { [weak self] in
+                    self?.pageboyParent?.scrollToPage(.next, animated: true, completion: nil)
+                }).disposed(by: headerView.disposeBag)
         case 1:
             headerView.label.text = "앨범"
+            headerView.button.rx.tap.asDriver()
+                .drive(onNext: { [weak self] in
+                    self?.pageboyParent?.scrollToPage(.at(index: 2), animated: true, completion: nil)
+                }).disposed(by: headerView.disposeBag)
         case 2:
             headerView.label.text = "아티스트"
+            headerView.button.rx.tap.asDriver()
+                .drive(onNext: { [weak self] in
+                    self?.pageboyParent?.scrollToPage(.at(index: 3), animated: true, completion: nil)
+                }).disposed(by: headerView.disposeBag)
         default:
             print("you need to add section case")
         }
