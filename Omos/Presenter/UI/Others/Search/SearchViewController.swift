@@ -8,10 +8,6 @@
 import UIKit
 import RxSwift
 
-enum SearchType {
-    
-}
-
 class SearchViewController:BaseViewController {
     
     let viewModel:SearchViewModel

@@ -21,12 +21,20 @@ class SongView:BaseView {
         return table
     }()
     
+    let loadingView = LoadingView()
+    
     override func configureUI() {
         super.configureUI()
         self.addSubview(tableView)
+        self.addSubview(loadingView)
         
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        loadingView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        loadingView.isHidden = true
     }
 }

@@ -11,12 +11,13 @@ class SearchArtistViewController:BaseViewController {
     
     let topView = SearchArtistHeaderView()
     let viewModel:SearchArtistDetailViewModel
-    let bottomViewController = SearchArtistTopTabViewController()
     let artistData:ArtistRespone
+    let bottomViewController:SearchArtistTopTabViewController
     
     init(viewModel:SearchArtistDetailViewModel,artistData:ArtistRespone) {
         self.viewModel = viewModel
         self.artistData = artistData
+        self.bottomViewController = SearchArtistTopTabViewController(viewModel: viewModel, artistId: artistData.artistID)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -27,7 +28,7 @@ class SearchArtistViewController:BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.artistDetailTrackFetch(artistId: self.artistData.artistID)
-        viewModel.artistDetailAlbumFetch(artistId: self.artistData.artistID, request: .init(keyword: artistData.artistName, limit: 20, offset: 0))
+        viewModel.artistDetailAlbumFetch(artistId: self.artistData.artistID, request: .init(artistId: artistData.artistName, limit: 20, offset: 0))
     }
     
     
@@ -35,7 +36,6 @@ class SearchArtistViewController:BaseViewController {
         super.configureUI()
         setTopViewData()
         self.view.addSubview(topView)
-        self.addChild(bottomViewController)
         
         topView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
@@ -49,7 +49,6 @@ class SearchArtistViewController:BaseViewController {
     
     
     private func addContentsView() {
-        
         addChild(bottomViewController)
         self.view.addSubview(bottomViewController.view)
         

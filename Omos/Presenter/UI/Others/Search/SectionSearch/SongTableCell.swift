@@ -91,6 +91,12 @@ class SongTableCell:UITableViewCell {
         subTitleLabel.text = track.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
     }
     
+    func configureModelArtistTrack(track:ArtistDetailRespone) {
+        songImageView.setImage(with: track.albumImageURL)
+        titleLabel.text = track.musicTitle
+        subTitleLabel.text = track.artistName.reduce("") { $0 + " \($1)" }
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         songImageView.image = nil

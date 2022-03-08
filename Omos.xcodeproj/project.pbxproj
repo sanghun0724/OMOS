@@ -26,6 +26,8 @@
 		B6183CC327D733350035AA06 /* SearchAlbumDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CC227D733350035AA06 /* SearchAlbumDetailViewModel.swift */; };
 		B6183CC527D755150035AA06 /* ArtistDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CC427D755140035AA06 /* ArtistDetail.swift */; };
 		B6183CC727D76ADF0035AA06 /* SearchArtistDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CC627D76ADF0035AA06 /* SearchArtistDetailViewModel.swift */; };
+		B6183CCB27D788970035AA06 /* ArtistSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CCA27D788970035AA06 /* ArtistSongViewController.swift */; };
+		B6183CCD27D788A60035AA06 /* ArtistAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CCC27D788A60035AA06 /* ArtistAlbumViewController.swift */; };
 		B630D2FA27C7756A00E66F22 /* MydjTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2F927C7756A00E66F22 /* MydjTableCell.swift */; };
 		B630D2FC27C7761D00E66F22 /* Mydj + Table + Collect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2FB27C7761D00E66F22 /* Mydj + Table + Collect.swift */; };
 		B630D2FF27C78C0E00E66F22 /* BestSearchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2FE27C78C0E00E66F22 /* BestSearchTableCell.swift */; };
@@ -182,6 +184,8 @@
 		B6183CC227D733350035AA06 /* SearchAlbumDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAlbumDetailViewModel.swift; sourceTree = "<group>"; };
 		B6183CC427D755140035AA06 /* ArtistDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistDetail.swift; sourceTree = "<group>"; };
 		B6183CC627D76ADF0035AA06 /* SearchArtistDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtistDetailViewModel.swift; sourceTree = "<group>"; };
+		B6183CCA27D788970035AA06 /* ArtistSongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistSongViewController.swift; sourceTree = "<group>"; };
+		B6183CCC27D788A60035AA06 /* ArtistAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistAlbumViewController.swift; sourceTree = "<group>"; };
 		B630D2F927C7756A00E66F22 /* MydjTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MydjTableCell.swift; sourceTree = "<group>"; };
 		B630D2FB27C7761D00E66F22 /* Mydj + Table + Collect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mydj + Table + Collect.swift"; sourceTree = "<group>"; };
 		B630D2FE27C78C0E00E66F22 /* BestSearchTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSearchTableCell.swift; sourceTree = "<group>"; };
@@ -786,6 +790,8 @@
 				B646053527CBE1B40022E062 /* SearchArtistHeaderView.swift */,
 				B6DFD2CA27CC93EE00645F52 /* SearchArtistTopTabView.swift */,
 				B6183CC627D76ADF0035AA06 /* SearchArtistDetailViewModel.swift */,
+				B6183CCA27D788970035AA06 /* ArtistSongViewController.swift */,
+				B6183CCC27D788A60035AA06 /* ArtistAlbumViewController.swift */,
 			);
 			path = ArtistSection;
 			sourceTree = "<group>";
@@ -1031,6 +1037,7 @@
 				B67EF45027B7A9B80023D5D4 /* SignUpView.swift in Sources */,
 				B67EF45727B7AA220023D5D4 /* PrivateLabelView.swift in Sources */,
 				B611826227D45F5F004217E2 /* SearchTarget.swift in Sources */,
+				B6183CCD27D788A60035AA06 /* ArtistAlbumViewController.swift in Sources */,
 				B68454F827BE374600F1E6B5 /* LoginAPI.swift in Sources */,
 				B6DFD2D227CCB4D800645F52 /* AllRecordCateLongDetaillCell.swift in Sources */,
 				B646052327CB79D60022E062 /* AlbumView.swift in Sources */,
@@ -1075,6 +1082,7 @@
 				B611826927D46D7F004217E2 /* Album.swift in Sources */,
 				B682185C27B3C0BB00B58E19 /* MyError.swift in Sources */,
 				B646051D27CB610C0022E062 /* SongTableCell.swift in Sources */,
+				B6183CCB27D788970035AA06 /* ArtistSongViewController.swift in Sources */,
 				B650874527AFAE220020D2C1 /* SearchViewController.swift in Sources */,
 				B630D2FA27C7756A00E66F22 /* MydjTableCell.swift in Sources */,
 				B683A45927B130D100838749 /* Profile + Table.swift in Sources */,

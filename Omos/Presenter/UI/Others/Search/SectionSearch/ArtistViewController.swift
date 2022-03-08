@@ -70,8 +70,12 @@ extension ArtistViewController:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let cellData = viewModel.currentArtist[indexPath.row]
-        
-        
+        print("move")
+        let rp = SearchRepositoryImpl(searchAPI: SearchAPI())
+        let uc = SearchUseCase(searchRepository: rp)
+        let vm = SearchArtistDetailViewModel(usecase: uc)
+        let vc = SearchArtistViewController(viewModel: vm, artistData: cellData)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

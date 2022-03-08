@@ -7,8 +7,16 @@
 
 import Foundation
 
+
+struct ArtistRequest:Codable {
+        let artistId:String
+        let limit:Int
+        let offset:Int
+}
+
+
 struct ArtistDetailRespone:Codable {
-    let albumImageURL: String
+       let albumImageURL: String
        let artistName: [String]
        let musicID, musicTitle: String
 

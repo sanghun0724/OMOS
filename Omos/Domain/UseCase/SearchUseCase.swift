@@ -16,10 +16,10 @@ class SearchUseCase {
         self.searchRepository = searchRepository
     }
     
-    func albumFetch(request:musicRequest) -> Single<[AlbumRespone]> {
+    func albumFetch(request:MusicRequest) -> Single<[AlbumRespone]> {
         return searchRepository.albumFetch(request: request)
     }
-    func artistFetch(request:musicRequest) -> Single<[ArtistRespone]> {
+    func artistFetch(request:MusicRequest) -> Single<[ArtistRespone]> {
         return searchRepository.artistFetch(request: request)
     }
     
@@ -27,7 +27,7 @@ class SearchUseCase {
         return searchRepository.albumDetailFetch(albumId: albumId)
     }
     
-    func trackFetch(request:musicRequest) -> Single<[TrackRespone]> {
+    func trackFetch(request:MusicRequest) -> Single<[TrackRespone]> {
         return searchRepository.trackFetch(request: request)
     }
     
@@ -39,7 +39,7 @@ class SearchUseCase {
         return searchRepository.artistDetailTrackFetch(artistId: artistId)
     }
     
-    func artistDetailAlbumFetch(artistId:String,request:musicRequest) -> Single<[AlbumRespone]> {
+    func artistDetailAlbumFetch(artistId:String,request:ArtistRequest) -> Single<[AlbumRespone]> {
         return searchRepository.artistDetailAlbumFetch(artistId: artistId, request: request)
     }
     

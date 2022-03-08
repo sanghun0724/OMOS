@@ -9,7 +9,7 @@ import Foundation
 
 
 // shared
-struct musicRequest:Codable {
+struct MusicRequest:Codable {
     let keyword:String
     let limit:Int
     let offset:Int
@@ -27,3 +27,15 @@ struct AlbumRespone:Codable {
         case albumTitle, artists, releaseDate
     }
 }
+
+let artists: [Artist]
+  let albumID: String
+  let albumImageURL: String
+  let albumTitle, releaseDate: String
+
+  enum CodingKeys: String, CodingKey {
+      case artists
+      case albumID = "albumId"
+      case albumImageURL = "albumImageUrl"
+      case albumTitle, releaseDate
+  }

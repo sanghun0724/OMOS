@@ -76,4 +76,11 @@ class ArtistTableCell:UITableViewCell {
         subTitleLabel.text = artist.genres.reduce("") { $0 + " \($1)" }
     
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        songImageView.image = nil
+        titleLabel.text = nil
+        subTitleLabel.text = nil
+    }
 }

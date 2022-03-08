@@ -9,13 +9,13 @@ import Foundation
 import Alamofire
 
 enum SearchTarget {
-    case searchAlbum(musicRequest)
-    case searchArtist(musicRequest)
-    case searchTrack(musicRequest)
+    case searchAlbum(MusicRequest)
+    case searchArtist(MusicRequest)
+    case searchTrack(MusicRequest)
     case searchAlbumDetail(albumId:String)
     case searchTrackDetail(trackId:String)
     case searchArtistTrack(artistId:String)
-    case searchArtistAlbum(artistId:String,musicRequest)
+    case searchArtistAlbum(artistId:String,ArtistRequest)
 }
 
 extension SearchTarget:TargetType {
@@ -43,7 +43,7 @@ extension SearchTarget:TargetType {
         case .searchAlbumDetail(let id): return "/album/\(id)"
         case .searchTrackDetail(let id): return "track/\(id)"
         case .searchArtistTrack(let id): return "/artist/\(id)/hot-tracks"
-        case .searchArtistAlbum(let id,_): return "/artist/\(id)/album"
+        case .searchArtistAlbum(let id,_): return "/artist/\(id)/albums"
         }
     }
     

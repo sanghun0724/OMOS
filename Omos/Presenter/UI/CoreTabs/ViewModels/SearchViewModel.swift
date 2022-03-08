@@ -29,7 +29,7 @@ class SearchViewModel :BaseViewModel{
     
     
     
-    func searchAllResult(request:musicRequest) {
+    func searchAllResult(request:MusicRequest) {
         allLoading.onNext(true)
         trackLoading.onNext(true)
         albumLoading.onNext(true)
@@ -49,7 +49,7 @@ class SearchViewModel :BaseViewModel{
         artistFetch(request: request)
     }
     
-    func albumFetch(request:musicRequest) {
+    func albumFetch(request:MusicRequest) {
         usecase.albumFetch(request: request)
             .subscribe({ [weak self] event in
                 self?.albumLoading.onNext(false)
@@ -63,7 +63,7 @@ class SearchViewModel :BaseViewModel{
             }).disposed(by: disposeBag)
     }
     
-    func artistFetch(request:musicRequest) {
+    func artistFetch(request:MusicRequest) {
         usecase.artistFetch(request: request)
             .subscribe({ [weak self] event in
                 self?.artistLoading.onNext(false)
@@ -77,7 +77,7 @@ class SearchViewModel :BaseViewModel{
             }).disposed(by: disposeBag)
     }
     
-    func trackFetch(request:musicRequest) {
+    func trackFetch(request:MusicRequest) {
         usecase.trackFetch(request: request)
             .subscribe({ [weak self] event in
                 self?.trackLoading.onNext(false)

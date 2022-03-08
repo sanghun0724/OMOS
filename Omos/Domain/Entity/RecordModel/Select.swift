@@ -62,3 +62,7 @@ struct Artist: Codable {
         case artistName
     }
 }
+///이거 아직 서버 안한듯 
+struct testArtist:Codable {
+    let artistName: String
+}

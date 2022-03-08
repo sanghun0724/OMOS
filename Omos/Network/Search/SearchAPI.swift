@@ -11,7 +11,7 @@ import Alamofire
 
 class SearchAPI {
     
-    func albumFetch(request:musicRequest,completion:@escaping(Result<[AlbumRespone],Error>) -> Void) {
+    func albumFetch(request:MusicRequest,completion:@escaping(Result<[AlbumRespone],Error>) -> Void) {
         AF.request(SearchTarget.searchAlbum(request),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[AlbumRespone]>) in
             switch response.result {
             case .success(let data):
@@ -24,7 +24,7 @@ class SearchAPI {
         }
     }
     
-    func artistFetch(request:musicRequest,completion:@escaping(Result<[ArtistRespone],Error>) -> Void) {
+    func artistFetch(request:MusicRequest,completion:@escaping(Result<[ArtistRespone],Error>) -> Void) {
         AF.request(SearchTarget.searchArtist(request),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[ArtistRespone]>) in
             switch response.result {
             case .success(let data):
@@ -37,7 +37,7 @@ class SearchAPI {
         }
     }
     
-    func trackFetch(request:musicRequest,completion:@escaping(Result<[TrackRespone],Error>) -> Void) {
+    func trackFetch(request:MusicRequest,completion:@escaping(Result<[TrackRespone],Error>) -> Void) {
         AF.request(SearchTarget.searchTrack(request),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[TrackRespone]>) in
             switch response.result {
             case .success(let data):
@@ -89,11 +89,10 @@ class SearchAPI {
         }
     }
     
-    func ArtistDetailAlbumFetch(artistId:String,request:musicRequest,completion:@escaping(Result<[AlbumRespone],Error>) -> Void) {
+    func ArtistDetailAlbumFetch(artistId:String,request:ArtistRequest,completion:@escaping(Result<[AlbumRespone],Error>) -> Void) {
         AF.request(SearchTarget.searchArtistAlbum(artistId: artistId, request),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[AlbumRespone]>) in
             switch response.result {
             case .success(let data):
-                print(data)
                 completion(.success(data))
             case .failure(let error):
                 print(error.localizedDescription)

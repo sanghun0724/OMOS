@@ -17,7 +17,7 @@ class SearchRepositoryImpl:SearchRepository {
         self.searchAPI = searchAPI
     }
     
-    func albumFetch(request: musicRequest) -> Single<[AlbumRespone]> {
+    func albumFetch(request: MusicRequest) -> Single<[AlbumRespone]> {
         return Single<[AlbumRespone]>.create { [weak self] single in
             self?.searchAPI.albumFetch(request: request, completion: { result in
                 switch result {
@@ -33,7 +33,7 @@ class SearchRepositoryImpl:SearchRepository {
         }
     }
     
-    func artistFetch(request: musicRequest) -> Single<[ArtistRespone]> {
+    func artistFetch(request: MusicRequest) -> Single<[ArtistRespone]> {
         return Single<[ArtistRespone]>.create { [weak self] single in
             self?.searchAPI.artistFetch(request: request, completion: { result in
                 switch result {
@@ -49,7 +49,7 @@ class SearchRepositoryImpl:SearchRepository {
         }
     }
     
-    func trackFetch(request: musicRequest) -> Single<[TrackRespone]> {
+    func trackFetch(request: MusicRequest) -> Single<[TrackRespone]> {
         return Single<[TrackRespone]>.create { [weak self] single in
             self?.searchAPI.trackFetch(request: request, completion: { result in
                 switch result {
@@ -115,7 +115,7 @@ class SearchRepositoryImpl:SearchRepository {
     
     
     
-    func artistDetailAlbumFetch(artistId:String,request:musicRequest) -> Single<[AlbumRespone]> {
+    func artistDetailAlbumFetch(artistId:String,request:ArtistRequest) -> Single<[AlbumRespone]> {
         return Single<[AlbumRespone]>.create { [weak self] single in
             self?.searchAPI.ArtistDetailAlbumFetch(artistId: artistId, request: request, completion: { result in
                 switch result {
