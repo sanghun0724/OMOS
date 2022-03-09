@@ -32,4 +32,16 @@ class RecordsUseCase {
         return recordsRepository.save(cate: cate, content: content, isPublic: isPublic, musicId: musicId, title: title, userid: userid)
     }
     
+    func recordIspublic(postId:String) {
+        return recordsRepository.recordIspublic(postId: postId)
+    }
+    
+    func recordDelete(postId:String) {
+        return recordsRepository.recordDelete(postId: postId)
+    }
+    
+    func recordUpdate(postId:String,request:UpdateRequest) {
+        return recordsRepository.recordUpdate(postId: postId,request:request)
+    }
+    
 }

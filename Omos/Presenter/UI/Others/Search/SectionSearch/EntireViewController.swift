@@ -32,7 +32,6 @@ class EntireViewController:BaseViewController {
         selfView.emptyView.isHidden = !(viewModel.currentAlbum.isEmpty) && !(viewModel.currentTrack.isEmpty) && !(viewModel.currentArtist.isEmpty)
     }
     
-    
     override func configureUI() {
         super.configureUI()
         self.view.addSubview(selfView)

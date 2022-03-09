@@ -68,5 +68,28 @@ class RecordAPI {
         }
     }
     
+    func searchRecordFetch(musicId:String,request:SearchRecordRequest,completion:@escaping(Result<SaveRespone,Error>) -> Void) {
+        AF.request(RecordTarget.searchRecord(musicId:musicId,request),interceptor: TokenInterceptor.shared.getInterceptor()).responseString { result in
+            print(result)
+        }
+    }
+    
+    func recordIspublic(postId:String) {
+        AF.request(RecordTarget.recordIspublic(postId: postId),interceptor: TokenInterceptor.shared.getInterceptor()).responseString { result in
+            print(result)
+        }
+    }
+    
+    func recordDelete(postId:String) {
+        AF.request(RecordTarget.recordDelete(postId: postId),interceptor: TokenInterceptor.shared.getInterceptor()).responseString { result in
+            print(result)
+        }
+    }
+    
+    func recordUpdate(postId:String,request:UpdateRequest) {
+        AF.request(RecordTarget.recordUpdate(postId: postId,request),interceptor: TokenInterceptor.shared.getInterceptor()).responseString { result in
+            print(result)
+        }
+    }
     
 }

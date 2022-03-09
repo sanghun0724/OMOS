@@ -65,7 +65,7 @@ class CreateViewController:BaseViewController {
                   return
               }
         
-        viewModel.saveRecord(cate: getCate(cate: category), content: text, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: titleText, userid: 2)//UserDefaults.standard.integer(forKey: "user"))
+        viewModel.saveRecord(cate: getCate(cate: category), content: text, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: titleText, userid: UserDefaults.standard.integer(forKey: "user"))
         
     }
     

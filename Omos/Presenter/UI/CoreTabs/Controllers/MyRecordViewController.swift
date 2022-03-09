@@ -28,7 +28,7 @@ class MyRecordViewController: BaseViewController {
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         configureUI()
-        viewModel.myRecordFetch(userid: 1)
+        viewModel.myRecordFetch(userid: UserDefaults.standard.integer(forKey: "user"))
         setRightItems()
        
     }

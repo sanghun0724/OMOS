@@ -46,6 +46,7 @@ class AllRecordCateShortDetailCell:UITableViewCell {
     }
     
     func configureModel(record:CategoryRespone) {
+        myView.reportButton.isHidden = true 
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
         myView.circleImageView.setImage(with: record.music.albumImageURL)
@@ -56,5 +57,16 @@ class AllRecordCateShortDetailCell:UITableViewCell {
         myView.nicknameLabel.text = record.nickname
         myView.loveCountLabel.text = String(record.likeCnt)
         myView.starCountLabel.text = String(record.scrapCnt)
+        
+        if record.isLiked {
+            myView.loveImageView.image = UIImage(named: "fillLove")
+            myView.loveCountLabel.textColor = .mainOrange
+        }
+        
+        if record.isScraped {
+            myView.starImageView.image = UIImage(named: "fillStar")
+            myView.starCountLabel.textColor = .mainOrange
+        }
+        
     }
 }

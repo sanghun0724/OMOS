@@ -42,7 +42,6 @@
 //
 //    override func configureUI() {
 //        super.configureUI()
-//        setTitle()
 //        self.view.addSubview(selfView)
 //
 //        selfView.snp.makeConstraints { make in
@@ -55,13 +54,13 @@
 //
 //
 //    private func bind() {
-//        viewModel.cateRecords
-//            .subscribe(onNext:{ [weak self] data in
-//                self?.cateRecords += data
-//                self?.hasNextPage = self?.cateRecords.count ?? 0 > 300 ? false : true //다음페이지 있는지 확인
-//                self?.isPaging = false //페이징 종료
-//                self?.selfView.tableView.reloadData()
-//            }).disposed(by: disposeBag)
+////        viewModel.cateRecords
+////            .subscribe(onNext:{ [weak self] data in
+////                self?.cateRecords += data
+////                self?.hasNextPage = self?.cateRecords.count ?? 0 > 300 ? false : true //다음페이지 있는지 확인
+////                self?.isPaging = false //페이징 종료
+////                self?.selfView.tableView.reloadData()
+////            }).disposed(by: disposeBag)
 //
 //
 //    }
@@ -70,7 +69,7 @@
 //    private func fetchRecord() {
 //        //1. 데이터 부르기 페이지+1 해서
 //        currentPage+=1
-//        viewModel.selectRecordsShow(type: self.myCateType, page:currentPage , size: 3, sort: "viewsCount,ASC", userid: 1)
+//
 //        //2. 바인딩 하고 도착하면 데이터 append (위에서 하고 있으니 ok)
 //    }
 //
@@ -197,16 +196,3 @@
 //
 //}
 //
-//extension AllRecordCateDetailViewController:MyCellDelegate {
-//    func readMoreTapped(cell: AllRecordCateLongDetailCell) {
-//        let indexPath = selfView.tableView.indexPath(for: cell)!
-//        print(indexPath)
-//        if(expandedIndexSet.contains(indexPath.row)){
-//            expandedIndexSet.remove(indexPath.row)
-//        } else {
-//            expandedIndexSet.insert(indexPath.row)
-//        }
-//        selfView.tableView.reloadRows(at: [indexPath], with: .none)
-//    }
-//
-//}

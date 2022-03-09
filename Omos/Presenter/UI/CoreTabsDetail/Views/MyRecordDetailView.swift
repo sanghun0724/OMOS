@@ -80,6 +80,13 @@ class MyRecordDetailView:BaseView {
         return button
     }()
     
+    let lockButton:UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "unlock"), for: .normal)
+        button.setImage(UIImage(named: "lock"), for: .selected)
+        return button
+    }()
+    
     /// 3
     let textCoverView:UIView = {
         let view = UIView()
@@ -225,6 +232,12 @@ class MyRecordDetailView:BaseView {
             make.height.width.equalTo(20)
         }
         
+        lockButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview().offset(-10)
+            make.width.height.equalTo(18)
+        }
+        
         ///4
         lastView.snp.makeConstraints { make in
             make.left.right.bottom.equalToSuperview()
@@ -305,6 +318,7 @@ class MyRecordDetailView:BaseView {
         titleImageView.addSubview(createdLabel)
         titleImageView.addSubview(cateLabel)
         titleImageView.addSubview(reportButton)
+        titleImageView.addSubview(lockButton)
         
         textCoverView.addSubview(mainLabelView)
         

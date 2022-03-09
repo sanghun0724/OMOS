@@ -7,23 +7,28 @@
 
 import Foundation
 
-// MARK: - CategoryElement
 // MARK: - MyRecordElement
 struct MyRecordRespone: Codable {
-    let category, createdDate: String
-    let isPublic: Bool
-    let music: Music
-    let recordContents: String
-    let recordID: Int
-    let recordImageURL:String?
-    let recordTitle: String
+       let music: Music
+       let recordID: Int
+       let recordTitle, recordContents: String
+       let recordImageURL: String?
+       let createdDate: String
+       let category: String
+       let viewsCnt, userID: Int
+       let nickname: String
+       let likeCnt, scrapCnt: Int
+       let isLiked, isScraped, isPublic: Bool
 
-    enum CodingKeys: String, CodingKey {
-        case category, createdDate, isPublic, music, recordContents
-        case recordID = "recordId"
-        case recordImageURL = "recordImageUrl"
-        case recordTitle
-    }
+       enum CodingKeys: String, CodingKey {
+           case music
+           case recordID = "recordId"
+           case recordTitle, recordContents
+           case recordImageURL = "recordImageUrl"
+           case createdDate, category, viewsCnt
+           case userID = "userId"
+           case nickname, likeCnt, scrapCnt, isLiked, isScraped, isPublic
+       }
 }
 
 
@@ -48,3 +53,10 @@ struct SaveRequest: Codable { // add imageURL or image data using form - data
 struct SaveRespone:Codable {
     let state:Bool
 }
+
+
+struct UpdateRequest:Codable {
+    let contents:String
+    let title:String
+}
+

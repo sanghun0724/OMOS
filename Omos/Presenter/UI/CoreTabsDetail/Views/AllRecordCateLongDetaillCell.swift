@@ -52,7 +52,7 @@ class AllRecordCateLongDetailCell:UITableViewCell {
             .disposed(by: disposeBag)
     }
     
-
+    
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -60,6 +60,7 @@ class AllRecordCateLongDetailCell:UITableViewCell {
     }
     
     func configureModel(record:CategoryRespone) {
+        myView.myView.reportButton.isHidden = true 
         myView.myView.musicTitleLabel.text = record.music.musicTitle
         myView.myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
         myView.myView.circleImageView.setImage(with: record.music.albumImageURL)
@@ -70,7 +71,17 @@ class AllRecordCateLongDetailCell:UITableViewCell {
         myView.myView.nicknameLabel.text = record.nickname
         myView.myView.loveCountLabel.text = String(record.likeCnt)
         myView.myView.starCountLabel.text = String(record.scrapCnt)
-        /// 추후에 자기가 스크랩 눌렀는지 좋아요 눌렀는지 체크하는 로직. ㄱ
+        
+        if record.isLiked {
+            myView.myView.loveImageView.image = UIImage(named: "fillLove")
+            myView.myView.loveCountLabel.textColor = .mainOrange
+        }
+        
+        if record.isScraped {
+            myView.myView.starImageView.image = UIImage(named: "fillStar")
+            myView.myView.starCountLabel.textColor = .mainOrange
+        }
+        
     }
     
 }
@@ -91,7 +102,7 @@ class CellContainerView:BaseView {
         let button = UIButton()
         return button
     }()
-   
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -114,15 +125,15 @@ class CellContainerView:BaseView {
         myView.mainLabelView.numberOfLines = 3
         myView.mainLabelView.lineBreakMode = .byTruncatingTail
         myView.mainLabelView.text = "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-       
+        
         //remake
         
         myView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-   
+        
         myView.topLabelView.snp.remakeConstraints { make in
-                make.leading.trailing.top.equalToSuperview()
+            make.leading.trailing.top.equalToSuperview()
             make.height.equalTo(Constant.mainHeight * 0.069)
         }
         
@@ -144,13 +155,13 @@ class CellContainerView:BaseView {
         readMoreButton.snp.makeConstraints { make in
             make.edges.equalTo(dummyLabel)
         }
-
+        
         myView.lastView.snp.remakeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
             make.height.equalTo(Constant.mainHeight * 0.077)
         }
-       
-   }
+        
+    }
 }
 
 class LoadingCell:UITableViewCell {

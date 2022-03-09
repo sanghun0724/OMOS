@@ -49,6 +49,7 @@ class MyRecordDetailViewController:BaseViewController {
     
     override func configureUI() {
         self.view.addSubview(selfView)
+        selfView.reportButton.isHidden = true
         
         selfView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
@@ -59,15 +60,23 @@ class MyRecordDetailViewController:BaseViewController {
     }
     
     func bind() {
-        selfView.reportButton.rx.tap
-            .asDriver()
-            .drive(onNext:{ [weak self] _ in
-                let action = UIAlertAction(title: "신고", style: .default) { alert in
-                    print(alert)
-                }
-                action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
-                self?.presentAlert(title: "신고하기", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
-            }).disposed(by: disposeBag)
+//        selfView.reportButton.rx.tap
+//            .asDriver()
+//            .drive(onNext:{ [weak self] _ in
+//                let action = UIAlertAction(title: "신고", style: .default) { alert in
+//                    print(alert)
+//                }
+//                action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
+//                self?.presentAlert(title: "신고하기", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
+//            }).disposed(by: disposeBag)
+        
+        //like button and scrap button
+        selfView.lockButton.rx.tap
+            .scan(false) { (lastState, newValue) in
+                !lastState
+            }
+            .bind(to: selfView.lockButton.rx.isSelected)
+            .disposed(by: disposeBag)
         
     }
     
@@ -78,8 +87,26 @@ class MyRecordDetailViewController:BaseViewController {
 //        selfView.backImageView.setImage(with: <#T##String#>)
         selfView.titleLabel.text = myRecord.recordTitle
         selfView.createdLabel.text = myRecord.createdDate
-        
         selfView.mainLabelView.text = myRecord.recordContents
+        selfView.loveCountLabel.text = String(myRecord.likeCnt)
+        selfView.starCountLabel.text = String(myRecord.scrapCnt)
+        
+        if myRecord.isPublic {
+            selfView.lockButton.setImage(UIImage(named: "unlock"), for: .normal)
+            selfView.lockButton.setImage(UIImage(named: "lock"), for: .selected)
+        } else {
+            selfView.lockButton.setImage(UIImage(named: "lock"), for: .normal)
+            selfView.lockButton.setImage(UIImage(named: "unlock"), for: .selected)
+        }
+        if myRecord.isLiked {
+            selfView.loveImageView.image = UIImage(named: "fillLove")
+            selfView.loveCountLabel.textColor = .mainOrange
+        }
+        
+        if myRecord.isScraped {
+            selfView.starImageView.image = UIImage(named: "fillStar")
+            selfView.starCountLabel.textColor = .mainOrange
+        }
         
     }
     

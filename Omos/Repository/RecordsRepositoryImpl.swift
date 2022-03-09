@@ -83,7 +83,17 @@ class RecordsRepositoryImpl:RecordsRepository {
         }
     }
     
+    func recordIspublic(postId:String) {
+        recordAPI.recordIspublic(postId: postId)
+    }
     
+    func recordDelete(postId:String) {
+        recordAPI.recordDelete(postId: postId)
+    }
+    
+    func recordUpdate(postId:String,request request:UpdateRequest) {
+        recordAPI.recordUpdate(postId: postId,request:request)
+    }
     
     
 }

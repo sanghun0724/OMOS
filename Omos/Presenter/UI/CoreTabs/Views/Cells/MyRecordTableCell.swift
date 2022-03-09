@@ -166,7 +166,7 @@ class MyRecordTableCell:UITableViewCell {
         recordLabel.text = record.recordTitle
         descLabel.text = record.recordContents
         nameLabel.text = record.createdDate + " | " + record.category
-        record.isPublic ? (lockImageView.setImage(with: "lock")) : (lockImageView.setImage(with: "unlock"))
+        record.isPublic ? (lockImageView.image = UIImage(named:"unlock")) : (lockImageView.image = UIImage(named:"lock"))
         
     }
     
