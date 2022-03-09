@@ -20,9 +20,10 @@ class ArtistAlbumViewController:BaseViewController,UIScrollViewDelegate {
     var pagingCount = 0
     let artistId:String
     
-    init(viewModel:SearchArtistDetailViewModel,artistId:String) {
+    init(viewModel:SearchArtistDetailViewModel,artistId:String,searchType:SearchType) {
         self.viewModel = viewModel
         self.artistId = artistId
+        self.viewModel.searchType = searchType
         super.init(nibName: nil, bundle: nil)
     }
     

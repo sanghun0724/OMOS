@@ -33,6 +33,7 @@ class SongViewController:BaseViewController,UIScrollViewDelegate {
         bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
+        selfView.emptyView.isHidden = !(viewModel.currentTrack.isEmpty)
     }
     
     
@@ -56,20 +57,27 @@ class SongViewController:BaseViewController,UIScrollViewDelegate {
                 self?.selfView.tableView.reloadData()
             }).disposed(by: disposebag)
         
+        viewModel.isTrackEmpty
+            .withUnretained(self)
+            .subscribe(onNext: { owner,empty in
+                owner.selfView.emptyView.isHidden = !empty
+            }).disposed(by: disposeBag)
+        
+        
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-          let offsetY = scrollView.contentOffset.y
-          let contentHeight = scrollView.contentSize.height
-          let height = scrollView.frame.height
-    
-          // 스크롤이 테이블 뷰 Offset의 끝에 가게 되면 다음 페이지를 호출
-          if offsetY > (contentHeight - height) {
-              if isPaging == false && hasNextPage {
-                  beginPaging()
-              }
-          }
-      }
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.height
+        
+        // 스크롤이 테이블 뷰 Offset의 끝에 가게 되면 다음 페이지를 호출
+        if offsetY > (contentHeight - height) {
+            if isPaging == false && hasNextPage {
+                beginPaging()
+            }
+        }
+    }
     func beginPaging() {
         isPaging = true
         
@@ -107,7 +115,7 @@ extension SongViewController:UITableViewDelegate,UITableViewDataSource {
                 .asDriver()
                 .drive(onNext: { [weak self] _ in
                     print("click")
-                    let vc = CategoryViewController(musicId: cellData.musicID)
+                    let vc = CategoryViewController(defaultModel: .init(musicId:cellData.musicID, imageURL: cellData.albumImageURL, musicTitle: cellData.musicTitle, subTitle: cellData.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}))
                     self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: cell.disposeBag)
             return cell
@@ -115,7 +123,7 @@ extension SongViewController:UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: LoadingCell.identifier, for: indexPath) as! LoadingCell
             return cell
         }
-       
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

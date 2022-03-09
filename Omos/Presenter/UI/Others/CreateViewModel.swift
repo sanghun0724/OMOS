@@ -9,10 +9,12 @@ import Foundation
 import RxSwift
 
 class CreateViewModel:BaseViewModel {
+    
+    var defaultModel:recordSaveDefaultModel = .init(musicId: "", imageURL: "", musicTitle: "", subTitle: "")
     let errorMessage = BehaviorSubject<String?>(value: nil)
     let loading = BehaviorSubject<Bool>(value:false)
-    let postID = PublishSubject<Int>()
-    var currnetPostID = 0
+    let state = PublishSubject<Bool>()
+    var currentState:Bool = true
     let usecase:RecordsUseCase
     
     init(usecase:RecordsUseCase) {
@@ -28,8 +30,8 @@ class CreateViewModel:BaseViewModel {
                 self?.loading.onNext(true)
                 switch event {
                 case .success(let data):
-                    self?.currnetPostID = data.postID
-                    self?.postID.onNext(data.postID)
+                    self?.currentState = data.state
+                    self?.state.onNext(data.state)
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)
                 }

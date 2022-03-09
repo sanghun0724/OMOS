@@ -123,15 +123,15 @@ class SearchViewController:BaseViewController {
                 owner.loadingView.isHidden = !loading
             }).disposed(by: disposeBag)
         
-        viewModel.isEmpty
-            .withUnretained(self)
-            .subscribe(onNext: { owner,empty in
-                guard let isTextEmpty = owner.selfView.searchViewController.searchBar.text?.isEmpty else { return }
-                if !isTextEmpty {
-                    print("test")
-                    owner.selfView.emptyView.isHidden = !empty
-                }
-            }).disposed(by: disposeBag)
+//        viewModel.isEmpty
+//            .withUnretained(self)
+//            .subscribe(onNext: { owner,empty in
+//                guard let isTextEmpty = owner.selfView.searchViewController.searchBar.text?.isEmpty else { return }
+//                if !isTextEmpty {
+//                    print("test")
+//                    owner.selfView.emptyView.isHidden = !empty
+//                }
+//            }).disposed(by: disposeBag)
     }
     
     private func addContentsView() {

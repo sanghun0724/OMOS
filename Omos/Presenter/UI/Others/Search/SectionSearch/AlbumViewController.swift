@@ -27,6 +27,7 @@ class AlbumViewController:BaseViewController {
         bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
+        selfView.emptyView.isHidden = !(viewModel.currentAlbum.isEmpty)
     }
     
     
@@ -43,8 +44,17 @@ class AlbumViewController:BaseViewController {
     func bind() {
         viewModel.album
             .subscribe({ [weak self] data in
+                self?.selfView.emptyView.isHidden = !(self?.viewModel.currentAlbum.isEmpty)!
                 self?.selfView.tableView.reloadData()
             }).disposed(by: disposebag)
+        
+        
+        viewModel.isAlbumEmpty
+            .withUnretained(self)
+            .subscribe(onNext: { owner,empty in
+                owner.selfView.emptyView.isHidden = !empty
+            }).disposed(by: disposeBag)
+        
     }
     
     

@@ -28,6 +28,7 @@ class ArtistViewController:BaseViewController {
         bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
+        selfView.emptyView.isHidden = !(viewModel.currentArtist.isEmpty)
     }
     
     
@@ -45,8 +46,16 @@ class ArtistViewController:BaseViewController {
     func bind() {
         viewModel.artist
             .subscribe({ [weak self] data in
+                self?.selfView.emptyView.isHidden = !(self?.viewModel.currentArtist.isEmpty)!
                 self?.selfView.tableView.reloadData()
             }).disposed(by: disposebag)
+        
+        viewModel.isArtistEmpty
+            .withUnretained(self)
+            .subscribe(onNext: { owner,empty in
+                owner.selfView.emptyView.isHidden = !empty
+            }).disposed(by: disposeBag)
+  
     }
     
     
@@ -74,6 +83,7 @@ extension ArtistViewController:UITableViewDelegate,UITableViewDataSource {
         let rp = SearchRepositoryImpl(searchAPI: SearchAPI())
         let uc = SearchUseCase(searchRepository: rp)
         let vm = SearchArtistDetailViewModel(usecase: uc)
+        vm.searchType = viewModel.searchType
         let vc = SearchArtistViewController(viewModel: vm, artistData: cellData)
         self.navigationController?.pushViewController(vc, animated: true)
     }

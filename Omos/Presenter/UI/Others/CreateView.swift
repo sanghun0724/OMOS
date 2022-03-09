@@ -93,6 +93,7 @@ class CreateView: BaseView {
     let lockButton:UIButton = {
        let button = UIButton()
         button.setImage(UIImage(named: "unlock"), for: .normal)
+        button.setImage(UIImage(named: "lock"), for: .selected)
         return button
     }()
     

@@ -57,16 +57,15 @@ class CreateViewController:BaseViewController {
         } else {
             mainText = selfView.mainfullTextView.text
         }
-        
-        guard let backImage = selfView.imageView.image,
-              let titleText = selfView.titleTextView.text,
+        let backImage = selfView.imageView.image
+        guard let titleText = selfView.titleTextView.text,
               let text = mainText else {
-                    //alert
+                  //alert
                   print("alert here")
                   return
               }
         
-        viewModel.saveRecord(cate: category, content: text, isPublic: true, musicId: "0pYacDCZuRhcrwGUA5nTBe artistId : 3HqSLMAZ3g3d5poNaI7GOU", title: titleText, userid: 1)
+        viewModel.saveRecord(cate: getCate(cate: category), content: text, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: titleText, userid: 2)//UserDefaults.standard.integer(forKey: "user"))
         
     }
     
@@ -75,6 +74,9 @@ class CreateViewController:BaseViewController {
         selfView.mainTextView.delegate = self
         selfView.mainfullTextView.delegate = self
         selfView.cateLabel.text = "  | \(category)"
+        selfView.circleImageView.setImage(with: viewModel.defaultModel.imageURL)
+        selfView.musicTitleLabel.text = viewModel.defaultModel.musicTitle
+        selfView.subMusicInfoLabel.text = viewModel.defaultModel.subTitle
         textViewDidChange(selfView.mainfullTextView)
         // get the current date and time
         let currentDateTime = Date()
@@ -106,17 +108,29 @@ class CreateViewController:BaseViewController {
                 self?.configureImagePicker()
             }).disposed(by: disposeBag)
         
-        viewModel.postID
+        viewModel.state
             .subscribe(onNext: { [weak self] info in
                 //info is postid
-               self?.navigationController?.popViewController(animated: true)
+                for controller in (self?.navigationController!.viewControllers ?? [UIViewController()] )  as Array {
+                            if controller.isKind(of: MyRecordViewController.self) {
+                                self?.navigationController?.popToViewController(controller, animated: true)
+                                break
+                            }
+                        }
+               // print("here is \(self?.navigationController!.viewControllers ?? [UIViewController()])")
             }).disposed(by: disposeBag)
         
         viewModel.loading
             .subscribe(onNext: { [weak self] loading in
-            
+                
             }).disposed(by: disposeBag)
         
+        selfView.lockButton.rx.tap
+            .scan(false) { (lastState, newValue) in
+                !lastState
+            }
+            .bind(to: selfView.lockButton.rx.isSelected)
+            .disposed(by: disposeBag)
         
     }
     
@@ -181,7 +195,22 @@ class CreateViewController:BaseViewController {
         scrollView.showsVerticalScrollIndicator = false
     }
     
-
+    private func getCate(cate:String) -> String {
+        switch cate {
+        case "한 줄 감상":
+            return "A_LINE"
+        case "노래 속 나의 이야기":
+            return "STORY"
+        case "내 인생의 OST":
+            return "OST"
+        case "나만의 가사해석":
+            return "LYRICS"
+        case "자유 공간":
+            return "FREE"
+        default:
+            return "FREE"
+        }
+    }
 }
 
 

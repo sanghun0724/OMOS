@@ -10,6 +10,7 @@ import RxSwift
 
 class SearchViewModel :BaseViewModel{
     
+    //DATA
     var searchType:SearchType = .main
     let allLoading = BehaviorSubject<Bool>(value:false)
     let trackLoading = BehaviorSubject<Bool>(value:false)
@@ -21,10 +22,17 @@ class SearchViewModel :BaseViewModel{
     var currentAlbum:[AlbumRespone] = []
     var currentArtist:[ArtistRespone] = []
     var currentTrack:[TrackRespone] = []
-    var isEmpty = PublishSubject<Bool>()
+    var currentKeyword = ""
+    
     let errorMessage = BehaviorSubject<String?>(value: nil)
     let isReload = BehaviorSubject<Bool>(value:false)
-    var currentKeyword = ""
+    
+    //EMPTY
+    var isAllEmpty = PublishSubject<Bool>()
+    var isTrackEmpty = PublishSubject<Bool>()
+    var isAlbumEmpty = PublishSubject<Bool>()
+    var isArtistEmpty = PublishSubject<Bool>()
+    
     let usecase:SearchUseCase
     
     
@@ -96,19 +104,48 @@ class SearchViewModel :BaseViewModel{
     init(usecase:SearchUseCase) {
         self.usecase = usecase
         super.init()
-        //self.reduce()
+        self.reduce()
     }
     
-//    func reduce() {
-//        musics
-//            .withUnretained(self)
-//            .subscribe(onNext: { owner,musics in
-//                if musics.isEmpty {
-//                    owner.isEmpty.onNext(true)
-//                } else {
-//                    owner.isEmpty.onNext(false)
-//                }
-//            }).disposed(by: disposeBag)
-//    }
+    func reduce() {
+        Observable.combineLatest(track, album, artist)
+        { $0.isEmpty && $1.isEmpty && $2.isEmpty }
+        .withUnretained(self)
+        .subscribe(onNext: { owner,empty in
+            if empty {
+                owner.isAllEmpty.onNext(true)
+            } else {
+                owner.isAllEmpty.onNext(false)
+            }
+        }).disposed(by: disposeBag)
+        
+        track.withUnretained(self)
+            .subscribe(onNext: { owner,_ in
+                if owner.currentTrack.isEmpty {
+                    owner.isTrackEmpty.onNext(true)
+                } else {
+                    owner.isTrackEmpty.onNext(false)
+                }
+            }).disposed(by: disposeBag)
+        
+        album.withUnretained(self)
+            .subscribe(onNext: { owner,_ in
+                if owner.currentTrack.isEmpty {
+                    owner.isAlbumEmpty.onNext(true)
+                } else {
+                    owner.isAlbumEmpty.onNext(false)
+                }
+            }).disposed(by: disposeBag)
+        
+        artist.withUnretained(self)
+            .subscribe(onNext: { owner,_ in
+                if owner.currentTrack.isEmpty {
+                    owner.isArtistEmpty.onNext(true)
+                } else {
+                    owner.isArtistEmpty.onNext(false)
+                }
+            }).disposed(by: disposeBag)
+      
+    }
     
 }

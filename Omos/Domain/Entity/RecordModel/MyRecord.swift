@@ -30,23 +30,21 @@ struct MyRecordRespone: Codable {
 
 // MARK: - MyRecord
 struct SaveRequest: Codable { // add imageURL or image data using form - data
-    let category, contents: String
-    let isPublic: Bool
-    let musicID, title: String
-    let userID: Int
+        let category: String
+        let isPublic: Bool
+        let musicID, recordContents, recordImageURL, recordTitle: String
+        let userID: Int
 
-    enum CodingKeys: String, CodingKey {
-        case category, contents, isPublic
-        case musicID = "musicId"
-        case title
-        case userID = "userId"
-    }
+        enum CodingKeys: String, CodingKey {
+            case category, isPublic
+            case musicID = "musicId"
+            case recordContents
+            case recordImageURL = "recordImageUrl"
+            case recordTitle
+            case userID = "userId"
+        }
 }
 
 struct SaveRespone:Codable {
-    let postID: Int
-    
-    enum CodingKeys: String, CodingKey {
-        case postID = "postId"
-    }
+    let state:Bool
 }

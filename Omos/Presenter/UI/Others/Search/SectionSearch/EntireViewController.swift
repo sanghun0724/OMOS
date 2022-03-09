@@ -13,9 +13,6 @@ import RxCocoa
 class EntireViewController:BaseViewController {
     
     let selfView = EntireView()
-    var album:[AlbumRespone] = []
-    var artist:[ArtistRespone] = []
-    var track:[TrackRespone] = []
     let viewModel:SearchViewModel
     
     init(viewModel:SearchViewModel) {
@@ -29,8 +26,10 @@ class EntireViewController:BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
+        selfView.emptyView.isHidden = !(viewModel.currentAlbum.isEmpty) && !(viewModel.currentTrack.isEmpty) && !(viewModel.currentArtist.isEmpty)
     }
     
     
@@ -44,6 +43,22 @@ class EntireViewController:BaseViewController {
         }
         
     }
+    
+    func bind() {
+        Observable.zip(viewModel.album, viewModel.track, viewModel.artist)
+            .take(1)
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner,musics in
+                owner.selfView.tableView.reloadData()
+            }).disposed(by: disposeBag)
+        
+        viewModel.isAllEmpty
+            .subscribe(onNext: { [weak self] empty in
+                self?.selfView.emptyView.isHidden = !empty
+            }).disposed(by: disposeBag)
+    }
+    
 }
 
 extension EntireViewController:UITableViewDelegate,UITableViewDataSource {
@@ -77,7 +92,7 @@ extension EntireViewController:UITableViewDelegate,UITableViewDataSource {
             cell.createdButton.rx.tap
                 .asDriver()
                 .drive(onNext: { [weak self] _ in
-                    let vc = CategoryViewController(musicId: cellData.musicID)
+                    let vc = CategoryViewController(defaultModel: .init(musicId:cellData.musicID, imageURL: cellData.albumImageURL, musicTitle: cellData.musicTitle, subTitle: cellData.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}))
                     self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: cell.disposeBag)
             return cell
@@ -85,7 +100,7 @@ extension EntireViewController:UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: AlbumTableCell.identifier, for: indexPath) as! AlbumTableCell
             let cellData = viewModel.currentAlbum[indexPath.row]
             cell.configureModel(album: cellData)
-            cell.selectionStyle = . none
+            cell.selectionStyle = .none
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier:  ArtistTableCell.identifier, for: indexPath) as! ArtistTableCell

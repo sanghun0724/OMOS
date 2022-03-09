@@ -29,14 +29,31 @@ class MyRecordViewController: BaseViewController {
         selfView.tableView.dataSource = self
         configureUI()
         viewModel.myRecordFetch(userid: 1)
+        setRightItems()
+       
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    
+    func setRightItems() {
+        let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(didTapSearchButton))
+        searchButton.tintColor = .white
         let createButton = UIBarButtonItem(image: UIImage(named: "plus-square"), style: .plain, target: self, action: #selector(didTapCreateButton))
         createButton.tintColor = .white
-        self.navigationItem.rightBarButtonItems?.append(createButton)
+        self.navigationItem.rightBarButtonItems = [searchButton,createButton]
     }
     
     @objc func didTapCreateButton() {
-        let vc = SearchViewController(viewModel: SearchViewModel(usecase: SearchUseCase(searchRepository: SearchRepositoryImpl(searchAPI: SearchAPI()))), searchType: .main)
+        let vc = SearchViewController(viewModel: SearchViewModel(usecase: SearchUseCase(searchRepository: SearchRepositoryImpl(searchAPI: SearchAPI()))), searchType: .me)
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func didTapSearchButton() {
+        print("search")
     }
     
     override func configureUI() {

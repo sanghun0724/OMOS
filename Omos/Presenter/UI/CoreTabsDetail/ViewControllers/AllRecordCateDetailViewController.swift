@@ -112,7 +112,7 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         
-      //계속 부르는 이유 -> 데이터 없어서 게속 스크롤 끝에 가있다고 인지해서 게속부름 
+      //계속 부르는 이유 -> 데이터 없어서 게속 스크롤 끝에 가있다고 인지해서 게속부름
 //        if offsetY > contentHeight - scrollView.frame.height {
 //            if isPaging == false && hasNextPage {
 //                beginPaging()

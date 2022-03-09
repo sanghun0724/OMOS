@@ -20,15 +20,23 @@ class AlbumView:BaseView {
     }()
     
     let loadingView = LoadingView()
+    let emptyView = EmptyView()
     
     override func configureUI() {
         super.configureUI()
         self.addSubview(tableView)
         self.addSubview(loadingView)
+        self.addSubview(emptyView)
         
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        emptyView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        emptyView.isHidden = true
         
         loadingView.snp.makeConstraints { make in
             make.edges.equalToSuperview()

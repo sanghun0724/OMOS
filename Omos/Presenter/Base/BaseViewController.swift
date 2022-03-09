@@ -51,15 +51,8 @@ class BaseViewController:UIViewController {
     }
     
     func setBarButtonItems() {
-        //rigthBarButtonItems
-        let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(didTapSearchButton))
-        searchButton.tintColor = .white
-        
-        self.navigationItem.rightBarButtonItems = [searchButton]
         UINavigationBar.appearance().backIndicatorImage = UIImage(named: "arrow-left")?.withTintColor(.white, renderingMode: .alwaysOriginal)
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage(named: "arrow-left")
-        
-        
         
         let label = UILabel()
         for titleValue in TabBarViewController.titles {
@@ -73,15 +66,6 @@ class BaseViewController:UIViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
         self.navigationItem.leftItemsSupplementBackButton = true //backbutton 안숨기기
         self.navigationItem.backButtonTitle = ""
-    }
-    
-    
-    @objc func didTapSearchButton() {
-//        let uc = AuthUseCase(authRepository:AuthRepositoryImpl(loginAPI: LoginAPI()))
-//        let vm = SearchViewModel(usecase: uc)
-//        let vc = SearchViewController(viewModel: vm)
-//        self.navigationController?.pushViewController(vc, animated: true)
-        print("search")
     }
     
     @objc func didTapNotification() {

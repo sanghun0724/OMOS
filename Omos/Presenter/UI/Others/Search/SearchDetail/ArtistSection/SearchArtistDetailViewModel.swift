@@ -10,6 +10,7 @@ import RxSwift
 
 class SearchArtistDetailViewModel:BaseViewModel {
     
+    var searchType:SearchType = .main
     let artistTrack = PublishSubject<[ArtistDetailRespone]>()
     var currentArtistTrack:[ArtistDetailRespone] = []
     let artistAlbum = PublishSubject<[AlbumRespone]>()

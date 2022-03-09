@@ -107,6 +107,7 @@ extension ArtistSongViewController:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: SongTableCell.identifier, for: indexPath) as! SongTableCell
+            viewModel.searchType == .me ? (cell.createdButton.isHidden = false) : (cell.createdButton.isHidden = true)
             let cellData = viewModel.currentArtistTrack[indexPath.row]
             cell.configureModelArtistTrack(track: cellData)
             cell.selectionStyle = . none
@@ -114,7 +115,7 @@ extension ArtistSongViewController:UITableViewDelegate,UITableViewDataSource {
                 .asDriver()
                 .drive(onNext: { [weak self] _ in
                     print("click")
-                    let vc = CategoryViewController(musicId: cellData.musicID)
+                    let vc = CategoryViewController(defaultModel: .init(musicId:cellData.musicID, imageURL: cellData.albumImageURL, musicTitle: cellData.musicTitle, subTitle: cellData.artistName.reduce("") { $0 + " \($1)"}))
                     self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: cell.disposeBag)
             return cell

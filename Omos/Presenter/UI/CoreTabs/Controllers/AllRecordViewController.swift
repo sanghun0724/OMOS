@@ -31,8 +31,23 @@ class AllRecordViewController: BaseViewController {
         selfView.tableView.dataSource = self
         bind()
         viewModel.selectRecordsShow()
-        
+        setRightItems()
     }
+    
+    func setRightItems() {
+        let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(didTapSearchButton))
+        searchButton.tintColor = .white
+        self.navigationItem.rightBarButtonItem = searchButton
+    }
+    
+    @objc func didTapSearchButton() {
+        let rp = SearchRepositoryImpl(searchAPI: SearchAPI())
+        let uc = SearchUseCase(searchRepository: rp)
+        let vm = SearchViewModel(usecase: uc)
+        let vc = SearchViewController(viewModel: vm, searchType: .main)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
     override func configureUI() {
         view.addSubview(selfView)
