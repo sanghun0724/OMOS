@@ -8,14 +8,20 @@
 import UIKit
 import RxSwift
 
+enum SearchType {
+    case main
+    case me
+}
+
 class SearchViewController:BaseViewController {
     
     let viewModel:SearchViewModel
     let selfView = SearchListView()
     let loadingView = LoadingView()
     
-    init(viewModel:SearchViewModel) {
+    init(viewModel:SearchViewModel,searchType:SearchType) {
         self.viewModel = viewModel
+        self.viewModel.searchType = searchType
         super.init(nibName: nil, bundle: nil)
     }
     

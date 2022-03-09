@@ -74,10 +74,11 @@ class TopTabViewController:TabmanViewController {
             }).disposed(by:disposeBag)
         
         Observable.zip(viewModel.album, viewModel.track, viewModel.artist)
+            .take(1)
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner,musics in
-                let entireVC = EntireViewController(album: owner.viewModel.currentAlbum, artist: owner.viewModel.currentArtist, track: owner.viewModel.currentTrack)
+                let entireVC = EntireViewController(viewModel: owner.viewModel)
                 let songVC = SongViewController(viewModel: owner.viewModel)
                 let albumVC = AlbumViewController(viewModel: owner.viewModel)
                 let artistVC = ArtistViewController(viewModel: owner.viewModel)

@@ -70,7 +70,7 @@ extension AlbumViewController:UITableViewDelegate,UITableViewDataSource {
         let rp = SearchRepositoryImpl(searchAPI: SearchAPI())
         let uc = SearchUseCase(searchRepository: rp)
         let vm = SearchAlbumDetailViewModel(usecase: uc)
-        let vc = SearchAlbumDetailViewController(viewModel:vm ,albumInfo:cellData)
+        let vc = SearchAlbumDetailViewController(viewModel:vm ,albumInfo:cellData,searchType: viewModel.searchType)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

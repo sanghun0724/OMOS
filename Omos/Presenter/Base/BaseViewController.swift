@@ -52,13 +52,10 @@ class BaseViewController:UIViewController {
     
     func setBarButtonItems() {
         //rigthBarButtonItems
-        let notiButton = UIBarButtonItem(image: UIImage(systemName: "bell"), style: .plain, target: self, action: #selector(didTapNotification))
-        notiButton.tintColor = .white
         let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(didTapSearchButton))
         searchButton.tintColor = .white
-        let createButton = UIBarButtonItem(image: UIImage(named: "plus-square"), style: .plain, target: self, action: #selector(didTapCreateButton))
-        createButton.tintColor = .white
-        self.navigationItem.rightBarButtonItems = [notiButton,searchButton,createButton]
+        
+        self.navigationItem.rightBarButtonItems = [searchButton]
         UINavigationBar.appearance().backIndicatorImage = UIImage(named: "arrow-left")?.withTintColor(.white, renderingMode: .alwaysOriginal)
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage(named: "arrow-left")
         
@@ -78,11 +75,6 @@ class BaseViewController:UIViewController {
         self.navigationItem.backButtonTitle = ""
     }
     
-    @objc func didTapCreateButton() {
-       
-       let vc = SearchViewController(viewModel: SearchViewModel(usecase: SearchUseCase(searchRepository: SearchRepositoryImpl(searchAPI: SearchAPI()))))
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
     
     @objc func didTapSearchButton() {
 //        let uc = AuthUseCase(authRepository:AuthRepositoryImpl(loginAPI: LoginAPI()))

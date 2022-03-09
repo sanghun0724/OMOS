@@ -10,6 +10,7 @@ import RxSwift
 
 class SearchViewModel :BaseViewModel{
     
+    var searchType:SearchType = .main
     let allLoading = BehaviorSubject<Bool>(value:false)
     let trackLoading = BehaviorSubject<Bool>(value:false)
     let albumLoading = BehaviorSubject<Bool>(value:false)

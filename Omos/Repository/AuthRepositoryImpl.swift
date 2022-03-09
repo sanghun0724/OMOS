@@ -17,9 +17,7 @@ class AuthRepositoryImpl:AuthRepository {
     required init(loginAPI:LoginAPI) {
         self.loginAPI = loginAPI
     }
-    
 
-    
     //MARK: Login API Caller
     func signIn(_ email: String, _ password: String) -> Single<LoginResponse> {
         return Single<LoginResponse>.create { [weak self] single in

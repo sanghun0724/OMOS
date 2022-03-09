@@ -29,6 +29,14 @@ class MyRecordViewController: BaseViewController {
         selfView.tableView.dataSource = self
         configureUI()
         viewModel.myRecordFetch(userid: 1)
+        let createButton = UIBarButtonItem(image: UIImage(named: "plus-square"), style: .plain, target: self, action: #selector(didTapCreateButton))
+        createButton.tintColor = .white
+        self.navigationItem.rightBarButtonItems?.append(createButton)
+    }
+    
+    @objc func didTapCreateButton() {
+        let vc = SearchViewController(viewModel: SearchViewModel(usecase: SearchUseCase(searchRepository: SearchRepositoryImpl(searchAPI: SearchAPI()))), searchType: .main)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     override func configureUI() {

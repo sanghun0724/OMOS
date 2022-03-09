@@ -97,7 +97,7 @@ extension ArtistAlbumViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return viewModel.currentArtistTrack.count
+            return viewModel.currentArtistAlbum.count
         } else if section == 1 && isPaging && hasNextPage {
             return 1
         }

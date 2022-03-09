@@ -28,14 +28,4 @@ struct AlbumRespone:Codable {
     }
 }
 
-let artists: [Artist]
-  let albumID: String
-  let albumImageURL: String
-  let albumTitle, releaseDate: String
 
-  enum CodingKeys: String, CodingKey {
-      case artists
-      case albumID = "albumId"
-      case albumImageURL = "albumImageUrl"
-      case albumTitle, releaseDate
-  }

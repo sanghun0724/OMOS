@@ -113,8 +113,6 @@ class SearchRepositoryImpl:SearchRepository {
         }
     }
     
-    
-    
     func artistDetailAlbumFetch(artistId:String,request:ArtistRequest) -> Single<[AlbumRespone]> {
         return Single<[AlbumRespone]>.create { [weak self] single in
             self?.searchAPI.ArtistDetailAlbumFetch(artistId: artistId, request: request, completion: { result in

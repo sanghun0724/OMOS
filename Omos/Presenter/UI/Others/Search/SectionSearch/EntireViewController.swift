@@ -16,12 +16,11 @@ class EntireViewController:BaseViewController {
     var album:[AlbumRespone] = []
     var artist:[ArtistRespone] = []
     var track:[TrackRespone] = []
+    let viewModel:SearchViewModel
     
-    init(album:[AlbumRespone],artist:[ArtistRespone],track:[TrackRespone]) {
+    init(viewModel:SearchViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        self.album = album
-        self.artist = artist
-        self.track = track
     }
     
     required init?(coder: NSCoder) {
@@ -57,11 +56,11 @@ extension EntireViewController:UITableViewDelegate,UITableViewDataSource {
         //모델에 따라 여기서 분리
         switch section {
         case 0:
-            return track.count > 5 ? 5 : track.count
+            return viewModel.currentTrack.count > 5 ? 5 : viewModel.currentTrack.count
         case 1:
-            return album.count > 5 ? 5 : album.count
+            return viewModel.currentAlbum.count > 5 ? 5 : viewModel.currentAlbum.count
         case 2:
-            return artist.count > 5 ? 5 : artist.count
+            return viewModel.currentArtist.count > 5 ? 5 : viewModel.currentArtist.count
         default:
             return 0
         }
@@ -71,7 +70,8 @@ extension EntireViewController:UITableViewDelegate,UITableViewDataSource {
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: SongTableCell.identifier, for: indexPath) as! SongTableCell
-            let cellData = self.track[indexPath.row]
+            viewModel.searchType == .me ? (cell.createdButton.isHidden = false) : (cell.createdButton.isHidden = true)
+            let cellData = viewModel.currentTrack[indexPath.row]
             cell.selectionStyle = . none
             cell.configureModel(track: cellData)
             cell.createdButton.rx.tap
@@ -83,13 +83,13 @@ extension EntireViewController:UITableViewDelegate,UITableViewDataSource {
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: AlbumTableCell.identifier, for: indexPath) as! AlbumTableCell
-            let cellData = self.album[indexPath.row]
+            let cellData = viewModel.currentAlbum[indexPath.row]
             cell.configureModel(album: cellData)
             cell.selectionStyle = . none
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier:  ArtistTableCell.identifier, for: indexPath) as! ArtistTableCell
-            let cellData = self.artist[indexPath.row]
+            let cellData = viewModel.currentArtist[indexPath.row]
             cell.configureModel(artist: cellData)
             cell.selectionStyle = . none
             return cell

@@ -12,10 +12,12 @@ class SearchAlbumDetailViewController:BaseViewController {
     let selfView = SearchAlbumDetailView()
     let viewModel:SearchAlbumDetailViewModel
     let albumInfo:AlbumRespone
+    let searchType:SearchType
     
-    init(viewModel:SearchAlbumDetailViewModel,albumInfo:AlbumRespone) {
+    init(viewModel:SearchAlbumDetailViewModel,albumInfo:AlbumRespone,searchType:SearchType) {
         self.viewModel = viewModel
         self.albumInfo = albumInfo
+        self.searchType = searchType
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -64,6 +66,7 @@ extension SearchAlbumDetailViewController:UITableViewDelegate,UITableViewDataSou
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchAlbumDetailCell.identifier, for: indexPath) as! SearchAlbumDetailCell
+        self.searchType == .me ? (cell.createdButton.isHidden = false) : (cell.createdButton.isHidden = true)
         let cellData = viewModel.currentAlbumDetails[indexPath.row]
         cell.configureModel(albumDetail: cellData,count:indexPath.row+1)
         cell.selectionStyle = .none
