@@ -27,7 +27,10 @@ extension MyRecordViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         let data = myRecord[indexPath.row]
-        let vc = MyRecordDetailViewController(myRecord: data)
+        let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+        let uc = RecordsUseCase(recordsRepository: rp)
+        let vm = MyRecordDetailViewModel(usecase: uc)
+        let vc = MyRecordDetailViewController(myRecord: data,viewModel: vm)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

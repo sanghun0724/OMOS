@@ -8,14 +8,22 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import MaterialComponents.MaterialBottomSheet
 
 class MyRecordDetailViewController:BaseViewController {
     
     private let selfView = MyRecordDetailView()
     let myRecord:MyRecordRespone
+    let bottomVC:BottomSheetViewController
+    let bottomSheet:MDCBottomSheetController
+    let viewModel:MyRecordDetailViewModel
     
-    init(myRecord:MyRecordRespone) {
+    
+    init(myRecord:MyRecordRespone,viewModel:MyRecordDetailViewModel) {
         self.myRecord = myRecord
+        self.viewModel = viewModel
+        self.bottomVC = BottomSheetViewController(type: .MyRecord, myRecordVM: viewModel, AllRecordVM: nil)
+        self.bottomSheet = MDCBottomSheetController(contentViewController: bottomVC)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -44,7 +52,9 @@ class MyRecordDetailViewController:BaseViewController {
     }
     
     @objc func didTapMoreButton() {
-        
+        viewModel.postId = myRecord.recordID
+        bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = Constant.mainHeight * 0.194
+        self.present(bottomSheet,animated: true)
     }
     
     override func configureUI() {
