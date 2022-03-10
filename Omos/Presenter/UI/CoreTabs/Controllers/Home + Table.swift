@@ -32,7 +32,8 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordTableCell.identifier,for:indexPath) as! AllRecordTableCell
             return cell
         case 2:
-            return UITableViewCell()
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableMiddleCell.identifier,for:indexPath) as! HomeTableMiddleCell
+            return cell
         case 3:
             return UITableViewCell()
         default:

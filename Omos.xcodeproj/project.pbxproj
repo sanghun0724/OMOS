@@ -135,7 +135,8 @@
 		B6CC1D7627BA475900B5EE7E /* UseInfoText.rtf in Resources */ = {isa = PBXBuildFile; fileRef = B6CC1D7527BA475900B5EE7E /* UseInfoText.rtf */; };
 		B6CC1D7827BA536A00B5EE7E /* PrivateInfoText.rtf in Resources */ = {isa = PBXBuildFile; fileRef = B6CC1D7727BA536A00B5EE7E /* PrivateInfoText.rtf */; };
 		B6CCBC9727D9E5E4009F8499 /* OneMusicRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CCBC9627D9E5E4009F8499 /* OneMusicRecord.swift */; };
-		B6CCBC9927DA5EBC009F8499 /* HomeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CCBC9827DA5EBB009F8499 /* HomeTableCell.swift */; };
+		B6CCBC9927DA5EBC009F8499 /* HomeTableMiddleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CCBC9827DA5EBB009F8499 /* HomeTableMiddleCell.swift */; };
+		B6CCBC9B27DA65F4009F8499 /* HomeTableLastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CCBC9A27DA65F4009F8499 /* HomeTableLastCell.swift */; };
 		B6D3685627B7A510008B5635 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D3685527B7A510008B5635 /* NicknameViewController.swift */; };
 		B6D4BB1E27CA48CD00D6741B /* AllRecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D4BB1D27CA48CD00D6741B /* AllRecordDetailViewController.swift */; };
 		B6D4BB2227CA5D7C00D6741B /* AllRecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D4BB2127CA5D7C00D6741B /* AllRecordDetailView.swift */; };
@@ -303,7 +304,8 @@
 		B6CC1D7527BA475900B5EE7E /* UseInfoText.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = UseInfoText.rtf; sourceTree = "<group>"; };
 		B6CC1D7727BA536A00B5EE7E /* PrivateInfoText.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = PrivateInfoText.rtf; sourceTree = "<group>"; };
 		B6CCBC9627D9E5E4009F8499 /* OneMusicRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneMusicRecord.swift; sourceTree = "<group>"; };
-		B6CCBC9827DA5EBB009F8499 /* HomeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableCell.swift; sourceTree = "<group>"; };
+		B6CCBC9827DA5EBB009F8499 /* HomeTableMiddleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableMiddleCell.swift; sourceTree = "<group>"; };
+		B6CCBC9A27DA65F4009F8499 /* HomeTableLastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableLastCell.swift; sourceTree = "<group>"; };
 		B6D3685527B7A510008B5635 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
 		B6D4BB1D27CA48CD00D6741B /* AllRecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordDetailViewController.swift; sourceTree = "<group>"; };
 		B6D4BB2127CA5D7C00D6741B /* AllRecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordDetailView.swift; sourceTree = "<group>"; };
@@ -765,7 +767,8 @@
 				B6EF88A827BD3AC2006F6A8F /* EmptyCell.swift */,
 				B66AD44F27C6983F0012686B /* MydjCollectionCell.swift */,
 				B630D2F927C7756A00E66F22 /* MydjTableCell.swift */,
-				B6CCBC9827DA5EBB009F8499 /* HomeTableCell.swift */,
+				B6CCBC9827DA5EBB009F8499 /* HomeTableMiddleCell.swift */,
+				B6CCBC9A27DA65F4009F8499 /* HomeTableLastCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1046,7 +1049,7 @@
 				B6CCBC9727D9E5E4009F8499 /* OneMusicRecord.swift in Sources */,
 				B68454F327BE30EE00F1E6B5 /* MyAuthenticationCredential.swift in Sources */,
 				B666A90627AED17C00BE7F92 /* BaseView.swift in Sources */,
-				B6CCBC9927DA5EBC009F8499 /* HomeTableCell.swift in Sources */,
+				B6CCBC9927DA5EBC009F8499 /* HomeTableMiddleCell.swift in Sources */,
 				B68454FE27BE380800F1E6B5 /* UserDetail.swift in Sources */,
 				B689A9CE27AE94E9005F26E4 /* UIVIew.swift in Sources */,
 				B646053627CBE1B40022E062 /* SearchArtistHeaderView.swift in Sources */,
@@ -1068,6 +1071,7 @@
 				B67EF45027B7A9B80023D5D4 /* SignUpView.swift in Sources */,
 				B67EF45727B7AA220023D5D4 /* PrivateLabelView.swift in Sources */,
 				B6183CD227D895D30035AA06 /* AllRecordSearchDetailViewController.swift in Sources */,
+				B6CCBC9B27DA65F4009F8499 /* HomeTableLastCell.swift in Sources */,
 				B611826227D45F5F004217E2 /* SearchTarget.swift in Sources */,
 				B6183CCD27D788A60035AA06 /* ArtistAlbumViewController.swift in Sources */,
 				B68454F827BE374600F1E6B5 /* LoginAPI.swift in Sources */,

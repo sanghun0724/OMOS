@@ -14,6 +14,7 @@ class HomeView:BaseView {
     let tableView:UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(AllRecordTableCell.self, forCellReuseIdentifier: AllRecordTableCell.identifier)
+        table.register(HomeTableMiddleCell.self, forCellReuseIdentifier: HomeTableMiddleCell.identifier)
         table.register(HomeHeaderView.self, forHeaderFooterViewReuseIdentifier: HomeHeaderView.identifier)
         table.register(AllRecordHeaderView.self, forHeaderFooterViewReuseIdentifier: AllRecordHeaderView.identifier)
         
