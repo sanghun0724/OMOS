@@ -44,4 +44,8 @@ class RecordsUseCase {
         return recordsRepository.recordUpdate(postId: postId,request:request)
     }
     
+    func oneMusicRecordFetch(musicId:String,request:OneMusicRecordRequest) -> Single<[OneMusicRecordRespone]> {
+        return recordsRepository.oneMusicRecordFetch(musicId: musicId, request: request)
+    }
+    
 }

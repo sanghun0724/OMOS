@@ -23,11 +23,23 @@ class AllRecordCateDetailView:BaseView {
         table.automaticallyAdjustsScrollIndicatorInsets = false
        return table
     }()
-
+    let emptyView = EmptyView()
+    let loadingView = LoadingView()
     
     override func configureUI() {
         self.addSubview(tableView)
+        self.addSubview(emptyView)
+        self.addSubview(loadingView)
+        
         tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        emptyView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        loadingView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }

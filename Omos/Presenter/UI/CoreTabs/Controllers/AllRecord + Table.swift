@@ -16,24 +16,25 @@ extension AllRecordViewController:UITableViewDelegate,UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.numberofRows()
+        return viewModel.numberofSections()
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordTableCell.identifier,for:indexPath) as! AllRecordTableCell
         guard let model = self.selectedRecords else { return  AllRecordTableCell() }
-        switch indexPath.row {
+        cell.backgroundColor = .mainBackGround
+        switch indexPath.section {
         case 0:
             cell.configureModel(records: model.aLine)
         case 1:
             cell.configureModel(records: model.ost)
         case 2:
-            cell.configureModel(records: model.free)
+            cell.configureModel(records: model.story)
         case 3:
-            cell.configureModel(records: model.aLine)
+            cell.configureModel(records: model.lyrics)
         case 4:
-            cell.configureModel(records: model.aLine)
+            cell.configureModel(records: model.free)
         default:
             print("default")
         }

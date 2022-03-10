@@ -46,6 +46,7 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
     
     override func configureUI() {
         super.configureUI()
+        selfView.emptyView.isHidden = true 
         setTitle()
         self.view.addSubview(selfView)
         
@@ -65,6 +66,11 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
                 self?.hasNextPage = self?.cateRecords.count ?? 0 > 300 ? false : true //다음페이지 있는지 확인
                 self?.isPaging = false //페이징 종료
                 self?.selfView.tableView.reloadData()
+            }).disposed(by: disposeBag)
+        
+        viewModel.loading
+            .subscribe(onNext: { [weak self] loading in
+                self?.selfView.loadingView.isHidden = !loading
             }).disposed(by: disposeBag)
         
         
@@ -92,7 +98,7 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
     }
     
     private func fetchRecord() {
-        //1. 데이터 부르기 페이지+1 해서
+        //1. 데이터 부르기 마지막 포스트아이디
         
         viewModel.selectRecordsShow(type: self.myCateType, postId:viewModel.currentCateRecords.last?.recordID , size: 3, sort: "viewsCount", userid: UserDefaults.standard.integer(forKey: "user"))
         //2. 바인딩 하고 도착하면 데이터 append (위에서 하고 있으니 ok)

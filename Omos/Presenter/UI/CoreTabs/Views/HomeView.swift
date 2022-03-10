@@ -13,8 +13,10 @@ class HomeView:BaseView {
     
     let tableView:UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        table.register(AllRecordTableCell.self, forCellReuseIdentifier: AllRecordTableCell.identifier)
         table.register(HomeHeaderView.self, forHeaderFooterViewReuseIdentifier: HomeHeaderView.identifier)
+        table.register(AllRecordHeaderView.self, forHeaderFooterViewReuseIdentifier: AllRecordHeaderView.identifier)
+        
         table.showsVerticalScrollIndicator = false
         table.automaticallyAdjustsScrollIndicatorInsets = false
         table.insetsContentViewsToSafeArea = true

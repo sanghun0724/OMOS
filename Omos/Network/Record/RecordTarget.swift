@@ -13,10 +13,10 @@ enum RecordTarget {
     case category(cate:cateType,request:CateRequest)
     case myRecord(userid:Int)
     case save(SaveRequest)
-    case searchRecord(musicId:String,SearchRecordRequest)
     case recordIspublic(postId:Int)
     case recordDelete(postId:Int)
     case recordUpdate(postId:Int,UpdateRequest)
+    case oneMusicRecord(musicId:String,OneMusicRecordRequest)
 }
 
 extension RecordTarget:TargetType {
@@ -30,10 +30,10 @@ extension RecordTarget:TargetType {
         case .category: return .get
         case .myRecord: return .get
         case .save: return .post
-        case .searchRecord: return .get
         case .recordIspublic: return .put
         case .recordDelete: return .delete
         case .recordUpdate: return .put
+        case .oneMusicRecord: return .get
         }
     }
     
@@ -43,10 +43,10 @@ extension RecordTarget:TargetType {
         case .category(let cate, _): return "/select/category/\(cate)"
         case .myRecord(let user): return "/\(user)"
         case .save: return "/save"
-        case .searchRecord(let id,_): return "/select/\(id)"
         case .recordIspublic(let id): return "/\(id)/ispublic"
         case .recordDelete(let id): return "/delete/\(id)"
         case .recordUpdate(let id,_): return "/update/\(id)"
+        case .oneMusicRecord(let id,_): return "/select/music/\(id)"
         }
     }
     
@@ -56,10 +56,10 @@ extension RecordTarget:TargetType {
         case .category(_,let request): return .query(request)
         case .myRecord: return nil
         case .save(let request): return .body(request)
-        case .searchRecord(_,let request): return .query(request)
         case .recordIspublic: return nil
         case .recordDelete: return nil
         case .recordUpdate(_,let request): return .body(request)
+        case .oneMusicRecord(_,let request): return .query(request)
         }
     }
     

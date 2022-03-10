@@ -67,6 +67,12 @@ class AllRecordViewController: BaseViewController {
                 owner.selectedRecords = info
                 owner.selfView.tableView.reloadData()
             }).disposed(by: disposeBag)
+        
+        viewModel.loading
+            .withUnretained(self)
+            .subscribe(onNext: { owner,loading in
+                owner.selfView.loadngView.isHidden = !loading
+            }).disposed(by: disposeBag)
     }
 }
 

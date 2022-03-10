@@ -61,14 +61,14 @@ class AllRecordTableCell:UITableViewCell {
 
 extension AllRecordTableCell: UICollectionViewDelegate,UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.selectedRecords?.count ?? 2
+        return self.selectedRecords?.count ?? 5
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AllRecordCollectionCell.identifier, for: indexPath) as! AllRecordCollectionCell
         guard let data = self.selectedRecords?[indexPath.row] else {
             print("data 없어요")
-            return AllRecordCollectionCell()
+            return cell
         }
         
         cell.configureModel(record: data)

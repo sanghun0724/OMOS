@@ -11,6 +11,7 @@ import RxSwift
 
 class AllRecordView:BaseView {
     let emptyView = EmptyView()
+    let loadngView = LoadingView()
     
     
     let tableView:UITableView = {
@@ -31,11 +32,17 @@ class AllRecordView:BaseView {
         
         self.addSubview(emptyView)
         self.addSubview(tableView)
+        self.addSubview(loadngView)
         
         emptyView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         emptyView.isHidden = true
+        
+        loadngView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        loadngView.isHidden = true 
         
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()

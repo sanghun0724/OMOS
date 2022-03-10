@@ -84,6 +84,32 @@ class AllRecordCateLongDetailCell:UITableViewCell {
         
     }
     
+    func configureOneMusic(record:OneMusicRecordRespone) {
+        myView.myView.reportButton.isHidden = true
+        myView.myView.musicTitleLabel.text = record.music.musicTitle
+        myView.myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
+        myView.myView.circleImageView.setImage(with: record.music.albumImageURL)
+        //myView.myView.backImageView.setImage(with: ) 추후 추가되면 삽입
+        myView.myView.titleLabel.text = record.recordTitle
+        myView.myView.createdLabel.text = record.createdDate
+        myView.myView.mainLabelView.text = record.recordContents
+        myView.myView.nicknameLabel.text = record.nickname
+        myView.myView.loveCountLabel.text = String(record.likeCnt)
+        myView.myView.starCountLabel.text = String(record.scrapCnt)
+        myView.myView.cateLabel.text = record.category
+        
+        if record.isLiked {
+            myView.myView.loveImageView.image = UIImage(named: "fillLove")
+            myView.myView.loveCountLabel.textColor = .mainOrange
+        }
+        
+        if record.isScraped {
+            myView.myView.starImageView.image = UIImage(named: "fillStar")
+            myView.myView.starCountLabel.textColor = .mainOrange
+        }
+        
+    }
+    
 }
 
 class CellContainerView:BaseView {
@@ -180,7 +206,7 @@ class LoadingCell:UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         self.addSubview(selfView)
-        selfView.backgroundColor = .red
+        selfView.backgroundColor = .mainBackGround
         selfView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }

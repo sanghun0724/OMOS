@@ -103,6 +103,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UserDefaults.standard.set("eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NDY4MDM3MDV9.ZImb_c8Q6WSl2KaIDjMGs_tKfQPbgM57qDL6LFQFFnSksh0tGLxdflBVHQ4Ll76PglZg8ez86_QfyR6Jc75Lmw",forKey: "refresh")
         UserDefaults.standard.set(1,forKey: "user")
         
+        
+        
+        let vm = AllRecordSearchDetailViewModel(usecase: RecordsUseCase(recordsRepository: RecordsRepositoryImpl(recordAPI: RecordAPI())))
         self.window?.rootViewController = TabBarViewController()
         self.window?.makeKeyAndVisible()
         self.window?.backgroundColor = .mainBackGround

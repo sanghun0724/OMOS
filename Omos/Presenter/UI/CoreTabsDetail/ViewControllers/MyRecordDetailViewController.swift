@@ -12,18 +12,21 @@ import MaterialComponents.MaterialBottomSheet
 
 class MyRecordDetailViewController:BaseViewController {
     
-    private let selfView = MyRecordDetailView()
+    let scrollView = UIScrollView()
+    var selfView = MyRecordDetailView()
+    var selflongView = AllRecordDetailView()
     let myRecord:MyRecordRespone
     let bottomVC:BottomSheetViewController
     let bottomSheet:MDCBottomSheetController
     let viewModel:MyRecordDetailViewModel
+    let cate:String
     
-    
-    init(myRecord:MyRecordRespone,viewModel:MyRecordDetailViewModel) {
+    init(myRecord:MyRecordRespone,viewModel:MyRecordDetailViewModel,cate:String) {
         self.myRecord = myRecord
         self.viewModel = viewModel
         self.bottomVC = BottomSheetViewController(type: .MyRecord, myRecordVM: viewModel, AllRecordVM: nil)
         self.bottomSheet = MDCBottomSheetController(contentViewController: bottomVC)
+        self.cate = cate
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -35,7 +38,7 @@ class MyRecordDetailViewController:BaseViewController {
         super.viewDidLoad()
         setNavigationItems()
         bind()
-        setData()
+        cate == "A_LINE" ? (setShrotData()) : (setLongData())
     }
     
     private func setNavigationItems() {
@@ -57,16 +60,40 @@ class MyRecordDetailViewController:BaseViewController {
     }
     
     override func configureUI() {
+        cate == "A_LINE" ? (configShort()) : (configLong())
+    }
+    
+    
+    func configShort() {
         self.view.addSubview(selfView)
         selfView.reportButton.isHidden = true
-        
         selfView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.height.equalToSuperview().multipliedBy(0.7)
         }
-       
     }
+    
+    func configLong() {
+        self.view.addSubview(scrollView)
+        scrollView.addSubview(selflongView)
+        selflongView.myView.reportButton.isHidden = true
+     
+        scrollView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+        }
+        
+        selflongView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+    }
+    
     
     func bind() {
 //        selfView.reportButton.rx.tap
@@ -87,6 +114,13 @@ class MyRecordDetailViewController:BaseViewController {
             .bind(to: selfView.lockButton.rx.isSelected)
             .disposed(by: disposeBag)
         
+        selflongView.myView.lockButton.rx.tap
+            .scan(false) { (lastState, newValue) in
+                !lastState
+            }
+            .bind(to: selfView.lockButton.rx.isSelected)
+            .disposed(by: disposeBag)
+        
         viewModel.modify
             .subscribe(onNext: { [weak self] _ in
                 let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
@@ -100,6 +134,7 @@ class MyRecordDetailViewController:BaseViewController {
         
         viewModel.delete
             .subscribe(onNext: { [weak self] _ in
+                print("delete\(self?.myRecord.recordID ?? 0)")
                 self?.viewModel.deleteRecord(postId: self?.myRecord.recordID ?? 0)
             }).disposed(by: disposeBag)
         
@@ -110,16 +145,16 @@ class MyRecordDetailViewController:BaseViewController {
         
     }
     
-    func setData() {
+    func setShrotData() {
         selfView.musicTitleLabel.text = myRecord.music.musicTitle
         selfView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
         selfView.circleImageView.setImage(with: myRecord.music.albumImageURL)
 //        selfView.backImageView.setImage(with: <#T##String#>)
         selfView.titleLabel.text = myRecord.recordTitle
         selfView.createdLabel.text = myRecord.createdDate
-        selfView.mainLabelView.text = myRecord.recordContents
         selfView.loveCountLabel.text = String(myRecord.likeCnt)
         selfView.starCountLabel.text = String(myRecord.scrapCnt)
+        selfView.cateLabel.text =  " | \(myRecord.category )"
         
         if myRecord.isPublic {
             selfView.lockButton.setImage(UIImage(named: "unlock"), for: .normal)
@@ -137,7 +172,38 @@ class MyRecordDetailViewController:BaseViewController {
             selfView.starImageView.image = UIImage(named: "fillStar")
             selfView.starCountLabel.textColor = .mainOrange
         }
+        selfView.mainLabelView.text = myRecord.recordContents
         
+    }
+    
+    func setLongData() {
+        selflongView.myView.musicTitleLabel.text = myRecord.music.musicTitle
+        selflongView.myView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
+        selflongView.myView.circleImageView.setImage(with: myRecord.music.albumImageURL)
+//        selfView.backImageView.setImage(with: <#T##String#>)
+        selflongView.myView.titleLabel.text = myRecord.recordTitle
+        selflongView.myView.createdLabel.text = myRecord.createdDate
+        selflongView.myView.loveCountLabel.text = String(myRecord.likeCnt)
+        selflongView.myView.starCountLabel.text = String(myRecord.scrapCnt)
+        selflongView.myView.cateLabel.text = " | \(myRecord.category )"
+        
+        if myRecord.isPublic {
+            selfView.lockButton.setImage(UIImage(named: "unlock"), for: .normal)
+            selfView.lockButton.setImage(UIImage(named: "lock"), for: .selected)
+        } else {
+            selfView.lockButton.setImage(UIImage(named: "lock"), for: .normal)
+            selfView.lockButton.setImage(UIImage(named: "unlock"), for: .selected)
+        }
+        if myRecord.isLiked {
+            selfView.loveImageView.image = UIImage(named: "fillLove")
+            selfView.loveCountLabel.textColor = .mainOrange
+        }
+        
+        if myRecord.isScraped {
+            selfView.starImageView.image = UIImage(named: "fillStar")
+            selfView.starCountLabel.textColor = .mainOrange
+        }
+        selflongView.myView.mainLabelView.text = myRecord.recordContents
     }
     
     private func getReverseCate(cate:String) -> String {

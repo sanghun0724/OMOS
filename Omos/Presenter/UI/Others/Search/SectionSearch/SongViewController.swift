@@ -128,6 +128,14 @@ extension SongViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let cellData = viewModel.currentTrack[indexPath.row]
+        if viewModel.searchType == .main {
+            let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+            let uc = RecordsUseCase(recordsRepository: rp)
+            let vm = AllRecordSearchDetailViewModel(usecase: uc)
+            let vc = AllRecordSearchDetailViewController(viewModel: vm, musicId: cellData.musicID)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

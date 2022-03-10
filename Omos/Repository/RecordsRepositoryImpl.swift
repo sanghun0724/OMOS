@@ -131,5 +131,21 @@ class RecordsRepositoryImpl:RecordsRepository {
         }
     }
     
+    func oneMusicRecordFetch(musicId:String,request:OneMusicRecordRequest) -> Single<[OneMusicRecordRespone]> {
+        return Single<[OneMusicRecordRespone]>.create { [weak self] single in
+            self?.recordAPI.oneMusicRecordFetch(musicId: musicId, request: request ,completion: { result in
+                switch result {
+                case .success(let data):
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            })
+            
+            return Disposables.create()
+        }
+    }
+    
     
 }

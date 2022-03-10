@@ -76,10 +76,18 @@ class CreateViewController:BaseViewController {
                   print("alert here")
                   return
               }
+        
         if type == .create {
             viewModel.saveRecord(cate: getCate(cate: category), content: text, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: titleText, userid: UserDefaults.standard.integer(forKey: "user"))
         } else {
-            viewModel.updateRecord(postId: viewModel.modifyDefaultModel?.recordID ?? 0, request: .init(contents: viewModel.modifyDefaultModel?.recordContents ?? "error", title: viewModel.modifyDefaultModel?.recordTitle ?? "error" ))
+            var recordContent = ""
+            if  selfView.mainTextView.text != viewModel.modifyDefaultModel?.recordTitle {
+                recordContent = selfView.mainTextView.text
+            } else {
+                recordContent = selfView.mainfullTextView.text
+            }
+            
+            viewModel.updateRecord(postId: viewModel.modifyDefaultModel?.recordID ?? 0, request: .init(contents: recordContent, title: selfView.titleTextView.text ))
         }
         
     }
@@ -241,6 +249,7 @@ class CreateViewController:BaseViewController {
             return "FREE"
         }
     }
+    
 }
 
 

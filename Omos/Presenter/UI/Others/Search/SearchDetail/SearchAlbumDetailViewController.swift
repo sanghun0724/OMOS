@@ -85,6 +85,14 @@ extension SearchAlbumDetailViewController:UITableViewDelegate,UITableViewDataSou
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if self.searchType == .main {
+            let cellData = viewModel.currentAlbumDetails[indexPath.row]
+            let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+            let uc = RecordsUseCase(recordsRepository: rp)
+            let vm = AllRecordSearchDetailViewModel(usecase: uc)
+            let vc = AllRecordSearchDetailViewController(viewModel: vm, musicId: cellData.musicID)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -116,6 +116,35 @@ extension EntireViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        switch indexPath.section {
+        case 0:
+            if viewModel.searchType == .main {
+                let cellData = viewModel.currentTrack[indexPath.row]
+                let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+                let uc = RecordsUseCase(recordsRepository: rp)
+                let vm = AllRecordSearchDetailViewModel(usecase: uc)
+                let vc = AllRecordSearchDetailViewController(viewModel: vm, musicId: cellData.musicID )
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        case 1:
+            let cellData = viewModel.currentAlbum[indexPath.row]
+            let rp = SearchRepositoryImpl(searchAPI: SearchAPI())
+            let uc = SearchUseCase(searchRepository: rp)
+            let vm = SearchAlbumDetailViewModel(usecase: uc)
+            let vc = SearchAlbumDetailViewController(viewModel:vm ,albumInfo:cellData,searchType: viewModel.searchType)
+            self.navigationController?.pushViewController(vc, animated: true)
+        case 2:
+            let cellData = viewModel.currentArtist[indexPath.row]
+            let rp = SearchRepositoryImpl(searchAPI: SearchAPI())
+            let uc = SearchUseCase(searchRepository: rp)
+            let vm = SearchArtistDetailViewModel(usecase: uc)
+            vm.searchType = viewModel.searchType
+            let vc = SearchArtistViewController(viewModel: vm, artistData: cellData)
+            self.navigationController?.pushViewController(vc, animated: true)
+        default:
+            print("de other")
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

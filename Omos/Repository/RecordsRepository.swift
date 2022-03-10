@@ -16,4 +16,5 @@ protocol RecordsRepository {
     func recordIspublic(postId:Int) -> Single<StateRespone>
     func recordDelete(postId:Int) -> Single<StateRespone>
     func recordUpdate(postId:Int,request:UpdateRequest) -> Single<PostRespone>
+    func oneMusicRecordFetch(musicId:String,request:OneMusicRecordRequest) -> Single<[OneMusicRecordRespone]>
 }

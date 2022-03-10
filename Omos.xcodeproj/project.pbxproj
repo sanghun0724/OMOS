@@ -30,7 +30,6 @@
 		B6183CCD27D788A60035AA06 /* ArtistAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CCC27D788A60035AA06 /* ArtistAlbumViewController.swift */; };
 		B6183CD027D895C40035AA06 /* AllRecordSearchDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CCF27D895C40035AA06 /* AllRecordSearchDetailViewModel.swift */; };
 		B6183CD227D895D30035AA06 /* AllRecordSearchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CD127D895D30035AA06 /* AllRecordSearchDetailViewController.swift */; };
-		B6183CD427D8BCBC0035AA06 /* SearchRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CD327D8BCBC0035AA06 /* SearchRecord.swift */; };
 		B6183CD627D8F7490035AA06 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CD527D8F7490035AA06 /* BottomSheetViewController.swift */; };
 		B6183CD827D906300035AA06 /* MyRecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CD727D9062F0035AA06 /* MyRecordDetailViewModel.swift */; };
 		B630D2FA27C7756A00E66F22 /* MydjTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2F927C7756A00E66F22 /* MydjTableCell.swift */; };
@@ -135,6 +134,8 @@
 		B6CC1D7427BA437A00B5EE7E /* InfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CC1D7327BA437A00B5EE7E /* InfoController.swift */; };
 		B6CC1D7627BA475900B5EE7E /* UseInfoText.rtf in Resources */ = {isa = PBXBuildFile; fileRef = B6CC1D7527BA475900B5EE7E /* UseInfoText.rtf */; };
 		B6CC1D7827BA536A00B5EE7E /* PrivateInfoText.rtf in Resources */ = {isa = PBXBuildFile; fileRef = B6CC1D7727BA536A00B5EE7E /* PrivateInfoText.rtf */; };
+		B6CCBC9727D9E5E4009F8499 /* OneMusicRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CCBC9627D9E5E4009F8499 /* OneMusicRecord.swift */; };
+		B6CCBC9927DA5EBC009F8499 /* HomeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CCBC9827DA5EBB009F8499 /* HomeTableCell.swift */; };
 		B6D3685627B7A510008B5635 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D3685527B7A510008B5635 /* NicknameViewController.swift */; };
 		B6D4BB1E27CA48CD00D6741B /* AllRecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D4BB1D27CA48CD00D6741B /* AllRecordDetailViewController.swift */; };
 		B6D4BB2227CA5D7C00D6741B /* AllRecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D4BB2127CA5D7C00D6741B /* AllRecordDetailView.swift */; };
@@ -193,7 +194,6 @@
 		B6183CCC27D788A60035AA06 /* ArtistAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistAlbumViewController.swift; sourceTree = "<group>"; };
 		B6183CCF27D895C40035AA06 /* AllRecordSearchDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordSearchDetailViewModel.swift; sourceTree = "<group>"; };
 		B6183CD127D895D30035AA06 /* AllRecordSearchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordSearchDetailViewController.swift; sourceTree = "<group>"; };
-		B6183CD327D8BCBC0035AA06 /* SearchRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecord.swift; sourceTree = "<group>"; };
 		B6183CD527D8F7490035AA06 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		B6183CD727D9062F0035AA06 /* MyRecordDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordDetailViewModel.swift; sourceTree = "<group>"; };
 		B630D2F927C7756A00E66F22 /* MydjTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MydjTableCell.swift; sourceTree = "<group>"; };
@@ -302,6 +302,8 @@
 		B6CC1D7327BA437A00B5EE7E /* InfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoController.swift; sourceTree = "<group>"; };
 		B6CC1D7527BA475900B5EE7E /* UseInfoText.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = UseInfoText.rtf; sourceTree = "<group>"; };
 		B6CC1D7727BA536A00B5EE7E /* PrivateInfoText.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = PrivateInfoText.rtf; sourceTree = "<group>"; };
+		B6CCBC9627D9E5E4009F8499 /* OneMusicRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneMusicRecord.swift; sourceTree = "<group>"; };
+		B6CCBC9827DA5EBB009F8499 /* HomeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableCell.swift; sourceTree = "<group>"; };
 		B6D3685527B7A510008B5635 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
 		B6D4BB1D27CA48CD00D6741B /* AllRecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordDetailViewController.swift; sourceTree = "<group>"; };
 		B6D4BB2127CA5D7C00D6741B /* AllRecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordDetailView.swift; sourceTree = "<group>"; };
@@ -740,7 +742,7 @@
 				B6ABCCF227CF44880003B47A /* Select.swift */,
 				B6FE837927D07CE700401FC5 /* Category.swift */,
 				B6C969B627D1B7C100BA4E58 /* MyRecord.swift */,
-				B6183CD327D8BCBC0035AA06 /* SearchRecord.swift */,
+				B6CCBC9627D9E5E4009F8499 /* OneMusicRecord.swift */,
 			);
 			path = RecordModel;
 			sourceTree = "<group>";
@@ -763,6 +765,7 @@
 				B6EF88A827BD3AC2006F6A8F /* EmptyCell.swift */,
 				B66AD44F27C6983F0012686B /* MydjCollectionCell.swift */,
 				B630D2F927C7756A00E66F22 /* MydjTableCell.swift */,
+				B6CCBC9827DA5EBB009F8499 /* HomeTableCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1040,8 +1043,10 @@
 				B646052A27CBA9EE0022E062 /* ArtistView.swift in Sources */,
 				B682185E27B3E22900B58E19 /* LoadingView.swift in Sources */,
 				B646051927CB5EF10022E062 /* SongView.swift in Sources */,
+				B6CCBC9727D9E5E4009F8499 /* OneMusicRecord.swift in Sources */,
 				B68454F327BE30EE00F1E6B5 /* MyAuthenticationCredential.swift in Sources */,
 				B666A90627AED17C00BE7F92 /* BaseView.swift in Sources */,
+				B6CCBC9927DA5EBC009F8499 /* HomeTableCell.swift in Sources */,
 				B68454FE27BE380800F1E6B5 /* UserDetail.swift in Sources */,
 				B689A9CE27AE94E9005F26E4 /* UIVIew.swift in Sources */,
 				B646053627CBE1B40022E062 /* SearchArtistHeaderView.swift in Sources */,
@@ -1114,7 +1119,6 @@
 				B630D2FA27C7756A00E66F22 /* MydjTableCell.swift in Sources */,
 				B683A45927B130D100838749 /* Profile + Table.swift in Sources */,
 				B611826B27D4B104004217E2 /* Artist.swift in Sources */,
-				B6183CD427D8BCBC0035AA06 /* SearchRecord.swift in Sources */,
 				B6F0596E27C3490E00CCB242 /* CategoryView.swift in Sources */,
 				B651E8CA27CA87F500996CC3 /* MydjProfileView.swift in Sources */,
 				B68454E827BE027500F1E6B5 /* LoginUseCase.swift in Sources */,
