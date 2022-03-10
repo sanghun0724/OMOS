@@ -10,10 +10,10 @@ import RxSwift
 protocol RecordsRepository {
     init(recordAPI:RecordAPI)
     func selectRecord() -> Single<SelectResponse>
-    func cateFetch(type:cateType,page:Int,size:Int,sort:String,userid:Int) -> Single<[CategoryRespone]>
+    func cateFetch(type:cateType,postId:Int?,size:Int,sort:String,userid:Int) -> Single<[CategoryRespone]>
     func myRecordFetch(userid:Int) -> Single<[MyRecordRespone]>
     func save(cate:String,content:String,isPublic:Bool,musicId:String,title:String,userid:Int) -> Single<SaveRespone>
-    func recordIspublic(postId:String)
-    func recordDelete(postId:String)
-    func recordUpdate(postId:String,request:UpdateRequest)
+    func recordIspublic(postId:Int) -> Single<StateRespone>
+    func recordDelete(postId:Int) -> Single<StateRespone>
+    func recordUpdate(postId:Int,request:UpdateRequest) -> Single<PostRespone>
 }

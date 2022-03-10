@@ -10,7 +10,8 @@ import RxSwift
 
 class CreateViewModel:BaseViewModel {
     
-    var defaultModel:recordSaveDefaultModel = .init(musicId: "", imageURL: "", musicTitle: "", subTitle: "")
+    var modifyDefaultModel:MyRecordRespone? = nil 
+    var defaultModel:recordSaveDefaultModel = .init(musicId: "", imageURL: "", musicTitle: "", subTitle: "") // create할때 있는놈들
     let errorMessage = BehaviorSubject<String?>(value: nil)
     let loading = BehaviorSubject<Bool>(value:false)
     let state = PublishSubject<Bool>()
@@ -38,6 +39,19 @@ class CreateViewModel:BaseViewModel {
             }).disposed(by: disposeBag)
     }
     
+    func updateRecord(postId:Int,request:UpdateRequest) {
+        usecase.recordUpdate(postId: postId, request: request)
+            .subscribe({ [weak self] event in
+                self?.loading.onNext(true)
+                switch event {
+                case .success(let data):
+                    self?.currentState = true
+                    self?.state.onNext(true)
+                case .failure(let error):
+                    self?.errorMessage.onNext(error.localizedDescription)
+                }
+            }).disposed(by: disposeBag)
+    }
     
     
 }

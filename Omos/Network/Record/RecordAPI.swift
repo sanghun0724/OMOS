@@ -67,29 +67,51 @@ class RecordAPI {
             }
         }
     }
-    
+    ///내일 하기
     func searchRecordFetch(musicId:String,request:SearchRecordRequest,completion:@escaping(Result<SaveRespone,Error>) -> Void) {
         AF.request(RecordTarget.searchRecord(musicId:musicId,request),interceptor: TokenInterceptor.shared.getInterceptor()).responseString { result in
             print(result)
         }
     }
     
-    func recordIspublic(postId:String) {
-        AF.request(RecordTarget.recordIspublic(postId: postId),interceptor: TokenInterceptor.shared.getInterceptor()).responseString { result in
-            print(result)
+    func recordIspublic(postId:Int,completion:@escaping(Result<StateRespone,Error>) -> Void) {
+        AF.request(RecordTarget.recordIspublic(postId: postId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<StateRespone>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
         }
     }
     
-    func recordDelete(postId:String) {
-        AF.request(RecordTarget.recordDelete(postId: postId),interceptor: TokenInterceptor.shared.getInterceptor()).responseString { result in
-            print(result)
+    func recordDelete(postId:Int,completion:@escaping(Result<StateRespone,Error>) -> Void) {
+        AF.request(RecordTarget.recordDelete(postId: postId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<StateRespone>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
         }
     }
     
-    func recordUpdate(postId:String,request:UpdateRequest) {
-        AF.request(RecordTarget.recordUpdate(postId: postId,request),interceptor: TokenInterceptor.shared.getInterceptor()).responseString { result in
-            print(result)
+    func recordUpdate(postId:Int,request:UpdateRequest,completion:@escaping(Result<PostRespone,Error>) -> Void) {
+        AF.request(RecordTarget.recordUpdate(postId: postId,request),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<PostRespone>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
         }
-    }
+    
+     }
     
 }

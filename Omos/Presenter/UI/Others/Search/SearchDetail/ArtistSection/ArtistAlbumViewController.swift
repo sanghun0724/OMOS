@@ -24,6 +24,7 @@ class ArtistAlbumViewController:BaseViewController,UIScrollViewDelegate {
         self.viewModel = viewModel
         self.artistId = artistId
         self.viewModel.searchType = searchType
+        print("check Type \(searchType)")
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -121,7 +122,12 @@ extension ArtistAlbumViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        print("move")
+        let cellData = viewModel.currentArtistAlbum[indexPath.row]
+        let rp = SearchRepositoryImpl(searchAPI: SearchAPI())
+        let uc = SearchUseCase(searchRepository: rp)
+        let vm = SearchAlbumDetailViewModel(usecase: uc)
+        let vc = SearchAlbumDetailViewController(viewModel: vm, albumInfo: cellData, searchType: viewModel.searchType)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

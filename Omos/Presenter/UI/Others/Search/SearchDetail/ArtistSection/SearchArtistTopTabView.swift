@@ -19,6 +19,7 @@ class SearchArtistTopTabViewController:TabmanViewController {
         self.viewModel = viewModel
         self.artistId = artistId
         self.viewControllers.append(ArtistSongViewController(viewModel: viewModel, artistId: artistId))
+        self.viewControllers.append(ArtistAlbumViewController(viewModel: viewModel, artistId: artistId, searchType: viewModel.searchType))
         super.init(nibName: nil, bundle: nil)
     }
     

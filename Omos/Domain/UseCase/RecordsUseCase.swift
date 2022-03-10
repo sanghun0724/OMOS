@@ -20,8 +20,8 @@ class RecordsUseCase {
         return recordsRepository.selectRecord()
     }
     
-    func cateFetch(type:cateType,page:Int,size:Int,sort:String,userid:Int) -> Single<[CategoryRespone]> {
-        return recordsRepository.cateFetch(type:type,page:page,size:size,sort:sort,userid:userid)
+    func cateFetch(type:cateType,postId:Int?,size:Int,sort:String,userid:Int) -> Single<[CategoryRespone]> {
+        return recordsRepository.cateFetch(type:type,postId:postId,size:size,sort:sort,userid:userid)
     }
     
     func myRecordFetch(userid:Int) -> Single<[MyRecordRespone]> {
@@ -32,15 +32,15 @@ class RecordsUseCase {
         return recordsRepository.save(cate: cate, content: content, isPublic: isPublic, musicId: musicId, title: title, userid: userid)
     }
     
-    func recordIspublic(postId:String) {
+    func recordIspublic(postId:Int) -> Single<StateRespone> {
         return recordsRepository.recordIspublic(postId: postId)
     }
     
-    func recordDelete(postId:String) {
+    func recordDelete(postId:Int) -> Single<StateRespone> {
         return recordsRepository.recordDelete(postId: postId)
     }
     
-    func recordUpdate(postId:String,request:UpdateRequest) {
+    func recordUpdate(postId:Int,request:UpdateRequest) -> Single<PostRespone> {
         return recordsRepository.recordUpdate(postId: postId,request:request)
     }
     

@@ -27,16 +27,16 @@ class CreateView: BaseView {
         return view
     }()
     
-    let musicTitleLabel:UITextField = {
-        let label = UITextField()
-        label.placeholder = "노래 제목이 들어있습니다"
+    let musicTitleLabel:UILabel = {
+        let label = UILabel()
+        label.text = "error"
         label.font = .systemFont(ofSize: 14)
         return label
     }()
     
-    let subMusicInfoLabel:UITextField = {
-        let label = UITextField()
-        label.placeholder = "가수이름이 들어갑니다. 앨범제목이 들어갑니다."
+    let subMusicInfoLabel:UILabel = {
+        let label = UILabel()
+        label.text = "error"
         label.font = .systemFont(ofSize: 12)
         label.textColor = .mainGrey4
         return label

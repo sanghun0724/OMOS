@@ -28,16 +28,20 @@ class MyRecordViewController: BaseViewController {
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         configureUI()
-        viewModel.myRecordFetch(userid: UserDefaults.standard.integer(forKey: "user"))
         setRightItems()
-       
+        viewModel.myRecordFetch(userid: UserDefaults.standard.integer(forKey: "user"))
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if UserDefaults.standard.integer(forKey: "reload") == 1 {
+            print("this is work")
+            viewModel.myRecordFetch(userid: UserDefaults.standard.integer(forKey: "user"))
+            selfView.tableView.reloadData()
+            UserDefaults.standard.removeObject(forKey: "reload")
+        }
         self.tabBarController?.tabBar.isHidden = false
     }
-    
     
     func setRightItems() {
         let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(didTapSearchButton))
@@ -87,3 +91,4 @@ class MyRecordViewController: BaseViewController {
     
 
 }
+

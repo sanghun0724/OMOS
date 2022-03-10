@@ -153,7 +153,7 @@ class CategoryViewController:BaseViewController {
                 if view == selfView.lyricsView {
                     print("this is lyrics view")
                 } else {
-                    let vc = CreateViewController(viewModel:vm,category: view.titleLabel.text!)
+                    let vc = CreateViewController(viewModel:vm,category: view.titleLabel.text!, type: .create)
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             }

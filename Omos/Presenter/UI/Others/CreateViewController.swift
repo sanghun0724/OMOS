@@ -12,16 +12,24 @@ import SnapKit
 import YPImagePicker
 import Mantis
 
+enum CreateType {
+    case modify
+    case create
+}
+
 class CreateViewController:BaseViewController {
     
+  
     let scrollView = UIScrollView()
     let category:String
     private let selfView = CreateView()
     let viewModel:CreateViewModel
+    let type:CreateType
     
-    init(viewModel:CreateViewModel,category:String) {
+    init(viewModel:CreateViewModel,category:String,type:CreateType) {
         self.viewModel = viewModel
         self.category = category
+        self.type = type
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -31,9 +39,13 @@ class CreateViewController:BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        selfView.titleTextView.delegate = self
+        selfView.mainTextView.delegate = self
+        selfView.mainfullTextView.delegate = self
         bind()
-        setViewinfo()
+        
+        if type == .create { setCreateViewinfo() }
+        else { setModifyView() }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -64,15 +76,15 @@ class CreateViewController:BaseViewController {
                   print("alert here")
                   return
               }
-        
-        viewModel.saveRecord(cate: getCate(cate: category), content: text, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: titleText, userid: UserDefaults.standard.integer(forKey: "user"))
+        if type == .create {
+            viewModel.saveRecord(cate: getCate(cate: category), content: text, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: titleText, userid: UserDefaults.standard.integer(forKey: "user"))
+        } else {
+            viewModel.updateRecord(postId: viewModel.modifyDefaultModel?.recordID ?? 0, request: .init(contents: viewModel.modifyDefaultModel?.recordContents ?? "error", title: viewModel.modifyDefaultModel?.recordTitle ?? "error" ))
+        }
         
     }
     
-    private func setViewinfo() {
-        selfView.titleTextView.delegate = self
-        selfView.mainTextView.delegate = self
-        selfView.mainfullTextView.delegate = self
+    private func setCreateViewinfo() {
         selfView.cateLabel.text = "  | \(category)"
         selfView.circleImageView.setImage(with: viewModel.defaultModel.imageURL)
         selfView.musicTitleLabel.text = viewModel.defaultModel.musicTitle
@@ -97,6 +109,23 @@ class CreateViewController:BaseViewController {
         selfView.createdField.text = "\(dateTimeComponents.year!) \(dateTimeComponents.month!) \(dateTimeComponents.day!)"
     }
     
+    func setModifyView() {
+        print("check")
+        print(viewModel.modifyDefaultModel!)
+        selfView.cateLabel.text = "  | \(category)"
+        selfView.circleImageView.setImage(with: viewModel.modifyDefaultModel?.music.albumImageURL ?? "")
+        selfView.musicTitleLabel.text = viewModel.modifyDefaultModel?.music.musicTitle
+        selfView.subMusicInfoLabel.text = viewModel.modifyDefaultModel?.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
+        selfView.titleTextView.text = viewModel.modifyDefaultModel?.recordTitle
+        selfView.mainTextView.text = viewModel.modifyDefaultModel?.recordContents
+        selfView.mainfullTextView.text = viewModel.modifyDefaultModel?.recordContents
+        selfView.mainTextView.textColor = .white
+        selfView.mainfullTextView.textColor = .white
+        selfView.titleTextView.textColor = .white
+        
+        textViewDidChange(selfView.mainfullTextView)
+    }
+    
     override func configureUI() {
         super.configureUI()
     }
@@ -114,6 +143,7 @@ class CreateViewController:BaseViewController {
                 for controller in (self?.navigationController!.viewControllers ?? [UIViewController()] )  as Array {
                             if controller.isKind(of: MyRecordViewController.self) {
                                 self?.navigationController?.popToViewController(controller, animated: true)
+                                UserDefaults.standard.set(1, forKey: "reload")
                                 break
                             }
                         }

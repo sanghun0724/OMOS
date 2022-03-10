@@ -69,6 +69,16 @@ extension SearchAlbumDetailViewController:UITableViewDelegate,UITableViewDataSou
         self.searchType == .me ? (cell.createdButton.isHidden = false) : (cell.createdButton.isHidden = true)
         let cellData = viewModel.currentAlbumDetails[indexPath.row]
         cell.configureModel(albumDetail: cellData,count:indexPath.row+1)
+        if searchType == .me {
+            cell.createdButton.rx.tap
+                .asDriver()
+                .drive(onNext: { [weak self] _ in
+                    print("click")
+                    let vc = CategoryViewController(defaultModel: .init(musicId:cellData.musicID, imageURL:self?.albumInfo.albumImageURL ?? "" , musicTitle: cellData.musicTitle, subTitle: cellData.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}))
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }).disposed(by: cell.disposeBag)
+        }
+      
         cell.selectionStyle = .none
         return cell
     }

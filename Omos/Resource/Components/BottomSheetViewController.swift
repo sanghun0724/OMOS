@@ -88,13 +88,14 @@ extension BottomSheetViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+        dismiss(animated: true)
         if type == .MyRecord {
             switch indexPath.row {
             case 0:
-                print("삭제")
+                myRecordVM?.delete.onNext(true)
+                UserDefaults.standard.set(1, forKey: "reload")
             case 1:
-                //let vc = CreateViewController(viewModel: <#T##CreateViewModel#>, category: <#T##String#>)
+                myRecordVM?.modify.onNext(true)
             default:
                 print("defualt")
             }

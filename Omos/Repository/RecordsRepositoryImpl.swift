@@ -34,9 +34,9 @@ class RecordsRepositoryImpl:RecordsRepository {
     }
     
     
-    func cateFetch(type: cateType, page: Int, size: Int, sort: String, userid: Int) -> Single<[CategoryRespone]> {
+    func cateFetch(type: cateType, postId: Int?, size: Int, sort: String, userid: Int) -> Single<[CategoryRespone]> {
         return Single<[CategoryRespone]>.create { [weak self] single in
-            self?.recordAPI.categoryFetch(cateType: type, request: .init(page: page, size: size, sort: sort, userid: userid), completion: { result in
+            self?.recordAPI.categoryFetch(cateType: type, request: .init(postId: postId, size: size, sortType: sort, userid: userid), completion: { result in
                 switch result {
                 case .success(let data):
                     single(.success(data))
@@ -83,16 +83,52 @@ class RecordsRepositoryImpl:RecordsRepository {
         }
     }
     
-    func recordIspublic(postId:String) {
-        recordAPI.recordIspublic(postId: postId)
+    func recordIspublic(postId:Int) -> Single<StateRespone> {
+        return Single<StateRespone>.create { [weak self] single in
+            self?.recordAPI.recordIspublic(postId: postId ,completion: { result in
+                switch result {
+                case .success(let data):
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            })
+            
+            return Disposables.create()
+        }
     }
     
-    func recordDelete(postId:String) {
-        recordAPI.recordDelete(postId: postId)
+    func recordDelete(postId:Int) -> Single<StateRespone> {
+        return Single<StateRespone>.create { [weak self] single in
+            self?.recordAPI.recordDelete(postId: postId ,completion: { result in
+                switch result {
+                case .success(let data):
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            })
+            
+            return Disposables.create()
+        }
     }
     
-    func recordUpdate(postId:String,request request:UpdateRequest) {
-        recordAPI.recordUpdate(postId: postId,request:request)
+    func recordUpdate(postId:Int,request:UpdateRequest) -> Single<PostRespone> {
+        return Single<PostRespone>.create { [weak self] single in
+            self?.recordAPI.recordUpdate(postId: postId,request:request,completion: { result in
+                switch result {
+                case .success(let data):
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            })
+            
+            return Disposables.create()
+        }
     }
     
     

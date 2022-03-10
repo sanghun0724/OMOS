@@ -14,9 +14,9 @@ enum RecordTarget {
     case myRecord(userid:Int)
     case save(SaveRequest)
     case searchRecord(musicId:String,SearchRecordRequest)
-    case recordIspublic(postId:String)
-    case recordDelete(postId:String)
-    case recordUpdate(postId:String,UpdateRequest)
+    case recordIspublic(postId:Int)
+    case recordDelete(postId:Int)
+    case recordUpdate(postId:Int,UpdateRequest)
 }
 
 extension RecordTarget:TargetType {
@@ -46,7 +46,7 @@ extension RecordTarget:TargetType {
         case .searchRecord(let id,_): return "/select/\(id)"
         case .recordIspublic(let id): return "/\(id)/ispublic"
         case .recordDelete(let id): return "/delete/\(id)"
-        case .recordUpdate(let id): return "/update/\(id)"
+        case .recordUpdate(let id,_): return "/update/\(id)"
         }
     }
     

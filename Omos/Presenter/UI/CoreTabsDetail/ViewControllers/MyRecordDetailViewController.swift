@@ -52,7 +52,6 @@ class MyRecordDetailViewController:BaseViewController {
     }
     
     @objc func didTapMoreButton() {
-        viewModel.postId = myRecord.recordID
         bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = Constant.mainHeight * 0.194
         self.present(bottomSheet,animated: true)
     }
@@ -88,6 +87,27 @@ class MyRecordDetailViewController:BaseViewController {
             .bind(to: selfView.lockButton.rx.isSelected)
             .disposed(by: disposeBag)
         
+        viewModel.modify
+            .subscribe(onNext: { [weak self] _ in
+                let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+                let uc = RecordsUseCase(recordsRepository: rp)
+                let vm = CreateViewModel(usecase: uc)
+                vm.modifyDefaultModel = self?.myRecord
+                let vc = CreateViewController(viewModel: vm, category: (self?.getReverseCate(cate: self?.myRecord.category ?? ""))!, type: .modify)
+                self?.navigationController?.pushViewController( vc, animated: true)
+                
+            }).disposed(by: disposeBag)
+        
+        viewModel.delete
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.deleteRecord(postId: self?.myRecord.recordID ?? 0)
+            }).disposed(by: disposeBag)
+        
+        viewModel.done
+            .subscribe(onNext: { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            }).disposed(by: disposeBag)
+        
     }
     
     func setData() {
@@ -118,6 +138,23 @@ class MyRecordDetailViewController:BaseViewController {
             selfView.starCountLabel.textColor = .mainOrange
         }
         
+    }
+    
+    private func getReverseCate(cate:String) -> String {
+        switch cate {
+        case "A_LINE":
+            return "한 줄 감상"
+        case "STORY":
+            return "노래 속 나의 이야기"
+        case "OST":
+            return "내 인생의 OST"
+        case "LYRICS":
+            return "나만의 가사해석"
+        case "FREE":
+            return "자유 공간"
+        default:
+            return "자유 공간"
+        }
     }
     
 }

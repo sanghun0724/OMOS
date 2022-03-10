@@ -60,3 +60,10 @@ struct UpdateRequest:Codable {
     let title:String
 }
 
+struct PostRespone:Codable {
+    let postId:Int
+}
+
+struct StateRespone:Codable {
+    let state:Bool
+}

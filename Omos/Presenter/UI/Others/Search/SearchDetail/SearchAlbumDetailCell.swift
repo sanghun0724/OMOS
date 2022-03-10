@@ -7,9 +7,11 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 class SearchAlbumDetailCell:UITableViewCell {
     static let identifier = "SearchAlbumDetailCell"
+    var disposeBag = DisposeBag()
     
     let countLabel:UILabel = {
         let label = UILabel()
@@ -88,7 +90,10 @@ class SearchAlbumDetailCell:UITableViewCell {
         countLabel.text = count < 10 ? "0\(count)" : "\(count)"
     }
     
-    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
     
     
     
