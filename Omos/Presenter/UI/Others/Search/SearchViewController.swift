@@ -158,7 +158,7 @@ extension SearchViewController:UISearchControllerDelegate {
     func didPresentSearchController(_ searchController: UISearchController) {
         DispatchQueue.main.async
         { [weak self] in
-            self?.selfView.searchViewController.searchBar.becomeFirstResponder()
+            //self?.selfView.searchViewController.searchBar.becomeFirstResponder()
         }
     }
     

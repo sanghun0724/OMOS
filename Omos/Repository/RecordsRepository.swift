@@ -18,4 +18,9 @@ protocol RecordsRepository {
     func recordDelete(postId:Int) -> Single<StateRespone>
     func recordUpdate(postId:Int,request:UpdateRequest) -> Single<PostRespone>
     func oneMusicRecordFetch(musicId:String,request:OneMusicRecordRequest) -> Single<[OneMusicRecordRespone]>
+    //MARK: Interaction API
+    func saveScrap(postId:Int,userId:Int) -> Single<StateRespone>
+    func deleteScrap(postId:Int,userId:Int) -> Single<StateRespone>
+    func saveLike(postId:Int,userId:Int) -> Single<StateRespone>
+    func deleteLike(postId:Int,userId:Int) -> Single<StateRespone>
 }

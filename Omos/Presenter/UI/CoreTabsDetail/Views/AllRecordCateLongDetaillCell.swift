@@ -69,18 +69,18 @@ class AllRecordCateLongDetailCell:UITableViewCell {
         myView.myView.createdLabel.text = record.createdDate
         myView.myView.mainLabelView.text = record.recordContents
         myView.myView.nicknameLabel.text = record.nickname
-        myView.myView.loveCountLabel.text = String(record.likeCnt)
-        myView.myView.starCountLabel.text = String(record.scrapCnt)
+        myView.myView.likeCountLabel.text = String(record.likeCnt)
+        myView.myView.scrapCountLabel.text = String(record.scrapCnt)
         
         if record.isLiked {
-            myView.myView.loveImageView.image = UIImage(named: "fillLove")
-            myView.myView.loveCountLabel.textColor = .mainOrange
+            myView.myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
+            myView.myView.likeCountLabel.textColor = .mainOrange
         }
         
         if record.isScraped {
-            myView.myView.starImageView.image = UIImage(named: "fillStar")
-            myView.myView.starCountLabel.textColor = .mainOrange
-        }
+            myView.myView.scrapButton.setImage( UIImage(named: "fillStar"), for: .normal)
+            myView.myView.scrapCountLabel.textColor = .mainOrange
+        } 
         
     }
     
@@ -94,18 +94,18 @@ class AllRecordCateLongDetailCell:UITableViewCell {
         myView.myView.createdLabel.text = record.createdDate
         myView.myView.mainLabelView.text = record.recordContents
         myView.myView.nicknameLabel.text = record.nickname
-        myView.myView.loveCountLabel.text = String(record.likeCnt)
-        myView.myView.starCountLabel.text = String(record.scrapCnt)
+        myView.myView.likeCountLabel.text = String(record.likeCnt)
+        myView.myView.scrapCountLabel.text = String(record.scrapCnt)
         myView.myView.cateLabel.text = record.category
         
         if record.isLiked {
-            myView.myView.loveImageView.image = UIImage(named: "fillLove")
-            myView.myView.loveCountLabel.textColor = .mainOrange
+            myView.myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
+            myView.myView.likeCountLabel.textColor = .mainOrange
         }
         
         if record.isScraped {
-            myView.myView.starImageView.image = UIImage(named: "fillStar")
-            myView.myView.starCountLabel.textColor = .mainOrange
+            myView.myView.scrapButton.setImage( UIImage(named: "fillStar"), for: .normal)
+            myView.myView.scrapCountLabel.textColor = .mainOrange
         }
         
     }

@@ -126,12 +126,13 @@ class MyRecordDetailView:BaseView {
         return label
     }()
     
-    let loveImageView:UIImageView = {
-        let view = UIImageView(image:UIImage(named: "emptyLove"))
-        return view
+    let likeButton:UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "emptyLove"), for: .normal)
+        return button
     }()
     
-    let loveCountLabel:UILabel = {
+    let likeCountLabel:UILabel = {
        let label = UILabel()
         label.text = "122"
         label.textAlignment = .center
@@ -139,12 +140,13 @@ class MyRecordDetailView:BaseView {
         return label
     }()
     
-    let starImageView:UIImageView = {
-        let view = UIImageView(image:UIImage(named: "emptyStar"))
-        return view
+    let scrapButton:UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "emptyStar"), for: .normal)
+        return button
     }()
     
-    let starCountLabel:UILabel = {
+    let scrapCountLabel:UILabel = {
        let label = UILabel()
         label.text = "144"
         label.textAlignment = .center
@@ -255,31 +257,31 @@ class MyRecordDetailView:BaseView {
             nicknameLabel.sizeToFit()
         }
         
-        starImageView.snp.makeConstraints { make in
+        scrapButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)
             make.height.equalToSuperview().multipliedBy(0.3)
-            make.width.equalTo(starImageView.snp.height)
+            make.width.equalTo(scrapButton.snp.height)
             make.right.equalToSuperview().offset(-10)
         }
 
-        starCountLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(starImageView.snp.centerX)
-            make.top.equalTo(starImageView.snp.bottom).offset(3)
-            starCountLabel.sizeToFit()
+        scrapCountLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(scrapButton.snp.centerX)
+            make.top.equalTo(scrapButton.snp.bottom).offset(3)
+            scrapCountLabel.sizeToFit()
         }
 
 
-        loveImageView.snp.makeConstraints { make in
+        likeButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)
             make.height.equalToSuperview().multipliedBy(0.3)
-            make.width.equalTo(loveImageView.snp.height)
-            make.right.equalTo(starImageView.snp.left).offset(-30)
+            make.width.equalTo(likeButton.snp.height)
+            make.right.equalTo(scrapButton.snp.left).offset(-30)
         }
 
-        loveCountLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(loveImageView.snp.centerX)
-            make.top.equalTo(loveImageView.snp.bottom).offset(3)
-            starCountLabel.sizeToFit()
+        likeCountLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(likeButton.snp.centerX)
+            make.top.equalTo(likeButton.snp.bottom).offset(3)
+            likeCountLabel.sizeToFit()
         }
         
         dummyView3.snp.makeConstraints { make in
@@ -324,10 +326,10 @@ class MyRecordDetailView:BaseView {
         
         lastView.addSubview(nicknameLabel)
         lastView.addSubview(dummyView2)
-        lastView.addSubview(loveImageView)
-        lastView.addSubview(loveCountLabel)
-        lastView.addSubview(starImageView)
-        lastView.addSubview(starCountLabel)
+        lastView.addSubview(likeButton)
+        lastView.addSubview(likeCountLabel)
+        lastView.addSubview(scrapButton)
+        lastView.addSubview(scrapCountLabel)
         lastView.addSubview(dummyView3)
     }
     

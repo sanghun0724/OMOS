@@ -31,10 +31,10 @@ extension InteractionTarget:TargetType {
     
     var path: String {
         switch self {
-        case .saveScrap(let post,let user): return "\(post)/\(user)"
-        case .deleteScrap(let post,let user): return "\(post)/\(user)"
-        case .saveLike(let post,let user): return "\(post)/\(user)"
-        case .deleteLike(let post,let user): return "\(post)/\(user)"
+        case .saveScrap(let post,let user): return "scrap/save/\(post)/\(user)"
+        case .deleteScrap(let post,let user): return "scrap/delete/\(post)/\(user)"
+        case .saveLike(let post,let user): return "like/save/\(post)/\(user)"
+        case .deleteLike(let post,let user): return "like/delete/\(post)/\(user)"
         }
     }
     

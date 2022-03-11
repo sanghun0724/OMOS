@@ -163,5 +163,67 @@ class RecordsRepositoryImpl:RecordsRepository {
         }
     }
     
+    func saveScrap(postId:Int,userId:Int) -> Single<StateRespone> {
+        return Single<StateRespone>.create { [weak self] single in
+            self?.recordAPI.saveScrap(postId: postId, userId: userId,completion: { result in
+                switch result {
+                case .success(let data):
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            })
+            
+            return Disposables.create()
+        }
+    }
     
+    func deleteScrap(postId:Int,userId:Int) -> Single<StateRespone> {
+        return Single<StateRespone>.create { [weak self] single in
+            self?.recordAPI.deleteScrap(postId: postId, userId: userId,completion: { result in
+                switch result {
+                case .success(let data):
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            })
+            
+            return Disposables.create()
+        }
+    }
+    
+    func saveLike(postId:Int,userId:Int) -> Single<StateRespone> {
+        return Single<StateRespone>.create { [weak self] single in
+            self?.recordAPI.saveLike(postId: postId, userId: userId,completion: { result in
+                switch result {
+                case .success(let data):
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            })
+            
+            return Disposables.create()
+        }
+    }
+    
+    func deleteLike(postId:Int,userId:Int) -> Single<StateRespone> {
+        return Single<StateRespone>.create { [weak self] single in
+            self?.recordAPI.deleteLike(postId: postId, userId: userId,completion: { result in
+                switch result {
+                case .success(let data):
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            })
+            
+            return Disposables.create()
+        }
+    }
 }

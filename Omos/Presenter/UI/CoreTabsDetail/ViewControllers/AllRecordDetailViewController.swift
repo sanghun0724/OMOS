@@ -53,14 +53,17 @@ class AllRecordDetailViewController:BaseViewController {
     
     func bind() {
         viewModel.selectDetail
+            .take(1)
             .subscribe(onNext: { [weak self] data in
                 guard let record = self?.viewModel.currentSelectDetail else { return }
                 if data.category == "A_LINE" {
                     self?.configShortView()
                     self?.setShortData(myRecord: record)
+                    self?.shortBind(myRecord: record)
                 } else {
                     self?.configLongView()
                     self?.setLongData(myRecord: record)
+                    self?.longBind(myRecord: record)
                 }
             }).disposed(by: disposeBag)
         
@@ -70,6 +73,103 @@ class AllRecordDetailViewController:BaseViewController {
                 self?.loadingView.isHidden = !loading
             }).disposed(by: disposeBag)
     }
+    
+    func shortBind(myRecord:SelectDetailRespone) {
+        selfShortView.likeButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let count = Int(self?.selfShortView.likeCountLabel.text ?? "0")
+                else { return }
+                let userId = UserDefaults.standard.integer(forKey: "user")
+                let recordId = myRecord.recordID
+                
+                if self?.selfShortView.likeCountLabel.textColor == .mainOrange {
+                    //좋아요 취소
+                    print("orange")
+                    self?.selfShortView.likeButton.setImage(UIImage(named:"emptyLove"), for: .normal)
+                    self?.selfShortView.likeCountLabel.textColor = .mainGrey3
+                    self?.selfShortView.likeCountLabel.text = String(count-1)
+                    self?.viewModel.deleteLike(postId: recordId, userId: userId)
+                } else {
+                    //좋아요 클릭
+                    self?.selfShortView.likeButton.setImage(UIImage(named:"fillLove"), for: .normal)
+                    self?.selfShortView.likeCountLabel.textColor = .mainOrange
+                    self?.selfShortView.likeCountLabel.text = String(count+1)
+                    self?.viewModel.saveLike(postId: recordId, userId: userId)
+                }
+            }).disposed(by: disposeBag)
+        
+        selfShortView.scrapButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let scrapCount = Int(self?.selfShortView.scrapCountLabel.text ?? "10")
+                else { return }
+                let userId = UserDefaults.standard.integer(forKey: "user")
+                let recordId = myRecord.recordID
+                
+                if self?.selfShortView.scrapCountLabel.textColor == .mainOrange {
+                    //스크랩 취소
+                    self?.selfShortView.scrapButton.setImage(UIImage(named:"emptyStar"), for: .normal)
+                    self?.selfShortView.scrapCountLabel.textColor = .mainGrey3
+                    self?.selfShortView.scrapCountLabel.text = String(scrapCount-1)
+                    self?.viewModel.deleteScrap(postId: recordId, userId: userId)
+                    
+                } else {
+                    //스크랩 클릭
+                    self?.selfShortView.scrapButton.setImage(UIImage(named:"fillStar"), for: .normal)
+                    self?.selfShortView.scrapCountLabel.text =  String(scrapCount+1)
+                    self?.selfShortView.scrapCountLabel.textColor = .mainOrange
+                    self?.viewModel.saveScrap(postId: recordId, userId: userId)
+                }
+                
+            }).disposed(by: disposeBag)
+    }
+    
+    
+    func longBind(myRecord:SelectDetailRespone) {
+        selfLongView.myView.likeButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let count = Int(self?.selfLongView.myView.likeCountLabel.text ?? "0")
+                else { return }
+                let userId = UserDefaults.standard.integer(forKey: "user")
+                let recordId = myRecord.recordID
+                
+                if self?.selfLongView.myView.likeCountLabel.textColor == .mainOrange {
+                    //좋아요 취소
+                    self?.selfLongView.myView.likeButton.setImage(UIImage(named:"emptyLove"), for: .normal)
+                    self?.selfLongView.myView.likeCountLabel.textColor = .mainGrey3
+                    self?.selfLongView.myView.likeCountLabel.text = String(count-1)
+                     self?.viewModel.deleteLike(postId: recordId, userId: userId)
+                } else {
+                    //좋아요 클릭
+                    self?.selfLongView.myView.likeButton.setImage(UIImage(named:"fillLove"), for: .normal)
+                    self?.selfLongView.myView.likeCountLabel.textColor = .mainOrange
+                    self?.selfLongView.myView.likeCountLabel.text = String(count+1)
+                     self?.viewModel.saveLike(postId: recordId, userId: userId)
+                }
+            }).disposed(by: disposeBag)
+        
+        selfLongView.myView.scrapButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let scrapCount = Int(self?.selfLongView.myView.scrapCountLabel.text ?? "0")
+                else { return }
+                let userId = UserDefaults.standard.integer(forKey: "user")
+                let recordId = myRecord.recordID
+                
+                if self?.selfLongView.myView.scrapCountLabel.textColor == .mainOrange {
+                    //좋아요 취소
+                    self?.selfLongView.myView.scrapButton.setImage(UIImage(named:"emptyStar"), for: .normal)
+                    self?.selfLongView.myView.scrapCountLabel.textColor = .mainGrey3
+                    self?.selfLongView.myView.scrapCountLabel.text = String(scrapCount-1)
+                    self?.viewModel.deleteScrap(postId: recordId, userId: userId)
+                } else {
+                    //좋아요 클릭
+                    self?.selfLongView.myView.scrapButton.setImage(UIImage(named:"fillStar"), for: .normal)
+                    self?.selfLongView.myView.scrapCountLabel.textColor = .mainOrange
+                    self?.selfLongView.myView.scrapCountLabel.text = String(scrapCount+1)
+                    self?.viewModel.saveScrap(postId: recordId, userId: userId)
+                }
+            }).disposed(by: disposeBag)
+    }
+    
     
     func configLongView() {
         self.view.addSubview(scrollView)
@@ -97,19 +197,19 @@ class AllRecordDetailViewController:BaseViewController {
         //        selfView.backImageView.setImage(with: <#T##String#>)
         selfLongView.myView.titleLabel.text = myRecord.recordTitle
         selfLongView.myView.createdLabel.text = myRecord.createdDate
-        selfLongView.myView.loveCountLabel.text = String(myRecord.likeCnt)
-        selfLongView.myView.starCountLabel.text = String(myRecord.scrapCnt)
+        selfLongView.myView.likeCountLabel.text = String(myRecord.likeCnt)
+        selfLongView.myView.scrapCountLabel.text = String(myRecord.scrapCnt)
         selfLongView.myView.cateLabel.text = " | \(myRecord.category )"
         
-      
+        
         if myRecord.isLiked {
-            selfLongView.myView.loveImageView.image = UIImage(named: "fillLove")
-            selfLongView.myView.loveCountLabel.textColor = .mainOrange
+            selfLongView.myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
+            selfLongView.myView.likeCountLabel.textColor = .mainOrange
         }
         
         if myRecord.isScraped {
-            selfLongView.myView.starImageView.image = UIImage(named: "fillStar")
-            selfLongView.myView.starCountLabel.textColor = .mainOrange
+            selfLongView.myView.scrapButton.setImage(UIImage(named: "fillStar"), for: .normal)
+            selfLongView.myView.scrapCountLabel.textColor = .mainOrange
         }
         selfLongView.myView.mainLabelView.text = myRecord.recordContents
     }
@@ -131,20 +231,25 @@ class AllRecordDetailViewController:BaseViewController {
         //        selfView.backImageView.setImage(with: <#T##String#>)
         selfShortView.titleLabel.text = myRecord.recordTitle
         selfShortView.createdLabel.text = myRecord.createdDate
-        selfShortView.loveCountLabel.text = String(myRecord.likeCnt)
-        selfShortView.starCountLabel.text = String(myRecord.scrapCnt)
+        selfShortView.likeCountLabel.text = String(myRecord.likeCnt)
+        selfShortView.scrapCountLabel.text = String(myRecord.scrapCnt)
         selfShortView.cateLabel.text =  " | \(myRecord.category )"
         
-       
+        
         if myRecord.isLiked {
-            selfShortView.loveImageView.image = UIImage(named: "fillLove")
-            selfShortView.loveCountLabel.textColor = .mainOrange
+            selfShortView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
+            selfShortView.likeCountLabel.textColor = .mainOrange
         }
         
         if myRecord.isScraped {
-            selfShortView.starImageView.image = UIImage(named: "fillStar")
-            selfShortView.starCountLabel.textColor = .mainOrange
+            selfShortView.scrapButton.setImage(UIImage(named: "fillLove"), for: .normal)
+            selfShortView.scrapCountLabel.textColor = .mainOrange
         }
         selfShortView.mainLabelView.text = myRecord.recordContents
     }
+    
+    
+    
+    
+    
 }

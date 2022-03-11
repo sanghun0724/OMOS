@@ -52,4 +52,21 @@ class RecordsUseCase {
         return recordsRepository.oneMusicRecordFetch(musicId: musicId, request: request)
     }
     
+    //MARK: Interaction API
+    func saveScrap(postId:Int,userId:Int) -> Single<StateRespone> {
+        return recordsRepository.saveScrap(postId: postId, userId: userId)
+    }
+    
+    func deleteScrap(postId:Int,userId:Int) -> Single<StateRespone> {
+        return recordsRepository.deleteScrap(postId: postId, userId: userId)
+    }
+    
+    func saveLike(postId:Int,userId:Int) -> Single<StateRespone> {
+        return recordsRepository.saveLike(postId: postId, userId: userId)
+    }
+    
+    func deleteLike(postId:Int,userId:Int) -> Single<StateRespone> {
+        return recordsRepository.deleteLike(postId: postId, userId: userId)
+    }
+    
 }
