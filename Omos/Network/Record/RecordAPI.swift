@@ -10,11 +10,7 @@ import Alamofire
 
 class RecordAPI {
     
-   
-    
-    
     func select(completion:@escaping(Result<SelectResponse,Error>) -> Void) {
-        
         AF.request(RecordTarget.select,interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<SelectResponse>) in
             switch response.result {
             case .success(let data):
@@ -24,6 +20,19 @@ class RecordAPI {
                 completion(.failure(error))
             }
         }
+    }
+    
+    func selectDetail(postId:Int,userId:Int,completion:@escaping(Result<SelectDetailRespone,Error>) -> Void) {
+        AF.request(RecordTarget.selectDetail(postId: postId, userId: userId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<SelectDetailRespone>) in
+            switch response.result {
+            case .success(let data):
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+        
     }
     
     func categoryFetch(cateType:cateType,request:CateRequest,completion:@escaping(Result<[CategoryRespone],Error>) -> Void) {
@@ -105,10 +114,9 @@ class RecordAPI {
                 completion(.failure(error))
             }
         }
+        
+    }
     
-     }
-    
-    ///내일 하기
     func oneMusicRecordFetch(musicId:String,request:OneMusicRecordRequest,completion:@escaping(Result<[OneMusicRecordRespone],Error>) -> Void) {
         AF.request(RecordTarget.oneMusicRecord(musicId: musicId, request),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[OneMusicRecordRespone]>) in
             switch response.result {
@@ -121,5 +129,60 @@ class RecordAPI {
             }
         }
     }
+    
+    
+    //MARK: Interaction API here
+    func saveScrap(postId:Int,userId:Int,completion:@escaping(Result<StateRespone,Error>) -> Void) {
+        AF.request(InteractionTarget.saveScrap(postId: postId, userId: userId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<StateRespone>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func deleteScrap(postId:Int,userId:Int,completion:@escaping(Result<StateRespone,Error>) -> Void) {
+        AF.request(InteractionTarget.deleteScrap(postId: postId, userId: userId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<StateRespone>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func saveLike(postId:Int,userId:Int,completion:@escaping(Result<StateRespone,Error>) -> Void) {
+        AF.request(InteractionTarget.saveLike(postId: postId, userId: userId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<StateRespone>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func deleteLike(postId:Int,userId:Int,completion:@escaping(Result<StateRespone,Error>) -> Void) {
+        AF.request(InteractionTarget.deleteLike(postId: postId, userId: userId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<StateRespone>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
+    
     
 }

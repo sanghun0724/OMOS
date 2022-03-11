@@ -62,7 +62,25 @@ struct Artist: Codable {
         case artistName
     }
 }
-///이거 아직 서버 안한듯 
-struct testArtist:Codable {
-    let artistName: String
+
+struct SelectDetailRespone:Codable {
+      let music: Music
+      let recordID: Int
+      let recordTitle, recordContents: String
+      let recordImageURL: String?
+      let createdDate, category: String
+      let viewsCnt, userID: Int
+      let nickname: String
+      let likeCnt, scrapCnt: Int
+      let isLiked, isScraped: Bool
+
+      enum CodingKeys: String, CodingKey {
+          case music
+          case recordID = "recordId"
+          case recordTitle, recordContents
+          case recordImageURL = "recordImageUrl"
+          case createdDate, category, viewsCnt
+          case userID = "userId"
+          case nickname, likeCnt, scrapCnt, isLiked, isScraped
+      }
 }

@@ -33,6 +33,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: scene)
+        self.window?.overrideUserInterfaceStyle = .dark
 //        let uc = LoginUseCase(authRepository:AuthRepositoryImpl(loginAPI: LoginAPI()))
 //        let vm = LoginViewModel(usecase: uc)
 //
@@ -102,8 +103,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UserDefaults.standard.set("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvcmlnaW5AbmF2ZXIuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY3ODM2MTMyMn0.q6YbvSmVFOoU2-Rnp1a9iav1TTlbdV0aPQQ_E8OiOv34XwGfPWCRrOriMkSOpo7MkddJo5O2QyRjqZk29b7jfw",forKey:"access")
         UserDefaults.standard.set("eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NDY4MDM3MDV9.ZImb_c8Q6WSl2KaIDjMGs_tKfQPbgM57qDL6LFQFFnSksh0tGLxdflBVHQ4Ll76PglZg8ez86_QfyR6Jc75Lmw",forKey: "refresh")
         UserDefaults.standard.set(1,forKey: "user")
-        
-        
         
         let vm = AllRecordSearchDetailViewModel(usecase: RecordsUseCase(recordsRepository: RecordsRepositoryImpl(recordAPI: RecordAPI())))
         self.window?.rootViewController = TabBarViewController()

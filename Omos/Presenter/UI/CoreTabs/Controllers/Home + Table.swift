@@ -35,7 +35,8 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableMiddleCell.identifier,for:indexPath) as! HomeTableMiddleCell
             return cell
         case 3:
-            return UITableViewCell()
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableLastCell.identifier,for:indexPath) as! HomeTableLastCell
+            return cell
         default:
             print("de other")
         }
@@ -78,9 +79,9 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource {
         case 1:
             return Constant.mainHeight / 4.72
         case 2:
-            return 100
+            return Constant.mainHeight * 0.1478
         case 3:
-            return 100
+            return Constant.mainHeight * 0.201
         default:
             print("de other")
         }
@@ -101,6 +102,13 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource {
             return Constant.mainHeight / 17
         }
       
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+       if indexPath.section == 3 {
+           print("hi")
+        }
     }
     
 }

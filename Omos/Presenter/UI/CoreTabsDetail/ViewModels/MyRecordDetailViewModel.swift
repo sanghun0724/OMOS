@@ -15,6 +15,7 @@ class MyRecordDetailViewModel:BaseViewModel {
     let done = PublishSubject<Bool>()
     var recordData:MyRecordRespone? = nil
     let usecase:RecordsUseCase
+    let errorMessage = BehaviorSubject<String?>(value: nil)
     
     func deleteRecord(postId:Int) {
         usecase.recordDelete(postId: postId)

@@ -15,9 +15,11 @@ class HomeView:BaseView {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(AllRecordTableCell.self, forCellReuseIdentifier: AllRecordTableCell.identifier)
         table.register(HomeTableMiddleCell.self, forCellReuseIdentifier: HomeTableMiddleCell.identifier)
+        table.register(HomeTableLastCell.self, forCellReuseIdentifier: HomeTableLastCell.identifier)
         table.register(HomeHeaderView.self, forHeaderFooterViewReuseIdentifier: HomeHeaderView.identifier)
         table.register(AllRecordHeaderView.self, forHeaderFooterViewReuseIdentifier: AllRecordHeaderView.identifier)
-        
+        table.separatorStyle = .none
+        table.backgroundColor = .mainBackGround
         table.showsVerticalScrollIndicator = false
         table.automaticallyAdjustsScrollIndicatorInsets = false
         table.insetsContentViewsToSafeArea = true

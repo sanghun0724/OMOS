@@ -33,6 +33,22 @@ class RecordsRepositoryImpl:RecordsRepository {
         }
     }
     
+    func selectDetail(postId:Int,userId:Int) -> Single<SelectDetailRespone> {
+        return Single<SelectDetailRespone>.create { [weak self] single in
+            self?.recordAPI.selectDetail(postId: postId, userId: userId, completion: { result in
+                switch result {
+                case .success(let data):
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            })
+            
+            return Disposables.create()
+        }
+    }
+    
     
     func cateFetch(type: cateType, postId: Int?, size: Int, sort: String, userid: Int) -> Single<[CategoryRespone]> {
         return Single<[CategoryRespone]>.create { [weak self] single in

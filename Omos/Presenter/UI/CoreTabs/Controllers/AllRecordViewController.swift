@@ -78,8 +78,12 @@ class AllRecordViewController: BaseViewController {
 
 extension AllRecordViewController:AllCollectCellprotocol {
     func collectionView(collectionViewCell: AllRecordCollectionCell?, index: Int, didTappedInTableViewCell: AllRecordTableCell) {
-        let cate = collectionViewCell?.titleLabel.text
-        let vc = AllRecordDetailViewController(category: cate ?? "empty")
+       guard let postId = collectionViewCell?.detailInfo?.recordID,
+             let userId = collectionViewCell?.detailInfo?.userID else { return }
+        let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+        let uc = RecordsUseCase(recordsRepository: rp)
+        let vm = AllRecordDetailViewModel(usecase: uc)
+        let vc = AllRecordDetailViewController(viewModel: vm, postId: postId, userId: userId)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

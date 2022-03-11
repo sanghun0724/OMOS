@@ -35,6 +35,10 @@
 		B630D2FA27C7756A00E66F22 /* MydjTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2F927C7756A00E66F22 /* MydjTableCell.swift */; };
 		B630D2FC27C7761D00E66F22 /* Mydj + Table + Collect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2FB27C7761D00E66F22 /* Mydj + Table + Collect.swift */; };
 		B630D2FF27C78C0E00E66F22 /* BestSearchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2FE27C78C0E00E66F22 /* BestSearchTableCell.swift */; };
+		B64601D927DB18DA0076C2E5 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64601D827DB18DA0076C2E5 /* LaunchViewController.swift */; };
+		B64601DB27DB32800076C2E5 /* AllRecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64601DA27DB32800076C2E5 /* AllRecordDetailViewModel.swift */; };
+		B64601E227DB481D0076C2E5 /* InteractionTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64601E127DB481D0076C2E5 /* InteractionTarget.swift */; };
+		B64601E527DB4C090076C2E5 /* MyDJTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64601E427DB4C090076C2E5 /* MyDJTarget.swift */; };
 		B646051027CB3A530022E062 /* MydjProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646050F27CB3A530022E062 /* MydjProfileViewController.swift */; };
 		B646051227CB3BEA0022E062 /* MydjProfile + Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646051127CB3BEA0022E062 /* MydjProfile + Table.swift */; };
 		B646051527CB5E7A0022E062 /* EntireView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646051427CB5E7A0022E062 /* EntireView.swift */; };
@@ -200,6 +204,10 @@
 		B630D2F927C7756A00E66F22 /* MydjTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MydjTableCell.swift; sourceTree = "<group>"; };
 		B630D2FB27C7761D00E66F22 /* Mydj + Table + Collect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mydj + Table + Collect.swift"; sourceTree = "<group>"; };
 		B630D2FE27C78C0E00E66F22 /* BestSearchTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSearchTableCell.swift; sourceTree = "<group>"; };
+		B64601D827DB18DA0076C2E5 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		B64601DA27DB32800076C2E5 /* AllRecordDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordDetailViewModel.swift; sourceTree = "<group>"; };
+		B64601E127DB481D0076C2E5 /* InteractionTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionTarget.swift; sourceTree = "<group>"; };
+		B64601E427DB4C090076C2E5 /* MyDJTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDJTarget.swift; sourceTree = "<group>"; };
 		B646050F27CB3A530022E062 /* MydjProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MydjProfileViewController.swift; sourceTree = "<group>"; };
 		B646051127CB3BEA0022E062 /* MydjProfile + Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MydjProfile + Table.swift"; sourceTree = "<group>"; };
 		B646051427CB5E7A0022E062 /* EntireView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntireView.swift; sourceTree = "<group>"; };
@@ -469,6 +477,7 @@
 				B609137F27AD3A7C00B439C3 /* AppDelegate.swift */,
 				B609138127AD3A7C00B439C3 /* SceneDelegate.swift */,
 				B6E8C91427B6AEFC00C32752 /* Constant.swift */,
+				B64601D827DB18DA0076C2E5 /* LaunchViewController.swift */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -540,6 +549,22 @@
 				B6D4BB2B27CA86FB00D6741B /* SearchResultDetailView.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		B64601DC27DB47B10076C2E5 /* Interaction */ = {
+			isa = PBXGroup;
+			children = (
+				B64601E127DB481D0076C2E5 /* InteractionTarget.swift */,
+			);
+			path = Interaction;
+			sourceTree = "<group>";
+		};
+		B64601E327DB4BC30076C2E5 /* MyDJ */ = {
+			isa = PBXGroup;
+			children = (
+				B64601E427DB4C090076C2E5 /* MyDJTarget.swift */,
+			);
+			path = MyDJ;
 			sourceTree = "<group>";
 		};
 		B646051327CB5E140022E062 /* SectionSearch */ = {
@@ -662,6 +687,8 @@
 		B68454E927BE1D7A00F1E6B5 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				B64601E327DB4BC30076C2E5 /* MyDJ */,
+				B64601DC27DB47B10076C2E5 /* Interaction */,
 				B611825E27D45F43004217E2 /* Search */,
 				B6ABCCF427CF44F50003B47A /* Record */,
 				B68454F627BE35FC00F1E6B5 /* Login */,
@@ -854,6 +881,7 @@
 			children = (
 				B6FE837B27D093E500401FC5 /* AllRecordCateDetailViewModel.swift */,
 				B6183CD727D9062F0035AA06 /* MyRecordDetailViewModel.swift */,
+				B64601DA27DB32800076C2E5 /* AllRecordDetailViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1021,6 +1049,7 @@
 				B6183CD827D906300035AA06 /* MyRecordDetailViewModel.swift in Sources */,
 				B6C3AD4527B95B1E00D5D69D /* Attributed + Stirng.swift in Sources */,
 				B68454F527BE310100F1E6B5 /* MyAuthenticator.swift in Sources */,
+				B64601D927DB18DA0076C2E5 /* LaunchViewController.swift in Sources */,
 				B6D4BB2827CA804000D6741B /* MySearch + Table.swift in Sources */,
 				B6B1BB5A27BBCE1000DF2528 /* MyRecordView.swift in Sources */,
 				B6BC147B27BF98FD0067D8FB /* Refresh.swift in Sources */,
@@ -1102,6 +1131,7 @@
 				B689A9D627AE9627005F26E4 /* IndicatorView.swift in Sources */,
 				B67EF45527B7AA000023D5D4 /* SignUpViewController.swift in Sources */,
 				B611825B27D45E1C004217E2 /* SearchRepository.swift in Sources */,
+				B64601E227DB481D0076C2E5 /* InteractionTarget.swift in Sources */,
 				B609138027AD3A7C00B439C3 /* AppDelegate.swift in Sources */,
 				B684550227BE703700F1E6B5 /* RefreshTokenAPI.swift in Sources */,
 				B6D4BB2427CA7FBF00D6741B /* MySearchView.swift in Sources */,
@@ -1120,6 +1150,7 @@
 				B646051D27CB610C0022E062 /* SongTableCell.swift in Sources */,
 				B6183CCB27D788970035AA06 /* ArtistSongViewController.swift in Sources */,
 				B650874527AFAE220020D2C1 /* SearchViewController.swift in Sources */,
+				B64601E527DB4C090076C2E5 /* MyDJTarget.swift in Sources */,
 				B630D2FA27C7756A00E66F22 /* MydjTableCell.swift in Sources */,
 				B683A45927B130D100838749 /* Profile + Table.swift in Sources */,
 				B611826B27D4B104004217E2 /* Artist.swift in Sources */,
@@ -1147,6 +1178,7 @@
 				B68454FC27BE378700F1E6B5 /* Login.swift in Sources */,
 				B682185227B39F6500B58E19 /* AuthRepositoryImpl.swift in Sources */,
 				B682185027B39ADD00B58E19 /* TestModel.swift in Sources */,
+				B64601DB27DB32800076C2E5 /* AllRecordDetailViewModel.swift in Sources */,
 				B66AD44E27C6963B0012686B /* MydjView.swift in Sources */,
 				B6B1BB5C27BBCF6000DF2528 /* MyRecordTableCell.swift in Sources */,
 				B689A9CF27AE94E9005F26E4 /* UIViewController.swift in Sources */,

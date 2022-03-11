@@ -188,20 +188,20 @@ class MyRecordDetailViewController:BaseViewController {
         selflongView.myView.cateLabel.text = " | \(myRecord.category )"
         
         if myRecord.isPublic {
-            selfView.lockButton.setImage(UIImage(named: "unlock"), for: .normal)
-            selfView.lockButton.setImage(UIImage(named: "lock"), for: .selected)
+            selflongView.myView.lockButton.setImage(UIImage(named: "unlock"), for: .normal)
+            selflongView.myView.lockButton.setImage(UIImage(named: "lock"), for: .selected)
         } else {
-            selfView.lockButton.setImage(UIImage(named: "lock"), for: .normal)
-            selfView.lockButton.setImage(UIImage(named: "unlock"), for: .selected)
+            selflongView.myView.lockButton.setImage(UIImage(named: "lock"), for: .normal)
+            selflongView.myView.lockButton.setImage(UIImage(named: "unlock"), for: .selected)
         }
         if myRecord.isLiked {
-            selfView.loveImageView.image = UIImage(named: "fillLove")
-            selfView.loveCountLabel.textColor = .mainOrange
+            selflongView.myView.loveImageView.image = UIImage(named: "fillLove")
+            selflongView.myView.loveCountLabel.textColor = .mainOrange
         }
         
         if myRecord.isScraped {
-            selfView.starImageView.image = UIImage(named: "fillStar")
-            selfView.starCountLabel.textColor = .mainOrange
+            selflongView.myView.starImageView.image = UIImage(named: "fillStar")
+            selflongView.myView.starCountLabel.textColor = .mainOrange
         }
         selflongView.myView.mainLabelView.text = myRecord.recordContents
     }

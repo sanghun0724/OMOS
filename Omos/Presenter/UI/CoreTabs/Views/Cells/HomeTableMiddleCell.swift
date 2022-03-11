@@ -14,7 +14,7 @@ protocol HomeTableMiddleCellprotocol:AnyObject {
 
 class HomeTableMiddleCell:UITableViewCell {
     static let identifier = "HomeTableMiddleCell"
-    let cellSize = UIScreen.main.bounds.width * 0.21
+  
     
     var selectedRecords:[ALine]? {
         didSet {
@@ -31,8 +31,8 @@ class HomeTableMiddleCell:UITableViewCell {
     
      private func setUpCollection() {
             let layout = UICollectionViewFlowLayout()
-            layout.scrollDirection = .horizontal
-            layout.itemSize = CGSize(width: cellSize , height: cellSize) //비율정해서 설정하기
+            layout.scrollDirection = .horizontal//Constant.mainWidth * 0.5
+         layout.itemSize = CGSize(width: Constant.mainHeight * 0.145 , height: Constant.mainHeight * 0.145) //비율정해서 설정하기
             layout.minimumLineSpacing = 6
             layout.minimumInteritemSpacing = 6
             collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
