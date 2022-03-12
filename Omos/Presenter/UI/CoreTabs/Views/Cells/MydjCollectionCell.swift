@@ -17,7 +17,7 @@ import RxGesture
 class MydjCollectionCell:UICollectionViewCell {
     static let identifier = "MydjCollectionCell"
     
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     
     
     let djImageView:UIImageView = {
@@ -54,6 +54,7 @@ class MydjCollectionCell:UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         //djImageView.image = nil
+        disposeBag = DisposeBag()
     }
     
     private func configureUI() {

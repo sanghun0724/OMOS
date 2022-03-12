@@ -14,7 +14,7 @@ protocol AllRecordCellProtocol:AnyObject {
 
 class AllRecordCollectionCell:UICollectionViewCell {
     static let identifier = "AllRecordCollectionCell"
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     var delegate:AllRecordCellProtocol?
     var detailInfo:ALine?
     
@@ -77,6 +77,11 @@ class AllRecordCollectionCell:UICollectionViewCell {
         view.backgroundColor = .mainOrange
         return view
     }()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

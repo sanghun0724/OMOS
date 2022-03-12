@@ -14,7 +14,7 @@ protocol MyCellDelegate: AnyObject {
 
 class AllRecordCateLongDetailCell:UITableViewCell {
     static let identifier = "AllRecordCateDetailCell"
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     
     weak var delegate:MyCellDelegate?
     let myView = CellContainerView()
@@ -57,6 +57,11 @@ class AllRecordCateLongDetailCell:UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         //myView.myView.backImageView.image = nil
+//        myView.myView.likeButton.setImage(nil, for: .normal)
+//        myView.myView.scrapButton.setImage(nil, for: .normal)
+//        myView.myView.likeCountLabel.textColor = nil
+//        myView.myView.scrapCountLabel.textColor = nil
+        disposeBag = DisposeBag()
     }
     
     func configureModel(record:CategoryRespone) {

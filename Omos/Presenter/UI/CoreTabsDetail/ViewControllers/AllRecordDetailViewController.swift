@@ -75,6 +75,17 @@ class AllRecordDetailViewController:BaseViewController {
     }
     
     func shortBind(myRecord:SelectDetailRespone) {
+        selfShortView.reportButton.rx.tap
+            .asDriver()
+            .drive(onNext:{ [weak self] _ in
+                let action = UIAlertAction(title: "신고", style: .default) { alert in
+                    print(alert)
+                }
+                action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
+                self?.presentAlert(title: "신고하기", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
+            }).disposed(by: disposeBag)
+        
+        
         selfShortView.likeButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
                 guard let count = Int(self?.selfShortView.likeCountLabel.text ?? "0")
@@ -84,7 +95,6 @@ class AllRecordDetailViewController:BaseViewController {
                 
                 if self?.selfShortView.likeCountLabel.textColor == .mainOrange {
                     //좋아요 취소
-                    print("orange")
                     self?.selfShortView.likeButton.setImage(UIImage(named:"emptyLove"), for: .normal)
                     self?.selfShortView.likeCountLabel.textColor = .mainGrey3
                     self?.selfShortView.likeCountLabel.text = String(count-1)
@@ -121,10 +131,23 @@ class AllRecordDetailViewController:BaseViewController {
                 }
                 
             }).disposed(by: disposeBag)
+        
+        
     }
     
     
     func longBind(myRecord:SelectDetailRespone) {
+        
+        selfLongView.myView.reportButton.rx.tap
+            .asDriver()
+            .drive(onNext:{ [weak self] _ in
+                let action = UIAlertAction(title: "신고", style: .default) { alert in
+                    print(alert)
+                }
+                action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
+                self?.presentAlert(title: "신고하기", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
+            }).disposed(by: disposeBag)
+        
         selfLongView.myView.likeButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
                 guard let count = Int(self?.selfLongView.myView.likeCountLabel.text ?? "0")
@@ -137,13 +160,13 @@ class AllRecordDetailViewController:BaseViewController {
                     self?.selfLongView.myView.likeButton.setImage(UIImage(named:"emptyLove"), for: .normal)
                     self?.selfLongView.myView.likeCountLabel.textColor = .mainGrey3
                     self?.selfLongView.myView.likeCountLabel.text = String(count-1)
-                     self?.viewModel.deleteLike(postId: recordId, userId: userId)
+                    self?.viewModel.deleteLike(postId: recordId, userId: userId)
                 } else {
                     //좋아요 클릭
                     self?.selfLongView.myView.likeButton.setImage(UIImage(named:"fillLove"), for: .normal)
                     self?.selfLongView.myView.likeCountLabel.textColor = .mainOrange
                     self?.selfLongView.myView.likeCountLabel.text = String(count+1)
-                     self?.viewModel.saveLike(postId: recordId, userId: userId)
+                    self?.viewModel.saveLike(postId: recordId, userId: userId)
                 }
             }).disposed(by: disposeBag)
         

@@ -16,7 +16,6 @@ class AllRecordCateShortDetailCell:UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        bind()
     }
     
     required init?(coder: NSCoder) {
@@ -36,9 +35,6 @@ class AllRecordCateShortDetailCell:UITableViewCell {
         }
     }
     
-    func bind() {
-       
-    }
     
     override func prepareForReuse() {
         super.prepareForReuse()
