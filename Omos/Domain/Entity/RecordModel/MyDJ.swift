@@ -45,7 +45,7 @@ struct MyDjProfileResponse:Codable {
 
 // MARK: - Count
 struct Count: Codable {
-    let followerCount, followingCount, recordsCount: String
+    let followerCount, followingCount, recordsCount: Int
 }
 
 // MARK: - Profile
@@ -60,4 +60,26 @@ struct MyDjListResponse: Codable {
         case userID = "userId"
     }
 }
+
+
+struct UserRecordsResponse:Codable {
+       let category, createdDate: String
+       let isLiked, isPublic, isScraped: Bool
+       let likeCnt: Int
+       let music: Music
+       let nickname, recordContents: String
+       let recordID: Int
+       let recordImageURL, recordTitle: String
+       let scrapCnt, userID, viewsCnt: Int
+
+       enum CodingKeys: String, CodingKey {
+           case category, createdDate, isLiked, isPublic, isScraped, likeCnt, music, nickname, recordContents
+           case recordID = "recordId"
+           case recordImageURL = "recordImageUrl"
+           case recordTitle, scrapCnt
+           case userID = "userId"
+           case viewsCnt
+       }
+}
+
 

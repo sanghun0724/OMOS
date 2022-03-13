@@ -6,16 +6,33 @@
 //
 
 import UIKit
+import KakaoSDKUser
 
 class MydjProfileViewController:BaseViewController {
     
     private let selfView = MydjProfieView()
+    let viewModel:MyDjProfileViewModel
+    let fromId = UserDefaults.standard.integer(forKey: "user")
+    let toId:Int
+    
+    init(viewModel:MyDjProfileViewModel,toId:Int) {
+        self.viewModel = viewModel
+        self.toId = toId
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         self.navigationItem.rightBarButtonItems?.removeAll()
+        viewModel.fetchMyDjProfile(fromId: fromId, toId: toId)
+        
     }
     
     override func configureUI() {
@@ -27,6 +44,22 @@ class MydjProfileViewController:BaseViewController {
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
         }
 
+    }
+    
+    
+    func bind() {
+        viewModel.loading
+            .subscribe(onNext: { [weak self] loading in
+                self?.selfView.loadingView.isHidden = !loading
+            }).disposed(by: disposeBag)
+        
+        viewModel.mydjProfile
+            .subscribe(onNext: { [weak self] _ in
+                self?.selfView.tableView.reloadSections(IndexSet(0..<1), with: .automatic)
+            }).disposed(by: disposeBag)
+        
+        
+        
     }
     
 }

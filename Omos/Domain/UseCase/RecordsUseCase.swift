@@ -89,4 +89,8 @@ class RecordsUseCase {
     func myDjList(userId:Int) -> Single<[MyDjListResponse]> {
         return recordsRepository.myDjList(userId: userId)
     }
+    
+    func userRecords(fromId:Int,toId:Int) -> Single<[UserRecordsResponse]> {
+        return recordsRepository.userRecords(fromId: fromId, toId: toId)
+    }
 }

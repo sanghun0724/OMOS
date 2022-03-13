@@ -60,7 +60,7 @@ extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let record = viewModel.currentMyDjRecord[indexPath.row]
+            guard  let record = viewModel.currentMyDjRecord[safe: indexPath.row] else { return LoadingCell() }
             switch record.category {
             case "LYRICS":
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateShortDetailCell.identifier, for: indexPath) as! AllRecordCateShortDetailCell
@@ -115,7 +115,7 @@ extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            let record = viewModel.currentMyDjRecord[indexPath.row]
+            guard let record = viewModel.currentMyDjRecord[safe:indexPath.row] else { return Constant.mainHeight * 0.63 }
             switch record.category {
             case "LYRICS":
                 return shortCellHeights[indexPath] ?? 100
@@ -222,7 +222,10 @@ extension MyDJViewController {
         cell.myView.nicknameLabel.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
-                let vc = MydjProfileViewController()
+                let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+                let uc = RecordsUseCase(recordsRepository: rp)
+                let vm = MyDjProfileViewModel(usecase: uc)
+                let vc = MydjProfileViewController(viewModel: vm, toId: data.userID)
                 self?.navigationController?.pushViewController(vc, animated: true)
             }).disposed(by: cell.disposeBag)
         
@@ -283,5 +286,14 @@ extension MyDJViewController {
                 }
             }).disposed(by: cell.disposeBag)
         
+        cell.myView.myView.nicknameLabel.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+                let uc = RecordsUseCase(recordsRepository: rp)
+                let vm = MyDjProfileViewModel(usecase: uc)
+                let vc = MydjProfileViewController(viewModel: vm, toId: data.userID)
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }).disposed(by: cell.disposeBag)
     }
 }

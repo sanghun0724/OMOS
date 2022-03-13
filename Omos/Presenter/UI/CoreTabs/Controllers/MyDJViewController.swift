@@ -66,8 +66,15 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
             }).disposed(by: disposeBag)
       
         viewModel.myDjRecord
-            .subscribe(onNext: { [weak self] _ in
-                    self?.selfView.tableView.reloadData()
+            .subscribe(onNext: { [weak self] data in
+                if !data.isEmpty {
+                    DispatchQueue.main.async {
+                        self?.selfView.tableView.reloadData()
+                        self?.selfView.tableView.layoutIfNeeded()
+                        self?.selfView.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                    }
+                    
+                }
             }).disposed(by: disposeBag)
         
         viewModel.loading

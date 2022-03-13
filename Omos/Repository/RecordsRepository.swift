@@ -30,4 +30,5 @@ protocol RecordsRepository {
     func deleteFollow(fromId:Int,toId:Int) -> Single<StateRespone>
     func myDjProfile(fromId:Int,toId:Int) -> Single<MyDjProfileResponse>
     func myDjList(userId:Int) -> Single<[MyDjListResponse]>
+    func userRecords(fromId:Int,toId:Int) -> Single<[UserRecordsResponse]>
 }

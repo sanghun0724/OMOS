@@ -19,6 +19,7 @@ enum RecordTarget {
     case recordUpdate(postId:Int,UpdateRequest)
     case oneMusicRecord(musicId:String,OneMusicRecordRequest)
     case MyDjAllRecord(userId:Int,MyDjRequest)
+    case userRecords(fromId:Int,toId:Int)
 }
 
 extension RecordTarget:TargetType {
@@ -38,6 +39,7 @@ extension RecordTarget:TargetType {
         case .recordUpdate: return .put
         case .oneMusicRecord: return .get
         case .MyDjAllRecord: return .get
+        case .userRecords: return .get
         }
     }
     
@@ -53,6 +55,7 @@ extension RecordTarget:TargetType {
         case .recordUpdate(let id,_): return "/update/\(id)"
         case .oneMusicRecord(let id,_): return "/select/music/\(id)"
         case .MyDjAllRecord(let user,_): return "/select/\(user)/my-dj"
+        case .userRecords(let from,let to): return "/select/\(from)/\(to)"
         }
     }
     
@@ -68,6 +71,7 @@ extension RecordTarget:TargetType {
         case .recordUpdate(_,let request): return .body(request)
         case .oneMusicRecord(_,let request): return .query(request)
         case .MyDjAllRecord(_, let request): return .query(request)
+        case .userRecords: return nil
         }
     }
     

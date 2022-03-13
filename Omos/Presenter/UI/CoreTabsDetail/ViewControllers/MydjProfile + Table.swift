@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import KakaoSDKUser
 
 
 extension MydjProfileViewController: UITableViewDelegate,UITableViewDataSource {
@@ -26,7 +27,25 @@ extension MydjProfileViewController: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: MydjProfileHeader.identifier) as! MydjProfileHeader
-        
+        guard let headerData = viewModel.currentMydjProfile else { return UITableViewHeaderFooterView() }
+        header.configureModel(profile: headerData)
+        header.followButton.rx.tap
+            .asDriver()
+            .drive(onNext:{ [weak self] _ in
+                if header.followButton.layer.borderWidth == 0 {
+                    self?.viewModel.saveFollow(fromId: self?.fromId ?? 0, toId: self?.toId ?? 0)
+                    header.followButton.layer.borderWidth = 1
+                    header.followButton.backgroundColor = .clear
+                    header.followButton.setTitleColor(UIColor.mainGrey4, for: .normal )
+                    header.followButton.setTitle("팔로잉", for: .normal)
+                } else {
+                    self?.viewModel.deleteFollow(fromId: self?.fromId ?? 0, toId: self?.toId ?? 0)
+                    header.followButton.layer.borderWidth = 0
+                    header.followButton.backgroundColor = .mainOrange
+                    header.followButton.setTitleColor(UIColor.white, for: .normal )
+                    header.followButton.setTitle("팔로우", for: .normal)
+                }
+            }).disposed(by: header.disposeBag)
         return header
     }
     
@@ -39,3 +58,4 @@ extension MydjProfileViewController: UITableViewDelegate,UITableViewDataSource {
         
     }
 }
+

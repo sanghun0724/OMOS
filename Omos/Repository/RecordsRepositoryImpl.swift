@@ -312,5 +312,20 @@ class RecordsRepositoryImpl:RecordsRepository {
         }
     }
     
+    func userRecords(fromId:Int,toId:Int) -> Single<[UserRecordsResponse]> {
+        return Single<[UserRecordsResponse]>.create { [weak self] single in
+            self?.recordAPI.userRecords(fromId: fromId, toId: toId ,completion: { result in
+                switch result {
+                case .success(let data):
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            })
+            
+            return Disposables.create()
+        }
+    }
     
 }

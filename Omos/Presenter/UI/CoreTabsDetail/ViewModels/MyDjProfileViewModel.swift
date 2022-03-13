@@ -10,17 +10,54 @@ import RxSwift
 
 class MyDjProfileViewModel:BaseViewModel {
     
-    let delete = PublishSubject<Bool>()
-    let modify = PublishSubject<Bool>()
-    let done = PublishSubject<Bool>()
-    var recordData:MyRecordRespone? = nil
+    let isEmpty = BehaviorSubject<Bool>(value:false)
+    let loading = BehaviorSubject<Bool>(value:false)
+    let mydjProfile = PublishSubject<MyDjProfileResponse>()
+    var currentMydjProfile:MyDjProfileResponse? = nil
     let usecase:RecordsUseCase
     let errorMessage = BehaviorSubject<String?>(value: nil)
     
-    func deleteRecord(postId:Int) {
-        usecase.recordDelete(postId: postId)
-            .subscribe({ [weak self] _ in
-                self?.done.onNext(true)
+    func fetchMyDjProfile(fromId:Int,toId:Int) {
+        loading.onNext(true)
+        usecase.myDjProfile(fromId: fromId, toId: toId)
+            .subscribe({ [weak self] event in
+                self?.loading.onNext(false)
+                switch event {
+                case .success(let data):
+                    self?.currentMydjProfile = data
+                    self?.mydjProfile.onNext(data)
+                case .failure(let error):
+                    self?.errorMessage.onNext(error.localizedDescription)
+                }
+            }).disposed(by: disposeBag)
+    }
+    
+    func fetchUserRecords(fromId:Int,toId:Int) {
+      
+        usecase.userRecords(fromId: fromId, toId: toId)
+            .subscribe({ [weak self] event in
+               
+                switch event {
+                case .success(let data):
+                    
+                case .failure(let error):
+                    self?.errorMessage.onNext(error.localizedDescription)
+                }
+            }).disposed(by: disposeBag)
+    }
+    
+    //follow
+    func saveFollow(fromId:Int,toId:Int) {
+        usecase.saveFollow(fromId: fromId, toId: toId)
+            .subscribe({ state in
+                print(state)
+            }).disposed(by: disposeBag)
+    }
+    
+    func deleteFollow(fromId:Int,toId:Int) {
+        usecase.deleteFollow(fromId: fromId, toId: toId)
+            .subscribe({ state in
+                print(state)
             }).disposed(by: disposeBag)
     }
     
@@ -30,4 +67,16 @@ class MyDjProfileViewModel:BaseViewModel {
         super.init()
     }
     
+    func reduce() {
+        mydjProfile
+            .withUnretained(self)
+            .subscribe(onNext: { owner,record in
+                if owner.currentMydjProfile == nil {
+                    owner.isEmpty.onNext(true)
+                } else {
+                    owner.isEmpty.onNext(false)
+                }
+            }).disposed(by: disposeBag)
+
+    }
 }

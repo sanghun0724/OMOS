@@ -31,7 +31,9 @@ class MydjView:BaseView {
         super.configureUI()
         addSubview(tableView)
         setUpCollection()
+        addSubview(emptyView)
         addSubview(loadingView)
+        emptyView.isHidden = true
         loadingView.isHidden = true
         
         collectionView.snp.makeConstraints { make in
@@ -46,6 +48,11 @@ class MydjView:BaseView {
         
         loadingView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        
+        emptyView.snp.makeConstraints { make in
+            make.top.equalTo(collectionView.snp.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
         }
         
     }

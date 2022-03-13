@@ -87,12 +87,13 @@ class MyDjViewModel:BaseViewModel {
     init(usecase:RecordsUseCase) {
         self.usecase = usecase
         super.init()
+        self.reduce()
     }
     func reduce() {
-        myDjList
+        myDjRecord
             .withUnretained(self)
             .subscribe(onNext: { owner,record in
-                if owner.currentMyDjList.isEmpty {
+                if owner.currentMyDjRecord.isEmpty {
                     owner.isEmpty.onNext(true)
                 } else {
                     owner.isEmpty.onNext(false)
