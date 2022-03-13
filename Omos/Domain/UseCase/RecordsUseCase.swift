@@ -69,4 +69,24 @@ class RecordsUseCase {
         return recordsRepository.deleteLike(postId: postId, userId: userId)
     }
     
+    //MARK: Mydj
+    func MyDjAllRecord(userId:Int,MyDjRequest:MyDjRequest) -> Single<[MyDjResponse]> {
+        return recordsRepository.MyDjAllRecord(userId: userId, MyDjRequest: MyDjRequest)
+    }
+    
+    func saveFollow(fromId:Int,toId:Int) -> Single<StateRespone> {
+        return recordsRepository.saveFollow(fromId: fromId, toId: toId)
+    }
+     
+    func deleteFollow(fromId:Int,toId:Int) -> Single<StateRespone> {
+        return recordsRepository.deleteFollow(fromId: fromId, toId: toId)
+    }
+    
+    func myDjProfile(fromId:Int,toId:Int) -> Single<MyDjProfileResponse> {
+        return recordsRepository.myDjProfile(fromId: fromId, toId: toId)
+    }
+    
+    func myDjList(userId:Int) -> Single<[MyDjListResponse]> {
+        return recordsRepository.myDjList(userId: userId)
+    }
 }

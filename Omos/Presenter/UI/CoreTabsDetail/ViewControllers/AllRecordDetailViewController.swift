@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class AllRecordDetailViewController:BaseViewController {
     
@@ -31,7 +33,7 @@ class AllRecordDetailViewController:BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.selectDetailFetch(postId: self.postId, userId: self.userId)
-        setNavigationItems()
+       // setNavigationItems()
         bind()
     }
     
@@ -59,10 +61,12 @@ class AllRecordDetailViewController:BaseViewController {
                 if data.category == "A_LINE" {
                     self?.configShortView()
                     self?.setShortData(myRecord: record)
+                    self?.selfShortView.layoutIfNeeded()
                     self?.shortBind(myRecord: record)
                 } else {
                     self?.configLongView()
                     self?.setLongData(myRecord: record)
+                    self?.selfLongView.layoutIfNeeded()
                     self?.longBind(myRecord: record)
                 }
             }).disposed(by: disposeBag)
@@ -176,7 +180,7 @@ class AllRecordDetailViewController:BaseViewController {
                 else { return }
                 let userId = UserDefaults.standard.integer(forKey: "user")
                 let recordId = myRecord.recordID
-                
+                print("User\(userId)")
                 if self?.selfLongView.myView.scrapCountLabel.textColor == .mainOrange {
                     //좋아요 취소
                     self?.selfLongView.myView.scrapButton.setImage(UIImage(named:"emptyStar"), for: .normal)
@@ -225,6 +229,8 @@ class AllRecordDetailViewController:BaseViewController {
         selfLongView.myView.cateLabel.text = " | \(myRecord.category )"
         
         
+        print(myRecord.recordID)
+        
         if myRecord.isLiked {
             selfLongView.myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
             selfLongView.myView.likeCountLabel.textColor = .mainOrange
@@ -265,7 +271,7 @@ class AllRecordDetailViewController:BaseViewController {
         }
         
         if myRecord.isScraped {
-            selfShortView.scrapButton.setImage(UIImage(named: "fillLove"), for: .normal)
+            selfShortView.scrapButton.setImage(UIImage(named: "fillStar"), for: .normal)
             selfShortView.scrapCountLabel.textColor = .mainOrange
         }
         selfShortView.mainLabelView.text = myRecord.recordContents

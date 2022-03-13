@@ -98,13 +98,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //              default:
 //                  break
 //              }
-//          }
+//          }o
         
         UserDefaults.standard.set("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvcmlnaW5AbmF2ZXIuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY3ODM2MTMyMn0.q6YbvSmVFOoU2-Rnp1a9iav1TTlbdV0aPQQ_E8OiOv34XwGfPWCRrOriMkSOpo7MkddJo5O2QyRjqZk29b7jfw",forKey:"access")
         UserDefaults.standard.set("eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NDY4MDM3MDV9.ZImb_c8Q6WSl2KaIDjMGs_tKfQPbgM57qDL6LFQFFnSksh0tGLxdflBVHQ4Ll76PglZg8ez86_QfyR6Jc75Lmw",forKey: "refresh")
-        UserDefaults.standard.set(1,forKey: "user")
+        UserDefaults.standard.set(3,forKey: "user")
         
         let vm = AllRecordSearchDetailViewModel(usecase: RecordsUseCase(recordsRepository: RecordsRepositoryImpl(recordAPI: RecordAPI())))
+        
         self.window?.rootViewController = TabBarViewController()
         self.window?.makeKeyAndVisible()
         self.window?.backgroundColor = .mainBackGround

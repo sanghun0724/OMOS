@@ -1,8 +1,8 @@
 //
-//  Mydj + Table.swift
+//  AllRecordSearchDetail + Table.swift
 //  Omos
 //
-//  Created by sangheon on 2022/02/24.
+//  Created by sangheon on 2022/03/12.
 //
 
 import Foundation
@@ -10,31 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-extension MyDJViewController:UICollectionViewDataSource,UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.currentMyDjList.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MydjCollectionCell.identifier, for: indexPath) as! MydjCollectionCell
-        cell.backgroundColor = .mainBackGround
-        
-        cell.configureModel(record: )
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: false)
-        
-        let vc = MydjProfileViewController()
-         self.navigationController?.pushViewController(vc, animated: true)
-        
-    }
-
-}
-
-
-extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
+extension AllRecordSearchDetailViewController:UITableViewDelegate,UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -42,7 +18,7 @@ extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return viewModel.numberofRows()
+            return viewModel.currentOneMusicRecords.count
         } else if section == 1 && isPaging && hasNextPage {
             return 1
         }
@@ -51,16 +27,16 @@ extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let record = viewModel.currentMyDjRecord[indexPath.row]
+            let record = viewModel.currentOneMusicRecords[indexPath.row]
             switch record.category {
             case "LYRICS":
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateShortDetailCell.identifier, for: indexPath) as! AllRecordCateShortDetailCell
-                cell.configureMyDjRecord(record: record)
+                cell.configureOneMusic(record: record)
                 cell.selectionStyle = . none
                 return cell
             case "A_LINE":
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateShortDetailCell.identifier, for: indexPath) as! AllRecordCateShortDetailCell
-                cell.configureMyDjRecord(record: record)
+                cell.configureOneMusic(record: record)
                 shortCellBind(cell: cell, data: record)
                 cell.selectionStyle = . none
                 return cell
@@ -77,7 +53,7 @@ extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
                     cell.myView.dummyLabel.text = " 더보기"
                 }
                 cell.delegate = self
-                cell.configureMyDjRecord(record: record)
+                cell.configureOneMusic(record: record)
                 cell.selectionStyle = . none
                 longCellBind(cell: cell, data: record)
                 return cell
@@ -102,7 +78,7 @@ extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            let record = viewModel.currentMyDjRecord[indexPath.row]
+            let record = viewModel.currentOneMusicRecords[indexPath.row]
             switch record.category {
             case "LYRICS":
                 return shortCellHeights[indexPath] ?? 100
@@ -136,7 +112,7 @@ extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
     
 }
 
-extension MyDJViewController:MyCellDelegate {
+extension AllRecordSearchDetailViewController:MyCellDelegate {
     func readMoreTapped(cell: AllRecordCateLongDetailCell) {
         let indexPath = selfView.tableView.indexPath(for: cell)!
         print(indexPath)
@@ -147,11 +123,12 @@ extension MyDJViewController:MyCellDelegate {
         }
         selfView.tableView.reloadRows(at: [indexPath], with: .none)
     }
-
+    
+    
 }
 
-extension MyDJViewController {
-    func shortCellBind(cell:AllRecordCateShortDetailCell,data:MyDjResponse) {
+extension AllRecordSearchDetailViewController {
+    func shortCellBind(cell:AllRecordCateShortDetailCell,data:OneMusicRecordRespone) {
         cell.myView.reportButton.rx.tap
             .asDriver()
             .drive(onNext:{ [weak self] _ in
@@ -207,7 +184,7 @@ extension MyDJViewController {
             }).disposed(by: cell.disposeBag)
     }
     
-    func longCellBind(cell:AllRecordCateLongDetailCell,data:MyDjResponse) {
+    func longCellBind(cell:AllRecordCateLongDetailCell,data:OneMusicRecordRespone) {
         cell.myView.myView.reportButton.rx.tap
             .asDriver()
             .drive(onNext:{ [weak self] _ in

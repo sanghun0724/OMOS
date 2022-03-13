@@ -1,39 +1,57 @@
 //
-//  AllRecordSearchDetailViewModel.swift
+//  MyDJViewModel.swift
 //  Omos
 //
-//  Created by sangheon on 2022/03/09.
+//  Created by sangheon on 2022/03/13.
 //
 
 import Foundation
 import RxSwift
 
-class AllRecordSearchDetailViewModel:BaseViewModel {
+class MyDjViewModel:BaseViewModel {
     
-    
-    
+    let myDjRecord = PublishSubject<[MyDjResponse]>()
+    var currentMyDjRecord:[MyDjResponse] = []
+    let myDjList = PublishSubject<[MyDjListResponse]>()
+    var currentMyDjList:[MyDjListResponse] = []
     let loading = BehaviorSubject<Bool>(value:false)
-    let oneMusicRecords = PublishSubject<[OneMusicRecordRespone]>()
-    var currentOneMusicRecords:[OneMusicRecordRespone] = []
-    let errorMessage = BehaviorSubject<String?>(value: nil)
     let isEmpty = BehaviorSubject<Bool>(value:false)
+    let errorMessage = BehaviorSubject<String?>(value: nil)
+    
     let usecase:RecordsUseCase
     
-    
-    func oneMusicRecordsFetch(musicId:String,request:OneMusicRecordRequest) {
+    func fetchMyDjRecord(userId:Int,request:MyDjRequest) {
         loading.onNext(true)
-        usecase.oneMusicRecordFetch(musicId: musicId, request: request)
+        usecase.MyDjAllRecord(userId:userId, MyDjRequest: request)
             .subscribe({ [weak self] event in
                 self?.loading.onNext(false)
                 switch event {
                 case .success(let data):
-                    self?.currentOneMusicRecords += data
-                    self?.oneMusicRecords.onNext(data)
+                    self?.currentMyDjRecord += data
+                    self?.myDjRecord.onNext(data)
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)
-                    self?.oneMusicRecords.onNext([])
                 }
             }).disposed(by: disposeBag)
+    }
+    
+    func fetchMyDjList(userId:Int) {
+        usecase.myDjList(userId: userId)
+            .subscribe({ [weak self] event in
+                self?.loading.onNext(false)
+                switch event {
+                case .success(let data):
+                    self?.currentMyDjList += data
+                    self?.myDjList.onNext(data)
+                case .failure(let error):
+                    self?.errorMessage.onNext(error.localizedDescription)
+                }
+            }).disposed(by: disposeBag)
+    }
+    
+    
+    func numberofRows() -> Int {
+        return currentMyDjRecord.count
     }
     
     //Interation
@@ -65,17 +83,16 @@ class AllRecordSearchDetailViewModel:BaseViewModel {
             }).disposed(by: disposeBag)
     }
     
+    
     init(usecase:RecordsUseCase) {
         self.usecase = usecase
         super.init()
-        self.reduce()
     }
-    
     func reduce() {
-        oneMusicRecords
+        myDjList
             .withUnretained(self)
             .subscribe(onNext: { owner,record in
-                if owner.currentOneMusicRecords.isEmpty {
+                if owner.currentMyDjList.isEmpty {
                     owner.isEmpty.onNext(true)
                 } else {
                     owner.isEmpty.onNext(false)
@@ -83,8 +100,5 @@ class AllRecordSearchDetailViewModel:BaseViewModel {
             }).disposed(by: disposeBag)
         
     }
-    
-    
-    
     
 }

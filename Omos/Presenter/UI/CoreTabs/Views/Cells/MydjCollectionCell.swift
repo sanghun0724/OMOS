@@ -73,5 +73,10 @@ class MydjCollectionCell:UICollectionViewCell {
         
     }
     
+    func configureModel(record:MyDjListResponse) {
+        djImageView.setImage(with: record.profileURL)
+        djLabel.text = record.nickName
+    }
+    
     
 }

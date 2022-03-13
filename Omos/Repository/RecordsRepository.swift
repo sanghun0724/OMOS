@@ -23,4 +23,11 @@ protocol RecordsRepository {
     func deleteScrap(postId:Int,userId:Int) -> Single<StateRespone>
     func saveLike(postId:Int,userId:Int) -> Single<StateRespone>
     func deleteLike(postId:Int,userId:Int) -> Single<StateRespone>
+    
+    //MARK: mydj
+    func MyDjAllRecord(userId:Int,MyDjRequest:MyDjRequest) -> Single<[MyDjResponse]>
+    func saveFollow(fromId:Int,toId:Int) -> Single<StateRespone>
+    func deleteFollow(fromId:Int,toId:Int) -> Single<StateRespone>
+    func myDjProfile(fromId:Int,toId:Int) -> Single<MyDjProfileResponse>
+    func myDjList(userId:Int) -> Single<[MyDjListResponse]>
 }

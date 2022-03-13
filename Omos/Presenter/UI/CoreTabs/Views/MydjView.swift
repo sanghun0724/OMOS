@@ -23,11 +23,15 @@ class MydjView:BaseView {
         return table
     }()
     
+    let loadingView = LoadingView()
+    let emptyView = EmptyView()
     
     override func configureUI() {
         super.configureUI()
         addSubview(tableView)
         setUpCollection()
+        addSubview(loadingView)
+        loadingView.isHidden = true
         
         collectionView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
@@ -37,6 +41,10 @@ class MydjView:BaseView {
         tableView.snp.makeConstraints { make in
             make.top.equalTo(collectionView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        loadingView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
         
     }

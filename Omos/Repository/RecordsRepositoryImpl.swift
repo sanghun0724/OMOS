@@ -226,4 +226,91 @@ class RecordsRepositoryImpl:RecordsRepository {
             return Disposables.create()
         }
     }
+    
+    func MyDjAllRecord(userId:Int,MyDjRequest:MyDjRequest) -> Single<[MyDjResponse]> {
+        return Single<[MyDjResponse]>.create { [weak self] single in
+            self?.recordAPI.MyDjAllRecord(userId: userId, MyDjRequest: MyDjRequest ,completion: { result in
+                switch result {
+                case .success(let data):
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            })
+            
+            return Disposables.create()
+        }
+    }
+//    func MyDjAllRecord(userId:Int,MyDjRequest:MyDjRequest) -> Single<[MyDjResponse]>
+//    func saveFollow(fromId:Int,toId:Int) -> Single<StateRespone>
+//    func deleteFollow(fromId:Int,toId:Int) -> Single<StateRespone>
+//    func myDjProfile(fromId:Int,toId:Int) -> Single<MyDjProfileResponse>
+//    func myDjList(userId:Int) -> Single<[MyDjListResponse]>
+    
+    func saveFollow(fromId:Int,toId:Int) -> Single<StateRespone> {
+        return Single<StateRespone>.create { [weak self] single in
+            self?.recordAPI.saveFollow(fromId: fromId, toId: toId ,completion: { result in
+                switch result {
+                case .success(let data):
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            })
+            
+            return Disposables.create()
+        }
+    }
+    
+    func deleteFollow(fromId:Int,toId:Int) -> Single<StateRespone> {
+        return Single<StateRespone>.create { [weak self] single in
+            self?.recordAPI.deleteFollow(fromId: fromId, toId: toId ,completion: { result in
+                switch result {
+                case .success(let data):
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            })
+            
+            return Disposables.create()
+        }
+    }
+    
+    func myDjProfile(fromId:Int,toId:Int) -> Single<MyDjProfileResponse> {
+        return Single<MyDjProfileResponse>.create { [weak self] single in
+            self?.recordAPI.myDjProfile(fromId: fromId, toId: toId ,completion: { result in
+                switch result {
+                case .success(let data):
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            })
+            
+            return Disposables.create()
+        }
+    }
+    
+    func myDjList(userId:Int) -> Single<[MyDjListResponse]> {
+        return Single<[MyDjListResponse]>.create { [weak self] single in
+            self?.recordAPI.myDjList(userId: userId ,completion: { result in
+                switch result {
+                case .success(let data):
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            })
+            
+            return Disposables.create()
+        }
+    }
+    
+    
 }

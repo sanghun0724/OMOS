@@ -10,7 +10,8 @@ import Foundation
 struct OneMusicRecordRespone:Codable {
        let music: Music
        let recordID: Int
-       let recordTitle, recordContents, recordImageURL, createdDate: String
+       let recordTitle, recordContents, createdDate: String
+       let recordImageURL: String?
        let category: String
        let viewsCnt, userID: Int
        let nickname: String

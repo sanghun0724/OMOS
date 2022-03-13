@@ -184,5 +184,70 @@ class RecordAPI {
         }
     }
     
+    //MARK: MyDj API
+    func MyDjAllRecord(userId:Int,MyDjRequest:MyDjRequest,completion:@escaping(Result<[MyDjResponse],Error>) -> Void) {
+        AF.request(RecordTarget.MyDjAllRecord(userId: userId, MyDjRequest),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[MyDjResponse]>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func saveFollow(fromId:Int,toId:Int,completion:@escaping(Result<StateRespone,Error>) -> Void) {
+        AF.request(FollowTarget.saveFollow(fromId: fromId, toId: toId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<StateRespone>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func deleteFollow(fromId:Int,toId:Int,completion:@escaping(Result<StateRespone,Error>) -> Void) {
+        AF.request(FollowTarget.deleteFollow(fromId: fromId, toId: toId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<StateRespone>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func myDjProfile(fromId:Int,toId:Int,completion:@escaping(Result<MyDjProfileResponse,Error>) -> Void) {
+        AF.request(FollowTarget.myDjProfile(fromId: fromId, toId: toId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<MyDjProfileResponse>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func myDjList(userId:Int,completion:@escaping(Result<[MyDjListResponse],Error>) -> Void) {
+        AF.request(FollowTarget.myDjList(userId: userId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[MyDjListResponse]>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
     
 }
