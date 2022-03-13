@@ -21,6 +21,7 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
     var longCellHeights:[IndexPath:CGFloat] = [:]
     let viewModel:MyDjViewModel
     let user = UserDefaults.standard.integer(forKey: "user")
+    var currentDjLastPostId = 0
 
     init(viewModel:MyDjViewModel) {
         self.viewModel = viewModel
@@ -39,6 +40,7 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
         selfView.tableView.dataSource = self
         selfView.collectionView.delegate = self
         selfView.collectionView.dataSource = self
+        viewModel.fetchMyDjList(userId: user)
     }
 
 
@@ -56,10 +58,16 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
 
 
     private func bind() {
+        
+        viewModel.myDjList
+            .subscribe(onNext: { [weak self] data in
+                self?.viewModel.fetchMyDjRecord(userId: data.first?.userID ?? 0, request: .init(postId: nil, size: 10))
+                self?.selfView.collectionView.reloadData()
+            }).disposed(by: disposeBag)
       
         viewModel.myDjRecord
             .subscribe(onNext: { [weak self] _ in
-                self?.selfView.tableView.reloadData()
+                    self?.selfView.tableView.reloadData()
             }).disposed(by: disposeBag)
         
         viewModel.loading

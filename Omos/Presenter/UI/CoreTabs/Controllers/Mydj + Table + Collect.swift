@@ -5,10 +5,10 @@
 //  Created by sangheon on 2022/02/24.
 //
 
-import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
+import RxGesture
 
 extension MyDJViewController:UICollectionViewDataSource,UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -18,17 +18,26 @@ extension MyDJViewController:UICollectionViewDataSource,UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MydjCollectionCell.identifier, for: indexPath) as! MydjCollectionCell
         cell.backgroundColor = .mainBackGround
-        
-        cell.configureModel(record: )
+        if indexPath.row == 0 {
+            cell.djImageView.layer.borderWidth = 1
+        }
+        let cellData = viewModel.currentMyDjList[indexPath.row]
+        cell.configureModel(record: cellData)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: false)
-        
-        let vc = MydjProfileViewController()
-         self.navigationController?.pushViewController(vc, animated: true)
-        
+        collectionView.visibleCells.forEach { cell in
+            if let cell = cell as? MydjCollectionCell {
+                cell.djImageView.layer.borderWidth = 0
+            }
+        }
+        let cellData = viewModel.currentMyDjList[indexPath.row]
+        guard let cell = collectionView.cellForItem(at: indexPath) as? MydjCollectionCell else { return }
+        cell.djImageView.layer.borderWidth = 1
+        viewModel.currentMyDjRecord = []
+        viewModel.fetchMyDjRecord(userId: cellData.userID, request: .init(postId: nil, size: 10))
     }
 
 }
@@ -42,7 +51,7 @@ extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return viewModel.numberofRows()
+            return viewModel.currentMyDjRecord.count
         } else if section == 1 && isPaging && hasNextPage {
             return 1
         }
@@ -56,12 +65,15 @@ extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
             case "LYRICS":
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateShortDetailCell.identifier, for: indexPath) as! AllRecordCateShortDetailCell
                 cell.configureMyDjRecord(record: record)
+                cell.myView.lockButton.isHidden = true
                 cell.selectionStyle = . none
                 return cell
             case "A_LINE":
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateShortDetailCell.identifier, for: indexPath) as! AllRecordCateShortDetailCell
                 cell.configureMyDjRecord(record: record)
                 shortCellBind(cell: cell, data: record)
+                cell.myView.lockButton.isHidden = true
+                
                 cell.selectionStyle = . none
                 return cell
             default:
@@ -80,6 +92,7 @@ extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
                 cell.configureMyDjRecord(record: record)
                 cell.selectionStyle = . none
                 longCellBind(cell: cell, data: record)
+                cell.myView.myView.lockButton.isHidden = true
                 return cell
             }
         } else {
@@ -205,6 +218,14 @@ extension MyDJViewController {
                     self?.viewModel.saveScrap(postId: recordId, userId: userId)
                 }
             }).disposed(by: cell.disposeBag)
+        
+        cell.myView.nicknameLabel.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                let vc = MydjProfileViewController()
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }).disposed(by: cell.disposeBag)
+        
     }
     
     func longCellBind(cell:AllRecordCateLongDetailCell,data:MyDjResponse) {

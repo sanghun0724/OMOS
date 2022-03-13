@@ -65,7 +65,6 @@ class AllRecordCateLongDetailCell:UITableViewCell {
     }
     
     func configureModel(record:CategoryRespone) {
-        myView.myView.reportButton.isHidden = true 
         myView.myView.musicTitleLabel.text = record.music.musicTitle
         myView.myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
         myView.myView.circleImageView.setImage(with: record.music.albumImageURL)
@@ -90,7 +89,6 @@ class AllRecordCateLongDetailCell:UITableViewCell {
     }
     
     func configureOneMusic(record:OneMusicRecordRespone) {
-        myView.myView.reportButton.isHidden = true
         myView.myView.musicTitleLabel.text = record.music.musicTitle
         myView.myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
         myView.myView.circleImageView.setImage(with: record.music.albumImageURL)
@@ -115,7 +113,6 @@ class AllRecordCateLongDetailCell:UITableViewCell {
     }
     
     func configureMyDjRecord(record:MyDjResponse) {
-        myView.myView.reportButton.isHidden = true
         myView.myView.musicTitleLabel.text = record.music.musicTitle
         myView.myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
         myView.myView.circleImageView.setImage(with: record.music.albumImageURL)

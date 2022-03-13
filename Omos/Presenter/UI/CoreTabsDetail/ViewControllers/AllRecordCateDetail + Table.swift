@@ -36,14 +36,14 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateShortDetailCell.identifier, for: indexPath) as! AllRecordCateShortDetailCell
                 cell.configureModel(record: record)
                 cell.selectionStyle = . none
-                
+                cell.myView.lockButton.isHidden = true 
                 return cell
             case .A_LINE:
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateShortDetailCell.identifier, for: indexPath) as! AllRecordCateShortDetailCell
                 cell.configureModel(record: record)
                 shortCellBind(cell: cell, data: record)
                 cell.selectionStyle = . none
-              
+                cell.myView.lockButton.isHidden = true
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateLongDetailCell.identifier, for: indexPath) as! AllRecordCateLongDetailCell
@@ -60,6 +60,7 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
                 cell.delegate = self
                 cell.configureModel(record: record)
                 longCellBind(cell: cell, data: record)
+                cell.myView.myView.lockButton.isHidden = true
                 cell.selectionStyle = . none
                 return cell
             }

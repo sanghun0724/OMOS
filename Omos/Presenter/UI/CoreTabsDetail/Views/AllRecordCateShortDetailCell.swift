@@ -11,7 +11,7 @@ import RxSwift
 
 class AllRecordCateShortDetailCell:UITableViewCell {
     static let identifier = "AllRecordCateShortDetailCell"
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     let myView = MyRecordDetailView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -38,11 +38,10 @@ class AllRecordCateShortDetailCell:UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        //myView.myView.backImageView.image = nil
+        disposeBag = DisposeBag()
     }
     
     func configureModel(record:CategoryRespone) {
-        myView.reportButton.isHidden = true 
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
         myView.circleImageView.setImage(with: record.music.albumImageURL)
@@ -66,7 +65,6 @@ class AllRecordCateShortDetailCell:UITableViewCell {
     }
     
     func configureOneMusic(record:OneMusicRecordRespone) {
-        myView.reportButton.isHidden = true
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
         myView.circleImageView.setImage(with: record.music.albumImageURL)
@@ -90,7 +88,6 @@ class AllRecordCateShortDetailCell:UITableViewCell {
     }
     
     func configureMyDjRecord(record:MyDjResponse) {
-        myView.reportButton.isHidden = true
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
         myView.circleImageView.setImage(with: record.music.albumImageURL)

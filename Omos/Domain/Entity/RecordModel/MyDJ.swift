@@ -14,23 +14,25 @@ struct MyDjRequest:Codable {
 }
 
 struct MyDjResponse:Codable {
-        let category, createdDate: String
-        let isLiked, isPublic, isScraped: Bool
-        let likeCnt: Int
-        let music: Music
-        let nickname, recordContents: String
-        let recordID: Int
-        let recordImageURL, recordTitle: String
-        let scrapCnt, userID, viewsCnt: Int
+       let music: Music
+       let recordID: Int
+       let recordTitle, recordContents: String
+       let recordImageURL: String?
+       let createdDate, category: String
+       let viewsCnt, userID: Int
+       let nickname: String
+       let likeCnt, scrapCnt: Int
+       let isLiked, isScraped: Bool
 
-        enum CodingKeys: String, CodingKey {
-            case category, createdDate, isLiked, isPublic, isScraped, likeCnt, music, nickname, recordContents
-            case recordID = "recordId"
-            case recordImageURL = "recordImageUrl"
-            case recordTitle, scrapCnt
-            case userID = "userId"
-            case viewsCnt
-        }
+       enum CodingKeys: String, CodingKey {
+           case music
+           case recordID = "recordId"
+           case recordTitle, recordContents
+           case recordImageURL = "recordImageUrl"
+           case createdDate, category, viewsCnt
+           case userID = "userId"
+           case nickname, likeCnt, scrapCnt, isLiked, isScraped
+       }
 }
 
 
@@ -48,7 +50,8 @@ struct Count: Codable {
 
 // MARK: - Profile
 struct MyDjListResponse: Codable {
-    let nickName, profileURL: String
+    let nickName: String
+    let profileURL: String?
     let userID: Int
 
     enum CodingKeys: String, CodingKey {

@@ -16,7 +16,8 @@ class MydjView:BaseView {
     
     let tableView:UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
-        table.register(MydjTableCell.self, forCellReuseIdentifier: MydjTableCell.identifier)
+        table.register(AllRecordCateShortDetailCell.self, forCellReuseIdentifier: AllRecordCateShortDetailCell.identifier)
+        table.register(AllRecordCateLongDetailCell.self, forCellReuseIdentifier: AllRecordCateLongDetailCell.identifier)
         table.backgroundColor = .mainBackGround
         table.showsVerticalScrollIndicator = false
         table.automaticallyAdjustsScrollIndicatorInsets = false

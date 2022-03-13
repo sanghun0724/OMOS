@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 import RxGesture
 
 //protocol MydjCollectionCellProtocol:AnyObject {
@@ -19,11 +20,12 @@ class MydjCollectionCell:UICollectionViewCell {
     
     var disposeBag = DisposeBag()
     
-    
     let djImageView:UIImageView = {
        let imageView = UIImageView(image: UIImage(named: "albumCover"))
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
+        imageView.layer.borderWidth = 0
+        imageView.layer.borderColor = UIColor.mainOrange.cgColor
         return imageView
     }()
     
@@ -49,6 +51,7 @@ class MydjCollectionCell:UICollectionViewCell {
         djImageView.layer.cornerCurve = .circular
         djImageView.layer.cornerRadius = djImageView.height / 2
         djImageView.layer.masksToBounds = true
+        
     }
     
     override func prepareForReuse() {
@@ -74,7 +77,7 @@ class MydjCollectionCell:UICollectionViewCell {
     }
     
     func configureModel(record:MyDjListResponse) {
-        djImageView.setImage(with: record.profileURL)
+        djImageView.setImage(with: record.profileURL ?? "")
         djLabel.text = record.nickName
     }
     
