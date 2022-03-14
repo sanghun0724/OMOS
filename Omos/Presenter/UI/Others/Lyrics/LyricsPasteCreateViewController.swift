@@ -24,6 +24,7 @@ class LyricsPasteCreateViewController:BaseViewController {
     let type:CreateType
     var totalString = 0
     var textTagCount = 0
+    var textCellsArray = [Int](repeating: 0, count: 6)
     
     init(viewModel:LyricsPasteCreateViewModel,type:CreateType) {
         self.viewModel = viewModel
@@ -262,7 +263,7 @@ extension LyricsPasteCreateViewController: UITextViewDelegate {
             textView.textColor = .lightGray
             //selfView.remainTextCount.text = "\(0)/250"
         }
-        textView.text.count
+      
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -270,8 +271,8 @@ extension LyricsPasteCreateViewController: UITextViewDelegate {
         guard let oldString = textView.text, let newRange = Range(range, in: oldString) else { return true }
         let newString = oldString.replacingCharacters(in: newRange, with: inputString).trimmingCharacters(in: .whitespacesAndNewlines)
         let characterCount = newString.count
-        totalString = characterCount
-        
+        textCellsArray[textView.tag] = characterCount
+        totalString = textCellsArray.reduce(0,+)
         guard totalString <= 250 else { return false }
         selfView.remainTextCount.text =  "\(totalString)/250"
         
