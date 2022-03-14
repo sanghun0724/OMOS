@@ -63,22 +63,24 @@ struct MyDjListResponse: Codable {
 
 
 struct UserRecordsResponse:Codable {
-       let category, createdDate: String
-       let isLiked, isPublic, isScraped: Bool
-       let likeCnt: Int
        let music: Music
-       let nickname, recordContents: String
        let recordID: Int
-       let recordImageURL, recordTitle: String
-       let scrapCnt, userID, viewsCnt: Int
+       let recordTitle, recordContents: String
+       let recordImageURL: String?
+       let createdDate, category: String
+       let viewsCnt, userID: Int
+       let nickname: String
+       let likeCnt, scrapCnt: Int
+       let isLiked, isScraped: Bool
 
        enum CodingKeys: String, CodingKey {
-           case category, createdDate, isLiked, isPublic, isScraped, likeCnt, music, nickname, recordContents
+           case music
            case recordID = "recordId"
+           case recordTitle, recordContents
            case recordImageURL = "recordImageUrl"
-           case recordTitle, scrapCnt
+           case createdDate, category, viewsCnt
            case userID = "userId"
-           case viewsCnt
+           case nickname, likeCnt, scrapCnt, isLiked, isScraped
        }
 }
 

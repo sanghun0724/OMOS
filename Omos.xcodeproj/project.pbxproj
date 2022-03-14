@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		21B827FA49CA17F32C953880 /* Pods_Omos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDDD0956E1034CF6BE3CC18 /* Pods_Omos.framework */; };
 		B601C53B27C0F50100DCD2AF /* Cafe24Oneprettynight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B601C53A27C0F50100DCD2AF /* Cafe24Oneprettynight.ttf */; };
+		B606195227DF0F14006508CA /* LyricsPasteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606195127DF0F14006508CA /* LyricsPasteViewController.swift */; };
+		B606195427DF0F57006508CA /* LyricsPasteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606195327DF0F57006508CA /* LyricsPasteView.swift */; };
+		B606195627DF20E7006508CA /* LyricsPasteCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606195527DF20E7006508CA /* LyricsPasteCreateView.swift */; };
+		B606195827DF2437006508CA /* LyricsPasteCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606195727DF2437006508CA /* LyricsPasteCreateViewController.swift */; };
+		B606195A27DF2B85006508CA /* LyricsPasteCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606195927DF2B85006508CA /* LyricsPasteCreateViewModel.swift */; };
+		B606195D27DF32E7006508CA /* Lyrics + Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606195C27DF32E7006508CA /* Lyrics + Table.swift */; };
+		B606195F27DF5ADC006508CA /* LyricsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606195E27DF5ADB006508CA /* LyricsTableCell.swift */; };
 		B609138027AD3A7C00B439C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609137F27AD3A7C00B439C3 /* AppDelegate.swift */; };
 		B609138227AD3A7C00B439C3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609138127AD3A7C00B439C3 /* SceneDelegate.swift */; };
 		B609138427AD3A7C00B439C3 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609138327AD3A7C00B439C3 /* BaseViewController.swift */; };
@@ -181,6 +188,13 @@
 
 /* Begin PBXFileReference section */
 		B601C53A27C0F50100DCD2AF /* Cafe24Oneprettynight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Cafe24Oneprettynight.ttf; sourceTree = "<group>"; };
+		B606195127DF0F14006508CA /* LyricsPasteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsPasteViewController.swift; sourceTree = "<group>"; };
+		B606195327DF0F57006508CA /* LyricsPasteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsPasteView.swift; sourceTree = "<group>"; };
+		B606195527DF20E7006508CA /* LyricsPasteCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsPasteCreateView.swift; sourceTree = "<group>"; };
+		B606195727DF2437006508CA /* LyricsPasteCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsPasteCreateViewController.swift; sourceTree = "<group>"; };
+		B606195927DF2B85006508CA /* LyricsPasteCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsPasteCreateViewModel.swift; sourceTree = "<group>"; };
+		B606195C27DF32E7006508CA /* Lyrics + Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lyrics + Table.swift"; sourceTree = "<group>"; };
+		B606195E27DF5ADB006508CA /* LyricsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsTableCell.swift; sourceTree = "<group>"; };
 		B609137C27AD3A7C00B439C3 /* Omos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Omos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B609137F27AD3A7C00B439C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B609138127AD3A7C00B439C3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -375,6 +389,20 @@
 				EBDDD0956E1034CF6BE3CC18 /* Pods_Omos.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B606195B27DF2DAC006508CA /* Lyrics */ = {
+			isa = PBXGroup;
+			children = (
+				B606195127DF0F14006508CA /* LyricsPasteViewController.swift */,
+				B606195327DF0F57006508CA /* LyricsPasteView.swift */,
+				B606195527DF20E7006508CA /* LyricsPasteCreateView.swift */,
+				B606195727DF2437006508CA /* LyricsPasteCreateViewController.swift */,
+				B606195C27DF32E7006508CA /* Lyrics + Table.swift */,
+				B606195927DF2B85006508CA /* LyricsPasteCreateViewModel.swift */,
+				B606195E27DF5ADB006508CA /* LyricsTableCell.swift */,
+			);
+			path = Lyrics;
 			sourceTree = "<group>";
 		};
 		B609137327AD3A7C00B439C3 = {
@@ -620,6 +648,7 @@
 		B650873727AF94500020D2C1 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				B606195B27DF2DAC006508CA /* Lyrics */,
 				B630D2FD27C78BDE00E66F22 /* Search */,
 				B6E12E7D27C21050008644B5 /* CreateViewController.swift */,
 				B6E12E7F27C210B4008644B5 /* CreateView.swift */,
@@ -1061,6 +1090,7 @@
 			files = (
 				B642344727DCC9B600C1083D /* AllRecordSearchDetail + Table.swift in Sources */,
 				B646052527CB7A0E0022E062 /* AlbumTableCell.swift in Sources */,
+				B606195D27DF32E7006508CA /* Lyrics + Table.swift in Sources */,
 				B6FE837827D07B4800401FC5 /* Cell.swift in Sources */,
 				B6183CD827D906300035AA06 /* MyRecordDetailViewModel.swift in Sources */,
 				B6C3AD4527B95B1E00D5D69D /* Attributed + Stirng.swift in Sources */,
@@ -1107,6 +1137,7 @@
 				B6D4BB2C27CA86FB00D6741B /* SearchResultDetailView.swift in Sources */,
 				B650874727AFC4CA0020D2C1 /* AllRecordViewModel.swift in Sources */,
 				B650874927AFC5150020D2C1 /* AllRecord + Table.swift in Sources */,
+				B606195627DF20E7006508CA /* LyricsPasteCreateView.swift in Sources */,
 				B6183CC527D755150035AA06 /* ArtistDetail.swift in Sources */,
 				B689A9DA27AEA835005F26E4 /* BaseViewModel.swift in Sources */,
 				B646051F27CB6EA60022E062 /* TopTabViewController.swift in Sources */,
@@ -1128,6 +1159,7 @@
 				B66AD45027C6983F0012686B /* MydjCollectionCell.swift in Sources */,
 				B68454FA27BE375000F1E6B5 /* LoginTarget.swift in Sources */,
 				B68454EC27BE1D9800F1E6B5 /* TargetType.swift in Sources */,
+				B606195A27DF2B85006508CA /* LyricsPasteCreateViewModel.swift in Sources */,
 				B689A9D127AE94E9005F26E4 /* Color.swift in Sources */,
 				B6B1BB5E27BBD06600DF2528 /* MyRecord + Table.swift in Sources */,
 				B642344527DCA9A600C1083D /* AllRecordCateDetail + Table.swift in Sources */,
@@ -1145,6 +1177,7 @@
 				B6FE837A27D07CE700401FC5 /* Category.swift in Sources */,
 				B68454F027BE2D7B00F1E6B5 /* MyRequestInterceptor.swift in Sources */,
 				B6183CC727D76ADF0035AA06 /* SearchArtistDetailViewModel.swift in Sources */,
+				B606195827DF2437006508CA /* LyricsPasteCreateViewController.swift in Sources */,
 				B683A45727B12DD000838749 /* ProfileView.swift in Sources */,
 				B6E12E8027C210B4008644B5 /* CreateView.swift in Sources */,
 				B689A9D627AE9627005F26E4 /* IndicatorView.swift in Sources */,
@@ -1189,6 +1222,7 @@
 				B6ABCCF827CF450D0003B47A /* RecordTarget.swift in Sources */,
 				B68FC9A927D6529400BDE475 /* Home + Table.swift in Sources */,
 				B646053427CBE1A10022E062 /* SearchArtistViewController.swift in Sources */,
+				B606195227DF0F14006508CA /* LyricsPasteViewController.swift in Sources */,
 				B642344927DCE7D500C1083D /* FollowTarget.swift in Sources */,
 				B689A9D527AE9627005F26E4 /* CustomToggleView.swift in Sources */,
 				B609138227AD3A7C00B439C3 /* SceneDelegate.swift in Sources */,
@@ -1196,6 +1230,8 @@
 				B666A90827AED1AA00BE7F92 /* EmptyView.swift in Sources */,
 				B6E8C91527B6AEFC00C32752 /* Constant.swift in Sources */,
 				B68454FC27BE378700F1E6B5 /* Login.swift in Sources */,
+				B606195F27DF5ADC006508CA /* LyricsTableCell.swift in Sources */,
+				B606195427DF0F57006508CA /* LyricsPasteView.swift in Sources */,
 				B682185227B39F6500B58E19 /* AuthRepositoryImpl.swift in Sources */,
 				B682185027B39ADD00B58E19 /* TestModel.swift in Sources */,
 				B64601DB27DB32800076C2E5 /* AllRecordDetailViewModel.swift in Sources */,

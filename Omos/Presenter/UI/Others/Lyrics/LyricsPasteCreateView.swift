@@ -1,13 +1,16 @@
 //
-//  CreateView.swift
+//  LyrisPasteCreateView.swift
 //  Omos
 //
-//  Created by sangheon on 2022/02/20.
+//  Created by sangheon on 2022/03/14.
 //
 
 import UIKit
+import SnapKit
 
-class CreateView: BaseView {
+class LyricsPasteCreateView: BaseView {
+    
+    var tableHeightConstraint: Constraint? = nil
     
     ///1
     let topLabelView:UIView = {
@@ -51,7 +54,7 @@ class CreateView: BaseView {
     let imageView:UIImageView = {
        let view = UIImageView()
         view.contentMode = .scaleAspectFill
-        view.clipsToBounds = true  
+        view.clipsToBounds = true
         return view
     }()
     
@@ -98,36 +101,18 @@ class CreateView: BaseView {
     }()
     
     /// 3
-    let textCoverView:UIView = {
-        let view = UIView()
-        view.backgroundColor = .mainBlack
-        return view
-    }()
-    
-    let mainTextView:UITextView = {
-        let view = UITextView()
-        view.text = #""레코드 내용을 입력해주세요""#
-        view.font = UIFont(name: "Cafe24Oneprettynight", size: 22)
-        view.isScrollEnabled = false
-        view.textAlignment = .center
-        view.backgroundColor = .mainBlack
-        view.textColor = .mainGrey7
-        view.autocorrectionType = .no
-        view.autocapitalizationType = .none
-        return view
-    }()
-    
-    let mainfullTextView:UITextView = {
-        let view = UITextView()
-        view.text = "레코드 내용을 입력해주세요"
-        view.font = UIFont(name: "Cafe24Oneprettynight", size: 20)
-        view.isScrollEnabled = false
-        view.textAlignment = .left
-        view.backgroundColor = .mainBlack
-        view.textColor = .mainGrey7
-        view.autocorrectionType = .no
-        view.autocapitalizationType = .none
-        return view
+    let tableView:UITableView = {
+       let table = UITableView()
+        table.register(LyriscTableCell.self, forCellReuseIdentifier: LyriscTableCell.identifier)
+        table.register(TextTableCell.self, forCellReuseIdentifier: TextTableCell.identifier)
+        table.backgroundColor = .mainBackGround
+        table.separatorStyle = .none
+        table.estimatedRowHeight = UITableView.automaticDimension
+        table.rowHeight = UITableView.automaticDimension
+        table.showsVerticalScrollIndicator = false
+        table.automaticallyAdjustsScrollIndicatorInsets = false
+        table.isScrollEnabled = false 
+       return table
     }()
     
     ///4
@@ -324,19 +309,11 @@ class CreateView: BaseView {
         ///3
         
         
-        textCoverView.snp.makeConstraints { make in
+        tableView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(titleImageView.snp.bottom)
+            self.tableHeightConstraint = make.height.equalTo(1200).constraint
             make.bottom.equalTo(lastView.snp.top)
-        }
-        
-        mainTextView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.centerY.equalToSuperview()
-        }
-        
-        mainfullTextView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
         }
         
         
@@ -347,7 +324,7 @@ class CreateView: BaseView {
         self.addSubview(dummyView)
         self.addSubview(topLabelView)
         self.addSubview(titleImageView)
-        self.addSubview(textCoverView)
+        self.addSubview(tableView)
         self.addSubview(lastView)
         topLabelView.addSubview(circleImageView)
         topLabelView.addSubview(musicTitleLabel)
@@ -360,9 +337,6 @@ class CreateView: BaseView {
         titleImageView.addSubview(imageAddButton)
         titleImageView.addSubview(lockButton)
         
-        textCoverView.addSubview(mainTextView)
-        textCoverView.addSubview(mainfullTextView)
-        
         lastView.addSubview(remainTitle)
         lastView.addSubview(remainText)
         lastView.addSubview(remainTitleCount)
@@ -372,6 +346,7 @@ class CreateView: BaseView {
         lastView.addSubview(stickerLabel)
         
     }
+    
 }
 
 

@@ -100,7 +100,7 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
     private func fetchRecord() {
         //1. 데이터 부르기 마지막 포스트아이디
         
-        viewModel.selectRecordsShow(type: self.myCateType, postId:viewModel.currentCateRecords.last?.recordID , size: 3, sort: "viewsCount", userid: UserDefaults.standard.integer(forKey: "user"))
+        viewModel.selectRecordsShow(type: self.myCateType, postId:viewModel.currentCateRecords.last?.recordID , size: 3, sort: "like", userid: UserDefaults.standard.integer(forKey: "user"))
         //2. 바인딩 하고 도착하면 데이터 append (위에서 하고 있으니 ok)
     }
     

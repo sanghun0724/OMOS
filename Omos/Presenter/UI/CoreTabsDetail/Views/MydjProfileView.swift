@@ -22,23 +22,32 @@ class MydjProfieView:BaseView {
        return table
     }()
     
-    let loadingView = LoadingView()
-
-    
+    let profileLoadingView = LoadingView()
+    let recordsLoadingView = LoadingView()
+        
     override func configureUI() {
         self.addSubview(tableView)
-        self.addSubview(loadingView)
+        self.addSubview(profileLoadingView)
+        self.addSubview(recordsLoadingView)
+        
         
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
-        loadingView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+        profileLoadingView.snp.makeConstraints { make in
+            make.leading.trailing.top.equalToSuperview()
+            make.height.equalTo(Constant.mainHeight * 0.17)
         }
         
-        loadingView.isHidden = true
+        profileLoadingView.isHidden = true
         
+        recordsLoadingView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(Constant.mainHeight * 0.83)
+        }
+        
+        recordsLoadingView.isHidden = true
     }
     
 }

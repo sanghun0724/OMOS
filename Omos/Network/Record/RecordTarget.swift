@@ -55,7 +55,7 @@ extension RecordTarget:TargetType {
         case .recordUpdate(let id,_): return "/update/\(id)"
         case .oneMusicRecord(let id,_): return "/select/music/\(id)"
         case .MyDjAllRecord(let user,_): return "/select/\(user)/my-dj"
-        case .userRecords(let from,let to): return "/select/\(from)/\(to)"
+        case .userRecords(let from,let to): return "/select/user/\(from)/\(to)"
         }
     }
     

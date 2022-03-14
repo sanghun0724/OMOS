@@ -11,17 +11,20 @@ import RxSwift
 class MyDjProfileViewModel:BaseViewModel {
     
     let isEmpty = BehaviorSubject<Bool>(value:false)
-    let loading = BehaviorSubject<Bool>(value:false)
+    let profileLoading = BehaviorSubject<Bool>(value:false)
+    let recordsLoading = BehaviorSubject<Bool>(value:false)
     let mydjProfile = PublishSubject<MyDjProfileResponse>()
     var currentMydjProfile:MyDjProfileResponse? = nil
+    let userRecords = PublishSubject<[UserRecordsResponse]>()
+    var currentUserRecrods:[UserRecordsResponse] = []
     let usecase:RecordsUseCase
     let errorMessage = BehaviorSubject<String?>(value: nil)
     
     func fetchMyDjProfile(fromId:Int,toId:Int) {
-        loading.onNext(true)
+        profileLoading.onNext(true)
         usecase.myDjProfile(fromId: fromId, toId: toId)
             .subscribe({ [weak self] event in
-                self?.loading.onNext(false)
+                self?.profileLoading.onNext(false)
                 switch event {
                 case .success(let data):
                     self?.currentMydjProfile = data
@@ -33,13 +36,14 @@ class MyDjProfileViewModel:BaseViewModel {
     }
     
     func fetchUserRecords(fromId:Int,toId:Int) {
-      
+        recordsLoading.onNext(true)
         usecase.userRecords(fromId: fromId, toId: toId)
             .subscribe({ [weak self] event in
-               
+                self?.recordsLoading.onNext(false)
                 switch event {
                 case .success(let data):
-                    
+                    self?.currentUserRecrods += data
+                    self?.userRecords.onNext(data)
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)
                 }

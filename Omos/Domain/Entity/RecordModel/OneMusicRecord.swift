@@ -33,4 +33,5 @@ struct OneMusicRecordRequest:Codable {
     let postId:Int?
     let size:Int
     let userId:Int
+    let sortType:String
 }

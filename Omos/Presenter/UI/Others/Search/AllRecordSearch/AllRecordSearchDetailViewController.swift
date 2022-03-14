@@ -78,7 +78,7 @@ class AllRecordSearchDetailViewController:BaseViewController , UIScrollViewDeleg
 
     private func fetchRecord() {
     
-        viewModel.oneMusicRecordsFetch(musicId: self.musicId, request: .init(postId: viewModel.currentOneMusicRecords.last?.recordID, size: 10, userId: UserDefaults.standard.integer(forKey: "user")))
+        viewModel.oneMusicRecordsFetch(musicId: self.musicId, request: .init(postId: viewModel.currentOneMusicRecords.last?.recordID, size: 10, userId: UserDefaults.standard.integer(forKey: "user"),sortType: "like"))
         //2. 바인딩 하고 도착하면 데이터 append (위에서 하고 있으니 ok)
     }
 

@@ -32,6 +32,7 @@ class MydjProfileViewController:BaseViewController {
         selfView.tableView.dataSource = self
         self.navigationItem.rightBarButtonItems?.removeAll()
         viewModel.fetchMyDjProfile(fromId: fromId, toId: toId)
+        viewModel.fetchUserRecords(fromId: fromId, toId: toId)
         
     }
     
@@ -48,9 +49,14 @@ class MydjProfileViewController:BaseViewController {
     
     
     func bind() {
-        viewModel.loading
+        viewModel.profileLoading
             .subscribe(onNext: { [weak self] loading in
-                self?.selfView.loadingView.isHidden = !loading
+                self?.selfView.profileLoadingView.isHidden = !loading
+            }).disposed(by: disposeBag)
+        
+        viewModel.recordsLoading
+            .subscribe(onNext: { [weak self] loading in
+                self?.selfView.recordsLoadingView.isHidden = !loading
             }).disposed(by: disposeBag)
         
         viewModel.mydjProfile
@@ -58,6 +64,10 @@ class MydjProfileViewController:BaseViewController {
                 self?.selfView.tableView.reloadSections(IndexSet(0..<1), with: .automatic)
             }).disposed(by: disposeBag)
         
+        viewModel.userRecords
+            .subscribe(onNext: { [weak self] _ in
+                self?.selfView.tableView.reloadData()
+            }).disposed(by: disposeBag)
         
         
     }
