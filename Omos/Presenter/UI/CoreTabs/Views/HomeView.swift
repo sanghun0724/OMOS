@@ -16,6 +16,7 @@ class HomeView:BaseView {
         table.register(AllRecordTableCell.self, forCellReuseIdentifier: AllRecordTableCell.identifier)
         table.register(HomeTableMiddleCell.self, forCellReuseIdentifier: HomeTableMiddleCell.identifier)
         table.register(HomeTableLastCell.self, forCellReuseIdentifier: HomeTableLastCell.identifier)
+        table.register(LovedEmptyCell.self, forCellReuseIdentifier: LovedEmptyCell.identifier)
         table.register(HomeHeaderView.self, forHeaderFooterViewReuseIdentifier: HomeHeaderView.identifier)
         table.register(AllRecordHeaderView.self, forHeaderFooterViewReuseIdentifier: AllRecordHeaderView.identifier)
         table.separatorStyle = .none
@@ -34,6 +35,8 @@ class HomeView:BaseView {
         return button
     }()
     
+    let loadingView = LoadingView()
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         layoutIfNeeded()
@@ -45,6 +48,7 @@ class HomeView:BaseView {
     override func configureUI() {
         self.addSubview(tableView)
         self.addSubview(floatingButton)
+        self.addSubview(loadingView)
         
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -55,6 +59,11 @@ class HomeView:BaseView {
             make.width.equalToSuperview().multipliedBy(0.17)
             make.height.equalTo(floatingButton.snp.width)
         }
+        
+        loadingView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
         
     }
     
@@ -164,6 +173,10 @@ class HomeHeaderView:UITableViewHeaderFooterView {
     override func layoutSubviews() {
         super.layoutSubviews()
         configureUI()
+        
+        layoutIfNeeded()
+        albumImageView.layer.cornerRadius = albumImageView.height / 2
+        albumImageView.layer.masksToBounds = true
     }
     
     func configureUI() {

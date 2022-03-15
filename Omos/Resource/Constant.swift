@@ -14,3 +14,7 @@ struct Constant {
    static let mainHeight = UIScreen.main.bounds.height
    static let mainWidth = UIScreen.main.bounds.width
 }
+
+struct Account {
+   static let currentUser = UserDefaults.standard.integer(forKey: "user")
+}

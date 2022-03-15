@@ -11,6 +11,7 @@ import UIKit
 class HomeTableLastCell:UITableViewCell {
     static let identifier = "HomeTableLastCell"
     
+    
     let backImageView:UIImageView = {
         let imageView = UIImageView(image:UIImage(named: "photo2"))
         imageView.clipsToBounds = true
@@ -53,7 +54,7 @@ class HomeTableLastCell:UITableViewCell {
     }()
     
     let decoView:UIView = {
-       let view = UIView()
+        let view = UIView()
         view.backgroundColor = .mainBlack
         view.alpha = 0.92
         return view
@@ -68,6 +69,11 @@ class HomeTableLastCell:UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         configureUI()
+        
+        layoutIfNeeded()
+        
+        albumImageView.layer.cornerRadius = albumImageView.height / 2
+        albumImageView.layer.masksToBounds = true
         
     }
     
@@ -131,4 +137,64 @@ class HomeTableLastCell:UITableViewCell {
         
     }
     
+    func configureModel(record:LovedResponse) {
+        backImageView.setImage(with: record.music.albumImageURL) //바꿔야함
+        albumImageView.setImage(with: record.music.albumImageURL)
+        trackTitleLabel.text = record.music.musicTitle
+        artistTitleLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}
+        albumTitleLabel.text = record.music.albumTitle
+    }
+    
+}
+
+
+class LovedEmptyCell:UITableViewCell {
+    static let identifier = "LovedEmptyCell"
+    
+    let label:UILabel = {
+        let label = UILabel()
+        label.text = "당신이 사랑하는 노래를\n 기록하러 가실래요?"
+        label.numberOfLines = 2
+        label.font = .systemFont(ofSize: 16, weight: .light)
+        return label
+    }()
+    
+    let decoLabel:UILabel = {
+        let label = UILabel()
+        label.text = "MY 레코드 기록하러 가기"
+        label.textColor = .mainOrange
+        return label
+    }()
+    
+    let decoImageView:UIImageView = {
+        let imageView = UIImageView(image:UIImage(named: "keyboard_arrow_left"))
+        return imageView
+    }()
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        configureUI()
+    }
+    
+    func configureUI() {
+        self.addSubview(label)
+        self.addSubview(decoLabel)
+        self.addSubview(decoImageView)
+        
+        label.snp.makeConstraints { make in
+            make.leading.top.equalToSuperview()
+            label.sizeToFit()
+        }
+        
+        decoLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.top.equalTo(label.snp.bottom).offset(16)
+        }
+        
+        decoImageView.snp.makeConstraints { make in
+            make.leading.equalTo(decoLabel.snp.trailing).offset(6)
+            make.top.equalTo(decoLabel)
+            make.height.width.equalTo(16)
+        }
+    }
 }

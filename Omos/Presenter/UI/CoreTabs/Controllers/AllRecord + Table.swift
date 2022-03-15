@@ -19,7 +19,6 @@ extension AllRecordViewController:UITableViewDelegate,UITableViewDataSource {
         return viewModel.numberofSections()
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordTableCell.identifier,for:indexPath) as! AllRecordTableCell
         guard let model = self.selectedRecords else { return  AllRecordTableCell() }
@@ -27,18 +26,23 @@ extension AllRecordViewController:UITableViewDelegate,UITableViewDataSource {
         switch indexPath.section {
         case 0:
             cell.configureModel(records: model.aLine)
+            cell.cate = "A_LINE"
         case 1:
             cell.configureModel(records: model.ost)
+            cell.cate = "OST"
         case 2:
             cell.configureModel(records: model.story)
+            cell.cate = "STORY"
         case 3:
             cell.configureModel(records: model.lyrics)
+            cell.cate = "LYRICS"
         case 4:
             cell.configureModel(records: model.free)
+            cell.cate = "FREE"
         default:
             print("default")
         }
-        cell.cellDelegate = self 
+        cell.cellDelegate = self
         return cell
     }
     

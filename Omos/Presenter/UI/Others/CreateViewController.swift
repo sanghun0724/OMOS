@@ -19,7 +19,7 @@ enum CreateType {
 
 class CreateViewController:BaseViewController {
     
-  
+    
     let scrollView = UIScrollView()
     let category:String
     private let selfView = CreateView()
@@ -147,15 +147,31 @@ class CreateViewController:BaseViewController {
         
         viewModel.state
             .subscribe(onNext: { [weak self] info in
-                //info is postid
-                for controller in (self?.navigationController!.viewControllers ?? [UIViewController()] )  as Array {
-                            if controller.isKind(of: MyRecordViewController.self) {
-                                self?.navigationController?.popToViewController(controller, animated: true)
-                                UserDefaults.standard.set(1, forKey: "reload")
-                                break
-                            }
-                        }
-               // print("here is \(self?.navigationController!.viewControllers ?? [UIViewController()])")
+                
+                for controller in (self?.navigationController?.viewControllers ?? [UIViewController()] )  as Array {
+                    if controller.isKind(of: MyRecordViewController.self) {
+                        self?.navigationController?.popToViewController(controller, animated: true)
+                        UserDefaults.standard.set(1, forKey: "reload")
+                        break
+                    }
+                    if controller.isKind(of: AllRecordCateDetailViewController.self) {
+                        self?.navigationController?.popToViewController(controller, animated: true)
+                        
+                        break
+                    }
+                    if controller.isKind(of: AllRecordSearchDetailViewController.self) {
+                        self?.navigationController?.popToViewController(controller, animated: true)
+                        break
+                    }
+                }
+                for controller in (self?.navigationController?.viewControllers ?? [UIViewController()] )  as Array {
+                    if controller.isKind(of: AllRecordViewController.self) {
+                        self?.navigationController?.popToViewController(controller, animated: true)
+                        break
+                    }
+                }
+                
+                // print("here is \(self?.navigationController!.viewControllers ?? [UIViewController()])")
             }).disposed(by: disposeBag)
         
         viewModel.loading

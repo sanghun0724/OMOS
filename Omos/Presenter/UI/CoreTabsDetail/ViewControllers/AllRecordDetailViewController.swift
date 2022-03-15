@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import KakaoSDKUser
 
 class AllRecordDetailViewController:BaseViewController {
     
@@ -35,6 +36,12 @@ class AllRecordDetailViewController:BaseViewController {
         viewModel.selectDetailFetch(postId: self.postId, userId: self.userId)
        // setNavigationItems()
         bind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+      
     }
     
     private func setNavigationItems() {
@@ -227,7 +234,7 @@ class AllRecordDetailViewController:BaseViewController {
         selfLongView.myView.likeCountLabel.text = String(myRecord.likeCnt)
         selfLongView.myView.scrapCountLabel.text = String(myRecord.scrapCnt)
         selfLongView.myView.cateLabel.text = " | \(myRecord.category )"
-        
+        selfLongView.myView.nicknameLabel.text = myRecord.nickname
         
         print(myRecord.recordID)
         
@@ -241,6 +248,7 @@ class AllRecordDetailViewController:BaseViewController {
             selfLongView.myView.scrapCountLabel.textColor = .mainOrange
         }
         selfLongView.myView.mainLabelView.text = myRecord.recordContents
+        selfLongView.myView.dummyView3.isHidden = true
     }
     
     func configShortView() {
@@ -263,6 +271,7 @@ class AllRecordDetailViewController:BaseViewController {
         selfShortView.likeCountLabel.text = String(myRecord.likeCnt)
         selfShortView.scrapCountLabel.text = String(myRecord.scrapCnt)
         selfShortView.cateLabel.text =  " | \(myRecord.category )"
+        selfShortView.nicknameLabel.text = myRecord.nickname
         
         
         if myRecord.isLiked {
@@ -275,6 +284,7 @@ class AllRecordDetailViewController:BaseViewController {
             selfShortView.scrapCountLabel.textColor = .mainOrange
         }
         selfShortView.mainLabelView.text = myRecord.recordContents
+        selfShortView.dummyView3.isHidden = true
     }
     
     

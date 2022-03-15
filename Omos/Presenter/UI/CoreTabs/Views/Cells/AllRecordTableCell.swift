@@ -9,11 +9,19 @@ import Foundation
 import UIKit
 
 protocol AllCollectCellprotocol:AnyObject {
-    func collectionView(collectionViewCell:AllRecordCollectionCell?,index:Int,didTappedInTableViewCell:AllRecordTableCell)
+    func collectionView(collectionViewCell:AllRecordCollectionCell?,cate:String,didTappedInTableViewCell:AllRecordTableCell)
 }
+
 
 class AllRecordTableCell:UITableViewCell {
     static let identifier = "AllRecordTableCell"
+    var cate = ""
+    
+    var popuralRecords:[PopuralResponse]? {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     
     var selectedRecords:[ALine]? {
         didSet {
@@ -57,29 +65,31 @@ class AllRecordTableCell:UITableViewCell {
         self.selectedRecords = records
     }
     
+    
 }
 
 extension AllRecordTableCell: UICollectionViewDelegate,UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.selectedRecords?.count ?? 5
+        return self.selectedRecords?.count ?? self.popuralRecords?.count ?? 0 
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AllRecordCollectionCell.identifier, for: indexPath) as! AllRecordCollectionCell
-        guard let data = self.selectedRecords?[indexPath.row] else {
-            print("data 없어요")
+        cell.backgroundColor = .mainBlack
+        guard let data = self.selectedRecords?[safe:indexPath.row] else {
+            guard let homeData = self.popuralRecords?[safe:indexPath.row] else { return cell }
+            cell.configureHome(record: homeData)
             return cell
         }
-        
         cell.configureModel(record: data)
-        cell.backgroundColor = .mainBlack
+       
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: false)
         let cell = collectionView.cellForItem(at: indexPath) as? AllRecordCollectionCell
-        self.cellDelegate?.collectionView(collectionViewCell: cell, index: indexPath.item, didTappedInTableViewCell: self)
+        self.cellDelegate?.collectionView(collectionViewCell: cell, cate: cate, didTappedInTableViewCell: self)
     }
 
 }

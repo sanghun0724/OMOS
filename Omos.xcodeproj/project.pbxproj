@@ -95,7 +95,6 @@
 		B67EF45727B7AA220023D5D4 /* PrivateLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67EF45627B7AA220023D5D4 /* PrivateLabelView.swift */; };
 		B682184C27B3823D00B58E19 /* ShareCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682184B27B3823D00B58E19 /* ShareCustomViewController.swift */; };
 		B682184E27B393BF00B58E19 /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682184D27B393BF00B58E19 /* AuthRepository.swift */; };
-		B682185027B39ADD00B58E19 /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682184F27B39ADD00B58E19 /* TestModel.swift */; };
 		B682185227B39F6500B58E19 /* AuthRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682185127B39F6500B58E19 /* AuthRepositoryImpl.swift */; };
 		B682185627B3A0BE00B58E19 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682185527B3A0BE00B58E19 /* SearchViewModel.swift */; };
 		B682185827B3AA4F00B58E19 /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682185727B3AA4F00B58E19 /* SearchListView.swift */; };
@@ -127,6 +126,13 @@
 		B689A9DC27AEA877005F26E4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9DB27AEA877005F26E4 /* LoginViewController.swift */; };
 		B68FC9A927D6529400BDE475 /* Home + Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68FC9A827D6529300BDE475 /* Home + Table.swift */; };
 		B693049D27C1F84200DC3E90 /* MyRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B693049C27C1F84200DC3E90 /* MyRecordViewModel.swift */; };
+		B697F20227E0A29F00F34AB5 /* TodayTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B697F20127E0A29E00F34AB5 /* TodayTarget.swift */; };
+		B697F20527E0A47C00F34AB5 /* Today.swift in Sources */ = {isa = PBXBuildFile; fileRef = B697F20427E0A47C00F34AB5 /* Today.swift */; };
+		B697F20727E0CF7200F34AB5 /* TodayAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B697F20627E0CF7200F34AB5 /* TodayAPI.swift */; };
+		B697F20927E0D08300F34AB5 /* TodayUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B697F20827E0D08300F34AB5 /* TodayUseCase.swift */; };
+		B697F20B27E0D09C00F34AB5 /* TodayRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B697F20A27E0D09C00F34AB5 /* TodayRepository.swift */; };
+		B697F20D27E0D0A700F34AB5 /* TodayRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B697F20C27E0D0A700F34AB5 /* TodayRepositoryImpl.swift */; };
+		B697F20F27E0DDAF00F34AB5 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B697F20E27E0DDAF00F34AB5 /* HomeViewModel.swift */; };
 		B69860BD27B8E85600E83DB9 /* NickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69860BC27B8E85600E83DB9 /* NickNameView.swift */; };
 		B6A0299C27B23D3500D3D3C9 /* OmosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */; };
 		B6ABCCF327CF44880003B47A /* Select.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ABCCF227CF44880003B47A /* Select.swift */; };
@@ -277,7 +283,6 @@
 		B67EF45627B7AA220023D5D4 /* PrivateLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateLabelView.swift; sourceTree = "<group>"; };
 		B682184B27B3823D00B58E19 /* ShareCustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCustomViewController.swift; sourceTree = "<group>"; };
 		B682184D27B393BF00B58E19 /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
-		B682184F27B39ADD00B58E19 /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
 		B682185127B39F6500B58E19 /* AuthRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepositoryImpl.swift; sourceTree = "<group>"; };
 		B682185527B3A0BE00B58E19 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		B682185727B3AA4F00B58E19 /* SearchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListView.swift; sourceTree = "<group>"; };
@@ -310,6 +315,13 @@
 		B689A9DD27AEAD0C005F26E4 /* Omos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Omos.entitlements; sourceTree = "<group>"; };
 		B68FC9A827D6529300BDE475 /* Home + Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Home + Table.swift"; sourceTree = "<group>"; };
 		B693049C27C1F84200DC3E90 /* MyRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordViewModel.swift; sourceTree = "<group>"; };
+		B697F20127E0A29E00F34AB5 /* TodayTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTarget.swift; sourceTree = "<group>"; };
+		B697F20427E0A47C00F34AB5 /* Today.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Today.swift; sourceTree = "<group>"; };
+		B697F20627E0CF7200F34AB5 /* TodayAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayAPI.swift; sourceTree = "<group>"; };
+		B697F20827E0D08300F34AB5 /* TodayUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayUseCase.swift; sourceTree = "<group>"; };
+		B697F20A27E0D09C00F34AB5 /* TodayRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayRepository.swift; sourceTree = "<group>"; };
+		B697F20C27E0D0A700F34AB5 /* TodayRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayRepositoryImpl.swift; sourceTree = "<group>"; };
+		B697F20E27E0DDAF00F34AB5 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		B69860BC27B8E85600E83DB9 /* NickNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameView.swift; sourceTree = "<group>"; };
 		B6A0299927B23D3500D3D3C9 /* OmosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OmosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmosTests.swift; sourceTree = "<group>"; };
@@ -488,6 +500,7 @@
 				B682185527B3A0BE00B58E19 /* SearchViewModel.swift */,
 				B693049C27C1F84200DC3E90 /* MyRecordViewModel.swift */,
 				B642344C27DD07B100C1083D /* MyDJViewModel.swift */,
+				B697F20E27E0DDAF00F34AB5 /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -530,6 +543,8 @@
 				B6ABCCFB27CF5E650003B47A /* RecordsRepositoryImpl.swift */,
 				B611825A27D45E1C004217E2 /* SearchRepository.swift */,
 				B611825C27D45E2D004217E2 /* SearchRepositoryImpl.swift */,
+				B697F20A27E0D09C00F34AB5 /* TodayRepository.swift */,
+				B697F20C27E0D0A700F34AB5 /* TodayRepositoryImpl.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -707,10 +722,10 @@
 		B682184927B37F9200B58E19 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				B697F20327E0A46B00F34AB5 /* Others */,
 				B611826727D46D26004217E2 /* SearchModel */,
 				B6ABCCF127CF44670003B47A /* RecordModel */,
 				B6540F6127C4A7F9002B1696 /* AuthModel */,
-				B682184F27B39ADD00B58E19 /* TestModel.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -721,6 +736,7 @@
 				B68454E727BE027500F1E6B5 /* LoginUseCase.swift */,
 				B6ABCCFD27CF5EDE0003B47A /* RecordsUseCase.swift */,
 				B611826527D465FD004217E2 /* SearchUseCase.swift */,
+				B697F20827E0D08300F34AB5 /* TodayUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -728,6 +744,7 @@
 		B68454E927BE1D7A00F1E6B5 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				B697F20027E0A28900F34AB5 /* Today */,
 				B64601E327DB4BC30076C2E5 /* MyDJ */,
 				B64601DC27DB47B10076C2E5 /* Interaction */,
 				B611825E27D45F43004217E2 /* Search */,
@@ -796,6 +813,23 @@
 				B6183CD527D8F7490035AA06 /* BottomSheetViewController.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		B697F20027E0A28900F34AB5 /* Today */ = {
+			isa = PBXGroup;
+			children = (
+				B697F20127E0A29E00F34AB5 /* TodayTarget.swift */,
+				B697F20627E0CF7200F34AB5 /* TodayAPI.swift */,
+			);
+			path = Today;
+			sourceTree = "<group>";
+		};
+		B697F20327E0A46B00F34AB5 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				B697F20427E0A47C00F34AB5 /* Today.swift */,
+			);
+			path = Others;
 			sourceTree = "<group>";
 		};
 		B6A0299A27B23D3500D3D3C9 /* OmosTests */ = {
@@ -1125,6 +1159,7 @@
 				B6CCBC9727D9E5E4009F8499 /* OneMusicRecord.swift in Sources */,
 				B68454F327BE30EE00F1E6B5 /* MyAuthenticationCredential.swift in Sources */,
 				B666A90627AED17C00BE7F92 /* BaseView.swift in Sources */,
+				B697F20D27E0D0A700F34AB5 /* TodayRepositoryImpl.swift in Sources */,
 				B6CCBC9927DA5EBC009F8499 /* HomeTableMiddleCell.swift in Sources */,
 				B68454FE27BE380800F1E6B5 /* UserDetail.swift in Sources */,
 				B6163B5727DE1B1000481B63 /* MyDjProfileViewModel.swift in Sources */,
@@ -1159,13 +1194,16 @@
 				B66AD45027C6983F0012686B /* MydjCollectionCell.swift in Sources */,
 				B68454FA27BE375000F1E6B5 /* LoginTarget.swift in Sources */,
 				B68454EC27BE1D9800F1E6B5 /* TargetType.swift in Sources */,
+				B697F20927E0D08300F34AB5 /* TodayUseCase.swift in Sources */,
 				B606195A27DF2B85006508CA /* LyricsViewModel.swift in Sources */,
 				B689A9D127AE94E9005F26E4 /* Color.swift in Sources */,
 				B6B1BB5E27BBD06600DF2528 /* MyRecord + Table.swift in Sources */,
 				B642344527DCA9A600C1083D /* AllRecordCateDetail + Table.swift in Sources */,
+				B697F20527E0A47C00F34AB5 /* Today.swift in Sources */,
 				B683A45327B0DA3500838749 /* AllRecordTableCell.swift in Sources */,
 				B69860BD27B8E85600E83DB9 /* NickNameView.swift in Sources */,
 				B6D4BB2627CA801300D6741B /* MySearchViewController.swift in Sources */,
+				B697F20F27E0DDAF00F34AB5 /* HomeViewModel.swift in Sources */,
 				B682184C27B3823D00B58E19 /* ShareCustomViewController.swift in Sources */,
 				B6FE838127D0B37F00401FC5 /* AllRecordCateShortDetailCell.swift in Sources */,
 				B646053227CBBF050022E062 /* SearchAlbumDetailCell.swift in Sources */,
@@ -1207,6 +1245,7 @@
 				B683A45927B130D100838749 /* Profile + Table.swift in Sources */,
 				B611826B27D4B104004217E2 /* Artist.swift in Sources */,
 				B6F0596E27C3490E00CCB242 /* CategoryView.swift in Sources */,
+				B697F20B27E0D09C00F34AB5 /* TodayRepository.swift in Sources */,
 				B651E8CA27CA87F500996CC3 /* MydjProfileView.swift in Sources */,
 				B68454E827BE027500F1E6B5 /* LoginUseCase.swift in Sources */,
 				B6ABCCFE27CF5EDE0003B47A /* RecordsUseCase.swift in Sources */,
@@ -1221,6 +1260,7 @@
 				B646051727CB5E8C0022E062 /* EntireViewController.swift in Sources */,
 				B6ABCCF827CF450D0003B47A /* RecordTarget.swift in Sources */,
 				B68FC9A927D6529400BDE475 /* Home + Table.swift in Sources */,
+				B697F20727E0CF7200F34AB5 /* TodayAPI.swift in Sources */,
 				B646053427CBE1A10022E062 /* SearchArtistViewController.swift in Sources */,
 				B606195227DF0F14006508CA /* LyricsPasteViewController.swift in Sources */,
 				B642344927DCE7D500C1083D /* FollowTarget.swift in Sources */,
@@ -1233,7 +1273,6 @@
 				B606195F27DF5ADC006508CA /* LyricsTableCell.swift in Sources */,
 				B606195427DF0F57006508CA /* LyricsPasteView.swift in Sources */,
 				B682185227B39F6500B58E19 /* AuthRepositoryImpl.swift in Sources */,
-				B682185027B39ADD00B58E19 /* TestModel.swift in Sources */,
 				B64601DB27DB32800076C2E5 /* AllRecordDetailViewModel.swift in Sources */,
 				B66AD44E27C6963B0012686B /* MydjView.swift in Sources */,
 				B6B1BB5C27BBCF6000DF2528 /* MyRecordTableCell.swift in Sources */,
@@ -1248,6 +1287,7 @@
 				B6ABCCFA27CF5E480003B47A /* RecordsRepository.swift in Sources */,
 				B6BC148727BFF6C50067D8FB /* MyRecordDetailViewController.swift in Sources */,
 				B650873F27AF96B00020D2C1 /* AllRecordViewController.swift in Sources */,
+				B697F20227E0A29F00F34AB5 /* TodayTarget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

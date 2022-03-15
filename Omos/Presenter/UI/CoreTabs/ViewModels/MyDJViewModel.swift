@@ -89,6 +89,7 @@ class MyDjViewModel:BaseViewModel {
         super.init()
         self.reduce()
     }
+    
     func reduce() {
         myDjRecord
             .withUnretained(self)

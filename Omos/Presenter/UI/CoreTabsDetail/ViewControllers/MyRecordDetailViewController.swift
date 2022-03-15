@@ -15,12 +15,14 @@ class MyRecordDetailViewController:BaseViewController {
     let scrollView = UIScrollView()
     var selfView = MyRecordDetailView()
     var selflongView = AllRecordDetailView()
-    let postId:Int
+    let instaDecoView = InstaDecoTopView()
+    let loadingView = LoadingView()
     let bottomVC:BottomSheetViewController
     let bottomSheet:MDCBottomSheetController
     let viewModel:MyRecordDetailViewModel
     let userId = UserDefaults.standard.integer(forKey: "user")
     let cate:String
+    let postId:Int
     
     init(posetId:Int,viewModel:MyRecordDetailViewModel,cate:String) {
         self.postId = posetId
@@ -40,8 +42,9 @@ class MyRecordDetailViewController:BaseViewController {
         setNavigationItems()
         bind()
         viewModel.myRecordDetailFetch(postId: postId, userId: userId)
-        self.navigationController?.navigationBar.isHidden = true
     }
+    
+    
     
     private func setNavigationItems() {
         self.navigationItem.rightBarButtonItems?.removeAll()
@@ -53,7 +56,38 @@ class MyRecordDetailViewController:BaseViewController {
     }
     
     @objc func didTapInstagram() {
-        
+        if let storyShareURL = URL(string: "instagram-stories://share") {
+        if UIApplication.shared.canOpenURL(storyShareURL) {
+            let renderer = UIGraphicsImageRenderer(size: self.view.bounds.size)
+            let renderImage = renderer.image { _ in
+              
+                self.view.drawHierarchy(in: self.view.bounds, afterScreenUpdates: true)
+            }
+            
+            guard let imageData = renderImage.pngData() else { return }
+            
+            let pasteboardItems : [String:Any] = [
+                "com.instagram.sharedSticker.stickerImage": imageData,
+            ]
+            let pasteboardOptions = [
+                UIPasteboard.OptionsKey.expirationDate : Date().addingTimeInterval(300)
+            ]
+            
+            UIPasteboard.general.setItems([pasteboardItems], options: pasteboardOptions)
+            
+            
+            UIApplication.shared.open(storyShareURL, options: [:], completionHandler: nil)
+        } else {
+            let alert = UIAlertController(title: "알림", message: "인스타그램이 필요합니다", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "확인", style: .default, handler: nil)
+            alert.addAction(ok)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+//        var view:UIView = UIView()
+//        cate == "A_LINE" ? (view = selfView) : (view = selflongView)
+//        let vc = ShareCustomViewController(instaShareView: view)
+//        self.present(vc,animated: false)
     }
     
     @objc func didTapMoreButton() {
@@ -62,12 +96,13 @@ class MyRecordDetailViewController:BaseViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        self.tabBarController?.tabBar.isHidden = true
+       
     }
     
     override func configureUI() {
-        cate == "A_LINE" ? (configShort()) : (configLong())
-        
+        self.view.addSubview(loadingView)
+        loadingView.frame = view.bounds
     }
     
     
@@ -104,10 +139,16 @@ class MyRecordDetailViewController:BaseViewController {
     
     func bind() {
         
+        viewModel.loading
+            .subscribe(onNext: { [weak self] loading in
+                self?.loadingView.isHidden = !loading
+            }).disposed(by: disposeBag)
+        
         viewModel.myRocordDetail
             .subscribe(onNext: { [weak self] data in
                 self?.navigationController?.navigationBar.isHidden = false
                 guard let record = self?.viewModel.currentMyRecordDetail else { return }
+                self?.cate == "A_LINE" ? (self?.configShort()) : (self?.configLong())
                 self?.cate == "A_LINE" ? (self?.setShrotData(myRecord: record )) : (self?.setLongData(myRecord: record ))
             }).disposed(by: disposeBag)
         
@@ -252,6 +293,7 @@ class MyRecordDetailViewController:BaseViewController {
         selfView.likeCountLabel.text = String(myRecord.likeCnt)
         selfView.scrapCountLabel.text = String(myRecord.scrapCnt)
         selfView.cateLabel.text =  " | \(myRecord.category )"
+        selfView.nicknameLabel.text = myRecord.nickname
         
         if myRecord.isPublic {
             selfView.lockButton.setImage(UIImage(named: "unlock"), for: .normal)
@@ -270,7 +312,7 @@ class MyRecordDetailViewController:BaseViewController {
             selfView.scrapCountLabel.textColor = .mainOrange
         }
         selfView.mainLabelView.text = myRecord.recordContents
-        
+        selfView.dummyView3.isHidden = true
     }
     
     func setLongData(myRecord:DetailRecordResponse) {
@@ -283,6 +325,7 @@ class MyRecordDetailViewController:BaseViewController {
         selflongView.myView.likeCountLabel.text = String(myRecord.likeCnt)
         selflongView.myView.scrapCountLabel.text = String(myRecord.scrapCnt)
         selflongView.myView.cateLabel.text = " | \(myRecord.category )"
+        selflongView.myView.nicknameLabel.text = myRecord.nickname
         
         if myRecord.isPublic {
             selflongView.myView.lockButton.setImage(UIImage(named: "unlock"), for: .normal)
@@ -301,6 +344,7 @@ class MyRecordDetailViewController:BaseViewController {
             selflongView.myView.scrapCountLabel.textColor = .mainOrange
         }
         selflongView.myView.mainLabelView.text = myRecord.recordContents
+        selflongView.myView.dummyView3.isHidden = true
     }
     
     private func getReverseCate(cate:String) -> String {
@@ -320,4 +364,13 @@ class MyRecordDetailViewController:BaseViewController {
         }
     }
     
+}
+
+
+class InstaDecoTopView:BaseView {
+    
+    
+    override func configureUI() {
+        self.backgroundColor = .mainOrange
+    }
 }

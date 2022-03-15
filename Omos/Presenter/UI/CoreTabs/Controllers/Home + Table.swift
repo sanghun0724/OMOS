@@ -30,12 +30,23 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource {
             return UITableViewCell()
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordTableCell.identifier,for:indexPath) as! AllRecordTableCell
+            cell.selectionStyle = .none
+            cell.popuralRecords = viewModel.currentPopuralRecord
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableMiddleCell.identifier,for:indexPath) as! HomeTableMiddleCell
+            cell.selectedRecords = viewModel.currentRecommentRecord
+            cell.selectionStyle = .none
             return cell
         case 3:
+            guard let cellData = viewModel.currentLovedRecord else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: LovedEmptyCell.identifier,for:indexPath) as! LovedEmptyCell
+                return cell
+            }
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableLastCell.identifier,for:indexPath) as! HomeTableLastCell
+            cell.configureModel(record: cellData)
+            cell.selectionStyle = .none
             return cell
         default:
             print("de other")
@@ -55,6 +66,11 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource {
                 .drive(onNext: { [weak self] _ in
                   print("noti")
                 }).disposed(by: header.disposeBag)
+            guard let headerData = viewModel.currentTodayRecord else { return header }
+            header.songTitleLabel.text = headerData.musicTitle
+            header.artistTitleLabel.text = headerData.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}
+            header.albumImageView.setImage(with: headerData.albumImageURL)
+            header.albumTitleLabel.text = headerData.albumTitle
             return header
         case 1:
             header.label.text = "지금 인기있는 레코드"

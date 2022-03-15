@@ -72,6 +72,20 @@ extension AllRecordSearchDetailViewController:UITableViewDelegate,UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let record = viewModel.currentOneMusicRecords[indexPath.row]
+        if Account.currentUser == record.userID {
+            let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+            let uc = RecordsUseCase(recordsRepository: rp)
+            let vm = MyRecordDetailViewModel(usecase: uc)
+            let vc = MyRecordDetailViewController(posetId: record.recordID, viewModel: vm, cate: record.category)
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+            let uc = RecordsUseCase(recordsRepository: rp)
+            let vm = AllRecordDetailViewModel(usecase: uc)
+            let vc = AllRecordDetailViewController(viewModel: vm, postId: record.recordID, userId: record.userID)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     

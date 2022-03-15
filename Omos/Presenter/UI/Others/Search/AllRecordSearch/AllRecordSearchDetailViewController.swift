@@ -38,8 +38,13 @@ class AllRecordSearchDetailViewController:BaseViewController , UIScrollViewDeleg
         bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
-        self.tabBarController?.tabBar.isHidden = true
         fetchRecord()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+        
     }
 
 

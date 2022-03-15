@@ -33,6 +33,10 @@ class AllRecordViewController: BaseViewController {
         viewModel.selectRecordsShow()
         setRightItems()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
     
     func setRightItems() {
         let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(didTapSearchButton))
@@ -77,14 +81,24 @@ class AllRecordViewController: BaseViewController {
 }
 
 extension AllRecordViewController:AllCollectCellprotocol {
-    func collectionView(collectionViewCell: AllRecordCollectionCell?, index: Int, didTappedInTableViewCell: AllRecordTableCell) {
+    func collectionView(collectionViewCell: AllRecordCollectionCell?, cate: String, didTappedInTableViewCell: AllRecordTableCell) {
        guard let postId = collectionViewCell?.detailInfo?.recordID,
              let userId = collectionViewCell?.detailInfo?.userID else { return }
-        let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
-        let uc = RecordsUseCase(recordsRepository: rp)
-        let vm = AllRecordDetailViewModel(usecase: uc)
-        let vc = AllRecordDetailViewController(viewModel: vm, postId: postId, userId: userId)
-        self.navigationController?.pushViewController(vc, animated: true)
+
+        if Account.currentUser == userId {
+            let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+            let uc = RecordsUseCase(recordsRepository: rp)
+            let vm = MyRecordDetailViewModel(usecase: uc)
+            let vc = MyRecordDetailViewController(posetId: postId, viewModel: vm, cate: cate)
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+            let uc = RecordsUseCase(recordsRepository: rp)
+            let vm = AllRecordDetailViewModel(usecase: uc)
+            let vc = AllRecordDetailViewController(viewModel: vm, postId: postId, userId: userId)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
     }
     
 }
