@@ -20,15 +20,16 @@ class LyricsPasteCreateViewController:BaseViewController {
     let scrollView = UIScrollView()
     var cancellables = Set<AnyCancellable>()
     let selfView = LyricsPasteCreateView()
-    let viewModel:LyricsPasteCreateViewModel
+    let viewModel:LyricsViewModel
     let type:CreateType
     var totalString = 0
-    var textTagCount = 0
-    var textCellsArray = [Int](repeating: 0, count: 6)
+    var textTagCount = 1
+    var textCellsArray:[Int]
     
-    init(viewModel:LyricsPasteCreateViewModel,type:CreateType) {
+    init(viewModel:LyricsViewModel,type:CreateType) {
         self.viewModel = viewModel
         self.type = type
+        self.textCellsArray = [Int](repeating: 0, count: viewModel.lyricsStringArray.count + 1)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -247,13 +248,17 @@ class LyricsPasteCreateViewController:BaseViewController {
 
 extension LyricsPasteCreateViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
+            
+        if textView.tag < 1 {
+            textView.tag = textTagCount
+            textTagCount+=1
+        }
         
         if textView.text == "레코드 가사해석을 입력해주세요" {
             textView.text = nil
             textView.textColor = .white
         }
-        textView.tag = textTagCount
-        textTagCount+=1
+
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
@@ -272,6 +277,7 @@ extension LyricsPasteCreateViewController: UITextViewDelegate {
         let newString = oldString.replacingCharacters(in: newRange, with: inputString).trimmingCharacters(in: .whitespacesAndNewlines)
         let characterCount = newString.count
         textCellsArray[textView.tag] = characterCount
+        print(textCellsArray)
         totalString = textCellsArray.reduce(0,+)
         guard totalString <= 250 else { return false }
         selfView.remainTextCount.text =  "\(totalString)/250"
@@ -284,10 +290,11 @@ extension LyricsPasteCreateViewController: UITextViewDelegate {
         let size = textView.bounds.size
         let newSize = selfView.tableView.sizeThatFits(CGSize(width: size.width,
                                                              height: CGFloat.greatestFiniteMagnitude))
-        print(newSize)
+
         if size.height != newSize.height {
             UIView.setAnimationsEnabled(false)
             selfView.tableView.beginUpdates()
+            selfView.tableHeightConstraint!.update(offset: selfView.tableView.contentSize.height )
             selfView.tableView.endUpdates()
             UIView.setAnimationsEnabled(true)
         }

@@ -13,7 +13,7 @@
 		B606195427DF0F57006508CA /* LyricsPasteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606195327DF0F57006508CA /* LyricsPasteView.swift */; };
 		B606195627DF20E7006508CA /* LyricsPasteCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606195527DF20E7006508CA /* LyricsPasteCreateView.swift */; };
 		B606195827DF2437006508CA /* LyricsPasteCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606195727DF2437006508CA /* LyricsPasteCreateViewController.swift */; };
-		B606195A27DF2B85006508CA /* LyricsPasteCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606195927DF2B85006508CA /* LyricsPasteCreateViewModel.swift */; };
+		B606195A27DF2B85006508CA /* LyricsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606195927DF2B85006508CA /* LyricsViewModel.swift */; };
 		B606195D27DF32E7006508CA /* Lyrics + Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606195C27DF32E7006508CA /* Lyrics + Table.swift */; };
 		B606195F27DF5ADC006508CA /* LyricsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606195E27DF5ADB006508CA /* LyricsTableCell.swift */; };
 		B609138027AD3A7C00B439C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609137F27AD3A7C00B439C3 /* AppDelegate.swift */; };
@@ -192,7 +192,7 @@
 		B606195327DF0F57006508CA /* LyricsPasteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsPasteView.swift; sourceTree = "<group>"; };
 		B606195527DF20E7006508CA /* LyricsPasteCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsPasteCreateView.swift; sourceTree = "<group>"; };
 		B606195727DF2437006508CA /* LyricsPasteCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsPasteCreateViewController.swift; sourceTree = "<group>"; };
-		B606195927DF2B85006508CA /* LyricsPasteCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsPasteCreateViewModel.swift; sourceTree = "<group>"; };
+		B606195927DF2B85006508CA /* LyricsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsViewModel.swift; sourceTree = "<group>"; };
 		B606195C27DF32E7006508CA /* Lyrics + Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lyrics + Table.swift"; sourceTree = "<group>"; };
 		B606195E27DF5ADB006508CA /* LyricsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsTableCell.swift; sourceTree = "<group>"; };
 		B609137C27AD3A7C00B439C3 /* Omos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Omos.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -399,7 +399,7 @@
 				B606195527DF20E7006508CA /* LyricsPasteCreateView.swift */,
 				B606195727DF2437006508CA /* LyricsPasteCreateViewController.swift */,
 				B606195C27DF32E7006508CA /* Lyrics + Table.swift */,
-				B606195927DF2B85006508CA /* LyricsPasteCreateViewModel.swift */,
+				B606195927DF2B85006508CA /* LyricsViewModel.swift */,
 				B606195E27DF5ADB006508CA /* LyricsTableCell.swift */,
 			);
 			path = Lyrics;
@@ -1159,7 +1159,7 @@
 				B66AD45027C6983F0012686B /* MydjCollectionCell.swift in Sources */,
 				B68454FA27BE375000F1E6B5 /* LoginTarget.swift in Sources */,
 				B68454EC27BE1D9800F1E6B5 /* TargetType.swift in Sources */,
-				B606195A27DF2B85006508CA /* LyricsPasteCreateViewModel.swift in Sources */,
+				B606195A27DF2B85006508CA /* LyricsViewModel.swift in Sources */,
 				B689A9D127AE94E9005F26E4 /* Color.swift in Sources */,
 				B6B1BB5E27BBD06600DF2528 /* MyRecord + Table.swift in Sources */,
 				B642344527DCA9A600C1083D /* AllRecordCateDetail + Table.swift in Sources */,

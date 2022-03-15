@@ -12,12 +12,16 @@ import UIKit
 extension LyricsPasteCreateViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 12
+        return viewModel.lyricsStringArray.count * 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row % 2 == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: LyriscTableCell.identifier, for: indexPath) as! LyriscTableCell
+            if indexPath.row == 0 {
+                cell.label.text = viewModel.lyricsStringArray[0]
+            }
+            cell.label.text = viewModel.lyricsStringArray[indexPath.row/2]
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: TextTableCell.identifier, for: indexPath) as! TextTableCell
