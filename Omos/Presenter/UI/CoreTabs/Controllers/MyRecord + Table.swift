@@ -30,7 +30,7 @@ extension MyRecordViewController: UITableViewDelegate,UITableViewDataSource {
         let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
         let uc = RecordsUseCase(recordsRepository: rp)
         let vm = MyRecordDetailViewModel(usecase: uc)
-        let vc = MyRecordDetailViewController(myRecord: data,viewModel: vm,cate:data.category)
+        let vc = MyRecordDetailViewController(posetId: data.recordID,viewModel: vm,cate:data.category)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

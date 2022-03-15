@@ -12,7 +12,8 @@ class LyriscTableCell:UITableViewCell {
     
     let label:UILabel = {
         let label = UILabel()
-        label.text = "짤리나?어떻게되는건데짤리나?어떻게되는건데짤리나?어떻게되는건데짤리나?어떻게되는건데짤리나?어떻게되는건데짤리나?어떻게되는건데짤리나?어떻게되는건데짤리나?어떻게되는건데짤리나?어떻게되는건데짤리나?어떻게되는건데짤리나?어떻게되는건데짤리나?어떻게되는건데짤리나?어떻게되는건데"
+        label.text = ""
+        label.font = UIFont(name: "Cafe24Oneprettynight", size: 18)
         label.numberOfLines = 0
         return label
     }()
@@ -23,7 +24,8 @@ class LyriscTableCell:UITableViewCell {
         contentView.addSubview(label)
         
         label.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(12)
+            make.top.bottom.equalToSuperview().inset(10)
+            make.leading.trailing.equalToSuperview().inset(16)
             label.sizeToFit()
         }
     }
@@ -42,8 +44,10 @@ class TextTableCell:UITableViewCell,UITextViewDelegate {
     
     let textView:UITextView = {
       let view = UITextView()
-        view.text = "레코드 가사해석을 입력해주세요"
-        view.isScrollEnabled = false 
+        view.text = "가사해석을 적어주세요"
+        view.textColor = .mainGrey7
+        view.isScrollEnabled = false
+        view.font = .systemFont(ofSize: 16, weight: .light)
       return view
     }()
     
@@ -58,7 +62,9 @@ class TextTableCell:UITableViewCell,UITextViewDelegate {
         contentView.addSubview(textView)
         
         textView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(12)
+            make.top.bottom.equalToSuperview().inset(10)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-20)
             textView.sizeToFit()
         }
         

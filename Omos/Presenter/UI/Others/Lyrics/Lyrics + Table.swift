@@ -22,10 +22,12 @@ extension LyricsPasteCreateViewController:UITableViewDelegate,UITableViewDataSou
                 cell.label.text = viewModel.lyricsStringArray[0]
             }
             cell.label.text = viewModel.lyricsStringArray[indexPath.row/2]
+            cell.selectionStyle = .none
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: TextTableCell.identifier, for: indexPath) as! TextTableCell
             cell.textView.delegate = self
+            cell.selectionStyle = .none
             return cell
         }
        
@@ -43,11 +45,13 @@ extension LyricsPasteCreateViewController:UITableViewDelegate,UITableViewDataSou
         return CGFloat.leastNormalMagnitude
     }
     
-   
-    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         tableView.layoutIfNeeded()
         selfView.tableHeightConstraint!.update(offset: selfView.tableView.contentSize.height )
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }

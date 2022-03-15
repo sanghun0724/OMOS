@@ -11,7 +11,7 @@ import Alamofire
 enum RecordTarget {
     case select
     case category(cate:cateType,request:CateRequest)
-    case selectDetail(postId:Int,userId:Int)
+    case recordDetail(postId:Int,userId:Int)
     case myRecord(userid:Int)
     case save(SaveRequest)
     case recordIspublic(postId:Int)
@@ -30,7 +30,7 @@ extension RecordTarget:TargetType {
     var method: HTTPMethod {
         switch self {
         case .select: return .get
-        case .selectDetail: return .get
+        case .recordDetail: return .get
         case .category: return .get
         case .myRecord: return .get
         case .save: return .post
@@ -46,7 +46,7 @@ extension RecordTarget:TargetType {
     var path: String {
         switch self {
         case .select: return "/select"
-        case .selectDetail(let post,let user): return "/select/\(post)/user/\(user)"
+        case .recordDetail(let post,let user): return "/select/\(post)/user/\(user)"
         case .category(let cate, _): return "/select/category/\(cate)"
         case .myRecord(let user): return "/\(user)"
         case .save: return "/save"
@@ -62,7 +62,7 @@ extension RecordTarget:TargetType {
     var parameters: RequestParams? {
         switch self {
         case .select: return nil
-        case .selectDetail: return nil
+        case .recordDetail: return nil
         case .category(_,let request): return .query(request)
         case .myRecord: return nil
         case .save(let request): return .body(request)

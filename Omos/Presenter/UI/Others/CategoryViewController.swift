@@ -151,7 +151,7 @@ class CategoryViewController:BaseViewController {
         for view in views {
             if view.layer.borderWidth == 1 {
                 if view == selfView.lyricsView {
-                    let vc = LyricsPasteViewController()
+                    let vc = LyricsPasteViewController(defaultModel: self.defaultModel)
                     self.navigationController?.pushViewController(vc, animated: true)
                 } else {
                     let vc = CreateViewController(viewModel:vm,category: view.titleLabel.text!, type: .create)

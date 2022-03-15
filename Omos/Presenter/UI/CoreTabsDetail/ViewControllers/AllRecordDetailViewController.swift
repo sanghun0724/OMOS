@@ -78,7 +78,7 @@ class AllRecordDetailViewController:BaseViewController {
             }).disposed(by: disposeBag)
     }
     
-    func shortBind(myRecord:SelectDetailRespone) {
+    func shortBind(myRecord:DetailRecordResponse) {
         selfShortView.reportButton.rx.tap
             .asDriver()
             .drive(onNext:{ [weak self] _ in
@@ -140,7 +140,7 @@ class AllRecordDetailViewController:BaseViewController {
     }
     
     
-    func longBind(myRecord:SelectDetailRespone) {
+    func longBind(myRecord:DetailRecordResponse) {
         
         selfLongView.myView.reportButton.rx.tap
             .asDriver()
@@ -217,7 +217,7 @@ class AllRecordDetailViewController:BaseViewController {
         }
     }
     
-    func setLongData(myRecord:SelectDetailRespone) {
+    func setLongData(myRecord:DetailRecordResponse) {
         selfLongView.myView.musicTitleLabel.text = myRecord.music.musicTitle
         selfLongView.myView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
         selfLongView.myView.circleImageView.setImage(with: myRecord.music.albumImageURL)
@@ -253,7 +253,7 @@ class AllRecordDetailViewController:BaseViewController {
         }
     }
     
-    func setShortData(myRecord:SelectDetailRespone) {
+    func setShortData(myRecord:DetailRecordResponse) {
         selfShortView.musicTitleLabel.text = myRecord.music.musicTitle
         selfShortView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
         selfShortView.circleImageView.setImage(with: myRecord.music.albumImageURL)

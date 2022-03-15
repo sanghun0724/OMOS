@@ -11,14 +11,14 @@ import RxSwift
 class AllRecordDetailViewModel:BaseViewModel {
     
     let loading = BehaviorSubject<Bool>(value:false)
-    let selectDetail = PublishSubject<SelectDetailRespone>()
-    var currentSelectDetail:SelectDetailRespone? = nil
+    let selectDetail = PublishSubject<DetailRecordResponse>()
+    var currentSelectDetail:DetailRecordResponse? = nil
     let usecase:RecordsUseCase
     let errorMessage = BehaviorSubject<String?>(value: nil)
     
     func selectDetailFetch(postId:Int,userId:Int) {
         loading.onNext(true)
-        usecase.selectDetail(postId: postId, userId: userId)
+        usecase.recordDetail(postId: postId, userId: userId)
             .subscribe({ [weak self] event in
                 self?.loading.onNext(false)
                 switch event {

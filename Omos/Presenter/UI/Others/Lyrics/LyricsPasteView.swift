@@ -46,7 +46,7 @@ class LyricsPastView:BaseView {
     
     let mainLyricsTextView:UITextView = {
         let view = UITextView()
-        view.text = "레코드 가사를 입력해주세요"
+        view.text = "해석하고 싶은 가사를 복사해 붙여놓고,\n줄바꿈을 통해 마디구분을 해주세요."
         view.font = .systemFont(ofSize: 16, weight: .light)
         view.isScrollEnabled = false
         view.textAlignment = .left
@@ -155,6 +155,10 @@ class LyricsPastView:BaseView {
             make.bottom.equalTo(lastView.snp.top)
         }
         
+        layoutIfNeeded()
+        
+        circleImageView.layer.cornerRadius = circleImageView.height / 2
+        circleImageView.layer.masksToBounds = true 
         
     }
     

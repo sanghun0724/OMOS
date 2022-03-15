@@ -10,7 +10,7 @@ import RxSwift
 
 class CreateViewModel:BaseViewModel {
     
-    var modifyDefaultModel:MyRecordRespone? = nil 
+    var modifyDefaultModel:DetailRecordResponse? = nil 
     var defaultModel:recordSaveDefaultModel = .init(musicId: "", imageURL: "", musicTitle: "", subTitle: "") // create할때 있는놈들
     let errorMessage = BehaviorSubject<String?>(value: nil)
     let loading = BehaviorSubject<Bool>(value:false)

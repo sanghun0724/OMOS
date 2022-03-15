@@ -20,8 +20,8 @@ class RecordsUseCase {
         return recordsRepository.selectRecord()
     }
     
-    func selectDetail(postId:Int,userId:Int) -> Single<SelectDetailRespone> {
-        return recordsRepository.selectDetail(postId: postId, userId: userId)
+    func recordDetail(postId:Int,userId:Int) -> Single<DetailRecordResponse> {
+        return recordsRepository.recordDetail(postId: postId, userId: userId)
     }
     
     func cateFetch(type:cateType,postId:Int?,size:Int,sort:String,userid:Int) -> Single<[CategoryRespone]> {

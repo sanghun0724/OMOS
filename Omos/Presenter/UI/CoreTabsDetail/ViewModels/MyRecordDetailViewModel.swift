@@ -10,12 +10,33 @@ import RxSwift
 
 class MyRecordDetailViewModel:BaseViewModel {
     
+    let myRocordDetail = PublishSubject<DetailRecordResponse>()
+    var currentMyRecordDetail:DetailRecordResponse? = nil
     let delete = PublishSubject<Bool>()
     let modify = PublishSubject<Bool>()
     let done = PublishSubject<Bool>()
+    let loading = BehaviorSubject<Bool>(value:false)
     var recordData:MyRecordRespone? = nil
     let usecase:RecordsUseCase
     let errorMessage = BehaviorSubject<String?>(value: nil)
+    
+    func myRecordDetailFetch(postId:Int,userId:Int) {
+        loading.onNext(true)
+        usecase.recordDetail(postId: postId, userId: userId)
+            .subscribe({ [weak self] event in
+                self?.loading.onNext(false)
+                switch event {
+                case .success(let data):
+                    self?.currentMyRecordDetail = data
+                    self?.myRocordDetail.onNext(data)
+                case .failure(let error):
+                    self?.errorMessage.onNext(error.localizedDescription)
+                }
+            }).disposed(by: disposeBag)
+    }
+
+    
+    
     
     func deleteRecord(postId:Int) {
         usecase.recordDelete(postId: postId)

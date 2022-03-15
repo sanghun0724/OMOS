@@ -22,8 +22,8 @@ class RecordAPI {
         }
     }
     
-    func selectDetail(postId:Int,userId:Int,completion:@escaping(Result<SelectDetailRespone,Error>) -> Void) {
-        AF.request(RecordTarget.selectDetail(postId: postId, userId: userId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<SelectDetailRespone>) in
+    func recordDetail(postId:Int,userId:Int,completion:@escaping(Result<DetailRecordResponse,Error>) -> Void) {
+        AF.request(RecordTarget.recordDetail(postId: postId, userId: userId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<DetailRecordResponse>) in
             switch response.result {
             case .success(let data):
                 completion(.success(data))

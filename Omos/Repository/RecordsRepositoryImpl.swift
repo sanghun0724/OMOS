@@ -33,9 +33,9 @@ class RecordsRepositoryImpl:RecordsRepository {
         }
     }
     
-    func selectDetail(postId:Int,userId:Int) -> Single<SelectDetailRespone> {
-        return Single<SelectDetailRespone>.create { [weak self] single in
-            self?.recordAPI.selectDetail(postId: postId, userId: userId, completion: { result in
+    func recordDetail(postId:Int,userId:Int) -> Single<DetailRecordResponse> {
+        return Single<DetailRecordResponse>.create { [weak self] single in
+            self?.recordAPI.recordDetail(postId: postId, userId: userId, completion: { result in
                 switch result {
                 case .success(let data):
                     single(.success(data))

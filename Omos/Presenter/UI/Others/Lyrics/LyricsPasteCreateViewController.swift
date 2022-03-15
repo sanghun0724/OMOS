@@ -16,7 +16,7 @@ import Combine
 
 class LyricsPasteCreateViewController:BaseViewController {
     
-    
+    var defaultModel:recordSaveDefaultModel = .init(musicId: "", imageURL: "", musicTitle: "", subTitle: "")
     let scrollView = UIScrollView()
     var cancellables = Set<AnyCancellable>()
     let selfView = LyricsPasteCreateView()
@@ -41,9 +41,10 @@ class LyricsPasteCreateViewController:BaseViewController {
         super.viewDidLoad()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
+        selfView.titleTextView.delegate = self 
         bind()
         
-        //        if type == .create { setCreateViewinfo() }
+                if type == .create { setCreateViewinfo() }
         //        else { setModifyView() }
     }
     
@@ -66,74 +67,24 @@ class LyricsPasteCreateViewController:BaseViewController {
     }
     
     @objc func didTapDone() {
-        //        var mainText:String?
-        //        if category == "한 줄 감상" {
-        //            mainText = selfView.mainTextView.text
-        //        } else {
-        //            mainText = selfView.mainfullTextView.text
-        //        }
-        //        let backImage = selfView.imageView.image
-        //        guard let titleText = selfView.titleTextView.text,
-        //              let text = mainText else {
-        //                  //alert
-        //                  print("alert here")
-        //                  return
-        //              }
-        //
-        //        if type == .create {
-        //            viewModel.saveRecord(cate: getCate(cate: category), content: text, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: titleText, userid: UserDefaults.standard.integer(forKey: "user"))
-        //        } else {
-        //            var recordContent = ""
-        //            if  selfView.mainTextView.text != viewModel.modifyDefaultModel?.recordTitle {
-        //                recordContent = selfView.mainTextView.text
-        //            } else {
-        //                recordContent = selfView.mainfullTextView.text
-        //            }
-        //
-        //            viewModel.updateRecord(postId: viewModel.modifyDefaultModel?.recordID ?? 0, request: .init(contents: recordContent, title: selfView.titleTextView.text ))
-        //        }
+        guard let titleText = selfView.titleTextView.text else {
+            print("get away")
+            return
+        }
+        selfView.tableView.visibleCells.forEach { cell in
+            if let cell = cell as? LyriscTableCell {
+             
+            } else {
+                
+            }
+        }
         
-        // }
-        
-        //    private func setCreateViewinfo() {
-        //        selfView.cateLabel.text = "  | \(category)"
-        //        selfView.circleImageView.setImage(with: viewModel.defaultModel.imageURL)
-        //        selfView.musicTitleLabel.text = viewModel.defaultModel.musicTitle
-        //        selfView.subMusicInfoLabel.text = viewModel.defaultModel.subTitle
-        //        // get the current date and time
-        //        let currentDateTime = Date()
-        //
-        //        // get the user's calendar
-        //        let userCalendar = Calendar.current
-        //
-        //        // choose which date and time components are needed
-        //        let requestedComponents: Set<Calendar.Component> = [
-        //            .year,
-        //            .month,
-        //            .day
-        //        ]
-        //
-        //        // get the components
-        //        let dateTimeComponents = userCalendar.dateComponents(requestedComponents, from: currentDateTime)
-        //
-        //        selfView.createdField.text = "\(dateTimeComponents.year!) \(dateTimeComponents.month!) \(dateTimeComponents.day!)"
-        //    }
-        //
-        //    func setModifyView() {
-        //        print("check")
-        //        print(viewModel.modifyDefaultModel!)
-        //        selfView.cateLabel.text = "  | \(category)"
-        //        selfView.circleImageView.setImage(with: viewModel.modifyDefaultModel?.music.albumImageURL ?? "")
-        //        selfView.musicTitleLabel.text = viewModel.modifyDefaultModel?.music.musicTitle
-        //        selfView.subMusicInfoLabel.text = viewModel.modifyDefaultModel?.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
-        //        selfView.titleTextView.text = viewModel.modifyDefaultModel?.recordTitle
-        //        selfView.mainTextView.text = viewModel.modifyDefaultModel?.recordContents
-        //        selfView.mainfullTextView.text = viewModel.modifyDefaultModel?.recordContents
-        //        selfView.mainTextView.textColor = .white
-        //        selfView.mainfullTextView.textColor = .white
-        //        selfView.titleTextView.textColor = .white
-        //
-        //    }
+        if type == .create {
+            viewModel.saveRecord(cate: "LYRICS", content: "", isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title:titleText , userid: UserDefaults.standard.integer(forKey: "user"))
+        } else {
+            
+            viewModel.updateRecord(postId: viewModel.modifyDefaultModel?.recordID ?? 0, request: .init(contents: "", title: selfView.titleTextView.text ))
+        }
     }
     
     func setScrollView() {
@@ -159,6 +110,31 @@ class LyricsPasteCreateViewController:BaseViewController {
         super.configureUI()
         setScrollView()
         
+    }
+    
+    private func setCreateViewinfo() {
+        selfView.cateLabel.text = "  | 나만의 가사해석"
+        selfView.circleImageView.setImage(with: viewModel.defaultModel.imageURL)
+        selfView.musicTitleLabel.text = viewModel.defaultModel.musicTitle
+        selfView.subMusicInfoLabel.text = viewModel.defaultModel.subTitle
+
+        // get the current date and time
+        let currentDateTime = Date()
+        
+        // get the user's calendar
+        let userCalendar = Calendar.current
+        
+        // choose which date and time components are needed
+        let requestedComponents: Set<Calendar.Component> = [
+            .year,
+            .month,
+            .day
+        ]
+        
+        // get the components
+        let dateTimeComponents = userCalendar.dateComponents(requestedComponents, from: currentDateTime)
+        
+        selfView.createdField.text = "\(dateTimeComponents.year!) \(dateTimeComponents.month!) \(dateTimeComponents.day!)"
     }
     
     private func bind() {
@@ -224,50 +200,49 @@ class LyricsPasteCreateViewController:BaseViewController {
     }
     
     
-    
-    private func getCate(cate:String) -> String {
-        switch cate {
-        case "한 줄 감상":
-            return "A_LINE"
-        case "노래 속 나의 이야기":
-            return "STORY"
-        case "내 인생의 OST":
-            return "OST"
-        case "나만의 가사해석":
-            return "LYRICS"
-        case "자유 공간":
-            return "FREE"
-        default:
-            return "FREE"
-        }
-    }
-    
 }
 
 
 
 extension LyricsPasteCreateViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView == selfView.titleTextView {
+            if textView.text == "레코드 제목을 입력해주세요" {
+                textView.text = nil
+                textView.textColor = .white
+            }
+        } else {
+            if textView.tag < 1 {
+                textView.tag = textTagCount
+                textTagCount+=1
+            }
             
-        if textView.tag < 1 {
-            textView.tag = textTagCount
-            textTagCount+=1
+            if textView.text == "가사해석을 적어주세요" {
+                textView.text = nil
+                textView.textColor = .white
+            }
         }
-        
-        if textView.text == "레코드 가사해석을 입력해주세요" {
-            textView.text = nil
-            textView.textColor = .white
-        }
-
+     
+       
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         
-        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            textView.text = "레코드 가사해석을 입력해주세요"
-            textView.textColor = .lightGray
-            //selfView.remainTextCount.text = "\(0)/250"
+        if textView == selfView.titleTextView {
+            if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                textView.text = "레코드 제목을 입력해주세요"
+                textView.textColor = .mainGrey7
+                selfView.remainTitleCount.text = "\(0)/36"
+            }
+        } else {
+            if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                textView.text = "가사해석을 적어주세요"
+                textView.textColor = .mainGrey7
+                //selfView.remainTextCount.text = "\(0)/250"
+            }
         }
+        
+      
       
     }
     
@@ -276,11 +251,15 @@ extension LyricsPasteCreateViewController: UITextViewDelegate {
         guard let oldString = textView.text, let newRange = Range(range, in: oldString) else { return true }
         let newString = oldString.replacingCharacters(in: newRange, with: inputString).trimmingCharacters(in: .whitespacesAndNewlines)
         let characterCount = newString.count
-        textCellsArray[textView.tag] = characterCount
-        print(textCellsArray)
-        totalString = textCellsArray.reduce(0,+)
-        guard totalString <= 250 else { return false }
-        selfView.remainTextCount.text =  "\(totalString)/250"
+        if textView == selfView.titleTextView {
+            guard characterCount <= 36 else { return false }
+            selfView.remainTitleCount.text =  "\(characterCount)/36"
+        } else {
+            textCellsArray[textView.tag] = characterCount
+            totalString = textCellsArray.reduce(0,+)
+            guard totalString <= 380 else { return false }
+            selfView.remainTextCount.text =  "\(totalString)/380"
+        }
         
 
         return true

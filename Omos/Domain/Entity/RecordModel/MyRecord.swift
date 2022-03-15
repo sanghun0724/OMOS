@@ -9,26 +9,18 @@ import Foundation
 
 // MARK: - MyRecordElement
 struct MyRecordRespone: Codable {
-       let music: Music
-       let recordID: Int
-       let recordTitle, recordContents: String
-       let recordImageURL: String?
-       let createdDate: String
-       let category: String
-       let viewsCnt, userID: Int
-       let nickname: String
-       let likeCnt, scrapCnt: Int
-       let isLiked, isScraped, isPublic: Bool
+    let category, createdDate: String
+    let isPublic: Bool
+    let music: Music
+    let recordContents: String
+    let recordID: Int
+    let recordTitle: String
 
-       enum CodingKeys: String, CodingKey {
-           case music
-           case recordID = "recordId"
-           case recordTitle, recordContents
-           case recordImageURL = "recordImageUrl"
-           case createdDate, category, viewsCnt
-           case userID = "userId"
-           case nickname, likeCnt, scrapCnt, isLiked, isScraped, isPublic
-       }
+    enum CodingKeys: String, CodingKey {
+        case category, createdDate, isPublic, music, recordContents
+        case recordID = "recordId"
+        case recordTitle
+    }
 }
 
 
@@ -66,4 +58,26 @@ struct PostRespone:Codable {
 
 struct StateRespone:Codable {
     let state:Bool
+}
+
+
+struct DetailRecordResponse:Codable {
+       let category, createdDate: String
+       let isLiked, isPublic, isScraped: Bool
+       let likeCnt: Int
+       let music: Music
+       let nickname, recordContents: String
+       let recordID: Int
+       let recordImageURL: String?
+       let recordTitle: String
+       let scrapCnt, userID, viewsCnt: Int
+
+       enum CodingKeys: String, CodingKey {
+           case category, createdDate, isLiked, isPublic, isScraped, likeCnt, music, nickname, recordContents
+           case recordID = "recordId"
+           case recordImageURL = "recordImageUrl"
+           case recordTitle, scrapCnt
+           case userID = "userId"
+           case viewsCnt
+       }
 }

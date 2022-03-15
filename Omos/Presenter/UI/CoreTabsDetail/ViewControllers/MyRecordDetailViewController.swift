@@ -15,15 +15,15 @@ class MyRecordDetailViewController:BaseViewController {
     let scrollView = UIScrollView()
     var selfView = MyRecordDetailView()
     var selflongView = AllRecordDetailView()
-    let myRecord:MyRecordRespone
+    let postId:Int
     let bottomVC:BottomSheetViewController
     let bottomSheet:MDCBottomSheetController
     let viewModel:MyRecordDetailViewModel
     let userId = UserDefaults.standard.integer(forKey: "user")
     let cate:String
     
-    init(myRecord:MyRecordRespone,viewModel:MyRecordDetailViewModel,cate:String) {
-        self.myRecord = myRecord
+    init(posetId:Int,viewModel:MyRecordDetailViewModel,cate:String) {
+        self.postId = posetId
         self.viewModel = viewModel
         self.bottomVC = BottomSheetViewController(type: .MyRecord, myRecordVM: viewModel, AllRecordVM: nil)
         self.bottomSheet = MDCBottomSheetController(contentViewController: bottomVC)
@@ -39,7 +39,8 @@ class MyRecordDetailViewController:BaseViewController {
         super.viewDidLoad()
         setNavigationItems()
         bind()
-        
+        viewModel.myRecordDetailFetch(postId: postId, userId: userId)
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     private func setNavigationItems() {
@@ -61,7 +62,7 @@ class MyRecordDetailViewController:BaseViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        cate == "A_LINE" ? (setShrotData()) : (setLongData())
+        
     }
     
     override func configureUI() {
@@ -102,7 +103,15 @@ class MyRecordDetailViewController:BaseViewController {
     
     
     func bind() {
-        //like button and scrap button
+        
+        viewModel.myRocordDetail
+            .subscribe(onNext: { [weak self] data in
+                self?.navigationController?.navigationBar.isHidden = false
+                guard let record = self?.viewModel.currentMyRecordDetail else { return }
+                self?.cate == "A_LINE" ? (self?.setShrotData(myRecord: record )) : (self?.setLongData(myRecord: record ))
+            }).disposed(by: disposeBag)
+        
+        // like and scrap
         selfViewBind()
         
         viewModel.modify
@@ -110,16 +119,15 @@ class MyRecordDetailViewController:BaseViewController {
                 let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
                 let uc = RecordsUseCase(recordsRepository: rp)
                 let vm = CreateViewModel(usecase: uc)
-                vm.modifyDefaultModel = self?.myRecord
-                let vc = CreateViewController(viewModel: vm, category: (self?.getReverseCate(cate: self?.myRecord.category ?? ""))!, type: .modify)
+                vm.modifyDefaultModel = self?.viewModel.currentMyRecordDetail
+                let vc = CreateViewController(viewModel: vm, category: (self?.getReverseCate(cate: self?.viewModel.currentMyRecordDetail?.category ?? ""))!, type: .modify)
                 self?.navigationController?.pushViewController( vc, animated: true)
                 
             }).disposed(by: disposeBag)
         
         viewModel.delete
             .subscribe(onNext: { [weak self] _ in
-                print("delete\(self?.myRecord.recordID ?? 0)")
-                self?.viewModel.deleteRecord(postId: self?.myRecord.recordID ?? 0)
+                self?.viewModel.deleteRecord(postId: self?.postId ?? 0)
             }).disposed(by: disposeBag)
         
         viewModel.done
@@ -141,7 +149,7 @@ class MyRecordDetailViewController:BaseViewController {
             selfView.likeButton.rx.tap
                 .subscribe(onNext: { [weak self] _ in
                     guard let count = Int(self?.selfView.likeCountLabel.text ?? "0"),
-                          let recordId = self?.myRecord.recordID else { return }
+                          let recordId = self?.postId else { return }
                     
                     if self?.selfView.likeCountLabel.textColor == .mainOrange {
                         //좋아요 취소
@@ -161,7 +169,7 @@ class MyRecordDetailViewController:BaseViewController {
             selfView.scrapButton.rx.tap
                 .subscribe(onNext: { [weak self] _ in
                     guard let scrapCount = Int(self?.selfView.scrapCountLabel.text ?? "10"),
-                          let recordId = self?.myRecord.recordID else { return }
+                          let recordId = self?.postId else { return }
                     
                     if self?.selfView.scrapCountLabel.textColor == .mainOrange {
                         //스크랩 취소
@@ -191,7 +199,7 @@ class MyRecordDetailViewController:BaseViewController {
             selflongView.myView.likeButton.rx.tap
                 .subscribe(onNext: { [weak self] _ in
                     guard let count = Int(self?.selflongView.myView.likeCountLabel.text ?? "0"),
-                          let recordId = self?.myRecord.recordID else { return }
+                          let recordId = self?.postId else { return }
                     
                     if self?.selflongView.myView.likeCountLabel.textColor == .mainOrange {
                         //좋아요 취소
@@ -211,7 +219,7 @@ class MyRecordDetailViewController:BaseViewController {
             selflongView.myView.scrapButton.rx.tap
                 .subscribe(onNext: { [weak self] _ in
                     guard let scrapCount = Int(self?.selflongView.myView.scrapCountLabel.text ?? "0"),
-                          let recordId = self?.myRecord.recordID else { return }
+                          let recordId = self?.postId else { return }
            
                     if self?.selflongView.myView.scrapCountLabel.textColor == .mainOrange {
                         //좋아요 취소
@@ -234,7 +242,7 @@ class MyRecordDetailViewController:BaseViewController {
     
     
     
-    func setShrotData() {
+    func setShrotData(myRecord:DetailRecordResponse) {
         selfView.musicTitleLabel.text = myRecord.music.musicTitle
         selfView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
         selfView.circleImageView.setImage(with: myRecord.music.albumImageURL)
@@ -265,7 +273,7 @@ class MyRecordDetailViewController:BaseViewController {
         
     }
     
-    func setLongData() {
+    func setLongData(myRecord:DetailRecordResponse) {
         selflongView.myView.musicTitleLabel.text = myRecord.music.musicTitle
         selflongView.myView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
         selflongView.myView.circleImageView.setImage(with: myRecord.music.albumImageURL)

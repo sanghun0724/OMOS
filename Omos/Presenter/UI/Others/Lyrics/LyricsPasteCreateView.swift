@@ -151,7 +151,7 @@ class LyricsPasteCreateView: BaseView {
     
     let remainTextCount:UILabel = {
        let label = UILabel()
-        label.text = "0/50"
+        label.text = "0/380"
         label.textColor = .mainGrey4
         return label
     }()
@@ -316,6 +316,9 @@ class LyricsPasteCreateView: BaseView {
             make.bottom.equalTo(lastView.snp.top)
         }
         
+        layoutIfNeeded()
+        circleImageView.layer.cornerRadius = circleImageView.height / 2
+        circleImageView.layer.masksToBounds = true 
         
     }
     
