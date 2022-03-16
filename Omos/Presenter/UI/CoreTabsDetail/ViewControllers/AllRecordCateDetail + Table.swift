@@ -36,15 +36,6 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllrecordLyricsTableCell.identifier, for: indexPath) as! AllrecordLyricsTableCell
                 cell.configureModel(record: record)
                 cell.selectionStyle = . none
-                cell.selfView.myView.tableView.reloadData()
-                
-                DispatchQueue.main.async {
-                    UIView.animate(withDuration: 1.5) {
-                        cell.selfView.myView.tableView.layoutIfNeeded()
-                        cell.selfView.myView.tableHeightConstraint?.update(offset: cell.selfView.myView.tableView.intrinsicContentSize2.height)
-                    }
-                }
-                
               
                 return cell
             case .A_LINE:
@@ -88,6 +79,7 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let record = cateRecords[indexPath.row]
+      
         if Account.currentUser == record.userID {
             let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
             let uc = RecordsUseCase(recordsRepository: rp)
