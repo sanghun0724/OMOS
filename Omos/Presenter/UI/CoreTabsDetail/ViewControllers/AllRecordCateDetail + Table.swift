@@ -36,6 +36,9 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllrecordLyricsTableCell.identifier, for: indexPath) as! AllrecordLyricsTableCell
                 cell.configureModel(record: record)
                 cell.selectionStyle = . none
+                
+                cell.selfView.myView.tableView.layoutIfNeeded()
+                cell.selfView.myView.tableHeightConstraint?.update(offset: cell.selfView.myView.tableView.contentSize.height)
                 return cell
             case .A_LINE:
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateShortDetailCell.identifier, for: indexPath) as! AllRecordCateShortDetailCell
@@ -118,6 +121,7 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
         if cell.height == 44.0 { return }
         shortCellHeights[indexPath] = cell.height
         longCellHeights[indexPath] = cell.height
+        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

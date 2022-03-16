@@ -66,6 +66,12 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.selfView.tableView.layoutIfNeeded()
+        self.view.layoutIfNeeded()
+    }
+    
     override func configureUI() {
         super.configureUI()
         selfView.emptyView.isHidden = true 

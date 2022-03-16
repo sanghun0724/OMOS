@@ -29,6 +29,8 @@ class AllrecordLyricsTableCell:UITableViewCell {
           super.init(style: style , reuseIdentifier: reuseIdentifier)
         selfView.myView.tableView.dataSource = self
         selfView.myView.tableView.delegate = self
+        
+      
       }
     
     override func layoutSubviews() {
@@ -37,7 +39,12 @@ class AllrecordLyricsTableCell:UITableViewCell {
         
         selfView.myView.circleImageView.layer.cornerRadius = selfView.myView.circleImageView.height / 2
         selfView.myView.circleImageView.layer.masksToBounds = true
+        selfView.myView.tableView.reloadData()
+        self.contentView.layoutIfNeeded()
+        selfView.myView.tableView.layoutIfNeeded()
     }
+    
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -50,7 +57,7 @@ class AllrecordLyricsTableCell:UITableViewCell {
         selfView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        self.contentView.autoresizingMask = [.flexibleHeight,.flexibleWidth]
+
     }
     
     override func prepareForReuse() {
@@ -146,26 +153,26 @@ extension AllrecordLyricsTableCell:UITableViewDelegate,UITableViewDataSource {
             }
             cell.label.text = lyricsArr[indexPath.row/2]
             cell.selectionStyle = .none
+            cell.layoutIfNeeded()
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: TextTableCell.identifier, for: indexPath) as! TextTableCell
             cell.textView.text = lyricsArr[indexPath.row/2+1]
             cell.selectionStyle = .none
+            cell.textView.isUserInteractionEnabled = false
+            cell.textView.textColor = .white
+            cell.layoutIfNeeded()
             return cell
         }
     }
     
     
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 500
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-         tableView.layoutIfNeeded()
-         selfView.myView.tableHeightConstraint?.update(offset: ceil(selfView.myView.tableView.contentSize.height) )
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat.leastNormalMagnitude
     }
     
-    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-      
-    }
 }

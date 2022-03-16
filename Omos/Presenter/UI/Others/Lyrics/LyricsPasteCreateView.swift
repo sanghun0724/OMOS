@@ -101,14 +101,16 @@ class LyricsPasteCreateView: BaseView {
     }()
     
     /// 3
-    let tableView:UITableView = {
-       let table = UITableView()
+    let tableView:IntrinsicTableView = {
+       let table = IntrinsicTableView()
         table.register(LyriscTableCell.self, forCellReuseIdentifier: LyriscTableCell.identifier)
         table.register(TextTableCell.self, forCellReuseIdentifier: TextTableCell.identifier)
         table.backgroundColor = .mainBackGround
         table.separatorStyle = .none
-        table.estimatedRowHeight = 500
-        //table.rowHeight = UITableView.automaticDimension
+        table.estimatedRowHeight = 190
+        table.rowHeight = UITableView.automaticDimension
+        table.estimatedSectionHeaderHeight = 0
+        table.estimatedSectionFooterHeight = 0
         table.showsVerticalScrollIndicator = false
         table.automaticallyAdjustsScrollIndicatorInsets = false
         table.isScrollEnabled = false 

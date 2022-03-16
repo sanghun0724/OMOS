@@ -23,11 +23,13 @@ extension LyricsPasteCreateViewController:UITableViewDelegate,UITableViewDataSou
             }
             cell.label.text = viewModel.lyricsStringArray[indexPath.row/2]
             cell.selectionStyle = .none
+            cell.layoutIfNeeded()
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: TextTableCell.identifier, for: indexPath) as! TextTableCell
             cell.textView.delegate = self
             cell.selectionStyle = .none
+            cell.layoutIfNeeded()
             return cell
         }
        

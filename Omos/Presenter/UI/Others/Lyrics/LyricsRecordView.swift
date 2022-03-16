@@ -105,7 +105,7 @@ class LyricsRecordView:BaseView {
         self.addSubview(myView)
         
         myView.imageAddButton.isHidden = true
-        myView.titleTextView.isEditable = false
+        myView.titleTextView.isUserInteractionEnabled = false 
         myView.titleTextView.textColor = .white
         myView.lockButton.isHidden = true
         myView.remainTitle.isHidden = true
