@@ -11,7 +11,9 @@ import RxSwift
 class AllRecordSearchDetailViewModel:BaseViewModel {
     
     
-    
+    let recentFilter = PublishSubject<Bool>()
+    let likeFilter = PublishSubject<Bool>()
+    let randomFilter = PublishSubject<Bool>()
     let loading = BehaviorSubject<Bool>(value:false)
     let oneMusicRecords = PublishSubject<[OneMusicRecordRespone]>()
     var currentOneMusicRecords:[OneMusicRecordRespone] = []

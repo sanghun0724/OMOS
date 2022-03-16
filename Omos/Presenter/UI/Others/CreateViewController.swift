@@ -234,8 +234,6 @@ class CreateViewController:BaseViewController {
                 make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             }
             selfView.snp.makeConstraints { make in
-//                make.leading.trailing.bottom.equalToSuperview()
-//                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
                 make.centerX.equalToSuperview()
                 make.width.equalToSuperview()
                 make.top.equalToSuperview()

@@ -54,15 +54,8 @@ class LyricsPasteViewController:BaseViewController {
             let nsRange = NSRange(range, in: text)
 
             if  let substring = substring,
-                !substring.isEmpty,
-                let start = textView.position(from: textView.beginningOfDocument, offset: nsRange.location),
-                let end = textView.position(from: start, offset: nsRange.length)
-               // let textRange = self.textView.textRange(from: start, to: end)
-            {
-                if substring != "" {
+                !substring.isEmpty {
                     lyricsArr.append(substring)
-                }
-
             }
         }
   

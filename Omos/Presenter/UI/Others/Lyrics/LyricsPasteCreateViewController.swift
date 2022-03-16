@@ -63,7 +63,12 @@ class LyricsPasteCreateViewController:BaseViewController {
         let doneButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(didTapDone))
         doneButton.tintColor = .white
         self.navigationItem.rightBarButtonItem = doneButton
-        
+        enableScrollWhenKeyboardAppeared(scrollView: self.scrollView)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        removeListeners()
     }
     
     @objc func didTapDone() {

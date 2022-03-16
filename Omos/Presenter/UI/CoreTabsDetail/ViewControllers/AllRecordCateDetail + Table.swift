@@ -30,13 +30,12 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let record = cateRecords[indexPath.row]
+            guard let record = cateRecords[safe:indexPath.row] else { return UITableViewCell() }
             switch self.myCateType {
             case .LYRICS:
-                let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateShortDetailCell.identifier, for: indexPath) as! AllRecordCateShortDetailCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: AllrecordLyricsTableCell.identifier, for: indexPath) as! AllrecordLyricsTableCell
                 cell.configureModel(record: record)
                 cell.selectionStyle = . none
-                cell.myView.lockButton.isHidden = true 
                 return cell
             case .A_LINE:
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateShortDetailCell.identifier, for: indexPath) as! AllRecordCateShortDetailCell
@@ -96,16 +95,14 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
     }
     
     
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
             switch self.myCateType {
             case .LYRICS:
-                return shortCellHeights[indexPath] ?? 100
+                return UITableView.automaticDimension
             case .A_LINE:
                 return shortCellHeights[indexPath] ?? Constant.mainHeight * 0.63
             default:
-                print(longCellHeights[indexPath])
                 return longCellHeights[indexPath] ?? UITableView.automaticDimension
             }
         }
@@ -114,6 +111,7 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        tableView.layoutIfNeeded()
     }
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {

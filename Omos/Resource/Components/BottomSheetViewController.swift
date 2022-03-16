@@ -11,19 +11,22 @@ import MaterialComponents.MaterialBottomSheet
 
 enum SheetType {
     case MyRecord
-    case AllRecord
+    case AllcateRecord
+    case searchTrack
 }
 
 class BottomSheetViewController:UIViewController {
     
     let type:SheetType
     let myRecordVM:MyRecordDetailViewModel?
-    let AllRecordVM:AllRecordViewModel?
+    let allRecordVM:AllRecordCateDetailViewModel?
+    let searchTrackVM:AllRecordSearchDetailViewModel?
     
-    init(type:SheetType,myRecordVM:MyRecordDetailViewModel?,AllRecordVM:AllRecordViewModel?) {
+    init(type:SheetType,myRecordVM:MyRecordDetailViewModel?,allRecordVM:AllRecordCateDetailViewModel?,searchTrackVM:AllRecordSearchDetailViewModel?) {
         self.type = type
         self.myRecordVM = myRecordVM
-        self.AllRecordVM = AllRecordVM
+        self.allRecordVM = allRecordVM
+        self.searchTrackVM = searchTrackVM
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -35,6 +38,7 @@ class BottomSheetViewController:UIViewController {
         let table = UITableView()
       
         table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        table.register(filterCell.self, forCellReuseIdentifier: filterCell.identifier)
         return table
     }()
     
@@ -61,9 +65,9 @@ extension BottomSheetViewController:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! UITableViewCell
-        cell.backgroundColor = .mainBackGround
         if type == .MyRecord {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! UITableViewCell
+            cell.backgroundColor = .mainBackGround
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "삭제"
@@ -77,9 +81,26 @@ extension BottomSheetViewController:UITableViewDelegate,UITableViewDataSource {
             }
          
             return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: filterCell.identifier, for: indexPath) as! filterCell
+            cell.backgroundColor = .mainBackGround
+            cell.checkImageView.isHidden = true
+            switch indexPath.row {
+            case 0:
+                cell.filterLabel.text = "최신순"
+            case 1:
+                cell.filterLabel.text = "공감순"
+            case 2:
+                cell.filterLabel.text = "랜덤순"
+                cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
+                cell.directionalLayoutMargins = .zero
+            default:
+                cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
+                cell.directionalLayoutMargins = .zero
+            }
+            return cell
         }
         
-        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -99,7 +120,77 @@ extension BottomSheetViewController:UITableViewDelegate,UITableViewDataSource {
             default:
                 print("defualt")
             }
+        } else if type == .AllcateRecord {
+            switch indexPath.row {
+            case 0:
+                allRecordVM?.recentFilter.onNext(true)
+            case 1:
+                allRecordVM?.likeFilter.onNext(true)
+            case 2:
+                allRecordVM?.randomFilter.onNext(true)
+            default:
+                print("defualt")
+            }
+        } else {
+            switch indexPath.row {
+            case 0:
+                searchTrackVM?.recentFilter.onNext(true)
+            case 1:
+                searchTrackVM?.likeFilter.onNext(true)
+            case 2:
+                searchTrackVM?.randomFilter.onNext(true)
+            default:
+                print("defualt")
+            }
         }
     }
+    
+}
+
+
+
+class filterCell:UITableViewCell {
+    static let identifier = "filterCell"
+    
+    
+    let filterLabel:UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    
+    let checkImageView:UIImageView = {
+        let imageView = UIImageView(image:UIImage(named: "check"))
+        return imageView
+    }()
+    
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        configureUI()
+    }
+    
+    func configureUI() {
+        self.addSubview(filterLabel)
+        self.addSubview(checkImageView)
+        
+        filterLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(16)
+            make.centerY.equalToSuperview()
+            filterLabel.sizeToFit()
+        }
+        
+        checkImageView.snp.makeConstraints { make in
+            make.leading.equalTo(filterLabel.snp.trailing).offset(8)
+            make.height.equalTo(filterLabel)
+            make.width.equalTo(checkImageView.snp.height)
+            make.centerY.equalToSuperview()
+        }
+        
+    }
+    
+    
+    
+    
+    
     
 }

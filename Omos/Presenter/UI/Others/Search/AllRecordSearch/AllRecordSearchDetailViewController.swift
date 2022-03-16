@@ -8,12 +8,15 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import MaterialComponents.MaterialBottomSheet
 
 class AllRecordSearchDetailViewController:BaseViewController , UIScrollViewDelegate {
 
     let selfView = AllRecordCateDetailView()
     var expandedIndexSet : IndexSet = []
 
+    let bottomVC:BottomSheetViewController
+    let bottomSheet:MDCBottomSheetController
     var isPaging = false
     var hasNextPage = false
     var currentPage = -1
@@ -21,10 +24,13 @@ class AllRecordSearchDetailViewController:BaseViewController , UIScrollViewDeleg
     var longCellHeights:[IndexPath:CGFloat] = [:]
     let viewModel:AllRecordSearchDetailViewModel
     let musicId:String
+    var filterType = "date"
 
     init(viewModel:AllRecordSearchDetailViewModel,musicId:String) {
         self.viewModel = viewModel
         self.musicId = musicId
+        self.bottomVC = BottomSheetViewController(type: .searchTrack, myRecordVM: nil, allRecordVM: nil, searchTrackVM: viewModel)
+        self.bottomSheet = MDCBottomSheetController(contentViewController: bottomVC)
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -36,6 +42,7 @@ class AllRecordSearchDetailViewController:BaseViewController , UIScrollViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
+        bottomSheet.delegate = self
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         fetchRecord()
@@ -44,6 +51,15 @@ class AllRecordSearchDetailViewController:BaseViewController , UIScrollViewDeleg
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
+        let filterButton = UIBarButtonItem(image: UIImage(named: "filter"), style: .plain, target: self, action: #selector(didTapfilterButton))
+        filterButton.tintColor = .white
+        self.navigationItem.rightBarButtonItem = filterButton
+    }
+    
+    @objc func didTapfilterButton() {
+        self.navigationItem.rightBarButtonItem?.tintColor = .mainOrange
+        bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = Constant.mainHeight * 0.28
+        self.present(bottomSheet,animated: true)
         
     }
 
@@ -78,12 +94,35 @@ class AllRecordSearchDetailViewController:BaseViewController , UIScrollViewDeleg
             .subscribe(onNext:{ [weak self] empty in
                 self?.selfView.emptyView.isHidden = !empty
             }).disposed(by: disposeBag)
+        
+        viewModel.recentFilter
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.currentOneMusicRecords = []
+                self?.filterType = "date"
+                self?.fetchRecord()
+                self?.selfView.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            }).disposed(by: disposeBag)
+        
+        viewModel.likeFilter
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.currentOneMusicRecords = []
+                self?.fetchRecord()
+                self?.selfView.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            }).disposed(by: disposeBag)
+        
+        viewModel.randomFilter
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.currentOneMusicRecords = []
+                self?.filterType = "random"
+                self?.fetchRecord()
+                self?.selfView.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            }).disposed(by: disposeBag)
     }
 
 
     private func fetchRecord() {
     
-        viewModel.oneMusicRecordsFetch(musicId: self.musicId, request: .init(postId: viewModel.currentOneMusicRecords.last?.recordID, size: 10, userId: UserDefaults.standard.integer(forKey: "user"),sortType: "like"))
+        viewModel.oneMusicRecordsFetch(musicId: self.musicId, request: .init(postId: viewModel.currentOneMusicRecords.last?.recordID, size: 10, userId: Account.currentUser,sortType: filterType))
         //2. 바인딩 하고 도착하면 데이터 append (위에서 하고 있으니 ok)
     }
 
@@ -110,3 +149,8 @@ class AllRecordSearchDetailViewController:BaseViewController , UIScrollViewDeleg
     }
 }
 
+extension AllRecordSearchDetailViewController: MDCBottomSheetControllerDelegate {
+    func bottomSheetControllerDidDismissBottomSheet(_ controller: MDCBottomSheetController) {
+        self.navigationItem.rightBarButtonItem?.tintColor = .white
+    }
+}

@@ -27,7 +27,7 @@ class MyRecordDetailViewController:BaseViewController {
     init(posetId:Int,viewModel:MyRecordDetailViewModel,cate:String) {
         self.postId = posetId
         self.viewModel = viewModel
-        self.bottomVC = BottomSheetViewController(type: .MyRecord, myRecordVM: viewModel, AllRecordVM: nil)
+        self.bottomVC = BottomSheetViewController(type: .MyRecord, myRecordVM: viewModel, allRecordVM: nil, searchTrackVM: nil)
         self.bottomSheet = MDCBottomSheetController(contentViewController: bottomVC)
         self.cate = cate
         super.init(nibName: nil, bundle: nil)
@@ -374,3 +374,8 @@ class InstaDecoTopView:BaseView {
         self.backgroundColor = .mainOrange
     }
 }
+
+
+
+
+

@@ -126,6 +126,8 @@
 		B689A9DC27AEA877005F26E4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9DB27AEA877005F26E4 /* LoginViewController.swift */; };
 		B68FC9A927D6529400BDE475 /* Home + Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68FC9A827D6529300BDE475 /* Home + Table.swift */; };
 		B693049D27C1F84200DC3E90 /* MyRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B693049C27C1F84200DC3E90 /* MyRecordViewModel.swift */; };
+		B693658227E1C57400A8FCBA /* AllrecordLyricsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B693658127E1C57400A8FCBA /* AllrecordLyricsTableCell.swift */; };
+		B693658427E1D0D200A8FCBA /* LyricsRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B693658327E1D0D200A8FCBA /* LyricsRecordView.swift */; };
 		B697F20227E0A29F00F34AB5 /* TodayTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B697F20127E0A29E00F34AB5 /* TodayTarget.swift */; };
 		B697F20527E0A47C00F34AB5 /* Today.swift in Sources */ = {isa = PBXBuildFile; fileRef = B697F20427E0A47C00F34AB5 /* Today.swift */; };
 		B697F20727E0CF7200F34AB5 /* TodayAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B697F20627E0CF7200F34AB5 /* TodayAPI.swift */; };
@@ -315,6 +317,8 @@
 		B689A9DD27AEAD0C005F26E4 /* Omos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Omos.entitlements; sourceTree = "<group>"; };
 		B68FC9A827D6529300BDE475 /* Home + Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Home + Table.swift"; sourceTree = "<group>"; };
 		B693049C27C1F84200DC3E90 /* MyRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordViewModel.swift; sourceTree = "<group>"; };
+		B693658127E1C57400A8FCBA /* AllrecordLyricsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllrecordLyricsTableCell.swift; sourceTree = "<group>"; };
+		B693658327E1D0D200A8FCBA /* LyricsRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsRecordView.swift; sourceTree = "<group>"; };
 		B697F20127E0A29E00F34AB5 /* TodayTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTarget.swift; sourceTree = "<group>"; };
 		B697F20427E0A47C00F34AB5 /* Today.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Today.swift; sourceTree = "<group>"; };
 		B697F20627E0CF7200F34AB5 /* TodayAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayAPI.swift; sourceTree = "<group>"; };
@@ -413,6 +417,8 @@
 				B606195C27DF32E7006508CA /* Lyrics + Table.swift */,
 				B606195927DF2B85006508CA /* LyricsViewModel.swift */,
 				B606195E27DF5ADB006508CA /* LyricsTableCell.swift */,
+				B693658127E1C57400A8FCBA /* AllrecordLyricsTableCell.swift */,
+				B693658327E1D0D200A8FCBA /* LyricsRecordView.swift */,
 			);
 			path = Lyrics;
 			sourceTree = "<group>";
@@ -1139,6 +1145,7 @@
 				B682185627B3A0BE00B58E19 /* SearchViewModel.swift in Sources */,
 				B693049D27C1F84200DC3E90 /* MyRecordViewModel.swift in Sources */,
 				B6183CD027D895C40035AA06 /* AllRecordSearchDetailViewModel.swift in Sources */,
+				B693658427E1D0D200A8FCBA /* LyricsRecordView.swift in Sources */,
 				B6183CD627D8F7490035AA06 /* BottomSheetViewController.swift in Sources */,
 				B689A9DC27AEA877005F26E4 /* LoginViewController.swift in Sources */,
 				B6C969B927D1F44500BA4E58 /* HomeView.swift in Sources */,
@@ -1182,6 +1189,7 @@
 				B682184E27B393BF00B58E19 /* AuthRepository.swift in Sources */,
 				B650873927AF948D0020D2C1 /* HomeViewController.swift in Sources */,
 				B67EF45027B7A9B80023D5D4 /* SignUpView.swift in Sources */,
+				B693658227E1C57400A8FCBA /* AllrecordLyricsTableCell.swift in Sources */,
 				B67EF45727B7AA220023D5D4 /* PrivateLabelView.swift in Sources */,
 				B6183CD227D895D30035AA06 /* AllRecordSearchDetailViewController.swift in Sources */,
 				B6CCBC9B27DA65F4009F8499 /* HomeTableLastCell.swift in Sources */,

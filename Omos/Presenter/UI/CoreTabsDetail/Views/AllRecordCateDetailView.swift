@@ -14,10 +14,10 @@ class AllRecordCateDetailView:BaseView {
        let table = UITableView()
         table.register(AllRecordCateLongDetailCell.self, forCellReuseIdentifier: AllRecordCateLongDetailCell.identifier)
         table.register(AllRecordCateShortDetailCell.self, forCellReuseIdentifier: AllRecordCateShortDetailCell.identifier)
+        table.register(AllrecordLyricsTableCell.self, forCellReuseIdentifier: AllrecordLyricsTableCell.identifier)
         table.register(LoadingCell.self, forCellReuseIdentifier: LoadingCell.identifier)
         table.backgroundColor = .mainBackGround
-        table.rowHeight = UITableView.automaticDimension
-        table.estimatedRowHeight = UITableView.automaticDimension
+        table.estimatedRowHeight = 500
         table.separatorStyle = .none
         table.showsVerticalScrollIndicator = false
         table.automaticallyAdjustsScrollIndicatorInsets = false

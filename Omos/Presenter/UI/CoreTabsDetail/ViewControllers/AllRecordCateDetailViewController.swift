@@ -8,17 +8,20 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import MaterialComponents.MaterialBottomSheet
 
 class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegate {
     
     let selfView = AllRecordCateDetailView()
     var expandedIndexSet : IndexSet = []
-    
+    let bottomVC:BottomSheetViewController
+    let bottomSheet:MDCBottomSheetController
     var isPaging = false
     var hasNextPage = false
     var currentPage = -1
     var shortCellHeights:[IndexPath:CGFloat] = [:]
     var longCellHeights:[IndexPath:CGFloat] = [:]
+    var filterType = "date"
     
     var cateRecords:[CategoryRespone] = []
     let viewModel:AllRecordCateDetailViewModel
@@ -27,6 +30,8 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
     init(viewModel:AllRecordCateDetailViewModel,cateType:cateType) {
         self.viewModel = viewModel
         self.myCateType = cateType
+        self.bottomVC = BottomSheetViewController(type: .AllcateRecord, myRecordVM: nil, allRecordVM: viewModel, searchTrackVM: nil)
+        self.bottomSheet = MDCBottomSheetController(contentViewController: bottomVC)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -37,10 +42,22 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .mainBackGround
         bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         fetchRecord()
+        let filterButton = UIBarButtonItem(image: UIImage(named: "filter"), style: .plain, target: self, action: #selector(didTapfilterButton))
+        filterButton.tintColor = .white
+        self.navigationItem.rightBarButtonItem = filterButton
+        bottomSheet.delegate = self
+    }
+    
+    @objc func didTapfilterButton() {
+        self.navigationItem.rightBarButtonItem?.tintColor = .mainOrange
+        bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = Constant.mainHeight * 0.28
+        self.present(bottomSheet,animated: true)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,6 +95,32 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
                 self?.selfView.loadingView.isHidden = !loading
             }).disposed(by: disposeBag)
         
+        viewModel.recentFilter
+            .subscribe(onNext: { [weak self] _ in
+                self?.cateRecords = []
+                self?.viewModel.currentCateRecords = []
+                self?.filterType = "date"
+                self?.fetchRecord()
+                self?.selfView.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            }).disposed(by: disposeBag)
+        
+        viewModel.likeFilter
+            .subscribe(onNext: { [weak self] _ in
+                self?.cateRecords = []
+                self?.viewModel.currentCateRecords = []
+                self?.filterType = "like"
+                self?.fetchRecord()
+                self?.selfView.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            }).disposed(by: disposeBag)
+        
+        viewModel.randomFilter
+            .subscribe(onNext: { [weak self] _ in
+                self?.cateRecords = []
+                self?.viewModel.currentCateRecords = []
+                self?.filterType = "random"
+                self?.fetchRecord()
+                self?.selfView.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            }).disposed(by: disposeBag)
         
     }
     
@@ -105,7 +148,7 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
     private func fetchRecord() {
         //1. 데이터 부르기 마지막 포스트아이디
         
-        viewModel.selectRecordsShow(type: self.myCateType, postId:viewModel.currentCateRecords.last?.recordID , size: 3, sort: "like", userid: UserDefaults.standard.integer(forKey: "user"))
+        viewModel.selectRecordsShow(type: self.myCateType, postId:viewModel.currentCateRecords.last?.recordID , size: 10, sort: filterType, userid: Account.currentUser)
         //2. 바인딩 하고 도착하면 데이터 append (위에서 하고 있으니 ok)
     }
     
@@ -129,5 +172,12 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
 //                beginPaging()
 //            }
 //        }
+    }
+}
+
+
+extension AllRecordCateDetailViewController: MDCBottomSheetControllerDelegate {
+    func bottomSheetControllerDidDismissBottomSheet(_ controller: MDCBottomSheetController) {
+        self.navigationItem.rightBarButtonItem?.tintColor = .white
     }
 }

@@ -68,7 +68,7 @@ class LyricsPasteCreateView: BaseView {
         let textView = UITextView()
         textView.text = "레코드 제목을 입력해주세요"
         textView.font = .systemFont(ofSize: 22)
-        textView.textColor = .secondarySystemFill
+        textView.textColor = .mainGrey4
         textView.isScrollEnabled = false
         textView.isEditable = true
         textView.backgroundColor = nil
@@ -107,8 +107,8 @@ class LyricsPasteCreateView: BaseView {
         table.register(TextTableCell.self, forCellReuseIdentifier: TextTableCell.identifier)
         table.backgroundColor = .mainBackGround
         table.separatorStyle = .none
-        table.estimatedRowHeight = UITableView.automaticDimension
-        table.rowHeight = UITableView.automaticDimension
+        table.estimatedRowHeight = 500
+        //table.rowHeight = UITableView.automaticDimension
         table.showsVerticalScrollIndicator = false
         table.automaticallyAdjustsScrollIndicatorInsets = false
         table.isScrollEnabled = false 
@@ -312,13 +312,10 @@ class LyricsPasteCreateView: BaseView {
         tableView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(titleImageView.snp.bottom)
-            self.tableHeightConstraint = make.height.equalTo(1200).constraint
-            make.bottom.equalTo(lastView.snp.top)
+            self.tableHeightConstraint = make.height.greaterThanOrEqualTo(1200).constraint
+            make.bottom.equalTo(lastView.snp.top).priority(751)
         }
         
-        layoutIfNeeded()
-        circleImageView.layer.cornerRadius = circleImageView.height / 2
-        circleImageView.layer.masksToBounds = true 
         
     }
     

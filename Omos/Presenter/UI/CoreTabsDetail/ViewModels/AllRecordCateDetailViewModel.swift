@@ -9,8 +9,12 @@ import Foundation
 import RxSwift
 
 
+
 class AllRecordCateDetailViewModel:BaseViewModel {
     
+    let recentFilter = PublishSubject<Bool>()
+    let likeFilter = PublishSubject<Bool>()
+    let randomFilter = PublishSubject<Bool>()
     let loading = BehaviorSubject<Bool>(value:false)
     let cateRecords = BehaviorSubject<[CategoryRespone]>(value: [])
     var currentCateRecords:[CategoryRespone] = []

@@ -27,7 +27,7 @@ extension AllRecordSearchDetailViewController:UITableViewDelegate,UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let record = viewModel.currentOneMusicRecords[indexPath.row]
+            guard let record = viewModel.currentOneMusicRecords[safe:indexPath.row] else { return UITableViewCell() }
             switch record.category {
             case "LYRICS":
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateShortDetailCell.identifier, for: indexPath) as! AllRecordCateShortDetailCell
@@ -72,7 +72,7 @@ extension AllRecordSearchDetailViewController:UITableViewDelegate,UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let record = viewModel.currentOneMusicRecords[indexPath.row]
+        guard let record = viewModel.currentOneMusicRecords[safe:indexPath.row] else { return }
         if Account.currentUser == record.userID {
             let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
             let uc = RecordsUseCase(recordsRepository: rp)
@@ -92,7 +92,7 @@ extension AllRecordSearchDetailViewController:UITableViewDelegate,UITableViewDat
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            let record = viewModel.currentOneMusicRecords[indexPath.row]
+            guard let record = viewModel.currentOneMusicRecords[safe:indexPath.row] else { return 0 }
             switch record.category {
             case "LYRICS":
                 return shortCellHeights[indexPath] ?? 100
