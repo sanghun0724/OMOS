@@ -60,6 +60,13 @@ class CreateViewController:BaseViewController {
         let doneButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(didTapDone))
         doneButton.tintColor = .white
         self.navigationItem.rightBarButtonItem = doneButton
+        enableScrollWhenKeyboardAppeared(scrollView: scrollView)
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        removeListeners()
     }
     
     @objc func didTapDone() {
@@ -218,11 +225,25 @@ class CreateViewController:BaseViewController {
     func setlongTextView(_ category:String) {
         if category == "한 줄 감상" {
             selfView.mainfullTextView.isHidden = true
-            self.view.addSubview(selfView)
-            selfView.snp.makeConstraints { make in
-                make.leading.trailing.bottom.equalToSuperview()
+            self.view.addSubview(scrollView)
+            scrollView.addSubview(selfView)
+            scrollView.snp.makeConstraints { make in
+                make.centerX.equalToSuperview()
+                make.width.equalToSuperview()
+                make.bottom.equalToSuperview()
                 make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             }
+            selfView.snp.makeConstraints { make in
+//                make.leading.trailing.bottom.equalToSuperview()
+//                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+                make.centerX.equalToSuperview()
+                make.width.equalToSuperview()
+                make.top.equalToSuperview()
+                make.bottom.equalToSuperview()
+            }
+            selfView.textCoverView.translatesAutoresizingMaskIntoConstraints = false
+            selfView.textCoverView.heightAnchor.constraint(equalToConstant: Constant.mainHeight * 0.49).isActive = true
+            scrollView.showsVerticalScrollIndicator = false
             return
         }
         
@@ -360,7 +381,7 @@ extension CreateViewController: UITextViewDelegate {
                     constraint.constant =  Constant.mainHeight * 0.49
                 } else {
                     constraint.constant = estimatedSize.height
-                    scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height-scrollView.bounds.height), animated: true)
+                   // scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height-scrollView.bounds.height), animated: true)
                     
                 }
             }
