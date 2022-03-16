@@ -12,6 +12,7 @@ import SnapKit
 import YPImagePicker
 import Mantis
 import Combine
+import KakaoSDKUser
 
 
 class LyricsPasteCreateViewController:BaseViewController {
@@ -53,7 +54,8 @@ class LyricsPasteCreateViewController:BaseViewController {
         selfView.tableView.layoutIfNeeded()
         selfView.tableView.reloadData()
         // selfView.tableHeightConstraint!.update(offset: selfView.tableView.contentSize.height)
-        print(selfView.tableView.contentSize.height)
+        selfView.tableView.layoutIfNeeded()
+        selfView.tableHeightConstraint!.update(offset: selfView.tableView.intrinsicContentSize2.height )
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,22 +75,26 @@ class LyricsPasteCreateViewController:BaseViewController {
     
     @objc func didTapDone() {
         guard let titleText = selfView.titleTextView.text else {
-            print("get away")
             return
         }
+        var content = ""
         selfView.tableView.visibleCells.forEach { cell in
             if let cell = cell as? LyriscTableCell {
-             
-            } else {
-                
+               content += cell.label.text ?? ""  + "\n "
+            } else if let cell = cell as? TextTableCell {
+                guard let desc = cell.textView.text else {
+                    //alret
+                    return
+                }
+                content += desc + "\n "
             }
         }
         
         if type == .create {
-            viewModel.saveRecord(cate: "LYRICS", content: "", isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title:titleText , userid: UserDefaults.standard.integer(forKey: "user"))
+            viewModel.saveRecord(cate: "LYRICS", content: content, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title:titleText , userid: Account.currentUser)
         } else {
             
-            viewModel.updateRecord(postId: viewModel.modifyDefaultModel?.recordID ?? 0, request: .init(contents: "", title: selfView.titleTextView.text ))
+            viewModel.updateRecord(postId: viewModel.modifyDefaultModel?.recordID ?? 0, request: .init(contents: content, title: selfView.titleTextView.text ))
         }
     }
     

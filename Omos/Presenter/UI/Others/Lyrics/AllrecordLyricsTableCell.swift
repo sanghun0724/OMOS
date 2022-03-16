@@ -20,6 +20,7 @@ class AllrecordLyricsTableCell:UITableViewCell {
                     self?.lyricsArr.append(substring)
                 }
             }
+            print(lyricsArr)
             selfView.myView.tableView.reloadData()
         }
     }
@@ -39,9 +40,6 @@ class AllrecordLyricsTableCell:UITableViewCell {
         
         selfView.myView.circleImageView.layer.cornerRadius = selfView.myView.circleImageView.height / 2
         selfView.myView.circleImageView.layer.masksToBounds = true
-        selfView.myView.tableView.reloadData()
-        self.contentView.layoutIfNeeded()
-        selfView.myView.tableView.layoutIfNeeded()
     }
     
     
@@ -142,6 +140,7 @@ class AllrecordLyricsTableCell:UITableViewCell {
 
 extension AllrecordLyricsTableCell:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print( "cell count \(lyricsArr.count)")
         return lyricsArr.count
     }
     

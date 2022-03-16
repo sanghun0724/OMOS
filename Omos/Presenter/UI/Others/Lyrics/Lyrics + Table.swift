@@ -48,8 +48,7 @@ extension LyricsPasteCreateViewController:UITableViewDelegate,UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        tableView.layoutIfNeeded()
-        selfView.tableHeightConstraint!.update(offset: selfView.tableView.contentSize.height )
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -94,6 +94,7 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
                 self?.hasNextPage = self?.cateRecords.count ?? 0 > 300 ? false : true //다음페이지 있는지 확인
                 self?.isPaging = false //페이징 종료
                 self?.selfView.tableView.reloadData()
+                self?.selfView.layoutIfNeeded()
             }).disposed(by: disposeBag)
         
         viewModel.loading
