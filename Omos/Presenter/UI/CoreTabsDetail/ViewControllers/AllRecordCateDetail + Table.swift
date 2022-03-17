@@ -49,24 +49,24 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
                 print("cell reload")
                 if expandedIndexSet.contains(indexPath.row) {
                     cell.layoutIfNeeded()
-                    cell.myView.myView.mainLabelView.numberOfLines = 0
-                    cell.myView.myView.mainLabelView.sizeToFit()
-                    cell.myView.myView.mainLabelView.setNeedsLayout()
-                    cell.myView.myView.mainLabelView.layoutIfNeeded()
-                    print(cell.myView.myView.mainLabelView.height)
+                    cell.myView.mainLabelView.numberOfLines = 0
+                    cell.myView.mainLabelView.sizeToFit()
+                    cell.myView.mainLabelView.setNeedsLayout()
+                    cell.myView.mainLabelView.layoutIfNeeded()
+                    print(cell.myView.mainLabelView.height)
                     cell.myView.readMoreButton.isHidden = true
                     print("here here")
                 } else {
-                    if cell.myView.myView.mainLabelView.maxNumberOfLines < 4 {
+                    if cell.myView.mainLabelView.maxNumberOfLines < 4 {
                         cell.myView.readMoreButton.isHidden = true
                     } else {
-                        cell.myView.myView.mainLabelView.numberOfLines = 4
-                        cell.myView.myView.mainLabelView.sizeToFit()
+                        cell.myView.mainLabelView.numberOfLines = 4
+                        cell.myView.mainLabelView.sizeToFit()
                         cell.myView.readMoreButton.isHidden = false
                     }
                 }
                 longCellBind(cell: cell, data: record,indexPath:indexPath)
-                cell.myView.myView.lockButton.isHidden = true
+                cell.myView.lockButton.isHidden = true
                 cell.selectionStyle = . none
                 return cell
             }
@@ -106,16 +106,16 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
             }
         }
         
-        return 500
+        return UITableView.automaticDimension
     }
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            if self.myCateType == .A_LINE  || self.myCateType == .LYRICS {
-                return shortCellHeights[indexPath] ?? Constant.mainHeight * 0.63
-            }
-        }
+//        if indexPath.section == 0 {
+//            if self.myCateType == .A_LINE  || self.myCateType == .LYRICS {
+//                return shortCellHeights[indexPath] ?? Constant.mainHeight * 0.63
+//            }
+//        }
         return UITableView.automaticDimension
     }
     
@@ -280,7 +280,7 @@ extension AllRecordCateDetailViewController {
     }
     
     func longCellBind(cell:AllRecordCateLongDetailCell,data:CategoryRespone,indexPath:IndexPath) {
-        cell.myView.myView.reportButton.rx.tap
+        cell.myView.reportButton.rx.tap
             .asDriver()
             .drive(onNext:{ [weak self] _ in
                 let action = UIAlertAction(title: "신고", style: .default) { alert in
@@ -290,46 +290,46 @@ extension AllRecordCateDetailViewController {
                 self?.presentAlert(title: "신고하기", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
             }).disposed(by: cell.disposeBag)
         
-        cell.myView.myView.likeButton.rx.tap
+        cell.myView.likeButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
-                guard let count = Int(cell.myView.myView.likeCountLabel.text ?? "0")
+                guard let count = Int(cell.myView.likeCountLabel.text ?? "0")
                 else { return }
                 let userId = UserDefaults.standard.integer(forKey: "user")
                 let recordId = data.recordID
                 
-                if cell.myView.myView.likeCountLabel.textColor == .mainOrange {
+                if cell.myView.likeCountLabel.textColor == .mainOrange {
                     //좋아요 취소
-                    cell.myView.myView.likeButton.setImage(UIImage(named:"emptyLove"), for: .normal)
-                    cell.myView.myView.likeCountLabel.textColor = .mainGrey3
-                    cell.myView.myView.likeCountLabel.text = String(count-1)
+                    cell.myView.likeButton.setImage(UIImage(named:"emptyLove"), for: .normal)
+                    cell.myView.likeCountLabel.textColor = .mainGrey3
+                    cell.myView.likeCountLabel.text = String(count-1)
                     self?.viewModel.deleteLike(postId: recordId, userId: userId)
                 } else {
                     //좋아요 클릭
-                    cell.myView.myView.likeButton.setImage(UIImage(named:"fillLove"), for: .normal)
-                    cell.myView.myView.likeCountLabel.textColor = .mainOrange
-                    cell.myView.myView.likeCountLabel.text = String(count+1)
+                    cell.myView.likeButton.setImage(UIImage(named:"fillLove"), for: .normal)
+                    cell.myView.likeCountLabel.textColor = .mainOrange
+                    cell.myView.likeCountLabel.text = String(count+1)
                     self?.viewModel.saveLike(postId: recordId, userId: userId)
                 }
             }).disposed(by: cell.disposeBag)
         
-        cell.myView.myView.scrapButton.rx.tap
+        cell.myView.scrapButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
-                guard let scrapCount = Int(cell.myView.myView.scrapCountLabel.text ?? "0")
+                guard let scrapCount = Int(cell.myView.scrapCountLabel.text ?? "0")
                 else { return }
                 let userId = UserDefaults.standard.integer(forKey: "user")
                 let recordId = data.recordID
                 
-                if cell.myView.myView.scrapCountLabel.textColor == .mainOrange {
+                if cell.myView.scrapCountLabel.textColor == .mainOrange {
                     //좋아요 취소
-                    cell.myView.myView.scrapButton.setImage(UIImage(named:"emptyStar"), for: .normal)
-                    cell.myView.myView.scrapCountLabel.textColor = .mainGrey3
-                    cell.myView.myView.scrapCountLabel.text = String(scrapCount-1)
+                    cell.myView.scrapButton.setImage(UIImage(named:"emptyStar"), for: .normal)
+                    cell.myView.scrapCountLabel.textColor = .mainGrey3
+                    cell.myView.scrapCountLabel.text = String(scrapCount-1)
                     self?.viewModel.deleteScrap(postId: recordId, userId: userId)
                 } else {
                     //좋아요 클릭
-                    cell.myView.myView.scrapButton.setImage(UIImage(named:"fillStar"), for: .normal)
-                    cell.myView.myView.scrapCountLabel.textColor = .mainOrange
-                    cell.myView.myView.scrapCountLabel.text = String(scrapCount+1)
+                    cell.myView.scrapButton.setImage(UIImage(named:"fillStar"), for: .normal)
+                    cell.myView.scrapCountLabel.textColor = .mainOrange
+                    cell.myView.scrapCountLabel.text = String(scrapCount+1)
                     self?.viewModel.saveScrap(postId: recordId, userId: userId)
                 }
             }).disposed(by: cell.disposeBag)
@@ -350,7 +350,7 @@ extension AllRecordCateDetailViewController {
             
         }
         
-        cell.myView.myView.nicknameLabel.rx.tapGesture()
+        cell.myView.nicknameLabel.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
                 let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())

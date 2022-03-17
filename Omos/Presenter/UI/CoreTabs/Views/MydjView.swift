@@ -19,7 +19,6 @@ class MydjView:BaseView {
         table.register(AllRecordCateShortDetailCell.self, forCellReuseIdentifier: AllRecordCateShortDetailCell.identifier)
         table.register(AllRecordCateLongDetailCell.self, forCellReuseIdentifier: AllRecordCateLongDetailCell.identifier)
         table.register(AllrecordLyricsTableCell.self, forCellReuseIdentifier: AllrecordLyricsTableCell.identifier)
-        table.estimatedRowHeight = 500
         table.rowHeight = UITableView.automaticDimension
         table.backgroundColor = .mainBackGround
         table.showsVerticalScrollIndicator = false

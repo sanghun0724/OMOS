@@ -15,7 +15,7 @@ class AllRecordDetailViewController:BaseViewController {
     
     let scrollView = UIScrollView()
     let selfShortView = MyRecordDetailView()
-    let selfLongView = AllRecordDetailView()
+    let selfLongView = recordLongView()
     let selfLyricsView = LyricsRecordView()
     let postId:Int
     let userId:Int
@@ -162,7 +162,7 @@ class AllRecordDetailViewController:BaseViewController {
     
     
     func longBind(myRecord:DetailRecordResponse) {
-        selfLongView.myView.reportButton.rx.tap
+        selfLongView.reportButton.rx.tap
             .asDriver()
             .drive(onNext:{ [weak self] _ in
                 let action = UIAlertAction(title: "신고", style: .default) { alert in
@@ -172,46 +172,46 @@ class AllRecordDetailViewController:BaseViewController {
                 self?.presentAlert(title: "신고하기", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
             }).disposed(by: disposeBag)
         
-        selfLongView.myView.likeButton.rx.tap
+        selfLongView.likeButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
-                guard let count = Int(self?.selfLongView.myView.likeCountLabel.text ?? "0")
+                guard let count = Int(self?.selfLongView.likeCountLabel.text ?? "0")
                 else { return }
                 let userId = UserDefaults.standard.integer(forKey: "user")
                 let recordId = myRecord.recordID
                 
-                if self?.selfLongView.myView.likeCountLabel.textColor == .mainOrange {
+                if self?.selfLongView.likeCountLabel.textColor == .mainOrange {
                     //좋아요 취소
-                    self?.selfLongView.myView.likeButton.setImage(UIImage(named:"emptyLove"), for: .normal)
-                    self?.selfLongView.myView.likeCountLabel.textColor = .mainGrey3
-                    self?.selfLongView.myView.likeCountLabel.text = String(count-1)
+                    self?.selfLongView.likeButton.setImage(UIImage(named:"emptyLove"), for: .normal)
+                    self?.selfLongView.likeCountLabel.textColor = .mainGrey3
+                    self?.selfLongView.likeCountLabel.text = String(count-1)
                     self?.viewModel.deleteLike(postId: recordId, userId: userId)
                 } else {
                     //좋아요 클릭
-                    self?.selfLongView.myView.likeButton.setImage(UIImage(named:"fillLove"), for: .normal)
-                    self?.selfLongView.myView.likeCountLabel.textColor = .mainOrange
-                    self?.selfLongView.myView.likeCountLabel.text = String(count+1)
+                    self?.selfLongView.likeButton.setImage(UIImage(named:"fillLove"), for: .normal)
+                    self?.selfLongView.likeCountLabel.textColor = .mainOrange
+                    self?.selfLongView.likeCountLabel.text = String(count+1)
                     self?.viewModel.saveLike(postId: recordId, userId: userId)
                 }
             }).disposed(by: disposeBag)
         
-        selfLongView.myView.scrapButton.rx.tap
+        selfLongView.scrapButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
-                guard let scrapCount = Int(self?.selfLongView.myView.scrapCountLabel.text ?? "0")
+                guard let scrapCount = Int(self?.selfLongView.scrapCountLabel.text ?? "0")
                 else { return }
                 let userId = UserDefaults.standard.integer(forKey: "user")
                 let recordId = myRecord.recordID
                 print("User\(userId)")
-                if self?.selfLongView.myView.scrapCountLabel.textColor == .mainOrange {
+                if self?.selfLongView.scrapCountLabel.textColor == .mainOrange {
                     //좋아요 취소
-                    self?.selfLongView.myView.scrapButton.setImage(UIImage(named:"emptyStar"), for: .normal)
-                    self?.selfLongView.myView.scrapCountLabel.textColor = .mainGrey3
-                    self?.selfLongView.myView.scrapCountLabel.text = String(scrapCount-1)
+                    self?.selfLongView.scrapButton.setImage(UIImage(named:"emptyStar"), for: .normal)
+                    self?.selfLongView.scrapCountLabel.textColor = .mainGrey3
+                    self?.selfLongView.scrapCountLabel.text = String(scrapCount-1)
                     self?.viewModel.deleteScrap(postId: recordId, userId: userId)
                 } else {
                     //좋아요 클릭
-                    self?.selfLongView.myView.scrapButton.setImage(UIImage(named:"fillStar"), for: .normal)
-                    self?.selfLongView.myView.scrapCountLabel.textColor = .mainOrange
-                    self?.selfLongView.myView.scrapCountLabel.text = String(scrapCount+1)
+                    self?.selfLongView.scrapButton.setImage(UIImage(named:"fillStar"), for: .normal)
+                    self?.selfLongView.scrapCountLabel.textColor = .mainOrange
+                    self?.selfLongView.scrapCountLabel.text = String(scrapCount+1)
                     self?.viewModel.saveScrap(postId: recordId, userId: userId)
                 }
             }).disposed(by: disposeBag)
@@ -221,7 +221,7 @@ class AllRecordDetailViewController:BaseViewController {
     func configLongView() {
         self.view.addSubview(scrollView)
         scrollView.addSubview(selfLongView)
-        selfLongView.myView.lockButton.isHidden = true
+        selfLongView.lockButton.isHidden = true
         scrollView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.equalToSuperview()
@@ -238,30 +238,30 @@ class AllRecordDetailViewController:BaseViewController {
     }
     
     func setLongData(myRecord:DetailRecordResponse) {
-        selfLongView.myView.musicTitleLabel.text = myRecord.music.musicTitle
-        selfLongView.myView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
-        selfLongView.myView.circleImageView.setImage(with: myRecord.music.albumImageURL)
+        selfLongView.musicTitleLabel.text = myRecord.music.musicTitle
+        selfLongView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
+        selfLongView.circleImageView.setImage(with: myRecord.music.albumImageURL)
         //        selfView.backImageView.setImage(with: <#T##String#>)
-        selfLongView.myView.titleLabel.text = myRecord.recordTitle
-        selfLongView.myView.createdLabel.text = myRecord.createdDate
-        selfLongView.myView.likeCountLabel.text = String(myRecord.likeCnt)
-        selfLongView.myView.scrapCountLabel.text = String(myRecord.scrapCnt)
-        selfLongView.myView.cateLabel.text = " | \(myRecord.category )"
-        selfLongView.myView.nicknameLabel.text = myRecord.nickname
+        selfLongView.titleLabel.text = myRecord.recordTitle
+        selfLongView.createdLabel.text = myRecord.createdDate
+        selfLongView.likeCountLabel.text = String(myRecord.likeCnt)
+        selfLongView.scrapCountLabel.text = String(myRecord.scrapCnt)
+        selfLongView.cateLabel.text = " | \(myRecord.category )"
+        selfLongView.nicknameLabel.text = myRecord.nickname
         
         print(myRecord.recordID)
         
         if myRecord.isLiked {
-            selfLongView.myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
-            selfLongView.myView.likeCountLabel.textColor = .mainOrange
+            selfLongView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
+            selfLongView.likeCountLabel.textColor = .mainOrange
         }
         
         if myRecord.isScraped {
-            selfLongView.myView.scrapButton.setImage(UIImage(named: "fillStar"), for: .normal)
-            selfLongView.myView.scrapCountLabel.textColor = .mainOrange
+            selfLongView.scrapButton.setImage(UIImage(named: "fillStar"), for: .normal)
+            selfLongView.scrapCountLabel.textColor = .mainOrange
         }
-        selfLongView.myView.mainLabelView.text = myRecord.recordContents
-        selfLongView.myView.dummyView3.isHidden = true
+        selfLongView.mainLabelView.text = myRecord.recordContents
+        selfLongView.dummyView3.isHidden = true
     }
     
     func configShortView() {

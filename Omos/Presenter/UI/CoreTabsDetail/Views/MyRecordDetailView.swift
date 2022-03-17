@@ -8,8 +8,12 @@
 import Foundation
 import UIKit
 import ReadMoreTextView
+import SnapKit
 
 class MyRecordDetailView:BaseView {
+    
+    var heightConst:Constraint? = nil
+    
     /// 1
     let topLabelView:UIView = {
         let view = UIView()
@@ -176,7 +180,7 @@ class MyRecordDetailView:BaseView {
         ///1
         topLabelView.snp.makeConstraints { make in
             make.left.right.top.equalToSuperview()
-            make.height.equalTo(Constant.mainHeight * 0.068)
+            make.height.equalTo(Constant.mainHeight * 0.077)
         }
         
         circleImageView.snp.makeConstraints { make in
@@ -204,7 +208,7 @@ class MyRecordDetailView:BaseView {
         titleImageView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(topLabelView.snp.bottom)
-            make.height.equalTo(Constant.mainHeight * 0.201)
+            make.height.equalTo(Constant.mainHeight * 0.227)
         }
         
         backImageView.snp.makeConstraints { make in
@@ -242,8 +246,10 @@ class MyRecordDetailView:BaseView {
         
         ///4
         lastView.snp.makeConstraints { make in
-            make.left.right.bottom.equalToSuperview()
-            make.height.equalTo(Constant.mainHeight * 0.007)
+            make.left.right.equalToSuperview()
+            //make.top.equalTo(textCoverView.snp.bottom)
+            make.bottom.equalToSuperview()
+            make.height.equalTo(Constant.mainHeight * 0.07)
         }
         
         dummyView2.snp.makeConstraints { make in
@@ -293,14 +299,15 @@ class MyRecordDetailView:BaseView {
         textCoverView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(titleImageView.snp.bottom)
-            make.height.equalTo(Constant.mainHeight * 0.28)
-            make.bottom.equalTo(lastView.snp.top)
+            self.heightConst = make.height.equalTo(Constant.mainHeight * 0.28).constraint
+            make.bottom.equalTo(lastView.snp.top).priority(999)
         }
         
         mainLabelView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.centerY.equalToSuperview()
         }
+       
         
         
     }

@@ -46,15 +46,15 @@ extension AllRecordSearchDetailViewController:UITableViewDelegate,UITableViewDat
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateLongDetailCell.identifier, for: indexPath) as! AllRecordCateLongDetailCell
                 
                 if expandedIndexSet.contains(indexPath.row) {
-                    cell.myView.myView.mainLabelView.numberOfLines = 0
-                    cell.myView.myView.mainLabelView.sizeToFit()
+                    cell.myView.mainLabelView.numberOfLines = 0
+                    cell.myView.mainLabelView.sizeToFit()
                     cell.myView.readMoreButton.isHidden = true
                 } else {
-                    if cell.myView.myView.mainLabelView.maxNumberOfLines < 4 {
+                    if cell.myView.mainLabelView.maxNumberOfLines < 4 {
                         cell.myView.readMoreButton.isHidden = true
                     } else {
-                        cell.myView.myView.mainLabelView.numberOfLines = 3
-                        cell.myView.myView.mainLabelView.sizeToFit()
+                        cell.myView.mainLabelView.numberOfLines = 3
+                        cell.myView.mainLabelView.sizeToFit()
                         cell.myView.readMoreButton.isHidden = false
                     }
                 }
@@ -268,7 +268,7 @@ extension AllRecordSearchDetailViewController {
     }
     
     func longCellBind(cell:AllRecordCateLongDetailCell,data:OneMusicRecordRespone) {
-        cell.myView.myView.reportButton.rx.tap
+        cell.myView.reportButton.rx.tap
             .asDriver()
             .drive(onNext:{ [weak self] _ in
                 let action = UIAlertAction(title: "신고", style: .default) { alert in
@@ -278,46 +278,46 @@ extension AllRecordSearchDetailViewController {
                 self?.presentAlert(title: "신고하기", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
             }).disposed(by: cell.disposeBag)
         
-        cell.myView.myView.likeButton.rx.tap
+        cell.myView.likeButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
-                guard let count = Int(cell.myView.myView.likeCountLabel.text ?? "0")
+                guard let count = Int(cell.myView.likeCountLabel.text ?? "0")
                 else { return }
                 let userId = UserDefaults.standard.integer(forKey: "user")
                 let recordId = data.recordID
                 
-                if cell.myView.myView.likeCountLabel.textColor == .mainOrange {
+                if cell.myView.likeCountLabel.textColor == .mainOrange {
                     //좋아요 취소
-                    cell.myView.myView.likeButton.setImage(UIImage(named:"emptyLove"), for: .normal)
-                    cell.myView.myView.likeCountLabel.textColor = .mainGrey3
-                    cell.myView.myView.likeCountLabel.text = String(count-1)
+                    cell.myView.likeButton.setImage(UIImage(named:"emptyLove"), for: .normal)
+                    cell.myView.likeCountLabel.textColor = .mainGrey3
+                    cell.myView.likeCountLabel.text = String(count-1)
                     self?.viewModel.deleteLike(postId: recordId, userId: userId)
                 } else {
                     //좋아요 클릭
-                    cell.myView.myView.likeButton.setImage(UIImage(named:"fillLove"), for: .normal)
-                    cell.myView.myView.likeCountLabel.textColor = .mainOrange
-                    cell.myView.myView.likeCountLabel.text = String(count+1)
+                    cell.myView.likeButton.setImage(UIImage(named:"fillLove"), for: .normal)
+                    cell.myView.likeCountLabel.textColor = .mainOrange
+                    cell.myView.likeCountLabel.text = String(count+1)
                     self?.viewModel.saveLike(postId: recordId, userId: userId)
                 }
             }).disposed(by: cell.disposeBag)
         
-        cell.myView.myView.scrapButton.rx.tap
+        cell.myView.scrapButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
-                guard let scrapCount = Int(cell.myView.myView.scrapCountLabel.text ?? "0")
+                guard let scrapCount = Int(cell.myView.scrapCountLabel.text ?? "0")
                 else { return }
                 let userId = UserDefaults.standard.integer(forKey: "user")
                 let recordId = data.recordID
                 
-                if cell.myView.myView.scrapCountLabel.textColor == .mainOrange {
+                if cell.myView.scrapCountLabel.textColor == .mainOrange {
                     //좋아요 취소
-                    cell.myView.myView.scrapButton.setImage(UIImage(named:"emptyStar"), for: .normal)
-                    cell.myView.myView.scrapCountLabel.textColor = .mainGrey3
-                    cell.myView.myView.scrapCountLabel.text = String(scrapCount-1)
+                    cell.myView.scrapButton.setImage(UIImage(named:"emptyStar"), for: .normal)
+                    cell.myView.scrapCountLabel.textColor = .mainGrey3
+                    cell.myView.scrapCountLabel.text = String(scrapCount-1)
                     self?.viewModel.deleteScrap(postId: recordId, userId: userId)
                 } else {
                     //좋아요 클릭
-                    cell.myView.myView.scrapButton.setImage(UIImage(named:"fillStar"), for: .normal)
-                    cell.myView.myView.scrapCountLabel.textColor = .mainOrange
-                    cell.myView.myView.scrapCountLabel.text = String(scrapCount+1)
+                    cell.myView.scrapButton.setImage(UIImage(named:"fillStar"), for: .normal)
+                    cell.myView.scrapCountLabel.textColor = .mainOrange
+                    cell.myView.scrapCountLabel.text = String(scrapCount+1)
                     self?.viewModel.saveScrap(postId: recordId, userId: userId)
                 }
             }).disposed(by: cell.disposeBag)
@@ -338,7 +338,7 @@ extension AllRecordSearchDetailViewController {
             })
             .disposed(by: cell.disposeBag)
         
-        cell.myView.myView.nicknameLabel.rx.tapGesture()
+        cell.myView.nicknameLabel.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
                 let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
