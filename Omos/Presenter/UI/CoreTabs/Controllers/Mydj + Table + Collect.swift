@@ -64,18 +64,7 @@ extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
             switch record.category {
             case "LYRICS":
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllrecordLyricsTableCell.identifier, for: indexPath) as! AllrecordLyricsTableCell
-                if expandedIndexSet2.contains(indexPath.row) {
-                    for i in 0..<cell.selfView.allStackView.arrangedSubviews.count {
-                        if i < 2 { continue }
-                         cell.selfView.allStackView.arrangedSubviews[i].isHidden = false
-                    }
-                    cell.readMoreButton.isHidden = true
-                } else {
-                    for i in 0..<cell.selfView.allStackView.arrangedSubviews.count {
-                        if i < 2 { continue }
-                         cell.selfView.allStackView.arrangedSubviews[i].isHidden = true
-                    }
-                }
+                cell.selfView.tableHeightConstraint?.deactivate()
                 cell.configureMyDjRecord(record: record)
                 cell.selfView.lockButton.isHidden = true
                 lyricsCellBind(cell: cell, data: record,indexPath: indexPath)
@@ -86,7 +75,6 @@ extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
                 cell.configureMyDjRecord(record: record)
                 shortCellBind(cell: cell, data: record)
                 cell.myView.lockButton.isHidden = true
-                
                 cell.selectionStyle = . none
                 return cell
             default:
@@ -97,11 +85,12 @@ extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
                     cell.myView.myView.mainLabelView.sizeToFit()
                     cell.myView.readMoreButton.isHidden = true
                 } else {
-                    cell.myView.myView.mainLabelView.numberOfLines = 3
-                    cell.myView.myView.mainLabelView.sizeToFit()
-                    cell.myView.readMoreButton.isHidden = false
-                    if cell.myView.myView.mainLabelView.calculateMaxLines() < 4 {
+                    if cell.myView.myView.mainLabelView.maxNumberOfLines < 4 {
                         cell.myView.readMoreButton.isHidden = true
+                    } else {
+                        cell.myView.myView.mainLabelView.numberOfLines = 3
+                        cell.myView.myView.mainLabelView.sizeToFit()
+                        cell.myView.readMoreButton.isHidden = false
                     }
                 }
                 cell.configureMyDjRecord(record: record)
@@ -143,27 +132,25 @@ extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         guard  let record = viewModel.currentMyDjRecord[safe: indexPath.row] else { return 500 }
-        if indexPath.section == 0 {
-            if record.category == "LYRICS" {
-                return 500
-            } else if record.category != "A_LINE" {
-                return shortCellHeights[indexPath] ?? 500
-            }
-        }
+//        if indexPath.section == 0 {
+//            if record.category != "A_LINE" && record.category != "LYRICS" {
+//                return 500
+//            }
+//        }
         
-        return 500
-    }
-    
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard  let record = viewModel.currentMyDjRecord[safe: indexPath.row] else { return Constant.mainHeight * 0.63  }
-        if indexPath.section == 0 {
-            if record.category == "A_LINE" {
-                return shortCellHeights[indexPath] ?? Constant.mainHeight * 0.63
-            }
-        }
         return UITableView.automaticDimension
     }
+    
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        guard  let record = viewModel.currentMyDjRecord[safe: indexPath.row] else { return 0 }
+//        if indexPath.section == 0 {
+//            if record.category == "A_LINE" || record.category == "LYRICS" {
+//                return shortCellHeights[indexPath] ?? Constant.mainHeight * 0.63
+//            }
+//        }
+//        return UITableView.automaticDimension
+//    }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     }
@@ -241,15 +228,7 @@ extension MyDJViewController {
                     self?.viewModel.saveScrap(postId: recordId, userId: userId)
                 }
             }).disposed(by: cell.disposeBag)
-        if !(self.expandedIndexSet2.contains(indexPath.row)) {
-          cell.selfView.allStackView.rx.tapGesture()
-            .when(.recognized)
-            .subscribe(onNext: { [weak self] _ in
-                guard let self = self else { return }
-                    self.expandedIndexSet2.insert(indexPath.row)
-                    self.selfView.tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
-            }).disposed(by: cell.disposeBag)
-        }
+        
         
         cell.selfView.nicknameLabel.rx.tapGesture()
             .when(.recognized)

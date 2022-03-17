@@ -50,6 +50,8 @@ struct SaveRespone:Codable {
 struct UpdateRequest:Codable {
     let contents:String
     let title:String
+    let isPublic: Bool
+    let recordImageUrl: String
 }
 
 struct PostRespone:Codable {

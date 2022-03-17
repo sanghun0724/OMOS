@@ -176,7 +176,7 @@ class MyRecordDetailView:BaseView {
         ///1
         topLabelView.snp.makeConstraints { make in
             make.left.right.top.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.11)
+            make.height.equalTo(Constant.mainHeight * 0.068)
         }
         
         circleImageView.snp.makeConstraints { make in
@@ -204,7 +204,7 @@ class MyRecordDetailView:BaseView {
         titleImageView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(topLabelView.snp.bottom)
-            make.height.equalToSuperview().multipliedBy(0.32)
+            make.height.equalTo(Constant.mainHeight * 0.201)
         }
         
         backImageView.snp.makeConstraints { make in
@@ -243,7 +243,7 @@ class MyRecordDetailView:BaseView {
         ///4
         lastView.snp.makeConstraints { make in
             make.left.right.bottom.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.124)
+            make.height.equalTo(Constant.mainHeight * 0.007)
         }
         
         dummyView2.snp.makeConstraints { make in
@@ -293,6 +293,7 @@ class MyRecordDetailView:BaseView {
         textCoverView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(titleImageView.snp.bottom)
+            make.height.equalTo(Constant.mainHeight * 0.28)
             make.bottom.equalTo(lastView.snp.top)
         }
         

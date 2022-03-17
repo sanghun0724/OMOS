@@ -94,7 +94,7 @@ class LyricsPasteCreateViewController:BaseViewController {
             viewModel.saveRecord(cate: "LYRICS", content: content, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title:titleText , userid: Account.currentUser)
         } else {
             
-            viewModel.updateRecord(postId: viewModel.modifyDefaultModel?.recordID ?? 0, request: .init(contents: content, title: selfView.titleTextView.text ))
+            viewModel.updateRecord(postId: viewModel.modifyDefaultModel?.recordID ?? 0, request: .init(contents: content, title: selfView.titleTextView.text,isPublic: !(selfView.lockButton.isSelected),recordImageUrl: viewModel.modifyDefaultModel?.recordImageURL ?? "" ))
         }
     }
     
@@ -177,6 +177,12 @@ class LyricsPasteCreateViewController:BaseViewController {
                         UserDefaults.standard.set(1, forKey: "reload")
                         break
                     }
+                    
+                    if controller.isKind(of: HomeViewController.self) {
+                        self?.navigationController?.popToViewController(controller, animated: true)
+                        break
+                    }
+                    
                     if controller.isKind(of: AllRecordCateDetailViewController.self) {
                         self?.navigationController?.popToViewController(controller, animated: true)
                         

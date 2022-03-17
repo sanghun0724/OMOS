@@ -44,6 +44,7 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.view.backgroundColor = .mainBackGround
         bind()
         selfView.tableView.delegate = self

@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import SnapKit
 
 class LyricsRecordView:BaseView {
     
-    
+    var tableHeightConstraint: Constraint? = nil
+    var subTableHeightConstraint: Constraint? = nil
     ///1
     let topLabelView:UIView = {
         let view = UIView()
@@ -103,12 +105,18 @@ class LyricsRecordView:BaseView {
     
     ///3
     
-    lazy var allStackView:UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.spacing = 10
-        stack.distribution = .fillEqually
-        return stack
+    let tableView:IntrinsicTableView = {
+       let table = IntrinsicTableView()
+        table.register(LyriscTableCell.self, forCellReuseIdentifier: LyriscTableCell.identifier)
+        table.register(TextTableCell.self, forCellReuseIdentifier: TextTableCell.identifier)
+        table.backgroundColor = .mainBackGround
+        table.separatorStyle = .none
+        table.estimatedRowHeight = 190
+        table.rowHeight = UITableView.automaticDimension
+        table.showsVerticalScrollIndicator = false
+        table.automaticallyAdjustsScrollIndicatorInsets = false
+        table.isScrollEnabled = true
+       return table
     }()
     
   
@@ -275,9 +283,11 @@ class LyricsRecordView:BaseView {
             likeCountLabel.sizeToFit()
         }
         
-        allStackView.snp.makeConstraints { make in
+        tableView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(titleImageView.snp.bottom)
+            self.tableHeightConstraint = make.height.equalTo(1200).constraint
+            self.subTableHeightConstraint = make.height.equalTo(Constant.mainHeight * 0.28).constraint
             make.bottom.equalTo(lastView.snp.top).priority(751)
         }
         
@@ -287,7 +297,7 @@ class LyricsRecordView:BaseView {
     func setDefault() {
         self.addSubview(topLabelView)
         self.addSubview(titleImageView)
-        self.addSubview(allStackView)
+        self.addSubview(tableView)
         self.addSubview(lastView)
         topLabelView.addSubview(circleImageView)
         topLabelView.addSubview(musicTitleLabel)

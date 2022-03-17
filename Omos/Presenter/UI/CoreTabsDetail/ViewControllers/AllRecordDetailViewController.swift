@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import KakaoSDKUser
+import SnapKit
 
 class AllRecordDetailViewController:BaseViewController {
     
@@ -20,6 +21,7 @@ class AllRecordDetailViewController:BaseViewController {
     let userId:Int
     let viewModel:AllRecordDetailViewModel
     let loadingView = LoadingView()
+    var lyricsArr:[String] = []
     
     init(viewModel:AllRecordDetailViewModel,postId:Int,userId:Int) {
         self.viewModel = viewModel
@@ -34,16 +36,18 @@ class AllRecordDetailViewController:BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        selfLyricsView.tableView.delegate = self
+        selfLyricsView.tableView.dataSource = self
         viewModel.selectDetailFetch(postId: self.postId, userId: self.userId)
        // setNavigationItems()
         bind()
+     
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
-        self.navigationController?.navigationBar.isHidden = false 
-      
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     private func setNavigationItems() {
@@ -76,6 +80,11 @@ class AllRecordDetailViewController:BaseViewController {
                 } else if data.category == "LYRICS" {
                     self?.setLyricData(myRecord: record)
                     self?.configLyricsView()
+                    self?.selfLyricsView.tableView.reloadData()
+                    self?.selfLyricsView.tableView.layoutIfNeeded()
+                    self?.selfLyricsView.tableView.isScrollEnabled = false
+                    self?.selfLyricsView.tableHeightConstraint!.update(offset: ceil(self?.selfLyricsView.tableView.intrinsicContentSize2.height ?? 100 ) )
+                   
                 } else {
                     self?.configLongView()
                     self?.setLongData(myRecord: record)
@@ -149,12 +158,10 @@ class AllRecordDetailViewController:BaseViewController {
                 
             }).disposed(by: disposeBag)
         
-        
     }
     
     
     func longBind(myRecord:DetailRecordResponse) {
-        
         selfLongView.myView.reportButton.rx.tap
             .asDriver()
             .drive(onNext:{ [weak self] _ in
@@ -313,6 +320,13 @@ class AllRecordDetailViewController:BaseViewController {
     }
     
     func setLyricData(myRecord:DetailRecordResponse) {
+        myRecord.recordContents.enumerateSubstrings(in: myRecord.recordContents.startIndex..., options: .byParagraphs) { [weak self] substring, range, _, stop in
+            if  let substring = substring,
+                !substring.isEmpty {
+                self?.lyricsArr.append(substring)
+            }
+        }
+        print(lyricsArr)
         selfLyricsView.musicTitleLabel.text = myRecord.music.musicTitle
         selfLyricsView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
         selfLyricsView.circleImageView.setImage(with: myRecord.music.albumImageURL)
@@ -321,7 +335,7 @@ class AllRecordDetailViewController:BaseViewController {
         selfLyricsView.createdField.text = myRecord.createdDate
         selfLyricsView.likeCountLabel.text = String(myRecord.likeCnt)
         selfLyricsView.scrapCountLabel.text = String(myRecord.scrapCnt)
-        selfLyricsView.cateLabel.text =  " | \(myRecord.category )"
+        selfLyricsView.cateLabel.text = " | \(myRecord.category )"
         selfLyricsView.nicknameLabel.text = myRecord.nickname
         
         
@@ -334,44 +348,8 @@ class AllRecordDetailViewController:BaseViewController {
             selfLyricsView.scrapButton.setImage(UIImage(named: "fillStar"), for: .normal)
             selfLyricsView.scrapCountLabel.textColor = .mainOrange
         }
-        var lyricsArr:[String] = []
-        myRecord.recordContents.enumerateSubstrings(in: myRecord.recordContents.startIndex..., options: .byParagraphs) { substring, range, _, stop in
-            if  let substring = substring,
-                !substring.isEmpty {
-                lyricsArr.append(substring)
-            }
-        }
-        
-        for i in 0..<lyricsArr.count {
-            let labelView:BasePaddingLabel = {
-                let label = BasePaddingLabel()
-                label.text = ""
-                label.backgroundColor = .LyricsBack
-                label.numberOfLines = 0
-                return label
-            }()
-            
-            selfLyricsView.allStackView.addArrangedSubview(labelView)
-            
-            labelView.snp.makeConstraints { make in
-                make.width.equalToSuperview()
-                labelView.sizeToFit()
-            }
-            if i % 2 == 0 {
-                labelView.text = lyricsArr[i]
-            } else {
-                labelView.backgroundColor = .mainBlack
-                labelView.text = lyricsArr[i]
-            }
-        }
-        selfLyricsView.reloadInputViews()
-        
-       // selfLyricsView.dummyView3.isHidden = true
+      
     }
-    
-    
-    
-    
     
     
 }

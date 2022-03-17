@@ -105,7 +105,7 @@ class LoginTopView:BaseView {
 class CoverView:BaseView {
     
     let imageView:UIImageView = {
-        let imageView = UIImageView(image:UIImage(named: "onboarding_logo"))
+        let imageView = UIImageView(image:UIImage(named: "logo"))
         return imageView
     }()
     

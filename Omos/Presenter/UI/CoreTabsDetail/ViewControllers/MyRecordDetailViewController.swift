@@ -23,6 +23,7 @@ class MyRecordDetailViewController:BaseViewController {
     let viewModel:MyRecordDetailViewModel
     let userId = UserDefaults.standard.integer(forKey: "user")
     let postId:Int
+    var lyricsArr:[String] = []
     
     init(posetId:Int,viewModel:MyRecordDetailViewModel) {
         self.postId = posetId
@@ -154,6 +155,10 @@ class MyRecordDetailViewController:BaseViewController {
                 } else if record.category == "LYRICS" {
                     self?.setLyricData(myRecord: record)
                     self?.configLyricsView()
+                    self?.selfLyricsView.tableView.reloadData()
+                    self?.selfLyricsView.tableView.layoutIfNeeded()
+                    self?.selfLyricsView.tableView.isScrollEnabled = false
+                    self?.selfLyricsView.tableHeightConstraint!.update(offset: ceil(self?.selfLyricsView.tableView.intrinsicContentSize2.height ?? 100 ) )
                 } else {
                     self?.configLong()
                     self?.setLongData(myRecord: record )
@@ -392,6 +397,13 @@ class MyRecordDetailViewController:BaseViewController {
     }
     
     func setLyricData(myRecord:DetailRecordResponse) {
+        myRecord.recordContents.enumerateSubstrings(in: myRecord.recordContents.startIndex..., options: .byParagraphs) { [weak self] substring, range, _, stop in
+            if  let substring = substring,
+                !substring.isEmpty {
+                self?.lyricsArr.append(substring)
+            }
+        }
+        
         selfLyricsView.musicTitleLabel.text = myRecord.music.musicTitle
         selfLyricsView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
         selfLyricsView.circleImageView.setImage(with: myRecord.music.albumImageURL)
@@ -413,39 +425,9 @@ class MyRecordDetailViewController:BaseViewController {
             selfLyricsView.scrapButton.setImage(UIImage(named: "fillStar"), for: .normal)
             selfLyricsView.scrapCountLabel.textColor = .mainOrange
         }
-        var lyricsArr:[String] = []
-        myRecord.recordContents.enumerateSubstrings(in: myRecord.recordContents.startIndex..., options: .byParagraphs) { substring, range, _, stop in
-            if  let substring = substring,
-                !substring.isEmpty {
-                lyricsArr.append(substring)
-            }
-        }
+       
         
-        for i in 0..<lyricsArr.count {
-            let labelView:BasePaddingLabel = {
-                let label = BasePaddingLabel()
-                label.text = ""
-                label.backgroundColor = .LyricsBack
-                label.numberOfLines = 0
-                return label
-            }()
-            
-            selfLyricsView.allStackView.addArrangedSubview(labelView)
-            
-            labelView.snp.makeConstraints { make in
-                make.width.equalToSuperview()
-                labelView.sizeToFit()
-            }
-            if i % 2 == 0 {
-                labelView.text = lyricsArr[i]
-            } else {
-                labelView.backgroundColor = .mainBlack
-                labelView.text = lyricsArr[i]
-            }
-        }
-        selfLyricsView.reloadInputViews()
-        
-       // selfLyricsView.dummyView3.isHidden = true
+    
     }
     
     private func getReverseCate(cate:String) -> String {

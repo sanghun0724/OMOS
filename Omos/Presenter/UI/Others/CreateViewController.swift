@@ -50,8 +50,6 @@ class CreateViewController:BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        selfView.circleImageView.layer.cornerRadius = selfView.circleImageView.height / 2
-        selfView.circleImageView.layer.masksToBounds = true
         setlongTextView(category)
     }
     
@@ -87,7 +85,7 @@ class CreateViewController:BaseViewController {
               }
         
         if type == .create {
-            viewModel.saveRecord(cate: getCate(cate: category), content: text, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: titleText, userid: UserDefaults.standard.integer(forKey: "user"))
+            viewModel.saveRecord(cate: getCate(cate: category), content: text, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: titleText, userid: Account.currentUser)
         } else {
             var recordContent = ""
             if  selfView.mainTextView.text != viewModel.modifyDefaultModel?.recordTitle {
@@ -96,7 +94,7 @@ class CreateViewController:BaseViewController {
                 recordContent = selfView.mainfullTextView.text
             }
             
-            viewModel.updateRecord(postId: viewModel.modifyDefaultModel?.recordID ?? 0, request: .init(contents: recordContent, title: selfView.titleTextView.text ))
+            viewModel.updateRecord(postId: viewModel.modifyDefaultModel?.recordID ?? 0, request: .init(contents: recordContent, title: selfView.titleTextView.text,isPublic:  !(selfView.lockButton.isSelected),recordImageUrl: viewModel.modifyDefaultModel?.recordImageURL ?? "" ))
         }
         
     }
@@ -162,6 +160,11 @@ class CreateViewController:BaseViewController {
                         UserDefaults.standard.set(1, forKey: "reload")
                         break
                     }
+                    
+                    if controller.isKind(of: HomeViewController.self) {
+                        self?.navigationController?.popToViewController(controller, animated: true)
+                        break
+                    }
                     if controller.isKind(of: AllRecordCateDetailViewController.self) {
                         self?.navigationController?.popToViewController(controller, animated: true)
                         
@@ -178,6 +181,8 @@ class CreateViewController:BaseViewController {
                         break
                     }
                 }
+                
+             
                 
                 // print("here is \(self?.navigationController!.viewControllers ?? [UIViewController()])")
             }).disposed(by: disposeBag)

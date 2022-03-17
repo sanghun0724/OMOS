@@ -31,7 +31,7 @@ class HomeView:BaseView {
     let floatingButton:UIButton = {
         let button = UIButton()
         button.backgroundColor = .mainGrey4
-        button.setImage(UIImage(named: "edit2"), for: .normal)
+        button.setImage(UIImage(named: "edit3"), for: .normal)
         return button
     }()
     

@@ -34,6 +34,7 @@ class HomeViewController:BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func configureUI() {
@@ -60,7 +61,7 @@ class HomeViewController:BaseViewController {
                 let rp = SearchRepositoryImpl(searchAPI: SearchAPI())
                 let uc = SearchUseCase(searchRepository: rp)
                 let vm = SearchViewModel(usecase: uc)
-                let vc = SearchViewController(viewModel: vm, searchType: .main)
+                let vc = SearchViewController(viewModel: vm, searchType: .me)
                 self?.navigationController?.pushViewController(vc, animated: true)
             }).disposed(by: disposeBag)
         

@@ -43,6 +43,11 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
         selfView.collectionView.dataSource = self
         viewModel.fetchMyDjList(userId: user)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false 
+    }
 
 
     override func configureUI() {
@@ -69,12 +74,13 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
         viewModel.myDjRecord
             .subscribe(onNext: { [weak self] data in
                 if !data.isEmpty {
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { [weak self] in
                         self?.selfView.tableView.reloadData()
                         self?.selfView.tableView.layoutIfNeeded()
                         self?.selfView.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                        self?.expandedIndexSet = []
+                        self?.expandedIndexSet2 = []
                     }
-                    
                 }
             }).disposed(by: disposeBag)
         
