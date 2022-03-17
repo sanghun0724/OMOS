@@ -89,7 +89,7 @@ extension AllRecordViewController:AllCollectCellprotocol {
             let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
             let uc = RecordsUseCase(recordsRepository: rp)
             let vm = MyRecordDetailViewModel(usecase: uc)
-            let vc = MyRecordDetailViewController(posetId: postId, viewModel: vm, cate: cate)
+            let vc = MyRecordDetailViewController(posetId: postId, viewModel: vm)
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
             let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())

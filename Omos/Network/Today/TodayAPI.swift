@@ -22,8 +22,8 @@ class TodayAPI {
         }
     }
     
-    func lovedRecord(completion:@escaping(Result<LovedResponse,Error>) -> Void) {
-        AF.request(TodayTarget.lovedRecord,interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<LovedResponse>) in
+    func lovedRecord(userId:Int,completion:@escaping(Result<LovedResponse,Error>) -> Void) {
+        AF.request(TodayTarget.lovedRecord(userId:userId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<LovedResponse>) in
             switch response.result {
             case .success(let data):
                 completion(.success(data))

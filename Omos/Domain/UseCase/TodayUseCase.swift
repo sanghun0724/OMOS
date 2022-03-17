@@ -19,8 +19,8 @@ class TodayUseCase {
         return todayRepository.popuralRecord()
     }
     
-    func lovedRecord() -> Single<LovedResponse> {
-        return todayRepository.lovedRecord()
+    func lovedRecord(userId:Int) -> Single<LovedResponse> {
+        return todayRepository.lovedRecord(userId: userId)
     }
     
     func recommendDJRecord() -> Single<[recommendDjResponse]> {

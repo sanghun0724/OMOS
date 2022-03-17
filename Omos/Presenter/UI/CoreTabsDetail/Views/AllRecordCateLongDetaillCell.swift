@@ -8,20 +8,14 @@
 import Foundation
 import UIKit
 import RxSwift
-protocol MyCellDelegate: AnyObject {
-    func readMoreTapped(cell: AllRecordCateLongDetailCell)
-}
 
 class AllRecordCateLongDetailCell:UITableViewCell {
     static let identifier = "AllRecordCateDetailCell"
     var disposeBag = DisposeBag()
-    
-    weak var delegate:MyCellDelegate?
     let myView = CellContainerView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        bind()
     }
     
     required init?(coder: NSCoder) {
@@ -41,16 +35,7 @@ class AllRecordCateLongDetailCell:UITableViewCell {
         }
     }
     
-    func bind() {
-        myView.readMoreButton.rx
-            .tap
-            .asDriver()
-            .drive(onNext:{ [weak self] _ in
-                guard let self = self else { return }
-                self.delegate?.readMoreTapped(cell: self)
-            })
-            .disposed(by: disposeBag)
-    }
+ 
     
     
     
@@ -152,6 +137,9 @@ class CellContainerView:BaseView {
     
     let readMoreButton:UIButton = {
         let button = UIButton()
+        button.setTitle("더 보기", for: .normal)
+        button.setTitleColor(UIColor.mainGrey6, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
         return button
     }()
     
@@ -199,13 +187,15 @@ class CellContainerView:BaseView {
             make.edges.equalToSuperview().inset(16)
         }
         
-        dummyLabel.snp.makeConstraints { make in
-            make.bottom.trailing.equalToSuperview()
-            dummyLabel.sizeToFit()
-        }
+//        dummyLabel.snp.makeConstraints { make in
+//            make.bottom.trailing.equalToSuperview()
+//            dummyLabel.sizeToFit()
+//        }
         
         readMoreButton.snp.makeConstraints { make in
-            make.edges.equalTo(dummyLabel)
+            make.trailing.bottom.equalToSuperview()
+            make.height.equalTo(26)
+            make.width.equalTo(46)
         }
         
         myView.lastView.snp.remakeConstraints { make in

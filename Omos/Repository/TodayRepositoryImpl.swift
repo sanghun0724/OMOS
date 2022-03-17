@@ -31,9 +31,9 @@ class TodayRepositoryImpl:TodayRepository {
         }
     }
     
-    func lovedRecord() -> Single<LovedResponse> {
+    func lovedRecord(userId:Int) -> Single<LovedResponse> {
         return Single<LovedResponse>.create { [weak self] single in
-            self?.todayAPI.lovedRecord( completion: { result in
+            self?.todayAPI.lovedRecord(userId:userId ,completion: { result in
                 switch result {
                 case .success(let data):
                     single(.success(data))

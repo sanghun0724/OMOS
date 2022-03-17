@@ -50,7 +50,8 @@ struct TodayTrackResponse:Codable {
 }
 
 struct recommendDjResponse:Codable {
-    let nickName, profileURL: String
+    let nickName:String
+    let profileURL:String?
     let userID: Int
     
     enum CodingKeys: String, CodingKey {

@@ -31,7 +31,7 @@ class HomeViewModel:BaseViewModel {
     let usecase:TodayUseCase
     
     
-    func allHomeDataFetch() {
+    func allHomeDataFetch(userId:Int) {
         allLoading.accept(true)
         Observable.zip(popuralLoading,lovedLoading,recommendLoading,todayLoading)
         { !($0 && $1 && $2 && $3) }
@@ -41,7 +41,7 @@ class HomeViewModel:BaseViewModel {
             }
         }).disposed(by: disposeBag)
         
-        self.fetchLovedRecord()
+        self.fetchLovedRecord(userId: userId)
         self.fetchPopuralRecord()
         self.fetchRecommendDj()
         self.fetchTodayRecord()
@@ -56,7 +56,7 @@ class HomeViewModel:BaseViewModel {
                 self?.popuralLoading.onNext(false)
                 switch event {
                 case .success(let data):
-                    self?.currentPopuralRecord += data
+                    self?.currentPopuralRecord = data
                     self?.popuralRecord.onNext(data)
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)
@@ -64,9 +64,9 @@ class HomeViewModel:BaseViewModel {
             }).disposed(by: disposeBag)
     }
     
-    func fetchLovedRecord() {
+    func fetchLovedRecord(userId:Int) {
         lovedLoading.onNext(true)
-        usecase.lovedRecord()
+        usecase.lovedRecord(userId:userId)
             .subscribe({ [weak self] event in
                 self?.lovedLoading.onNext(false)
                 switch event {
@@ -86,7 +86,7 @@ class HomeViewModel:BaseViewModel {
                 self?.recommendLoading.onNext(false)
                 switch event {
                 case .success(let data):
-                    self?.currentRecommentRecord += data
+                    self?.currentRecommentRecord = data
                     self?.recommendRecord.onNext(data)
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)

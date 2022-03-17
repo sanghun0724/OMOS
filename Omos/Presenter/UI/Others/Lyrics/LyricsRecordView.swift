@@ -56,6 +56,13 @@ class LyricsRecordView:BaseView {
         return view
     }()
     
+    let lockButton:UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "unlock"), for: .normal)
+        button.setImage(UIImage(named: "lock"), for: .selected)
+        return button
+    }()
+    
  
     
     let titleTextView:UITextView = {
@@ -64,7 +71,7 @@ class LyricsRecordView:BaseView {
         textView.font = .systemFont(ofSize: 22)
         textView.textColor = .mainGrey4
         textView.isScrollEnabled = false
-        textView.isEditable = true
+        textView.isUserInteractionEnabled = false 
         textView.backgroundColor = nil
         textView.autocorrectionType = .no
         textView.autocapitalizationType = .none
@@ -87,20 +94,14 @@ class LyricsRecordView:BaseView {
         return label
     }()
     
-    ///3
-    let labelView:UILabel = {
-        let label = UILabel()
-        label.text = "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:::@@@@::@@@:@:@::@:@:@@@@@:@:@@:@:@::@:@::@@@@@"
-        label.numberOfLines = 0
-        return label
+    let reportButton:UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "report"), for: .normal)
+        return button
     }()
     
-    let labelView2:UILabel = {
-        let label = UILabel()
-        label.text = "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:::@@@@::@@@:@:@::@:@:@@@@@:@:@@:@:@::@:@::@@@@@"
-        label.numberOfLines = 0
-        return label
-    }()
+    
+    ///3
     
     lazy var allStackView:UIStackView = {
         let stack = UIStackView()
@@ -218,13 +219,23 @@ class LyricsRecordView:BaseView {
             titleTextView.sizeToFit()
         }
         
+        reportButton.snp.makeConstraints { make in
+            make.trailing.top.equalToSuperview().inset(16)
+            make.height.width.equalTo(20)
+        }
+        
         cateLabel.snp.makeConstraints { make in
             make.leading.equalTo(createdField.snp.trailing)
             make.centerY.equalTo(createdField)
             cateLabel.sizeToFit()
         }
+        lockButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview().offset(-10)
+            make.width.height.equalTo(18)
+        }
        
-        
+        //4
         lastView.snp.remakeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
@@ -263,9 +274,6 @@ class LyricsRecordView:BaseView {
             make.top.equalTo(likeButton.snp.bottom).offset(3)
             likeCountLabel.sizeToFit()
         }
-       
-        
-        
         
         allStackView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
@@ -289,6 +297,8 @@ class LyricsRecordView:BaseView {
         titleImageView.addSubview(titleTextView)
         titleImageView.addSubview(createdField)
         titleImageView.addSubview(cateLabel)
+        titleImageView.addSubview(reportButton)
+        titleImageView.addSubview(lockButton)
         
         lastView.addSubview(nicknameLabel)
         lastView.addSubview(likeButton)

@@ -7,10 +7,19 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
+import RxGesture
+
+protocol AllrecordLyricsTableCellProtocol: AnyObject {
+    func readMoreTapped(cell: AllrecordLyricsTableCell)
+}
 
 class AllrecordLyricsTableCell:UITableViewCell {
     static let identifier = "AllrecordLyricsTableCell"
-    
+    weak var delegate:AllrecordLyricsTableCellProtocol?
+    var disposeBag = DisposeBag()
+    var hiddenFlag = true
     let selfView = LyricsRecordView()
     var lyricsText:String = "" {
         didSet {
@@ -20,16 +29,27 @@ class AllrecordLyricsTableCell:UITableViewCell {
                     self?.lyricsArr.append(substring)
                 }
             }
-            print("check \(lyricsArr)")
+                print("check \(lyricsArr)")
             setStackViews()
         }
     }
     var lyricsArr:[String] = []
     
+    let readMoreButton:UIButton = {
+        let button = UIButton()
+        button.setTitle("더 보기", for: .normal)
+        button.setTitleColor(.mainGrey6, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
+        return button
+    }()
+    
+    
+    
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
           super.init(style: style , reuseIdentifier: reuseIdentifier)
-        
-        
+               
+
       }
     
     func setStackViews() {
@@ -49,44 +69,28 @@ class AllrecordLyricsTableCell:UITableViewCell {
                 labelView.sizeToFit()
             }
             if i % 2 == 0 {
-                //lyrics
                 labelView.text = lyricsArr[i]
-                if i > 1 {
-                    labelView.isHidden = true
-                }
+
             } else {
                 if i == 1 {
-                    let readMoreButton:UIButton = {
-                        let button = UIButton()
-                        button.backgroundColor = .red
-                        return button
-                    }()
                     
                     labelView.backgroundColor = .mainBlack
                     labelView.addSubview(readMoreButton)
                     
                     readMoreButton.snp.makeConstraints { make in
-                        make.bottom.trailing.equalToSuperview()
-                        make.width.height.equalTo(20)
+                        make.bottom.equalToSuperview()
+                        make.trailing.equalToSuperview()
+                        make.width.equalTo(46)
+                        make.height.equalTo(30)
                     }
                 }
                 
                 labelView.backgroundColor = .mainBlack
                 labelView.text = lyricsArr[i]
-                
-                if i > 1 {
-                    labelView.isHidden = true
-                }
+            
             }
-            
-            
-           
+    
         }
-        selfView.reloadInputViews()
-        selfView.setNeedsLayout()
-        selfView.layoutIfNeeded()
-        self.layoutIfNeeded()
-        self.reloadInputViews()
     }
     
     
@@ -111,11 +115,6 @@ class AllrecordLyricsTableCell:UITableViewCell {
         selfView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
-        
-     
-       
-        
 
     }
     
@@ -124,6 +123,7 @@ class AllrecordLyricsTableCell:UITableViewCell {
         lyricsArr = []
         lyricsText = ""
         selfView.allStackView.removeFullyAllArrangedSubviews()
+        disposeBag = DisposeBag()
     }
     
     func configureModel(record:CategoryRespone) {

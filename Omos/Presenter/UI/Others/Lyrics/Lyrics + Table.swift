@@ -12,7 +12,12 @@ import UIKit
 extension LyricsPasteCreateViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.lyricsStringArray.count * 2
+        if self.type == .modify {
+            return viewModel.lyricsStringArray.count
+        } else {
+            return viewModel.lyricsStringArray.count * 2
+        }
+            
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -21,13 +26,21 @@ extension LyricsPasteCreateViewController:UITableViewDelegate,UITableViewDataSou
             if indexPath.row == 0 {
                 cell.label.text = viewModel.lyricsStringArray[0]
             }
-            cell.label.text = viewModel.lyricsStringArray[indexPath.row/2]
+            if self.type == .modify {
+                cell.label.text = viewModel.lyricsStringArray[indexPath.row]
+            } else {
+                cell.label.text = viewModel.lyricsStringArray[indexPath.row/2]
+            }
+            
             cell.selectionStyle = .none
             cell.layoutIfNeeded()
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: TextTableCell.identifier, for: indexPath) as! TextTableCell
             cell.textView.delegate = self
+            if self.type == .modify {
+                cell.textView.text = viewModel.lyricsStringArray[indexPath.row]
+            }
             cell.selectionStyle = .none
             cell.layoutIfNeeded()
             return cell

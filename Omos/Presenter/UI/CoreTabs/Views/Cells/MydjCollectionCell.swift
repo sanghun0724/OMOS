@@ -84,7 +84,7 @@ class MydjCollectionCell:UICollectionViewCell {
     
     func configureHome(record:recommendDjResponse) {
         self.homeInfo = record
-        djImageView.setImage(with: record.profileURL )
+        djImageView.setImage(with: record.profileURL ?? "" )
         djLabel.text = record.nickName
     }
     

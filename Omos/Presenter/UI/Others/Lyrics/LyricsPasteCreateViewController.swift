@@ -46,7 +46,8 @@ class LyricsPasteCreateViewController:BaseViewController {
         bind()
         
                 if type == .create { setCreateViewinfo() }
-        //        else { setModifyView() }
+                else { setModifyView() }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -54,7 +55,6 @@ class LyricsPasteCreateViewController:BaseViewController {
         selfView.tableView.layoutIfNeeded()
         selfView.tableView.reloadData()
         // selfView.tableHeightConstraint!.update(offset: selfView.tableView.contentSize.height)
-        selfView.tableView.layoutIfNeeded()
         selfView.tableHeightConstraint!.update(offset: selfView.tableView.intrinsicContentSize2.height )
     }
     
@@ -80,13 +80,13 @@ class LyricsPasteCreateViewController:BaseViewController {
         var content = ""
         selfView.tableView.visibleCells.forEach { cell in
             if let cell = cell as? LyriscTableCell {
-               content += cell.label.text ?? ""  + "\n "
+               content += cell.label.text ?? ""  + "\n"
             } else if let cell = cell as? TextTableCell {
                 guard let desc = cell.textView.text else {
                     //alret
                     return
                 }
-                content += desc + "\n "
+                content += desc + "\n"
             }
         }
         
@@ -148,6 +148,19 @@ class LyricsPasteCreateViewController:BaseViewController {
         selfView.createdField.text = "\(dateTimeComponents.year!) \(dateTimeComponents.month!) \(dateTimeComponents.day!)"
     }
     
+    func setModifyView() {
+        print(viewModel.modifyDefaultModel!)
+        selfView.cateLabel.text = "  | 가사 해석"
+        selfView.circleImageView.setImage(with: viewModel.modifyDefaultModel?.music.albumImageURL ?? "")
+        selfView.musicTitleLabel.text = viewModel.modifyDefaultModel?.music.musicTitle
+        selfView.subMusicInfoLabel.text = viewModel.modifyDefaultModel?.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
+        selfView.titleTextView.text = viewModel.modifyDefaultModel?.recordTitle
+        selfView.titleTextView.textColor = .white
+        selfView.remainTitle.text =  "\(viewModel.modifyDefaultModel?.recordTitle.count)/36"
+        selfView.remainTextCount.text = "\(viewModel.modifyDefaultModel?.recordContents.count)/380"
+        
+    }
+    
     private func bind() {
         selfView.imageAddButton.rx.tap
             .asDriver()
@@ -157,14 +170,30 @@ class LyricsPasteCreateViewController:BaseViewController {
         
         viewModel.state
             .subscribe(onNext: { [weak self] info in
-                //info is postid
-                for controller in (self?.navigationController!.viewControllers ?? [UIViewController()] )  as Array {
+                
+                for controller in (self?.navigationController?.viewControllers ?? [UIViewController()] )  as Array {
                     if controller.isKind(of: MyRecordViewController.self) {
                         self?.navigationController?.popToViewController(controller, animated: true)
                         UserDefaults.standard.set(1, forKey: "reload")
                         break
                     }
+                    if controller.isKind(of: AllRecordCateDetailViewController.self) {
+                        self?.navigationController?.popToViewController(controller, animated: true)
+                        
+                        break
+                    }
+                    if controller.isKind(of: AllRecordSearchDetailViewController.self) {
+                        self?.navigationController?.popToViewController(controller, animated: true)
+                        break
+                    }
                 }
+                for controller in (self?.navigationController?.viewControllers ?? [UIViewController()] )  as Array {
+                    if controller.isKind(of: AllRecordViewController.self) {
+                        self?.navigationController?.popToViewController(controller, animated: true)
+                        break
+                    }
+                }
+                
                 // print("here is \(self?.navigationController!.viewControllers ?? [UIViewController()])")
             }).disposed(by: disposeBag)
         

@@ -13,6 +13,7 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
 
     let selfView = MydjView()
     var expandedIndexSet : IndexSet = []
+    var expandedIndexSet2 : IndexSet = []
 
     var isPaging = false
     var hasNextPage = false

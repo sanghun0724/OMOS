@@ -14,7 +14,7 @@ class AllRecordSearchDetailViewController:BaseViewController , UIScrollViewDeleg
 
     let selfView = AllRecordCateDetailView()
     var expandedIndexSet : IndexSet = []
-
+    var expandedIndexSet2 : IndexSet = []
     let bottomVC:BottomSheetViewController
     let bottomSheet:MDCBottomSheetController
     var isPaging = false

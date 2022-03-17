@@ -15,6 +15,7 @@ class AllRecordDetailViewController:BaseViewController {
     let scrollView = UIScrollView()
     let selfShortView = MyRecordDetailView()
     let selfLongView = AllRecordDetailView()
+    let selfLyricsView = LyricsRecordView()
     let postId:Int
     let userId:Int
     let viewModel:AllRecordDetailViewModel
@@ -41,6 +42,7 @@ class AllRecordDetailViewController:BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = false 
       
     }
     
@@ -65,11 +67,15 @@ class AllRecordDetailViewController:BaseViewController {
             .take(1)
             .subscribe(onNext: { [weak self] data in
                 guard let record = self?.viewModel.currentSelectDetail else { return }
+                print(data.category)
                 if data.category == "A_LINE" {
                     self?.configShortView()
                     self?.setShortData(myRecord: record)
                     self?.selfShortView.layoutIfNeeded()
                     self?.shortBind(myRecord: record)
+                } else if data.category == "LYRICS" {
+                    self?.setLyricData(myRecord: record)
+                    self?.configLyricsView()
                 } else {
                     self?.configLongView()
                     self?.setLongData(myRecord: record)
@@ -286,6 +292,83 @@ class AllRecordDetailViewController:BaseViewController {
         selfShortView.mainLabelView.text = myRecord.recordContents
         selfShortView.dummyView3.isHidden = true
     }
+    
+    func configLyricsView() {
+        self.view.addSubview(scrollView)
+        scrollView.addSubview(selfLyricsView)
+        selfLyricsView.lockButton.isHidden = true
+        scrollView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+        }
+        
+        selfLyricsView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+    }
+    
+    func setLyricData(myRecord:DetailRecordResponse) {
+        selfLyricsView.musicTitleLabel.text = myRecord.music.musicTitle
+        selfLyricsView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
+        selfLyricsView.circleImageView.setImage(with: myRecord.music.albumImageURL)
+        //        selfView.backImageView.setImage(with: <#T##String#>)
+        selfLyricsView.titleTextView.text = myRecord.recordTitle
+        selfLyricsView.createdField.text = myRecord.createdDate
+        selfLyricsView.likeCountLabel.text = String(myRecord.likeCnt)
+        selfLyricsView.scrapCountLabel.text = String(myRecord.scrapCnt)
+        selfLyricsView.cateLabel.text =  " | \(myRecord.category )"
+        selfLyricsView.nicknameLabel.text = myRecord.nickname
+        
+        
+        if myRecord.isLiked {
+            selfLyricsView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
+            selfLyricsView.likeCountLabel.textColor = .mainOrange
+        }
+        
+        if myRecord.isScraped {
+            selfLyricsView.scrapButton.setImage(UIImage(named: "fillStar"), for: .normal)
+            selfLyricsView.scrapCountLabel.textColor = .mainOrange
+        }
+        var lyricsArr:[String] = []
+        myRecord.recordContents.enumerateSubstrings(in: myRecord.recordContents.startIndex..., options: .byParagraphs) { substring, range, _, stop in
+            if  let substring = substring,
+                !substring.isEmpty {
+                lyricsArr.append(substring)
+            }
+        }
+        
+        for i in 0..<lyricsArr.count {
+            let labelView:BasePaddingLabel = {
+                let label = BasePaddingLabel()
+                label.text = ""
+                label.backgroundColor = .LyricsBack
+                label.numberOfLines = 0
+                return label
+            }()
+            
+            selfLyricsView.allStackView.addArrangedSubview(labelView)
+            
+            labelView.snp.makeConstraints { make in
+                make.width.equalToSuperview()
+                labelView.sizeToFit()
+            }
+            if i % 2 == 0 {
+                labelView.text = lyricsArr[i]
+            } else {
+                labelView.backgroundColor = .mainBlack
+                labelView.text = lyricsArr[i]
+            }
+        }
+        selfLyricsView.reloadInputViews()
+        
+       // selfLyricsView.dummyView3.isHidden = true
+    }
+    
     
     
     

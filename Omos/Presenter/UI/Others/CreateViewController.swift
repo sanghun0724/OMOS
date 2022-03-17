@@ -50,6 +50,8 @@ class CreateViewController:BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        selfView.circleImageView.layer.cornerRadius = selfView.circleImageView.height / 2
+        selfView.circleImageView.layer.masksToBounds = true
         setlongTextView(category)
     }
     
@@ -125,7 +127,6 @@ class CreateViewController:BaseViewController {
     }
     
     func setModifyView() {
-        print("check")
         print(viewModel.modifyDefaultModel!)
         selfView.cateLabel.text = "  | \(category)"
         selfView.circleImageView.setImage(with: viewModel.modifyDefaultModel?.music.albumImageURL ?? "")

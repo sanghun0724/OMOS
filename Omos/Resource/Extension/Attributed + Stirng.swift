@@ -87,9 +87,9 @@ extension String {
     }
 }
 
-
+//라벨에 패딩값주기 
 class BasePaddingLabel: UILabel {
-    private var padding = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
+    private var padding = UIEdgeInsets(top: 10.0, left: 16.0, bottom: 10, right: 16.0)
 
     convenience init(padding: UIEdgeInsets) {
         self.init()
@@ -106,5 +106,17 @@ class BasePaddingLabel: UILabel {
         contentSize.width += padding.left + padding.right
 
         return contentSize
+    }
+}
+
+//라벨 라인수 구하기
+extension UILabel {
+    func calculateMaxLines() -> Int {
+        let maxSize = CGSize(width: frame.size.width, height: CGFloat(Float.infinity))
+        let charSize = font.lineHeight
+        let text = (self.text ?? "") as NSString
+        let textSize = text.boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+        let linesRoundedUp = Int(ceil(textSize.height/charSize))
+        return linesRoundedUp
     }
 }

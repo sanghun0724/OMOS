@@ -31,10 +31,12 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource {
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordTableCell.identifier,for:indexPath) as! AllRecordTableCell
             cell.selectionStyle = .none
+            cell.cellDelegate = self
             cell.popuralRecords = viewModel.currentPopuralRecord
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableMiddleCell.identifier,for:indexPath) as! HomeTableMiddleCell
+            
             cell.selectedRecords = viewModel.currentRecommentRecord
             cell.selectionStyle = .none
             return cell
@@ -123,7 +125,21 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
        if indexPath.section == 3 {
-           print("hi")
+           guard let data = viewModel.currentLovedRecord else {
+               let rp = SearchRepositoryImpl(searchAPI: SearchAPI())
+               let uc = SearchUseCase(searchRepository: rp)
+               let vm = SearchViewModel(usecase: uc)
+               let vc = SearchViewController(viewModel: vm, searchType: .main)
+               self.navigationController?.pushViewController(vc, animated: true)
+               return
+           }
+        
+           let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+           let uc = RecordsUseCase(recordsRepository: rp)
+           let vm = MyRecordDetailViewModel(usecase: uc)
+           let vc = MyRecordDetailViewController(posetId: data.recordID,viewModel: vm)
+           self.navigationController?.pushViewController(vc, animated: true)
+           
         }
     }
     

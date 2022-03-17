@@ -10,7 +10,7 @@ import RxSwift
 class LyricsViewModel:BaseViewModel {
     
     var lyricsStringArray:[String] = []
-    var modifyDefaultModel:MyRecordRespone? = nil //Lyrics로 바꿔야함
+    var modifyDefaultModel:DetailRecordResponse? = nil //Lyrics로 바꿔야함
     var defaultModel:recordSaveDefaultModel = .init(musicId: "", imageURL: "", musicTitle: "", subTitle: "") // create할때 있는놈들
     let errorMessage = BehaviorSubject<String?>(value: nil)
     let loading = BehaviorSubject<Bool>(value:false)

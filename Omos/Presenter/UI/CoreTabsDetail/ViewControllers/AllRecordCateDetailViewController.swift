@@ -14,6 +14,7 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
     
     let selfView = AllRecordCateDetailView()
     var expandedIndexSet : IndexSet = []
+    var expandedIndexSet2 : IndexSet = []
     let bottomVC:BottomSheetViewController
     let bottomSheet:MDCBottomSheetController
     var isPaging = false
@@ -22,6 +23,7 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
     var shortCellHeights:[IndexPath:CGFloat] = [:]
     var longCellHeights:[IndexPath:CGFloat] = [:]
     var filterType = "date"
+    var tableViewReload = true 
     
     var cateRecords:[CategoryRespone] = []
     let viewModel:AllRecordCateDetailViewModel
@@ -94,7 +96,7 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
                 self?.hasNextPage = self?.cateRecords.count ?? 0 > 300 ? false : true //다음페이지 있는지 확인
                 self?.isPaging = false //페이징 종료
                 self?.selfView.tableView.reloadData()
-                self?.selfView.layoutIfNeeded()
+                self?.selfView.tableView.layoutIfNeeded()
             }).disposed(by: disposeBag)
         
         viewModel.loading
@@ -109,6 +111,8 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
                 self?.filterType = "date"
                 self?.fetchRecord()
                 self?.selfView.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+                self?.selfView.tableView.reloadData()
+                self?.selfView.tableView.layoutIfNeeded()
             }).disposed(by: disposeBag)
         
         viewModel.likeFilter

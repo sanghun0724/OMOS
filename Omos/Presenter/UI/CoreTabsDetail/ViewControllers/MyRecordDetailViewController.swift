@@ -15,21 +15,20 @@ class MyRecordDetailViewController:BaseViewController {
     let scrollView = UIScrollView()
     var selfView = MyRecordDetailView()
     var selflongView = AllRecordDetailView()
+    var selfLyricsView = LyricsRecordView()
     let instaDecoView = InstaDecoTopView()
     let loadingView = LoadingView()
     let bottomVC:BottomSheetViewController
     let bottomSheet:MDCBottomSheetController
     let viewModel:MyRecordDetailViewModel
     let userId = UserDefaults.standard.integer(forKey: "user")
-    let cate:String
     let postId:Int
     
-    init(posetId:Int,viewModel:MyRecordDetailViewModel,cate:String) {
+    init(posetId:Int,viewModel:MyRecordDetailViewModel) {
         self.postId = posetId
         self.viewModel = viewModel
         self.bottomVC = BottomSheetViewController(type: .MyRecord, myRecordVM: viewModel, allRecordVM: nil, searchTrackVM: nil)
         self.bottomSheet = MDCBottomSheetController(contentViewController: bottomVC)
-        self.cate = cate
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -44,6 +43,7 @@ class MyRecordDetailViewController:BaseViewController {
         viewModel.myRecordDetailFetch(postId: postId, userId: userId)
     }
     
+
     
     
     private func setNavigationItems() {
@@ -97,7 +97,7 @@ class MyRecordDetailViewController:BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
-       
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     override func configureUI() {
@@ -148,8 +148,16 @@ class MyRecordDetailViewController:BaseViewController {
             .subscribe(onNext: { [weak self] data in
                 self?.navigationController?.navigationBar.isHidden = false
                 guard let record = self?.viewModel.currentMyRecordDetail else { return }
-                self?.cate == "A_LINE" ? (self?.configShort()) : (self?.configLong())
-                self?.cate == "A_LINE" ? (self?.setShrotData(myRecord: record )) : (self?.setLongData(myRecord: record ))
+                if record.category == "A_LINE"  {
+                    self?.configShort()
+                    self?.setShrotData(myRecord: record )
+                } else if record.category == "LYRICS" {
+                    self?.setLyricData(myRecord: record)
+                    self?.configLyricsView()
+                } else {
+                    self?.configLong()
+                    self?.setLongData(myRecord: record )
+                }
             }).disposed(by: disposeBag)
         
         // like and scrap
@@ -159,10 +167,27 @@ class MyRecordDetailViewController:BaseViewController {
             .subscribe(onNext: { [weak self] _ in
                 let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
                 let uc = RecordsUseCase(recordsRepository: rp)
-                let vm = CreateViewModel(usecase: uc)
-                vm.modifyDefaultModel = self?.viewModel.currentMyRecordDetail
-                let vc = CreateViewController(viewModel: vm, category: (self?.getReverseCate(cate: self?.viewModel.currentMyRecordDetail?.category ?? ""))!, type: .modify)
-                self?.navigationController?.pushViewController( vc, animated: true)
+                if self?.viewModel.currentMyRecordDetail?.category  == "LYRICS" {
+                    guard let contents = self?.viewModel.currentMyRecordDetail?.recordContents else { return }
+                    let vm = LyricsViewModel(usecase: uc)
+                    var lyricsArr:[String] = []
+                    contents.enumerateSubstrings(in: contents.startIndex..., options: .byParagraphs) { substring, range, _, stop in
+                        if  let substring = substring,
+                            !substring.isEmpty {
+                            lyricsArr.append(substring)
+                        }
+                    }
+                    vm.lyricsStringArray = lyricsArr
+                    vm.modifyDefaultModel = self?.viewModel.currentMyRecordDetail
+                    let vc = LyricsPasteCreateViewController(viewModel: vm, type: .modify)
+                    self?.navigationController?.pushViewController( vc, animated: true)
+                } else {
+                    let vm = CreateViewModel(usecase: uc)
+                    vm.modifyDefaultModel = self?.viewModel.currentMyRecordDetail
+                    let vc = CreateViewController(viewModel: vm, category: (self?.getReverseCate(cate: self?.viewModel.currentMyRecordDetail?.category ?? ""))!, type: .modify)
+                    self?.navigationController?.pushViewController( vc, animated: true)
+                }
+              
                 
             }).disposed(by: disposeBag)
         
@@ -179,7 +204,7 @@ class MyRecordDetailViewController:BaseViewController {
     }
     
     func selfViewBind() {
-        if cate == "A_LINE" {
+        if self.viewModel.currentMyRecordDetail?.category  == "A_LINE" {
             selfView.lockButton.rx.tap
                 .scan(false) { (lastState, newValue) in
                     !lastState
@@ -345,6 +370,82 @@ class MyRecordDetailViewController:BaseViewController {
         }
         selflongView.myView.mainLabelView.text = myRecord.recordContents
         selflongView.myView.dummyView3.isHidden = true
+    }
+    
+    func configLyricsView() {
+        self.view.addSubview(scrollView)
+        scrollView.addSubview(selfLyricsView)
+        selfLyricsView.lockButton.isHidden = true
+        scrollView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+        }
+        
+        selfLyricsView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+    }
+    
+    func setLyricData(myRecord:DetailRecordResponse) {
+        selfLyricsView.musicTitleLabel.text = myRecord.music.musicTitle
+        selfLyricsView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
+        selfLyricsView.circleImageView.setImage(with: myRecord.music.albumImageURL)
+        //        selfView.backImageView.setImage(with: <#T##String#>)
+        selfLyricsView.titleTextView.text = myRecord.recordTitle
+        selfLyricsView.createdField.text = myRecord.createdDate
+        selfLyricsView.likeCountLabel.text = String(myRecord.likeCnt)
+        selfLyricsView.scrapCountLabel.text = String(myRecord.scrapCnt)
+        selfLyricsView.cateLabel.text =  " | \(myRecord.category )"
+        selfLyricsView.nicknameLabel.text = myRecord.nickname
+        
+        
+        if myRecord.isLiked {
+            selfLyricsView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
+            selfLyricsView.likeCountLabel.textColor = .mainOrange
+        }
+        
+        if myRecord.isScraped {
+            selfLyricsView.scrapButton.setImage(UIImage(named: "fillStar"), for: .normal)
+            selfLyricsView.scrapCountLabel.textColor = .mainOrange
+        }
+        var lyricsArr:[String] = []
+        myRecord.recordContents.enumerateSubstrings(in: myRecord.recordContents.startIndex..., options: .byParagraphs) { substring, range, _, stop in
+            if  let substring = substring,
+                !substring.isEmpty {
+                lyricsArr.append(substring)
+            }
+        }
+        
+        for i in 0..<lyricsArr.count {
+            let labelView:BasePaddingLabel = {
+                let label = BasePaddingLabel()
+                label.text = ""
+                label.backgroundColor = .LyricsBack
+                label.numberOfLines = 0
+                return label
+            }()
+            
+            selfLyricsView.allStackView.addArrangedSubview(labelView)
+            
+            labelView.snp.makeConstraints { make in
+                make.width.equalToSuperview()
+                labelView.sizeToFit()
+            }
+            if i % 2 == 0 {
+                labelView.text = lyricsArr[i]
+            } else {
+                labelView.backgroundColor = .mainBlack
+                labelView.text = lyricsArr[i]
+            }
+        }
+        selfLyricsView.reloadInputViews()
+        
+       // selfLyricsView.dummyView3.isHidden = true
     }
     
     private func getReverseCate(cate:String) -> String {
