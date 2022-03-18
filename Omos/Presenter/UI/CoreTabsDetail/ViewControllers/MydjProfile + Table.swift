@@ -48,6 +48,8 @@ extension MydjProfileViewController: UITableViewDelegate,UITableViewDataSource {
                     header.followButton.setTitle("팔로우", for: .normal)
                 }
             }).disposed(by: header.disposeBag)
+        header.followButton.isHidden = (fromId == toId)
+        header.settingButton.isHidden = true 
         return header
     }
     
@@ -70,12 +72,18 @@ extension MydjProfileViewController: UITableViewDelegate,UITableViewDataSource {
             let uc = RecordsUseCase(recordsRepository: rp)
             let vm = MyRecordDetailViewModel(usecase: uc)
             let vc = MyRecordDetailViewController(posetId: record.recordID, viewModel: vm)
+            vc.selfView.nicknameLabel.isHidden = true
+            vc.selflongView.myView.nicknameLabel.isHidden = true
+            vc.selfLyricsView.nicknameLabel.isHidden = true
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
             let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
             let uc = RecordsUseCase(recordsRepository: rp)
             let vm = AllRecordDetailViewModel(usecase: uc)
             let vc = AllRecordDetailViewController(viewModel: vm, postId: record.recordID, userId: record.userID)
+            vc.selfLongView.nicknameLabel.isHidden = true
+            vc.selfShortView.nicknameLabel.isHidden = true
+            vc.selfShortView.nicknameLabel.isHidden = true
             self.navigationController?.pushViewController(vc, animated: true)
         }
         

@@ -36,7 +36,7 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource {
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableMiddleCell.identifier,for:indexPath) as! HomeTableMiddleCell
-            
+            cell.cellDelegate = self 
             cell.selectedRecords = viewModel.currentRecommentRecord
             cell.selectionStyle = .none
             return cell
@@ -68,7 +68,19 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource {
                 .drive(onNext: { [weak self] _ in
                   print("noti")
                 }).disposed(by: header.disposeBag)
+            header.createdButton.rx.tap
+                .throttle(RxTimeInterval.seconds(1), scheduler: MainScheduler.instance)
+                .subscribe(onNext: { [weak self] _ in
+                    let rp = SearchRepositoryImpl(searchAPI: SearchAPI())
+                    let uc = SearchUseCase(searchRepository: rp)
+                    let vm = SearchViewModel(usecase: uc)
+                    let vc = SearchViewController(viewModel: vm, searchType: .me)
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }).disposed(by: header.disposeBag)
+         
+            
             guard let headerData = viewModel.currentTodayRecord else { return header }
+            
             header.songTitleLabel.text = headerData.musicTitle
             header.artistTitleLabel.text = headerData.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}
             header.albumImageView.setImage(with: headerData.albumImageURL)

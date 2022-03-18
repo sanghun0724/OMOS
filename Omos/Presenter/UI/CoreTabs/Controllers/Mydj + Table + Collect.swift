@@ -80,19 +80,17 @@ extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateLongDetailCell.identifier, for: indexPath) as! AllRecordCateLongDetailCell
                 
+                cell.layoutIfNeeded()
                 if expandedIndexSet.contains(indexPath.row) {
                     cell.myView.mainLabelView.numberOfLines = 0
                     cell.myView.mainLabelView.sizeToFit()
                     cell.myView.readMoreButton.isHidden = true
                 } else {
-                    if cell.myView.mainLabelView.maxNumberOfLines < 4 {
-                        cell.myView.readMoreButton.isHidden = true
-                    } else {
                         cell.myView.mainLabelView.numberOfLines = 3
                         cell.myView.mainLabelView.sizeToFit()
                         cell.myView.readMoreButton.isHidden = false
-                    }
                 }
+                
                 cell.configureMyDjRecord(record: record)
                 cell.selectionStyle = . none
                 longCellBind(cell: cell, data: record)
@@ -131,7 +129,6 @@ extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard  let record = viewModel.currentMyDjRecord[safe: indexPath.row] else { return 500 }
 //        if indexPath.section == 0 {
 //            if record.category != "A_LINE" && record.category != "LYRICS" {
 //                return 500
@@ -143,7 +140,6 @@ extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard  let record = viewModel.currentMyDjRecord[safe: indexPath.row] else { return 0 }
 //        if indexPath.section == 0 {
 //            if record.category == "A_LINE" || record.category == "LYRICS" {
 //                return shortCellHeights[indexPath] ?? Constant.mainHeight * 0.63

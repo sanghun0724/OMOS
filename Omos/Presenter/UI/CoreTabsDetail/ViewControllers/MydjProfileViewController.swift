@@ -27,18 +27,26 @@ class MydjProfileViewController:BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      
         bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         self.navigationItem.rightBarButtonItems?.removeAll()
         viewModel.fetchMyDjProfile(fromId: fromId, toId: toId)
         viewModel.fetchUserRecords(fromId: fromId, toId: toId)
+        self.navigationController?.navigationBar.backgroundColor = .mainBlack
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     override func configureUI() {
         super.configureUI()
         self.view.addSubview(selfView)
+        self.view.backgroundColor = .mainBlack
         
         selfView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
@@ -49,14 +57,10 @@ class MydjProfileViewController:BaseViewController {
     
     
     func bind() {
-        viewModel.profileLoading
-            .subscribe(onNext: { [weak self] loading in
-                self?.selfView.profileLoadingView.isHidden = !loading
-            }).disposed(by: disposeBag)
-        
+       
         viewModel.recordsLoading
             .subscribe(onNext: { [weak self] loading in
-                self?.selfView.recordsLoadingView.isHidden = !loading
+                self?.selfView.loadingView.isHidden = !loading
             }).disposed(by: disposeBag)
         
         viewModel.mydjProfile

@@ -8,7 +8,6 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import KakaoSDKUser
 import SnapKit
 
 class AllRecordDetailViewController:BaseViewController {
@@ -50,6 +49,13 @@ class AllRecordDetailViewController:BaseViewController {
         self.navigationController?.navigationBar.isHidden = false
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        selfLongView.nicknameLabel.isHidden = true
+        selfShortView.nicknameLabel.isHidden = true
+        selfShortView.nicknameLabel.isHidden = true
+    }
+    
     private func setNavigationItems() {
         self.navigationItem.rightBarButtonItems?.removeAll()
         let moreButton = UIBarButtonItem(image: UIImage(named: "more"), style: .plain, target: self, action: #selector(didTapMoreButton))
@@ -82,12 +88,13 @@ class AllRecordDetailViewController:BaseViewController {
                     self?.configLyricsView()
                     self?.selfLyricsView.tableView.reloadData()
                     self?.selfLyricsView.tableView.layoutIfNeeded()
+                    self?.selfLyricsView.subTableHeightConstraint?.deactivate()
                     self?.selfLyricsView.tableView.isScrollEnabled = false
                     self?.selfLyricsView.tableHeightConstraint!.update(offset: ceil(self?.selfLyricsView.tableView.intrinsicContentSize2.height ?? 100 ) )
-                   
+                    self?.lyricsBind(myRecord: record)
                 } else {
-                    self?.configLongView()
                     self?.setLongData(myRecord: record)
+                    self?.configLongView()
                     self?.selfLongView.layoutIfNeeded()
                     self?.longBind(myRecord: record)
                 }
@@ -158,6 +165,16 @@ class AllRecordDetailViewController:BaseViewController {
                 
             }).disposed(by: disposeBag)
         
+        selfShortView.nicknameLabel.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+                let uc = RecordsUseCase(recordsRepository: rp)
+                let vm = MyDjProfileViewModel(usecase: uc)
+                let vc = MydjProfileViewController(viewModel: vm, toId: myRecord.userID)
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }).disposed(by: disposeBag)
+        
     }
     
     
@@ -215,6 +232,16 @@ class AllRecordDetailViewController:BaseViewController {
                     self?.viewModel.saveScrap(postId: recordId, userId: userId)
                 }
             }).disposed(by: disposeBag)
+        
+        selfLongView.nicknameLabel.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+                let uc = RecordsUseCase(recordsRepository: rp)
+                let vm = MyDjProfileViewModel(usecase: uc)
+                let vc = MydjProfileViewController(viewModel: vm, toId: myRecord.userID)
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }).disposed(by: disposeBag)
     }
     
     
@@ -248,8 +275,7 @@ class AllRecordDetailViewController:BaseViewController {
         selfLongView.scrapCountLabel.text = String(myRecord.scrapCnt)
         selfLongView.cateLabel.text = " | \(myRecord.category )"
         selfLongView.nicknameLabel.text = myRecord.nickname
-        
-        print(myRecord.recordID)
+        selfLongView.lockButton.isHidden = true
         
         if myRecord.isLiked {
             selfLongView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
@@ -270,7 +296,7 @@ class AllRecordDetailViewController:BaseViewController {
         selfShortView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-            make.height.equalToSuperview().multipliedBy(0.7)
+            
         }
     }
     
@@ -326,7 +352,6 @@ class AllRecordDetailViewController:BaseViewController {
                 self?.lyricsArr.append(substring)
             }
         }
-        print(lyricsArr)
         selfLyricsView.musicTitleLabel.text = myRecord.music.musicTitle
         selfLyricsView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
         selfLyricsView.circleImageView.setImage(with: myRecord.music.albumImageURL)
@@ -349,6 +374,72 @@ class AllRecordDetailViewController:BaseViewController {
             selfLyricsView.scrapCountLabel.textColor = .mainOrange
         }
       
+    }
+    
+    func lyricsBind(myRecord:DetailRecordResponse) {
+        selfLyricsView.reportButton.rx.tap
+            .asDriver()
+            .drive(onNext:{ [weak self] _ in
+                let action = UIAlertAction(title: "신고", style: .default) { alert in
+                    print(alert)
+                }
+                action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
+                self?.presentAlert(title: "신고하기", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
+            }).disposed(by: disposeBag)
+        
+        selfLyricsView.likeButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let count = Int(self?.selfLyricsView.likeCountLabel.text ?? "0")
+                else { return }
+                let userId = UserDefaults.standard.integer(forKey: "user")
+                let recordId = myRecord.recordID
+                
+                if self?.selfLyricsView.likeCountLabel.textColor == .mainOrange {
+                    //좋아요 취소
+                    self?.selfLyricsView.likeButton.setImage(UIImage(named:"emptyLove"), for: .normal)
+                    self?.selfLyricsView.likeCountLabel.textColor = .mainGrey3
+                    self?.selfLyricsView.likeCountLabel.text = String(count-1)
+                    self?.viewModel.deleteLike(postId: recordId, userId: userId)
+                } else {
+                    //좋아요 클릭
+                    self?.selfLyricsView.likeButton.setImage(UIImage(named:"fillLove"), for: .normal)
+                    self?.selfLyricsView.likeCountLabel.textColor = .mainOrange
+                    self?.selfLyricsView.likeCountLabel.text = String(count+1)
+                    self?.viewModel.saveLike(postId: recordId, userId: userId)
+                }
+            }).disposed(by: disposeBag)
+        
+        selfLyricsView.scrapButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let scrapCount = Int(self?.selfLyricsView.scrapCountLabel.text ?? "0")
+                else { return }
+                let userId = UserDefaults.standard.integer(forKey: "user")
+                let recordId = myRecord.recordID
+                print("User\(userId)")
+                if self?.selfLyricsView.scrapCountLabel.textColor == .mainOrange {
+                    //좋아요 취소
+                    self?.selfLyricsView.scrapButton.setImage(UIImage(named:"emptyStar"), for: .normal)
+                    self?.selfLyricsView.scrapCountLabel.textColor = .mainGrey3
+                    self?.selfLyricsView.scrapCountLabel.text = String(scrapCount-1)
+                    self?.viewModel.deleteScrap(postId: recordId, userId: userId)
+                } else {
+                    //좋아요 클릭
+                    self?.selfLyricsView.scrapButton.setImage(UIImage(named:"fillStar"), for: .normal)
+                    self?.selfLyricsView.scrapCountLabel.textColor = .mainOrange
+                    self?.selfLyricsView.scrapCountLabel.text = String(scrapCount+1)
+                    self?.viewModel.saveScrap(postId: recordId, userId: userId)
+                }
+            }).disposed(by: disposeBag)
+        
+        selfLyricsView.nicknameLabel.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+                let uc = RecordsUseCase(recordsRepository: rp)
+                let vm = MyDjProfileViewModel(usecase: uc)
+                let vc = MydjProfileViewController(viewModel: vm, toId: myRecord.userID)
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }).disposed(by: disposeBag)
     }
     
     

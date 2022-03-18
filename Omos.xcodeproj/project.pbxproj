@@ -102,7 +102,6 @@
 		B682185C27B3C0BB00B58E19 /* MyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682185B27B3C0BB00B58E19 /* MyError.swift */; };
 		B682185E27B3E22900B58E19 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682185D27B3E22900B58E19 /* LoadingView.swift */; };
 		B683A45327B0DA3500838749 /* AllRecordTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B683A45227B0DA3500838749 /* AllRecordTableCell.swift */; };
-		B683A45727B12DD000838749 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B683A45627B12DD000838749 /* ProfileView.swift */; };
 		B683A45927B130D100838749 /* Profile + Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B683A45827B130D100838749 /* Profile + Table.swift */; };
 		B68454E827BE027500F1E6B5 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68454E727BE027500F1E6B5 /* LoginUseCase.swift */; };
 		B68454EC27BE1D9800F1E6B5 /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68454EB27BE1D9800F1E6B5 /* TargetType.swift */; };
@@ -171,6 +170,10 @@
 		B6D4BB2627CA801300D6741B /* MySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D4BB2527CA801300D6741B /* MySearchViewController.swift */; };
 		B6D4BB2827CA804000D6741B /* MySearch + Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D4BB2727CA804000D6741B /* MySearch + Table.swift */; };
 		B6D4BB2C27CA86FB00D6741B /* SearchResultDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D4BB2B27CA86FB00D6741B /* SearchResultDetailView.swift */; };
+		B6DCFA5627E45F4B006283FE /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCFA5527E45F4B006283FE /* ProfileView.swift */; };
+		B6DCFA5827E4616E006283FE /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCFA5727E4616E006283FE /* ProfileCell.swift */; };
+		B6DCFA5B27E48647006283FE /* InteractionRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCFA5A27E48647006283FE /* InteractionRecordViewController.swift */; };
+		B6DCFA5D27E49D20006283FE /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCFA5C27E49D20006283FE /* ProfileViewModel.swift */; };
 		B6DFD2CB27CC93EE00645F52 /* SearchArtistTopTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DFD2CA27CC93EE00645F52 /* SearchArtistTopTabView.swift */; };
 		B6DFD2CE27CCAEF100645F52 /* AllRecordCateDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DFD2CD27CCAEF100645F52 /* AllRecordCateDetailView.swift */; };
 		B6DFD2D027CCAF0800645F52 /* AllRecordCateDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DFD2CF27CCAF0800645F52 /* AllRecordCateDetailViewController.swift */; };
@@ -295,7 +298,6 @@
 		B682185B27B3C0BB00B58E19 /* MyError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyError.swift; sourceTree = "<group>"; };
 		B682185D27B3E22900B58E19 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		B683A45227B0DA3500838749 /* AllRecordTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordTableCell.swift; sourceTree = "<group>"; };
-		B683A45627B12DD000838749 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B683A45827B130D100838749 /* Profile + Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile + Table.swift"; sourceTree = "<group>"; };
 		B68454E727BE027500F1E6B5 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		B68454EB27BE1D9800F1E6B5 /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
@@ -367,6 +369,10 @@
 		B6D4BB2527CA801300D6741B /* MySearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySearchViewController.swift; sourceTree = "<group>"; };
 		B6D4BB2727CA804000D6741B /* MySearch + Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MySearch + Table.swift"; sourceTree = "<group>"; };
 		B6D4BB2B27CA86FB00D6741B /* SearchResultDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDetailView.swift; sourceTree = "<group>"; };
+		B6DCFA5527E45F4B006283FE /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		B6DCFA5727E4616E006283FE /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		B6DCFA5A27E48647006283FE /* InteractionRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionRecordViewController.swift; sourceTree = "<group>"; };
+		B6DCFA5C27E49D20006283FE /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		B6DFD2CA27CC93EE00645F52 /* SearchArtistTopTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtistTopTabView.swift; sourceTree = "<group>"; };
 		B6DFD2CD27CCAEF100645F52 /* AllRecordCateDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordCateDetailView.swift; sourceTree = "<group>"; };
 		B6DFD2CF27CCAF0800645F52 /* AllRecordCateDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordCateDetailViewController.swift; sourceTree = "<group>"; };
@@ -497,10 +503,10 @@
 			children = (
 				B6B1BB5827BBCDF500DF2528 /* Cells */,
 				B650874A27AFC5EE0020D2C1 /* AllRecordView.swift */,
-				B683A45627B12DD000838749 /* ProfileView.swift */,
 				B6B1BB5927BBCE1000DF2528 /* MyRecordView.swift */,
 				B66AD44D27C6963B0012686B /* MydjView.swift */,
 				B6C969B827D1F44500BA4E58 /* HomeView.swift */,
+				B6DCFA5527E45F4B006283FE /* ProfileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -513,6 +519,7 @@
 				B693049C27C1F84200DC3E90 /* MyRecordViewModel.swift */,
 				B642344C27DD07B100C1083D /* MyDJViewModel.swift */,
 				B697F20E27E0DDAF00F34AB5 /* HomeViewModel.swift */,
+				B6DCFA5C27E49D20006283FE /* ProfileViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -885,6 +892,7 @@
 				B630D2F927C7756A00E66F22 /* MydjTableCell.swift */,
 				B6CCBC9827DA5EBB009F8499 /* HomeTableMiddleCell.swift */,
 				B6CCBC9A27DA65F4009F8499 /* HomeTableLastCell.swift */,
+				B6DCFA5727E4616E006283FE /* ProfileCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -921,10 +929,19 @@
 				B650874827AFC5150020D2C1 /* AllRecord + Table.swift */,
 				B650874027AF96C00020D2C1 /* MyDJViewController.swift */,
 				B630D2FB27C7761D00E66F22 /* Mydj + Table + Collect.swift */,
-				B650874227AF96E80020D2C1 /* ProfileViewController.swift */,
-				B683A45827B130D100838749 /* Profile + Table.swift */,
+				B6DCFA5927E47DFE006283FE /* Profile */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		B6DCFA5927E47DFE006283FE /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				B650874227AF96E80020D2C1 /* ProfileViewController.swift */,
+				B683A45827B130D100838749 /* Profile + Table.swift */,
+				B6DCFA5A27E48647006283FE /* InteractionRecordViewController.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		B6DFD2CC27CC949A00645F52 /* ArtistSection */ = {
@@ -1182,6 +1199,7 @@
 				B689A9CE27AE94E9005F26E4 /* UIVIew.swift in Sources */,
 				B646053627CBE1B40022E062 /* SearchArtistHeaderView.swift in Sources */,
 				B646051B27CB60120022E062 /* SongViewController.swift in Sources */,
+				B6DCFA5827E4616E006283FE /* ProfileCell.swift in Sources */,
 				B6670FAC27B5542100BABF40 /* ButtonView.swift in Sources */,
 				B6DFD2CB27CC93EE00645F52 /* SearchArtistTopTabView.swift in Sources */,
 				B6BC148427BFC8FE0067D8FB /* SignUpViewModel.swift in Sources */,
@@ -1196,6 +1214,7 @@
 				B646051227CB3BEA0022E062 /* MydjProfile + Table.swift in Sources */,
 				B6FE837C27D093E500401FC5 /* AllRecordCateDetailViewModel.swift in Sources */,
 				B682184E27B393BF00B58E19 /* AuthRepository.swift in Sources */,
+				B6DCFA5D27E49D20006283FE /* ProfileViewModel.swift in Sources */,
 				B650873927AF948D0020D2C1 /* HomeViewController.swift in Sources */,
 				B67EF45027B7A9B80023D5D4 /* SignUpView.swift in Sources */,
 				B693658227E1C57400A8FCBA /* AllrecordLyricsTableCell.swift in Sources */,
@@ -1210,6 +1229,7 @@
 				B6DFD2D027CCAF0800645F52 /* AllRecordCateDetailViewController.swift in Sources */,
 				B66AD45027C6983F0012686B /* MydjCollectionCell.swift in Sources */,
 				B68454FA27BE375000F1E6B5 /* LoginTarget.swift in Sources */,
+				B6DCFA5627E45F4B006283FE /* ProfileView.swift in Sources */,
 				B68454EC27BE1D9800F1E6B5 /* TargetType.swift in Sources */,
 				B697F20927E0D08300F34AB5 /* TodayUseCase.swift in Sources */,
 				B606195A27DF2B85006508CA /* LyricsViewModel.swift in Sources */,
@@ -1221,6 +1241,7 @@
 				B69860BD27B8E85600E83DB9 /* NickNameView.swift in Sources */,
 				B6D4BB2627CA801300D6741B /* MySearchViewController.swift in Sources */,
 				B697F20F27E0DDAF00F34AB5 /* HomeViewModel.swift in Sources */,
+				B6DCFA5B27E48647006283FE /* InteractionRecordViewController.swift in Sources */,
 				B682184C27B3823D00B58E19 /* ShareCustomViewController.swift in Sources */,
 				B6FE838127D0B37F00401FC5 /* AllRecordCateShortDetailCell.swift in Sources */,
 				B646053227CBBF050022E062 /* SearchAlbumDetailCell.swift in Sources */,
@@ -1234,7 +1255,6 @@
 				B68454F027BE2D7B00F1E6B5 /* MyRequestInterceptor.swift in Sources */,
 				B6183CC727D76ADF0035AA06 /* SearchArtistDetailViewModel.swift in Sources */,
 				B606195827DF2437006508CA /* LyricsPasteCreateViewController.swift in Sources */,
-				B683A45727B12DD000838749 /* ProfileView.swift in Sources */,
 				B6E12E8027C210B4008644B5 /* CreateView.swift in Sources */,
 				B689A9D627AE9627005F26E4 /* IndicatorView.swift in Sources */,
 				B67EF45527B7AA000023D5D4 /* SignUpViewController.swift in Sources */,

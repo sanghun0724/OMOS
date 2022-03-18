@@ -74,7 +74,6 @@ class HomeViewController:BaseViewController {
 extension HomeViewController:AllCollectCellprotocol {
     func collectionView(collectionViewCell: AllRecordCollectionCell?, cate: String, didTappedInTableViewCell: AllRecordTableCell) {
         
-        print("here")
         guard let postId = collectionViewCell?.homeInfo?.recordID,
               let userId = collectionViewCell?.homeInfo?.userID else { return }
 
@@ -92,6 +91,21 @@ extension HomeViewController:AllCollectCellprotocol {
              self.navigationController?.pushViewController(vc, animated: true)
          }
     }
+}
+
+extension HomeViewController:HomeTableMiddleCellprotocol {
+    func collectionView(collectionViewCell: MydjCollectionCell?, index: Int, didTappedInTableViewCell: HomeTableMiddleCell) {
+        guard let userId = collectionViewCell?.homeInfo?.userID else { return }
+        
+        let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+        let uc = RecordsUseCase(recordsRepository: rp)
+        let vm = MyDjProfileViewModel(usecase: uc)
+        let vc = MydjProfileViewController(viewModel: vm, toId: userId)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
     
 }
+
+
+

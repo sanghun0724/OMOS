@@ -217,7 +217,6 @@ class recordLongView:BaseView {
         view.text = #"“한줄감상이나옵니다글자수는50자이내여야합니다한줄감상이나옵니다글자수는50자이내여야합니다한@@@@@@@@@@@@@@@@@@@@@줄감상”"#
         view.font = .systemFont(ofSize: 16, weight: .light)
         view.textAlignment = .left
-        view.numberOfLines = 3
         view.backgroundColor = .mainBlack
         view.textColor = .mainGrey1
         view.numberOfLines = 0
@@ -441,7 +440,12 @@ class recordLongView:BaseView {
             mainLabelView.sizeToFit()
         }
        
-        
+        readMoreButton.snp.makeConstraints { make in
+            make.bottom.trailing.equalToSuperview()
+            make.width.equalTo(46)
+            make.height.equalTo(26)
+        }
+        readMoreButton.isHidden = true 
         
     }
     
@@ -464,6 +468,7 @@ class recordLongView:BaseView {
         titleImageView.addSubview(lockButton)
         
         textCoverView.addSubview(mainLabelView)
+        textCoverView.addSubview(readMoreButton)
         
         lastView.addSubview(nicknameLabel)
         lastView.addSubview(dummyView2)

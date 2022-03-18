@@ -31,7 +31,7 @@ class HomeView:BaseView {
     let floatingButton:UIButton = {
         let button = UIButton()
         button.backgroundColor = .mainGrey4
-        button.setImage(UIImage(named: "edit3"), for: .normal)
+        button.setImage(UIImage(named: "edit2"), for: .normal)
         return button
     }()
     
@@ -72,7 +72,7 @@ class HomeView:BaseView {
 
 class HomeHeaderView:UITableViewHeaderFooterView {
     static let identifier = "HomeHeaderView"
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     
     let groundView:UIView = {
         let view = UIView()
@@ -166,7 +166,7 @@ class HomeHeaderView:UITableViewHeaderFooterView {
     
     let createdButton:UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "edit"), for: .normal)
+        button.setImage(UIImage(named: "edit3"), for: .normal)
         return button
     }()
     
@@ -177,6 +177,11 @@ class HomeHeaderView:UITableViewHeaderFooterView {
         layoutIfNeeded()
         albumImageView.layer.cornerRadius = albumImageView.height / 2
         albumImageView.layer.masksToBounds = true
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
     }
     
     func configureUI() {
