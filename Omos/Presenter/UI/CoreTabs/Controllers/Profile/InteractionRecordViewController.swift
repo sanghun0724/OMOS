@@ -40,6 +40,7 @@ extension InteractionRecordViewController:UITableViewDelegate,UITableViewDataSou
         let cell = tableView.dequeueReusableCell(withIdentifier: MyRecordTableCell.identifier, for: indexPath) as! MyRecordTableCell
 //        let data = myRecord[indexPath.row]
 //        cell.configureModel(record:data)
+        cell.lockImageView.isHidden = true
         return cell
     }
     

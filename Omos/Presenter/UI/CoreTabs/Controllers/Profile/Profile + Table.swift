@@ -34,16 +34,26 @@ extension ProfileViewController:UITableViewDelegate,UITableViewDataSource {
             header.settingButton.isHidden = false
             header.settingButton.rx.tap
                 .subscribe(onNext: { [weak self] _ in
-                    print("wwdwd")
+                   let vc = SettingViewController()
+                    self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: header.disposeBag)
             return header
         } else {
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: AllRecordHeaderView.identifier) as! AllRecordHeaderView
+            if section == 1 {
+                header.label.text = "스크랩한 레코드"
+            } else {
+                header.label.text = "공감한 레코드"
+            }
             header.button.setTitle("전체보기", for: .normal)
+            header.button.titleLabel?.font = .systemFont(ofSize: 12, weight: .regular)
+            header.button.setTitleColor(.mainGrey3, for: .normal)
             header.button.setImage(nil, for: .normal)
             header.button.rx.tap
                 .subscribe(onNext: { [weak self] _ in
-                    print("muibene")
+                    let vc = InteractionRecordViewController()
+                    vc.title = header.label.text
+                    self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: header.disposeBag)
             
             return header

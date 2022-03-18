@@ -15,12 +15,22 @@ class ProfileViewController: BaseViewController {
         super.viewDidLoad()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
-
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.navigationController?.navigationBar.backgroundColor = .mainBlack
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.backgroundColor = .mainBackGround
     }
     
     override func configureUI() {
         self.view.backgroundColor = .mainBlack
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
         view.addSubview(selfView)
         selfView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)

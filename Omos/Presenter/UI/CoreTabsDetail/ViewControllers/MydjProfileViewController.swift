@@ -38,9 +38,15 @@ class MydjProfileViewController:BaseViewController {
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.backgroundColor = .mainBackGround
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.backgroundColor = .mainBlack
     }
     
     override func configureUI() {
