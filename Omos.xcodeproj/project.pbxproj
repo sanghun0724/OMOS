@@ -176,6 +176,8 @@
 		B6DCFA5D27E49D20006283FE /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCFA5C27E49D20006283FE /* ProfileViewModel.swift */; };
 		B6DCFA5F27E4A497006283FE /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCFA5E27E4A497006283FE /* SettingViewController.swift */; };
 		B6DCFA6127E4B835006283FE /* ProfileChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCFA6027E4B835006283FE /* ProfileChangeViewController.swift */; };
+		B6DCFA6327E4CB26006283FE /* PasswordChangViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCFA6227E4CB26006283FE /* PasswordChangViewController.swift */; };
+		B6DCFA6527E4D852006283FE /* AccountOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCFA6427E4D852006283FE /* AccountOutViewController.swift */; };
 		B6DFD2CB27CC93EE00645F52 /* SearchArtistTopTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DFD2CA27CC93EE00645F52 /* SearchArtistTopTabView.swift */; };
 		B6DFD2CE27CCAEF100645F52 /* AllRecordCateDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DFD2CD27CCAEF100645F52 /* AllRecordCateDetailView.swift */; };
 		B6DFD2D027CCAF0800645F52 /* AllRecordCateDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DFD2CF27CCAF0800645F52 /* AllRecordCateDetailViewController.swift */; };
@@ -377,6 +379,8 @@
 		B6DCFA5C27E49D20006283FE /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		B6DCFA5E27E4A497006283FE /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		B6DCFA6027E4B835006283FE /* ProfileChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileChangeViewController.swift; sourceTree = "<group>"; };
+		B6DCFA6227E4CB26006283FE /* PasswordChangViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordChangViewController.swift; sourceTree = "<group>"; };
+		B6DCFA6427E4D852006283FE /* AccountOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountOutViewController.swift; sourceTree = "<group>"; };
 		B6DFD2CA27CC93EE00645F52 /* SearchArtistTopTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtistTopTabView.swift; sourceTree = "<group>"; };
 		B6DFD2CD27CCAEF100645F52 /* AllRecordCateDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordCateDetailView.swift; sourceTree = "<group>"; };
 		B6DFD2CF27CCAF0800645F52 /* AllRecordCateDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordCateDetailViewController.swift; sourceTree = "<group>"; };
@@ -946,6 +950,8 @@
 				B6DCFA5A27E48647006283FE /* InteractionRecordViewController.swift */,
 				B6DCFA5E27E4A497006283FE /* SettingViewController.swift */,
 				B6DCFA6027E4B835006283FE /* ProfileChangeViewController.swift */,
+				B6DCFA6227E4CB26006283FE /* PasswordChangViewController.swift */,
+				B6DCFA6427E4D852006283FE /* AccountOutViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1275,11 +1281,13 @@
 				B682185827B3AA4F00B58E19 /* SearchListView.swift in Sources */,
 				B6670FAA27B517DE00BABF40 /* DecoView.swift in Sources */,
 				B689A9D027AE94E9005F26E4 /* UIImage.swift in Sources */,
+				B6DCFA6327E4CB26006283FE /* PasswordChangViewController.swift in Sources */,
 				B6183CC327D733350035AA06 /* SearchAlbumDetailViewModel.swift in Sources */,
 				B646052127CB79C50022E062 /* AlbumViewController.swift in Sources */,
 				B6D4BB2227CA5D7C00D6741B /* AllRecordDetailView.swift in Sources */,
 				B69E42D527E3A8F900CAD5F1 /* MyRecordDetail + Table .swift in Sources */,
 				B6ABCCFC27CF5E650003B47A /* RecordsRepositoryImpl.swift in Sources */,
+				B6DCFA6527E4D852006283FE /* AccountOutViewController.swift in Sources */,
 				B6ABCCF627CF45020003B47A /* RecordAPI.swift in Sources */,
 				B6BC148927BFF6F80067D8FB /* MyRecordDetailView.swift in Sources */,
 				B650873D27AF969C0020D2C1 /* MyRecordViewController.swift in Sources */,

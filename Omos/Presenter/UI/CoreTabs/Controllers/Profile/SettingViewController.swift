@@ -27,6 +27,11 @@ class SettingViewController:BaseViewController {
         self.view.backgroundColor = .mainBackGround
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true 
+    }
+    
     override func configureUI() {
         super.configureUI()
         self.view.addSubview(tableView)
@@ -99,7 +104,49 @@ extension SettingViewController:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        if indexPath.section == 0 {
+            switch indexPath.row {
+            case 0:
+               let vc = ProfileChangeViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            case 1:
+                let vc = PasswordChangeViewController()
+                 self.navigationController?.pushViewController(vc, animated: true)
+            default:
+                print("")
+            }
+        } else {
+            switch indexPath.row {
+            case 0:
+                //logout
+                let action = UIAlertAction(title: "로그아웃", style: .default) { alert in
+                    print(alert)
+                }
+                action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
+                self.presentAlert(title: "", message: "정말 로그아웃 하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
+            case 1:
+                let vc = AccountOutViewController()
+                 self.navigationController?.pushViewController(vc, animated: true)
+            default:
+                print("")
+            }
+        }
+        
     }
     
+    public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+       let view = UIView()
+        view.backgroundColor = .mainBlack1
+       return view
+   }
+
+   public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+       if section == 0 {
+           return 0.5
+       } else {
+           return 0
+       }
+       
+   }
     
 }

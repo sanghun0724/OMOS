@@ -25,6 +25,7 @@ class AllRecordCateShortDetailCell:UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         configureUI()
+        
     }
     
     func configureUI() {

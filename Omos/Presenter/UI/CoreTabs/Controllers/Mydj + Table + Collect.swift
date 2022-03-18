@@ -174,11 +174,11 @@ extension MyDJViewController {
         cell.selfView.reportButton.rx.tap
             .asDriver()
             .drive(onNext:{ [weak self] _ in
-                let action = UIAlertAction(title: "신고", style: .default) { alert in
+                let action = UIAlertAction(title: "신고하기", style: .default) { alert in
                     print(alert)
                 }
                 action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
-                self?.presentAlert(title: "신고하기", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
+                self?.presentAlert(title: "", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
             }).disposed(by: cell.disposeBag)
         
         cell.selfView.likeButton.rx.tap
@@ -241,11 +241,11 @@ extension MyDJViewController {
         cell.myView.reportButton.rx.tap
             .asDriver()
             .drive(onNext:{ [weak self] _ in
-                let action = UIAlertAction(title: "신고", style: .default) { alert in
+                let action = UIAlertAction(title: "신고하기", style: .default) { alert in
                     print(alert)
                 }
                 action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
-                self?.presentAlert(title: "신고하기", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
+                self?.presentAlert(title: "", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
             }).disposed(by: cell.disposeBag)
         
         cell.myView.likeButton.rx.tap
@@ -308,11 +308,11 @@ extension MyDJViewController {
         cell.myView.reportButton.rx.tap
             .asDriver()
             .drive(onNext:{ [weak self] _ in
-                let action = UIAlertAction(title: "신고", style: .default) { alert in
+                let action = UIAlertAction(title: "신고하기", style: .default) { alert in
                     print(alert)
                 }
                 action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
-                self?.presentAlert(title: "신고하기", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
+                self?.presentAlert(title: "", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
             }).disposed(by: cell.disposeBag)
         
         cell.myView.likeButton.rx.tap

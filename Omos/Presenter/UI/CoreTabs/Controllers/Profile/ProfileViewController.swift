@@ -21,6 +21,7 @@ class ProfileViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.backgroundColor = .mainBlack
+        self.tabBarController?.tabBar.isHidden = false 
     }
     
     override func viewWillDisappear(_ animated: Bool) {
