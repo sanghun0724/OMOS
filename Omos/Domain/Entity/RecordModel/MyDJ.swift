@@ -39,7 +39,7 @@ struct MyDjResponse:Codable {
 
 struct MyDjProfileResponse:Codable {
     let count: Count
-    let isFollowed: Bool
+    let isFollowed: Bool?
     let profile: MyDjListResponse
 }
 

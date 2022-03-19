@@ -60,11 +60,12 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
                     if cell.myView.mainLabelView.maxNumberOfLines < 4 {
                         cell.myView.readMoreButton.isHidden = true
                     } else {
-                        cell.myView.mainLabelView.numberOfLines = 4
+                        cell.myView.mainLabelView.numberOfLines = 3
                         cell.myView.mainLabelView.sizeToFit()
                         cell.myView.readMoreButton.isHidden = false
                     }
                 }
+                
                 longCellBind(cell: cell, data: record,indexPath:indexPath)
                 cell.myView.lockButton.isHidden = true
                 cell.selectionStyle = . none

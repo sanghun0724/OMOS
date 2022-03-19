@@ -42,6 +42,7 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
         selfView.collectionView.delegate = self
         selfView.collectionView.dataSource = self
         viewModel.fetchMyDjList(userId: user)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

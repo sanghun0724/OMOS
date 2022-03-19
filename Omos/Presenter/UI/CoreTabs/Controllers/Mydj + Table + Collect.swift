@@ -80,7 +80,7 @@ extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateLongDetailCell.identifier, for: indexPath) as! AllRecordCateLongDetailCell
                 
-                cell.layoutIfNeeded()
+                //cell.layoutIfNeeded()
                 if expandedIndexSet.contains(indexPath.row) {
                     cell.myView.mainLabelView.numberOfLines = 0
                     cell.myView.mainLabelView.sizeToFit()
@@ -149,12 +149,14 @@ extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
     }
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if cell.height == 44.0 { return }
         shortCellHeights[indexPath] = cell.height
         longCellHeights[indexPath] = cell.height
+        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

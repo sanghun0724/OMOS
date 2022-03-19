@@ -44,6 +44,7 @@ class AllRecordCateLongDetailCell:UITableViewCell {
 //        myView.myView.likeCountLabel.textColor = nil
 //        myView.myView.scrapCountLabel.textColor = nil
         disposeBag = DisposeBag()
+        myView.mainLabelView.text = nil
     }
     
     func configureModel(record:CategoryRespone) {
@@ -57,6 +58,10 @@ class AllRecordCateLongDetailCell:UITableViewCell {
         myView.nicknameLabel.text = record.nickname
         myView.likeCountLabel.text = String(record.likeCnt)
         myView.scrapCountLabel.text = String(record.scrapCnt)
+        
+        if myView.mainLabelView.maxNumberOfLines < 3 {
+            myView.readMoreButton.isHidden = true
+        }
         
         if record.isLiked {
             myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
@@ -82,7 +87,9 @@ class AllRecordCateLongDetailCell:UITableViewCell {
         myView.likeCountLabel.text = String(record.likeCnt)
         myView.scrapCountLabel.text = String(record.scrapCnt)
         myView.cateLabel.text = record.category
-        
+        if myView.mainLabelView.maxNumberOfLines < 3 {
+            myView.readMoreButton.isHidden = true
+        }
         if record.isLiked {
             myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
             myView.likeCountLabel.textColor = .mainOrange
@@ -106,6 +113,10 @@ class AllRecordCateLongDetailCell:UITableViewCell {
         myView.likeCountLabel.text = String(record.likeCnt)
         myView.scrapCountLabel.text = String(record.scrapCnt)
         myView.cateLabel.text = record.category
+
+        if myView.mainLabelView.maxNumberOfLines < 3 {
+            myView.readMoreButton.isHidden = true
+        }
         
         if record.isLiked {
             myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
@@ -482,7 +493,6 @@ class recordLongView:BaseView {
     
     
 }
-
 
 
 

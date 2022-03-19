@@ -149,7 +149,8 @@ override func configureUI() {
     }
     
     subTitleLabel.snp.makeConstraints { make in
-        make.leading.trailing.equalToSuperview().offset(10)
+        make.leading.equalToSuperview().offset(10)
+        make.trailing.equalToSuperview().offset(-10)
         make.top.equalTo(titleLabel.snp.bottom).offset(4)
         subTitleLabel.sizeToFit()
     }

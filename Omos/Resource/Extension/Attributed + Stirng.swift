@@ -107,6 +107,16 @@ class BasePaddingLabel: UILabel {
 
         return contentSize
     }
+    
+//    override var text: String? {
+//        didSet {
+//            if let text = text {
+//               print(text)
+//            } else {
+//                print("Text not changed.")
+//            }
+//        }
+//    }
 }
 
 //라벨 라인수 구하기

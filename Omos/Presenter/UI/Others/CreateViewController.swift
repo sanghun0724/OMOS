@@ -61,6 +61,9 @@ class CreateViewController:BaseViewController {
         doneButton.tintColor = .white
         self.navigationItem.rightBarButtonItem = doneButton
         enableScrollWhenKeyboardAppeared(scrollView: scrollView)
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.backgroundColor = .mainBackGround
+        
         
     }
     
@@ -182,7 +185,7 @@ class CreateViewController:BaseViewController {
                     }
                 }
                 
-             
+                
                 
                 // print("here is \(self?.navigationController!.viewControllers ?? [UIViewController()])")
             }).disposed(by: disposeBag)
@@ -222,9 +225,10 @@ class CreateViewController:BaseViewController {
                 print("Picker was canceled")
                 picker.dismiss(animated: true, completion: nil)
                 self.tabBarController?.tabBar.isHidden = true
+                self.navigationController?.navigationBar.backgroundColor = .mainBackGround
             }
         }
-        
+        self.navigationController?.navigationBar.backgroundColor = .black
         present(picker, animated: true, completion: nil)
     }
     
@@ -385,7 +389,7 @@ extension CreateViewController: UITextViewDelegate {
                     constraint.constant =  Constant.mainHeight * 0.49
                 } else {
                     constraint.constant = estimatedSize.height
-                   // scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height-scrollView.bounds.height), animated: true)
+                    // scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height-scrollView.bounds.height), animated: true)
                     
                 }
             }

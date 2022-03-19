@@ -50,14 +50,11 @@ extension AllRecordSearchDetailViewController:UITableViewDelegate,UITableViewDat
                     cell.myView.mainLabelView.sizeToFit()
                     cell.myView.readMoreButton.isHidden = true
                 } else {
-                    if cell.myView.mainLabelView.maxNumberOfLines < 4 {
-                        cell.myView.readMoreButton.isHidden = true
-                    } else {
                         cell.myView.mainLabelView.numberOfLines = 3
                         cell.myView.mainLabelView.sizeToFit()
                         cell.myView.readMoreButton.isHidden = false
                     }
-                }
+
                 cell.configureOneMusic(record: record)
                 cell.selectionStyle = . none
                 longCellBind(cell: cell, data: record)

@@ -10,6 +10,7 @@ import RxSwift
 
 class MyDjViewModel:BaseViewModel {
     
+    let cellHeight = PublishSubject<IndexPath>() 
     let myDjRecord = PublishSubject<[MyDjResponse]>()
     var currentMyDjRecord:[MyDjResponse] = []
     let myDjList = PublishSubject<[MyDjListResponse]>()

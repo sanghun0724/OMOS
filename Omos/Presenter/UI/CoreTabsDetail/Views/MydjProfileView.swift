@@ -238,17 +238,23 @@ class MydjProfileHeader:UITableViewHeaderFooterView {
     
     func configureModel(profile:MyDjProfileResponse) {
         profileLabel.text = profile.profile.nickName
-        profileImageView.setImage(with: profile.profile.profileURL ?? "")
         followerCountLabel.text = "\(profile.count.followerCount)"
         followingCountLabel.text = "\(profile.count.followingCount)"
         recordCountLabel.text = "\(profile.count.recordsCount)"
         
-        if profile.isFollowed {
+        if profile.isFollowed ?? false {
             followButton.setTitle("팔로잉", for:  .normal)
             followButton.backgroundColor = .clear
             followButton.setTitleColor(.mainGrey4, for: .normal)
             followButton.layer.borderWidth = 1
         }
+        
+        guard let image = profile.profile.profileURL else {
+            profileImageView.image = UIImage(named: "profile")
+            print("default")
+            return
+        }
+        profileImageView.setImage(with: image)
     }
     
 }

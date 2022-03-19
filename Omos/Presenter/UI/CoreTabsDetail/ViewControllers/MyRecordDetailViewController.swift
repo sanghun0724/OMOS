@@ -118,7 +118,6 @@ class MyRecordDetailViewController:BaseViewController {
         selfView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-            make.height.equalToSuperview().multipliedBy(0.7)
         }
     }
     
@@ -494,7 +493,6 @@ class MyRecordDetailViewController:BaseViewController {
                 else { return }
                 let userId = UserDefaults.standard.integer(forKey: "user")
                 let recordId = myRecord.recordID
-                print("User\(userId)")
                 if self?.selfLyricsView.scrapCountLabel.textColor == .mainOrange {
                     //좋아요 취소
                     self?.selfLyricsView.scrapButton.setImage(UIImage(named:"emptyStar"), for: .normal)
