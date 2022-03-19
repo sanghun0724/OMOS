@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import KakaoSDKCommon
+import KakaoSDKUser
+import KakaoSDKAuth
 
 class SettingViewController:BaseViewController {
     
@@ -39,6 +42,33 @@ class SettingViewController:BaseViewController {
         tableView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.leading.trailing.bottom.equalToSuperview()
+        }
+    }
+    
+    private func logout() {
+        // KAKAKO 로그아웃
+        UserApi.shared.logout {(error) in
+            if let error = error {
+                print(error)
+            }
+            else {
+                print("로그아웃 성공")
+            }
+        }
+        // APPLE 로그아웃 은 각자 해야함 화면 돌려주기만 하기
+        
+        // local
+        
+        
+        //reset UserDefault
+        resetDefaults()
+    }
+    
+   private func resetDefaults() {
+        let defaults = UserDefaults.standard
+        let dictionary = defaults.dictionaryRepresentation()
+        dictionary.keys.forEach { key in
+            defaults.removeObject(forKey: key)
         }
     }
     
@@ -120,7 +150,7 @@ extension SettingViewController:UITableViewDelegate,UITableViewDataSource {
             case 0:
                 //logout
                 let action = UIAlertAction(title: "로그아웃", style: .default) { alert in
-                    print(alert)
+                   
                 }
                 action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
                 self.presentAlert(title: "", message: "정말 로그아웃 하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)

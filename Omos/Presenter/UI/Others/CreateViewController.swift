@@ -211,6 +211,7 @@ class CreateViewController:BaseViewController {
         config.wordings.cameraTitle = "카메라"
         config.wordings.next = "다음"
         config.colors.tintColor = .white
+        UINavigationBar.appearance().backgroundColor = .black
         let picker = YPImagePicker(configuration: config)
         picker.didFinishPicking { [unowned picker] items, cancelled in
             if let photo = items.singlePhoto {
@@ -225,10 +226,9 @@ class CreateViewController:BaseViewController {
                 print("Picker was canceled")
                 picker.dismiss(animated: true, completion: nil)
                 self.tabBarController?.tabBar.isHidden = true
-                self.navigationController?.navigationBar.backgroundColor = .mainBackGround
+                UINavigationBar.appearance().backgroundColor = .mainBackGround
             }
         }
-        self.navigationController?.navigationBar.backgroundColor = .black
         present(picker, animated: true, completion: nil)
     }
     
