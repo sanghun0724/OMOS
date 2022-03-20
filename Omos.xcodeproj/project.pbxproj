@@ -186,6 +186,12 @@
 		B6E12E8027C210B4008644B5 /* CreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E12E7F27C210B4008644B5 /* CreateView.swift */; };
 		B6E12E8227C210E6008644B5 /* CreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E12E8127C210E6008644B5 /* CreateViewModel.swift */; };
 		B6E8C91527B6AEFC00C32752 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E8C91427B6AEFC00C32752 /* Constant.swift */; };
+		B6E9B5CA27E717940045143F /* MyProfileTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E9B5C927E717940045143F /* MyProfileTarget.swift */; };
+		B6E9B5CC27E717A50045143F /* MyProfileAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E9B5CB27E717A50045143F /* MyProfileAPI.swift */; };
+		B6E9B5CE27E719E30045143F /* MyProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E9B5CD27E719E30045143F /* MyProfile.swift */; };
+		B6E9B5D027E73CB90045143F /* MyProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E9B5CF27E73CB90045143F /* MyProfileUseCase.swift */; };
+		B6E9B5D227E73D000045143F /* MyProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E9B5D127E73D000045143F /* MyProfileRepository.swift */; };
+		B6E9B5D427E73D0E0045143F /* MyProfileRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E9B5D327E73D0E0045143F /* MyProfileRepositoryImpl.swift */; };
 		B6EF88A927BD3AC2006F6A8F /* EmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EF88A827BD3AC2006F6A8F /* EmptyCell.swift */; };
 		B6F0596E27C3490E00CCB242 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F0596D27C3490E00CCB242 /* CategoryView.swift */; };
 		B6FE837827D07B4800401FC5 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FE837727D07B4800401FC5 /* Cell.swift */; };
@@ -389,6 +395,12 @@
 		B6E12E7F27C210B4008644B5 /* CreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateView.swift; sourceTree = "<group>"; };
 		B6E12E8127C210E6008644B5 /* CreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewModel.swift; sourceTree = "<group>"; };
 		B6E8C91427B6AEFC00C32752 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		B6E9B5C927E717940045143F /* MyProfileTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileTarget.swift; sourceTree = "<group>"; };
+		B6E9B5CB27E717A50045143F /* MyProfileAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileAPI.swift; sourceTree = "<group>"; };
+		B6E9B5CD27E719E30045143F /* MyProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfile.swift; sourceTree = "<group>"; };
+		B6E9B5CF27E73CB90045143F /* MyProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileUseCase.swift; sourceTree = "<group>"; };
+		B6E9B5D127E73D000045143F /* MyProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileRepository.swift; sourceTree = "<group>"; };
+		B6E9B5D327E73D0E0045143F /* MyProfileRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileRepositoryImpl.swift; sourceTree = "<group>"; };
 		B6EF88A827BD3AC2006F6A8F /* EmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCell.swift; sourceTree = "<group>"; };
 		B6F0596D27C3490E00CCB242 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		B6FE837727D07B4800401FC5 /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
@@ -572,6 +584,8 @@
 				B611825C27D45E2D004217E2 /* SearchRepositoryImpl.swift */,
 				B697F20A27E0D09C00F34AB5 /* TodayRepository.swift */,
 				B697F20C27E0D0A700F34AB5 /* TodayRepositoryImpl.swift */,
+				B6E9B5D127E73D000045143F /* MyProfileRepository.swift */,
+				B6E9B5D327E73D0E0045143F /* MyProfileRepositoryImpl.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -764,6 +778,7 @@
 				B6ABCCFD27CF5EDE0003B47A /* RecordsUseCase.swift */,
 				B611826527D465FD004217E2 /* SearchUseCase.swift */,
 				B697F20827E0D08300F34AB5 /* TodayUseCase.swift */,
+				B6E9B5CF27E73CB90045143F /* MyProfileUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -771,6 +786,7 @@
 		B68454E927BE1D7A00F1E6B5 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				B6E9B5C827E716760045143F /* MyProfile */,
 				B697F20027E0A28900F34AB5 /* Today */,
 				B64601E327DB4BC30076C2E5 /* MyDJ */,
 				B64601DC27DB47B10076C2E5 /* Interaction */,
@@ -856,6 +872,7 @@
 			isa = PBXGroup;
 			children = (
 				B697F20427E0A47C00F34AB5 /* Today.swift */,
+				B6E9B5CD27E719E30045143F /* MyProfile.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -967,6 +984,15 @@
 				B6183CCC27D788A60035AA06 /* ArtistAlbumViewController.swift */,
 			);
 			path = ArtistSection;
+			sourceTree = "<group>";
+		};
+		B6E9B5C827E716760045143F /* MyProfile */ = {
+			isa = PBXGroup;
+			children = (
+				B6E9B5C927E717940045143F /* MyProfileTarget.swift */,
+				B6E9B5CB27E717A50045143F /* MyProfileAPI.swift */,
+			);
+			path = MyProfile;
 			sourceTree = "<group>";
 		};
 		B6FE837D27D09BFF00401FC5 /* ViewControllers */ = {
@@ -1167,6 +1193,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B642344727DCC9B600C1083D /* AllRecordSearchDetail + Table.swift in Sources */,
+				B6E9B5D427E73D0E0045143F /* MyProfileRepositoryImpl.swift in Sources */,
 				B646052527CB7A0E0022E062 /* AlbumTableCell.swift in Sources */,
 				B606195D27DF32E7006508CA /* Lyrics + Table.swift in Sources */,
 				B6FE837827D07B4800401FC5 /* Cell.swift in Sources */,
@@ -1199,6 +1226,7 @@
 				B646052C27CBAA0D0022E062 /* ArtistTableCell.swift in Sources */,
 				B646052E27CBAD2F0022E062 /* SearchAlbumDetailViewController.swift in Sources */,
 				B646051527CB5E7A0022E062 /* EntireView.swift in Sources */,
+				B6E9B5CE27E719E30045143F /* MyProfile.swift in Sources */,
 				B646052A27CBA9EE0022E062 /* ArtistView.swift in Sources */,
 				B682185E27B3E22900B58E19 /* LoadingView.swift in Sources */,
 				B646051927CB5EF10022E062 /* SongView.swift in Sources */,
@@ -1252,6 +1280,8 @@
 				B697F20527E0A47C00F34AB5 /* Today.swift in Sources */,
 				B683A45327B0DA3500838749 /* AllRecordTableCell.swift in Sources */,
 				B69860BD27B8E85600E83DB9 /* NickNameView.swift in Sources */,
+				B6E9B5D027E73CB90045143F /* MyProfileUseCase.swift in Sources */,
+				B6E9B5CC27E717A50045143F /* MyProfileAPI.swift in Sources */,
 				B6D4BB2627CA801300D6741B /* MySearchViewController.swift in Sources */,
 				B697F20F27E0DDAF00F34AB5 /* HomeViewModel.swift in Sources */,
 				B6DCFA5B27E48647006283FE /* InteractionRecordViewController.swift in Sources */,
@@ -1288,6 +1318,7 @@
 				B69E42D527E3A8F900CAD5F1 /* MyRecordDetail + Table .swift in Sources */,
 				B6ABCCFC27CF5E650003B47A /* RecordsRepositoryImpl.swift in Sources */,
 				B6DCFA6527E4D852006283FE /* AccountOutViewController.swift in Sources */,
+				B6E9B5D227E73D000045143F /* MyProfileRepository.swift in Sources */,
 				B6ABCCF627CF45020003B47A /* RecordAPI.swift in Sources */,
 				B6BC148927BFF6F80067D8FB /* MyRecordDetailView.swift in Sources */,
 				B650873D27AF969C0020D2C1 /* MyRecordViewController.swift in Sources */,
@@ -1301,6 +1332,7 @@
 				B683A45927B130D100838749 /* Profile + Table.swift in Sources */,
 				B611826B27D4B104004217E2 /* Artist.swift in Sources */,
 				B6F0596E27C3490E00CCB242 /* CategoryView.swift in Sources */,
+				B6E9B5CA27E717940045143F /* MyProfileTarget.swift in Sources */,
 				B697F20B27E0D09C00F34AB5 /* TodayRepository.swift in Sources */,
 				B651E8CA27CA87F500996CC3 /* MydjProfileView.swift in Sources */,
 				B68454E827BE027500F1E6B5 /* LoginUseCase.swift in Sources */,
