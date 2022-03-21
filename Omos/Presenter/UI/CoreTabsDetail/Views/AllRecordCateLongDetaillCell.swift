@@ -55,7 +55,8 @@ class AllRecordCateLongDetailCell:UITableViewCell {
         myView.circleImageView.setImage(with: record.music.albumImageURL)
         //myView.myView.backImageView.setImage(with: ) 추후 추가되면 삽입
         myView.titleLabel.text = record.recordTitle
-        myView.createdLabel.text = record.createdDate
+        myView.createdLabel.text = record.createdDate.toDate()
+        myView.cateLabel.text = record.category.getReverseCate()
         myView.mainLabelView.text = record.recordContents
         myView.nicknameLabel.text = record.nickname
         myView.likeCountLabel.text = String(record.likeCnt)
@@ -83,12 +84,12 @@ class AllRecordCateLongDetailCell:UITableViewCell {
         myView.circleImageView.setImage(with: record.music.albumImageURL)
         //myView.myView.backImageView.setImage(with: ) 추후 추가되면 삽입
         myView.titleLabel.text = record.recordTitle
-        myView.createdLabel.text = record.createdDate
+        myView.createdLabel.text = record.createdDate.toDate()
         myView.mainLabelView.text = record.recordContents
         myView.nicknameLabel.text = record.nickname
         myView.likeCountLabel.text = String(record.likeCnt)
         myView.scrapCountLabel.text = String(record.scrapCnt)
-        myView.cateLabel.text = record.category
+        myView.cateLabel.text = " | \(record.category.getReverseCate())"
         if myView.mainLabelView.maxNumberOfLines < 3 {
             myView.readMoreButton.isHidden = true
         }
@@ -109,12 +110,12 @@ class AllRecordCateLongDetailCell:UITableViewCell {
         myView.circleImageView.setImage(with: record.music.albumImageURL)
         //myView.myView.backImageView.setImage(with: ) 추후 추가되면 삽입
         myView.titleLabel.text = record.recordTitle
-        myView.createdLabel.text = record.createdDate
+        myView.createdLabel.text = record.createdDate.toDate()
         myView.mainLabelView.text = record.recordContents
         myView.nicknameLabel.text = record.nickname
         myView.likeCountLabel.text = String(record.likeCnt)
         myView.scrapCountLabel.text = String(record.scrapCnt)
-        myView.cateLabel.text = record.category
+        myView.cateLabel.text = record.category.getReverseCate()
 
         if myView.mainLabelView.maxNumberOfLines < 3 {
             myView.readMoreButton.isHidden = true
@@ -299,9 +300,9 @@ class recordLongView:BaseView {
         return label
     }()
     
-    let readMoreButton:UIButton = {
-        let button = UIButton()
-        button.setTitle("... 더 보기", for: .normal)
+    let readMoreButton:adjustButton = {
+        let button = adjustButton()
+        button.setTitle(" 더 보기", for: .normal)
         button.setTitleColor(UIColor.mainGrey6, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
         button.backgroundColor = .mainBlack
@@ -390,7 +391,7 @@ class recordLongView:BaseView {
             make.bottom.equalToSuperview()
             make.height.equalTo(Constant.mainHeight * 0.07)
         }
-        
+     
         dummyView2.snp.makeConstraints { make in
             make.leading.trailing.top.equalToSuperview()
             make.height.equalTo(0.5)
@@ -449,9 +450,8 @@ class recordLongView:BaseView {
             mainLabelView.sizeToFit()
         }
 
-        
         readMoreButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-10)
+            make.bottom.equalTo(mainLabelView.snp.top).offset(mainLabelView.intrinsicContentSize.height-20)
             make.trailing.equalToSuperview().offset(-16)
             make.width.equalTo(readMoreButton.intrinsicContentSize.width)
             make.height.equalTo(readMoreButton.intrinsicContentSize.height)

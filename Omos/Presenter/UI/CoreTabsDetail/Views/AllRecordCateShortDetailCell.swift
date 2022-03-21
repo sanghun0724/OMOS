@@ -49,10 +49,11 @@ class AllRecordCateShortDetailCell:UITableViewCell {
         //myView.myView.backImageView.setImage(with: ) 추후 추가되면 삽입
         myView.titleLabel.text = record.recordTitle
         myView.mainLabelView.text = record.recordContents
-        myView.createdLabel.text = record.createdDate
+        myView.createdLabel.text = record.createdDate.toDate()
         myView.nicknameLabel.text = record.nickname
         myView.likeCountLabel.text = String(record.likeCnt)
         myView.scrapCountLabel.text = String(record.scrapCnt)
+        myView.cateLabel.text = record.category.getReverseCate()
         
         if record.isLiked {
             myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
@@ -72,11 +73,11 @@ class AllRecordCateShortDetailCell:UITableViewCell {
         //myView.myView.backImageView.setImage(with: ) 추후 추가되면 삽입
         myView.titleLabel.text = record.recordTitle
         myView.mainLabelView.text = record.recordContents
-        myView.createdLabel.text = record.createdDate
+        myView.createdLabel.text = record.createdDate.toDate()
         myView.nicknameLabel.text = record.nickname
         myView.likeCountLabel.text = String(record.likeCnt)
         myView.scrapCountLabel.text = String(record.scrapCnt)
-        myView.cateLabel.text = record.category
+        myView.cateLabel.text = " | \(record.category.getReverseCate())"
         if record.isLiked {
             myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
             myView.likeCountLabel.textColor = .mainOrange
@@ -95,11 +96,11 @@ class AllRecordCateShortDetailCell:UITableViewCell {
         //myView.myView.backImageView.setImage(with: ) 추후 추가되면 삽입
         myView.titleLabel.text = record.recordTitle
         myView.mainLabelView.text = record.recordContents
-        myView.createdLabel.text = record.createdDate
+        myView.createdLabel.text = record.createdDate.toDate()
         myView.nicknameLabel.text = record.nickname
         myView.likeCountLabel.text = String(record.likeCnt)
         myView.scrapCountLabel.text = String(record.scrapCnt)
-        myView.cateLabel.text = record.category
+        myView.cateLabel.text = record.category.getReverseCate()
         if record.isLiked {
             myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
             myView.likeCountLabel.textColor = .mainOrange

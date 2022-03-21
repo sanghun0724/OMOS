@@ -270,10 +270,10 @@ class AllRecordDetailViewController:BaseViewController {
         selfLongView.circleImageView.setImage(with: myRecord.music.albumImageURL)
         //        selfView.backImageView.setImage(with: <#T##String#>)
         selfLongView.titleLabel.text = myRecord.recordTitle
-        selfLongView.createdLabel.text = myRecord.createdDate
+        selfLongView.createdLabel.text = myRecord.createdDate.toDate()
         selfLongView.likeCountLabel.text = String(myRecord.likeCnt)
         selfLongView.scrapCountLabel.text = String(myRecord.scrapCnt)
-        selfLongView.cateLabel.text = " | \(myRecord.category )"
+        selfLongView.cateLabel.text = " | \(myRecord.category.getReverseCate() )"
         selfLongView.nicknameLabel.text = myRecord.nickname
         selfLongView.lockButton.isHidden = true
         
@@ -306,10 +306,10 @@ class AllRecordDetailViewController:BaseViewController {
         selfShortView.circleImageView.setImage(with: myRecord.music.albumImageURL)
         //        selfView.backImageView.setImage(with: <#T##String#>)
         selfShortView.titleLabel.text = myRecord.recordTitle
-        selfShortView.createdLabel.text = myRecord.createdDate
+        selfShortView.createdLabel.text = myRecord.createdDate.toDate()
         selfShortView.likeCountLabel.text = String(myRecord.likeCnt)
         selfShortView.scrapCountLabel.text = String(myRecord.scrapCnt)
-        selfShortView.cateLabel.text =  " | \(myRecord.category )"
+        selfShortView.cateLabel.text =  " | \(myRecord.category.getReverseCate() )"
         selfShortView.nicknameLabel.text = myRecord.nickname
         
         
@@ -357,10 +357,10 @@ class AllRecordDetailViewController:BaseViewController {
         selfLyricsView.circleImageView.setImage(with: myRecord.music.albumImageURL)
         //        selfView.backImageView.setImage(with: <#T##String#>)
         selfLyricsView.titleTextView.text = myRecord.recordTitle
-        selfLyricsView.createdField.text = myRecord.createdDate
+        selfLyricsView.createdField.text = myRecord.createdDate.toDate()
         selfLyricsView.likeCountLabel.text = String(myRecord.likeCnt)
         selfLyricsView.scrapCountLabel.text = String(myRecord.scrapCnt)
-        selfLyricsView.cateLabel.text = " | \(myRecord.category )"
+        selfLyricsView.cateLabel.text = " | \(myRecord.category.getReverseCate() )"
         selfLyricsView.nicknameLabel.text = myRecord.nickname
         selfLyricsView.dummyView3.isHidden = true
         

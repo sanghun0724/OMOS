@@ -81,19 +81,27 @@ extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateLongDetailCell.identifier, for: indexPath) as! AllRecordCateLongDetailCell
+                cell.configureMyDjRecord(record: record)
+                cell.layoutIfNeeded()
                 
-                //cell.layoutIfNeeded()
                 if expandedIndexSet.contains(indexPath.row) {
+                    //cell.layoutIfNeeded()
                     cell.myView.mainLabelView.numberOfLines = 0
                     cell.myView.mainLabelView.sizeToFit()
+                    cell.myView.mainLabelView.setNeedsLayout()
+                    cell.myView.mainLabelView.layoutIfNeeded()
                     cell.myView.readMoreButton.isHidden = true
                 } else {
+                    if  cell.myView.mainLabelView.maxNumberOfLines < 4 {
+                        cell.myView.readMoreButton.isHidden = true
+                    } else {
                         cell.myView.mainLabelView.numberOfLines = 3
                         cell.myView.mainLabelView.sizeToFit()
                         cell.myView.readMoreButton.isHidden = false
+                    }
                 }
                 
-                cell.configureMyDjRecord(record: record)
+                
                 cell.selectionStyle = . none
                 longCellBind(cell: cell, data: record)
                 cell.myView.lockButton.isHidden = true

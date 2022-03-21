@@ -195,7 +195,7 @@ class MyRecordDetailViewController:BaseViewController {
                 } else {
                     let vm = CreateViewModel(usecase: uc)
                     vm.modifyDefaultModel = self?.viewModel.currentMyRecordDetail
-                    let vc = CreateViewController(viewModel: vm, category: (self?.getReverseCate(cate: self?.viewModel.currentMyRecordDetail?.category ?? ""))!, type: .modify)
+                    let vc = CreateViewController(viewModel: vm, category: (self?.viewModel.currentMyRecordDetail?.category ?? "").getReverseCate(), type: .modify)
                     self?.navigationController?.pushViewController( vc, animated: true)
                 }
               
@@ -345,10 +345,10 @@ class MyRecordDetailViewController:BaseViewController {
         selfView.circleImageView.setImage(with: myRecord.music.albumImageURL)
         //        selfView.backImageView.setImage(with: <#T##String#>)
         selfView.titleLabel.text = myRecord.recordTitle
-        selfView.createdLabel.text = myRecord.createdDate
+        selfView.createdLabel.text = myRecord.createdDate.toDate()
         selfView.likeCountLabel.text = String(myRecord.likeCnt)
         selfView.scrapCountLabel.text = String(myRecord.scrapCnt)
-        selfView.cateLabel.text =  " | \(myRecord.category )"
+        selfView.cateLabel.text =  " | \(myRecord.category.getReverseCate() )"
         selfView.nicknameLabel.text = myRecord.nickname
         
         if myRecord.isPublic {
@@ -367,6 +367,7 @@ class MyRecordDetailViewController:BaseViewController {
             selfView.scrapButton.setImage(UIImage(named: "fillStar"), for: .normal)
             selfView.scrapCountLabel.textColor = .mainOrange
         }
+        
         selfView.mainLabelView.text = myRecord.recordContents
         selfView.dummyView3.isHidden = true
     }
@@ -377,10 +378,10 @@ class MyRecordDetailViewController:BaseViewController {
         selflongView.myView.circleImageView.setImage(with: myRecord.music.albumImageURL)
         //        selfView.backImageView.setImage(with: <#T##String#>)
         selflongView.myView.titleLabel.text = myRecord.recordTitle
-        selflongView.myView.createdLabel.text = myRecord.createdDate
+        selflongView.myView.createdLabel.text = myRecord.createdDate.toDate()
         selflongView.myView.likeCountLabel.text = String(myRecord.likeCnt)
         selflongView.myView.scrapCountLabel.text = String(myRecord.scrapCnt)
-        selflongView.myView.cateLabel.text = " | \(myRecord.category )"
+        selflongView.myView.cateLabel.text = " | \(myRecord.category.getReverseCate() )"
         selflongView.myView.nicknameLabel.text = myRecord.nickname
         
         if myRecord.isPublic {
@@ -435,10 +436,10 @@ class MyRecordDetailViewController:BaseViewController {
         selfLyricsView.circleImageView.setImage(with: myRecord.music.albumImageURL)
         //        selfView.backImageView.setImage(with: <#T##String#>)
         selfLyricsView.titleTextView.text = myRecord.recordTitle
-        selfLyricsView.createdField.text = myRecord.createdDate
+        selfLyricsView.createdField.text = myRecord.createdDate.toDate()
         selfLyricsView.likeCountLabel.text = String(myRecord.likeCnt)
         selfLyricsView.scrapCountLabel.text = String(myRecord.scrapCnt)
-        selfLyricsView.cateLabel.text =  " | \(myRecord.category )"
+        selfLyricsView.cateLabel.text =  " | \(myRecord.category.getReverseCate() )"
         selfLyricsView.nicknameLabel.text = myRecord.nickname
         selfLyricsView.dummyView3.isHidden = true
         
@@ -519,22 +520,7 @@ class MyRecordDetailViewController:BaseViewController {
             }).disposed(by: disposeBag)
     }
     
-    private func getReverseCate(cate:String) -> String {
-        switch cate {
-        case "A_LINE":
-            return "한 줄 감상"
-        case "STORY":
-            return "노래 속 나의 이야기"
-        case "OST":
-            return "내 인생의 OST"
-        case "LYRICS":
-            return "나만의 가사해석"
-        case "FREE":
-            return "자유 공간"
-        default:
-            return "자유 공간"
-        }
-    }
+   
     
 }
 

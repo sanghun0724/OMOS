@@ -144,14 +144,60 @@ extension String { // 한글 숫자 영문 특수문자 포함 정규식 (이모
             return false
         }
         return false
+        
+    }
+    
+    func getReverseCate() -> String {
+        switch self {
+        case "A_LINE":
+            return "한 줄 감상"
+        case "STORY":
+            return "노래 속 나의 이야기"
+        case "OST":
+            return "내 인생의 OST"
+        case "LYRICS":
+            return "나만의 가사해석"
+        case "FREE":
+            return "자유 공간"
+        default:
+            return self
+        }
+    }
+    
+     func toDate() -> String {
+         let dateFormatter = DateFormatter()
+         let tempLocale = dateFormatter.locale // save locale temporarily
+         dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+         let date = dateFormatter.date(from: self)!
+         dateFormatter.dateFormat = "yyyy-MM-dd"
+         dateFormatter.locale = tempLocale // reset the locale
+         let dateString = dateFormatter.string(from: date)
+         
+        return dateString
+    }
     
 }
 
+extension Date {
+    
+    func toString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        return dateFormatter.string(from: self)
+    }
 
 }
+
+
+
 
 
 extension Notification.Name {
     static let follow = Notification.Name("follow")
     static let followCancel = Notification.Name("followCancel")
 }
+
+
+

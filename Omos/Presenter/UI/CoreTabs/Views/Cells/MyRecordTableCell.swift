@@ -165,7 +165,7 @@ class MyRecordTableCell:UITableViewCell {
         titleLabel.text = record.music.musicTitle +  record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}
         recordLabel.text = record.recordTitle
         descLabel.text = record.recordContents
-        nameLabel.text = record.createdDate + " | " + record.category
+        nameLabel.text = record.createdDate.toDate() + " | " + record.category.getReverseCate()
         record.isPublic ? (lockImageView.image = UIImage(named:"unlock")) : (lockImageView.image = UIImage(named:"lock"))
         
     }
@@ -176,9 +176,8 @@ class MyRecordTableCell:UITableViewCell {
         titleLabel.text = record.music.musicTitle +  record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}
         recordLabel.text = record.recordTitle
         descLabel.text = record.recordContents
-        nameLabel.text = record.createdDate + " | " + record.category
+        nameLabel.text = record.createdDate.toDate() + " | " + record.category.getReverseCate()
        // record.isPublic ? (lockImageView.image = UIImage(named:"unlock")) : (lockImageView.image = UIImage(named:"lock"))
-        
     }
     
 }

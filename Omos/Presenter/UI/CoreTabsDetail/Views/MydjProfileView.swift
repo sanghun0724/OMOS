@@ -250,7 +250,7 @@ class MydjProfileHeader:UITableViewHeaderFooterView {
         }
         
         guard let image = profile.profile.profileURL else {
-            profileImageView.image = UIImage(named: "profile")
+            profileImageView.image = UIImage(named: "albumCover")
             print("default")
             return
         }

@@ -48,16 +48,14 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
                 cell.layoutIfNeeded()
                 cell.myView.circleImageView.layer.cornerRadius = cell.myView.circleImageView.height / 2
                 cell.myView.circleImageView.layer.masksToBounds = true
-                print("cell reload")
+    
                 if expandedIndexSet.contains(indexPath.row) {
                     //cell.layoutIfNeeded()
                     cell.myView.mainLabelView.numberOfLines = 0
                     cell.myView.mainLabelView.sizeToFit()
                     cell.myView.mainLabelView.setNeedsLayout()
                     cell.myView.mainLabelView.layoutIfNeeded()
-                    print(cell.myView.mainLabelView.height)
                     cell.myView.readMoreButton.isHidden = true
-                    print("here here")
                 } else {
                     if cell.myView.mainLabelView.maxNumberOfLines < 4 {
                         cell.myView.readMoreButton.isHidden = true
