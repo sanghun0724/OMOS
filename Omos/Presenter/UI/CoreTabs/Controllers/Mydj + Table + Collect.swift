@@ -20,6 +20,8 @@ extension MyDJViewController:UICollectionViewDataSource,UICollectionViewDelegate
         cell.backgroundColor = .mainBackGround
         if indexPath.row == 0 {
             cell.djImageView.layer.borderWidth = 1
+        } else {
+            cell.djImageView.layer.borderWidth = 0
         }
         let cellData = viewModel.currentMyDjList[indexPath.row]
         cell.configureModel(record: cellData)

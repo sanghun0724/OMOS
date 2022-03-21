@@ -9,6 +9,12 @@ import UIKit
 
 class LaunchViewController:BaseViewController {
     
+    let launchImageView:UIImageView = {
+        let view = UIImageView(image:UIImage(named: "spalsh_logo"))
+        view.clipsToBounds = true
+        view.contentMode = .scaleAspectFill
+        return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,5 +23,14 @@ class LaunchViewController:BaseViewController {
     
     override func configureUI() {
         super.configureUI()
+        self.view.addSubview(launchImageView)
+        
+        launchImageView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().multipliedBy(0.9)
+            make.height.equalToSuperview().multipliedBy(0.08)
+            make.width.equalToSuperview().multipliedBy(0.282)
+        }
+        
     }
 }

@@ -17,7 +17,7 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return cateRecords.count ?? 0
+            return cateRecords.count 
         } else if section == 1 && isPaging && hasNextPage {
             return 1
         }
@@ -45,10 +45,12 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateLongDetailCell.identifier, for: indexPath) as! AllRecordCateLongDetailCell
                 cell.configureModel(record: record)
-                
+                cell.layoutIfNeeded()
+                cell.myView.circleImageView.layer.cornerRadius = cell.myView.circleImageView.height / 2
+                cell.myView.circleImageView.layer.masksToBounds = true
                 print("cell reload")
                 if expandedIndexSet.contains(indexPath.row) {
-                    cell.layoutIfNeeded()
+                    //cell.layoutIfNeeded()
                     cell.myView.mainLabelView.numberOfLines = 0
                     cell.myView.mainLabelView.sizeToFit()
                     cell.myView.mainLabelView.setNeedsLayout()

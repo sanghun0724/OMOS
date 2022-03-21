@@ -55,6 +55,7 @@ class MyDjProfileViewModel:BaseViewModel {
         usecase.saveFollow(fromId: fromId, toId: toId)
             .subscribe({ state in
                 print(state)
+        NotificationCenter.default.post(name: NSNotification.Name.follow, object: nil, userInfo: nil);
             }).disposed(by: disposeBag)
     }
     
@@ -62,6 +63,7 @@ class MyDjProfileViewModel:BaseViewModel {
         usecase.deleteFollow(fromId: fromId, toId: toId)
             .subscribe({ state in
                 print(state)
+        NotificationCenter.default.post(name: NSNotification.Name.followCancel, object: nil, userInfo: nil);
             }).disposed(by: disposeBag)
     }
     

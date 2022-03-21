@@ -42,17 +42,29 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
         selfView.tableView.dataSource = self
         selfView.collectionView.delegate = self
         selfView.collectionView.dataSource = self
-//        viewModel.fetchMyDjList(userId: Account.currentUser)
+        viewModel.fetchMyDjList(userId: Account.currentUser)
         
-        self.timer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true, block: {[weak self] (tt) in
-            self?.viewModel.fetchMyDjList(userId: Account.currentUser)
-            self?.selfView.collectionView.reloadData()
-            })
-            timer?.fire()
+//        self.timer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true, block: {[weak self] (tt) in
+//            self?.viewModel.fetchMyDjList(userId: Account.currentUser)
+//            self?.selfView.collectionView.reloadData()
+//            })
+//            timer?.fire()
+        NotificationCenter.default.addObserver(self, selector: #selector(didRecieveFollowNotification), name: NSNotification.Name.follow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didRecieveFollowCacelNotification), name: NSNotification.Name.followCancel, object: nil)
+
+    }
+//
+//    deinit {
+//        timer?.invalidate()
+//    }
+    
+    @objc func didRecieveFollowCacelNotification(_ notification: Notification) {
+        self.viewModel.fetchMyDjList(userId: Account.currentUser)
     }
     
-    deinit {
-        timer?.invalidate()
+    @objc func didRecieveFollowNotification(_ notification: Notification) {
+        self.viewModel.fetchMyDjList(userId: Account.currentUser)
     }
     
     override func viewWillAppear(_ animated: Bool) {

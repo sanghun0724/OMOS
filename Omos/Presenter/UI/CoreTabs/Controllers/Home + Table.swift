@@ -43,6 +43,7 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource {
         case 3:
             guard let cellData = viewModel.currentLovedRecord else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: LovedEmptyCell.identifier,for:indexPath) as! LovedEmptyCell
+                cell.selectionStyle = .none
                 return cell
             }
             

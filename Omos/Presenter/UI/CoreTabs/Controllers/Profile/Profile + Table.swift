@@ -99,22 +99,28 @@ extension ProfileViewController:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
         if section == 0 {
-            return Constant.mainHeight * 0.16
+            return Constant.mainHeight * 0.17
         } else {
-            return Constant.mainHeight * 0.05
+            return Constant.mainHeight * 0.06
         }
         
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-      //  (view as? UITableViewHeaderFooterView)?.contentView.backgroundColor = UIColor.mainBlack
+        if section == 0 {
+            (view as? UITableViewHeaderFooterView)?.contentView.backgroundColor = UIColor.mainBlack
+        } else  {
+            (view as? UITableViewHeaderFooterView)?.contentView.backgroundColor = UIColor.mainBackGround
+        }
+      
         
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 1 || indexPath.section == 2  {
-            return Constant.mainHeight * 0.2253
+            return Constant.mainHeight * 0.2353
         }
         
         return 0

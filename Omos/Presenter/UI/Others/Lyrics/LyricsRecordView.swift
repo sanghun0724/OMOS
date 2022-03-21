@@ -170,6 +170,12 @@ class LyricsRecordView:BaseView {
         return label
     }()
     
+    let dummyView3:UIView = {
+        let view = UIView()
+        view.backgroundColor = .mainBlack1
+        return view
+    }()
+    
     override func configureUI() {
         super.configureUI()
         setDefault()
@@ -268,6 +274,11 @@ class LyricsRecordView:BaseView {
             make.top.equalTo(scrapButton.snp.bottom).offset(3)
             scrapCountLabel.sizeToFit()
         }
+        
+        dummyView3.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(2)
+        }
 
 
         likeButton.snp.makeConstraints { make in
@@ -315,6 +326,7 @@ class LyricsRecordView:BaseView {
         lastView.addSubview(likeCountLabel)
         lastView.addSubview(scrapButton)
         lastView.addSubview(scrapCountLabel)
+        lastView.addSubview(dummyView3)
         
         
     

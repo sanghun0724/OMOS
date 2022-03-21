@@ -27,13 +27,14 @@ class ProfileViewController: BaseViewController {
         bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
-        viewModel.allFetch()
+       // viewModel.allFetch()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.backgroundColor = .mainBlack
-        self.tabBarController?.tabBar.isHidden = false 
+        self.tabBarController?.tabBar.isHidden = false
+        viewModel.allFetch()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

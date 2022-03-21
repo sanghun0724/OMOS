@@ -17,7 +17,7 @@ class ProfileView:BaseView {
         table.backgroundColor = .mainBackGround
         table.showsVerticalScrollIndicator = false
         table.automaticallyAdjustsScrollIndicatorInsets = false
-        table.insetsContentViewsToSafeArea = true
+        table.insetsContentViewsToSafeArea = false
         table.contentInsetAdjustmentBehavior = .never
         table.isScrollEnabled = false 
         return table

@@ -292,7 +292,7 @@ class MyRecordDetailView:BaseView {
         
         dummyView3.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(4)
+            make.height.equalTo(2)
         }
         
         ///3

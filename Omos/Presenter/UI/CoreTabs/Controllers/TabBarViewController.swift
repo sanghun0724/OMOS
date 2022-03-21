@@ -17,7 +17,10 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupControllers()
-        print(UserDefaults.standard.integer(forKey: "user"))
+        if #available(iOS 15.0, *) {
+            UITableView.appearance().sectionHeaderTopPadding = 0
+        }
+        
     }
     
     private func setupControllers() {

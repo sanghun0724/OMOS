@@ -243,10 +243,11 @@ class HomeHeaderView:UITableViewHeaderFooterView {
         }
         
         albumImageView.snp.makeConstraints { make in
-            make.width.equalToSuperview().multipliedBy(0.247)
-            make.height.equalTo(albumImageView.snp.width)
+            make.height.equalToSuperview().multipliedBy(0.234)
+            make.width.equalTo(albumImageView.snp.height)
             make.leading.equalToSuperview()
-            make.top.equalTo(todayLabel.snp.bottom).offset(30).priority(300)
+            make.top.equalTo(todayLabel.snp.bottom).offset(28).priority(750)
+            make.bottom.equalToSuperview().offset(-20).priority(751)
         }
         
         createdButton.snp.makeConstraints { make in

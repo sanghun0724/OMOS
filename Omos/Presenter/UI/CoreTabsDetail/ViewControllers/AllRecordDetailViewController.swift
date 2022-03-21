@@ -362,7 +362,7 @@ class AllRecordDetailViewController:BaseViewController {
         selfLyricsView.scrapCountLabel.text = String(myRecord.scrapCnt)
         selfLyricsView.cateLabel.text = " | \(myRecord.category )"
         selfLyricsView.nicknameLabel.text = myRecord.nickname
-        
+        selfLyricsView.dummyView3.isHidden = true
         
         if myRecord.isLiked {
             selfLyricsView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)

@@ -15,11 +15,14 @@ class HomeTableLastCell:UITableViewCell {
     let backImageView:UIImageView = {
         let imageView = UIImageView(image:UIImage(named: "photo2"))
         imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
     let albumImageView:UIImageView = {
         let imageView = UIImageView(image:UIImage(named: "albumCover"))
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -167,7 +170,8 @@ class LovedEmptyCell:UITableViewCell {
     }()
     
     let decoImageView:UIImageView = {
-        let imageView = UIImageView(image:UIImage(named: "keyboard_arrow_left"))
+        let imageView = UIImageView(image:UIImage(named: "orangeright"))
+        imageView.tintColor = .mainOrange
         return imageView
     }()
     
@@ -182,12 +186,12 @@ class LovedEmptyCell:UITableViewCell {
         self.addSubview(decoImageView)
         
         label.snp.makeConstraints { make in
-            make.leading.top.equalToSuperview()
+            make.leading.top.equalToSuperview().inset(16)
             label.sizeToFit()
         }
         
         decoLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
+            make.leading.equalToSuperview().inset(16)
             make.top.equalTo(label.snp.bottom).offset(16)
         }
         

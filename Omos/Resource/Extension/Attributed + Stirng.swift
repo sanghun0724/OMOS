@@ -149,3 +149,9 @@ extension String { // 한글 숫자 영문 특수문자 포함 정규식 (이모
 
 
 }
+
+
+extension Notification.Name {
+    static let follow = Notification.Name("follow")
+    static let followCancel = Notification.Name("followCancel")
+}

@@ -29,6 +29,8 @@ class AllRecordCateLongDetailCell:UITableViewCell {
     
     func configureUI() {
         self.addSubview(myView)
+        
+        
         myView.snp.makeConstraints { make in
             make.leading.trailing.top.equalToSuperview()
             make.bottom.equalToSuperview()
@@ -299,25 +301,21 @@ class recordLongView:BaseView {
     
     let readMoreButton:UIButton = {
         let button = UIButton()
-        button.setTitle("더 보기", for: .normal)
+        button.setTitle("... 더 보기", for: .normal)
         button.setTitleColor(UIColor.mainGrey6, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
+        button.backgroundColor = .mainBlack
         return button
     }()
     
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        layoutIfNeeded()
-        circleImageView.layer.cornerCurve = .circular
-        circleImageView.layer.cornerRadius = circleImageView.height / 2
-        circleImageView.layer.masksToBounds = true
-       
+        configure()
     }
     
     
-    override func configureUI() {
+    func configure() {
         addSubviews()
         ///1
         topLabelView.snp.makeConstraints { make in
@@ -433,7 +431,7 @@ class recordLongView:BaseView {
         
         dummyView3.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(4)
+            make.height.equalTo(2)
         }
         
         ///3
@@ -450,12 +448,16 @@ class recordLongView:BaseView {
             make.bottom.equalToSuperview()
             mainLabelView.sizeToFit()
         }
-       
+
+        
         readMoreButton.snp.makeConstraints { make in
-            make.bottom.trailing.equalToSuperview()
-            make.width.equalTo(46)
-            make.height.equalTo(26)
+            make.bottom.equalToSuperview().offset(-10)
+            make.trailing.equalToSuperview().offset(-16)
+            make.width.equalTo(readMoreButton.intrinsicContentSize.width)
+            make.height.equalTo(readMoreButton.intrinsicContentSize.height)
         }
+//        print(readMoreButton.intrinsicContentSize.width)
+//        print(readMoreButton.intrinsicContentSize.height)
         readMoreButton.isHidden = true 
         
     }
