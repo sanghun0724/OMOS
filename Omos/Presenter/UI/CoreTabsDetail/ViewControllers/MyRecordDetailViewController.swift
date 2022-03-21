@@ -81,7 +81,6 @@ class MyRecordDetailViewController:BaseViewController {
             
             UIPasteboard.general.setItems([pasteboardItems], options: pasteboardOptions)
             
-            
             UIApplication.shared.open(storyShareURL, options: [:], completionHandler: nil)
         } else {
             let alert = UIAlertController(title: "알림", message: "인스타그램이 필요합니다", preferredStyle: .alert)
@@ -90,10 +89,7 @@ class MyRecordDetailViewController:BaseViewController {
             self.present(alert, animated: true, completion: nil)
         }
     }
-//        var view:UIView = UIView()
-//        cate == "A_LINE" ? (view = selfView) : (view = selflongView)
-//        let vc = ShareCustomViewController(instaShareView: view)
-//        self.present(vc,animated: false)
+
     }
     
     @objc func didTapMoreButton() {

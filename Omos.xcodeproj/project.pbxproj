@@ -154,6 +154,7 @@
 		B6BC148427BFC8FE0067D8FB /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BC148327BFC8FE0067D8FB /* SignUpViewModel.swift */; };
 		B6BC148727BFF6C50067D8FB /* MyRecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BC148627BFF6C40067D8FB /* MyRecordDetailViewController.swift */; };
 		B6BC148927BFF6F80067D8FB /* MyRecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BC148827BFF6F80067D8FB /* MyRecordDetailView.swift */; };
+		B6BFD15E27E9096900DC3722 /* InstagramShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BFD15D27E9096800DC3722 /* InstagramShareView.swift */; };
 		B6C3AD4527B95B1E00D5D69D /* Attributed + Stirng.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C3AD4427B95B1E00D5D69D /* Attributed + Stirng.swift */; };
 		B6C969B727D1B7C100BA4E58 /* MyRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C969B627D1B7C100BA4E58 /* MyRecord.swift */; };
 		B6C969B927D1F44500BA4E58 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C969B827D1F44500BA4E58 /* HomeView.swift */; };
@@ -364,6 +365,7 @@
 		B6BC148627BFF6C40067D8FB /* MyRecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordDetailViewController.swift; sourceTree = "<group>"; };
 		B6BC148827BFF6F80067D8FB /* MyRecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordDetailView.swift; sourceTree = "<group>"; };
 		B6BFD15C27E89D8800DC3722 /* Omos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Omos.entitlements; sourceTree = "<group>"; };
+		B6BFD15D27E9096800DC3722 /* InstagramShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramShareView.swift; sourceTree = "<group>"; };
 		B6C3AD4427B95B1E00D5D69D /* Attributed + Stirng.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attributed + Stirng.swift"; sourceTree = "<group>"; };
 		B6C969B627D1B7C100BA4E58 /* MyRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecord.swift; sourceTree = "<group>"; };
 		B6C969B827D1F44500BA4E58 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -857,6 +859,7 @@
 				B6CC1D7527BA475900B5EE7E /* UseInfoText.rtf */,
 				B6CC1D7727BA536A00B5EE7E /* PrivateInfoText.rtf */,
 				B6183CD527D8F7490035AA06 /* BottomSheetViewController.swift */,
+				B6BFD15D27E9096800DC3722 /* InstagramShareView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1358,6 +1361,7 @@
 				B609138227AD3A7C00B439C3 /* SceneDelegate.swift in Sources */,
 				B611826627D465FD004217E2 /* SearchUseCase.swift in Sources */,
 				B666A90827AED1AA00BE7F92 /* EmptyView.swift in Sources */,
+				B6BFD15E27E9096900DC3722 /* InstagramShareView.swift in Sources */,
 				B6E8C91527B6AEFC00C32752 /* Constant.swift in Sources */,
 				B68454FC27BE378700F1E6B5 /* Login.swift in Sources */,
 				B606195F27DF5ADC006508CA /* LyricsTableCell.swift in Sources */,
