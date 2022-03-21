@@ -20,6 +20,8 @@ class ProfileViewModel:BaseViewModel {
     let scrapRecord = PublishSubject<[MyRecordRespone]>()
     var currentScrapRecord:[MyRecordRespone] = []
     
+    let logoutState = PublishSubject<Bool>()
+    
     let allLoading = BehaviorSubject<Bool>(value:false)
     let profileLoading = BehaviorSubject<Bool>(value:false)
     let recordLoading = BehaviorSubject<Bool>(value:false)
@@ -124,6 +126,18 @@ class ProfileViewModel:BaseViewModel {
                 switch event {
                 case .success(let data):
                     print(data)
+                case .failure(let error):
+                    self?.errorMessage.onNext(error.localizedDescription)
+                }
+            }).disposed(by: disposeBag)
+    }
+    
+    func logOut(userId:Int) {
+        usecase.logOut(userId: userId)
+            .subscribe({ [weak self] event in
+                switch event {
+                case .success(let data):
+                    self?.logoutState.onNext(data.state)
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)
                 }

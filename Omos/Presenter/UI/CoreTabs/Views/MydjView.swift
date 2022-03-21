@@ -56,6 +56,7 @@ class MydjView:BaseView {
             make.top.equalTo(collectionView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
+        emptyView.descriptionLabel.text = "구독한 DJ가 없습니다."
         
     }
     

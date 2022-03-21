@@ -42,7 +42,7 @@ class MyDjViewModel:BaseViewModel {
                 self?.loading.onNext(false)
                 switch event {
                 case .success(let data):
-                    self?.currentMyDjList += data
+                    self?.currentMyDjList = data
                     self?.myDjList.onNext(data)
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)

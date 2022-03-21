@@ -142,24 +142,26 @@ class LoginViewController:UIViewController {
             .asDriver()
             .drive(onNext: { [weak self] in
                 self?.viewModel.loginLocal(email: (self?.topView.emailField.text)!, password: (self?.topView.passwordField.text)!)
-                
-                self?.viewModel.validSignIn.subscribe(onNext: { [weak self] valid in
-                    if valid {
-                        let vc = TabBarViewController()
-                        vc.modalPresentationStyle = .fullScreen
-                        self?.present(vc,animated: true)
-                    } else {
-                        self?.topView.emailField.layer.borderWidth = 1
-                        self?.topView.emailField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
-                        self?.topView.emailLabel.warningLabel.text = "입력하신 내용을 다시 확인해주세요."
-                        self?.topView.emailLabel.warningLabel.isHidden = false
-                        self?.topView.passwordField.layer.borderWidth = 1
-                        self?.topView.passwordField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
-                        self?.topView.passwordLabel.warningLabel.text = "입력하신 내용을 다시 확인해주세요."
-                        self?.topView.passwordLabel.warningLabel.isHidden = false
-                    }
-                }).disposed(by: self!.disposeBag)
             }).disposed(by: disposeBag)
+        
+        viewModel.validSignIn.subscribe(onNext: { [weak self] valid in
+            if valid {
+                print(UserDefaults.standard.integer(forKey: "user"))
+                let vc = TabBarViewController()
+                vc.modalPresentationStyle = .fullScreen
+                self?.present(vc,animated: true)
+            } else {
+                self?.topView.emailField.layer.borderWidth = 1
+                self?.topView.emailField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
+                self?.topView.emailLabel.warningLabel.text = "입력하신 내용을 다시 확인해주세요."
+                self?.topView.emailLabel.warningLabel.isHidden = false
+                self?.topView.passwordField.layer.borderWidth = 1
+                self?.topView.passwordField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
+                self?.topView.passwordLabel.warningLabel.text = "입력하신 내용을 다시 확인해주세요."
+                self?.topView.passwordLabel.warningLabel.isHidden = false
+            }
+        }).disposed(by: disposeBag)
+        
         
         bottomView.kakaoButton.rx.tap
             .asDriver()

@@ -35,6 +35,7 @@ class SettingViewController:BaseViewController {
     
     
     override func viewDidLoad() {
+        bind()
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
@@ -43,7 +44,7 @@ class SettingViewController:BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = true 
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     override func configureUI() {
@@ -54,6 +55,20 @@ class SettingViewController:BaseViewController {
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.leading.trailing.bottom.equalToSuperview()
         }
+    }
+    
+    func bind() {
+        viewModel.logoutState
+            .subscribe(onNext: { [weak self] state in
+                if state {
+                    let uc = LoginUseCase(authRepository:AuthRepositoryImpl(loginAPI: LoginAPI()))
+                    let vm = LoginViewModel(usecase: uc)
+                    let vc = LoginViewController(viewModel: vm)
+                    UIApplication.shared.windows.first?.rootViewController = vc
+                    UIApplication.shared.windows.first?.makeKeyAndVisible()
+                    self?.navigationController?.popToRootViewController(animated: false)
+                }
+            }).disposed(by: disposeBag)
     }
     
     private func logout() {
@@ -69,13 +84,13 @@ class SettingViewController:BaseViewController {
         // APPLE 로그아웃 은 각자 해야함 화면 돌려주기만 하기
         
         // local
-        
+        viewModel.logOut(userId: Account.currentUser)
         
         //reset UserDefault
         resetDefaults()
     }
     
-   private func resetDefaults() {
+    private func resetDefaults() {
         let defaults = UserDefaults.standard
         let dictionary = defaults.dictionaryRepresentation()
         dictionary.keys.forEach { key in
@@ -119,7 +134,7 @@ extension SettingViewController:UITableViewDelegate,UITableViewDataSource {
             }
         }
         
-    
+        
         return cell
     }
     
@@ -139,7 +154,7 @@ extension SettingViewController:UITableViewDelegate,UITableViewDataSource {
             view.backgroundView?.backgroundColor = .mainBackGround
             view.textLabel?.font = .systemFont(ofSize: 14, weight: .semibold)
             view.textLabel?.textColor = .mainOrange
-          }
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -148,11 +163,11 @@ extension SettingViewController:UITableViewDelegate,UITableViewDataSource {
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
-               let vc = ProfileChangeViewController(viewModel: viewModel)
+                let vc = ProfileChangeViewController(viewModel: viewModel)
                 self.navigationController?.pushViewController(vc, animated: true)
             case 1:
                 let vc = PasswordChangeViewController(viewModel: viewModel)
-                 self.navigationController?.pushViewController(vc, animated: true)
+                self.navigationController?.pushViewController(vc, animated: true)
             default:
                 print("")
             }
@@ -161,13 +176,13 @@ extension SettingViewController:UITableViewDelegate,UITableViewDataSource {
             case 0:
                 //logout
                 let action = UIAlertAction(title: "로그아웃", style: .default) { alert in
-                   
+                    self.logout()
                 }
                 action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
                 self.presentAlert(title: "", message: "정말 로그아웃 하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
             case 1:
                 let vc = AccountOutViewController()
-                 self.navigationController?.pushViewController(vc, animated: true)
+                self.navigationController?.pushViewController(vc, animated: true)
             default:
                 print("")
             }
@@ -176,18 +191,18 @@ extension SettingViewController:UITableViewDelegate,UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-       let view = UIView()
+        let view = UIView()
         view.backgroundColor = .mainBlack1
-       return view
-   }
-
-   public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-       if section == 0 {
-           return 0.5
-       } else {
-           return 0
-       }
-       
-   }
+        return view
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 0.5
+        } else {
+            return 0
+        }
+        
+    }
     
 }

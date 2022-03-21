@@ -23,6 +23,7 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
     let viewModel:MyDjViewModel
     let user = UserDefaults.standard.integer(forKey: "user")
     var currentDjLastPostId = 0
+    var timer: Timer?
 
     init(viewModel:MyDjViewModel) {
         self.viewModel = viewModel
@@ -41,8 +42,17 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
         selfView.tableView.dataSource = self
         selfView.collectionView.delegate = self
         selfView.collectionView.dataSource = self
-        viewModel.fetchMyDjList(userId: user)
+//        viewModel.fetchMyDjList(userId: Account.currentUser)
         
+        self.timer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true, block: {[weak self] (tt) in
+            self?.viewModel.fetchMyDjList(userId: Account.currentUser)
+            self?.selfView.collectionView.reloadData()
+            })
+            timer?.fire()
+    }
+    
+    deinit {
+        timer?.invalidate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,7 +78,7 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
         
         viewModel.myDjList
             .subscribe(onNext: { [weak self] data in
-                self?.viewModel.fetchMyDjRecord(userId: data.first?.userID ?? 0, request: .init(postId: nil, size: 10))
+                self?.viewModel.fetchMyDjRecord(userId: Account.currentUser, request: .init(postId: nil, size: 10))
                 self?.selfView.collectionView.reloadData()
             }).disposed(by: disposeBag)
       

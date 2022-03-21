@@ -14,7 +14,7 @@ struct PWUpdateRequest:Codable {
 
 struct myProfileResponse:Codable {
    let nickname:String
-   let profileUrl: String
+   let profileUrl: String?
    let userId: Int
 }
 

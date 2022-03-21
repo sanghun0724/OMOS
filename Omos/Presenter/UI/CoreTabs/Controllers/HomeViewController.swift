@@ -29,6 +29,7 @@ class HomeViewController:BaseViewController {
         selfView.tableView.dataSource = self
         selfView.tableView.delegate = self
         viewModel.allHomeDataFetch(userId: Account.currentUser)
+        print(UserDefaults.standard.string(forKey: "access"))
     }
     
     override func viewWillAppear(_ animated: Bool) {

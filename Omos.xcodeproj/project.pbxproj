@@ -1572,7 +1572,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2L2K3UD2LK;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Omos/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
@@ -1649,7 +1649,7 @@
 				B609138F27AD3A8000B439C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		B609139027AD3A8000B439C3 /* Build configuration list for PBXNativeTarget "Omos" */ = {
 			isa = XCConfigurationList;
@@ -1658,7 +1658,7 @@
 				B609139227AD3A8000B439C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		B6A029A127B23D3500D3D3C9 /* Build configuration list for PBXNativeTarget "OmosTests" */ = {
 			isa = XCConfigurationList;
@@ -1667,7 +1667,7 @@
 				B6A029A027B23D3500D3D3C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
