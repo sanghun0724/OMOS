@@ -46,4 +46,55 @@ class MyProfileAPI {
         }
     }
     
+    func likeRecords(userId:Int,completion:@escaping(Result<[MyRecordRespone],Error>) -> Void) {
+            AF.request(RecordTarget.likeRecords(userId: userId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[MyRecordRespone]>) in
+                switch response.result {
+                case .success(let data):
+                    completion(.success(data))
+                    print(data)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    completion(.failure(error))
+                }
+            }
+    }
+    
+    
+    func scrapRecords(userId:Int,completion:@escaping(Result<[MyRecordRespone],Error>) -> Void) {
+            AF.request(RecordTarget.scrapRecords(userId: userId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[MyRecordRespone]>) in
+                switch response.result {
+                case .success(let data):
+                    completion(.success(data))
+                    print(data)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    completion(.failure(error))
+                }
+            }
+    }
+    
+    func myProfileRecords(userId:Int,completion:@escaping(Result<MyProfileRecordResponse,Error>) -> Void) {
+        AF.request(RecordTarget.myProfileRecords(userId: userId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<MyProfileRecordResponse>) in
+            switch response.result {
+            case .success(let data):
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func logOut(userId:Int,completion:@escaping(Result<StateRespone,Error>) -> Void) {
+        AF.request(LoginTarget.logOut(userId: userId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<StateRespone>) in
+            switch response.result {
+            case .success(let data):
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
+    
 }

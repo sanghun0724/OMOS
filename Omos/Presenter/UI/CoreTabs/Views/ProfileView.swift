@@ -9,7 +9,7 @@ import UIKit
 
 class ProfileView:BaseView {
     let tableView:UITableView = {
-        let table = UITableView(frame: .zero, style: .grouped)
+        let table = UITableView()
         table.register(ProfileCell.self, forCellReuseIdentifier: ProfileCell.identifier)
         table.register(MydjProfileHeader.self, forHeaderFooterViewReuseIdentifier: MydjProfileHeader.identifier)
         table.register(AllRecordHeaderView.self, forHeaderFooterViewReuseIdentifier: AllRecordHeaderView.identifier)

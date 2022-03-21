@@ -124,7 +124,7 @@ class SignUpViewController:UIViewController {
                         self?.topView.emailField.layer.borderWidth = 0
                         self?.topView.emailLabel.warningLabel.isHidden = true
                     }
-                    if !(text2.count >= 8 && text2.count <= 16) {
+                    if !(text2.count >= 8 && text2.count <= 16 && !(text2.hasCharacters())) {
                         self?.topView.passwordField.layer.borderWidth = 1
                         self?.topView.passwordField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
                         self?.topView.passwordLabel.warningLabel.text = "8~16자의 영문 대소문자,숫자,특수문자만 가능해요"

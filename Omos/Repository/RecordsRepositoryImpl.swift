@@ -131,8 +131,8 @@ class RecordsRepositoryImpl:RecordsRepository {
         }
     }
     
-    func recordUpdate(postId:Int,request:UpdateRequest) -> Single<PostRespone> {
-        return Single<PostRespone>.create { [weak self] single in
+    func recordUpdate(postId:Int,request:UpdateRequest) -> Single<StateRespone> {
+        return Single<StateRespone>.create { [weak self] single in
             self?.recordAPI.recordUpdate(postId: postId,request:request,completion: { result in
                 switch result {
                 case .success(let data):

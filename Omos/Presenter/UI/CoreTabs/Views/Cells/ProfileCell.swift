@@ -11,6 +11,16 @@ import UIKit
 class ProfileCell:UITableViewCell {
     static let identifier = "ProfileCell"
     
+    let emptyLabel:UILabel = {
+        let label = UILabel()
+        label.text = "아직 스크랩한\n레코드가 없어요"
+        label.font = .systemFont(ofSize: 16, weight: .light)
+        label.numberOfLines = 2
+        label.textAlignment = .left
+        label.textColor = .white
+        return label
+    }()
+    
     let selfViewOne = SquareView()
     let selfViewTwo = SquareView()
     
@@ -18,6 +28,7 @@ class ProfileCell:UITableViewCell {
         super.layoutSubviews()
         self.addSubview(selfViewOne)
         self.addSubview(selfViewTwo)
+        addSubview(emptyLabel)
         
         selfViewOne.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -36,9 +47,114 @@ class ProfileCell:UITableViewCell {
             make.height.width.equalTo(selfViewOne).priority(751)
         }
         
+   
+        
+        emptyLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(16)
+            make.bottom.equalToSuperview().offset(-12)
+            emptyLabel.sizeToFit()
+        }
+//        emptyLabel.isHidden = true
+//
+    }
+    
+    func configureLike(record:MyProfileRecordResponse) {
+        if record.likedRecords.count == 0 {
+            self.backgroundColor = .mainBlack
+            emptyLabel.text = "아직 공감한\n레코드가 없어요"
+            emptyLabel.isHidden = false
+            selfViewOne.isHidden = true
+            selfViewTwo.isHidden = true
+        } else if record.likedRecords.count == 1 {
+            self.backgroundColor = .mainBackGround
+            emptyLabel.isHidden = true
+            selfViewOne.isHidden = false
+            selfViewTwo.isHidden = true
+            selfViewOne.albumImageView.setImage(with: record.likedRecords[0].music.albumImageURL)
+            selfViewOne.backGroundImageView.setImage(with: record.likedRecords[0].recordImageURL ?? "")
+            selfViewOne.recordTitleLabel.text = record.likedRecords[0].recordTitle
+            selfViewOne.artistTitleLabel.text = record.likedRecords[0].music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}
+           selfViewOne.trackTitleLabel.text = record.likedRecords[0].music.musicTitle
+        } else  {
+            self.backgroundColor = .mainBackGround
+            emptyLabel.isHidden = true
+            selfViewOne.isHidden = false
+            selfViewTwo.isHidden = false
+            selfViewOne.albumImageView.setImage(with: record.likedRecords[0].music.albumImageURL)
+            selfViewOne.backGroundImageView.setImage(with: record.likedRecords[0].recordImageURL ?? "")
+            selfViewOne.recordTitleLabel.text = record.likedRecords[0].recordTitle
+            selfViewOne.artistTitleLabel.text = record.likedRecords[0].music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}
+            selfViewOne.trackTitleLabel.text = record.likedRecords[0].music.musicTitle
+
+           selfViewTwo.albumImageView.setImage(with: record.likedRecords[1].music.albumImageURL)
+            selfViewTwo.backGroundImageView.setImage(with: record.likedRecords[1].recordImageURL ?? "")
+            selfViewTwo.recordTitleLabel.text = record.likedRecords[1].recordTitle
+            selfViewTwo.artistTitleLabel.text = record.likedRecords[1].music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}
+            selfViewTwo.trackTitleLabel.text = record.likedRecords[1].music.musicTitle
+        }
+        
+    }
+    
+    func configureScrap(record:MyProfileRecordResponse) {
+        if record.scrappedRecords.count == 0 {
+            self.backgroundColor = .mainBlack
+            emptyLabel.isHidden = false
+            selfViewOne.isHidden = true
+            selfViewTwo.isHidden = true
+        } else if record.scrappedRecords.count == 1 {
+            self.backgroundColor = .mainBackGround
+            emptyLabel.isHidden = true
+            selfViewOne.isHidden = false
+            selfViewTwo.isHidden = true
+            selfViewOne.albumImageView.setImage(with: record.scrappedRecords[0].music.albumImageURL)
+            selfViewOne.backGroundImageView.setImage(with: record.scrappedRecords[0].recordImageURL ?? "")
+            selfViewOne.recordTitleLabel.text = record.scrappedRecords[0].recordTitle
+            selfViewOne.artistTitleLabel.text = record.scrappedRecords[0].music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}
+            selfViewOne.trackTitleLabel.text = record.scrappedRecords[0].music.musicTitle
+        } else {
+            self.backgroundColor = .mainBackGround
+            emptyLabel.isHidden = true
+            selfViewOne.isHidden = false
+            selfViewTwo.isHidden = false
+            selfViewOne.albumImageView.setImage(with: record.scrappedRecords[0].music.albumImageURL)
+            selfViewOne.backGroundImageView.setImage(with: record.scrappedRecords[0].recordImageURL ?? "")
+            selfViewOne.recordTitleLabel.text = record.scrappedRecords[0].recordTitle
+            selfViewOne.artistTitleLabel.text = record.scrappedRecords[0].music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}
+            selfViewOne.trackTitleLabel.text = record.scrappedRecords[0].music.musicTitle
+
+            selfViewTwo.albumImageView.setImage(with: record.scrappedRecords[1].music.albumImageURL)
+            selfViewTwo.backGroundImageView.setImage(with: record.scrappedRecords[1].recordImageURL ?? "")
+            selfViewTwo.recordTitleLabel.text = record.scrappedRecords[1].recordTitle
+            selfViewTwo.artistTitleLabel.text = record.scrappedRecords[1].music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}
+            selfViewTwo.trackTitleLabel.text = record.scrappedRecords[1].music.musicTitle
     }
     
     
+}
+
+class ProfileRecordEmptyCell:UITableViewCell {
+    static let identifier = "ProfileRecordEmptyCell"
+    
+    let emptyLabel:UILabel = {
+        let label = UILabel()
+        label.text = "아직 스크랩한\n레코드가 없어요"
+        label.font = .systemFont(ofSize: 16, weight: .light)
+        label.textColor = .white
+        return label
+    }()
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.backgroundColor = .mainBlack
+        addSubview(emptyLabel)
+        
+        emptyLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(16)
+            make.bottom.equalToSuperview().offset(-12)
+            emptyLabel.sizeToFit()
+        }
+    
+    }
 }
 
 
@@ -137,11 +253,10 @@ class SquareView:BaseView {
         }
         
         
-        
-        
-        
-        
-        
-        
+
     }
+}
+
+
+
 }

@@ -103,8 +103,8 @@ class RecordAPI {
         }
     }
     
-    func recordUpdate(postId:Int,request:UpdateRequest,completion:@escaping(Result<PostRespone,Error>) -> Void) {
-        AF.request(RecordTarget.recordUpdate(postId: postId,request),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<PostRespone>) in
+    func recordUpdate(postId:Int,request:UpdateRequest,completion:@escaping(Result<StateRespone,Error>) -> Void) {
+        AF.request(RecordTarget.recordUpdate(postId: postId,request),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<StateRespone>) in
             switch response.result {
             case .success(let data):
                 print(data)

@@ -8,7 +8,7 @@
 import UIKit
 
 extension NSMutableAttributedString {
-
+    
     var fontSize: CGFloat {
         return 16
     }
@@ -18,52 +18,52 @@ extension NSMutableAttributedString {
     var normalFont: UIFont {
         return UIFont(name: "AppleSDGothicNeo-Regular", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
     }
-
+    
     func bold(string: String, fontSize: CGFloat) -> NSMutableAttributedString {
         let font = UIFont.boldSystemFont(ofSize: fontSize)
         let attributes: [NSAttributedString.Key: Any] = [.font: font]
         self.append(NSAttributedString(string: string, attributes: attributes))
         return self
     }
-
+    
     func regular(string: String, fontSize: CGFloat) -> NSMutableAttributedString {
         let font = UIFont.systemFont(ofSize: fontSize)
         let attributes: [NSAttributedString.Key: Any] = [.font: font]
         self.append(NSAttributedString(string: string, attributes: attributes))
         return self
     }
-
+    
     func orangeHighlight(_ value:String) -> NSMutableAttributedString {
         let attributes:[NSAttributedString.Key : Any] = [
             .font: normalFont,
             .foregroundColor: UIColor.mainOrange
         ]
-
+        
         self.append(NSAttributedString(string: value, attributes:attributes))
         return self
     }
-
+    
     func blackHighlight(_ value:String) -> NSMutableAttributedString {
-
+        
         let attributes:[NSAttributedString.Key : Any] = [
             .font: normalFont,
             .foregroundColor: UIColor.white,
             .backgroundColor: UIColor.black
-
+            
         ]
-
+        
         self.append(NSAttributedString(string: value, attributes:attributes))
         return self
     }
-
+    
     func underlined(_ value:String) -> NSMutableAttributedString {
-
+        
         let attributes:[NSAttributedString.Key : Any] = [
             .font: normalFont,
             .underlineStyle : NSUnderlineStyle.single.rawValue
-
+            
         ]
-
+        
         self.append(NSAttributedString(string: value, attributes:attributes))
         return self
     }
@@ -90,33 +90,33 @@ extension String {
 //라벨에 패딩값주기 
 class BasePaddingLabel: UILabel {
     private var padding = UIEdgeInsets(top: 10.0, left: 16.0, bottom: 10, right: 16.0)
-
+    
     convenience init(padding: UIEdgeInsets) {
         self.init()
         self.padding = padding
     }
-
+    
     override func drawText(in rect: CGRect) {
         super.drawText(in: rect.inset(by: padding))
     }
-
+    
     override var intrinsicContentSize: CGSize {
         var contentSize = super.intrinsicContentSize
         contentSize.height += padding.top + padding.bottom
         contentSize.width += padding.left + padding.right
-
+        
         return contentSize
     }
     
-//    override var text: String? {
-//        didSet {
-//            if let text = text {
-//               print(text)
-//            } else {
-//                print("Text not changed.")
-//            }
-//        }
-//    }
+    //    override var text: String? {
+    //        didSet {
+    //            if let text = text {
+    //               print(text)
+    //            } else {
+    //                print("Text not changed.")
+    //            }
+    //        }
+    //    }
 }
 
 //라벨 라인수 구하기
@@ -129,4 +129,23 @@ extension UILabel {
         let lineHeight = font.lineHeight
         return Int(ceil(textHeight / lineHeight))
     }
+}
+
+
+extension String { // 한글 숫자 영문 특수문자 포함 정규식 (이모티콘 제외)
+    func hasCharacters() -> Bool {
+        do {
+            let regex = try NSRegularExpression(pattern: "^[0-9a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:'\",<.>/?\\s]$", options: .caseInsensitive)
+            if let _ = regex.firstMatch(in: self, options: NSRegularExpression.MatchingOptions.reportCompletion, range: NSMakeRange(0, self.count)) {
+                return true
+            }
+        }
+        catch {
+            return false
+        }
+        return false
+    
+}
+
+
 }

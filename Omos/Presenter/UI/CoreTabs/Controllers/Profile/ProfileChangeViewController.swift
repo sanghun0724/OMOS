@@ -14,7 +14,17 @@ import YPImagePicker
 class ProfileChangeViewController:BaseViewController {
     
     let selfView = ProfileChangView()
-
+    let viewModel:ProfileViewModel
+    
+    init(viewModel:ProfileViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
@@ -29,6 +39,8 @@ class ProfileChangeViewController:BaseViewController {
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
         }
+        
+        selfView.nickNameField.text = viewModel.currentMyProfile?.nickname
     }
     
     
@@ -55,6 +67,18 @@ class ProfileChangeViewController:BaseViewController {
                         print("completion block")
                     })
             }).disposed(by: disposeBag)
+       
+        selfView.buttonView.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let text =  self?.selfView.nickNameField.text else  {
+                    //alert nickname입력해주세요
+                    print("alert")
+                    return
+                }
+                let request =  ProfileUpdateRequest(nickname:text,profileUrl: "" ,userId:Account.currentUser)
+                self?.viewModel.updateProfile(request:request)
+                self?.navigationController?.popViewController(animated: true)
+                       }).disposed(by: disposeBag)
         
         
     }
@@ -73,6 +97,7 @@ class ProfileChangeViewController:BaseViewController {
             if let photo = items.singlePhoto {
                 print(photo.image) // Final image selected by the user
                 self.selfView.profileImageView.image = photo.image
+                picker.dismiss(animated: true, completion: nil)
             }
             if cancelled {
                 print("Picker was canceled")
@@ -141,6 +166,9 @@ class ProfileChangView:BaseView {
         layoutIfNeeded()
         cameraView.layer.cornerRadius = cameraView.height / 2
         cameraView.layer.masksToBounds = true
+        
+        profileImageView.layer.cornerRadius = profileImageView.height / 2
+        profileImageView.layer.masksToBounds = true
     }
     
     

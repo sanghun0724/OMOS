@@ -16,7 +16,7 @@ protocol RecordsRepository {
     func save(cate:String,content:String,isPublic:Bool,musicId:String,title:String,userid:Int) -> Single<SaveRespone>
     func recordIspublic(postId:Int) -> Single<StateRespone>
     func recordDelete(postId:Int) -> Single<StateRespone>
-    func recordUpdate(postId:Int,request:UpdateRequest) -> Single<PostRespone>
+    func recordUpdate(postId:Int,request:UpdateRequest) -> Single<StateRespone>
     func oneMusicRecordFetch(musicId:String,request:OneMusicRecordRequest) -> Single<[OneMusicRecordRespone]>
     //MARK: Interaction API
     func saveScrap(postId:Int,userId:Int) -> Single<StateRespone>

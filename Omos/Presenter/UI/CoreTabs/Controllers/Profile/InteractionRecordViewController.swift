@@ -7,14 +7,33 @@
 
 import UIKit
 
+enum InteractionType {
+    case like
+    case scrap
+}
+
 class InteractionRecordViewController:BaseViewController {
     
     let selfView = MyRecordView()
+    let viewModel:ProfileViewModel
+    let type:InteractionType
+    
+    init(viewModel:ProfileViewModel,type:InteractionType) {
+        self.viewModel = viewModel
+        self.type = type
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bind()
         selfView.tableView.dataSource = self
         selfView.tableView.delegate = self
+        type == .like ? (viewModel.fetchLikesRecords(userId: Account.currentUser)):(viewModel.fetchScrapRecords(userId: Account.currentUser))
     }
     
     override func configureUI() {
@@ -28,18 +47,52 @@ class InteractionRecordViewController:BaseViewController {
         
     }
     
+    func bind() {
+        if type == .like {
+            viewModel.likesLoading
+                .subscribe(onNext: { [weak self] loading in
+                    self?.selfView.loadingView.isHidden = !loading
+                }).disposed(by: disposeBag)
+            
+            viewModel.likeRecord
+                .subscribe(onNext: { [weak self] _ in
+                    self?.selfView.tableView.reloadData()
+                }).disposed(by: disposeBag)
+        } else {
+            viewModel.scrapsLoading
+                .subscribe(onNext: { [weak self] loading in
+                    self?.selfView.loadingView.isHidden = !loading
+                }).disposed(by: disposeBag)
+            
+            viewModel.scrapRecord
+                .subscribe(onNext: { [weak self] _ in
+                    self?.selfView.tableView.reloadData()
+                }).disposed(by: disposeBag)
+        }
+    }
+    
 }
 
 
 extension InteractionRecordViewController:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        if type == .like {
+            return viewModel.currentLikeRecord.count
+        } else {
+            return viewModel.currentScrapRecord.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MyRecordTableCell.identifier, for: indexPath) as! MyRecordTableCell
-//        let data = myRecord[indexPath.row]
-//        cell.configureModel(record:data)
+        if type == .like {
+            let data = viewModel.currentLikeRecord[indexPath.row]
+                    cell.configureModel(record:data)
+        } else {
+            let data = viewModel.currentScrapRecord[indexPath.row]
+                    cell.configureModel(record:data)
+        }
+
         cell.lockImageView.isHidden = true
         return cell
     }

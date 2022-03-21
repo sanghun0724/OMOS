@@ -44,7 +44,7 @@ class RecordsUseCase {
         return recordsRepository.recordDelete(postId: postId)
     }
     
-    func recordUpdate(postId:Int,request:UpdateRequest) -> Single<PostRespone> {
+    func recordUpdate(postId:Int,request:UpdateRequest) -> Single<StateRespone> {
         return recordsRepository.recordUpdate(postId: postId,request:request)
     }
     

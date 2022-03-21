@@ -7,19 +7,37 @@
 
 import Foundation
 
-class PWUpdateRequest:Codable {
+struct PWUpdateRequest:Codable {
     let password:String
     let userId:Int
 }
 
-class myProfileResponse:Codable {
+struct myProfileResponse:Codable {
    let nickname:String
    let profileUrl: String
    let userId: Int
 }
 
-class ProfileUpdateRequest:Codable {
+struct ProfileUpdateRequest:Codable {
    let nickname:String
-   let profileUrl: String
+   let profileUrl: String?
    let userId: Int
+}
+
+struct MyProfileRecordResponse: Codable {
+    let likedRecords, scrappedRecords: [EdRecord]
+}
+
+// MARK: - EdRecord
+struct EdRecord: Codable {
+    let recordID: Int
+    let recordTitle: String
+    let music: Music
+    let recordImageURL: String?
+
+    enum CodingKeys: String, CodingKey {
+        case recordID = "recordId"
+        case recordTitle, music
+        case recordImageURL = "recordImageUrl"
+    }
 }

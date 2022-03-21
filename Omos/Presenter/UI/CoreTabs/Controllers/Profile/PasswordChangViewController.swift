@@ -10,10 +10,21 @@ import UIKit
 class PasswordChangeViewController:BaseViewController {
     
     let selfView = PasswordChangeView()
+    let viewModel:ProfileViewModel
+    var passwordFlag = false
+    
+    init(viewModel:ProfileViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        bind()
     }
     
     override func configureUI() {
@@ -26,14 +37,46 @@ class PasswordChangeViewController:BaseViewController {
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
         }
         
+        
     }
     
     
     
     func bind() {
         
+        selfView.buttonView.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let text =  self?.selfView.passwordField.text else  {
+                    //alert nickname입력해주세요
+                    print("alert")
+                    return
+                }
+                if text.count >= 8 && text.count <= 16 && !(text.hasCharacters()) {
+                    self?.viewModel.updatePassword(request: .init(password: text, userId: Account.currentUser))
+                    self?.navigationController?.popViewController(animated: true)
+                } else {
+                    self?.selfView.passwordField.layer.borderWidth = 1
+                    self?.selfView.passwordField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
+                    self?.selfView.passwordLabel.warningLabel.text = "비밀번호 양식을 다시 확인해주세요."
+                    self?.selfView.passwordLabel.warningLabel.isHidden = false
+                }
+    
+                       }).disposed(by: disposeBag)
         
-        
+        selfView.passwordDecoView.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                if !(self?.passwordFlag)! {
+                    self?.selfView.passwordField.isSecureTextEntry = false
+                    self?.selfView.passwordDecoView.setImage(UIImage(named: "visible1" ), for: .normal)
+                    self?.passwordFlag = true
+                } else {
+                    self?.selfView.passwordField.isSecureTextEntry = true
+                    self?.selfView.passwordDecoView.setImage(UIImage(named: "visible2" ), for: .normal)
+                    self?.passwordFlag = false
+                }
+            }).disposed(by: disposeBag)
+
     }
     
     
@@ -72,6 +115,11 @@ class PasswordChangeView:BaseView {
         return button
     }()
     
+    let passwordLabel:PasswordLabelView = {
+        let labelView = PasswordLabelView()
+        return labelView
+    }()
+    
     let buttonView:UIButton = {
        let button = UIButton()
         button.backgroundColor = .mainGrey4
@@ -91,14 +139,21 @@ class PasswordChangeView:BaseView {
         super.configureUI()
         self.addSubview(mentionLabel)
         self.addSubview(passwordField)
+        self.addSubview(passwordLabel)
         self.addSubview(buttonView)
-        
+        passwordField.addSubview(passwordDecoView)
       
         
         mentionLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
             make.top.equalToSuperview().offset(34)
             mentionLabel.sizeToFit()
+        }
+        
+        passwordLabel.snp.makeConstraints { make in
+            make.leading.top.equalTo(mentionLabel)
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalTo(mentionLabel)
         }
         
         passwordField.snp.makeConstraints { make in
@@ -112,6 +167,13 @@ class PasswordChangeView:BaseView {
             make.bottom.equalToSuperview().offset(-34)
         }
         
+        passwordDecoView.snp.makeConstraints { make in
+            make.right.equalToSuperview().inset(16)
+            make.centerY.equalToSuperview()
+            make.width.greaterThanOrEqualTo(24)
+        }
+        
+        passwordLabel.passwordLabel.isHidden = true
     }
     
     

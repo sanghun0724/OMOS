@@ -22,6 +22,17 @@ class SettingViewController:BaseViewController {
         table.isScrollEnabled = false
         return table
     }()
+    let viewModel:ProfileViewModel
+    
+    init(viewModel:ProfileViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -137,10 +148,10 @@ extension SettingViewController:UITableViewDelegate,UITableViewDataSource {
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
-               let vc = ProfileChangeViewController()
+               let vc = ProfileChangeViewController(viewModel: viewModel)
                 self.navigationController?.pushViewController(vc, animated: true)
             case 1:
-                let vc = PasswordChangeViewController()
+                let vc = PasswordChangeViewController(viewModel: viewModel)
                  self.navigationController?.pushViewController(vc, animated: true)
             default:
                 print("")
