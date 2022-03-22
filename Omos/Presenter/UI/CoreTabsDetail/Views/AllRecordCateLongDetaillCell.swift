@@ -56,7 +56,7 @@ class AllRecordCateLongDetailCell:UITableViewCell {
         //myView.myView.backImageView.setImage(with: ) 추후 추가되면 삽입
         myView.titleLabel.text = record.recordTitle
         myView.createdLabel.text = record.createdDate.toDate()
-        myView.cateLabel.text = record.category.getReverseCate()
+        myView.cateLabel.text = " | \(record.category.getReverseCate())"
         myView.mainLabelView.text = record.recordContents
         myView.nicknameLabel.text = record.nickname
         myView.likeCountLabel.text = String(record.likeCnt)
@@ -115,7 +115,7 @@ class AllRecordCateLongDetailCell:UITableViewCell {
         myView.nicknameLabel.text = record.nickname
         myView.likeCountLabel.text = String(record.likeCnt)
         myView.scrapCountLabel.text = String(record.scrapCnt)
-        myView.cateLabel.text = record.category.getReverseCate()
+        myView.cateLabel.text = " | \(record.category.getReverseCate())"
 
         if myView.mainLabelView.maxNumberOfLines < 3 {
             myView.readMoreButton.isHidden = true
@@ -313,6 +313,11 @@ class recordLongView:BaseView {
     override func layoutSubviews() {
         super.layoutSubviews()
         configure()
+        
+        circleImageView.layoutIfNeeded()
+        circleImageView.layer.cornerRadius = circleImageView.height / 2
+        circleImageView.layer.masksToBounds = true
+        
     }
     
     
@@ -449,16 +454,16 @@ class recordLongView:BaseView {
             make.bottom.equalToSuperview()
             mainLabelView.sizeToFit()
         }
+        print(mainLabelView.intrinsicContentSize.height)
 
         readMoreButton.snp.makeConstraints { make in
-            make.bottom.equalTo(mainLabelView.snp.top).offset(mainLabelView.intrinsicContentSize.height-20)
+            make.bottom.equalTo(mainLabelView.snp.bottom).offset(-2)
             make.trailing.equalToSuperview().offset(-16)
             make.width.equalTo(readMoreButton.intrinsicContentSize.width)
             make.height.equalTo(readMoreButton.intrinsicContentSize.height)
         }
 //        print(readMoreButton.intrinsicContentSize.width)
 //        print(readMoreButton.intrinsicContentSize.height)
-        readMoreButton.isHidden = true 
         
     }
     

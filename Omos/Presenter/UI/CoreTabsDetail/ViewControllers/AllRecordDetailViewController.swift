@@ -288,6 +288,7 @@ class AllRecordDetailViewController:BaseViewController {
         }
         selfLongView.mainLabelView.text = myRecord.recordContents
         selfLongView.dummyView3.isHidden = true
+        selfLongView.readMoreButton.isHidden = true
     }
     
     func configShortView() {

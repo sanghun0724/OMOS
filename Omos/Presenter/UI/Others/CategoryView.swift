@@ -19,6 +19,8 @@ class CategoryView:BaseView {
         let view = reactangleView()
         view.titleLabel.text = "내 인생의 OST"
         view.subTitleLabel.text = "당신의 인생곡을 들려주세요."
+        view.stickerImageView.image = UIImage(named: "ost")
+        
         return view
     }()
     
@@ -26,6 +28,7 @@ class CategoryView:BaseView {
         let view = reactangleView()
         view.titleLabel.text = "노래 속 나의 이야기"
         view.subTitleLabel.text = "노래로 떠올려보는 나의 이야기"
+        view.stickerImageView.image = UIImage(named: "story")
         return view
     }()
     
@@ -33,6 +36,7 @@ class CategoryView:BaseView {
         let view = reactangleView()
         view.titleLabel.text = "나만의 가사해석"
         view.subTitleLabel.text = "노래에 담긴 깊은 뜻을 살펴볼까요?"
+        view.stickerImageView.image = UIImage(named: "lyrics")
         return view
     }()
     
@@ -40,8 +44,10 @@ class CategoryView:BaseView {
         let view = reactangleView()
         view.titleLabel.text = "자유 공간"
         view.subTitleLabel.text = "당신이 노래를 통해 표현하고 싶은 모든 것을 써내려가는 공간"
+        view.stickerImageView.image = UIImage(named: "free")
         return view
     }()
+    
     
     // selfView. bottom 앵커를 옵셔널 (lessthan ) (점선) 으로 줘야댐. @@@@@
         private lazy var horiStack1:UIStackView = {
@@ -109,8 +115,8 @@ class CategoryView:BaseView {
 
 class reactangleView:BaseView {
 
-let coverImageView:UIImageView = {
-    let view = UIImageView()
+let coverImageView:UIView = {
+    let view = UIView()
     view.backgroundColor = .mainBlack
     return view
 }()
@@ -132,12 +138,22 @@ let subTitleLabel:UILabel = {
     return label
 }()
 
+    let stickerImageView:UIImageView = {
+        let view = UIImageView(image:UIImage(named: "oneline"))
+        view.clipsToBounds = true
+        view.contentMode = .scaleAspectFill
+        view.backgroundColor = .mainBlack
+        return view
+    }()
+
+
 
 override func configureUI() {
     super.configureUI()
     self.addSubview(coverImageView)
     coverImageView.addSubview(titleLabel)
     coverImageView.addSubview(subTitleLabel)
+    coverImageView.addSubview(stickerImageView)
     
     coverImageView.snp.makeConstraints { make in
         make.edges.equalToSuperview()
@@ -153,6 +169,12 @@ override func configureUI() {
         make.trailing.equalToSuperview().offset(-10)
         make.top.equalTo(titleLabel.snp.bottom).offset(4)
         subTitleLabel.sizeToFit()
+    }
+    
+    stickerImageView.snp.makeConstraints { make in
+        make.height.equalToSuperview().multipliedBy(0.524)
+        make.width.equalTo(stickerImageView.snp.height)
+        make.trailing.bottom.equalToSuperview()
     }
     
 }

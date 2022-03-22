@@ -101,6 +101,7 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
                         self?.selfView.tableView.reloadData()
                         self?.selfView.tableView.layoutIfNeeded()
                         self?.selfView.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                        self?.selfView.tableView.layoutIfNeeded()
                         self?.expandedIndexSet = []
                         self?.expandedIndexSet2 = []
                     }

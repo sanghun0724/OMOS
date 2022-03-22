@@ -65,7 +65,7 @@ extension RecordTarget:TargetType {
         case .userRecords(let from,let to): return "/select/user/\(from)/\(to)"
         case .likeRecords(let user): return "/select/\(user)/liked-records"
         case .scrapRecords(let user): return "/select/\(user)/scrapped-records"
-        case .myProfileRecords(let user): return "select/\(user)/my-recods"
+        case .myProfileRecords(let user): return "select/\(user)/my-records"
         }
     }
     

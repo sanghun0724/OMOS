@@ -86,9 +86,7 @@ class LyricsPastView:BaseView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        circleImageView.layoutIfNeeded()
-        circleImageView.layer.cornerRadius = circleImageView.height / 2
-        circleImageView.layer.masksToBounds = true
+        
     }
     
     

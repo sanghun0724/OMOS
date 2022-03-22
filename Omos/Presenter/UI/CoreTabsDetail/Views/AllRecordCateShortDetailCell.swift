@@ -53,7 +53,7 @@ class AllRecordCateShortDetailCell:UITableViewCell {
         myView.nicknameLabel.text = record.nickname
         myView.likeCountLabel.text = String(record.likeCnt)
         myView.scrapCountLabel.text = String(record.scrapCnt)
-        myView.cateLabel.text = record.category.getReverseCate()
+        myView.cateLabel.text = " | \(record.category.getReverseCate())"
         
         if record.isLiked {
             myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
@@ -100,7 +100,7 @@ class AllRecordCateShortDetailCell:UITableViewCell {
         myView.nicknameLabel.text = record.nickname
         myView.likeCountLabel.text = String(record.likeCnt)
         myView.scrapCountLabel.text = String(record.scrapCnt)
-        myView.cateLabel.text = record.category.getReverseCate()
+        myView.cateLabel.text = " | \(record.category.getReverseCate())"
         if record.isLiked {
             myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
             myView.likeCountLabel.textColor = .mainOrange

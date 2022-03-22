@@ -77,7 +77,10 @@ class LyricsPasteViewController:BaseViewController {
             make.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
         }
-
+        
+        selfView.layoutIfNeeded()
+        selfView.circleImageView.layer.cornerRadius = selfView.circleImageView.height / 2
+        selfView.circleImageView.layer.masksToBounds = true
     }
         
 }

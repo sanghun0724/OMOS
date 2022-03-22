@@ -237,7 +237,7 @@ class MydjProfileHeader:UITableViewHeaderFooterView {
     }
     
     func configureModel(profile:MyDjProfileResponse) {
-        profileLabel.text = profile.profile.nickName
+        profileLabel.text = profile.profile.nickname
         followerCountLabel.text = "\(profile.count.followerCount)"
         followingCountLabel.text = "\(profile.count.followingCount)"
         recordCountLabel.text = "\(profile.count.recordsCount)"
@@ -257,20 +257,18 @@ class MydjProfileHeader:UITableViewHeaderFooterView {
         profileImageView.setImage(with: image)
     }
     
-    func configureMyProfile(profile:myProfileResponse) {
-        profileLabel.text = profile.nickname
-//        followerCountLabel.text = "\(profile.count.followerCount)"
-//        followingCountLabel.text = "\(profile.count.followingCount)"
-//        recordCountLabel.text = "\(profile.count.recordsCount)"
-//
-//
-//
-//        guard let image = profile.profile.profileURL else {
-//            profileImageView.image = UIImage(named: "profile")
-//            print("default")
-//            return
-//        }
-//        profileImageView.setImage(with: image)
+    func configureMyProfile(profile:MyDjProfileResponse) {
+        profileLabel.text = profile.profile.nickname
+        followerCountLabel.text = "\(profile.count.followerCount)"
+        followingCountLabel.text = "\(profile.count.followingCount)"
+        recordCountLabel.text = "\(profile.count.recordsCount)"
+
+        guard let image = profile.profile.profileURL else {
+            profileImageView.image = UIImage(named: "profile")
+            print("default")
+            return
+        }
+        profileImageView.setImage(with: image)
     }
     
 }

@@ -176,6 +176,13 @@ class LyricsRecordView:BaseView {
         return view
     }()
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        circleImageView.layoutIfNeeded()
+        circleImageView.layer.cornerRadius = circleImageView.height / 2
+        circleImageView.layer.masksToBounds = true
+    }
+    
     override func configureUI() {
         super.configureUI()
         setDefault()

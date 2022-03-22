@@ -10,7 +10,7 @@ import UIKit
 
 class InstagramShareView:BaseView {
     
-    let instaShareView:UIView
+    let instaShareView = MyRecordDetailView()
     
     let topView:UIView = {
        let view = UIView()
@@ -18,32 +18,29 @@ class InstagramShareView:BaseView {
         return view
     }()
     
-    init(instaShareView:UIView) {
-        self.instaShareView = instaShareView
-        super.init(frame: .zero)
-    }
+    override init(frame: CGRect) {
+        super.init(frame: CGRect(x: 0, y: 0, width: Constant.mainWidth, height: 1200))
+        }
+
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    
+    //scrollview는 어케할건지 tableView도
     
     override func configureUI() {
         super.configureUI()
-        topView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(Constant.mainHeight * 0.091)
-        }
-        
-        instaShareView.snp.makeConstraints { make in
-            make.top.equalTo(topView.snp.bottom)
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(Constant.mainHeight * 0.7)
-        }
-        
+        self.addSubview(topView)
+        self.addSubview(instaShareView)
+        topView.frame = .init(x: 0, y: 45, width: Constant.mainWidth, height: Constant.mainHeight * 0.091)
+        instaShareView.frame = .init(x: 0, y: topView.height+1, width: Constant.mainWidth, height:instaShareView.height)
+        layoutIfNeeded()
+        print(instaShareView.frame)
+        topView.backgroundColor = .red
+        instaShareView.backgroundColor = .yellow
+        self.backgroundColor = .orange
     }
     
     

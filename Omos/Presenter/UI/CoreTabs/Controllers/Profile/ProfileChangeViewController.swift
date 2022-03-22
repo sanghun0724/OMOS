@@ -28,6 +28,7 @@ class ProfileChangeViewController:BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
+        selfView.nickNameField.text = viewModel.currentMyProfile?.profile.nickname
     }
     
     override func configureUI() {
@@ -40,7 +41,6 @@ class ProfileChangeViewController:BaseViewController {
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
         }
         
-        selfView.nickNameField.text = viewModel.currentMyProfile?.nickname
     }
     
     
@@ -75,12 +75,21 @@ class ProfileChangeViewController:BaseViewController {
                     print("alert")
                     return
                 }
-                let request =  ProfileUpdateRequest(nickname:text,profileUrl: "" ,userId:Account.currentUser)
+                let request = ProfileUpdateRequest(nickname:text,profileUrl: "" ,userId:Account.currentUser)
                 self?.viewModel.updateProfile(request:request)
-                self?.navigationController?.popViewController(animated: true)
                        }).disposed(by: disposeBag)
         
-        
+        viewModel.updateProfileState
+            .subscribe(onNext:{ [weak self] state in
+                if state {
+                    self?.navigationController?.popViewController(animated: true)
+                } else {
+                    self?.selfView.nickNameField.layer.borderWidth = 1
+                    self?.selfView.nickNameField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
+                    self?.selfView.warningLabel.text = "닉네임이 중복되었습니다."
+                    self?.selfView.warningLabel.isHidden = false
+                }
+            }).disposed(by: disposeBag)
     }
     
     
@@ -160,6 +169,15 @@ class ProfileChangView:BaseView {
         return button
     }()
     
+    let warningLabel:UILabel = {
+       let label = UILabel()
+        label.text = "닉네임이 중복 되었습니다"
+        label.font = .systemFont(ofSize:12)
+        label.textColor = .mainOrange
+        label.textAlignment = .left
+        return label
+    }()
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -179,6 +197,7 @@ class ProfileChangView:BaseView {
         self.addSubview(mentionLabel)
         self.addSubview(nickNameField)
         self.addSubview(buttonView)
+        self.addSubview(warningLabel)
         
         profileImageView.snp.makeConstraints { make in
             make.width.equalToSuperview().multipliedBy(0.256)
@@ -204,9 +223,18 @@ class ProfileChangView:BaseView {
             make.height.equalToSuperview().multipliedBy(0.06)
         }
         
+        warningLabel.snp.makeConstraints { make in
+            make.top.equalTo(nickNameField.snp.bottom).offset(4)
+            make.leading.trailing.equalToSuperview().inset(16)
+            warningLabel.sizeToFit()
+        }
+        warningLabel.isHidden = true
+        
         buttonView.snp.makeConstraints { make in
             make.leading.trailing.height.equalTo(nickNameField)
             make.bottom.equalToSuperview().offset(-34)
         }
+        
+        
     }
 }

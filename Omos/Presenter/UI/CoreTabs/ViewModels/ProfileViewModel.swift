@@ -10,8 +10,9 @@ import RxSwift
 
 class ProfileViewModel:BaseViewModel {
     
-    let myProfile = PublishSubject<myProfileResponse>()
-    var currentMyProfile:myProfileResponse? = nil
+    let myProfile = PublishSubject<MyDjProfileResponse>()
+    var currentMyProfile:MyDjProfileResponse? = nil
+    
     let myProfileRecord = PublishSubject<MyProfileRecordResponse>()
     var currentMyProfileRecord:MyProfileRecordResponse = .init(likedRecords: [],scrappedRecords: [])
     
@@ -21,6 +22,7 @@ class ProfileViewModel:BaseViewModel {
     var currentScrapRecord:[MyRecordRespone] = []
     
     let logoutState = PublishSubject<Bool>()
+    let updateProfileState = PublishSubject<Bool>()
     
     let allLoading = BehaviorSubject<Bool>(value:false)
     let profileLoading = BehaviorSubject<Bool>(value:false)
@@ -49,11 +51,12 @@ class ProfileViewModel:BaseViewModel {
     
     func fetchMyProfile(userId:Int) {
         profileLoading.onNext(true)
-        usecase.myProfile(userId: userId)
+        usecase.myDjProfile(fromId: userId, toId: userId)
             .subscribe({ [weak self] event in
                 self?.profileLoading.onNext(false)
                 switch event {
                 case .success(let data):
+                    print(data)
                     self?.currentMyProfile = data
                     self?.myProfile.onNext(data)
                 case .failure(let error):
@@ -125,7 +128,7 @@ class ProfileViewModel:BaseViewModel {
             .subscribe({ [weak self] event in
                 switch event {
                 case .success(let data):
-                    print(data)
+                    self?.updateProfileState.onNext(data.state)
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)
                 }

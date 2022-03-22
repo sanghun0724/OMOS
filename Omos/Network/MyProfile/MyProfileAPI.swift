@@ -97,4 +97,17 @@ class MyProfileAPI {
         }
     }
     
+    func myDjProfile(fromId:Int,toId:Int,completion:@escaping(Result<MyDjProfileResponse,Error>) -> Void) {
+        AF.request(FollowTarget.myDjProfile(fromId: fromId, toId: toId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<MyDjProfileResponse>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
+    
 }

@@ -15,11 +15,11 @@ class MydjView:BaseView {
     var collectionView:UICollectionView!
     
     let tableView:UITableView = {
-        let table = UITableView(frame: .zero, style: .grouped)
+        let table = UITableView()
         table.register(AllRecordCateShortDetailCell.self, forCellReuseIdentifier: AllRecordCateShortDetailCell.identifier)
         table.register(AllRecordCateLongDetailCell.self, forCellReuseIdentifier: AllRecordCateLongDetailCell.identifier)
         table.register(AllrecordLyricsTableCell.self, forCellReuseIdentifier: AllrecordLyricsTableCell.identifier)
-        table.rowHeight = UITableView.automaticDimension
+        table.estimatedRowHeight = 500
         table.backgroundColor = .mainBackGround
         table.showsVerticalScrollIndicator = false
         table.automaticallyAdjustsScrollIndicatorInsets = false

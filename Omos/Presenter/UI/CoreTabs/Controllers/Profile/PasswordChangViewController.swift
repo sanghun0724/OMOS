@@ -57,8 +57,8 @@ class PasswordChangeViewController:BaseViewController {
                 } else {
                     self?.selfView.passwordField.layer.borderWidth = 1
                     self?.selfView.passwordField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
-                    self?.selfView.passwordLabel.warningLabel.text = "비밀번호 양식을 다시 확인해주세요."
-                    self?.selfView.passwordLabel.warningLabel.isHidden = false
+                    self?.selfView.warningLabel.text = "비밀번호 양식을 다시 확인해주세요."
+                    self?.selfView.warningLabel.isHidden = false
                 }
     
                        }).disposed(by: disposeBag)
@@ -115,9 +115,13 @@ class PasswordChangeView:BaseView {
         return button
     }()
     
-    let passwordLabel:PasswordLabelView = {
-        let labelView = PasswordLabelView()
-        return labelView
+    let warningLabel:UILabel = {
+       let label = UILabel()
+        label.text = "비밀번호 양식을 확인해주세요"
+        label.font = .systemFont(ofSize:12)
+        label.textColor = .mainOrange
+        label.textAlignment = .right
+        return label
     }()
     
     let buttonView:UIButton = {
@@ -139,7 +143,7 @@ class PasswordChangeView:BaseView {
         super.configureUI()
         self.addSubview(mentionLabel)
         self.addSubview(passwordField)
-        self.addSubview(passwordLabel)
+        self.addSubview(warningLabel)
         self.addSubview(buttonView)
         passwordField.addSubview(passwordDecoView)
       
@@ -150,16 +154,17 @@ class PasswordChangeView:BaseView {
             mentionLabel.sizeToFit()
         }
         
-        passwordLabel.snp.makeConstraints { make in
-            make.leading.top.equalTo(mentionLabel)
+        warningLabel.snp.makeConstraints { make in
+            make.leading.equalTo(mentionLabel)
             make.trailing.equalToSuperview().offset(-16)
-            make.bottom.equalTo(mentionLabel)
+            make.top.equalTo(passwordField.snp.bottom).offset(4)
+            warningLabel.sizeToFit()
         }
         
         passwordField.snp.makeConstraints { make in
             make.top.equalTo(mentionLabel.snp.bottom).offset(10)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalToSuperview().multipliedBy(0.07)
+            make.height.equalToSuperview().multipliedBy(0.06)
         }
         
         buttonView.snp.makeConstraints { make in
@@ -173,7 +178,7 @@ class PasswordChangeView:BaseView {
             make.width.greaterThanOrEqualTo(24)
         }
         
-        passwordLabel.passwordLabel.isHidden = true
+        warningLabel.isHidden = true
     }
     
     

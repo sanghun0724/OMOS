@@ -29,7 +29,6 @@ class AllrecordLyricsTableCell:UITableViewCell {
                     self?.lyricsArr.append(substring)
                 }
             }
-                print("check \(lyricsArr)")
         }
     }
     var lyricsArr:[String] = []
@@ -141,7 +140,7 @@ class AllrecordLyricsTableCell:UITableViewCell {
         selfView.nicknameLabel.text = record.nickname
         selfView.likeCountLabel.text = String(record.likeCnt)
         selfView.scrapCountLabel.text = String(record.scrapCnt)
-        selfView.cateLabel.text = record.category.getReverseCate()
+        selfView.cateLabel.text = " | \(record.category.getReverseCate())"
         
         if record.isLiked {
             selfView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
