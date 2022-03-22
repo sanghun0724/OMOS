@@ -69,6 +69,7 @@ class SettingViewController:BaseViewController {
                     self?.navigationController?.popToRootViewController(animated: false)
                 }
             }).disposed(by: disposeBag)
+        
     }
     
     private func logout() {
@@ -181,7 +182,7 @@ extension SettingViewController:UITableViewDelegate,UITableViewDataSource {
                 action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
                 self.presentAlert(title: "", message: "정말 로그아웃 하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
             case 1:
-                let vc = AccountOutViewController()
+                let vc = AccountOutViewController(viewModel: viewModel)
                 self.navigationController?.pushViewController(vc, animated: true)
             default:
                 print("")

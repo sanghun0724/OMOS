@@ -110,4 +110,18 @@ class MyProfileAPI {
         }
     }
     
+    
+    func signOut(userId:Int,completion:@escaping(Result<StateRespone,Error>) -> Void) {
+        AF.request(LoginTarget.signout(userId: userId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<StateRespone>) in
+            switch response.result {
+            case .success(let data):
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    
 }

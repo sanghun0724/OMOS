@@ -47,4 +47,8 @@ class MyProfileUseCase {
         return myProfileRepository.myDjProfile(fromId: fromId, toId: toId)
     }
     
+    func signOut(userId:Int) -> Single<StateRespone> {
+        return myProfileRepository.signOut(userId: userId)
+    }
+    
 }

@@ -23,10 +23,11 @@ class ProfileViewModel:BaseViewModel {
     
     let logoutState = PublishSubject<Bool>()
     let updateProfileState = PublishSubject<Bool>()
+    let signoutState = PublishSubject<Bool>()
     
     let allLoading = BehaviorSubject<Bool>(value:false)
-    let profileLoading = BehaviorSubject<Bool>(value:false)
-    let recordLoading = BehaviorSubject<Bool>(value:false)
+    let profileLoading =  PublishSubject<Bool>()
+    let recordLoading =  PublishSubject<Bool>()
     let likesLoading = BehaviorSubject<Bool>(value:false)
     let scrapsLoading = BehaviorSubject<Bool>(value:false)
     let isLikeEmpty = BehaviorSubject<Bool>(value:false)
@@ -39,6 +40,7 @@ class ProfileViewModel:BaseViewModel {
         Observable.combineLatest(profileLoading,recordLoading)
         { !($0 || $1) }
         .subscribe(onNext: { [weak self] loading in
+            print("loading \(loading)")
             if loading {
                 self?.allLoading.onNext(false)
             }
@@ -141,6 +143,18 @@ class ProfileViewModel:BaseViewModel {
                 switch event {
                 case .success(let data):
                     self?.logoutState.onNext(data.state)
+                case .failure(let error):
+                    self?.errorMessage.onNext(error.localizedDescription)
+                }
+            }).disposed(by: disposeBag)
+    }
+    
+    func signOut(userId:Int) {
+        usecase.signOut(userId: userId)
+            .subscribe({ [weak self] event in
+                switch event {
+                case .success(let data):
+                    self?.signoutState.onNext(data.state)
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)
                 }

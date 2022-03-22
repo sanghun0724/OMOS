@@ -17,6 +17,7 @@ enum LoginTarget {
     case SNSLogin(SNSLoginRequest)
     case SNSSignUp(SNSSignUpRequest)
     case logOut(userId:Int)
+    case signout(userId:Int)
 }
 
 extension LoginTarget:TargetType {
@@ -34,6 +35,7 @@ extension LoginTarget:TargetType {
         case .SNSLogin: return .post
         case .SNSSignUp: return .post
         case .logOut: return .delete
+        case .signout: return .delete
         }
     }
     
@@ -47,6 +49,7 @@ extension LoginTarget:TargetType {
         case .SNSLogin: return "/sns-login"
         case .SNSSignUp: return "/sns-signup"
         case .logOut(let user): return "/logout/\(user)"
+        case .signout(let user): return "/signout/\(user)"
         }
     }
     

@@ -18,5 +18,6 @@ protocol MyProfileRepository {
     func scrapRecords(userId:Int) -> Single<[MyRecordRespone]>
     func myProfileRecord(userId:Int) -> Single<MyProfileRecordResponse>
     func logOut(userId:Int) -> Single<StateRespone>
-    func myDjProfile(fromId:Int,toId:Int) -> Single<MyDjProfileResponse> 
+    func myDjProfile(fromId:Int,toId:Int) -> Single<MyDjProfileResponse>
+    func signOut(userId:Int) -> Single<StateRespone>
 }
