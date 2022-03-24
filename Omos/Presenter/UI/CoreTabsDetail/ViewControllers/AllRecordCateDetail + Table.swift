@@ -17,7 +17,7 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return cateRecords.count 
+            return viewModel.currentCateRecords.count
         } else if section == 1 && isPaging && hasNextPage {
             return 1
         }
@@ -26,7 +26,7 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            guard let record = cateRecords[safe:indexPath.row] else { return UITableViewCell() }
+            guard let record = viewModel.currentCateRecords[safe:indexPath.row] else { return UITableViewCell() }
             switch self.myCateType {
             case .LYRICS:
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllrecordLyricsTableCell.identifier, for: indexPath) as! AllrecordLyricsTableCell
@@ -82,7 +82,7 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        guard let record = cateRecords[safe:indexPath.row] else { return }
+        guard let record = viewModel.currentCateRecords[safe:indexPath.row] else { return }
       
         if Account.currentUser == record.userID {
             let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())

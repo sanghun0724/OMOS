@@ -16,14 +16,14 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
     var expandedIndexSet2 : IndexSet = []
 
     var isPaging = false
-    var hasNextPage = false
+    var hasNextPage = true
     var currentPage = -1
     var shortCellHeights:[IndexPath:CGFloat] = [:]
     var longCellHeights:[IndexPath:CGFloat] = [:]
     let viewModel:MyDjViewModel
     let user = UserDefaults.standard.integer(forKey: "user")
-    var currentDjLastPostId = 0
-    var timer: Timer?
+    var lastPostId = 0
+    var isfirst = true
 
     init(viewModel:MyDjViewModel) {
         self.viewModel = viewModel
@@ -90,22 +90,37 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
         
         viewModel.myDjList
             .subscribe(onNext: { [weak self] data in
-                self?.viewModel.fetchMyDjRecord(userId: Account.currentUser, request: .init(postId: nil, size: 10))
+                guard let firstDjId = self?.viewModel.currentMyDjList.first?.userID else { return }
+                self?.viewModel.fetchMyDjRecord(userId: firstDjId , request: .init(postId: nil, size: 10))
                 self?.selfView.collectionView.reloadData()
+             
             }).disposed(by: disposeBag)
       
         viewModel.myDjRecord
             .subscribe(onNext: { [weak self] data in
-                if !data.isEmpty {
-                    DispatchQueue.main.async { [weak self] in
-                        self?.selfView.tableView.reloadData()
-                        self?.selfView.tableView.layoutIfNeeded()
-                        self?.selfView.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-                        self?.selfView.tableView.layoutIfNeeded()
-                        self?.expandedIndexSet = []
-                        self?.expandedIndexSet2 = []
+                guard let isfirst = self?.isfirst else { return }
+                if isfirst {
+                    if !data.isEmpty {
+                        DispatchQueue.main.async { [weak self] in
+                            self?.selfView.tableView.reloadData()
+                            self?.selfView.tableView.layoutIfNeeded()
+                            self?.selfView.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                            self?.selfView.tableView.layoutIfNeeded()
+                            self?.expandedIndexSet = []
+                            self?.expandedIndexSet2 = []
+                        }
                     }
+                } else {
+                    self?.hasNextPage = self?.lastPostId == self?.viewModel.currentMyDjRecord.last?.recordID ?? 0 ? false : true
+                    self?.lastPostId = self?.viewModel.currentMyDjRecord.last?.recordID ?? 0
+                    print("hasNext\(self?.hasNextPage)")
+                    self?.isPaging = false //페이징 종료
+                    self?.selfView.tableView.reloadData()
+                    self?.selfView.tableView.layoutIfNeeded()
                 }
+                
+                
+               
             }).disposed(by: disposeBag)
         
         viewModel.loading
@@ -121,7 +136,7 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
 
 
     private func fetchRecord() {
-    
+        self.isfirst = false 
         viewModel.fetchMyDjRecord(userId: user, request: .init(postId: viewModel.currentMyDjRecord.last?.recordID, size:10))
         //2. 바인딩 하고 도착하면 데이터 append (위에서 하고 있으니 ok)
     }
@@ -139,13 +154,15 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
-
-      //계속 부르는 이유 -> 데이터 없어서 게속 스크롤 끝에 가있다고 인지해서 게속부름
-//        if offsetY > contentHeight - scrollView.frame.height {
-//            if isPaging == false && hasNextPage {
-//                beginPaging()
-//            }
-//        }
+        let height = scrollView.frame.height
+        
+        // 스크롤이 테이블 뷰 Offset의 끝에 가게 되면 다음 페이지를 호출
+        if offsetY > (contentHeight - height) {
+            print("hasNext222\(self.hasNextPage)")
+            if isPaging == false && hasNextPage {
+                beginPaging()
+            }
+        }
     }
 }
 

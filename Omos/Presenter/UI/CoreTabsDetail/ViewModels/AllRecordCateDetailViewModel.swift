@@ -29,7 +29,7 @@ class AllRecordCateDetailViewModel:BaseViewModel {
                 self?.loading.onNext(false)
                 switch event {
                 case .success(let data):
-                    self?.currentCateRecords = data
+                    self?.currentCateRecords += data
                     self?.cateRecords.onNext(data)
                 case .failure(let error):
                     print(error.localizedDescription)

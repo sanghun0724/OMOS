@@ -19,6 +19,7 @@ class MydjView:BaseView {
         table.register(AllRecordCateShortDetailCell.self, forCellReuseIdentifier: AllRecordCateShortDetailCell.identifier)
         table.register(AllRecordCateLongDetailCell.self, forCellReuseIdentifier: AllRecordCateLongDetailCell.identifier)
         table.register(AllrecordLyricsTableCell.self, forCellReuseIdentifier: AllrecordLyricsTableCell.identifier)
+        table.register(LoadingCell.self, forCellReuseIdentifier: LoadingCell.identifier)
         table.estimatedRowHeight = 500
         table.backgroundColor = .mainBackGround
         table.showsVerticalScrollIndicator = false
@@ -57,6 +58,7 @@ class MydjView:BaseView {
             make.leading.trailing.bottom.equalToSuperview()
         }
         emptyView.descriptionLabel.text = "구독한 DJ가 없습니다."
+        loadingView.backgroundColor = .clear
         
     }
     

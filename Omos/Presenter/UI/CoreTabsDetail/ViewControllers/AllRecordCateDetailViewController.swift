@@ -18,15 +18,13 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
     let bottomVC:BottomSheetViewController
     let bottomSheet:MDCBottomSheetController
     var isPaging = false
-    var hasNextPage = false
+    var hasNextPage = true
     var currentPage = -1
     var shortCellHeights:[IndexPath:CGFloat] = [:]
     var longCellHeights:[IndexPath:CGFloat] = [:]
     var filterType = "date"
     var tableViewReload = true
     var lastPostId = 0
-    
-    var cateRecords:[CategoryRespone] = []
     let viewModel:AllRecordCateDetailViewModel
     let myCateType:cateType
     
@@ -96,9 +94,8 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
             .subscribe(onNext:{ [weak self] data in
                 self?.hasNextPage = self?.lastPostId == self?.viewModel.currentCateRecords.last?.recordID ?? 0 ? false : true
                 self?.lastPostId = self?.viewModel.currentCateRecords.last?.recordID ?? 0
-                
-                self?.cateRecords += data
-                self?.hasNextPage = self?.cateRecords.count ?? 0 > 200 ? false : true //다음페이지 있는지 확인
+                print("hasNext\(self?.hasNextPage)")
+//                self?.hasNextPage = self?.viewModel.currentCateRecords.count ?? 0 > 200 ? false : true //다음페이지 있는지 확인
                 self?.isPaging = false //페이징 종료
                 self?.selfView.tableView.reloadData()
                 self?.selfView.tableView.layoutIfNeeded()
@@ -111,7 +108,6 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
         
         viewModel.recentFilter
             .subscribe(onNext: { [weak self] _ in
-                self?.cateRecords = []
                 self?.viewModel.currentCateRecords = []
                 self?.filterType = "date"
                 self?.fetchRecord()
@@ -123,7 +119,6 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
         
         viewModel.likeFilter
             .subscribe(onNext: { [weak self] _ in
-                self?.cateRecords = []
                 self?.viewModel.currentCateRecords = []
                 self?.filterType = "like"
                 self?.fetchRecord()
@@ -133,7 +128,6 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
         
         viewModel.randomFilter
             .subscribe(onNext: { [weak self] _ in
-                self?.cateRecords = []
                 self?.viewModel.currentCateRecords = []
                 self?.filterType = "random"
                 self?.fetchRecord()
@@ -188,6 +182,8 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
         
         // 스크롤이 테이블 뷰 Offset의 끝에 가게 되면 다음 페이지를 호출
         if offsetY > (contentHeight - height) {
+            print(viewModel.currentCateRecords)
+            print("hasNext222\(self.hasNextPage)")
             if isPaging == false && hasNextPage {
                 beginPaging()
             }

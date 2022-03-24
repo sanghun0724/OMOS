@@ -39,6 +39,7 @@ extension MyDJViewController:UICollectionViewDataSource,UICollectionViewDelegate
         guard let cell = collectionView.cellForItem(at: indexPath) as? MydjCollectionCell else { return }
         cell.djImageView.layer.borderWidth = 1
         viewModel.currentMyDjRecord = []
+        self.isfirst = true 
         viewModel.fetchMyDjRecord(userId: cellData.userID, request: .init(postId: nil, size: 10))
     }
 
