@@ -35,6 +35,7 @@ class AllRecordCateLongDetailCell:UITableViewCell {
             make.leading.trailing.top.equalToSuperview()
             make.bottom.equalToSuperview()
         }
+        myView.lockButton.isHidden = true 
     }
     
 
@@ -130,6 +131,7 @@ class AllRecordCateLongDetailCell:UITableViewCell {
             myView.scrapButton.setImage( UIImage(named: "fillStar"), for: .normal)
             myView.scrapCountLabel.textColor = .mainOrange
         }
+       
     }
     
 }

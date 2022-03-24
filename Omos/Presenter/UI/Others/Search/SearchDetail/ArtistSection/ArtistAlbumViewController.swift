@@ -39,6 +39,11 @@ class ArtistAlbumViewController:BaseViewController,UIScrollViewDelegate {
         selfView.tableView.dataSource = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
     
     override func configureUI() {
         super.configureUI()

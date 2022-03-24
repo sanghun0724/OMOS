@@ -34,6 +34,7 @@ class AllRecordCateShortDetailCell:UITableViewCell {
         myView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        myView.lockButton.isHidden = true 
     }
     
     

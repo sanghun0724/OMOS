@@ -101,6 +101,7 @@ class AllRecordSearchDetailViewController:BaseViewController , UIScrollViewDeleg
                 self?.filterType = "date"
                 self?.fetchRecord()
                 self?.selfView.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+                self?.navigationItem.rightBarButtonItem?.tintColor = .white
             }).disposed(by: disposeBag)
         
         viewModel.likeFilter
@@ -108,6 +109,7 @@ class AllRecordSearchDetailViewController:BaseViewController , UIScrollViewDeleg
                 self?.viewModel.currentOneMusicRecords = []
                 self?.fetchRecord()
                 self?.selfView.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+                self?.navigationItem.rightBarButtonItem?.tintColor = .white
             }).disposed(by: disposeBag)
         
         viewModel.randomFilter
@@ -116,6 +118,7 @@ class AllRecordSearchDetailViewController:BaseViewController , UIScrollViewDeleg
                 self?.filterType = "random"
                 self?.fetchRecord()
                 self?.selfView.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+                self?.navigationItem.rightBarButtonItem?.tintColor = .white
             }).disposed(by: disposeBag)
     }
 

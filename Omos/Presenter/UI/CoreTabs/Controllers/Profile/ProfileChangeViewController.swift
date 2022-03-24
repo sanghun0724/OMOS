@@ -128,6 +128,7 @@ class ProfileChangView:BaseView {
         let view = UIImageView(image:UIImage(named: "profile"))
         view.clipsToBounds = true
         view.contentMode = .scaleAspectFill
+        view.isHidden = true
         return view
     }()
     
@@ -136,6 +137,7 @@ class ProfileChangView:BaseView {
         button.setImage(UIImage(systemName: "camera"), for: .normal)
         button.backgroundColor = .mainGrey6
         button.tintColor = .white
+        button.isHidden = true
         return button
     }()
     
@@ -213,7 +215,8 @@ class ProfileChangView:BaseView {
         
         mentionLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
-            make.top.equalTo(profileImageView.snp.bottom).offset(34)
+          //  make.top.equalTo(profileImageView.snp.bottom).offset(34)
+            make.top.equalToSuperview().offset(34)
             mentionLabel.sizeToFit()
         }
         

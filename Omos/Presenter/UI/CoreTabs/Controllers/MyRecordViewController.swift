@@ -48,7 +48,7 @@ class MyRecordViewController: BaseViewController {
         searchButton.tintColor = .white
         let createButton = UIBarButtonItem(image: UIImage(named: "plus-square"), style: .plain, target: self, action: #selector(didTapCreateButton))
         createButton.tintColor = .white
-        self.navigationItem.rightBarButtonItems = [searchButton,createButton]
+        self.navigationItem.rightBarButtonItems = [createButton]
     }
     
     @objc func didTapCreateButton() {

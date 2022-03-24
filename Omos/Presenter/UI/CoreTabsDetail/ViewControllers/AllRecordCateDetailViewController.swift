@@ -23,7 +23,8 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
     var shortCellHeights:[IndexPath:CGFloat] = [:]
     var longCellHeights:[IndexPath:CGFloat] = [:]
     var filterType = "date"
-    var tableViewReload = true 
+    var tableViewReload = true
+    var lastPostId = 0
     
     var cateRecords:[CategoryRespone] = []
     let viewModel:AllRecordCateDetailViewModel
@@ -93,8 +94,11 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
     private func bind() {
         viewModel.cateRecords
             .subscribe(onNext:{ [weak self] data in
+                self?.hasNextPage = self?.lastPostId == self?.viewModel.currentCateRecords.last?.recordID ?? 0 ? false : true
+                self?.lastPostId = self?.viewModel.currentCateRecords.last?.recordID ?? 0
+                
                 self?.cateRecords += data
-                self?.hasNextPage = self?.cateRecords.count ?? 0 > 300 ? false : true //다음페이지 있는지 확인
+                self?.hasNextPage = self?.cateRecords.count ?? 0 > 200 ? false : true //다음페이지 있는지 확인
                 self?.isPaging = false //페이징 종료
                 self?.selfView.tableView.reloadData()
                 self?.selfView.tableView.layoutIfNeeded()
@@ -114,6 +118,7 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
                 self?.selfView.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
                 self?.selfView.tableView.reloadData()
                 self?.selfView.tableView.layoutIfNeeded()
+                self?.navigationItem.rightBarButtonItem?.tintColor = .white
             }).disposed(by: disposeBag)
         
         viewModel.likeFilter
@@ -123,6 +128,7 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
                 self?.filterType = "like"
                 self?.fetchRecord()
                 self?.selfView.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+                self?.navigationItem.rightBarButtonItem?.tintColor = .white
             }).disposed(by: disposeBag)
         
         viewModel.randomFilter
@@ -132,6 +138,7 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
                 self?.filterType = "random"
                 self?.fetchRecord()
                 self?.selfView.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+                self?.navigationItem.rightBarButtonItem?.tintColor = .white
             }).disposed(by: disposeBag)
         
     }
@@ -177,14 +184,16 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.height
         
-      //계속 부르는 이유 -> 데이터 없어서 게속 스크롤 끝에 가있다고 인지해서 게속부름
-//        if offsetY > contentHeight - scrollView.frame.height {
-//            if isPaging == false && hasNextPage {
-//                beginPaging()
-//            }
-//        }
+        // 스크롤이 테이블 뷰 Offset의 끝에 가게 되면 다음 페이지를 호출
+        if offsetY > (contentHeight - height) {
+            if isPaging == false && hasNextPage {
+                beginPaging()
+            }
+        }
     }
+    
 }
 
 

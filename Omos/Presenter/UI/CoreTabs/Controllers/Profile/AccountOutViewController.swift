@@ -28,7 +28,7 @@ class AccountOutViewController:BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        bind()
     }
     
     override func configureUI() {

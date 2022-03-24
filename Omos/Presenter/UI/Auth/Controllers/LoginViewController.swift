@@ -61,6 +61,11 @@ class LoginViewController:UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+       
+    }
+    
     private func bind() {
         
         let isEmailEmpty = topView.emailField.rx.text
@@ -205,16 +210,15 @@ extension LoginViewController:ASAuthorizationControllerDelegate {
             let user = credential.user
             print("user:\(user)")
             UserDefaults.standard.set(user, forKey: "appleUser")
-            if let email = credential.email {
-                print("email:\(email)")
-                UserDefaults.standard.set(email, forKey: "appleEmail")
-
-            }
-            guard let appleEmail = UserDefaults.standard.string(forKey: "appleEmail") else {
-                print("애플 이메일이 없습니다")
-                return
-            }
-            LoginAPI.SNSLogin(request: .init(email:appleEmail , type: .APPLE)) { [weak self] result in
+            let email = credential.email
+            print("email:\(email)")
+            UserDefaults.standard.set(email ?? "" + "apple", forKey: "appleEmail")
+            
+            //앱 삭제후 다시 들어가면 위의 유저값만 받아올수 있으니 유저값이 서버에 있으면 다시 로그인 되는 로직들 필요 
+            
+            let appleEmail = UserDefaults.standard.string(forKey: "appleEmail")
+            
+            LoginAPI.SNSLogin(request: .init(email:appleEmail ?? "" , type: .APPLE)) { [weak self] result in
                 switch result {
                 case .success(let token):
                     UserDefaults.standard.set(token.accessToken, forKey: "access")

@@ -101,6 +101,7 @@ class HomeHeaderView:UITableViewHeaderFooterView {
     let notiButton:UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "bell"), for: .normal)
+        button.isHidden = true 
         return button
     }()
     

@@ -54,6 +54,7 @@ class AllrecordLyricsTableCell:UITableViewCell {
         
         selfView.circleImageView.layer.cornerRadius = selfView.circleImageView.height / 2
         selfView.circleImageView.layer.masksToBounds = true
+        selfView.lockButton.isHidden = true
     }
     
     

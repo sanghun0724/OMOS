@@ -61,6 +61,7 @@ class LyricsPasteCreateView: BaseView {
     let imageAddButton:UIButton = {
        let button = UIButton()
         button.setBackgroundImage(UIImage(named: "addImage"), for: .normal)
+        button.isHidden = true
         return button
     }()
     
@@ -160,6 +161,7 @@ class LyricsPasteCreateView: BaseView {
     
     let stickerImageView:UIImageView = {
         let view = UIImageView(image:UIImage(named: "sticker"))
+        view.isHidden = true
         return view
     }()
     
@@ -169,6 +171,7 @@ class LyricsPasteCreateView: BaseView {
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 12)
         label.textColor = .mainGrey3
+        label.isHidden = true 
         return label
     }()
     

@@ -46,7 +46,8 @@ class SignUpViewModel:BaseViewModel {
               let nickname = UserDefaults.standard.string(forKey: "nickname") else {
                   return
               }
-        
+        print(email)
+        print(nickname)
         usecase.snsSignUp(email: email, nickName: nickname, type: .KAKAO).subscribe({ [weak self] event in
             switch event {
             case .success:
@@ -62,7 +63,7 @@ class SignUpViewModel:BaseViewModel {
               let nickname = UserDefaults.standard.string(forKey: "nickname") else {
                   return
               }
-        
+        print("okk\(email)")
         usecase.snsSignUp(email: email, nickName: nickname, type: .APPLE).subscribe({ [weak self] event in
             switch event {
             case .success:

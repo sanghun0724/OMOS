@@ -173,7 +173,7 @@ override func configureUI() {
     
     stickerImageView.snp.makeConstraints { make in
         make.height.equalToSuperview().multipliedBy(0.524)
-        make.width.equalTo(stickerImageView.snp.height)
+        make.width.equalTo(stickerImageView.snp.height).multipliedBy(1.44)
         make.trailing.bottom.equalToSuperview()
     }
     
