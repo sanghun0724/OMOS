@@ -251,8 +251,8 @@ class RecordAPI {
     }
     
 
-    func userRecords(fromId:Int,toId:Int,completion:@escaping(Result<[UserRecordsResponse],Error>) -> Void) {
-        AF.request(RecordTarget.userRecords(fromId: fromId, toId: toId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[UserRecordsResponse]>) in
+    func userRecords(fromId:Int,toId:Int,completion:@escaping(Result<[MyDjResponse],Error>) -> Void) {
+        AF.request(RecordTarget.userRecords(fromId: fromId, toId: toId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[MyDjResponse]>) in
             switch response.result {
             case .success(let data):
                 print(data)

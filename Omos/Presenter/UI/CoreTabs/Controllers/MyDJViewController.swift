@@ -23,7 +23,8 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
     let viewModel:MyDjViewModel
     let user = UserDefaults.standard.integer(forKey: "user")
     var lastPostId = 0
-    var isfirst = true
+    var beforCliked = -1
+    var isDjcliked = false 
 
     init(viewModel:MyDjViewModel) {
         self.viewModel = viewModel
@@ -43,7 +44,7 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
         selfView.collectionView.delegate = self
         selfView.collectionView.dataSource = self
         viewModel.fetchMyDjList(userId: Account.currentUser)
-        
+        viewModel.fetchMyDjRecord(userId: Account.currentUser , request: .init(postId: viewModel.currentMyDjRecord.last?.recordID , size: 6))
 //        self.timer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true, block: {[weak self] (tt) in
 //            self?.viewModel.fetchMyDjList(userId: Account.currentUser)
 //            self?.selfView.collectionView.reloadData()
@@ -90,41 +91,45 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
         
         viewModel.myDjList
             .subscribe(onNext: { [weak self] data in
-                guard let firstDjId = self?.viewModel.currentMyDjList.first?.userID else { return }
-                self?.viewModel.fetchMyDjRecord(userId: firstDjId , request: .init(postId: nil, size: 10))
                 self?.selfView.collectionView.reloadData()
-             
             }).disposed(by: disposeBag)
       
         viewModel.myDjRecord
             .subscribe(onNext: { [weak self] data in
-                guard let isfirst = self?.isfirst else { return }
-                if isfirst {
-                    if !data.isEmpty {
-                        DispatchQueue.main.async { [weak self] in
-                            self?.selfView.tableView.reloadData()
-                            self?.selfView.tableView.layoutIfNeeded()
-                            self?.selfView.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-                            self?.selfView.tableView.layoutIfNeeded()
-                            self?.expandedIndexSet = []
-                            self?.expandedIndexSet2 = []
-                        }
-                    }
-                } else {
+
                     self?.hasNextPage = self?.lastPostId == self?.viewModel.currentMyDjRecord.last?.recordID ?? 0 ? false : true
                     self?.lastPostId = self?.viewModel.currentMyDjRecord.last?.recordID ?? 0
                     print("hasNext\(self?.hasNextPage)")
                     self?.isPaging = false //페이징 종료
                     self?.selfView.tableView.reloadData()
                     self?.selfView.tableView.layoutIfNeeded()
-                }
-                
-                
-               
+                    self?.selfView.loadingView.backgroundColor = .clear
+
             }).disposed(by: disposeBag)
+        
+        viewModel.userRecords
+            .subscribe(onNext: { [weak self] data in
+                if !data.isEmpty {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.selfView.tableView.reloadData()
+                        self?.selfView.tableView.layoutIfNeeded()
+                        self?.selfView.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                        self?.selfView.tableView.layoutIfNeeded()
+                        self?.expandedIndexSet = []
+                        self?.expandedIndexSet2 = []
+                    }
+                }
+            }).disposed(by:disposeBag)
         
         viewModel.loading
             .subscribe(onNext: { [weak self] loading in
+                self?.selfView.loadingView.isHidden = !loading
+                print("loading\(loading)")
+            }).disposed(by: disposeBag)
+        
+        viewModel.recordsLoading
+            .subscribe(onNext: { [weak self] loading in
+                self?.selfView.loadingView.backgroundColor = .mainBackGround
                 self?.selfView.loadingView.isHidden = !loading
             }).disposed(by: disposeBag)
         
@@ -136,8 +141,7 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
 
 
     private func fetchRecord() {
-        self.isfirst = false 
-        viewModel.fetchMyDjRecord(userId: user, request: .init(postId: viewModel.currentMyDjRecord.last?.recordID, size:10))
+        viewModel.fetchMyDjRecord(userId: user, request: .init(postId: viewModel.currentMyDjRecord.last?.recordID, size:6))
         //2. 바인딩 하고 도착하면 데이터 append (위에서 하고 있으니 ok)
     }
 
@@ -159,7 +163,7 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
         // 스크롤이 테이블 뷰 Offset의 끝에 가게 되면 다음 페이지를 호출
         if offsetY > (contentHeight - height) {
             print("hasNext222\(self.hasNextPage)")
-            if isPaging == false && hasNextPage {
+            if isPaging == false && hasNextPage && !isDjcliked{
                 beginPaging()
             }
         }

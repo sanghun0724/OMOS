@@ -18,11 +18,11 @@ extension MyDJViewController:UICollectionViewDataSource,UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MydjCollectionCell.identifier, for: indexPath) as! MydjCollectionCell
         cell.backgroundColor = .mainBackGround
-        if indexPath.row == 0 {
-            cell.djImageView.layer.borderWidth = 1
-        } else {
-            cell.djImageView.layer.borderWidth = 0
-        }
+//        if indexPath.row == 0 {
+//            cell.djImageView.layer.borderWidth = 1
+//        } else {
+//            cell.djImageView.layer.borderWidth = 0
+//        }
         let cellData = viewModel.currentMyDjList[indexPath.row]
         cell.configureModel(record: cellData)
         return cell
@@ -30,17 +30,24 @@ extension MyDJViewController:UICollectionViewDataSource,UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: false)
+        let cellData = viewModel.currentMyDjList[indexPath.row]
+        guard let cell = collectionView.cellForItem(at: indexPath) as? MydjCollectionCell else { return }
+        if cell.djImageView.layer.borderWidth == 1 {
+            cell.djImageView.layer.borderWidth = 0
+            isDjcliked = false
+            viewModel.fetchMyDjRecord(userId: Account.currentUser, request: .init(postId: viewModel.currentMyDjRecord.last?.recordID, size: 6))
+            self.selfView.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            return 
+        }
         collectionView.visibleCells.forEach { cell in
             if let cell = cell as? MydjCollectionCell {
                 cell.djImageView.layer.borderWidth = 0
             }
         }
-        let cellData = viewModel.currentMyDjList[indexPath.row]
-        guard let cell = collectionView.cellForItem(at: indexPath) as? MydjCollectionCell else { return }
-        cell.djImageView.layer.borderWidth = 1
-        viewModel.currentMyDjRecord = []
-        self.isfirst = true 
-        viewModel.fetchMyDjRecord(userId: cellData.userID, request: .init(postId: nil, size: 10))
+            cell.djImageView.layer.borderWidth = 1
+            isDjcliked = true
+            viewModel.fetchUserRecords(fromId: Account.currentUser, toId:cellData.userID)
+        
     }
 
 }
@@ -54,7 +61,12 @@ extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return viewModel.currentMyDjRecord.count
+            if isDjcliked {
+                return viewModel.currentUserRecrods.count
+            } else {
+                return viewModel.currentMyDjRecord.count
+            }
+          
         } else if section == 1 && isPaging && hasNextPage {
             return 1
         }
@@ -63,7 +75,15 @@ extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            guard  let record = viewModel.currentMyDjRecord[safe: indexPath.row] else { return LoadingCell() }
+            let record:MyDjResponse
+           
+            if isDjcliked {
+                guard let userRecord = viewModel.currentUserRecrods[safe: indexPath.row] else { return LoadingCell() }
+                 record = userRecord
+            } else {
+                guard let myDjRecord = viewModel.currentMyDjRecord[safe: indexPath.row] else { return LoadingCell() }
+                record = myDjRecord
+            }
             switch record.category {
             case "LYRICS":
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllrecordLyricsTableCell.identifier, for: indexPath) as! AllrecordLyricsTableCell

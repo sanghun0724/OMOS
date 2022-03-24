@@ -19,7 +19,7 @@ extension MydjProfileViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MyRecordTableCell.identifier, for: indexPath) as! MyRecordTableCell
         let cellData = viewModel.currentUserRecrods[indexPath.row]
-        cell.configureUserRecordModel(record: cellData)
+       // cell.configureUserRecordModel(record: cellData)
         return cell
     }
     

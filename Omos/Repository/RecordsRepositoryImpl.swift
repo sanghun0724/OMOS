@@ -312,8 +312,8 @@ class RecordsRepositoryImpl:RecordsRepository {
         }
     }
     
-    func userRecords(fromId:Int,toId:Int) -> Single<[UserRecordsResponse]> {
-        return Single<[UserRecordsResponse]>.create { [weak self] single in
+    func userRecords(fromId:Int,toId:Int) -> Single<[MyDjResponse]> {
+        return Single<[MyDjResponse]>.create { [weak self] single in
             self?.recordAPI.userRecords(fromId: fromId, toId: toId ,completion: { result in
                 switch result {
                 case .success(let data):

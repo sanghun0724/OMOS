@@ -90,7 +90,7 @@ class RecordsUseCase {
         return recordsRepository.myDjList(userId: userId)
     }
     
-    func userRecords(fromId:Int,toId:Int) -> Single<[UserRecordsResponse]> {
+    func userRecords(fromId:Int,toId:Int) -> Single<[MyDjResponse]> {
         return recordsRepository.userRecords(fromId: fromId, toId: toId)
     }
 }

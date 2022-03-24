@@ -15,9 +15,13 @@ class MyDjViewModel:BaseViewModel {
     var currentMyDjRecord:[MyDjResponse] = []
     let myDjList = PublishSubject<[MyDjListResponse]>()
     var currentMyDjList:[MyDjListResponse] = []
-    let loading = BehaviorSubject<Bool>(value:false)
+    let loading = PublishSubject<Bool>()
     let isEmpty = BehaviorSubject<Bool>(value:false)
     let errorMessage = BehaviorSubject<String?>(value: nil)
+    
+    let userRecords = PublishSubject<[MyDjResponse]>()
+    var currentUserRecrods:[MyDjResponse] = []
+    let recordsLoading = PublishSubject<Bool>()
     
     let usecase:RecordsUseCase
     
@@ -36,10 +40,25 @@ class MyDjViewModel:BaseViewModel {
             }).disposed(by: disposeBag)
     }
     
+    func fetchUserRecords(fromId:Int,toId:Int) {
+        recordsLoading.onNext(true)
+        usecase.userRecords(fromId: fromId, toId: toId)
+            .subscribe({ [weak self] event in
+                self?.recordsLoading.onNext(false)
+                switch event {
+                case .success(let data):
+                    self?.currentUserRecrods = data
+                    self?.userRecords.onNext(data)
+                case .failure(let error):
+                    self?.errorMessage.onNext(error.localizedDescription)
+                }
+            }).disposed(by: disposeBag)
+    }
+    
+    
     func fetchMyDjList(userId:Int) {
         usecase.myDjList(userId: userId)
             .subscribe({ [weak self] event in
-                self?.loading.onNext(false)
                 switch event {
                 case .success(let data):
                     self?.currentMyDjList = data

@@ -58,7 +58,7 @@ class MydjView:BaseView {
             make.leading.trailing.bottom.equalToSuperview()
         }
         emptyView.descriptionLabel.text = "구독한 DJ가 없습니다."
-        loadingView.backgroundColor = .clear
+        loadingView.backgroundColor = .mainBackGround
         
     }
     
