@@ -18,11 +18,6 @@ extension MyDJViewController:UICollectionViewDataSource,UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MydjCollectionCell.identifier, for: indexPath) as! MydjCollectionCell
         cell.backgroundColor = .mainBackGround
-//        if indexPath.row == 0 {
-//            cell.djImageView.layer.borderWidth = 1
-//        } else {
-//            cell.djImageView.layer.borderWidth = 0
-//        }
         let cellData = viewModel.currentMyDjList[indexPath.row]
         cell.configureModel(record: cellData)
         return cell
@@ -37,7 +32,7 @@ extension MyDJViewController:UICollectionViewDataSource,UICollectionViewDelegate
             isDjcliked = false
             viewModel.fetchMyDjRecord(userId: Account.currentUser, request: .init(postId: viewModel.currentMyDjRecord.last?.recordID, size: 6))
             self.selfView.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-            return 
+            return
         }
         collectionView.visibleCells.forEach { cell in
             if let cell = cell as? MydjCollectionCell {

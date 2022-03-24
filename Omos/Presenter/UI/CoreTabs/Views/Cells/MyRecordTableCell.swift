@@ -170,7 +170,7 @@ class MyRecordTableCell:UITableViewCell {
         
     }
     
-    func configureUserRecordModel(record:UserRecordsResponse) {
+    func configureUserRecordModel(record:MyRecordRespone) {
         lockImageView.isHidden = true
         albumImageView.setImage(with: record.music.albumImageURL)
         titleLabel.text = record.music.musicTitle +  record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}

@@ -15,8 +15,8 @@ class MyDjProfileViewModel:BaseViewModel {
     let recordsLoading = BehaviorSubject<Bool>(value:false)
     let mydjProfile = PublishSubject<MyDjProfileResponse>()
     var currentMydjProfile:MyDjProfileResponse? = nil
-    let userRecords = PublishSubject<[MyDjResponse]>()
-    var currentUserRecrods:[MyDjResponse] = []
+    let userRecords = PublishSubject<[MyRecordRespone]>()
+    var currentUserRecrods:[MyRecordRespone] = []
     let usecase:RecordsUseCase
     let errorMessage = BehaviorSubject<String?>(value: nil)
     
@@ -35,20 +35,20 @@ class MyDjProfileViewModel:BaseViewModel {
             }).disposed(by: disposeBag)
     }
     
-//    func fetchUserRecords(fromId:Int,toId:Int) {
-//        recordsLoading.onNext(true)
-//        usecase.userRecords(fromId: fromId, toId: toId)
-//            .subscribe({ [weak self] event in
-//                self?.recordsLoading.onNext(false)
-//                switch event {
-//                case .success(let data):
-//                    self?.currentUserRecrods += data
-//                    self?.userRecords.onNext(data)
-//                case .failure(let error):
-//                    self?.errorMessage.onNext(error.localizedDescription)
-//                }
-//            }).disposed(by: disposeBag)
-//    }
+    func fetchUserRecords(toUserId:Int) {
+        recordsLoading.onNext(true)
+        usecase.myRecordFetch(userid: toUserId)
+            .subscribe({ [weak self] event in
+                self?.recordsLoading.onNext(false)
+                switch event {
+                case .success(let data):
+                    self?.currentUserRecrods = data
+                    self?.userRecords.onNext(data)
+                case .failure(let error):
+                    self?.errorMessage.onNext(error.localizedDescription)
+                }
+            }).disposed(by: disposeBag)
+    }
     
     //follow
     func saveFollow(fromId:Int,toId:Int) {

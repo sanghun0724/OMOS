@@ -33,7 +33,7 @@ class MydjProfileViewController:BaseViewController {
         selfView.tableView.dataSource = self
         self.navigationItem.rightBarButtonItems?.removeAll()
         viewModel.fetchMyDjProfile(fromId: fromId, toId: toId)
-      //  viewModel.fetchUserRecords(fromId: fromId, toId: toId)
+        viewModel.fetchUserRecords(toUserId: toId)
         self.navigationController?.navigationBar.backgroundColor = .mainBlack
         
     }

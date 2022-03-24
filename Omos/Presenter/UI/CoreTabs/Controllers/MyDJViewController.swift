@@ -23,7 +23,6 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
     let viewModel:MyDjViewModel
     let user = UserDefaults.standard.integer(forKey: "user")
     var lastPostId = 0
-    var beforCliked = -1
     var isDjcliked = false 
 
     init(viewModel:MyDjViewModel) {
@@ -96,7 +95,6 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
       
         viewModel.myDjRecord
             .subscribe(onNext: { [weak self] data in
-
                     self?.hasNextPage = self?.lastPostId == self?.viewModel.currentMyDjRecord.last?.recordID ?? 0 ? false : true
                     self?.lastPostId = self?.viewModel.currentMyDjRecord.last?.recordID ?? 0
                     print("hasNext\(self?.hasNextPage)")
