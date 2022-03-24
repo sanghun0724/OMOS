@@ -49,6 +49,21 @@ class MydjProfileViewController:BaseViewController {
         self.navigationController?.navigationBar.backgroundColor = .mainBlack
     }
     
+    private func setNavigationItems() {
+        self.navigationItem.rightBarButtonItems?.removeAll()
+        let reportButton = UIBarButtonItem(image: UIImage(named: "report"), style: .plain, target: self, action: #selector(didTapReportButton))
+        reportButton.tintColor = .white
+        self.navigationItem.rightBarButtonItems = [reportButton]
+    }
+    
+    @objc func didTapReportButton() {
+        let action = UIAlertAction(title: "신고하기", style: .default) { alert in
+        
+        }
+        action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
+        self.presentAlert(title: "", message: "이 DJ를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
+    }
+    
     override func configureUI() {
         super.configureUI()
         self.view.addSubview(selfView)

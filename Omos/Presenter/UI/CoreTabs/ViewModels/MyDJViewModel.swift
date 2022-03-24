@@ -103,6 +103,13 @@ class MyDjViewModel:BaseViewModel {
             }).disposed(by: disposeBag)
     }
     
+    func reportRecord(postId:Int) {
+        usecase.reportRecord(postId: postId)
+            .subscribe({ event in
+                print(event)
+            }).disposed(by: disposeBag)
+    }
+    
     
     init(usecase:RecordsUseCase) {
         self.usecase = usecase

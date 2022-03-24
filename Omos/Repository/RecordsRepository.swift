@@ -31,4 +31,5 @@ protocol RecordsRepository {
     func myDjProfile(fromId:Int,toId:Int) -> Single<MyDjProfileResponse>
     func myDjList(userId:Int) -> Single<[MyDjListResponse]>
     func userRecords(fromId:Int,toId:Int) -> Single<[MyDjResponse]>
+    func reportRecord(postId:Int) -> Single<StateRespone>
 }

@@ -328,4 +328,20 @@ class RecordsRepositoryImpl:RecordsRepository {
         }
     }
     
+    func reportRecord(postId:Int) -> Single<StateRespone> {
+        return Single<StateRespone>.create { [weak self] single in
+            self?.recordAPI.reportRecord(postId: postId,completion: { result in
+                switch result {
+                case .success(let data):
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            })
+            
+            return Disposables.create()
+        }
+    }
+    
 }

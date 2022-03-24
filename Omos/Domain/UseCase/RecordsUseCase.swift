@@ -93,4 +93,8 @@ class RecordsUseCase {
     func userRecords(fromId:Int,toId:Int) -> Single<[MyDjResponse]> {
         return recordsRepository.userRecords(fromId: fromId, toId: toId)
     }
+    
+    func reportRecord(postId:Int) -> Single<StateRespone> {
+        return recordsRepository.reportRecord(postId: postId)
+    }
 }

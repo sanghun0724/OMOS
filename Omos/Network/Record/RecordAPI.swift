@@ -264,4 +264,18 @@ class RecordAPI {
         }
     }
     
+    func reportRecord(postId:Int,completion:@escaping(Result<StateRespone,Error>) -> Void) {
+        AF.request(RecordTarget.reportRecord(postId: postId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<StateRespone>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    
 }

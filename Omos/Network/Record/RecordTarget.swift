@@ -24,6 +24,7 @@ enum RecordTarget {
     case likeRecords(userId:Int)
     case scrapRecords(userId:Int)
     case myProfileRecords(userId:Int)
+    case reportRecord(postId:Int)
 }
 
 extension RecordTarget:TargetType {
@@ -47,6 +48,7 @@ extension RecordTarget:TargetType {
         case .likeRecords: return .get
         case .scrapRecords: return .get
         case .myProfileRecords: return .get
+        case .reportRecord: return .get
         }
     }
     
@@ -66,6 +68,7 @@ extension RecordTarget:TargetType {
         case .likeRecords(let user): return "/select/\(user)/liked-records"
         case .scrapRecords(let user): return "/select/\(user)/scrapped-records"
         case .myProfileRecords(let user): return "select/\(user)/my-records"
+        case .reportRecord(let post): return "/\(post)/report"
         }
     }
     

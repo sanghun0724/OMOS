@@ -48,7 +48,6 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
         bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
-        fetchRecord()
         let filterButton = UIBarButtonItem(image: UIImage(named: "filter"), style: .plain, target: self, action: #selector(didTapfilterButton))
         filterButton.tintColor = .white
         self.navigationItem.rightBarButtonItem = filterButton
@@ -65,7 +64,7 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
-        
+        fetchRecord()
     }
     
     override func viewDidAppear(_ animated: Bool) {
