@@ -19,7 +19,6 @@ enum CreateType {
 
 class CreateViewController:BaseViewController {
     
-    
     let scrollView = UIScrollView()
     let category:String
     private let selfView = CreateView()

@@ -35,6 +35,7 @@ class LoginViewModel: BaseViewModel {
                 UserDefaults.standard.set(data.accessToken, forKey: "access")
                 UserDefaults.standard.set(data.refreshToken, forKey: "refresh")
                 UserDefaults.standard.set(data.userId, forKey: "user")
+                Account.currentUser = UserDefaults.standard.integer(forKey: "user")
                 self?.validSignIn.accept(true)
             case .failure(let error):
                 print(error)

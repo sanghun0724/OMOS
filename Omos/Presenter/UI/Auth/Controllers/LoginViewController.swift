@@ -224,6 +224,7 @@ extension LoginViewController:ASAuthorizationControllerDelegate {
                     UserDefaults.standard.set(token.accessToken, forKey: "access")
                     UserDefaults.standard.set(token.refreshToken, forKey: "refresh")
                     UserDefaults.standard.set(token.userId, forKey: "user")
+                    Account.currentUser = UserDefaults.standard.integer(forKey: "user")
                     let vc = TabBarViewController()
                     vc.modalPresentationStyle = .fullScreen
                     self?.present(vc,animated: true)

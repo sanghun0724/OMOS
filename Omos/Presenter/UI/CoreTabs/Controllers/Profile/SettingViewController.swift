@@ -84,12 +84,9 @@ class SettingViewController:BaseViewController {
         }
         // APPLE 로그아웃 은 각자 해야함 화면 돌려주기만 하기
         //reset UserDefault
-        DispatchQueue.global().sync {
-            resetDefaults()
-            viewModel.logOut(userId: Account.currentUser)
-        }
-      
-        
+        resetDefaults()
+        viewModel.logOut(userId: Account.currentUser)
+        Account.currentUser = -1
         // local
         
     }
