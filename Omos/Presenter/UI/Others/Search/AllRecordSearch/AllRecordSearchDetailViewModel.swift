@@ -17,6 +17,7 @@ class AllRecordSearchDetailViewModel:BaseViewModel {
     let loading = BehaviorSubject<Bool>(value:false)
     let oneMusicRecords = PublishSubject<[OneMusicRecordRespone]>()
     var currentOneMusicRecords:[OneMusicRecordRespone] = []
+    let reportState = PublishSubject<Bool>()
     let errorMessage = BehaviorSubject<String?>(value: nil)
     let isEmpty = BehaviorSubject<Bool>(value:false)
     let usecase:RecordsUseCase
@@ -69,8 +70,13 @@ class AllRecordSearchDetailViewModel:BaseViewModel {
     
     func reportRecord(postId:Int) {
         usecase.reportRecord(postId: postId)
-            .subscribe({ event in
-                print(event)
+            .subscribe({ [weak self] event in
+                switch event {
+                case .success(let data):
+                    self?.reportState.onNext(data.state)
+                case .failure(let error):
+                    self?.errorMessage.onNext(error.localizedDescription)
+                }
             }).disposed(by: disposeBag)
     }
     

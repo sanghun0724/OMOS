@@ -16,6 +16,7 @@ class MyDjProfileViewModel:BaseViewModel {
     let mydjProfile = PublishSubject<MyDjProfileResponse>()
     var currentMydjProfile:MyDjProfileResponse? = nil
     let userRecords = PublishSubject<[MyRecordRespone]>()
+    let userReportState = PublishSubject<Bool>()
     var currentUserRecrods:[MyRecordRespone] = []
     let usecase:RecordsUseCase
     let errorMessage = BehaviorSubject<String?>(value: nil)
@@ -64,6 +65,18 @@ class MyDjProfileViewModel:BaseViewModel {
             .subscribe({ state in
                 print(state)
         NotificationCenter.default.post(name: NSNotification.Name.followCancel, object: nil, userInfo: nil);
+            }).disposed(by: disposeBag)
+    }
+    
+    func userReport(userId:Int) {
+        usecase.userReport(userId: userId)
+            .subscribe({ [weak self] event in
+                switch event {
+                case .success(let data):
+                    self?.userReportState.onNext(data.state)
+                case .failure(let error):
+                    self?.errorMessage.onNext(error.localizedDescription)
+                }
             }).disposed(by: disposeBag)
     }
     

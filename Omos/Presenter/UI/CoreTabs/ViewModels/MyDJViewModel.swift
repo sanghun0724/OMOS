@@ -23,6 +23,7 @@ class MyDjViewModel:BaseViewModel {
     var currentUserRecrods:[MyDjResponse] = []
     let recordsLoading = PublishSubject<Bool>()
     
+    let reportState = PublishSubject<Bool>()
     let usecase:RecordsUseCase
     
     func fetchMyDjRecord(userId:Int,request:MyDjRequest) {
@@ -105,8 +106,13 @@ class MyDjViewModel:BaseViewModel {
     
     func reportRecord(postId:Int) {
         usecase.reportRecord(postId: postId)
-            .subscribe({ event in
-                print(event)
+            .subscribe({ [weak self] event in
+                switch event {
+                case .success(let data):
+                    self?.reportState.onNext(data.state)
+                case .failure(let error):
+                    self?.errorMessage.onNext(error.localizedDescription)
+                }
             }).disposed(by: disposeBag)
     }
     

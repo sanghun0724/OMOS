@@ -32,11 +32,17 @@ class AllRecordViewController: BaseViewController {
         bind()
         viewModel.selectRecordsShow()
         setRightItems()
+        NotificationCenter.default.addObserver(self, selector: #selector(didRecieveReloadNotification), name: NSNotification.Name.reload, object: nil)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
     }
+    
+    @objc func didRecieveReloadNotification() {
+        viewModel.selectRecordsShow()
+    }
+    
     
     func setRightItems() {
         let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(didTapSearchButton))

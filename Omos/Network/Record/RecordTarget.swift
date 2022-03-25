@@ -48,7 +48,7 @@ extension RecordTarget:TargetType {
         case .likeRecords: return .get
         case .scrapRecords: return .get
         case .myProfileRecords: return .get
-        case .reportRecord: return .get
+        case .reportRecord: return .put
         }
     }
     

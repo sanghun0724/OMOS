@@ -30,6 +30,7 @@ extension MyDJViewController:UICollectionViewDataSource,UICollectionViewDelegate
         if cell.djImageView.layer.borderWidth == 1 {
             cell.djImageView.layer.borderWidth = 0
             isDjcliked = false
+            self.viewModel.currentMyDjRecord = [] 
             viewModel.fetchMyDjRecord(userId: Account.currentUser, request: .init(postId: viewModel.currentMyDjRecord.last?.recordID, size: 6))
             self.selfView.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
             return
@@ -136,7 +137,15 @@ extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        guard  let record = viewModel.currentMyDjRecord[safe: indexPath.row] else { return }
+        let record:MyDjResponse
+       
+        if isDjcliked {
+            guard let userRecord = viewModel.currentUserRecrods[safe: indexPath.row] else { return }
+             record = userRecord
+        } else {
+            guard let myDjRecord = viewModel.currentMyDjRecord[safe: indexPath.row] else { return }
+            record = myDjRecord
+        }
       
         if Account.currentUser == record.userID {
             let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
@@ -204,7 +213,7 @@ extension MyDJViewController {
             .asDriver()
             .drive(onNext:{ [weak self] _ in
                 let action = UIAlertAction(title: "신고하기", style: .default) { alert in
-                    print(alert)
+                    self?.viewModel.reportRecord(postId: data.recordID)
                 }
                 action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
                 self?.presentAlert(title: "", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
@@ -271,7 +280,7 @@ extension MyDJViewController {
             .asDriver()
             .drive(onNext:{ [weak self] _ in
                 let action = UIAlertAction(title: "신고하기", style: .default) { alert in
-                    print(alert)
+                    self?.viewModel.reportRecord(postId: data.recordID)
                 }
                 action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
                 self?.presentAlert(title: "", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
@@ -338,7 +347,7 @@ extension MyDJViewController {
             .asDriver()
             .drive(onNext:{ [weak self] _ in
                 let action = UIAlertAction(title: "신고하기", style: .default) { alert in
-                    print(alert)
+                    self?.viewModel.reportRecord(postId: data.recordID)
                 }
                 action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
                 self?.presentAlert(title: "", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)

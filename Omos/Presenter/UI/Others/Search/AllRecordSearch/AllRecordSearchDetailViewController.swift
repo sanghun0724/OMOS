@@ -46,6 +46,11 @@ class AllRecordSearchDetailViewController:BaseViewController , UIScrollViewDeleg
         bottomSheet.delegate = self
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
+        NotificationCenter.default.addObserver(self, selector: #selector(didRecieveReloadNotification), name: NSNotification.Name.reload, object: nil)
+    }
+    
+    @objc func didRecieveReloadNotification() {
+       fetchRecord()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -120,6 +125,12 @@ class AllRecordSearchDetailViewController:BaseViewController , UIScrollViewDeleg
                 self?.fetchRecord()
                 self?.selfView.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
                 self?.navigationItem.rightBarButtonItem?.tintColor = .white
+            }).disposed(by: disposeBag)
+        
+        viewModel.reportState
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.currentOneMusicRecords = []
+                self?.fetchRecord()
             }).disposed(by: disposeBag)
     }
 

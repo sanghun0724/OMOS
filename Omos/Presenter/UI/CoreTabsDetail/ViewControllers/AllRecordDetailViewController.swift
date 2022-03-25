@@ -105,6 +105,13 @@ class AllRecordDetailViewController:BaseViewController {
             .subscribe(onNext: { [weak self] loading in
                 self?.loadingView.isHidden = !loading
             }).disposed(by: disposeBag)
+        
+        viewModel.reportState
+            .subscribe(onNext: { [weak self] _ in
+                NotificationCenter.default.post(name: NSNotification.Name.reload, object: nil, userInfo: nil);
+                self?.navigationController?.popViewController(animated: true)
+            }).disposed(by: disposeBag)
+            
     }
     
     func shortBind(myRecord:DetailRecordResponse) {

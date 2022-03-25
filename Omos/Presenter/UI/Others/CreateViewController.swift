@@ -63,8 +63,6 @@ class CreateViewController:BaseViewController {
         enableScrollWhenKeyboardAppeared(scrollView: scrollView)
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.backgroundColor = .mainBackGround
-        
-        
     }
     
     override func viewDidDisappear(_ animated: Bool) {

@@ -150,7 +150,7 @@ extension AllRecordCateDetailViewController {
             .asDriver()
             .drive(onNext:{ [weak self] _ in
                 let action = UIAlertAction(title: "신고하기", style: .default) { alert in
-                    print(alert)
+                    self?.viewModel.reportRecord(postId: data.recordID)
                 }
                 action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
                 self?.presentAlert(title: "", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
@@ -219,7 +219,7 @@ extension AllRecordCateDetailViewController {
             .asDriver()
             .drive(onNext:{ [weak self] _ in
                 let action = UIAlertAction(title: "신고하기", style: .default) { alert in
-                    print(alert)
+                    self?.viewModel.reportRecord(postId: data.recordID)
                 }
                 action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
                 self?.presentAlert(title: "", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
@@ -285,7 +285,7 @@ extension AllRecordCateDetailViewController {
             .asDriver()
             .drive(onNext:{ [weak self] _ in
                 let action = UIAlertAction(title: "신고하기", style: .default) { alert in
-                    print(alert)
+                    self?.viewModel.reportRecord(postId: data.recordID)
                 }
                 action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
                 self?.presentAlert(title: "", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)

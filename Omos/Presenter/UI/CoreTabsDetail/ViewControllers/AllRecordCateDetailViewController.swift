@@ -43,7 +43,6 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.view.backgroundColor = .mainBackGround
         bind()
         selfView.tableView.delegate = self
@@ -52,6 +51,12 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
         filterButton.tintColor = .white
         self.navigationItem.rightBarButtonItem = filterButton
         bottomSheet.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(didRecieveReloadNotification), name: NSNotification.Name.reload, object: nil)
+       
+    }
+    
+    @objc func didRecieveReloadNotification() {
+        fetchRecord()
     }
     
     @objc func didTapfilterButton() {
@@ -65,6 +70,7 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
         fetchRecord()
+      
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -132,6 +138,12 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
                 self?.fetchRecord()
                 self?.selfView.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
                 self?.navigationItem.rightBarButtonItem?.tintColor = .white
+            }).disposed(by: disposeBag)
+        
+        viewModel.reportState
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.currentCateRecords = []
+                self?.fetchRecord()
             }).disposed(by: disposeBag)
         
     }

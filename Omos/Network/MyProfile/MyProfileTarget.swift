@@ -12,6 +12,7 @@ enum MyProfileTarget {
     case myProfile(userId:Int)
     case updatePassword(PWUpdateRequest)
     case updateProfile(ProfileUpdateRequest)
+    case userReport(userId:Int)
 }
 
 extension MyProfileTarget:TargetType {
@@ -24,6 +25,7 @@ extension MyProfileTarget:TargetType {
         case .myProfile: return .get
         case .updatePassword: return .put
         case .updateProfile: return .put
+        case .userReport: return .put
         }
         
     }
@@ -32,6 +34,7 @@ extension MyProfileTarget:TargetType {
             case .myProfile(let user): return "/\(user)"
             case .updatePassword: return "/update/password"
             case .updateProfile: return "/update/profile"
+            case .userReport(let user): return "/\(user)/report"
             }
         }
         

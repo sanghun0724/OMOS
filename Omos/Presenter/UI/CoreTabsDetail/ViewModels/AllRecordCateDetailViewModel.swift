@@ -18,6 +18,7 @@ class AllRecordCateDetailViewModel:BaseViewModel {
     let loading = BehaviorSubject<Bool>(value:false)
     let cateRecords = BehaviorSubject<[CategoryRespone]>(value: [])
     var currentCateRecords:[CategoryRespone] = []
+    let reportState = PublishSubject<Bool>()
     let errorMessage = BehaviorSubject<String?>(value: nil)
     let usecase:RecordsUseCase
     
@@ -73,8 +74,13 @@ class AllRecordCateDetailViewModel:BaseViewModel {
     
     func reportRecord(postId:Int) {
         usecase.reportRecord(postId: postId)
-            .subscribe({ event in
-                print(event)
+            .subscribe({ [weak self] event in
+                switch event {
+                case .success(let data):
+                    self?.reportState.onNext(data.state)
+                case .failure(let error):
+                    self?.errorMessage.onNext(error.localizedDescription)
+                }
             }).disposed(by: disposeBag)
     }
     

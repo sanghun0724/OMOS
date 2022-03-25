@@ -52,6 +52,9 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(didRecieveFollowNotification), name: NSNotification.Name.follow, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(didRecieveFollowCacelNotification), name: NSNotification.Name.followCancel, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didRecieveReloadNotification), name: NSNotification.Name.reload, object: nil)
+        
 
     }
 //
@@ -59,17 +62,35 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
 //        timer?.invalidate()
 //    }
     
+    @objc func didRecieveReloadNotification() {
+        isDjcliked = false
+        viewModel.fetchMyDjList(userId: Account.currentUser)
+        viewModel.fetchMyDjRecord(userId: Account.currentUser, request: .init(postId: viewModel.currentMyDjRecord.last?.recordID, size: 6))
+        self.selfView.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+    }
+    
     @objc func didRecieveFollowCacelNotification(_ notification: Notification) {
         self.viewModel.fetchMyDjList(userId: Account.currentUser)
+        self.selfView.collectionView.visibleCells.forEach({ cell in
+            if let cell = cell as? MydjCollectionCell {
+                cell.djImageView.layer.borderWidth = 0
+            }
+        })
     }
     
     @objc func didRecieveFollowNotification(_ notification: Notification) {
         self.viewModel.fetchMyDjList(userId: Account.currentUser)
+        self.selfView.collectionView.visibleCells.forEach({ cell in
+            if let cell = cell as? MydjCollectionCell {
+                cell.djImageView.layer.borderWidth = 0
+            }
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = false 
+        self.tabBarController?.tabBar.isHidden = false
+       
     }
 
 
@@ -135,6 +156,18 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
             .subscribe(onNext:{ [weak self] empty in
                 self?.selfView.emptyView.isHidden = !empty
             }).disposed(by: disposeBag)
+        
+        viewModel.reportState
+            .subscribe(onNext: { [weak self] _ in
+                self?.selfView.collectionView.visibleCells.forEach({ cell in
+                    if let cell = cell as? MydjCollectionCell {
+                        cell.djImageView.layer.borderWidth = 0
+                    }
+                })
+                self?.isDjcliked = false
+                self?.viewModel.currentMyDjRecord = []
+                self?.viewModel.fetchMyDjRecord(userId: Account.currentUser, request: .init(postId: self?.viewModel.currentMyDjRecord.last?.recordID, size: 6))
+            }).disposed(by: disposeBag)
     }
 
 
@@ -160,7 +193,7 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
         
         // 스크롤이 테이블 뷰 Offset의 끝에 가게 되면 다음 페이지를 호출
         if offsetY > (contentHeight - height) {
-            print("hasNext222\(self.hasNextPage)")
+         
             if isPaging == false && hasNextPage && !isDjcliked{
                 beginPaging()
             }

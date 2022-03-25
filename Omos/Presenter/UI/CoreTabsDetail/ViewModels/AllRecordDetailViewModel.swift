@@ -13,6 +13,7 @@ class AllRecordDetailViewModel:BaseViewModel {
     let loading = BehaviorSubject<Bool>(value:false)
     let selectDetail = PublishSubject<DetailRecordResponse>()
     var currentSelectDetail:DetailRecordResponse? = nil
+    let reportState = PublishSubject<Bool>()
     let usecase:RecordsUseCase
     let errorMessage = BehaviorSubject<String?>(value: nil)
     
@@ -62,8 +63,13 @@ class AllRecordDetailViewModel:BaseViewModel {
     
     func reportRecord(postId:Int) {
         usecase.reportRecord(postId: postId)
-            .subscribe({ event in
-                print(event)
+            .subscribe({ [weak self] event in
+                switch event {
+                case .success(let data):
+                    self?.reportState.onNext(data.state)
+                case .failure(let error):
+                    self?.errorMessage.onNext(error.localizedDescription)
+                }
             }).disposed(by: disposeBag)
     }
     
