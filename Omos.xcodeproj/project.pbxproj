@@ -40,6 +40,8 @@
 		B6183CD227D895D30035AA06 /* AllRecordSearchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CD127D895D30035AA06 /* AllRecordSearchDetailViewController.swift */; };
 		B6183CD627D8F7490035AA06 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CD527D8F7490035AA06 /* BottomSheetViewController.swift */; };
 		B6183CD827D906300035AA06 /* MyRecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CD727D9062F0035AA06 /* MyRecordDetailViewModel.swift */; };
+		B62A770527F0489600B427D0 /* SotoS3 in Frameworks */ = {isa = PBXBuildFile; productRef = B62A770427F0489600B427D0 /* SotoS3 */; };
+		B62A770727F049A800B427D0 /* AWSHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62A770627F049A800B427D0 /* AWSHelper.swift */; };
 		B630D2FA27C7756A00E66F22 /* MydjTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2F927C7756A00E66F22 /* MydjTableCell.swift */; };
 		B630D2FC27C7761D00E66F22 /* Mydj + Table + Collect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2FB27C7761D00E66F22 /* Mydj + Table + Collect.swift */; };
 		B630D2FF27C78C0E00E66F22 /* BestSearchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2FE27C78C0E00E66F22 /* BestSearchTableCell.swift */; };
@@ -246,6 +248,7 @@
 		B6183CD127D895D30035AA06 /* AllRecordSearchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordSearchDetailViewController.swift; sourceTree = "<group>"; };
 		B6183CD527D8F7490035AA06 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		B6183CD727D9062F0035AA06 /* MyRecordDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordDetailViewModel.swift; sourceTree = "<group>"; };
+		B62A770627F049A800B427D0 /* AWSHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSHelper.swift; sourceTree = "<group>"; };
 		B630D2F927C7756A00E66F22 /* MydjTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MydjTableCell.swift; sourceTree = "<group>"; };
 		B630D2FB27C7761D00E66F22 /* Mydj + Table + Collect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mydj + Table + Collect.swift"; sourceTree = "<group>"; };
 		B630D2FE27C78C0E00E66F22 /* BestSearchTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSearchTableCell.swift; sourceTree = "<group>"; };
@@ -421,6 +424,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21B827FA49CA17F32C953880 /* Pods_Omos.framework in Frameworks */,
+				B62A770527F0489600B427D0 /* SotoS3 in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -809,6 +813,7 @@
 				B68454EB27BE1D9800F1E6B5 /* TargetType.swift */,
 				B68454ED27BE228800F1E6B5 /* HTTPHeaderField.swift */,
 				B68454EF27BE2D7B00F1E6B5 /* MyRequestInterceptor.swift */,
+				B62A770627F049A800B427D0 /* AWSHelper.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1066,6 +1071,9 @@
 			dependencies = (
 			);
 			name = Omos;
+			packageProductDependencies = (
+				B62A770427F0489600B427D0 /* SotoS3 */,
+			);
 			productName = Omos;
 			productReference = B609137C27AD3A7C00B439C3 /* Omos.app */;
 			productType = "com.apple.product-type.application";
@@ -1118,6 +1126,9 @@
 				ko,
 			);
 			mainGroup = B609137327AD3A7C00B439C3;
+			packageReferences = (
+				B62A770327F0489600B427D0 /* XCRemoteSwiftPackageReference "soto" */,
+			);
 			productRefGroup = B609137D27AD3A7C00B439C3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1224,6 +1235,7 @@
 				B650874B27AFC5EF0020D2C1 /* AllRecordView.swift in Sources */,
 				B650873B27AF94C60020D2C1 /* TabBarViewController.swift in Sources */,
 				B642344D27DD07B100C1083D /* MyDJViewModel.swift in Sources */,
+				B62A770727F049A800B427D0 /* AWSHelper.swift in Sources */,
 				B646051027CB3A530022E062 /* MydjProfileViewController.swift in Sources */,
 				B650874327AF96E80020D2C1 /* ProfileViewController.swift in Sources */,
 				B6D3685627B7A510008B5635 /* NicknameViewController.swift in Sources */,
@@ -1679,6 +1691,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B62A770327F0489600B427D0 /* XCRemoteSwiftPackageReference "soto" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/soto-project/soto";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B62A770427F0489600B427D0 /* SotoS3 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B62A770327F0489600B427D0 /* XCRemoteSwiftPackageReference "soto" */;
+			productName = SotoS3;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B609137427AD3A7C00B439C3 /* Project object */;
 }

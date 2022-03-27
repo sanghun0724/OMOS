@@ -8,8 +8,9 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import RxGesture
 import YPImagePicker
+
+
 
 class ProfileChangeViewController:BaseViewController {
     
@@ -42,7 +43,7 @@ class ProfileChangeViewController:BaseViewController {
         }
         
     }
-    
+
     
     
     func bind() {
