@@ -23,6 +23,7 @@ class AllRecordCollectionCell:UICollectionViewCell {
         let imageView = UIImageView(image: UIImage(named: "test"))
         imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .mainBackGround
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -82,6 +83,7 @@ class AllRecordCollectionCell:UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
+        backImageView.image = nil
     }
     
     override init(frame: CGRect) {
@@ -107,7 +109,7 @@ class AllRecordCollectionCell:UICollectionViewCell {
         self.detailInfo = record
         descLabel.text = record.recordTitle
         albumImageView.setImage(with: record.music.albumImageURL)
-        backImageView.setImage(with: record.music.albumImageURL)
+        backImageView.setImage(with: record.recordImageURL ?? "")
         nameLabel.text = record.nickname
         titleLabel.text = record.music.albumTitle
         subTitleLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}
@@ -117,7 +119,7 @@ class AllRecordCollectionCell:UICollectionViewCell {
         self.homeInfo = record
         descLabel.text = record.recordTitle
         albumImageView.setImage(with: record.music.albumImageURL)
-        backImageView.setImage(with: record.music.albumImageURL) //바까야함 
+        backImageView.setImage(with: record.recordImageURL) //바까야함 
         nameLabel.text = record.nickname
         titleLabel.text = record.music.albumTitle
         subTitleLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}

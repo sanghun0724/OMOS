@@ -26,17 +26,19 @@ struct SelectResponse: Codable {
 // MARK: - ALine
 struct ALine: Codable {
     let music: Music
-    let recordTitle: String
-    let userID: Int
-    let nickname: String
-    let recordID: Int
+        let nickname: String
+        let recordID: Int
+        let recordImageURL: String?
+        let recordTitle: String
+        let userID: Int
 
-    enum CodingKeys: String, CodingKey {
-        case music, recordTitle
-        case userID = "userId"
-        case nickname
-        case recordID = "recordId"
-    }
+        enum CodingKeys: String, CodingKey {
+            case music, nickname
+            case recordID = "recordId"
+            case recordImageURL = "recordImageUrl"
+            case recordTitle
+            case userID = "userId"
+        }
 }
 
 // MARK: - Music

@@ -277,7 +277,7 @@ class AllRecordDetailViewController:BaseViewController {
         selfLongView.musicTitleLabel.text = myRecord.music.musicTitle
         selfLongView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
         selfLongView.circleImageView.setImage(with: myRecord.music.albumImageURL)
-        //        selfView.backImageView.setImage(with: <#T##String#>)
+        selfLongView.backImageView.setImage(with: myRecord.recordImageURL ?? "")
         selfLongView.titleLabel.text = myRecord.recordTitle
         selfLongView.createdLabel.text = myRecord.createdDate.toDate()
         selfLongView.likeCountLabel.text = String(myRecord.likeCnt)
@@ -314,7 +314,7 @@ class AllRecordDetailViewController:BaseViewController {
         selfShortView.musicTitleLabel.text = myRecord.music.musicTitle
         selfShortView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
         selfShortView.circleImageView.setImage(with: myRecord.music.albumImageURL)
-        //        selfView.backImageView.setImage(with: <#T##String#>)
+        selfShortView.backImageView.setImage(with: myRecord.recordImageURL ?? "")
         selfShortView.titleLabel.text = myRecord.recordTitle
         selfShortView.createdLabel.text = myRecord.createdDate.toDate()
         selfShortView.likeCountLabel.text = String(myRecord.likeCnt)
@@ -365,7 +365,7 @@ class AllRecordDetailViewController:BaseViewController {
         selfLyricsView.musicTitleLabel.text = myRecord.music.musicTitle
         selfLyricsView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
         selfLyricsView.circleImageView.setImage(with: myRecord.music.albumImageURL)
-        //        selfView.backImageView.setImage(with: <#T##String#>)
+        selfLyricsView.imageView.setImage(with: myRecord.recordImageURL ?? "")
         selfLyricsView.titleTextView.text = myRecord.recordTitle
         selfLyricsView.createdField.text = myRecord.createdDate.toDate()
         selfLyricsView.likeCountLabel.text = String(myRecord.likeCnt)

@@ -34,6 +34,7 @@ class ProfileViewController: BaseViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.backgroundColor = .mainBlack
         self.tabBarController?.tabBar.isHidden = false
+        
         viewModel.allFetch()
     }
     

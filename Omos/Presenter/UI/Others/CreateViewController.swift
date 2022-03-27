@@ -24,6 +24,8 @@ class CreateViewController:BaseViewController {
     private let selfView = CreateView()
     let viewModel:CreateViewModel
     let type:CreateType
+    lazy var awsHelper = AWSS3Helper()
+    
     
     init(viewModel:CreateViewModel,category:String,type:CreateType) {
         self.viewModel = viewModel
@@ -85,7 +87,9 @@ class CreateViewController:BaseViewController {
               }
         
         if type == .create {
-            viewModel.saveRecord(cate: getCate(cate: category), content: text, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: titleText, userid: Account.currentUser)
+            viewModel.saveRecord(cate: getCate(cate: category), content: text, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: titleText, userid: Account.currentUser,recordImageURL: "https://omos-image.s3.ap-northeast-2.amazonaws.com/record/\(viewModel.curTime).png")
+            
+            print("check Point\(viewModel.curTime)")
         } else {
             var recordContent = ""
             if  selfView.mainTextView.text != viewModel.modifyDefaultModel?.recordTitle {
@@ -398,6 +402,10 @@ extension CreateViewController: UITextViewDelegate {
 extension CreateViewController:CropViewControllerDelegate {
     func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation, cropInfo: CropInfo) {
         selfView.imageView.image = cropped
+        awsHelper.uploadImage(cropped, sender: self, imageName: "record/\(viewModel.curTime)" , type: .record) { _ in
+           
+        }
+        print("check Point\(viewModel.curTime)")
         self.dismiss(animated: true,completion: nil)
         self.tabBarController?.tabBar.isHidden = true
     }

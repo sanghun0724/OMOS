@@ -13,7 +13,7 @@ import RxRelay
 class TabBarViewController: UITabBarController {
     
     static var titles:[(String,String)] = []
-    lazy var awss3Helper = AWSS3Helper()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,13 +21,10 @@ class TabBarViewController: UITabBarController {
         if #available(iOS 15.0, *) {
             UITableView.appearance().sectionHeaderTopPadding = 0
         }
-        
+       
      
         // upload to S3
-        self.awss3Helper.uploadImage(UIImage(systemName: "person")!, sender: self) { (fileName) in
-            print("@@@@@")
-            print(fileName)
-        }
+       
         
     }
     

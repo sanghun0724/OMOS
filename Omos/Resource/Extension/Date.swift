@@ -26,4 +26,7 @@ extension Date{
         dateFormatter.dateFormat = "d일 a HH시"
         return dateFormatter.string(from: self)
     }
+    static var currentTimeStamp: Int64{
+            return Int64(Date().timeIntervalSince1970 * 1000)
+        }
 }

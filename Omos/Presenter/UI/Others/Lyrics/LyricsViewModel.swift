@@ -9,6 +9,7 @@ import RxSwift
 
 class LyricsViewModel:BaseViewModel {
     
+    let curTime = "\(Account.currentUser)\(Date.currentTimeStamp)"
     var lyricsStringArray:[String] = []
     var modifyDefaultModel:DetailRecordResponse? = nil //Lyrics로 바꿔야함
     var defaultModel:recordSaveDefaultModel = .init(musicId: "", imageURL: "", musicTitle: "", subTitle: "") // create할때 있는놈들
@@ -24,9 +25,9 @@ class LyricsViewModel:BaseViewModel {
         
     }
     
-    func saveRecord(cate:String, content:String, isPublic:Bool, musicId: String, title: String, userid: Int) {
+    func saveRecord(cate:String, content:String, isPublic:Bool, musicId: String, title: String, userid: Int,recordImageUrl:String) {
         loading.onNext(false)
-        usecase.save(cate: cate, content: content, isPublic: isPublic, musicId: musicId, title: title, userid: userid)
+        usecase.save(cate: cate, content: content, isPublic: isPublic, musicId: musicId, title: title, userid: userid,recordImageUrl: recordImageUrl)
             .subscribe({ [weak self] event in
                 self?.loading.onNext(true)
                 switch event {

@@ -9,13 +9,14 @@ import UIKit
 import RxSwift
 import RxCocoa
 import YPImagePicker
-
+import Kingfisher
 
 
 class ProfileChangeViewController:BaseViewController {
     
     let selfView = ProfileChangView()
     let viewModel:ProfileViewModel
+    lazy var awss3Helper = AWSS3Helper()
     
     init(viewModel:ProfileViewModel) {
         self.viewModel = viewModel
@@ -30,6 +31,10 @@ class ProfileChangeViewController:BaseViewController {
         super.viewDidLoad()
         bind()
         selfView.nickNameField.text = viewModel.currentMyProfile?.profile.nickname
+        guard let image = viewModel.currentMyProfile?.profile.profileURL else {
+            return
+        }
+        selfView.profileImageView.setImage(with: image)
     }
     
     override func configureUI() {
@@ -76,8 +81,15 @@ class ProfileChangeViewController:BaseViewController {
                     print("alert")
                     return
                 }
-                let request = ProfileUpdateRequest(nickname:text,profileUrl: "" ,userId:Account.currentUser)
+                let imageUrl = "https://omos-image.s3.ap-northeast-2.amazonaws.com/profile/\(Account.currentUser).png"
+                let request = ProfileUpdateRequest(nickname:text,profileUrl: imageUrl ,userId:Account.currentUser)
                 self?.viewModel.updateProfile(request:request)
+    
+                if ImageCache.default.isCached(forKey: imageUrl) {
+                              print("Image is cached")
+                              ImageCache.default.removeImage(forKey: imageUrl)
+                     }
+                
                        }).disposed(by: disposeBag)
         
         viewModel.updateProfileState
@@ -107,6 +119,12 @@ class ProfileChangeViewController:BaseViewController {
             if let photo = items.singlePhoto {
                 print(photo.image) // Final image selected by the user
                 self.selfView.profileImageView.image = photo.image
+                self.awss3Helper.uploadImage(photo.image, sender: self, imageName: "profile/\(Account.currentUser)",type:.profile) { _ in
+                    DispatchQueue.main.async {
+                        self.selfView.loadingView.isHidden = true
+                    }
+                }
+                self.selfView.loadingView.isHidden = false
                 picker.dismiss(animated: true, completion: nil)
             }
             if cancelled {
@@ -129,7 +147,6 @@ class ProfileChangView:BaseView {
         let view = UIImageView(image:UIImage(named: "profile"))
         view.clipsToBounds = true
         view.contentMode = .scaleAspectFill
-        view.isHidden = true
         return view
     }()
     
@@ -138,7 +155,6 @@ class ProfileChangView:BaseView {
         button.setImage(UIImage(systemName: "camera"), for: .normal)
         button.backgroundColor = .mainGrey6
         button.tintColor = .white
-        button.isHidden = true
         return button
     }()
     
@@ -181,6 +197,8 @@ class ProfileChangView:BaseView {
         return label
     }()
     
+    let loadingView = LoadingView()
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -201,6 +219,7 @@ class ProfileChangView:BaseView {
         self.addSubview(nickNameField)
         self.addSubview(buttonView)
         self.addSubview(warningLabel)
+        self.addSubview(loadingView)
         
         profileImageView.snp.makeConstraints { make in
             make.width.equalToSuperview().multipliedBy(0.256)
@@ -216,8 +235,8 @@ class ProfileChangView:BaseView {
         
         mentionLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
-          //  make.top.equalTo(profileImageView.snp.bottom).offset(34)
-            make.top.equalToSuperview().offset(34)
+            make.top.equalTo(profileImageView.snp.bottom).offset(34)
+          //  make.top.equalToSuperview().offset(34)
             mentionLabel.sizeToFit()
         }
         
@@ -239,6 +258,11 @@ class ProfileChangView:BaseView {
             make.bottom.equalToSuperview().offset(-34)
         }
         
+        loadingView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        loadingView.isHidden = true
         
     }
 }

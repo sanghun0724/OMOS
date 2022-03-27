@@ -29,7 +29,8 @@ struct MyRecordRespone: Codable {
 struct SaveRequest: Codable { // add imageURL or image data using form - data
         let category: String
         let isPublic: Bool
-        let musicID, recordContents, recordImageURL, recordTitle: String
+        let musicID, recordContents, recordTitle: String
+        let recordImageURL: String?
         let userID: Int
 
         enum CodingKeys: String, CodingKey {

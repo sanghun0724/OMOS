@@ -26,6 +26,7 @@ class LyricsPasteCreateViewController:BaseViewController {
     var totalString = 0
     var textTagCount = 1
     var textCellsArray:[Int]
+    lazy var awsHelper = AWSS3Helper()
     
     init(viewModel:LyricsViewModel,type:CreateType) {
         self.viewModel = viewModel
@@ -91,7 +92,7 @@ class LyricsPasteCreateViewController:BaseViewController {
         }
         
         if type == .create {
-            viewModel.saveRecord(cate: "LYRICS", content: content, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title:titleText , userid: Account.currentUser)
+            viewModel.saveRecord(cate: "LYRICS", content: content, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title:titleText , userid: Account.currentUser,recordImageUrl: "https://omos-image.s3.ap-northeast-2.amazonaws.com/record/\(viewModel.curTime).png")
         } else {
             
             viewModel.updateRecord(postId: viewModel.modifyDefaultModel?.recordID ?? 0, request: .init(contents: content, title: selfView.titleTextView.text,isPublic: !(selfView.lockButton.isSelected),recordImageUrl: viewModel.modifyDefaultModel?.recordImageURL ?? "" ))
@@ -331,6 +332,9 @@ extension LyricsPasteCreateViewController: UITextViewDelegate {
 extension LyricsPasteCreateViewController:CropViewControllerDelegate {
     func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation, cropInfo: CropInfo) {
         selfView.imageView.image = cropped
+        awsHelper.uploadImage(cropped, sender: self, imageName: "record/\(viewModel.curTime)" , type: .record) { _ in
+           
+        }
         self.dismiss(animated: true,completion: nil)
         self.tabBarController?.tabBar.isHidden = true
     }

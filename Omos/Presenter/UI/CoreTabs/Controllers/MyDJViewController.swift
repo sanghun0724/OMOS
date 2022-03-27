@@ -76,6 +76,8 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
                 cell.djImageView.layer.borderWidth = 0
             }
         })
+        isDjcliked = false
+        viewModel.fetchMyDjRecord(userId: Account.currentUser, request: .init(postId: viewModel.currentMyDjRecord.last?.recordID, size: 6))
     }
     
     @objc func didRecieveFollowNotification(_ notification: Notification) {
@@ -85,6 +87,8 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
                 cell.djImageView.layer.borderWidth = 0
             }
         })
+        isDjcliked = false
+        viewModel.fetchMyDjRecord(userId: Account.currentUser, request: .init(postId: viewModel.currentMyDjRecord.last?.recordID, size: 6))
     }
     
     override func viewWillAppear(_ animated: Bool) {

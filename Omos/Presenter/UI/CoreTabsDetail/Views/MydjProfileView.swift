@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import RxSwift
+import Kingfisher
 
 class MydjProfieView:BaseView {
     
@@ -128,6 +129,7 @@ class MydjProfileHeader:UITableViewHeaderFooterView {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        profileImageView.image = nil
         disposeBag = DisposeBag()
     }
     
@@ -258,17 +260,21 @@ class MydjProfileHeader:UITableViewHeaderFooterView {
     }
     
     func configureMyProfile(profile:MyDjProfileResponse) {
-        profileLabel.text = profile.profile.nickname
-        followerCountLabel.text = "\(profile.count.followerCount)"
-        followingCountLabel.text = "\(profile.count.followingCount)"
-        recordCountLabel.text = "\(profile.count.recordsCount)"
 
-        guard let image = profile.profile.profileURL else {
+        guard let imageUrl = profile.profile.profileURL else {
             profileImageView.image = UIImage(named: "albumCover")
             print("default")
             return
         }
-        profileImageView.setImage(with: image)
+//        let url = URL(string:imageUrl)
+//        let data = try! Data(contentsOf: url!)
+//        profileImageView.image = UIImage(data: data)
+        //profileImageView.setImageNocache(with: imageUrl)
+        profileImageView.setImage(with: imageUrl)
+        profileLabel.text = profile.profile.nickname
+        followerCountLabel.text = "\(profile.count.followerCount)"
+        followingCountLabel.text = "\(profile.count.followingCount)"
+        recordCountLabel.text = "\(profile.count.recordsCount)"
     }
     
 }

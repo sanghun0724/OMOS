@@ -395,13 +395,15 @@ class MyRecordDetailViewController:BaseViewController {
         selfView.musicTitleLabel.text = myRecord.music.musicTitle
         selfView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
         selfView.circleImageView.setImage(with: myRecord.music.albumImageURL)
-        //        selfView.backImageView.setImage(with: <#T##String#>)
+        selfView.backImageView.setImage(with: myRecord.recordImageURL ?? "")
         selfView.titleLabel.text = myRecord.recordTitle
         selfView.createdLabel.text = myRecord.createdDate.toDate()
         selfView.likeCountLabel.text = String(myRecord.likeCnt)
         selfView.scrapCountLabel.text = String(myRecord.scrapCnt)
         selfView.cateLabel.text =  " | \(myRecord.category.getReverseCate() )"
         selfView.nicknameLabel.text = myRecord.nickname
+        print("herererr")
+        print(myRecord)
         
         if myRecord.isPublic {
             selfView.lockButton.setImage(UIImage(named: "unlock"), for: .normal)
@@ -428,7 +430,7 @@ class MyRecordDetailViewController:BaseViewController {
         selflongView.myView.musicTitleLabel.text = myRecord.music.musicTitle
         selflongView.myView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
         selflongView.myView.circleImageView.setImage(with: myRecord.music.albumImageURL)
-        //        selfView.backImageView.setImage(with: <#T##String#>)
+        selflongView.myView.backImageView.setImage(with: myRecord.recordImageURL ?? "")
         selflongView.myView.titleLabel.text = myRecord.recordTitle
         selflongView.myView.createdLabel.text = myRecord.createdDate.toDate()
         selflongView.myView.likeCountLabel.text = String(myRecord.likeCnt)
@@ -486,7 +488,7 @@ class MyRecordDetailViewController:BaseViewController {
         selfLyricsView.musicTitleLabel.text = myRecord.music.musicTitle
         selfLyricsView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
         selfLyricsView.circleImageView.setImage(with: myRecord.music.albumImageURL)
-        //        selfView.backImageView.setImage(with: <#T##String#>)
+        selfLyricsView.imageView.setImage(with: myRecord.recordImageURL ?? "")
         selfLyricsView.titleTextView.text = myRecord.recordTitle
         selfLyricsView.createdField.text = myRecord.createdDate.toDate()
         selfLyricsView.likeCountLabel.text = String(myRecord.likeCnt)

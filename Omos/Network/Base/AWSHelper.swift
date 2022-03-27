@@ -14,29 +14,44 @@ struct AWSConstants {
     let bucket = "omos-image"
     let region:Region = .apnortheast2
     let awsClient = AWSClient(
-        credentialProvider: .static(accessKeyId: "", secretAccessKey: ""),
+        credentialProvider: .static(accessKeyId: "AKIAVIJ5RLU3AVRPOYOA", secretAccessKey: ""),
         httpClientProvider: .createNew
     )
 }
 
+enum awsType {
+    case profile
+    case record
+}
+
 class AWSS3Helper {
-    
-   
     
     let bucket = AWSConstants().bucket
     let s3 = S3(client: AWSConstants().awsClient, region: AWSConstants().region)
         
-    func uploadImage(_ image: UIImage, sender: UIViewController, completion: @escaping (String?) -> ()) {
+    func uploadImage(_ image: UIImage, sender: UIViewController,imageName:String,type:awsType, completion: @escaping (String?) -> ()) {
         
         // check internet connection
+        var imageData:Data = .init(count: 0)
         
-        guard let imageData = image.jpegData(compressionQuality: 1) else {
-            completion(nil)
-            return
+        if type == .profile {
+            guard let data = image.jpegData(compressionQuality: 0.1) else {
+                completion(nil)
+                return
+            }
+            imageData = data
+        } else if type == .record {
+            guard let data = image.jpegData(compressionQuality: 0.4) else {
+                completion(nil)
+                return
+            }
+            imageData = data
         }
+      
+        
         
         let uuid = UUID().uuidString
-        let fileName = "\(uuid).jpeg"
+        let fileName = "\(imageName).png"
         
         // Put an Object
         let putObjectRequest = S3.PutObjectRequest(acl: .publicRead,
@@ -53,7 +68,7 @@ class AWSS3Helper {
         })
         
         futureOutput.whenFailure({ (error) in
-            print(error)
+            print(error.localizedDescription)
             completion(nil)
         })
         
