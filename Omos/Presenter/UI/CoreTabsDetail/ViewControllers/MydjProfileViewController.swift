@@ -57,13 +57,13 @@ class MydjProfileViewController:BaseViewController {
     }
     
     @objc func didTapReportButton() {
-        let action = UIAlertAction(title: "신고하기", style: .default) {[weak self] alert in
+        let action = UIAlertAction(title: "차단하기", style: .default) {[weak self] alert in
             guard let id = self?.toId else { return }
             print("userId입니다:\(id)")
             self?.viewModel.userReport(userId: id)
         }
         action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
-        self.presentAlert(title: "", message: "이 DJ를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
+        self.presentAlert(title: "", message: "이 DJ를 차단하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
     }
     
     override func configureUI() {

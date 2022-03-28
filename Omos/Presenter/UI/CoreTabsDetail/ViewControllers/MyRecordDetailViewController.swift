@@ -49,9 +49,7 @@ class MyRecordDetailViewController:BaseViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        selfView.nicknameLabel.isHidden = true
-        selflongView.myView.nicknameLabel.isHidden = true
-        selfLyricsView.nicknameLabel.isHidden = true
+    
     }
     
     

@@ -47,7 +47,7 @@ class AllRecordCateShortDetailCell:UITableViewCell {
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
         myView.circleImageView.setImage(with: record.music.albumImageURL)
-        //myView.myView.backImageView.setImage(with: ) 추후 추가되면 삽입
+        myView.backImageView.setImage(with: record.recordImageURL ?? "")
         myView.titleLabel.text = record.recordTitle
         myView.mainLabelView.text = record.recordContents
         myView.createdLabel.text = record.createdDate.toDate()
@@ -71,7 +71,7 @@ class AllRecordCateShortDetailCell:UITableViewCell {
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
         myView.circleImageView.setImage(with: record.music.albumImageURL)
-        //myView.myView.backImageView.setImage(with: ) 추후 추가되면 삽입
+        myView.backImageView.setImage(with:record.recordImageURL ?? "" )
         myView.titleLabel.text = record.recordTitle
         myView.mainLabelView.text = record.recordContents
         myView.createdLabel.text = record.createdDate.toDate()
@@ -94,7 +94,7 @@ class AllRecordCateShortDetailCell:UITableViewCell {
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
         myView.circleImageView.setImage(with: record.music.albumImageURL)
-        //myView.myView.backImageView.setImage(with: ) 추후 추가되면 삽입
+        myView.backImageView.setImage(with: record.recordImageURL ?? "")
         myView.titleLabel.text = record.recordTitle
         myView.mainLabelView.text = record.recordContents
         myView.createdLabel.text = record.createdDate.toDate()

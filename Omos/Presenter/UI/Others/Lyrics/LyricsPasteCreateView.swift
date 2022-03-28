@@ -61,7 +61,6 @@ class LyricsPasteCreateView: BaseView {
     let imageAddButton:UIButton = {
        let button = UIButton()
         button.setBackgroundImage(UIImage(named: "addImage"), for: .normal)
-        button.isHidden = true
         return button
     }()
     

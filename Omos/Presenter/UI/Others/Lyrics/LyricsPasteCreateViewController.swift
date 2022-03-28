@@ -13,7 +13,7 @@ import YPImagePicker
 import Mantis
 import Combine
 import KakaoSDKUser
-
+import Kingfisher
 
 class LyricsPasteCreateViewController:BaseViewController {
     
@@ -94,7 +94,10 @@ class LyricsPasteCreateViewController:BaseViewController {
         if type == .create {
             viewModel.saveRecord(cate: "LYRICS", content: content, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title:titleText , userid: Account.currentUser,recordImageUrl: "https://omos-image.s3.ap-northeast-2.amazonaws.com/record/\(viewModel.curTime).png")
         } else {
-            
+            if ImageCache.default.isCached(forKey: viewModel.modifyDefaultModel?.recordImageURL ?? "") {
+                          print("Image is cached")
+                          ImageCache.default.removeImage(forKey: viewModel.modifyDefaultModel?.recordImageURL ?? "")
+                 }
             viewModel.updateRecord(postId: viewModel.modifyDefaultModel?.recordID ?? 0, request: .init(contents: content, title: selfView.titleTextView.text,isPublic: !(selfView.lockButton.isSelected),recordImageUrl: viewModel.modifyDefaultModel?.recordImageURL ?? "" ))
         }
     }
@@ -157,8 +160,9 @@ class LyricsPasteCreateViewController:BaseViewController {
         selfView.subMusicInfoLabel.text = viewModel.modifyDefaultModel?.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
         selfView.titleTextView.text = viewModel.modifyDefaultModel?.recordTitle
         selfView.titleTextView.textColor = .white
-        selfView.remainTitle.text =  "\(viewModel.modifyDefaultModel?.recordTitle.count)/36"
-        selfView.remainTextCount.text = "\(viewModel.modifyDefaultModel?.recordContents.count)/380"
+        selfView.imageView.setImage(with: viewModel.modifyDefaultModel?.recordImageURL ?? "")
+        selfView.remainTitleCount.text =  "\(viewModel.modifyDefaultModel?.recordTitle.count ?? 0)/36"
+        selfView.remainTextCount.text = "\(viewModel.modifyDefaultModel?.recordContents.count ?? 0)/380"
         
     }
     
@@ -332,7 +336,19 @@ extension LyricsPasteCreateViewController: UITextViewDelegate {
 extension LyricsPasteCreateViewController:CropViewControllerDelegate {
     func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation, cropInfo: CropInfo) {
         selfView.imageView.image = cropped
-        awsHelper.uploadImage(cropped, sender: self, imageName: "record/\(viewModel.curTime)" , type: .record) { _ in
+        if type == .create {
+            awsHelper.uploadImage(cropped, sender: self, imageName: "record/\(viewModel.curTime)" , type: .record) { _ in
+               
+            }
+        } else {//711648447384992.png
+            guard let str = viewModel.modifyDefaultModel?.recordImageURL else { return }
+            let startIndex = str.index(str.endIndex, offsetBy: -19)
+            let endIndex = str.index(str.endIndex, offsetBy: -4)
+            let defualtUrl = String(str[startIndex..<endIndex])
+            
+            awsHelper.uploadImage(cropped, sender: self, imageName: "record/\(defualtUrl)" , type: .record) { _ in
+
+            }
            
         }
         self.dismiss(animated: true,completion: nil)

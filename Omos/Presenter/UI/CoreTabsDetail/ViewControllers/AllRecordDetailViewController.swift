@@ -47,13 +47,11 @@ class AllRecordDetailViewController:BaseViewController {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = false
+       
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        selfLongView.nicknameLabel.isHidden = true
-        selfShortView.nicknameLabel.isHidden = true
-        selfShortView.nicknameLabel.isHidden = true
     }
     
     private func setNavigationItems() {

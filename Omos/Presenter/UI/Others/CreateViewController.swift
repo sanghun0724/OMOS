@@ -11,6 +11,7 @@ import RxCocoa
 import SnapKit
 import YPImagePicker
 import Mantis
+import Kingfisher
 
 enum CreateType {
     case modify
@@ -87,7 +88,9 @@ class CreateViewController:BaseViewController {
               }
         
         if type == .create {
-            viewModel.saveRecord(cate: getCate(cate: category), content: text, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: titleText, userid: Account.currentUser,recordImageURL: "https://omos-image.s3.ap-northeast-2.amazonaws.com/record/\(viewModel.curTime).png")
+            var imageUrl = "https://omos-image.s3.ap-northeast-2.amazonaws.com/record/\(viewModel.curTime).png"
+            viewModel.saveRecord(cate: getCate(cate: category), content: text, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: titleText, userid: Account.currentUser,recordImageURL: imageUrl )
+          
             
             print("check Point\(viewModel.curTime)")
         } else {
@@ -98,6 +101,10 @@ class CreateViewController:BaseViewController {
                 recordContent = selfView.mainfullTextView.text
             }
             
+            if ImageCache.default.isCached(forKey: viewModel.modifyDefaultModel?.recordImageURL ?? "") {
+                          print("Image is cached")
+                          ImageCache.default.removeImage(forKey: viewModel.modifyDefaultModel?.recordImageURL ?? "")
+                 }
             viewModel.updateRecord(postId: viewModel.modifyDefaultModel?.recordID ?? 0, request: .init(contents: recordContent, title: selfView.titleTextView.text,isPublic:  !(selfView.lockButton.isSelected),recordImageUrl: viewModel.modifyDefaultModel?.recordImageURL ?? "" ))
         }
         
@@ -137,6 +144,7 @@ class CreateViewController:BaseViewController {
         selfView.titleTextView.text = viewModel.modifyDefaultModel?.recordTitle
         selfView.mainTextView.text = viewModel.modifyDefaultModel?.recordContents
         selfView.mainfullTextView.text = viewModel.modifyDefaultModel?.recordContents
+        selfView.imageView.setImage(with: viewModel.modifyDefaultModel?.recordImageURL ?? "")
         selfView.mainTextView.textColor = .white
         selfView.mainfullTextView.textColor = .white
         selfView.titleTextView.textColor = .white
@@ -203,6 +211,10 @@ class CreateViewController:BaseViewController {
             .bind(to: selfView.lockButton.rx.isSelected)
             .disposed(by: disposeBag)
         
+        selfView.stickerImageView.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                self?.selfView.stickerChoiceView.isHidden = false
+            }).disposed(by: disposeBag)
     }
     
     
@@ -402,10 +414,25 @@ extension CreateViewController: UITextViewDelegate {
 extension CreateViewController:CropViewControllerDelegate {
     func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation, cropInfo: CropInfo) {
         selfView.imageView.image = cropped
-        awsHelper.uploadImage(cropped, sender: self, imageName: "record/\(viewModel.curTime)" , type: .record) { _ in
+        
+        if type == .create {
+            awsHelper.uploadImage(cropped, sender: self, imageName: "record/\(viewModel.curTime)" , type: .record) { _ in
+               
+            }
+        } else {//711648447384992.png
+            guard let str = viewModel.modifyDefaultModel?.recordImageURL else { return }
+            let startIndex = str.index(str.endIndex, offsetBy: -19)
+            let endIndex = str.index(str.endIndex, offsetBy: -4)
+            let defualtUrl = String(str[startIndex..<endIndex])
+            
+            awsHelper.uploadImage(cropped, sender: self, imageName: "record/\(defualtUrl)" , type: .record) { _ in
+
+            }
            
         }
-        print("check Point\(viewModel.curTime)")
+        
+       
+       
         self.dismiss(animated: true,completion: nil)
         self.tabBarController?.tabBar.isHidden = true
     }

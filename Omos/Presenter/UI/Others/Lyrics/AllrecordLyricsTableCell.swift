@@ -84,7 +84,7 @@ class AllrecordLyricsTableCell:UITableViewCell {
         selfView.musicTitleLabel.text = record.music.musicTitle
         selfView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
         selfView.circleImageView.setImage(with: record.music.albumImageURL)
-        //myView.myView.backImageView.setImage(with: ) 추후 추가되면 삽입
+        selfView.imageView.setImage(with: record.recordImageURL ?? "")
         selfView.titleTextView.text = record.recordTitle
         self.lyricsText = record.recordContents
         selfView.createdField.text = record.createdDate.toDate()
@@ -110,7 +110,7 @@ class AllrecordLyricsTableCell:UITableViewCell {
         selfView.musicTitleLabel.text = record.music.musicTitle
         selfView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
         selfView.circleImageView.setImage(with: record.music.albumImageURL)
-        //myView.myView.backImageView.setImage(with: ) 추후 추가되면 삽입
+        selfView.imageView.setImage(with: record.recordImageURL ?? "")
         selfView.titleTextView.text = record.recordTitle
         self.lyricsText = record.recordContents
         selfView.createdField.text = record.createdDate.toDate()
@@ -134,7 +134,7 @@ class AllrecordLyricsTableCell:UITableViewCell {
         selfView.musicTitleLabel.text = record.music.musicTitle
         selfView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
         selfView.circleImageView.setImage(with: record.music.albumImageURL)
-        //myView.myView.backImageView.setImage(with: ) 추후 추가되면 삽입
+        selfView.imageView.setImage(with: record.recordImageURL ?? "")
         selfView.titleTextView.text = record.recordTitle
         self.lyricsText = record.recordContents
         selfView.createdField.text = record.createdDate.toDate()

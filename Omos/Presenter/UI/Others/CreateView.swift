@@ -9,6 +9,8 @@ import UIKit
 
 class CreateView: BaseView {
     
+    var imageFileName = ""
+    
     ///1
     let topLabelView:UIView = {
         let view = UIView()
@@ -171,9 +173,9 @@ class CreateView: BaseView {
         return label
     }()
     
-    let stickerImageView:UIImageView = {
-        let view = UIImageView(image:UIImage(named: "sticker"))
-        view.isHidden = true
+    let stickerImageView:UIButton = {
+        let view = UIButton()
+        view.setImage(UIImage(named: "sticker"), for: .normal)
         return view
     }()
     
@@ -183,7 +185,6 @@ class CreateView: BaseView {
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 12)
         label.textColor = .mainGrey3
-        label.isHidden = true 
         return label
     }()
     
@@ -192,8 +193,11 @@ class CreateView: BaseView {
         return view
     }()
     
+    let stickerChoiceView = StickerView()
+    
     override func layoutSubviews() {
         super.layoutSubviews()
+        stickerChoiceView.isHidden = true
         circleImageView.layoutIfNeeded()
         circleImageView.layer.cornerRadius = circleImageView.height / 2
         circleImageView.layer.masksToBounds = true
@@ -339,6 +343,11 @@ class CreateView: BaseView {
             make.bottom.equalTo(lastView.snp.top)
         }
         
+        stickerChoiceView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
         mainTextView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.centerY.equalToSuperview()
@@ -373,6 +382,7 @@ class CreateView: BaseView {
         
         textCoverView.addSubview(mainTextView)
         textCoverView.addSubview(mainfullTextView)
+        textCoverView.addSubview(stickerChoiceView)
         
         lastView.addSubview(remainTitle)
         lastView.addSubview(remainText)
@@ -387,3 +397,99 @@ class CreateView: BaseView {
 
 
 
+class StickerView:BaseView {
+    
+    let stickerImageView1:UIImageView = {
+        let imageView = UIImageView(image:UIImage(named: "oneline")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
+                                                                                                          right: -10)))
+        return imageView
+    }()
+    
+    let stickerImageView2:UIImageView = {
+        let imageView = UIImageView(image:UIImage(named: "free")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
+                                                                                                       right: -10)))
+        return imageView
+    }()
+    
+    let stickerImageView3:UIImageView = {
+        let imageView = UIImageView(image:UIImage(named: "ost")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
+                                                                                                      right: -10)))
+        return imageView
+    }()
+    
+    let stickerImageView4:UIImageView = {
+        let imageView = UIImageView(image:UIImage(named: "lyrics")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
+                                                                                                         right: -10)))
+        return imageView
+    }()
+    
+    let stickerImageView5:UIImageView = {
+        let imageView = UIImageView(image:UIImage(named: "story")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
+                                                                                                       right: -10)))
+        return imageView
+    }()
+    
+    let stickerImageView6:UIImageView = {
+        let imageView = UIImageView(image:UIImage(named: "oneline")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
+                                                                                                          right: -10)))
+        return imageView
+    }()
+    
+    private lazy var horiStack1:UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [stickerImageView1,stickerImageView2,stickerImageView3])
+        stack.axis = .horizontal
+        stack.alignment = .fill
+        stack.spacing = 16
+        stack.distribution = .fillEqually
+        return stack
+    }()
+    
+    private lazy var horiStack2:UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [stickerImageView4,stickerImageView5,stickerImageView6])
+        stack.axis = .horizontal
+        stack.alignment = .fill
+        stack.spacing = 16
+        stack.distribution = .fillEqually
+        return stack
+    }()
+    
+    private lazy var vertiStack:UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [horiStack1,horiStack2])
+        stack.axis = .vertical
+        stack.alignment = .fill
+        stack.distribution = .fill
+        stack.spacing = 16
+        return stack
+    }()
+    
+    override func configureUI() {
+        super.configureUI()
+        self.addSubview(vertiStack)
+        
+        vertiStack.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        stickerImageView1.snp.makeConstraints { make in
+            make.height.equalTo(stickerImageView1.snp.width).multipliedBy(1.0)
+        }
+        stickerImageView2.snp.makeConstraints { make in
+            make.height.equalTo(stickerImageView2.snp.width).multipliedBy(1.0)
+        }
+        stickerImageView3.snp.makeConstraints { make in
+            make.height.equalTo(stickerImageView3.snp.width).multipliedBy(1.0)
+        }
+        stickerImageView4.snp.makeConstraints { make in
+            make.height.equalTo(stickerImageView4.snp.width).multipliedBy(1.0)
+        }
+        stickerImageView5.snp.makeConstraints { make in
+            make.height.equalTo(stickerImageView5.snp.width).multipliedBy(1.0)
+        }
+        stickerImageView6.snp.makeConstraints { make in
+            make.height.equalTo(stickerImageView6.snp.width).multipliedBy(1.0)
+        }
+       
+        
+    }
+    
+}
