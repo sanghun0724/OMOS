@@ -74,6 +74,7 @@ class ProfileViewModel:BaseViewModel {
                 self?.recordLoading.onNext(false)
                 switch event {
                 case .success(let data):
+                    print(data)
                     self?.currentMyProfileRecord = data
                     self?.myProfileRecord.onNext(data)
                 case .failure(let error):

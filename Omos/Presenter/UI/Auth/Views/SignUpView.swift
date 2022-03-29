@@ -87,9 +87,13 @@ class SignUpView:BaseView {
         return button
     }()
     
+    let emailCheckView:EmailCheckView = {
+       let view = EmailCheckView()
+        return view
+    }()
     
     
-    lazy var views = [emailLabel,emailField,passwordLabel,passwordField,repaswwordLabel,repasswordField]
+    lazy var views = [emailLabel,emailField,emailCheckView,passwordLabel,passwordField,repaswwordLabel,repasswordField]
     
     private lazy var stack:UIStackView = {
         let stack = UIStackView(arrangedSubviews: views)
@@ -135,4 +139,41 @@ class SignUpView:BaseView {
         
     }
     
+}
+
+
+class EmailCheckView:BaseView {
+    
+    let labelView:UILabel = {
+       let label = UILabel()
+        return label
+    }()
+    
+    override func configureUI() {
+        self.addSubview(labelView)
+        setAtt()
+        
+        labelView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-16)
+            labelView.sizeToFit()
+        }
+    }
+    
+    func setAtt() {
+        let text = NSMutableAttributedString.init(string: "이메일 인증")
+
+            let range = NSMakeRange(0, text.length)
+            // add large fonts
+            //text.addAttribute(NSAttributedString.Key.backgroundColor, value: UIColor.red, range: range)
+            text.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.mainGrey4, range: range)
+            text.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 16), range: range)
+
+
+            // add underline
+            text.addAttribute(NSAttributedString.Key.underlineStyle, value: NSNumber(value:  NSUnderlineStyle.double.rawValue), range: range)
+            text.addAttribute(NSAttributedString.Key.underlineColor, value: UIColor.mainGrey4, range: range)
+
+            labelView.attributedText = text
+    }
 }

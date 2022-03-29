@@ -260,7 +260,12 @@ class MydjProfileHeader:UITableViewHeaderFooterView {
     }
     
     func configureMyProfile(profile:MyDjProfileResponse) {
-
+       
+        profileLabel.text = profile.profile.nickname
+        followerCountLabel.text = "\(profile.count.followerCount)"
+        followingCountLabel.text = "\(profile.count.followingCount)"
+        recordCountLabel.text = "\(profile.count.recordsCount)"
+        
         guard let imageUrl = profile.profile.profileURL else {
             profileImageView.image = UIImage(named: "albumCover")
             print("default")
@@ -271,10 +276,6 @@ class MydjProfileHeader:UITableViewHeaderFooterView {
 //        profileImageView.image = UIImage(data: data)
         //profileImageView.setImageNocache(with: imageUrl)
         profileImageView.setImage(with: imageUrl)
-        profileLabel.text = profile.profile.nickname
-        followerCountLabel.text = "\(profile.count.followerCount)"
-        followingCountLabel.text = "\(profile.count.followingCount)"
-        recordCountLabel.text = "\(profile.count.recordsCount)"
     }
     
 }

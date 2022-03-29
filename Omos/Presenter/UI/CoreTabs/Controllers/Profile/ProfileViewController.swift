@@ -62,7 +62,7 @@ class ProfileViewController: BaseViewController {
             }).disposed(by: disposeBag)
         
         Observable.zip(viewModel.myProfileRecord,viewModel.myProfile)
-        .subscribe(onNext: { [weak self] loading in
+        .subscribe(onNext: { [weak self] _ in
             self?.selfView.tableView.reloadData()
         }).disposed(by: disposeBag)
         

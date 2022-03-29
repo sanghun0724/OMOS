@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxGesture
 
 class SignUpViewController:UIViewController {
     
@@ -159,6 +160,18 @@ class SignUpViewController:UIViewController {
                 }).disposed(by: self!.disposeBag)
             }).disposed(by: disposeBag)
         isAllEmptyBind()
+        
+        
+        topView.emailCheckView.labelView.rx
+            .tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                let action = UIAlertAction(title: "확인", style: .default) { alert in
+                  
+                }
+                action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
+                self?.presentAlert(title: "", message: "인증 메일을 성공적으로 발송했어요.", isCancelActionIncluded: false, preferredStyle: .alert, with: action)
+            }).disposed(by: disposeBag)
     }
     
     
