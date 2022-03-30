@@ -79,17 +79,30 @@ class LyricsPasteCreateViewController:BaseViewController {
             return
         }
         var content = ""
+        var state = true
         selfView.tableView.visibleCells.forEach { cell in
             if let cell = cell as? LyriscTableCell {
-               content += cell.label.text ?? ""  + "\n"
-            } else if let cell = cell as? TextTableCell {
-                guard let desc = cell.textView.text else {
-                    //alret
+                guard let txt = cell.label.text else {
                     return
                 }
-                content += desc + "\n"
+               content += txt + "\n"
+            } else if let cell = cell as? TextTableCell {
+                guard let desc = cell.textView.text else {
+                    return
+                }
+                if desc == "" || desc == "가사해석을 적어주세요." {
+                    state = false
+                }
+                content += (desc + "\n")
+            
             }
         }
+        print(content)
+        if selfView.titleTextView.text == "" || selfView.titleTextView.text == "레코드 제목을 입력해주세요" || !state {
+            setAlert()
+            return
+        }
+        
         
         if type == .create {
             viewModel.saveRecord(cate: "LYRICS", content: content, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title:titleText , userid: Account.currentUser,recordImageUrl: "https://omos-image.s3.ap-northeast-2.amazonaws.com/record/\(viewModel.curTime).png")
@@ -100,6 +113,14 @@ class LyricsPasteCreateViewController:BaseViewController {
                  }
             viewModel.updateRecord(postId: viewModel.modifyDefaultModel?.recordID ?? 0, request: .init(contents: content, title: selfView.titleTextView.text,isPublic: !(selfView.lockButton.isSelected),recordImageUrl: viewModel.modifyDefaultModel?.recordImageURL ?? "" ))
         }
+    }
+    
+    private func setAlert() {
+        let action = UIAlertAction(title: "확인", style: .default) { alert in
+            
+        }
+        action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
+        self.presentAlert(title: "", message: "내용이나 제목을 채워주세요", isCancelActionIncluded: false, preferredStyle: .alert, with: action)
     }
     
     func setScrollView() {

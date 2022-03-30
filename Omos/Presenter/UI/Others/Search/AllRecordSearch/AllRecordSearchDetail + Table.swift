@@ -33,6 +33,7 @@ extension AllRecordSearchDetailViewController:UITableViewDelegate,UITableViewDat
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllrecordLyricsTableCell.identifier, for: indexPath) as! AllrecordLyricsTableCell
                 cell.selfView.tableHeightConstraint?.deactivate()
                 cell.configureOneMusic(record: record)
+                cell.selfView.tableView.reloadData()
                 lyricsCellBind(cell: cell, data: record,indexPath: indexPath)
                 cell.selectionStyle = . none
                 return cell

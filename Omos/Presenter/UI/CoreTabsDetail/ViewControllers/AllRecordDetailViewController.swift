@@ -82,11 +82,11 @@ class AllRecordDetailViewController:BaseViewController {
                     self?.selfShortView.layoutIfNeeded()
                     self?.shortBind(myRecord: record)
                 } else if data.category == "LYRICS" {
+                    self?.selfLyricsView.subTableHeightConstraint?.deactivate()
                     self?.setLyricData(myRecord: record)
                     self?.configLyricsView()
                     self?.selfLyricsView.tableView.reloadData()
                     self?.selfLyricsView.tableView.layoutIfNeeded()
-                    self?.selfLyricsView.subTableHeightConstraint?.deactivate()
                     self?.selfLyricsView.tableView.isScrollEnabled = false
                     self?.selfLyricsView.tableHeightConstraint!.update(offset: ceil(self?.selfLyricsView.tableView.intrinsicContentSize2.height ?? 100 ) )
                     self?.lyricsBind(myRecord: record)

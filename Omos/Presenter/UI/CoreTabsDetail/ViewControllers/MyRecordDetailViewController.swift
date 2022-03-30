@@ -207,11 +207,11 @@ class MyRecordDetailViewController:BaseViewController {
                     self?.configShort()
                     self?.setShrotData(myRecord: record)
                 } else if record.category == "LYRICS" {
+                    self?.selfLyricsView.subTableHeightConstraint?.deactivate()
                     self?.setLyricData(myRecord: record)
                     self?.configLyricsView()
-                    self?.selfLyricsView.tableView.reloadData()
                     self?.selfLyricsView.tableView.layoutIfNeeded()
-                    self?.selfLyricsView.subTableHeightConstraint?.deactivate()
+                    self?.selfLyricsView.tableView.reloadData()
                     self?.selfLyricsView.tableView.isScrollEnabled = false
                     self?.selfLyricsView.tableHeightConstraint!.update(offset: ceil(self?.selfLyricsView.tableView.intrinsicContentSize2.height ?? 100 ) )
                     self?.lyricsBind(myRecord: record)
@@ -403,7 +403,7 @@ class MyRecordDetailViewController:BaseViewController {
         print("herererr")
         print(myRecord)
         
-        if myRecord.isPublic {
+        if myRecord.isPublic ?? true {
             selfView.lockButton.setImage(UIImage(named: "unlock"), for: .normal)
             selfView.lockButton.setImage(UIImage(named: "lock"), for: .selected)
         } else {
@@ -436,7 +436,7 @@ class MyRecordDetailViewController:BaseViewController {
         selflongView.myView.cateLabel.text = " | \(myRecord.category.getReverseCate() )"
         selflongView.myView.nicknameLabel.text = myRecord.nickname
         
-        if myRecord.isPublic {
+        if myRecord.isPublic ?? true {
             selflongView.myView.lockButton.setImage(UIImage(named: "unlock"), for: .normal)
             selflongView.myView.lockButton.setImage(UIImage(named: "lock"), for: .selected)
         } else {
@@ -482,7 +482,7 @@ class MyRecordDetailViewController:BaseViewController {
                 self?.lyricsArr.append(substring)
             }
         }
-        
+     
         selfLyricsView.musicTitleLabel.text = myRecord.music.musicTitle
         selfLyricsView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
         selfLyricsView.circleImageView.setImage(with: myRecord.music.albumImageURL)

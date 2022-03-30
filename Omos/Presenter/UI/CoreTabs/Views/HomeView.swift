@@ -83,6 +83,25 @@ class HomeHeaderView:UITableViewHeaderFooterView {
         let view = UIImageView(image:UIImage(named:"photo1"))
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
+        let random = Int.random(in: 1...7)
+        switch random {
+        case 1:
+            view.image = UIImage(named:"photo1")
+        case 2:
+            view.image = UIImage(named:"photo2")
+        case 3:
+            view.image = UIImage(named:"photo3")
+        case 4:
+            view.image = UIImage(named:"photo4")
+        case 5:
+            view.image = UIImage(named:"photo5")
+        case 6:
+            view.image = UIImage(named:"photo6")
+        case 7:
+            view.image = UIImage(named:"photo7")
+        default:
+            view.image = UIImage(named:"photo1")
+        }
         return view
     }()
     

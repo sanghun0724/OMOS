@@ -27,6 +27,7 @@ class AllRecordDetailViewModel:BaseViewModel {
                     self?.currentSelectDetail = data
                     self?.selectDetail.onNext(data)
                 case .failure(let error):
+                    print(error)
                     self?.errorMessage.onNext(error.localizedDescription)
                 }
             }).disposed(by: disposeBag)

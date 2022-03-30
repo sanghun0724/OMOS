@@ -11,13 +11,9 @@ import RxSwift
 import RxCocoa
 import RxGesture
 
-protocol AllrecordLyricsTableCellProtocol: AnyObject {
-    func readMoreTapped(cell: AllrecordLyricsTableCell)
-}
 
 class AllrecordLyricsTableCell:UITableViewCell {
     static let identifier = "AllrecordLyricsTableCell"
-    weak var delegate:AllrecordLyricsTableCellProtocol?
     var disposeBag = DisposeBag()
     var hiddenFlag = true
     let selfView = LyricsRecordView()
@@ -168,14 +164,16 @@ extension AllrecordLyricsTableCell:UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: LyriscTableCell.identifier, for: indexPath) as! LyriscTableCell
             if indexPath.row == 0 {
                 cell.label.text = lyricsArr[0]
+            } else {
+                cell.label.text = lyricsArr[safe:indexPath.row/2] ?? " "
             }
-            cell.label.text = lyricsArr[safe:indexPath.row/2] ?? " "
+            
             cell.selectionStyle = .none
             cell.layoutIfNeeded()
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: TextTableCell.identifier, for: indexPath) as! TextTableCell
-            cell.textView.text = lyricsArr[safe:indexPath.row/2+1] ?? " "
+            cell.textView.text = lyricsArr[safe:indexPath.row] ?? " "
             cell.selectionStyle = .none
             cell.textView.isUserInteractionEnabled = false
             cell.textView.textColor = .white

@@ -86,6 +86,7 @@ extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
                 cell.selfView.tableHeightConstraint?.deactivate()
                 cell.configureMyDjRecord(record: record)
                 cell.selfView.lockButton.isHidden = true
+                cell.selfView.tableView.reloadData()
                 lyricsCellBind(cell: cell, data: record,indexPath: indexPath)
                 cell.selectionStyle = . none
                 return cell

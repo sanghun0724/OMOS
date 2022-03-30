@@ -29,7 +29,6 @@ class HomeViewController:BaseViewController {
         selfView.tableView.dataSource = self
         selfView.tableView.delegate = self
         viewModel.allHomeDataFetch(userId: Account.currentUser)
-        print(UserDefaults.standard.string(forKey: "access"))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,8 +64,9 @@ class HomeViewController:BaseViewController {
                 let vc = SearchViewController(viewModel: vm, searchType: .me)
                 self?.navigationController?.pushViewController(vc, animated: true)
             }).disposed(by: disposeBag)
-        
     }
+    
+    
     
     
 }

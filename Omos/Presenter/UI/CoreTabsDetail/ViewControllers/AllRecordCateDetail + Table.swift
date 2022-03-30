@@ -33,6 +33,7 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
                 cell.selfView.tableHeightConstraint?.deactivate()
                 cell.configureModel(record: record)
                 cell.selectionStyle = .none
+                cell.selfView.tableView.reloadData()
                 lyricsCellBind(cell: cell, data: record,indexPath: indexPath)
                 return cell
             case .A_LINE:

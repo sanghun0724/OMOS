@@ -80,16 +80,14 @@ class CreateViewController:BaseViewController {
             mainText = selfView.mainfullTextView.text
         }
         let backImage = selfView.imageView.image
-        guard let titleText = selfView.titleTextView.text,
-              let text = mainText else {
-                  //alert
-                  print("alert here")
-                  return
-              }
+        if selfView.titleTextView.text == "레코드 제목을 입력해주세요" || selfView.titleTextView.text == "" || mainText == #""레코드 내용을 입력해주세요""# || mainText == "레코드 내용을 입력해주세요" || mainText == "" {
+            setAlert()
+            return
+        }
         
         if type == .create {
             var imageUrl = "https://omos-image.s3.ap-northeast-2.amazonaws.com/record/\(viewModel.curTime).png"
-            viewModel.saveRecord(cate: getCate(cate: category), content: text, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: titleText, userid: Account.currentUser,recordImageURL: imageUrl )
+            viewModel.saveRecord(cate: getCate(cate: category), content: mainText!, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: selfView.titleTextView.text, userid: Account.currentUser,recordImageURL: imageUrl )
           
             
             print("check Point\(viewModel.curTime)")
@@ -108,6 +106,14 @@ class CreateViewController:BaseViewController {
             viewModel.updateRecord(postId: viewModel.modifyDefaultModel?.recordID ?? 0, request: .init(contents: recordContent, title: selfView.titleTextView.text,isPublic:  !(selfView.lockButton.isSelected),recordImageUrl: viewModel.modifyDefaultModel?.recordImageURL ?? "" ))
         }
         
+    }
+    
+    private func setAlert() {
+        let action = UIAlertAction(title: "확인", style: .default) { alert in
+            
+        }
+        action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
+        self.presentAlert(title: "", message: "내용이나 제목을 채워주세요", isCancelActionIncluded: false, preferredStyle: .alert, with: action)
     }
     
     private func setCreateViewinfo() {

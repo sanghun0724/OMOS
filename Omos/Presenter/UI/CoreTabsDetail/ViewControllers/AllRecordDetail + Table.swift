@@ -27,7 +27,7 @@ extension AllRecordDetailViewController:UITableViewDelegate,UITableViewDataSourc
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: TextTableCell.identifier, for: indexPath) as! TextTableCell
-            cell.textView.text = lyricsArr[safe:indexPath.row/2+1] ?? " "
+            cell.textView.text = lyricsArr[safe:indexPath.row] ?? " "
             cell.selectionStyle = .none
             cell.textView.isUserInteractionEnabled = false
             cell.textView.textColor = .white

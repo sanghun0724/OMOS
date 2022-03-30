@@ -11,11 +11,16 @@ import UIKit
 class HomeTableLastCell:UITableViewCell {
     static let identifier = "HomeTableLastCell"
     
+    let baseView:UIView = {
+        let view = UIView()
+        return view
+    }()
     
     let backImageView:UIImageView = {
         let imageView = UIImageView(image:UIImage(named: "photo2"))
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
+        imageView.alpha = 0.4
         return imageView
     }()
     
@@ -81,14 +86,19 @@ class HomeTableLastCell:UITableViewCell {
     }
     
     func configureUI() {
-        self.addSubview(backImageView)
-        backImageView.addSubview(albumImageView)
-        backImageView.addSubview(trackTitleLabel)
-        backImageView.addSubview(artistTitleLabel)
-        backImageView.addSubview(albumTitleLabel)
-        backImageView.addSubview(albumLabelImageView)
-        backImageView.addSubview(decoView)
+        self.addSubview(baseView)
+        baseView.addSubview(backImageView)
+        baseView.addSubview(albumImageView)
+        baseView.addSubview(trackTitleLabel)
+        baseView.addSubview(artistTitleLabel)
+        baseView.addSubview(albumTitleLabel)
+        baseView.addSubview(albumLabelImageView)
+        baseView.addSubview(decoView)
         decoView.addSubview(arrowButton)
+        
+        baseView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         
         backImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()

@@ -50,6 +50,7 @@ class EntireViewController:BaseViewController {
             .withUnretained(self)
             .subscribe(onNext: { owner,musics in
                 owner.selfView.tableView.reloadData()
+                owner.selfView.tableView.layoutIfNeeded()
             }).disposed(by: disposeBag)
         
         viewModel.isAllEmpty

@@ -70,6 +70,7 @@ class RecordAPI {
             case .success(let data):
                 print(data)
                 completion(.success(data))
+                NotificationCenter.default.post(name: NSNotification.Name.reload, object: nil, userInfo: nil);
             case .failure(let error):
                 print(error.localizedDescription)
                 completion(.failure(error))
@@ -96,6 +97,7 @@ class RecordAPI {
             case .success(let data):
                 print(data)
                 completion(.success(data))
+                NotificationCenter.default.post(name: NSNotification.Name.reload, object: nil, userInfo: nil);
             case .failure(let error):
                 print(error.localizedDescription)
                 completion(.failure(error))
@@ -109,6 +111,7 @@ class RecordAPI {
             case .success(let data):
                 print(data)
                 completion(.success(data))
+                NotificationCenter.default.post(name: NSNotification.Name.reload, object: nil, userInfo: nil);
             case .failure(let error):
                 print(error.localizedDescription)
                 completion(.failure(error))

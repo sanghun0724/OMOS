@@ -110,6 +110,12 @@ extension InteractionRecordViewController:UITableViewDelegate,UITableViewDataSou
         } else {
              data = viewModel.currentScrapRecord[indexPath.row]
         }
+        let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+        let uc = RecordsUseCase(recordsRepository: rp)
+        let vm = AllRecordDetailViewModel(usecase: uc)
+        let vc = AllRecordDetailViewController(viewModel: vm, postId: data.recordID, userId: Account.currentUser)
+        self.navigationController?.pushViewController(vc, animated: true)
+        
 
        
     }

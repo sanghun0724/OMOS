@@ -66,7 +66,8 @@ struct StateRespone:Codable {
 
 struct DetailRecordResponse:Codable {
        let category, createdDate: String
-       let isLiked, isPublic, isScraped: Bool
+       let isLiked, isScraped: Bool
+       let isPublic: Bool?
        let likeCnt: Int
        let music: Music
        let nickname, recordContents: String
