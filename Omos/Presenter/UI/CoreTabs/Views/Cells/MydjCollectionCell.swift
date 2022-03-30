@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 import RxGesture
 
 //protocol MydjCollectionCellProtocol:AnyObject {
@@ -17,13 +18,15 @@ import RxGesture
 class MydjCollectionCell:UICollectionViewCell {
     static let identifier = "MydjCollectionCell"
     
-    let disposeBag = DisposeBag()
-    
+    var disposeBag = DisposeBag()
+    var homeInfo:recommendDjResponse?
     
     let djImageView:UIImageView = {
        let imageView = UIImageView(image: UIImage(named: "albumCover"))
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
+        imageView.layer.borderWidth = 0
+        imageView.layer.borderColor = UIColor.mainOrange.cgColor
         return imageView
     }()
     
@@ -49,11 +52,13 @@ class MydjCollectionCell:UICollectionViewCell {
         djImageView.layer.cornerCurve = .circular
         djImageView.layer.cornerRadius = djImageView.height / 2
         djImageView.layer.masksToBounds = true
+        
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         //djImageView.image = nil
+        disposeBag = DisposeBag()
     }
     
     private func configureUI() {
@@ -70,6 +75,17 @@ class MydjCollectionCell:UICollectionViewCell {
             make.centerX.equalToSuperview()
         }
         
+    }
+    
+    func configureModel(record:MyDjListResponse) {
+        djImageView.setImage(with: record.profileURL ?? "")
+        djLabel.text = record.nickName
+    }
+    
+    func configureHome(record:recommendDjResponse) {
+        self.homeInfo = record
+        djImageView.setImage(with: record.profileURL ?? "" )
+        djLabel.text = record.nickName
     }
     
     

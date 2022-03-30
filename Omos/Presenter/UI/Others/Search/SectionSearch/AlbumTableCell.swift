@@ -65,21 +65,30 @@ class AlbumTableCell:UITableViewCell {
         
         titleLabel.snp.makeConstraints { make in
             make.leading.equalTo(songImageView.snp.trailing).offset(12)
+            make.trailing.equalToSuperview().offset(-12)
             make.top.equalTo(songImageView.snp.top)
-            titleLabel.sizeToFit()
+            
         }
         
         subTitleLabel.snp.makeConstraints { make in
-            make.leading.equalTo(titleLabel)
+            make.leading.trailing.equalTo(titleLabel)
             make.top.equalTo(titleLabel.snp.bottom).offset(2)
-            subTitleLabel.sizeToFit()
+            
         }
         
         createdLabel.snp.makeConstraints { make in
-            make.leading.equalTo(titleLabel)
+            make.leading.trailing.equalTo(titleLabel)
             make.top.equalTo(subTitleLabel.snp.bottom).offset(6)
             createdLabel.sizeToFit()
         }
         
     }
+    
+    func configureModel(album:AlbumRespone) {
+        songImageView.setImage(with: album.albumImageURL)
+        titleLabel.text = album.albumTitle
+        subTitleLabel.text = album.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
+        createdLabel.text = album.releaseDate
+    }
+    
 }

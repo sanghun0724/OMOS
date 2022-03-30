@@ -27,16 +27,16 @@ class CreateView: BaseView {
         return view
     }()
     
-    let musicTitleLabel:UITextField = {
-        let label = UITextField()
-        label.placeholder = "노래 제목이 들어있습니다"
+    let musicTitleLabel:UILabel = {
+        let label = UILabel()
+        label.text = "error"
         label.font = .systemFont(ofSize: 14)
         return label
     }()
     
-    let subMusicInfoLabel:UITextField = {
-        let label = UITextField()
-        label.placeholder = "가수이름이 들어갑니다. 앨범제목이 들어갑니다."
+    let subMusicInfoLabel:UILabel = {
+        let label = UILabel()
+        label.text = "error"
         label.font = .systemFont(ofSize: 12)
         label.textColor = .mainGrey4
         return label
@@ -93,6 +93,7 @@ class CreateView: BaseView {
     let lockButton:UIButton = {
        let button = UIButton()
         button.setImage(UIImage(named: "unlock"), for: .normal)
+        button.setImage(UIImage(named: "lock"), for: .selected)
         return button
     }()
     
@@ -210,6 +211,7 @@ class CreateView: BaseView {
         
         musicTitleLabel.snp.makeConstraints { make in
             make.leading.equalTo(circleImageView.snp.trailing).offset(14)
+            make.trailing.equalToSuperview().offset(-14)
             make.top.equalTo(circleImageView.snp.top)
             make.bottom.equalTo(circleImageView.snp.centerY)
             musicTitleLabel.sizeToFit()
@@ -218,6 +220,7 @@ class CreateView: BaseView {
         subMusicInfoLabel.snp.makeConstraints { make in
             make.leading.equalTo(musicTitleLabel)
             make.bottom.equalTo(circleImageView.snp.bottom)
+            make.trailing.equalToSuperview().offset(-14)
             subMusicInfoLabel.sizeToFit()
         }
         

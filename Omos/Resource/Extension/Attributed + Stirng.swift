@@ -86,3 +86,37 @@ extension String {
         return predicate.evaluate(with: self)
     }
 }
+
+//라벨에 패딩값주기 
+class BasePaddingLabel: UILabel {
+    private var padding = UIEdgeInsets(top: 10.0, left: 16.0, bottom: 10, right: 16.0)
+
+    convenience init(padding: UIEdgeInsets) {
+        self.init()
+        self.padding = padding
+    }
+
+    override func drawText(in rect: CGRect) {
+        super.drawText(in: rect.inset(by: padding))
+    }
+
+    override var intrinsicContentSize: CGSize {
+        var contentSize = super.intrinsicContentSize
+        contentSize.height += padding.top + padding.bottom
+        contentSize.width += padding.left + padding.right
+
+        return contentSize
+    }
+}
+
+//라벨 라인수 구하기
+extension UILabel {
+    func calculateMaxLines() -> Int {
+        let maxSize = CGSize(width: frame.size.width, height: CGFloat(Float.infinity))
+        let charSize = font.lineHeight
+        let text = (self.text ?? "") as NSString
+        let textSize = text.boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+        let linesRoundedUp = Int(ceil(textSize.height/charSize))
+        return linesRoundedUp
+    }
+}

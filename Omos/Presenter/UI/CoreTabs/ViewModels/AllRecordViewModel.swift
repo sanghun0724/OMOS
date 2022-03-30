@@ -34,7 +34,7 @@ class AllRecordViewModel:BaseViewModel {
             }).disposed(by: disposeBag)
     }
     
-    func numberofRows() -> Int {
+    func numberofSections() -> Int {
         return 5
     }
     

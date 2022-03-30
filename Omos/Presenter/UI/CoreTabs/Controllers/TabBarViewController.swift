@@ -21,10 +21,10 @@ class TabBarViewController: UITabBarController {
     
     private func setupControllers() {
         
-        let home = HomeViewController()
+        let home = HomeViewController(viewModel: HomeViewModel(usecase: TodayUseCase(todayRepository: TodayRepositoryImpl(todayAPI: TodayAPI()))))
         let myRecord = MyRecordViewController(viewModel: MyRecordViewModel(usecase: RecordsUseCase(recordsRepository: RecordsRepositoryImpl(recordAPI: RecordAPI()))))
         let allRecord = AllRecordViewController(viewModel: AllRecordViewModel(usecase: RecordsUseCase(recordsRepository: RecordsRepositoryImpl(recordAPI: RecordAPI()))))
-        let myDj = MyDJViewController()
+        let myDj = MyDJViewController(viewModel: MyDjViewModel(usecase: RecordsUseCase(recordsRepository: RecordsRepositoryImpl(recordAPI: RecordAPI()))))
         let profile = ProfileViewController()
         
         

@@ -8,19 +8,35 @@
 import UIKit
 import Tabman
 import Pageboy
+import RxSwift
 
 class TopTabViewController:TabmanViewController {
+
+    let disposeBag = DisposeBag()
+    let viewModel:SearchViewModel
+    var viewControllers:Array<UIViewController> = []
     
-    var viewControllers:Array<UIViewController> = [EntireViewController(),SongViewController(),AlbumViewController(),ArtistViewController()]
+    
+    init(viewModel:SearchViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataSource = self
+        bind()
         
         let bar = TMBar.ButtonBar()
         settingTabBar(ctBar:bar)
         addBar(bar, dataSource: self, at: .top)
+        
     }
+    
     
     
     func settingTabBar(ctBar:TMBar.ButtonBar) {
@@ -45,6 +61,32 @@ class TopTabViewController:TabmanViewController {
               // 인디케이터 (영상에서 주황색 아래 바 부분)
               ctBar.indicator.weight = .custom(value: 4)
               ctBar.indicator.tintColor = .mainOrange
+    }
+    
+ 
+    
+    func bind() {
+        //relaod
+        viewModel.isReload
+            .withUnretained(self)
+            .subscribe(onNext: { owner,info in
+          
+            }).disposed(by:disposeBag)
+        
+        Observable.zip(viewModel.album, viewModel.track, viewModel.artist)
+            .take(1)
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner,musics in
+                let entireVC = EntireViewController(viewModel: owner.viewModel)
+                let songVC = SongViewController(viewModel: owner.viewModel)
+                let albumVC = AlbumViewController(viewModel: owner.viewModel)
+                let artistVC = ArtistViewController(viewModel: owner.viewModel)
+                owner.viewControllers = [entireVC,songVC,albumVC,artistVC]
+                self.reloadData()
+            }).disposed(by: disposeBag)
+        
+        
     }
     
 }
@@ -83,5 +125,7 @@ extension TopTabViewController: PageboyViewControllerDataSource,TMBarDataSource 
         func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
             return nil
         }
+    
+        
     
 }

@@ -13,7 +13,7 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource {
         if tableView == selfView.bestTableView {
             return 10
         } else {
-            return viewModel.currentMusic.count
+            return 10
         }
         
     }
@@ -24,9 +24,9 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: BestSearchTableCell.identifier, for: indexPath) as! BestSearchTableCell
             return cell
         } else {
-            let  item = viewModel.currentMusic[indexPath.row]
+            
               let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-              cell.textLabel?.text = item.name
+//              cell.textLabel?.text = item.name
               return cell
         }
         

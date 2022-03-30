@@ -18,6 +18,7 @@ class LoadingView:UIView {
         spinner.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         spinner.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         spinner.startAnimating()
+        self.backgroundColor = .mainBackGround
      }
     
     required init?(coder: NSCoder) {

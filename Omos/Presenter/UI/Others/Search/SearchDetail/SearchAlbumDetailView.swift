@@ -13,7 +13,7 @@ class SearchAlbumDetailView:BaseView {
         let table = UITableView()
         table.register(SearchAlbumDetailCell.self, forCellReuseIdentifier: SearchAlbumDetailCell.identifier)
         table.register(SearchAlbumDetailHeader.self, forHeaderFooterViewReuseIdentifier: SearchAlbumDetailHeader.identifier)
-        table.backgroundColor = .mainBlack
+        table.backgroundColor = .mainBackGround
         table.separatorStyle = .none
         table.showsVerticalScrollIndicator = false
         table.automaticallyAdjustsScrollIndicatorInsets = false
@@ -87,11 +87,11 @@ class SearchAlbumDetailHeader:UITableViewHeaderFooterView {
         self.addSubview(subTitleLabel)
         self.addSubview(createdLabel)
         self.addSubview(albumImageView)
-        albumImageView.addSubview(decoImageView)
+        self.addSubview(decoImageView)
         
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(2)
+            make.top.equalToSuperview().offset(4)
             make.centerX.equalToSuperview()
             titleLabel.sizeToFit()
         }
@@ -116,9 +116,10 @@ class SearchAlbumDetailHeader:UITableViewHeaderFooterView {
         }
         
         decoImageView.snp.makeConstraints { make in
-            make.height.equalToSuperview().multipliedBy(0.466)
+            make.height.equalTo(albumImageView).multipliedBy(0.466)
             make.width.equalTo(decoImageView.snp.height)
-            make.center.equalToSuperview().multipliedBy(1.76)
+            make.centerX.equalTo(albumImageView.snp.trailing).multipliedBy(0.94)
+            make.centerY.equalTo(albumImageView.snp.bottom).multipliedBy(0.94)
         }
         
     }

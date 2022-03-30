@@ -8,20 +8,14 @@
 import Foundation
 import UIKit
 import RxSwift
-protocol MyCellDelegate: AnyObject {
-    func readMoreTapped(cell: AllRecordCateLongDetailCell)
-}
 
 class AllRecordCateLongDetailCell:UITableViewCell {
     static let identifier = "AllRecordCateDetailCell"
-    let disposeBag = DisposeBag()
-    
-    weak var delegate:MyCellDelegate?
+    var disposeBag = DisposeBag()
     let myView = CellContainerView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        bind()
     }
     
     required init?(coder: NSCoder) {
@@ -41,22 +35,18 @@ class AllRecordCateLongDetailCell:UITableViewCell {
         }
     }
     
-    func bind() {
-        myView.readMoreButton.rx
-            .tap
-            .asDriver()
-            .drive(onNext:{ [weak self] _ in
-                guard let self = self else { return }
-                self.delegate?.readMoreTapped(cell: self)
-            })
-            .disposed(by: disposeBag)
-    }
+ 
     
-
+    
     
     override func prepareForReuse() {
         super.prepareForReuse()
         //myView.myView.backImageView.image = nil
+//        myView.myView.likeButton.setImage(nil, for: .normal)
+//        myView.myView.scrapButton.setImage(nil, for: .normal)
+//        myView.myView.likeCountLabel.textColor = nil
+//        myView.myView.scrapCountLabel.textColor = nil
+        disposeBag = DisposeBag()
     }
     
     func configureModel(record:CategoryRespone) {
@@ -68,9 +58,67 @@ class AllRecordCateLongDetailCell:UITableViewCell {
         myView.myView.createdLabel.text = record.createdDate
         myView.myView.mainLabelView.text = record.recordContents
         myView.myView.nicknameLabel.text = record.nickname
-        myView.myView.loveCountLabel.text = String(record.likeCnt)
-        myView.myView.starCountLabel.text = String(record.scrapCnt)
-        /// 추후에 자기가 스크랩 눌렀는지 좋아요 눌렀는지 체크하는 로직. ㄱ
+        myView.myView.likeCountLabel.text = String(record.likeCnt)
+        myView.myView.scrapCountLabel.text = String(record.scrapCnt)
+        
+        if record.isLiked {
+            myView.myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
+            myView.myView.likeCountLabel.textColor = .mainOrange
+        }
+        
+        if record.isScraped {
+            myView.myView.scrapButton.setImage( UIImage(named: "fillStar"), for: .normal)
+            myView.myView.scrapCountLabel.textColor = .mainOrange
+        } 
+        
+    }
+    
+    func configureOneMusic(record:OneMusicRecordRespone) {
+        myView.myView.musicTitleLabel.text = record.music.musicTitle
+        myView.myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
+        myView.myView.circleImageView.setImage(with: record.music.albumImageURL)
+        //myView.myView.backImageView.setImage(with: ) 추후 추가되면 삽입
+        myView.myView.titleLabel.text = record.recordTitle
+        myView.myView.createdLabel.text = record.createdDate
+        myView.myView.mainLabelView.text = record.recordContents
+        myView.myView.nicknameLabel.text = record.nickname
+        myView.myView.likeCountLabel.text = String(record.likeCnt)
+        myView.myView.scrapCountLabel.text = String(record.scrapCnt)
+        myView.myView.cateLabel.text = record.category
+        
+        if record.isLiked {
+            myView.myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
+            myView.myView.likeCountLabel.textColor = .mainOrange
+        }
+        
+        if record.isScraped {
+            myView.myView.scrapButton.setImage( UIImage(named: "fillStar"), for: .normal)
+            myView.myView.scrapCountLabel.textColor = .mainOrange
+        }
+    }
+    
+    func configureMyDjRecord(record:MyDjResponse) {
+        myView.myView.musicTitleLabel.text = record.music.musicTitle
+        myView.myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
+        myView.myView.circleImageView.setImage(with: record.music.albumImageURL)
+        //myView.myView.backImageView.setImage(with: ) 추후 추가되면 삽입
+        myView.myView.titleLabel.text = record.recordTitle
+        myView.myView.createdLabel.text = record.createdDate
+        myView.myView.mainLabelView.text = record.recordContents
+        myView.myView.nicknameLabel.text = record.nickname
+        myView.myView.likeCountLabel.text = String(record.likeCnt)
+        myView.myView.scrapCountLabel.text = String(record.scrapCnt)
+        myView.myView.cateLabel.text = record.category
+        
+        if record.isLiked {
+            myView.myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
+            myView.myView.likeCountLabel.textColor = .mainOrange
+        }
+        
+        if record.isScraped {
+            myView.myView.scrapButton.setImage( UIImage(named: "fillStar"), for: .normal)
+            myView.myView.scrapCountLabel.textColor = .mainOrange
+        }
     }
     
 }
@@ -89,9 +137,12 @@ class CellContainerView:BaseView {
     
     let readMoreButton:UIButton = {
         let button = UIButton()
+        button.setTitle("더 보기", for: .normal)
+        button.setTitleColor(UIColor.mainGrey6, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
         return button
     }()
-   
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -114,15 +165,15 @@ class CellContainerView:BaseView {
         myView.mainLabelView.numberOfLines = 3
         myView.mainLabelView.lineBreakMode = .byTruncatingTail
         myView.mainLabelView.text = "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-       
+        
         //remake
         
         myView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-   
+        
         myView.topLabelView.snp.remakeConstraints { make in
-                make.leading.trailing.top.equalToSuperview()
+            make.leading.trailing.top.equalToSuperview()
             make.height.equalTo(Constant.mainHeight * 0.069)
         }
         
@@ -136,21 +187,23 @@ class CellContainerView:BaseView {
             make.edges.equalToSuperview().inset(16)
         }
         
-        dummyLabel.snp.makeConstraints { make in
-            make.bottom.trailing.equalToSuperview()
-            dummyLabel.sizeToFit()
-        }
+//        dummyLabel.snp.makeConstraints { make in
+//            make.bottom.trailing.equalToSuperview()
+//            dummyLabel.sizeToFit()
+//        }
         
         readMoreButton.snp.makeConstraints { make in
-            make.edges.equalTo(dummyLabel)
+            make.trailing.bottom.equalToSuperview()
+            make.height.equalTo(26)
+            make.width.equalTo(46)
         }
-
+        
         myView.lastView.snp.remakeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
             make.height.equalTo(Constant.mainHeight * 0.077)
         }
-       
-   }
+        
+    }
 }
 
 class LoadingCell:UITableViewCell {

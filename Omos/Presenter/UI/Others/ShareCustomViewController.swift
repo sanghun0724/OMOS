@@ -9,56 +9,68 @@ import UIKit
 
 class ShareCustomViewController:UIViewController {
     
+    let instaShareView:UIView
+    
+    init(instaShareView:UIView) {
+        self.instaShareView = instaShareView
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private let customView:UIView = {
         let view = UIView()
-        let label = UILabel()
-        label.text = "this is test label"
-        view.addSubview(label)
-        label.frame = CGRect(x: 10, y: 10, width: 100, height: 100)
         view.backgroundColor = .orange
         return view
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(customView)
-        view.addSubview(button)
+        self.view.backgroundColor = .mainBackGround
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        customView.frame = CGRect(x: 20, y: 20, width: 300, height: 300)
-        button.frame = CGRect(x: 200, y:200, width: 100, height: 100)
+        self.view.addSubview(instaShareView)
+        self.view.addSubview(customView)
+        
+        customView.snp.makeConstraints { make in
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(Constant.mainHeight * 0.091)
+        }
+        
+        instaShareView.snp.makeConstraints { make in
+            make.top.equalTo(customView.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(Constant.mainHeight * 0.7)
+        }
+        
     }
     
-    private let button:UIButton = {
-        let bt = UIButton()
-        bt.backgroundColor = .white
-        bt.addTarget(self, action: #selector(tap), for: .touchUpInside)
-        return bt
-    }()
-    
-    @objc func tap() {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         shareStroy()
+        dismiss(animated: false, completion: nil)
+       
     }
     
     
     func shareStroy() {
         if let storyShareURL = URL(string: "instagram-stories://share") {
             if UIApplication.shared.canOpenURL(storyShareURL) {
-                let renderer = UIGraphicsImageRenderer(size: customView.bounds.size)
+                let renderer = UIGraphicsImageRenderer(size: self.view.bounds.size)
                 let renderImage = renderer.image { _ in
-                    print(customView.bounds.size)
-                    customView.drawHierarchy(in: customView.bounds, afterScreenUpdates: true)
+                  
+                    self.view.drawHierarchy(in: self.view.bounds, afterScreenUpdates: true)
                 }
                 
                 guard let imageData = renderImage.pngData() else { return }
                 
                 let pasteboardItems : [String:Any] = [
                     "com.instagram.sharedSticker.stickerImage": imageData,
-                    "com.instagram.sharedSticker.backgroundTopColor" : "#636e72",
-                    "com.instagram.sharedSticker.backgroundBottomColor" : "#b2bec3",
-                    
                 ]
                 let pasteboardOptions = [
                     UIPasteboard.OptionsKey.expirationDate : Date().addingTimeInterval(300)

@@ -34,6 +34,7 @@ class LoginViewModel: BaseViewModel {
             case .success(let data):
                 UserDefaults.standard.set(data.accessToken, forKey: "access")
                 UserDefaults.standard.set(data.refreshToken, forKey: "refresh")
+                UserDefaults.standard.set(data.userId, forKey: "user")
                 self?.validSignIn.accept(true)
             case .failure(let error):
                 print(error)
@@ -73,6 +74,7 @@ class LoginViewModel: BaseViewModel {
                     case .success(let token):
                         UserDefaults.standard.set(token.accessToken, forKey: "access")
                         UserDefaults.standard.set(token.refreshToken, forKey: "refresh")
+                        UserDefaults.standard.set(token.userId, forKey: "user")
                         self?.hasKakaoEmail.accept(true)
                     case .failure:
                         self?.hasKakaoEmail.accept(false)

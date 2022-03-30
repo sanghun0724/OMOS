@@ -107,6 +107,35 @@ PODS:
     - KakaoSDKAuth (= 2.8.5)
   - Kingfisher (7.1.2)
   - Mantis (1.9.0)
+  - MaterialComponents/Availability (124.2.0)
+  - MaterialComponents/BottomSheet (124.2.0):
+    - MaterialComponents/Elevation
+    - MaterialComponents/private/KeyboardWatcher
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/ShapeLibrary
+    - MaterialComponents/Shapes
+  - MaterialComponents/Elevation (124.2.0):
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/private/Application (124.2.0)
+  - MaterialComponents/private/Color (124.2.0):
+    - MaterialComponents/Availability
+  - MaterialComponents/private/KeyboardWatcher (124.2.0):
+    - MaterialComponents/private/Application
+  - MaterialComponents/private/Math (124.2.0)
+  - MaterialComponents/ShadowElevations (124.2.0)
+  - MaterialComponents/ShadowLayer (124.2.0):
+    - MaterialComponents/ShadowElevations
+  - MaterialComponents/ShapeLibrary (124.2.0):
+    - MaterialComponents/private/Math
+    - MaterialComponents/Shapes
+  - MaterialComponents/Shapes (124.2.0):
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowLayer
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
@@ -145,6 +174,7 @@ DEPENDENCIES:
   - KakaoSDKUser
   - Kingfisher
   - Mantis (~> 1.9.0)
+  - MaterialComponents/BottomSheet
   - ReadMoreTextView
   - RxAlamofire
   - RxCocoa
@@ -171,6 +201,7 @@ SPEC REPOS:
     - KakaoSDKUser
     - Kingfisher
     - Mantis
+    - MaterialComponents
     - nanopb
     - Pageboy
     - PromisesObjC
@@ -202,6 +233,7 @@ SPEC CHECKSUMS:
   KakaoSDKUser: a76667bb06c1d5072178eea5cee4ac9fdba94679
   Kingfisher: 44ed6a8504763f27bab46163adfac83f5deb240c
   Mantis: 5dea32ad49addabb3247112f5b1282a6e0964bb0
+  MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   Pageboy: cf121b9dd48c63f3f281b2a9ec93d02e0f23879b
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
@@ -217,6 +249,6 @@ SPEC CHECKSUMS:
   Tabman: 792ac76fd1ec95af175c93db880a3c47cabedc91
   YPImagePicker: f36043210c10b0783034eb1947d6e06e31c461e4
 
-PODFILE CHECKSUM: 3a4e37628fb966ce2488238ec662cf44929cfc47
+PODFILE CHECKSUM: c54bc199d9b9853ee78383a846dbaf8ecd69cf4b
 
 COCOAPODS: 1.11.2

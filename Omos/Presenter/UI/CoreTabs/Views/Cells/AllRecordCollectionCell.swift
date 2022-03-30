@@ -14,9 +14,10 @@ protocol AllRecordCellProtocol:AnyObject {
 
 class AllRecordCollectionCell:UICollectionViewCell {
     static let identifier = "AllRecordCollectionCell"
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     var delegate:AllRecordCellProtocol?
     var detailInfo:ALine?
+    var homeInfo:PopuralResponse?
     
     let backImageView:UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "test"))
@@ -78,6 +79,11 @@ class AllRecordCollectionCell:UICollectionViewCell {
         return view
     }()
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -102,6 +108,16 @@ class AllRecordCollectionCell:UICollectionViewCell {
         descLabel.text = record.recordTitle
         albumImageView.setImage(with: record.music.albumImageURL)
         backImageView.setImage(with: record.music.albumImageURL)
+        nameLabel.text = record.nickname
+        titleLabel.text = record.music.albumTitle
+        subTitleLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}
+    }
+    
+    func configureHome(record:PopuralResponse) {
+        self.homeInfo = record
+        descLabel.text = record.recordTitle
+        albumImageView.setImage(with: record.music.albumImageURL)
+        backImageView.setImage(with: record.music.albumImageURL) //바까야함 
         nameLabel.text = record.nickname
         titleLabel.text = record.music.albumTitle
         subTitleLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}

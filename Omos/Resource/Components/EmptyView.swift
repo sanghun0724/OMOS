@@ -28,7 +28,7 @@ class EmptyView: UIView {
             make.bottom.equalTo(descriptionLabel.snp.top)
             make.width.height.equalTo(72)
         }
-        
+        self.backgroundColor = .mainBackGround
     }
     
     required init?(coder: NSCoder) {

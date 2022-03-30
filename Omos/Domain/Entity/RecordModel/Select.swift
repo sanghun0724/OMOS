@@ -62,3 +62,4 @@ struct Artist: Codable {
         case artistName
     }
 }
+

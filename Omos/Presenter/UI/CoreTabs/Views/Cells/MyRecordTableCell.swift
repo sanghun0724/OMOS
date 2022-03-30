@@ -166,7 +166,18 @@ class MyRecordTableCell:UITableViewCell {
         recordLabel.text = record.recordTitle
         descLabel.text = record.recordContents
         nameLabel.text = record.createdDate + " | " + record.category
-        record.isPublic ? (lockImageView.setImage(with: "lock")) : (lockImageView.setImage(with: "unlock"))
+        record.isPublic ? (lockImageView.image = UIImage(named:"unlock")) : (lockImageView.image = UIImage(named:"lock"))
+        
+    }
+    
+    func configureUserRecordModel(record:UserRecordsResponse) {
+        lockImageView.isHidden = true
+        albumImageView.setImage(with: record.music.albumImageURL)
+        titleLabel.text = record.music.musicTitle +  record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}
+        recordLabel.text = record.recordTitle
+        descLabel.text = record.recordContents
+        nameLabel.text = record.createdDate + " | " + record.category
+       // record.isPublic ? (lockImageView.image = UIImage(named:"unlock")) : (lockImageView.image = UIImage(named:"lock"))
         
     }
     

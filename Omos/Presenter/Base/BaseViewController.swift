@@ -33,9 +33,9 @@ class BaseViewController:UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.backgroundColor = .mainBackGround
-//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
-//        self.navigationController?.navigationBar.shadowImage = UIImage()
-//        self.navigationController?.navigationBar.layoutIfNeeded()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.layoutIfNeeded()
         self.view.backgroundColor = .mainBackGround
         setBarButtonItems()
         dismissKeyboardWhenTappedAround()
@@ -51,18 +51,8 @@ class BaseViewController:UIViewController {
     }
     
     func setBarButtonItems() {
-        //rigthBarButtonItems
-        let notiButton = UIBarButtonItem(image: UIImage(systemName: "bell"), style: .plain, target: self, action: #selector(didTapNotification))
-        notiButton.tintColor = .white
-        let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(didTapSearchButton))
-        searchButton.tintColor = .white
-        let createButton = UIBarButtonItem(image: UIImage(named: "plus-square"), style: .plain, target: self, action: #selector(didTapCreateButton))
-        createButton.tintColor = .white
-        self.navigationItem.rightBarButtonItems = [notiButton,searchButton,createButton]
         UINavigationBar.appearance().backIndicatorImage = UIImage(named: "arrow-left")?.withTintColor(.white, renderingMode: .alwaysOriginal)
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage(named: "arrow-left")
-        
-        
         
         let label = UILabel()
         for titleValue in TabBarViewController.titles {
@@ -76,20 +66,6 @@ class BaseViewController:UIViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
         self.navigationItem.leftItemsSupplementBackButton = true //backbutton 안숨기기
         self.navigationItem.backButtonTitle = ""
-    }
-    
-    @objc func didTapCreateButton() {
-        
-        let vc = CategoryViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    @objc func didTapSearchButton() {
-        let uc = MusicUseCase(musicRepository:MusicRepositoryImpl(loginAPI: LoginAPI()))
-        let vm = SearchViewModel(usecase: uc)
-        let vc = SearchViewController(viewModel: vm)
-        self.navigationController?.pushViewController(vc, animated: true)
-        print("search")
     }
     
     @objc func didTapNotification() {

@@ -16,18 +16,25 @@ class MydjView:BaseView {
     
     let tableView:UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
-        table.register(MydjTableCell.self, forCellReuseIdentifier: MydjTableCell.identifier)
+        table.register(AllRecordCateShortDetailCell.self, forCellReuseIdentifier: AllRecordCateShortDetailCell.identifier)
+        table.register(AllRecordCateLongDetailCell.self, forCellReuseIdentifier: AllRecordCateLongDetailCell.identifier)
         table.backgroundColor = .mainBackGround
         table.showsVerticalScrollIndicator = false
         table.automaticallyAdjustsScrollIndicatorInsets = false
         return table
     }()
     
+    let loadingView = LoadingView()
+    let emptyView = EmptyView()
     
     override func configureUI() {
         super.configureUI()
         addSubview(tableView)
         setUpCollection()
+        addSubview(emptyView)
+        addSubview(loadingView)
+        emptyView.isHidden = true
+        loadingView.isHidden = true
         
         collectionView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
@@ -35,6 +42,15 @@ class MydjView:BaseView {
         }
         
         tableView.snp.makeConstraints { make in
+            make.top.equalTo(collectionView.snp.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        loadingView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        emptyView.snp.makeConstraints { make in
             make.top.equalTo(collectionView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }

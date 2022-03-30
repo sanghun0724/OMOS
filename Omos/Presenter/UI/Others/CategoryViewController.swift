@@ -12,32 +12,43 @@ import RxCocoa
 import SnapKit
 import RxGesture
 
+struct recordSaveDefaultModel {
+    let musicId:String
+    let imageURL:String
+    let musicTitle:String
+    let subTitle:String
+}
+
 class CategoryViewController:BaseViewController {
     
     private let selfView = CategoryView()
+    let defaultModel:recordSaveDefaultModel
     
+    init(defaultModel:recordSaveDefaultModel) {
+        self.defaultModel = defaultModel
+        super.init(nibName: nil, bundle: nil)
+    }
     
-    //    init(viewModel:CreateViewModel) {
-    //        self.viewModel = viewModel
-    //        super.init(nibName: nil, bundle: nil)
-    //    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
-    //    required init?(coder: NSCoder) {
-    //        fatalError("init(coder:) has not been implemented")
-    //    }
-    //
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItems?.removeAll()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "다음", style: .plain, target: self, action: #selector(createPresent))
         self.navigationItem.rightBarButtonItem?.tintColor = .white
         bind()
-        self.tabBarController?.tabBar.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     
@@ -140,12 +151,14 @@ class CategoryViewController:BaseViewController {
         let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
         let uc = RecordsUseCase(recordsRepository: rp)
         let vm = CreateViewModel(usecase: uc)
+        vm.defaultModel = self.defaultModel
         for view in views {
             if view.layer.borderWidth == 1 {
                 if view == selfView.lyricsView {
-                    print("this is lyrics view")
+                    let vc = LyricsPasteViewController(defaultModel: self.defaultModel)
+                    self.navigationController?.pushViewController(vc, animated: true)
                 } else {
-                    let vc = CreateViewController(viewModel:vm,category: view.titleLabel.text!)
+                    let vc = CreateViewController(viewModel:vm,category: view.titleLabel.text!, type: .create)
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             }

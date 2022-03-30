@@ -12,16 +12,24 @@ import SnapKit
 import YPImagePicker
 import Mantis
 
+enum CreateType {
+    case modify
+    case create
+}
+
 class CreateViewController:BaseViewController {
+    
     
     let scrollView = UIScrollView()
     let category:String
     private let selfView = CreateView()
     let viewModel:CreateViewModel
+    let type:CreateType
     
-    init(viewModel:CreateViewModel,category:String) {
+    init(viewModel:CreateViewModel,category:String,type:CreateType) {
         self.viewModel = viewModel
         self.category = category
+        self.type = type
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -31,13 +39,19 @@ class CreateViewController:BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        selfView.titleTextView.delegate = self
+        selfView.mainTextView.delegate = self
+        selfView.mainfullTextView.delegate = self
         bind()
-        setViewinfo()
+        
+        if type == .create { setCreateViewinfo() }
+        else { setModifyView() }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        selfView.circleImageView.layer.cornerRadius = selfView.circleImageView.height / 2
+        selfView.circleImageView.layer.masksToBounds = true
         setlongTextView(category)
     }
     
@@ -48,6 +62,13 @@ class CreateViewController:BaseViewController {
         let doneButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(didTapDone))
         doneButton.tintColor = .white
         self.navigationItem.rightBarButtonItem = doneButton
+        enableScrollWhenKeyboardAppeared(scrollView: scrollView)
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        removeListeners()
     }
     
     @objc func didTapDone() {
@@ -57,24 +78,34 @@ class CreateViewController:BaseViewController {
         } else {
             mainText = selfView.mainfullTextView.text
         }
-        
-        guard let backImage = selfView.imageView.image,
-              let titleText = selfView.titleTextView.text,
+        let backImage = selfView.imageView.image
+        guard let titleText = selfView.titleTextView.text,
               let text = mainText else {
-                    //alert
+                  //alert
                   print("alert here")
                   return
               }
         
-        viewModel.saveRecord(cate: category, content: text, isPublic: true, musicId: "0pYacDCZuRhcrwGUA5nTBe artistId : 3HqSLMAZ3g3d5poNaI7GOU", title: titleText, userid: 1)
+        if type == .create {
+            viewModel.saveRecord(cate: getCate(cate: category), content: text, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: titleText, userid: UserDefaults.standard.integer(forKey: "user"))
+        } else {
+            var recordContent = ""
+            if  selfView.mainTextView.text != viewModel.modifyDefaultModel?.recordTitle {
+                recordContent = selfView.mainTextView.text
+            } else {
+                recordContent = selfView.mainfullTextView.text
+            }
+            
+            viewModel.updateRecord(postId: viewModel.modifyDefaultModel?.recordID ?? 0, request: .init(contents: recordContent, title: selfView.titleTextView.text ))
+        }
         
     }
     
-    private func setViewinfo() {
-        selfView.titleTextView.delegate = self
-        selfView.mainTextView.delegate = self
-        selfView.mainfullTextView.delegate = self
+    private func setCreateViewinfo() {
         selfView.cateLabel.text = "  | \(category)"
+        selfView.circleImageView.setImage(with: viewModel.defaultModel.imageURL)
+        selfView.musicTitleLabel.text = viewModel.defaultModel.musicTitle
+        selfView.subMusicInfoLabel.text = viewModel.defaultModel.subTitle
         textViewDidChange(selfView.mainfullTextView)
         // get the current date and time
         let currentDateTime = Date()
@@ -95,6 +126,22 @@ class CreateViewController:BaseViewController {
         selfView.createdField.text = "\(dateTimeComponents.year!) \(dateTimeComponents.month!) \(dateTimeComponents.day!)"
     }
     
+    func setModifyView() {
+        print(viewModel.modifyDefaultModel!)
+        selfView.cateLabel.text = "  | \(category)"
+        selfView.circleImageView.setImage(with: viewModel.modifyDefaultModel?.music.albumImageURL ?? "")
+        selfView.musicTitleLabel.text = viewModel.modifyDefaultModel?.music.musicTitle
+        selfView.subMusicInfoLabel.text = viewModel.modifyDefaultModel?.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
+        selfView.titleTextView.text = viewModel.modifyDefaultModel?.recordTitle
+        selfView.mainTextView.text = viewModel.modifyDefaultModel?.recordContents
+        selfView.mainfullTextView.text = viewModel.modifyDefaultModel?.recordContents
+        selfView.mainTextView.textColor = .white
+        selfView.mainfullTextView.textColor = .white
+        selfView.titleTextView.textColor = .white
+        
+        textViewDidChange(selfView.mainfullTextView)
+    }
+    
     override func configureUI() {
         super.configureUI()
     }
@@ -106,17 +153,46 @@ class CreateViewController:BaseViewController {
                 self?.configureImagePicker()
             }).disposed(by: disposeBag)
         
-        viewModel.postID
+        viewModel.state
             .subscribe(onNext: { [weak self] info in
-                //info is postid
-               self?.navigationController?.popViewController(animated: true)
+                
+                for controller in (self?.navigationController?.viewControllers ?? [UIViewController()] )  as Array {
+                    if controller.isKind(of: MyRecordViewController.self) {
+                        self?.navigationController?.popToViewController(controller, animated: true)
+                        UserDefaults.standard.set(1, forKey: "reload")
+                        break
+                    }
+                    if controller.isKind(of: AllRecordCateDetailViewController.self) {
+                        self?.navigationController?.popToViewController(controller, animated: true)
+                        
+                        break
+                    }
+                    if controller.isKind(of: AllRecordSearchDetailViewController.self) {
+                        self?.navigationController?.popToViewController(controller, animated: true)
+                        break
+                    }
+                }
+                for controller in (self?.navigationController?.viewControllers ?? [UIViewController()] )  as Array {
+                    if controller.isKind(of: AllRecordViewController.self) {
+                        self?.navigationController?.popToViewController(controller, animated: true)
+                        break
+                    }
+                }
+                
+                // print("here is \(self?.navigationController!.viewControllers ?? [UIViewController()])")
             }).disposed(by: disposeBag)
         
         viewModel.loading
             .subscribe(onNext: { [weak self] loading in
-            
+                
             }).disposed(by: disposeBag)
         
+        selfView.lockButton.rx.tap
+            .scan(false) { (lastState, newValue) in
+                !lastState
+            }
+            .bind(to: selfView.lockButton.rx.isSelected)
+            .disposed(by: disposeBag)
         
     }
     
@@ -150,11 +226,23 @@ class CreateViewController:BaseViewController {
     func setlongTextView(_ category:String) {
         if category == "한 줄 감상" {
             selfView.mainfullTextView.isHidden = true
-            self.view.addSubview(selfView)
-            selfView.snp.makeConstraints { make in
-                make.leading.trailing.bottom.equalToSuperview()
+            self.view.addSubview(scrollView)
+            scrollView.addSubview(selfView)
+            scrollView.snp.makeConstraints { make in
+                make.centerX.equalToSuperview()
+                make.width.equalToSuperview()
+                make.bottom.equalToSuperview()
                 make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             }
+            selfView.snp.makeConstraints { make in
+                make.centerX.equalToSuperview()
+                make.width.equalToSuperview()
+                make.top.equalToSuperview()
+                make.bottom.equalToSuperview()
+            }
+            selfView.textCoverView.translatesAutoresizingMaskIntoConstraints = false
+            selfView.textCoverView.heightAnchor.constraint(equalToConstant: Constant.mainHeight * 0.49).isActive = true
+            scrollView.showsVerticalScrollIndicator = false
             return
         }
         
@@ -181,7 +269,23 @@ class CreateViewController:BaseViewController {
         scrollView.showsVerticalScrollIndicator = false
     }
     
-
+    private func getCate(cate:String) -> String {
+        switch cate {
+        case "한 줄 감상":
+            return "A_LINE"
+        case "노래 속 나의 이야기":
+            return "STORY"
+        case "내 인생의 OST":
+            return "OST"
+        case "나만의 가사해석":
+            return "LYRICS"
+        case "자유 공간":
+            return "FREE"
+        default:
+            return "FREE"
+        }
+    }
+    
 }
 
 
@@ -276,7 +380,7 @@ extension CreateViewController: UITextViewDelegate {
                     constraint.constant =  Constant.mainHeight * 0.49
                 } else {
                     constraint.constant = estimatedSize.height
-                    scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height-scrollView.bounds.height), animated: true)
+                   // scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height-scrollView.bounds.height), animated: true)
                     
                 }
             }

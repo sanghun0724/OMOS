@@ -59,15 +59,28 @@ class ArtistTableCell:UITableViewCell {
         
         titleLabel.snp.makeConstraints { make in
             make.leading.equalTo(songImageView.snp.trailing).offset(14)
+            make.trailing.equalToSuperview().offset(-14)
             make.centerY.equalToSuperview().multipliedBy(0.75)
-            titleLabel.sizeToFit()
         }
         
         subTitleLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(titleLabel)
+            make.leading.trailing.equalTo(titleLabel)
             make.centerY.equalToSuperview().multipliedBy(1.25)
-            subTitleLabel.sizeToFit()
         }
         
+    }
+    
+    func configureModel(artist:ArtistRespone) {
+        songImageView.setImage(with:artist.artistImageURL ?? "")
+        titleLabel.text = artist.artistName
+        subTitleLabel.text = artist.genres.reduce("") { $0 + " \($1)" }
+    
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        songImageView.image = nil
+        titleLabel.text = nil
+        subTitleLabel.text = nil
     }
 }

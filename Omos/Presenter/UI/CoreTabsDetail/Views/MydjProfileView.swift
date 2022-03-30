@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 class MydjProfieView:BaseView {
     
@@ -20,13 +21,33 @@ class MydjProfieView:BaseView {
         table.automaticallyAdjustsScrollIndicatorInsets = false
        return table
     }()
-
     
+    let profileLoadingView = LoadingView()
+    let recordsLoadingView = LoadingView()
+        
     override func configureUI() {
         self.addSubview(tableView)
+        self.addSubview(profileLoadingView)
+        self.addSubview(recordsLoadingView)
+        
+        
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        profileLoadingView.snp.makeConstraints { make in
+            make.leading.trailing.top.equalToSuperview()
+            make.height.equalTo(Constant.mainHeight * 0.17)
+        }
+        
+        profileLoadingView.isHidden = true
+        
+        recordsLoadingView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(Constant.mainHeight * 0.83)
+        }
+        
+        recordsLoadingView.isHidden = true
     }
     
 }
@@ -34,6 +55,7 @@ class MydjProfieView:BaseView {
 
 class MydjProfileHeader:UITableViewHeaderFooterView {
     static let identifier = "MydjProfileHeader"
+    var disposeBag = DisposeBag()
         
     let profileImageView:UIImageView = {
         let view = UIImageView(image:UIImage(named: "albumCover"))
@@ -61,6 +83,8 @@ class MydjProfileHeader:UITableViewHeaderFooterView {
         let button = UIButton()
         button.backgroundColor = .mainOrange
         button.setTitle("팔로우", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.layer.borderColor = UIColor.mainGrey4.cgColor
         return button
     }()
     
@@ -105,6 +129,11 @@ class MydjProfileHeader:UITableViewHeaderFooterView {
         label.font = .systemFont(ofSize: 18, weight: .medium)
         return label
     }()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
     
     
     override func layoutSubviews() {
@@ -188,9 +217,6 @@ class MydjProfileHeader:UITableViewHeaderFooterView {
             followingCountLabel.sizeToFit()
         }
         
-        
-        
-        
     }
     
     func plusSubViews() {
@@ -204,6 +230,21 @@ class MydjProfileHeader:UITableViewHeaderFooterView {
         self.addSubview(followerCountLabel)
         self.addSubview(followingTitleLabel)
         self.addSubview(followingCountLabel)
+    }
+    
+    func configureModel(profile:MyDjProfileResponse) {
+        profileLabel.text = profile.profile.nickName
+        profileImageView.setImage(with: profile.profile.profileURL ?? "")
+        followerCountLabel.text = "\(profile.count.followerCount)"
+        followingCountLabel.text = "\(profile.count.followingCount)"
+        recordCountLabel.text = "\(profile.count.recordsCount)"
+        
+        if profile.isFollowed {
+            followButton.setTitle("팔로잉", for:  .normal)
+            followButton.backgroundColor = .clear
+            followButton.setTitleColor(.mainGrey4, for: .normal)
+            followButton.layer.borderWidth = 1
+        }
     }
     
 }

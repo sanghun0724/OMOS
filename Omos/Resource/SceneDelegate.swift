@@ -10,6 +10,7 @@ import KakaoSDKAuth
 import AuthenticationServices
 import RxSwift
 import RxRelay
+import Alamofire
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -26,33 +27,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let disposeBag = DisposeBag()
     let kakaoValid = PublishRelay<Bool>()
     let appleValid = PublishRelay<Bool>()
-
+    let localValid = PublishRelay<Bool>()
+    
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: scene)
-        let uc = LoginUseCase(musicRepository: MusicRepositoryImpl(loginAPI: LoginAPI()))
-        let vm = LoginViewModel(usecase: uc)
-        //let localValid = PublishRelay<Bool>()
-        
-//        if $2  {
-//            if let local = UserDefaults.standard.string(forKey: "email") { //생략해도되겠다
-//                //탭바
-//            } else if !($0 || $1) {
-//                //로그인뷰
-//            } else {
-//                //탭바
-//            }
-//        } else {
-//            무조건 로그인뷰
-//        }
-        
-        
-        Observable.combineLatest(kakaoValid, appleValid)
-        { $0 || $1 }
-        .observe(on: MainScheduler.instance)
-        .subscribe(onNext: { [weak self] valid in
-            print("is it valid? \(valid)")
+        self.window?.overrideUserInterfaceStyle = .dark
+//        let uc = LoginUseCase(authRepository:AuthRepositoryImpl(loginAPI: LoginAPI()))
+//        let vm = LoginViewModel(usecase: uc)
+//
+//        Observable.combineLatest(kakaoValid, appleValid,localValid)
+//        { $0 || $1 || $2 }
+//        .observe(on: MainScheduler.instance)
+//        .subscribe(onNext: { [weak self] valid in
+//            print("is it valid? \(valid)")
 //            if valid {
 //                self?.window?.rootViewController = TabBarViewController()
 //                self?.window?.makeKeyAndVisible()
@@ -62,13 +51,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //                self?.window?.makeKeyAndVisible()
 //                self?.window?.backgroundColor = .mainBackGround
 //            }
-        }).disposed(by: disposeBag)
-        
-        //local 확인  -> accesstoken 필요한 API 호출해봄
-        //if api { Tabbar } else { login }
-        
-        
-        //snsToken 확인
+//        }).disposed(by: disposeBag)
+//
+//        //local 확인  -> accesstoken 필요한 API 호출해봄
+//        let recordAPI = RecordAPI()
+//        recordAPI.select { [weak self] result in
+//            switch result {
+//            case .success:
+//                print("local success")
+//                self?.localValid.accept(true)
+//            case .failure:
+//                print("local fail")
+//                self?.localValid.accept(false)
+//            }
+//        }
+//
+//
+//        //snsToken 확인
 //        LoginViewModel.hasKaKaoToken { [weak self] valid in
 //            if valid {
 //                self?.kakaoValid.accept(true)
@@ -77,7 +76,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //                self?.kakaoValid.accept(false)
 //                print("kakaoValid false")
 //            }
-//
 //        }
 //
 //        let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -100,10 +98,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //              default:
 //                  break
 //              }
-//          }
+//          }o
         
-        UserDefaults.standard.set("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvcmlnaW5AbmF2ZXIuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY0NjU0MjMyOX0.QNnyAccW-eb3CYECihPHTUbprlhJKKn9i0bl5muIdNHPlEP6zI8Gqv3USmXFY2f3RjXgYvxzNMSrOOa8TOIoZw",forKey:"access")
+        UserDefaults.standard.set("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvcmlnaW5AbmF2ZXIuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY3ODM2MTMyMn0.q6YbvSmVFOoU2-Rnp1a9iav1TTlbdV0aPQQ_E8OiOv34XwGfPWCRrOriMkSOpo7MkddJo5O2QyRjqZk29b7jfw",forKey:"access")
         UserDefaults.standard.set("eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NDY4MDM3MDV9.ZImb_c8Q6WSl2KaIDjMGs_tKfQPbgM57qDL6LFQFFnSksh0tGLxdflBVHQ4Ll76PglZg8ez86_QfyR6Jc75Lmw",forKey: "refresh")
+        UserDefaults.standard.set(1,forKey: "user")
+        
+        let vm = LyricsViewModel(usecase: RecordsUseCase(recordsRepository: RecordsRepositoryImpl(recordAPI: RecordAPI())))
         
         self.window?.rootViewController = TabBarViewController()
         self.window?.makeKeyAndVisible()

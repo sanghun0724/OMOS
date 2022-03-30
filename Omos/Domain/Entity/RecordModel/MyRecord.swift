@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - CategoryElement
 // MARK: - MyRecordElement
 struct MyRecordRespone: Codable {
     let category, createdDate: String
@@ -15,13 +14,11 @@ struct MyRecordRespone: Codable {
     let music: Music
     let recordContents: String
     let recordID: Int
-    let recordImageURL:String?
     let recordTitle: String
 
     enum CodingKeys: String, CodingKey {
         case category, createdDate, isPublic, music, recordContents
         case recordID = "recordId"
-        case recordImageURL = "recordImageUrl"
         case recordTitle
     }
 }
@@ -30,23 +27,57 @@ struct MyRecordRespone: Codable {
 
 // MARK: - MyRecord
 struct SaveRequest: Codable { // add imageURL or image data using form - data
-    let category, contents: String
-    let isPublic: Bool
-    let musicID, title: String
-    let userID: Int
+        let category: String
+        let isPublic: Bool
+        let musicID, recordContents, recordImageURL, recordTitle: String
+        let userID: Int
 
-    enum CodingKeys: String, CodingKey {
-        case category, contents, isPublic
-        case musicID = "musicId"
-        case title
-        case userID = "userId"
-    }
+        enum CodingKeys: String, CodingKey {
+            case category, isPublic
+            case musicID = "musicId"
+            case recordContents
+            case recordImageURL = "recordImageUrl"
+            case recordTitle
+            case userID = "userId"
+        }
 }
 
 struct SaveRespone:Codable {
-    let postID: Int
-    
-    enum CodingKeys: String, CodingKey {
-        case postID = "postId"
-    }
+    let state:Bool
+}
+
+
+struct UpdateRequest:Codable {
+    let contents:String
+    let title:String
+}
+
+struct PostRespone:Codable {
+    let postId:Int
+}
+
+struct StateRespone:Codable {
+    let state:Bool
+}
+
+
+struct DetailRecordResponse:Codable {
+       let category, createdDate: String
+       let isLiked, isPublic, isScraped: Bool
+       let likeCnt: Int
+       let music: Music
+       let nickname, recordContents: String
+       let recordID: Int
+       let recordImageURL: String?
+       let recordTitle: String
+       let scrapCnt, userID, viewsCnt: Int
+
+       enum CodingKeys: String, CodingKey {
+           case category, createdDate, isLiked, isPublic, isScraped, likeCnt, music, nickname, recordContents
+           case recordID = "recordId"
+           case recordImageURL = "recordImageUrl"
+           case recordTitle, scrapCnt
+           case userID = "userId"
+           case viewsCnt
+       }
 }
