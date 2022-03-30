@@ -19,11 +19,17 @@ class AllRecordCollectionCell:UICollectionViewCell {
     var detailInfo:ALine?
     var homeInfo:PopuralResponse?
     
+    let coverView:UIView = {
+        let view = UIView()
+        return view
+    }()
+    
     let backImageView:UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "test"))
         imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .mainBackGround
         imageView.clipsToBounds = true
+        imageView.alpha = 0.4
         return imageView
     }()
     
@@ -123,18 +129,24 @@ class AllRecordCollectionCell:UICollectionViewCell {
         nameLabel.text = record.nickname
         titleLabel.text = record.music.albumTitle
         subTitleLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}
+        
     }
     
     
    private func configureUI() {
-        self.addSubview(backImageView)
+        self.addSubview(coverView)
+       coverView.addSubview(backImageView)
        labelCoverView.addSubview(titleLabel)
        labelCoverView.addSubview(albumImageView)
        labelCoverView.addSubview(subTitleLabel)
-       backImageView.addSubview(labelCoverView)
-       backImageView.addSubview(descLabel)
-       backImageView.addSubview(nameLabel)
+       coverView.addSubview(labelCoverView)
+       coverView.addSubview(descLabel)
+       coverView.addSubview(nameLabel)
         
+       coverView.snp.makeConstraints { make in
+           make.edges.equalToSuperview()
+       }
+       
        backImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }

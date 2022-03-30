@@ -180,7 +180,10 @@ class recordLongView:BaseView {
     
     let backImageView:UIImageView = {
         let view = UIImageView()
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
         view.backgroundColor = .mainBackGround
+        view.alpha = 0.4
         return view
     }()
     

@@ -14,5 +14,6 @@ protocol AuthRepository {
     func checkEmail(email:String) -> Single<CheckEmailRespone>
     func snsLogin(email:String,type:SNSType) -> Single<SNSLoginResponse>
     func snsSignUp(email:String,nickName:String,type:SNSType) -> Single<SNSSignUpResponse>
+    func emailVerify(email:String) -> Single<EmailCheckResponse>
     
 }

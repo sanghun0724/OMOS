@@ -32,6 +32,10 @@ class LoginUseCase {
         return AuthRepository.snsSignUp(email: email, nickName: nickName, type: type)
     }
     
+    func emailVerify(email:String) -> Single<EmailCheckResponse> {
+        return AuthRepository.emailVerify(email: email)
+    }
+    
     init(authRepository:AuthRepository) {
         self.AuthRepository = authRepository
     }

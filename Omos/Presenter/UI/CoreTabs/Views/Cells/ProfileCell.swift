@@ -171,6 +171,7 @@ class SquareView:BaseView {
         let imageView = UIImageView(image:UIImage(named: "photo2"))
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
+        imageView.alpha = 0.4
         return imageView
     }()
     
@@ -216,11 +217,16 @@ class SquareView:BaseView {
     
     override func configureUI() {
         super.configureUI()
-        self.addSubview(backGroundImageView)
-        backGroundImageView.addSubview(albumImageView)
-        backGroundImageView.addSubview(trackTitleLabel)
-        backGroundImageView.addSubview(artistTitleLabel)
-        backGroundImageView.addSubview(recordTitleLabel)
+        self.addSubview(baseView)
+        baseView.addSubview(backGroundImageView)
+        baseView.addSubview(albumImageView)
+        baseView.addSubview(trackTitleLabel)
+        baseView.addSubview(artistTitleLabel)
+        baseView.addSubview(recordTitleLabel)
+        
+        baseView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         
         backGroundImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()

@@ -14,6 +14,10 @@ class SignUpViewModel:BaseViewModel {
     
     let validSignUp = PublishRelay<Bool>()
     let validEmail = PublishRelay<Bool>()
+    let validEmailCheck = PublishRelay<Bool>()
+    let emailCheckCode = PublishRelay<EmailCheckResponse>()
+    var currentEmailCheckCode:EmailCheckResponse = .init(code: "")
+    let loading = PublishRelay<Bool>()
     let usecase:LoginUseCase
     
     init(usecase:LoginUseCase) {
@@ -96,5 +100,19 @@ class SignUpViewModel:BaseViewModel {
         }).disposed(by: disposeBag)
     }
     
+    func emailVerify(email:String) {
+        loading.accept(true)
+        usecase.emailVerify(email: email).subscribe({ [weak self] event in
+            self?.loading.accept(false)
+            switch event {
+            case .success(let data):
+                self?.emailCheckCode.accept(data)
+                self?.currentEmailCheckCode = data
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }).disposed(by: disposeBag)
+    
+    }
     
 }

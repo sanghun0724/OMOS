@@ -103,12 +103,15 @@ extension InteractionRecordViewController:UITableViewDelegate,UITableViewDataSou
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-//        let data = myRecord[indexPath.row]
-//        let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
-//        let uc = RecordsUseCase(recordsRepository: rp)
-//        let vm = MyRecordDetailViewModel(usecase: uc)
-//        let vc = MyRecordDetailViewController(posetId: data.recordID,viewModel: vm)
-//        self.navigationController?.pushViewController(vc, animated: true)
+        let data:MyRecordRespone
+        if type == .like {
+             data = viewModel.currentLikeRecord[indexPath.row]
+                    
+        } else {
+             data = viewModel.currentScrapRecord[indexPath.row]
+        }
+
+       
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

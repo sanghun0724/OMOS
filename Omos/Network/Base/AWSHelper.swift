@@ -41,7 +41,7 @@ class AWSS3Helper {
             }
             imageData = data
         } else if type == .record {
-            guard let data = image.jpegData(compressionQuality: 0.4) else {
+            guard let data = image.jpegData(compressionQuality: 0.3) else {
                 completion(nil)
                 return
             }

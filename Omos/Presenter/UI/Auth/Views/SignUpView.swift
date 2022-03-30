@@ -149,8 +149,15 @@ class EmailCheckView:BaseView {
         return label
     }()
     
+    let isSuccessView:UIImageView = {
+        let view = UIImageView(image:UIImage(named: "check"))
+        view.isHidden = true
+        return view
+    }()
+    
     override func configureUI() {
         self.addSubview(labelView)
+        self.addSubview(isSuccessView)
         setAtt()
         
         labelView.snp.makeConstraints { make in
@@ -158,10 +165,16 @@ class EmailCheckView:BaseView {
             make.trailing.equalToSuperview().offset(-16)
             labelView.sizeToFit()
         }
+        
+        isSuccessView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.width.equalTo(20)
+        }
     }
     
     func setAtt() {
-        let text = NSMutableAttributedString.init(string: "이메일 인증")
+        let text = NSMutableAttributedString.init(string: "인증메일 보내기")
 
             let range = NSMakeRange(0, text.length)
             // add large fonts
