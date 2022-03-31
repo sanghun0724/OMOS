@@ -78,6 +78,7 @@ class NickNameViewController:BaseViewController {
 //                  let homeVC = TabBarViewController()
 //                  homeVC.modalPresentationStyle = .fullScreen
 //                    self?.present(homeVC,animated: true)
+                    NotificationCenter.default.post(name: NSNotification.Name.loginInfo, object: nil, userInfo: nil);
                 })
             } else {
                 self?.topView.nickNameField.layer.borderWidth = 1

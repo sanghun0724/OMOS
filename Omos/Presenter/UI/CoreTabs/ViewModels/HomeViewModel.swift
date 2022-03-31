@@ -20,7 +20,7 @@ class HomeViewModel:BaseViewModel {
     let todayRecord = PublishSubject<TodayTrackResponse>()
     var currentTodayRecord:TodayTrackResponse? = nil
     
-    let allLoading = PublishRelay<Bool>()
+    let allLoading = PublishSubject<Bool>()
     let popuralLoading = PublishSubject<Bool>()
     let lovedLoading = PublishSubject<Bool>()
     let recommendLoading = PublishSubject<Bool>()
@@ -32,13 +32,12 @@ class HomeViewModel:BaseViewModel {
     
     
     func allHomeDataFetch(userId:Int) {
-        allLoading.accept(true)
-        Observable.zip(popuralLoading,lovedLoading,recommendLoading,todayLoading)
+        allLoading.onNext(true)
+        Observable.combineLatest(popuralLoading,lovedLoading,recommendLoading,todayLoading)
         { !($0 && $1 && $2 && $3) }
+        .filter{ $0 }
         .subscribe(onNext: { [weak self] loading in
-            if loading {
-                self?.allLoading.accept(false)
-            }
+                self?.allLoading.onNext(false)
         }).disposed(by: disposeBag)
         
         self.fetchLovedRecord(userId: userId)

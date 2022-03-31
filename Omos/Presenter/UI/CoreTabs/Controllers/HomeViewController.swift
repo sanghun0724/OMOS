@@ -51,8 +51,11 @@ class HomeViewController:BaseViewController {
     func bind() {
         viewModel.allLoading
             .subscribe(onNext: { [weak self] loading in
+                print("loading is \(loading)")
                 self?.selfView.loadingView.isHidden = !loading
-                self?.selfView.tableView.reloadData()
+                if !loading {
+                    self?.selfView.tableView.reloadData()
+                }
             }).disposed(by: disposeBag)
         
         selfView.floatingButton.rx.tap
@@ -65,10 +68,6 @@ class HomeViewController:BaseViewController {
                 self?.navigationController?.pushViewController(vc, animated: true)
             }).disposed(by: disposeBag)
     }
-    
-    
-    
-    
 }
 
 

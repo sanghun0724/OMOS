@@ -107,7 +107,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        let vm = LyricsViewModel(usecase: RecordsUseCase(recordsRepository: RecordsRepositoryImpl(recordAPI: RecordAPI())))
         
 //        self.window?.rootViewController = LaunchViewController()
-        self.window?.rootViewController = TabBarViewController()
+        self.window?.rootViewController = LaunchViewController()
         self.window?.makeKeyAndVisible()
         self.window?.backgroundColor = .mainBackGround
        

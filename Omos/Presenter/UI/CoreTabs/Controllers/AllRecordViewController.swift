@@ -32,6 +32,7 @@ class AllRecordViewController: BaseViewController {
         bind()
         viewModel.selectRecordsShow()
         setRightItems()
+        setRefreshControl()
         NotificationCenter.default.addObserver(self, selector: #selector(didRecieveReloadNotification), name: NSNotification.Name.reload, object: nil)
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -43,11 +44,19 @@ class AllRecordViewController: BaseViewController {
         viewModel.selectRecordsShow()
     }
     
+    func setRefreshControl() {
+        self.selfView.tableView.refreshControl = UIRefreshControl()
+        self.selfView.tableView.refreshControl?.addTarget(self, action: #selector(didPullRefresh), for: .valueChanged)
+    }
     
     func setRightItems() {
         let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(didTapSearchButton))
         searchButton.tintColor = .white
         self.navigationItem.rightBarButtonItem = searchButton
+    }
+    
+    @objc func didPullRefresh() {
+        viewModel.selectRecordsShow()
     }
     
     @objc func didTapSearchButton() {
@@ -75,13 +84,23 @@ class AllRecordViewController: BaseViewController {
             .withUnretained(self)
             .subscribe(onNext: { owner,info in
                 owner.selectedRecords = info
-                owner.selfView.tableView.reloadData()
+                DispatchQueue.main.async {
+                    owner.selfView.tableView.refreshControl?.endRefreshing()
+                    owner.selfView.tableView.reloadData()
+                }
+               
             }).disposed(by: disposeBag)
         
         viewModel.loading
             .withUnretained(self)
             .subscribe(onNext: { owner,loading in
                 owner.selfView.loadngView.isHidden = !loading
+                guard let refreshing =  owner.selfView.tableView.refreshControl?.isRefreshing else {
+                    return
+                }
+                if refreshing {
+                    owner.selfView.loadngView.isHidden = true
+                }
             }).disposed(by: disposeBag)
     }
 }
