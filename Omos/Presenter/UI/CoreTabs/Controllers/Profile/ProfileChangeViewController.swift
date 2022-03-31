@@ -89,7 +89,7 @@ class ProfileChangeViewController:BaseViewController {
                               print("Image is cached")
                               ImageCache.default.removeImage(forKey: imageUrl)
                      }
-                
+                NotificationCenter.default.post(name: NSNotification.Name.profileReload, object: nil, userInfo: nil);
                        }).disposed(by: disposeBag)
         
         viewModel.updateProfileState

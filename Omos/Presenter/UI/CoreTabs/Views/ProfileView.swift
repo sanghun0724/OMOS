@@ -19,7 +19,7 @@ class ProfileView:BaseView {
         table.automaticallyAdjustsScrollIndicatorInsets = false
         table.insetsContentViewsToSafeArea = false
         table.contentInsetAdjustmentBehavior = .never
-        table.isScrollEnabled = false 
+        table.isScrollEnabled = true
         return table
     }()
     

@@ -53,6 +53,9 @@ class AllRecordCateLongDetailCell:UITableViewCell {
     func configureModel(record:CategoryRespone) {
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
+        if myView.subMusicInfoLabel.text?.first == " " {
+            myView.subMusicInfoLabel.text?.removeFirst()
+        }
         myView.circleImageView.setImage(with: record.music.albumImageURL)
         //myView.myView.backImageView.setImage(with: ) 추후 추가되면 삽입
         myView.titleLabel.text = record.recordTitle
@@ -82,6 +85,9 @@ class AllRecordCateLongDetailCell:UITableViewCell {
     func configureOneMusic(record:OneMusicRecordRespone) {
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
+        if myView.subMusicInfoLabel.text?.first == " " {
+            myView.subMusicInfoLabel.text?.removeFirst()
+        }
         myView.circleImageView.setImage(with: record.music.albumImageURL)
         myView.backImageView.setImage(with:record.recordImageURL ?? "" )
         myView.titleLabel.text = record.recordTitle
@@ -108,6 +114,9 @@ class AllRecordCateLongDetailCell:UITableViewCell {
     func configureMyDjRecord(record:MyDjResponse) {
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
+        if myView.subMusicInfoLabel.text?.first == " " {
+            myView.subMusicInfoLabel.text?.removeFirst()
+        }
         myView.circleImageView.setImage(with: record.music.albumImageURL)
         myView.backImageView.setImage(with: record.recordImageURL ?? "")
         myView.titleLabel.text = record.recordTitle
@@ -159,15 +168,16 @@ class recordLongView:BaseView {
     let musicTitleLabel:UILabel = {
         let label = UILabel()
         label.text = "노래 제목이 들어있습니다"
-        label.font = .systemFont(ofSize: 14)
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.textColor = .white
         return label
     }()
     
     let subMusicInfoLabel:UILabel = {
         let label = UILabel()
         label.text = "가수이름이 들어갑니다. 앨범제목이 들어갑니다."
-        label.font = .systemFont(ofSize: 12)
-        label.textColor = .mainGrey4
+        label.font = .systemFont(ofSize: 12, weight: .light)
+        label.textColor = .mainGrey1
         return label
     }()
     
@@ -190,7 +200,7 @@ class recordLongView:BaseView {
     let titleLabel:UILabel = {
         let label = UILabel()
         label.text = "백예린 노래"
-        label.font = .systemFont(ofSize: 22)
+        label.font = .systemFont(ofSize: 22,weight:.light)
         label.textColor = .white
         return label
     }()
@@ -198,7 +208,7 @@ class recordLongView:BaseView {
     let createdLabel:UILabel = {
         let label = UILabel()
         label.text = "2020 00 00"
-        label.font = .systemFont(ofSize: 12)
+        label.font = .systemFont(ofSize: 12,weight:.light)
         label.textColor = .mainGrey1
         return label
     }()

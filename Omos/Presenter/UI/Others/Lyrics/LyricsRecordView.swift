@@ -33,15 +33,16 @@ class LyricsRecordView:BaseView {
     let musicTitleLabel:UILabel = {
         let label = UILabel()
         label.text = "error"
-        label.font = .systemFont(ofSize: 14)
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.textColor = .white
         return label
     }()
     
     let subMusicInfoLabel:UILabel = {
         let label = UILabel()
         label.text = "error"
-        label.font = .systemFont(ofSize: 12)
-        label.textColor = .mainGrey4
+        label.font = .systemFont(ofSize: 12,weight: .light)
+        label.textColor = .mainGrey1
         return label
     }()
     
@@ -71,7 +72,7 @@ class LyricsRecordView:BaseView {
     let titleTextView:UITextView = {
         let textView = UITextView()
         textView.text = "레코드 제목을 입력해주세요"
-        textView.font = .systemFont(ofSize: 22)
+        textView.font = .systemFont(ofSize: 22,weight: .light)
         textView.textColor = .mainGrey4
         textView.isScrollEnabled = false
         textView.isUserInteractionEnabled = false 
@@ -84,7 +85,7 @@ class LyricsRecordView:BaseView {
     let createdField:UILabel = {
         let label = UILabel()
         label.text = "2020 00 00"
-        label.font = .systemFont(ofSize: 12)
+        label.font = .systemFont(ofSize: 12,weight: .light)
         label.textColor = .mainGrey1
         return label
     }()
@@ -92,7 +93,7 @@ class LyricsRecordView:BaseView {
     let cateLabel:UILabel = {
        let label = UILabel()
         label.text = " | 한줄감상"
-        label.font = .systemFont(ofSize: 12)
+        label.font = .systemFont(ofSize: 12,weight: .light)
         label.textColor = .mainGrey1
         return label
     }()
@@ -217,6 +218,11 @@ class LyricsRecordView:BaseView {
             subMusicInfoLabel.sizeToFit()
         }
         
+        dummyView1.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(0.5)
+        }
+        
         ///2
         titleImageView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
@@ -321,6 +327,7 @@ class LyricsRecordView:BaseView {
         topLabelView.addSubview(circleImageView)
         topLabelView.addSubview(musicTitleLabel)
         topLabelView.addSubview(subMusicInfoLabel)
+        topLabelView.addSubview(dummyView1)
         
         titleImageView.addSubview(imageView)
         titleImageView.addSubview(titleTextView)

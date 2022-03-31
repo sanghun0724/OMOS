@@ -129,23 +129,12 @@ class PasswordLabelView:BaseView {
 
 
 class labels:BaseView {
-    let findIDButton:UIButton = {
+    let findButton:UIButton = {
        let button = UIButton()
-        button.setTitle("아이디찾기", for: .normal)
+        button.setTitle("아이디찾기 | 비밀번호", for: .normal)
         return button
     }()
     
-    let dummyView:UIView = {
-       let view = UIView()
-        view.backgroundColor = .mainGrey7
-        return view
-    }()
-    
-    let findPWButton:UIButton = {
-        let button = UIButton()
-         button.setTitle("비밀번호 찾기", for: .normal)
-         return button
-    }()
     
     let signUpButton:UIButton = {
         let button = UIButton()
@@ -156,27 +145,15 @@ class labels:BaseView {
     }()
     
     override func configureUI() {
-//        self.addSubview(findIDButton)
-//        self.addSubview(findPWButton)
-//        self.addSubview(dummyView)
+        self.addSubview(findButton)
         self.addSubview(signUpButton)
         
-//        findIDButton.snp.makeConstraints { make in
+//        findButton.snp.makeConstraints { make in
 //            make.left.top.bottom.equalToSuperview()
 //            make.height.equalTo(64)
 //        }
 //
-//        dummyView.snp.makeConstraints { make in
-//            make.top.bottom.equalToSuperview()
-//            make.left.equalTo(findIDButton.snp.right).inset(1)
-//            make.width.equalTo(1)
-//        }
-//
-//        findPWButton.snp.makeConstraints { make in
-//            make.top.bottom.equalToSuperview()
-//            make.left.equalTo(dummyView.snp.right).inset(1)
-//            make.width.equalTo(64)
-//        }
+
         
         signUpButton.snp.makeConstraints { make in
             make.top.right.bottom.equalToSuperview()

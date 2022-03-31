@@ -27,7 +27,9 @@ class ProfileViewController: BaseViewController {
         bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
-       // viewModel.allFetch()
+        viewModel.allFetch()
+        setRefreshControl()
+        NotificationCenter.default.addObserver(self, selector: #selector(didRecieveProfileReloadNotification), name: NSNotification.Name.follow, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,12 +37,24 @@ class ProfileViewController: BaseViewController {
         self.navigationController?.navigationBar.backgroundColor = .mainBlack
         self.tabBarController?.tabBar.isHidden = false
         
-        viewModel.allFetch()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.navigationBar.backgroundColor = .mainBackGround
+    }
+    
+    @objc func didRecieveProfileReloadNotification() {
+        viewModel.allFetch()
+    }
+    
+    @objc func didPullRefresh() {
+        viewModel.allFetch()
+    }
+    
+    func setRefreshControl() {
+        self.selfView.tableView.refreshControl = UIRefreshControl()
+        self.selfView.tableView.refreshControl?.addTarget(self, action: #selector(didPullRefresh), for: .valueChanged)
     }
     
     override func configureUI() {
@@ -59,11 +73,20 @@ class ProfileViewController: BaseViewController {
             .subscribe(onNext:{ [weak self] loading in
                 print(loading)
                 self?.selfView.loadingView.isHidden = !loading
+                guard let refreshing = self?.selfView.tableView.refreshControl?.isRefreshing else {
+                    return
+                }
+                if refreshing {
+                    self?.selfView.loadingView.isHidden = true
+                }
             }).disposed(by: disposeBag)
         
         Observable.zip(viewModel.myProfileRecord,viewModel.myProfile)
         .subscribe(onNext: { [weak self] _ in
-            self?.selfView.tableView.reloadData()
+            DispatchQueue.main.async {
+                self?.selfView.tableView.refreshControl?.endRefreshing()
+                self?.selfView.tableView.reloadData()
+            }
         }).disposed(by: disposeBag)
         
         

@@ -70,6 +70,9 @@ class AllRecordCateShortDetailCell:UITableViewCell {
     func configureOneMusic(record:OneMusicRecordRespone) {
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
+        if myView.subMusicInfoLabel.text?.first == " " {
+            myView.subMusicInfoLabel.text?.removeFirst()
+        }
         myView.circleImageView.setImage(with: record.music.albumImageURL)
         myView.backImageView.setImage(with:record.recordImageURL ?? "" )
         myView.titleLabel.text = record.recordTitle
@@ -93,6 +96,9 @@ class AllRecordCateShortDetailCell:UITableViewCell {
     func configureMyDjRecord(record:MyDjResponse) {
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
+        if myView.subMusicInfoLabel.text?.first == " " {
+            myView.subMusicInfoLabel.text?.removeFirst()
+        }
         myView.circleImageView.setImage(with: record.music.albumImageURL)
         myView.backImageView.setImage(with: record.recordImageURL ?? "")
         myView.titleLabel.text = record.recordTitle

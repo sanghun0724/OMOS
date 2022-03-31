@@ -391,7 +391,7 @@ class MyRecordDetailViewController:BaseViewController {
     
     func setShrotData(myRecord:DetailRecordResponse) {
         selfView.musicTitleLabel.text = myRecord.music.musicTitle
-        selfView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
+        selfView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(myRecord.music.albumTitle)"
         selfView.circleImageView.setImage(with: myRecord.music.albumImageURL)
         selfView.backImageView.setImage(with: myRecord.recordImageURL ?? "")
         selfView.titleLabel.text = myRecord.recordTitle
@@ -400,8 +400,7 @@ class MyRecordDetailViewController:BaseViewController {
         selfView.scrapCountLabel.text = String(myRecord.scrapCnt)
         selfView.cateLabel.text =  " | \(myRecord.category.getReverseCate() )"
         selfView.nicknameLabel.text = myRecord.nickname
-        print("herererr")
-        print(myRecord)
+        selfView.lockButton.isEnabled = false
         
         if myRecord.isPublic ?? true {
             selfView.lockButton.setImage(UIImage(named: "unlock"), for: .normal)
@@ -426,7 +425,7 @@ class MyRecordDetailViewController:BaseViewController {
     
     func setLongData(myRecord:DetailRecordResponse) {
         selflongView.myView.musicTitleLabel.text = myRecord.music.musicTitle
-        selflongView.myView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
+        selflongView.myView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(myRecord.music.albumTitle)"
         selflongView.myView.circleImageView.setImage(with: myRecord.music.albumImageURL)
         selflongView.myView.backImageView.setImage(with: myRecord.recordImageURL ?? "")
         selflongView.myView.titleLabel.text = myRecord.recordTitle
@@ -435,6 +434,7 @@ class MyRecordDetailViewController:BaseViewController {
         selflongView.myView.scrapCountLabel.text = String(myRecord.scrapCnt)
         selflongView.myView.cateLabel.text = " | \(myRecord.category.getReverseCate() )"
         selflongView.myView.nicknameLabel.text = myRecord.nickname
+        selflongView.myView.lockButton.isEnabled = false
         
         if myRecord.isPublic ?? true {
             selflongView.myView.lockButton.setImage(UIImage(named: "unlock"), for: .normal)
@@ -484,7 +484,7 @@ class MyRecordDetailViewController:BaseViewController {
         }
      
         selfLyricsView.musicTitleLabel.text = myRecord.music.musicTitle
-        selfLyricsView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
+        selfLyricsView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(myRecord.music.albumTitle)"
         selfLyricsView.circleImageView.setImage(with: myRecord.music.albumImageURL)
         selfLyricsView.imageView.setImage(with: myRecord.recordImageURL ?? "")
         selfLyricsView.titleTextView.text = myRecord.recordTitle
@@ -494,6 +494,7 @@ class MyRecordDetailViewController:BaseViewController {
         selfLyricsView.cateLabel.text =  " | \(myRecord.category.getReverseCate() )"
         selfLyricsView.nicknameLabel.text = myRecord.nickname
         selfLyricsView.dummyView3.isHidden = true
+        selfLyricsView.lockButton.isEnabled = false
         
         if myRecord.isLiked {
             selfLyricsView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)

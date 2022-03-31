@@ -79,6 +79,9 @@ class AllrecordLyricsTableCell:UITableViewCell {
     func configureModel(record:CategoryRespone) {
         selfView.musicTitleLabel.text = record.music.musicTitle
         selfView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
+        if selfView.subMusicInfoLabel.text?.first == " " {
+            selfView.subMusicInfoLabel.text?.removeFirst()
+        }
         selfView.circleImageView.setImage(with: record.music.albumImageURL)
         selfView.imageView.setImage(with: record.recordImageURL ?? "")
         selfView.titleTextView.text = record.recordTitle
@@ -105,6 +108,9 @@ class AllrecordLyricsTableCell:UITableViewCell {
     func configureOneMusic(record:OneMusicRecordRespone) {
         selfView.musicTitleLabel.text = record.music.musicTitle
         selfView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
+        if selfView.subMusicInfoLabel.text?.first == " " {
+            selfView.subMusicInfoLabel.text?.removeFirst()
+        }
         selfView.circleImageView.setImage(with: record.music.albumImageURL)
         selfView.imageView.setImage(with: record.recordImageURL ?? "")
         selfView.titleTextView.text = record.recordTitle
@@ -129,6 +135,9 @@ class AllrecordLyricsTableCell:UITableViewCell {
     func configureMyDjRecord(record:MyDjResponse) {
         selfView.musicTitleLabel.text = record.music.musicTitle
         selfView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
+        if selfView.subMusicInfoLabel.text?.first == " " {
+            selfView.subMusicInfoLabel.text?.removeFirst()
+        }
         selfView.circleImageView.setImage(with: record.music.albumImageURL)
         selfView.imageView.setImage(with: record.recordImageURL ?? "")
         selfView.titleTextView.text = record.recordTitle

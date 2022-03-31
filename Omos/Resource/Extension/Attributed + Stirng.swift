@@ -199,6 +199,7 @@ extension Notification.Name {
     static let followCancel = Notification.Name("followCancel")
     static let reload = Notification.Name("reload")
     static let loginInfo = Notification.Name("login")
+    static let profileReload = Notification.Name("profile")
 }
 
 

@@ -273,7 +273,10 @@ class AllRecordDetailViewController:BaseViewController {
     
     func setLongData(myRecord:DetailRecordResponse) {
         selfLongView.musicTitleLabel.text = myRecord.music.musicTitle
-        selfLongView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
+        selfLongView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(myRecord.music.albumTitle)"
+        if selfLongView.subMusicInfoLabel.text?.first == " " {
+            selfLongView.subMusicInfoLabel.text?.removeFirst()
+        }
         selfLongView.circleImageView.setImage(with: myRecord.music.albumImageURL)
         selfLongView.backImageView.setImage(with: myRecord.recordImageURL ?? "")
         selfLongView.titleLabel.text = myRecord.recordTitle
@@ -310,7 +313,10 @@ class AllRecordDetailViewController:BaseViewController {
     
     func setShortData(myRecord:DetailRecordResponse) {
         selfShortView.musicTitleLabel.text = myRecord.music.musicTitle
-        selfShortView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
+        selfShortView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(myRecord.music.albumTitle)"
+        if  selfShortView.subMusicInfoLabel.text?.first == " " {
+            selfShortView.subMusicInfoLabel.text?.removeFirst()
+        }
         selfShortView.circleImageView.setImage(with: myRecord.music.albumImageURL)
         selfShortView.backImageView.setImage(with: myRecord.recordImageURL ?? "")
         selfShortView.titleLabel.text = myRecord.recordTitle
@@ -361,7 +367,10 @@ class AllRecordDetailViewController:BaseViewController {
             }
         }
         selfLyricsView.musicTitleLabel.text = myRecord.music.musicTitle
-        selfLyricsView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
+        selfLyricsView.subMusicInfoLabel.text = myRecord.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(myRecord.music.albumTitle)"
+        if selfLyricsView.subMusicInfoLabel.text?.first == " " {
+            selfLyricsView.subMusicInfoLabel.text?.removeFirst()
+        }
         selfLyricsView.circleImageView.setImage(with: myRecord.music.albumImageURL)
         selfLyricsView.imageView.setImage(with: myRecord.recordImageURL ?? "")
         selfLyricsView.titleTextView.text = myRecord.recordTitle

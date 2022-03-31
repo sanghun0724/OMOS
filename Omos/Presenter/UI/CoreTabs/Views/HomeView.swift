@@ -284,14 +284,14 @@ class HomeHeaderView:UITableViewHeaderFooterView {
         }
         
         songTitleLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(artistTitleLabel.snp.top).offset(-10)
+            make.bottom.equalTo(artistTitleLabel.snp.top).offset(-8)
             make.leading.trailing.equalTo(artistTitleLabel)
             songTitleLabel.sizeToFit()
         }
         
         albumLabelImageView.snp.makeConstraints { make in
             make.leading.equalTo(artistTitleLabel)
-            make.top.equalTo(artistTitleLabel.snp.bottom)
+            make.top.equalTo(artistTitleLabel.snp.bottom).offset(6)
             make.width.equalTo(createdButton).multipliedBy(0.6)
             make.height.equalTo(albumLabelImageView.snp.width)
         }

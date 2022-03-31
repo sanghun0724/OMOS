@@ -77,7 +77,6 @@ class MyRecordViewController: BaseViewController {
             make.left.right.bottom.equalToSuperview()
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
         }
-        
     }
     
     func bind() {
