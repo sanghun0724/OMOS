@@ -13,7 +13,7 @@ import YPImagePicker
 import Mantis
 import Combine
 import KakaoSDKUser
-
+import Kingfisher
 
 class LyricsPasteCreateViewController:BaseViewController {
     
@@ -26,6 +26,7 @@ class LyricsPasteCreateViewController:BaseViewController {
     var totalString = 0
     var textTagCount = 1
     var textCellsArray:[Int]
+    lazy var awsHelper = AWSS3Helper()
     
     init(viewModel:LyricsViewModel,type:CreateType) {
         self.viewModel = viewModel
@@ -78,24 +79,48 @@ class LyricsPasteCreateViewController:BaseViewController {
             return
         }
         var content = ""
+        var state = true
         selfView.tableView.visibleCells.forEach { cell in
             if let cell = cell as? LyriscTableCell {
-               content += cell.label.text ?? ""  + "\n"
-            } else if let cell = cell as? TextTableCell {
-                guard let desc = cell.textView.text else {
-                    //alret
+                guard let txt = cell.label.text else {
                     return
                 }
-                content += desc + "\n"
+               content += txt + "\n"
+            } else if let cell = cell as? TextTableCell {
+                guard let desc = cell.textView.text else {
+                    return
+                }
+                if desc == "" || desc == "가사해석을 적어주세요." {
+                    state = false
+                }
+                content += (desc + "\n")
+            
             }
         }
+        print(content)
+        if selfView.titleTextView.text == "" || selfView.titleTextView.text == "레코드 제목을 입력해주세요" || !state {
+            setAlert()
+            return
+        }
+        
         
         if type == .create {
-            viewModel.saveRecord(cate: "LYRICS", content: content, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title:titleText , userid: Account.currentUser)
+            viewModel.saveRecord(cate: "LYRICS", content: content, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title:titleText , userid: Account.currentUser,recordImageUrl: "https://omos-image.s3.ap-northeast-2.amazonaws.com/record/\(viewModel.curTime).png")
         } else {
-            
-            viewModel.updateRecord(postId: viewModel.modifyDefaultModel?.recordID ?? 0, request: .init(contents: content, title: selfView.titleTextView.text ))
+            if ImageCache.default.isCached(forKey: viewModel.modifyDefaultModel?.recordImageURL ?? "") {
+                          print("Image is cached")
+                          ImageCache.default.removeImage(forKey: viewModel.modifyDefaultModel?.recordImageURL ?? "")
+                 }
+            viewModel.updateRecord(postId: viewModel.modifyDefaultModel?.recordID ?? 0, request: .init(contents: content, title: selfView.titleTextView.text,isPublic: !(selfView.lockButton.isSelected),recordImageUrl: viewModel.modifyDefaultModel?.recordImageURL ?? "" ))
         }
+    }
+    
+    private func setAlert() {
+        let action = UIAlertAction(title: "확인", style: .default) { alert in
+            
+        }
+        action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
+        self.presentAlert(title: "", message: "내용이나 제목을 채워주세요", isCancelActionIncluded: false, preferredStyle: .alert, with: action)
     }
     
     func setScrollView() {
@@ -156,8 +181,9 @@ class LyricsPasteCreateViewController:BaseViewController {
         selfView.subMusicInfoLabel.text = viewModel.modifyDefaultModel?.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
         selfView.titleTextView.text = viewModel.modifyDefaultModel?.recordTitle
         selfView.titleTextView.textColor = .white
-        selfView.remainTitle.text =  "\(viewModel.modifyDefaultModel?.recordTitle.count)/36"
-        selfView.remainTextCount.text = "\(viewModel.modifyDefaultModel?.recordContents.count)/380"
+        selfView.imageView.setImage(with: viewModel.modifyDefaultModel?.recordImageURL ?? "")
+        selfView.remainTitleCount.text =  "\(viewModel.modifyDefaultModel?.recordTitle.count ?? 0)/36"
+        selfView.remainTextCount.text = "\(viewModel.modifyDefaultModel?.recordContents.count ?? 0)/380"
         
     }
     
@@ -177,6 +203,12 @@ class LyricsPasteCreateViewController:BaseViewController {
                         UserDefaults.standard.set(1, forKey: "reload")
                         break
                     }
+                    
+                    if controller.isKind(of: HomeViewController.self) {
+                        self?.navigationController?.popToViewController(controller, animated: true)
+                        break
+                    }
+                    
                     if controller.isKind(of: AllRecordCateDetailViewController.self) {
                         self?.navigationController?.popToViewController(controller, animated: true)
                         
@@ -325,6 +357,21 @@ extension LyricsPasteCreateViewController: UITextViewDelegate {
 extension LyricsPasteCreateViewController:CropViewControllerDelegate {
     func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation, cropInfo: CropInfo) {
         selfView.imageView.image = cropped
+        if type == .create {
+            awsHelper.uploadImage(cropped, sender: self, imageName: "record/\(viewModel.curTime)" , type: .record) { _ in
+               
+            }
+        } else {//711648447384992.png
+            guard let str = viewModel.modifyDefaultModel?.recordImageURL else { return }
+            let startIndex = str.index(str.endIndex, offsetBy: -19)
+            let endIndex = str.index(str.endIndex, offsetBy: -4)
+            let defualtUrl = String(str[startIndex..<endIndex])
+            
+            awsHelper.uploadImage(cropped, sender: self, imageName: "record/\(defualtUrl)" , type: .record) { _ in
+
+            }
+           
+        }
         self.dismiss(animated: true,completion: nil)
         self.tabBarController?.tabBar.isHidden = true
     }

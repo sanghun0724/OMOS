@@ -16,5 +16,5 @@ struct Constant {
 }
 
 struct Account {
-   static let currentUser = UserDefaults.standard.integer(forKey: "user")
+   static var currentUser = UserDefaults.standard.integer(forKey: "user")
 }

@@ -33,7 +33,8 @@ class SearchViewController:BaseViewController {
         super.viewWillAppear(animated)
         self.enableScrollWhenKeyboardAppeared(scrollView: selfView.tableView)
         self.enableScrollWhenKeyboardAppeared(scrollView: selfView.bestTableView)
-        self.navigationController?.navigationBar.isHidden = false 
+        self.navigationController?.navigationBar.isHidden = false
+        self.tabBarController?.tabBar.isHidden = true 
     }
     
     override func viewWillDisappear(_ animated: Bool) {

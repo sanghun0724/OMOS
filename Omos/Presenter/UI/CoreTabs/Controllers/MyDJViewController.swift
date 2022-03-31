@@ -16,13 +16,14 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
     var expandedIndexSet2 : IndexSet = []
 
     var isPaging = false
-    var hasNextPage = false
+    var hasNextPage = true
     var currentPage = -1
     var shortCellHeights:[IndexPath:CGFloat] = [:]
     var longCellHeights:[IndexPath:CGFloat] = [:]
     let viewModel:MyDjViewModel
     let user = UserDefaults.standard.integer(forKey: "user")
-    var currentDjLastPostId = 0
+    var lastPostId = 0
+    var isDjcliked = false 
 
     init(viewModel:MyDjViewModel) {
         self.viewModel = viewModel
@@ -41,7 +42,59 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
         selfView.tableView.dataSource = self
         selfView.collectionView.delegate = self
         selfView.collectionView.dataSource = self
-        viewModel.fetchMyDjList(userId: user)
+        viewModel.fetchMyDjList(userId: Account.currentUser)
+        viewModel.fetchMyDjRecord(userId: Account.currentUser , request: .init(postId: viewModel.currentMyDjRecord.last?.recordID , size: 6))
+//        self.timer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true, block: {[weak self] (tt) in
+//            self?.viewModel.fetchMyDjList(userId: Account.currentUser)
+//            self?.selfView.collectionView.reloadData()
+//            })
+//            timer?.fire()
+        NotificationCenter.default.addObserver(self, selector: #selector(didRecieveFollowNotification), name: NSNotification.Name.follow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didRecieveFollowCacelNotification), name: NSNotification.Name.followCancel, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didRecieveReloadNotification), name: NSNotification.Name.reload, object: nil)
+        
+
+    }
+//
+//    deinit {
+//        timer?.invalidate()
+//    }
+    
+    @objc func didRecieveReloadNotification() {
+        isDjcliked = false
+        viewModel.fetchMyDjList(userId: Account.currentUser)
+        viewModel.fetchMyDjRecord(userId: Account.currentUser, request: .init(postId: viewModel.currentMyDjRecord.last?.recordID, size: 6))
+        self.selfView.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+    }
+    
+    @objc func didRecieveFollowCacelNotification(_ notification: Notification) {
+        self.viewModel.fetchMyDjList(userId: Account.currentUser)
+        self.selfView.collectionView.visibleCells.forEach({ cell in
+            if let cell = cell as? MydjCollectionCell {
+                cell.djImageView.layer.borderWidth = 0
+            }
+        })
+        isDjcliked = false
+        viewModel.fetchMyDjRecord(userId: Account.currentUser, request: .init(postId: viewModel.currentMyDjRecord.last?.recordID, size: 6))
+    }
+    
+    @objc func didRecieveFollowNotification(_ notification: Notification) {
+        self.viewModel.fetchMyDjList(userId: Account.currentUser)
+        self.selfView.collectionView.visibleCells.forEach({ cell in
+            if let cell = cell as? MydjCollectionCell {
+                cell.djImageView.layer.borderWidth = 0
+            }
+        })
+        isDjcliked = false
+        viewModel.fetchMyDjRecord(userId: Account.currentUser, request: .init(postId: viewModel.currentMyDjRecord.last?.recordID, size: 6))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+       
     }
 
 
@@ -62,24 +115,44 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
         
         viewModel.myDjList
             .subscribe(onNext: { [weak self] data in
-                self?.viewModel.fetchMyDjRecord(userId: data.first?.userID ?? 0, request: .init(postId: nil, size: 10))
                 self?.selfView.collectionView.reloadData()
             }).disposed(by: disposeBag)
       
         viewModel.myDjRecord
             .subscribe(onNext: { [weak self] data in
+                    self?.hasNextPage = self?.lastPostId == self?.viewModel.currentMyDjRecord.last?.recordID ?? 0 ? false : true
+                    self?.lastPostId = self?.viewModel.currentMyDjRecord.last?.recordID ?? 0
+                    print("hasNext\(self?.hasNextPage)")
+                    self?.isPaging = false //페이징 종료
+                    self?.selfView.tableView.reloadData()
+                    self?.selfView.tableView.layoutIfNeeded()
+                    self?.selfView.loadingView.backgroundColor = .clear
+
+            }).disposed(by: disposeBag)
+        
+        viewModel.userRecords
+            .subscribe(onNext: { [weak self] data in
                 if !data.isEmpty {
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { [weak self] in
                         self?.selfView.tableView.reloadData()
                         self?.selfView.tableView.layoutIfNeeded()
                         self?.selfView.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                        self?.selfView.tableView.layoutIfNeeded()
+                        self?.expandedIndexSet = []
+                        self?.expandedIndexSet2 = []
                     }
-                    
                 }
-            }).disposed(by: disposeBag)
+            }).disposed(by:disposeBag)
         
         viewModel.loading
             .subscribe(onNext: { [weak self] loading in
+                self?.selfView.loadingView.isHidden = !loading
+                print("loading\(loading)")
+            }).disposed(by: disposeBag)
+        
+        viewModel.recordsLoading
+            .subscribe(onNext: { [weak self] loading in
+                self?.selfView.loadingView.backgroundColor = .mainBackGround
                 self?.selfView.loadingView.isHidden = !loading
             }).disposed(by: disposeBag)
         
@@ -87,12 +160,23 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
             .subscribe(onNext:{ [weak self] empty in
                 self?.selfView.emptyView.isHidden = !empty
             }).disposed(by: disposeBag)
+        
+        viewModel.reportState
+            .subscribe(onNext: { [weak self] _ in
+                self?.selfView.collectionView.visibleCells.forEach({ cell in
+                    if let cell = cell as? MydjCollectionCell {
+                        cell.djImageView.layer.borderWidth = 0
+                    }
+                })
+                self?.isDjcliked = false
+                self?.viewModel.currentMyDjRecord = []
+                self?.viewModel.fetchMyDjRecord(userId: Account.currentUser, request: .init(postId: self?.viewModel.currentMyDjRecord.last?.recordID, size: 6))
+            }).disposed(by: disposeBag)
     }
 
 
     private func fetchRecord() {
-    
-        viewModel.fetchMyDjRecord(userId: user, request: .init(postId: viewModel.currentMyDjRecord.last?.recordID, size:10))
+        viewModel.fetchMyDjRecord(userId: user, request: .init(postId: viewModel.currentMyDjRecord.last?.recordID, size:6))
         //2. 바인딩 하고 도착하면 데이터 append (위에서 하고 있으니 ok)
     }
 
@@ -109,13 +193,15 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
-
-      //계속 부르는 이유 -> 데이터 없어서 게속 스크롤 끝에 가있다고 인지해서 게속부름
-//        if offsetY > contentHeight - scrollView.frame.height {
-//            if isPaging == false && hasNextPage {
-//                beginPaging()
-//            }
-//        }
+        let height = scrollView.frame.height
+        
+        // 스크롤이 테이블 뷰 Offset의 끝에 가게 되면 다음 페이지를 호출
+        if offsetY > (contentHeight - height) {
+         
+            if isPaging == false && hasNextPage && !isDjcliked{
+                beginPaging()
+            }
+        }
     }
 }
 

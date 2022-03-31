@@ -20,6 +20,11 @@ enum RecordTarget {
     case oneMusicRecord(musicId:String,OneMusicRecordRequest)
     case MyDjAllRecord(userId:Int,MyDjRequest)
     case userRecords(fromId:Int,toId:Int)
+    //Profile like&scrap
+    case likeRecords(userId:Int)
+    case scrapRecords(userId:Int)
+    case myProfileRecords(userId:Int)
+    case reportRecord(postId:Int)
 }
 
 extension RecordTarget:TargetType {
@@ -40,6 +45,10 @@ extension RecordTarget:TargetType {
         case .oneMusicRecord: return .get
         case .MyDjAllRecord: return .get
         case .userRecords: return .get
+        case .likeRecords: return .get
+        case .scrapRecords: return .get
+        case .myProfileRecords: return .get
+        case .reportRecord: return .put
         }
     }
     
@@ -56,22 +65,22 @@ extension RecordTarget:TargetType {
         case .oneMusicRecord(let id,_): return "/select/music/\(id)"
         case .MyDjAllRecord(let user,_): return "/select/\(user)/my-dj"
         case .userRecords(let from,let to): return "/select/user/\(from)/\(to)"
+        case .likeRecords(let user): return "/select/\(user)/liked-records"
+        case .scrapRecords(let user): return "/select/\(user)/scrapped-records"
+        case .myProfileRecords(let user): return "select/\(user)/my-records"
+        case .reportRecord(let post): return "/\(post)/report"
         }
     }
     
     var parameters: RequestParams? {
         switch self {
-        case .select: return nil
-        case .recordDetail: return nil
         case .category(_,let request): return .query(request)
-        case .myRecord: return nil
         case .save(let request): return .body(request)
-        case .recordIspublic: return nil
-        case .recordDelete: return nil
         case .recordUpdate(_,let request): return .body(request)
         case .oneMusicRecord(_,let request): return .query(request)
         case .MyDjAllRecord(_, let request): return .query(request)
-        case .userRecords: return nil
+        default:
+            return nil
         }
     }
     

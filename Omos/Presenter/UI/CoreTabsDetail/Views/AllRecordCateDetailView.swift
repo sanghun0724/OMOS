@@ -42,5 +42,6 @@ class AllRecordCateDetailView:BaseView {
         loadingView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        loadingView.backgroundColor = .clear
     }
 }

@@ -82,10 +82,10 @@ class RecordsRepositoryImpl:RecordsRepository {
         }
     }
     
-    func save(cate: String, content: String, isPublic: Bool, musicId: String, title: String, userid: Int) -> Single<SaveRespone> {
+    func save(cate: String, content: String, isPublic: Bool, musicId: String, title: String, userid: Int,recordImageUrl:String) -> Single<SaveRespone> {
         
         return Single<SaveRespone>.create { [weak self] single in
-            self?.recordAPI.saveFetch(request:.init(category: cate, isPublic: isPublic, musicID: musicId, recordContents: content, recordImageURL: "", recordTitle: title, userID: userid) ,completion: { result in
+            self?.recordAPI.saveFetch(request:.init(category: cate, isPublic: isPublic, musicID: musicId, recordContents: content, recordTitle: title, recordImageURL:recordImageUrl , userID: userid) ,completion: { result in
                 switch result {
                 case .success(let data):
                     single(.success(data))
@@ -131,8 +131,8 @@ class RecordsRepositoryImpl:RecordsRepository {
         }
     }
     
-    func recordUpdate(postId:Int,request:UpdateRequest) -> Single<PostRespone> {
-        return Single<PostRespone>.create { [weak self] single in
+    func recordUpdate(postId:Int,request:UpdateRequest) -> Single<StateRespone> {
+        return Single<StateRespone>.create { [weak self] single in
             self?.recordAPI.recordUpdate(postId: postId,request:request,completion: { result in
                 switch result {
                 case .success(let data):
@@ -312,9 +312,41 @@ class RecordsRepositoryImpl:RecordsRepository {
         }
     }
     
-    func userRecords(fromId:Int,toId:Int) -> Single<[UserRecordsResponse]> {
-        return Single<[UserRecordsResponse]>.create { [weak self] single in
+    func userRecords(fromId:Int,toId:Int) -> Single<[MyDjResponse]> {
+        return Single<[MyDjResponse]>.create { [weak self] single in
             self?.recordAPI.userRecords(fromId: fromId, toId: toId ,completion: { result in
+                switch result {
+                case .success(let data):
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            })
+            
+            return Disposables.create()
+        }
+    }
+    
+    func reportRecord(postId:Int) -> Single<StateRespone> {
+        return Single<StateRespone>.create { [weak self] single in
+            self?.recordAPI.reportRecord(postId: postId,completion: { result in
+                switch result {
+                case .success(let data):
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            })
+            
+            return Disposables.create()
+        }
+    }
+    
+    func userReport(userId:Int) -> Single<StateRespone> {
+        return Single<StateRespone>.create { [weak self] single in
+            self?.recordAPI.userReport(userId: userId,completion: { result in
                 switch result {
                 case .success(let data):
                     single(.success(data))

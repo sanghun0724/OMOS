@@ -103,4 +103,19 @@ class LoginAPI {
            }
        }
    }
+    
+    func emailCheck(request:EmailCheckRequest,completion:@escaping(Result<EmailCheckResponse,Error>) -> Void) {
+       
+       AF.request(LoginTarget.emailCheck(request)).responseDecodable { (response:AFDataResponse<EmailCheckResponse>) in
+           switch response.result {
+           case .success(let data):
+               print(data)
+               completion(.success(data))
+           case .failure(let error):
+               print(error.localizedDescription) //같은 닉네임
+               completion(.failure(error))
+           }
+       }
+   }
+    
 }

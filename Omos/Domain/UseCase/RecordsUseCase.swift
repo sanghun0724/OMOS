@@ -32,8 +32,8 @@ class RecordsUseCase {
         return recordsRepository.myRecordFetch(userid: userid)
     }
     
-    func save(cate:String,content:String,isPublic:Bool,musicId:String,title:String,userid:Int) -> Single<SaveRespone> {
-        return recordsRepository.save(cate: cate, content: content, isPublic: isPublic, musicId: musicId, title: title, userid: userid)
+    func save(cate:String,content:String,isPublic:Bool,musicId:String,title:String,userid:Int,recordImageUrl:String) -> Single<SaveRespone> {
+        return recordsRepository.save(cate: cate, content: content, isPublic: isPublic, musicId: musicId, title: title, userid: userid,recordImageUrl:recordImageUrl)
     }
     
     func recordIspublic(postId:Int) -> Single<StateRespone> {
@@ -44,7 +44,7 @@ class RecordsUseCase {
         return recordsRepository.recordDelete(postId: postId)
     }
     
-    func recordUpdate(postId:Int,request:UpdateRequest) -> Single<PostRespone> {
+    func recordUpdate(postId:Int,request:UpdateRequest) -> Single<StateRespone> {
         return recordsRepository.recordUpdate(postId: postId,request:request)
     }
     
@@ -90,7 +90,15 @@ class RecordsUseCase {
         return recordsRepository.myDjList(userId: userId)
     }
     
-    func userRecords(fromId:Int,toId:Int) -> Single<[UserRecordsResponse]> {
+    func userRecords(fromId:Int,toId:Int) -> Single<[MyDjResponse]> {
         return recordsRepository.userRecords(fromId: fromId, toId: toId)
+    }
+    
+    func reportRecord(postId:Int) -> Single<StateRespone> {
+        return recordsRepository.reportRecord(postId: postId)
+    }
+    
+    func userReport(userId:Int) -> Single<StateRespone> {
+        return recordsRepository.userReport(userId: userId)
     }
 }

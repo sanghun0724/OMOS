@@ -8,8 +8,12 @@
 import Foundation
 import UIKit
 import ReadMoreTextView
+import SnapKit
 
 class MyRecordDetailView:BaseView {
+    
+    var heightConst:Constraint? = nil
+    
     /// 1
     let topLabelView:UIView = {
         let view = UIView()
@@ -25,16 +29,23 @@ class MyRecordDetailView:BaseView {
     let musicTitleLabel:UILabel = {
         let label = UILabel()
         label.text = "노래 제목이 들어있습니다"
-        label.font = .systemFont(ofSize: 14)
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.textColor = .white
         return label
     }()
     
     let subMusicInfoLabel:UILabel = {
         let label = UILabel()
         label.text = "가수이름이 들어갑니다. 앨범제목이 들어갑니다."
-        label.font = .systemFont(ofSize: 12)
-        label.textColor = .mainGrey4
+        label.font = .systemFont(ofSize: 12,weight: .light)
+        label.textColor = .mainGrey1
         return label
+    }()
+    
+    let dummyView2:UIView = {
+        let view = UIView()
+        view.backgroundColor = .mainBlack1
+        return view
     }()
     
     /// 2
@@ -46,14 +57,17 @@ class MyRecordDetailView:BaseView {
     
     let backImageView:UIImageView = {
         let view = UIImageView()
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true 
         view.backgroundColor = .mainBackGround
+        view.alpha = 0.4
         return view
     }()
     
     let titleLabel:UILabel = {
         let label = UILabel()
         label.text = "백예린 노래"
-        label.font = .systemFont(ofSize: 22)
+        label.font = .systemFont(ofSize: 22,weight: .light)
         label.textColor = .white
         return label
     }()
@@ -61,7 +75,7 @@ class MyRecordDetailView:BaseView {
     let createdLabel:UILabel = {
         let label = UILabel()
         label.text = "2020 00 00"
-        label.font = .systemFont(ofSize: 12)
+        label.font = .systemFont(ofSize: 12,weight: .light)
         label.textColor = .mainGrey1
         return label
     }()
@@ -112,7 +126,7 @@ class MyRecordDetailView:BaseView {
         return view
     }()
     
-    let dummyView2:UIView = {
+    let dummyView1:UIView = {
         let view = UIView()
         view.backgroundColor = .mainBlack1
         return view
@@ -176,7 +190,7 @@ class MyRecordDetailView:BaseView {
         ///1
         topLabelView.snp.makeConstraints { make in
             make.left.right.top.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.11)
+            make.height.equalTo(Constant.mainHeight * 0.077)
         }
         
         circleImageView.snp.makeConstraints { make in
@@ -200,11 +214,16 @@ class MyRecordDetailView:BaseView {
             subMusicInfoLabel.sizeToFit()
         }
         
+        dummyView1.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(0.5)
+        }
+        
         ///2
         titleImageView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(topLabelView.snp.bottom)
-            make.height.equalToSuperview().multipliedBy(0.32)
+            make.height.equalTo(Constant.mainHeight * 0.227)
         }
         
         backImageView.snp.makeConstraints { make in
@@ -242,8 +261,10 @@ class MyRecordDetailView:BaseView {
         
         ///4
         lastView.snp.makeConstraints { make in
-            make.left.right.bottom.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.124)
+            make.left.right.equalToSuperview()
+            //make.top.equalTo(textCoverView.snp.bottom)
+            make.bottom.equalToSuperview()
+            make.height.equalTo(Constant.mainHeight * 0.07)
         }
         
         dummyView2.snp.makeConstraints { make in
@@ -286,20 +307,22 @@ class MyRecordDetailView:BaseView {
         
         dummyView3.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(4)
+            make.height.equalTo(2)
         }
         
         ///3
         textCoverView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(titleImageView.snp.bottom)
-            make.bottom.equalTo(lastView.snp.top)
+            self.heightConst = make.height.equalTo(Constant.mainHeight * 0.28).constraint
+            make.bottom.equalTo(lastView.snp.top).priority(999)
         }
         
         mainLabelView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.centerY.equalToSuperview()
         }
+       
         
         
     }
@@ -314,6 +337,7 @@ class MyRecordDetailView:BaseView {
         topLabelView.addSubview(circleImageView)
         topLabelView.addSubview(musicTitleLabel)
         topLabelView.addSubview(subMusicInfoLabel)
+        topLabelView.addSubview(dummyView1)
         
         titleImageView.addSubview(backImageView)
         titleImageView.addSubview(titleLabel)

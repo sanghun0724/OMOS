@@ -10,6 +10,7 @@ import RxSwift
 
 class CreateViewModel:BaseViewModel {
     
+    let curTime = "\(Account.currentUser)\(Date.currentTimeStamp)"
     var modifyDefaultModel:DetailRecordResponse? = nil 
     var defaultModel:recordSaveDefaultModel = .init(musicId: "", imageURL: "", musicTitle: "", subTitle: "") // create할때 있는놈들
     let errorMessage = BehaviorSubject<String?>(value: nil)
@@ -24,9 +25,9 @@ class CreateViewModel:BaseViewModel {
         
     }
     
-    func saveRecord(cate:String, content:String, isPublic:Bool, musicId: String, title: String, userid: Int) {
+    func saveRecord(cate:String, content:String, isPublic:Bool,musicId: String, title: String, userid: Int,recordImageURL:String) {
         loading.onNext(false)
-        usecase.save(cate: cate, content: content, isPublic: isPublic, musicId: musicId, title: title, userid: userid)
+        usecase.save(cate: cate, content: content, isPublic: isPublic, musicId: musicId, title: title, userid: userid, recordImageUrl: recordImageURL)
             .subscribe({ [weak self] event in
                 self?.loading.onNext(true)
                 switch event {

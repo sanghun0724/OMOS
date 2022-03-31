@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "keyboard_arrow_left.png",
+      "filename" : "chevron-right 1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "chevron-right 1@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "chevron-right 1@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

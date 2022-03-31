@@ -31,6 +31,11 @@ class SearchArtistViewController:BaseViewController {
         viewModel.artistDetailAlbumFetch(artistId: self.artistData.artistID, request: .init(artistId: artistData.artistName, limit: 20, offset: 0))
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
     
     override func configureUI() {
         super.configureUI()

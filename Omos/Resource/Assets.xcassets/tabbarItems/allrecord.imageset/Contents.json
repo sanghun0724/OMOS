@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "전체 레코드.png",
+      "filename" : "allrecord.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "allrecord@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "allrecord@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

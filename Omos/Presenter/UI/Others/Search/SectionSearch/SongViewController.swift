@@ -52,7 +52,7 @@ class SongViewController:BaseViewController,UIScrollViewDelegate {
         
         viewModel.track
             .subscribe({ [weak self] data in
-                self?.hasNextPage = self?.viewModel.currentTrack.count ?? 0 > 300 ? false : true
+                self?.hasNextPage = self?.viewModel.currentTrack.count ?? 0 > 200 ? false : true
                 self?.isPaging = false
                 self?.selfView.tableView.reloadData()
             }).disposed(by: disposebag)
@@ -78,6 +78,7 @@ class SongViewController:BaseViewController,UIScrollViewDelegate {
             }
         }
     }
+    
     func beginPaging() {
         isPaging = true
         

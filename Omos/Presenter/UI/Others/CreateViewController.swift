@@ -11,6 +11,7 @@ import RxCocoa
 import SnapKit
 import YPImagePicker
 import Mantis
+import Kingfisher
 
 enum CreateType {
     case modify
@@ -19,12 +20,13 @@ enum CreateType {
 
 class CreateViewController:BaseViewController {
     
-    
     let scrollView = UIScrollView()
     let category:String
     private let selfView = CreateView()
     let viewModel:CreateViewModel
     let type:CreateType
+    lazy var awsHelper = AWSS3Helper()
+    
     
     init(viewModel:CreateViewModel,category:String,type:CreateType) {
         self.viewModel = viewModel
@@ -50,8 +52,6 @@ class CreateViewController:BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        selfView.circleImageView.layer.cornerRadius = selfView.circleImageView.height / 2
-        selfView.circleImageView.layer.masksToBounds = true
         setlongTextView(category)
     }
     
@@ -63,7 +63,8 @@ class CreateViewController:BaseViewController {
         doneButton.tintColor = .white
         self.navigationItem.rightBarButtonItem = doneButton
         enableScrollWhenKeyboardAppeared(scrollView: scrollView)
-        
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.backgroundColor = .mainBackGround
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -79,15 +80,17 @@ class CreateViewController:BaseViewController {
             mainText = selfView.mainfullTextView.text
         }
         let backImage = selfView.imageView.image
-        guard let titleText = selfView.titleTextView.text,
-              let text = mainText else {
-                  //alert
-                  print("alert here")
-                  return
-              }
+        if selfView.titleTextView.text == "레코드 제목을 입력해주세요" || selfView.titleTextView.text == "" || mainText == #""레코드 내용을 입력해주세요""# || mainText == "레코드 내용을 입력해주세요" || mainText == "" {
+            setAlert()
+            return
+        }
         
         if type == .create {
-            viewModel.saveRecord(cate: getCate(cate: category), content: text, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: titleText, userid: UserDefaults.standard.integer(forKey: "user"))
+            var imageUrl = "https://omos-image.s3.ap-northeast-2.amazonaws.com/record/\(viewModel.curTime).png"
+            viewModel.saveRecord(cate: getCate(cate: category), content: mainText!, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: selfView.titleTextView.text, userid: Account.currentUser,recordImageURL: imageUrl )
+          
+            
+            print("check Point\(viewModel.curTime)")
         } else {
             var recordContent = ""
             if  selfView.mainTextView.text != viewModel.modifyDefaultModel?.recordTitle {
@@ -96,9 +99,21 @@ class CreateViewController:BaseViewController {
                 recordContent = selfView.mainfullTextView.text
             }
             
-            viewModel.updateRecord(postId: viewModel.modifyDefaultModel?.recordID ?? 0, request: .init(contents: recordContent, title: selfView.titleTextView.text ))
+            if ImageCache.default.isCached(forKey: viewModel.modifyDefaultModel?.recordImageURL ?? "") {
+                          print("Image is cached")
+                          ImageCache.default.removeImage(forKey: viewModel.modifyDefaultModel?.recordImageURL ?? "")
+                 }
+            viewModel.updateRecord(postId: viewModel.modifyDefaultModel?.recordID ?? 0, request: .init(contents: recordContent, title: selfView.titleTextView.text,isPublic:  !(selfView.lockButton.isSelected),recordImageUrl: viewModel.modifyDefaultModel?.recordImageURL ?? "" ))
         }
         
+    }
+    
+    private func setAlert() {
+        let action = UIAlertAction(title: "확인", style: .default) { alert in
+            
+        }
+        action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
+        self.presentAlert(title: "", message: "내용이나 제목을 채워주세요", isCancelActionIncluded: false, preferredStyle: .alert, with: action)
     }
     
     private func setCreateViewinfo() {
@@ -135,6 +150,7 @@ class CreateViewController:BaseViewController {
         selfView.titleTextView.text = viewModel.modifyDefaultModel?.recordTitle
         selfView.mainTextView.text = viewModel.modifyDefaultModel?.recordContents
         selfView.mainfullTextView.text = viewModel.modifyDefaultModel?.recordContents
+        selfView.imageView.setImage(with: viewModel.modifyDefaultModel?.recordImageURL ?? "")
         selfView.mainTextView.textColor = .white
         selfView.mainfullTextView.textColor = .white
         selfView.titleTextView.textColor = .white
@@ -162,6 +178,11 @@ class CreateViewController:BaseViewController {
                         UserDefaults.standard.set(1, forKey: "reload")
                         break
                     }
+                    
+                    if controller.isKind(of: HomeViewController.self) {
+                        self?.navigationController?.popToViewController(controller, animated: true)
+                        break
+                    }
                     if controller.isKind(of: AllRecordCateDetailViewController.self) {
                         self?.navigationController?.popToViewController(controller, animated: true)
                         
@@ -179,6 +200,8 @@ class CreateViewController:BaseViewController {
                     }
                 }
                 
+                
+                
                 // print("here is \(self?.navigationController!.viewControllers ?? [UIViewController()])")
             }).disposed(by: disposeBag)
         
@@ -194,6 +217,10 @@ class CreateViewController:BaseViewController {
             .bind(to: selfView.lockButton.rx.isSelected)
             .disposed(by: disposeBag)
         
+        selfView.stickerImageView.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                self?.selfView.stickerChoiceView.isHidden = false
+            }).disposed(by: disposeBag)
     }
     
     
@@ -203,6 +230,7 @@ class CreateViewController:BaseViewController {
         config.wordings.cameraTitle = "카메라"
         config.wordings.next = "다음"
         config.colors.tintColor = .white
+        UINavigationBar.appearance().backgroundColor = .black
         let picker = YPImagePicker(configuration: config)
         picker.didFinishPicking { [unowned picker] items, cancelled in
             if let photo = items.singlePhoto {
@@ -217,9 +245,9 @@ class CreateViewController:BaseViewController {
                 print("Picker was canceled")
                 picker.dismiss(animated: true, completion: nil)
                 self.tabBarController?.tabBar.isHidden = true
+                UINavigationBar.appearance().backgroundColor = .mainBackGround
             }
         }
-        
         present(picker, animated: true, completion: nil)
     }
     
@@ -380,7 +408,7 @@ extension CreateViewController: UITextViewDelegate {
                     constraint.constant =  Constant.mainHeight * 0.49
                 } else {
                     constraint.constant = estimatedSize.height
-                   // scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height-scrollView.bounds.height), animated: true)
+                    // scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height-scrollView.bounds.height), animated: true)
                     
                 }
             }
@@ -392,6 +420,25 @@ extension CreateViewController: UITextViewDelegate {
 extension CreateViewController:CropViewControllerDelegate {
     func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation, cropInfo: CropInfo) {
         selfView.imageView.image = cropped
+        
+        if type == .create {
+            awsHelper.uploadImage(cropped, sender: self, imageName: "record/\(viewModel.curTime)" , type: .record) { _ in
+               
+            }
+        } else {//711648447384992.png
+            guard let str = viewModel.modifyDefaultModel?.recordImageURL else { return }
+            let startIndex = str.index(str.endIndex, offsetBy: -19)
+            let endIndex = str.index(str.endIndex, offsetBy: -4)
+            let defualtUrl = String(str[startIndex..<endIndex])
+            
+            awsHelper.uploadImage(cropped, sender: self, imageName: "record/\(defualtUrl)" , type: .record) { _ in
+
+            }
+           
+        }
+        
+       
+       
         self.dismiss(animated: true,completion: nil)
         self.tabBarController?.tabBar.isHidden = true
     }

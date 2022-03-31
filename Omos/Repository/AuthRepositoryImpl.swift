@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 import RxAlamofire
 
+
 class AuthRepositoryImpl:AuthRepository {
     
     let disposeBag = DisposeBag()
@@ -104,5 +105,23 @@ class AuthRepositoryImpl:AuthRepository {
            return Disposables.create()
        }
     }
+    
+    func emailVerify(email: String) -> Single<EmailCheckResponse> {
+        return Single<EmailCheckResponse>.create { [weak self] single in
+            self?.loginAPI.emailCheck(request: .init(email: email)) { result in
+               switch result {
+               case .success(let data):
+                   print("sign Up success \(data)")
+                   single(.success(data))
+               case .failure(let error):
+                   print(error.localizedDescription)
+                   single(.failure(error))
+               }
+           }
+           
+           return Disposables.create()
+       }
+    }
+    
     
 }

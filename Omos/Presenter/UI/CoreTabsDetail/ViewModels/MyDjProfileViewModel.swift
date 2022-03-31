@@ -15,8 +15,9 @@ class MyDjProfileViewModel:BaseViewModel {
     let recordsLoading = BehaviorSubject<Bool>(value:false)
     let mydjProfile = PublishSubject<MyDjProfileResponse>()
     var currentMydjProfile:MyDjProfileResponse? = nil
-    let userRecords = PublishSubject<[UserRecordsResponse]>()
-    var currentUserRecrods:[UserRecordsResponse] = []
+    let userRecords = PublishSubject<[MyRecordRespone]>()
+    let userReportState = PublishSubject<Bool>()
+    var currentUserRecrods:[MyRecordRespone] = []
     let usecase:RecordsUseCase
     let errorMessage = BehaviorSubject<String?>(value: nil)
     
@@ -35,14 +36,14 @@ class MyDjProfileViewModel:BaseViewModel {
             }).disposed(by: disposeBag)
     }
     
-    func fetchUserRecords(fromId:Int,toId:Int) {
+    func fetchUserRecords(toUserId:Int) {
         recordsLoading.onNext(true)
-        usecase.userRecords(fromId: fromId, toId: toId)
+        usecase.myRecordFetch(userid: toUserId)
             .subscribe({ [weak self] event in
                 self?.recordsLoading.onNext(false)
                 switch event {
                 case .success(let data):
-                    self?.currentUserRecrods += data
+                    self?.currentUserRecrods = data
                     self?.userRecords.onNext(data)
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)
@@ -55,6 +56,7 @@ class MyDjProfileViewModel:BaseViewModel {
         usecase.saveFollow(fromId: fromId, toId: toId)
             .subscribe({ state in
                 print(state)
+        NotificationCenter.default.post(name: NSNotification.Name.follow, object: nil, userInfo: nil);
             }).disposed(by: disposeBag)
     }
     
@@ -62,6 +64,19 @@ class MyDjProfileViewModel:BaseViewModel {
         usecase.deleteFollow(fromId: fromId, toId: toId)
             .subscribe({ state in
                 print(state)
+        NotificationCenter.default.post(name: NSNotification.Name.followCancel, object: nil, userInfo: nil);
+            }).disposed(by: disposeBag)
+    }
+    
+    func userReport(userId:Int) {
+        usecase.userReport(userId: userId)
+            .subscribe({ [weak self] event in
+                switch event {
+                case .success(let data):
+                    self?.userReportState.onNext(data.state)
+                case .failure(let error):
+                    self?.errorMessage.onNext(error.localizedDescription)
+                }
             }).disposed(by: disposeBag)
     }
     

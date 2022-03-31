@@ -65,6 +65,7 @@ class AllRecordTableCell:UITableViewCell {
         self.selectedRecords = records
     }
     
+
     
 }
 

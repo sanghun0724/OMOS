@@ -13,10 +13,19 @@ import RxRelay
 class TabBarViewController: UITabBarController {
     
     static var titles:[(String,String)] = []
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupControllers()
+        if #available(iOS 15.0, *) {
+            UITableView.appearance().sectionHeaderTopPadding = 0
+        }
+       
+     
+        // upload to S3
+       
+        
     }
     
     private func setupControllers() {
@@ -25,7 +34,7 @@ class TabBarViewController: UITabBarController {
         let myRecord = MyRecordViewController(viewModel: MyRecordViewModel(usecase: RecordsUseCase(recordsRepository: RecordsRepositoryImpl(recordAPI: RecordAPI()))))
         let allRecord = AllRecordViewController(viewModel: AllRecordViewModel(usecase: RecordsUseCase(recordsRepository: RecordsRepositoryImpl(recordAPI: RecordAPI()))))
         let myDj = MyDJViewController(viewModel: MyDjViewModel(usecase: RecordsUseCase(recordsRepository: RecordsRepositoryImpl(recordAPI: RecordAPI()))))
-        let profile = ProfileViewController()
+        let profile = ProfileViewController(viewModel: ProfileViewModel(usecase: MyProfileUseCase(myProfileRepository: MyProfileRepositoryImpl(myProfileAPI: MyProfileAPI()))))
         
         
         let nav1 = UINavigationController(rootViewController: home)

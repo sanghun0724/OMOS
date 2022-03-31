@@ -21,12 +21,21 @@ extension UIImageView {
                 } else {
                     guard let url = URL(string: urlString) else { return }
                     let resource = ImageResource(downloadURL: url, cacheKey: urlString) // URL로부터 이미지를 다운받고 String 타입의 URL을 캐시키로 지정하고
-                    self.kf.setImage(with: resource) // 이미지를 셋한다.
+                    self.kf.setImage(with: resource,placeholder: UIImage(named: "albumCover")) // 이미지를 셋한다.
                 }
             case .failure(let error):
                 print(error)
             }
         }
+    }
+    
+    func setImageNocache(with urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        self.kf.setImage(
+            with: url,
+            placeholder: UIImage(named: "albumCover"),
+            options: [.forceRefresh]
+        )
     }
     
     //서버에서 받아온 이미지 cornerRadius적용하기
@@ -66,5 +75,19 @@ extension UIImageView {
         gradient.mask = shape
         
         layer.insertSublayer(gradient, below: layer)
+    }
+    
+    
+}
+
+
+extension UIImage {
+
+    func alpha(_ value:CGFloat) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        draw(at: CGPoint.zero, blendMode: .normal, alpha: value)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
     }
 }

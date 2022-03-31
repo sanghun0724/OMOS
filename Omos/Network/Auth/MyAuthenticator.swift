@@ -40,6 +40,7 @@ class MyAuthenticator:Authenticator {
                 UserDefaults.standard.set(accessToken, forKey: "access")
                 UserDefaults.standard.set(refreshToken, forKey: "refresh")
                 UserDefaults.standard.set(userId ,forKey: "user")
+                Account.currentUser = UserDefaults.standard.integer(forKey: "user")
                 let newCredential = MyAuthenticationCredential(accessToken: accessToken, refreshToken: refreshToken,userID: userId)
                 completion(.success(newCredential))
             case .failure(let error):

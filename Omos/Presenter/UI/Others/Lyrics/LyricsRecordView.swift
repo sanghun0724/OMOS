@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import SnapKit
 
 class LyricsRecordView:BaseView {
     
-    
+    var tableHeightConstraint: Constraint? = nil
+    var subTableHeightConstraint: Constraint? = nil
     ///1
     let topLabelView:UIView = {
         let view = UIView()
@@ -31,15 +33,16 @@ class LyricsRecordView:BaseView {
     let musicTitleLabel:UILabel = {
         let label = UILabel()
         label.text = "error"
-        label.font = .systemFont(ofSize: 14)
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.textColor = .white
         return label
     }()
     
     let subMusicInfoLabel:UILabel = {
         let label = UILabel()
         label.text = "error"
-        label.font = .systemFont(ofSize: 12)
-        label.textColor = .mainGrey4
+        label.font = .systemFont(ofSize: 12,weight: .light)
+        label.textColor = .mainGrey1
         return label
     }()
     
@@ -53,6 +56,7 @@ class LyricsRecordView:BaseView {
        let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
+        view.alpha = 0.4
         return view
     }()
     
@@ -68,7 +72,7 @@ class LyricsRecordView:BaseView {
     let titleTextView:UITextView = {
         let textView = UITextView()
         textView.text = "레코드 제목을 입력해주세요"
-        textView.font = .systemFont(ofSize: 22)
+        textView.font = .systemFont(ofSize: 22,weight: .light)
         textView.textColor = .mainGrey4
         textView.isScrollEnabled = false
         textView.isUserInteractionEnabled = false 
@@ -81,7 +85,7 @@ class LyricsRecordView:BaseView {
     let createdField:UILabel = {
         let label = UILabel()
         label.text = "2020 00 00"
-        label.font = .systemFont(ofSize: 12)
+        label.font = .systemFont(ofSize: 12,weight: .light)
         label.textColor = .mainGrey1
         return label
     }()
@@ -89,7 +93,7 @@ class LyricsRecordView:BaseView {
     let cateLabel:UILabel = {
        let label = UILabel()
         label.text = " | 한줄감상"
-        label.font = .systemFont(ofSize: 12)
+        label.font = .systemFont(ofSize: 12,weight: .light)
         label.textColor = .mainGrey1
         return label
     }()
@@ -103,12 +107,18 @@ class LyricsRecordView:BaseView {
     
     ///3
     
-    lazy var allStackView:UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.spacing = 10
-        stack.distribution = .fillEqually
-        return stack
+    let tableView:IntrinsicTableView = {
+       let table = IntrinsicTableView()
+        table.register(LyriscTableCell.self, forCellReuseIdentifier: LyriscTableCell.identifier)
+        table.register(TextTableCell.self, forCellReuseIdentifier: TextTableCell.identifier)
+        table.backgroundColor = .mainBackGround
+        table.separatorStyle = .none
+        table.estimatedRowHeight = 190
+        table.rowHeight = UITableView.automaticDimension
+        table.showsVerticalScrollIndicator = false
+        table.automaticallyAdjustsScrollIndicatorInsets = false
+        table.isScrollEnabled = true
+       return table
     }()
     
   
@@ -162,6 +172,19 @@ class LyricsRecordView:BaseView {
         return label
     }()
     
+    let dummyView3:UIView = {
+        let view = UIView()
+        view.backgroundColor = .mainBlack1
+        return view
+    }()
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        circleImageView.layoutIfNeeded()
+        circleImageView.layer.cornerRadius = circleImageView.height / 2
+        circleImageView.layer.masksToBounds = true
+    }
+    
     override func configureUI() {
         super.configureUI()
         setDefault()
@@ -193,6 +216,11 @@ class LyricsRecordView:BaseView {
             make.bottom.equalTo(circleImageView.snp.bottom)
             make.trailing.equalToSuperview().offset(-14)
             subMusicInfoLabel.sizeToFit()
+        }
+        
+        dummyView1.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(0.5)
         }
         
         ///2
@@ -260,6 +288,11 @@ class LyricsRecordView:BaseView {
             make.top.equalTo(scrapButton.snp.bottom).offset(3)
             scrapCountLabel.sizeToFit()
         }
+        
+        dummyView3.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(2)
+        }
 
 
         likeButton.snp.makeConstraints { make in
@@ -275,9 +308,11 @@ class LyricsRecordView:BaseView {
             likeCountLabel.sizeToFit()
         }
         
-        allStackView.snp.makeConstraints { make in
+        tableView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(titleImageView.snp.bottom)
+            self.tableHeightConstraint = make.height.equalTo(1200).constraint
+            self.subTableHeightConstraint = make.height.equalTo(Constant.mainHeight * 0.28).constraint
             make.bottom.equalTo(lastView.snp.top).priority(751)
         }
         
@@ -287,11 +322,12 @@ class LyricsRecordView:BaseView {
     func setDefault() {
         self.addSubview(topLabelView)
         self.addSubview(titleImageView)
-        self.addSubview(allStackView)
+        self.addSubview(tableView)
         self.addSubview(lastView)
         topLabelView.addSubview(circleImageView)
         topLabelView.addSubview(musicTitleLabel)
         topLabelView.addSubview(subMusicInfoLabel)
+        topLabelView.addSubview(dummyView1)
         
         titleImageView.addSubview(imageView)
         titleImageView.addSubview(titleTextView)
@@ -305,6 +341,7 @@ class LyricsRecordView:BaseView {
         lastView.addSubview(likeCountLabel)
         lastView.addSubview(scrapButton)
         lastView.addSubview(scrapCountLabel)
+        lastView.addSubview(dummyView3)
         
         
     

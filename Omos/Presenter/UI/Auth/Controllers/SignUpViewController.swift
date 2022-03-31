@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxGesture
 
 class SignUpViewController:UIViewController {
     
@@ -15,6 +16,7 @@ class SignUpViewController:UIViewController {
     private let disposeBag = DisposeBag()
     private let topView = SignUpView()
     var passwordFlag = false
+    let loadingView = LoadingView()
     
     init(viewModel:SignUpViewModel) {
         self.viewModel = viewModel
@@ -32,11 +34,14 @@ class SignUpViewController:UIViewController {
         button.setTitleColor(.mainGrey7, for: .normal)
         button.layer.cornerRadius = Constant.loginCorner
         button.layer.masksToBounds = true
+        button.isEnabled = false
         return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadingView.isHidden = true
+        loadingView.backgroundColor = .clear
         dismissKeyboardWhenTappedAround()
         bind()
         
@@ -51,6 +56,7 @@ class SignUpViewController:UIViewController {
         topView.coverView.titleLabel.text = "회원가입"
         view.addSubview(topView)
         view.addSubview(nextButton)
+        view.addSubview(loadingView)
         
         topView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
@@ -62,6 +68,10 @@ class SignUpViewController:UIViewController {
             make.left.right.equalToSuperview().inset(16)
             make.height.equalToSuperview().multipliedBy(0.06)
             make.bottom.equalToSuperview().offset(-40)
+        }
+        
+        loadingView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
         
     }
@@ -124,7 +134,7 @@ class SignUpViewController:UIViewController {
                         self?.topView.emailField.layer.borderWidth = 0
                         self?.topView.emailLabel.warningLabel.isHidden = true
                     }
-                    if !(text2.count >= 8 && text2.count <= 16) {
+                    if !(text2.count >= 8 && text2.count <= 16 && !(text2.hasCharacters())) {
                         self?.topView.passwordField.layer.borderWidth = 1
                         self?.topView.passwordField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
                         self?.topView.passwordLabel.warningLabel.text = "8~16자의 영문 대소문자,숫자,특수문자만 가능해요"
@@ -159,6 +169,53 @@ class SignUpViewController:UIViewController {
                 }).disposed(by: self!.disposeBag)
             }).disposed(by: disposeBag)
         isAllEmptyBind()
+        
+        viewModel.loading
+            .subscribe(onNext: { [weak self] loading in
+                self?.loadingView.isHidden = !loading
+            }).disposed(by: disposeBag)
+        
+        topView.emailCheckView.labelView.rx
+            .tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.emailVerify(email: self?.topView.emailField.text ?? "")
+            }).disposed(by: disposeBag)
+        
+        viewModel.emailCheckCode
+            .subscribe(onNext: { [weak self] _ in
+                let alert = UIAlertController(title: "", message: "메일에서 받은 인증코드를 입력해주세요.", preferredStyle: .alert)
+                alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = UIColor.mainBackGround
+                alert.view.tintColor = .mainGrey3
+                alert.addTextField(configurationHandler: { textField in
+                    textField.placeholder = "이메일 인증코드를 입력해주세요."
+                })
+                let ok = UIAlertAction(title: "완료", style: .default, handler: { (action) -> Void in
+                    self?.topView.emailCheckView.labelView.gestureRecognizers?.forEach( (self?.topView.emailCheckView.labelView.removeGestureRecognizer)!)
+                    if alert.textFields?.first?.text ?? "" == self?.viewModel.currentEmailCheckCode.code {
+                        print("same")
+                        self?.viewModel.validEmailCheck.accept(true)
+                        self?.topView.emailCheckView.labelView.isHidden = true
+                        self?.topView.emailCheckView.isSuccessView.isHidden = false
+                    } else {
+                        print("diff")
+                        self?.viewModel.validEmailCheck.accept(false)
+                            let text = NSMutableAttributedString.init(string: "인증코드가 틀렸습니다. 다시 시도해주세요")
+                                let range = NSMakeRange(0, text.length)
+                                text.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red, range: range)
+                                text.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 16), range: range)
+                        self?.topView.emailCheckView.labelView.attributedText = text
+                    }
+                 
+                })
+                let cancel = UIAlertAction(title: "취소", style: .cancel) { (action) -> Void in
+                            print("Cancel button tapped")
+                        }
+                alert.addAction(ok)
+                alert.addAction(cancel)
+                self?.present(alert, animated: true, completion: nil)
+            }).disposed(by: disposeBag)
+                
     }
     
     
@@ -181,8 +238,8 @@ class SignUpViewController:UIViewController {
                 return !(text?.isEmpty ?? true)
             }.distinctUntilChanged()
         
-        Observable.combineLatest(isEmailEmpty, isPassWordEmpty,isRepasswordEmpty)
-        { $0 && $1 && $2 }
+        Observable.combineLatest(isEmailEmpty, isPassWordEmpty,isRepasswordEmpty,viewModel.validEmailCheck)
+        { $0 && $1 && $2 && $3 }
         .withUnretained(self)
         .subscribe(onNext: { owner,info in
             if info {

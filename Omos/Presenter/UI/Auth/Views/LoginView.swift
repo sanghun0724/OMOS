@@ -105,7 +105,7 @@ class LoginTopView:BaseView {
 class CoverView:BaseView {
     
     let imageView:UIImageView = {
-        let imageView = UIImageView(image:UIImage(named: "onboarding_logo"))
+        let imageView = UIImageView(image:UIImage(named: "loginlogo"))
         return imageView
     }()
     
@@ -130,15 +130,14 @@ class CoverView:BaseView {
         
         imageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.height.equalTo(74)
-            make.width.equalTo(77.5)
+            make.height.equalTo(Constant.mainWidth * 0.1706)
+            make.width.equalTo(Constant.mainWidth * 0.2015)
         }
         
         titleLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(16)
             make.bottom.equalToSuperview()
-            make.width.equalTo(100)
-            make.height.equalTo(60)
+            titleLabel.sizeToFit()
         }
         
         backButton.snp.makeConstraints { make in

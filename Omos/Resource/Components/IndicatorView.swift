@@ -28,7 +28,7 @@ open class IndicatorView {
     }
     
     open func showIndicator() {
-        self.containerView.backgroundColor = .white
+        self.containerView.backgroundColor = .clear
         
         self.activityIndicator.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         self.activityIndicator.style = .large

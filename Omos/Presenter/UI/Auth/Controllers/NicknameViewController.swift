@@ -74,11 +74,11 @@ class NickNameViewController:BaseViewController {
         
         viewModel.validSignUp.subscribe(onNext: { [weak self] event in
             if event {
-                
                 self?.view.window?.rootViewController?.dismiss(animated: false, completion: {
-                  let homeVC = TabBarViewController()
-                  homeVC.modalPresentationStyle = .fullScreen
-                    self?.present(homeVC,animated: true)
+//                  let homeVC = TabBarViewController()
+//                  homeVC.modalPresentationStyle = .fullScreen
+//                    self?.present(homeVC,animated: true)
+                    NotificationCenter.default.post(name: NSNotification.Name.loginInfo, object: nil, userInfo: nil);
                 })
             } else {
                 self?.topView.nickNameField.layer.borderWidth = 1

@@ -84,6 +84,11 @@ class LyricsPastView:BaseView {
         return label
     }()
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+    }
+    
     
     override func configureUI() {
         super.configureUI()

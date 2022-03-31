@@ -50,6 +50,7 @@ class EntireViewController:BaseViewController {
             .withUnretained(self)
             .subscribe(onNext: { owner,musics in
                 owner.selfView.tableView.reloadData()
+                owner.selfView.tableView.layoutIfNeeded()
             }).disposed(by: disposeBag)
         
         viewModel.isAllEmpty
@@ -85,7 +86,9 @@ extension EntireViewController:UITableViewDelegate,UITableViewDataSource {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: SongTableCell.identifier, for: indexPath) as! SongTableCell
             viewModel.searchType == .me ? (cell.createdButton.isHidden = false) : (cell.createdButton.isHidden = true)
-            let cellData = viewModel.currentTrack[indexPath.row]
+            guard let cellData = viewModel.currentTrack[safe:indexPath.row] else {
+                return cell
+            }
             cell.selectionStyle = . none
             cell.configureModel(track: cellData)
             cell.createdButton.rx.tap
@@ -97,13 +100,17 @@ extension EntireViewController:UITableViewDelegate,UITableViewDataSource {
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: AlbumTableCell.identifier, for: indexPath) as! AlbumTableCell
-            let cellData = viewModel.currentAlbum[indexPath.row]
+            guard let cellData = viewModel.currentAlbum[safe: indexPath.row] else {
+                return cell
+            }
             cell.configureModel(album: cellData)
             cell.selectionStyle = .none
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier:  ArtistTableCell.identifier, for: indexPath) as! ArtistTableCell
-            let cellData = viewModel.currentArtist[indexPath.row]
+            guard let cellData = viewModel.currentArtist[safe: indexPath.row] else {
+                return cell
+            }
             cell.configureModel(artist: cellData)
             cell.selectionStyle = . none
             return cell

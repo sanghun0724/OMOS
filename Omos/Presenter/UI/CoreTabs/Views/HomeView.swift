@@ -72,7 +72,7 @@ class HomeView:BaseView {
 
 class HomeHeaderView:UITableViewHeaderFooterView {
     static let identifier = "HomeHeaderView"
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     
     let groundView:UIView = {
         let view = UIView()
@@ -83,6 +83,25 @@ class HomeHeaderView:UITableViewHeaderFooterView {
         let view = UIImageView(image:UIImage(named:"photo1"))
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
+        let random = Int.random(in: 1...7)
+        switch random {
+        case 1:
+            view.image = UIImage(named:"photo1")
+        case 2:
+            view.image = UIImage(named:"photo2")
+        case 3:
+            view.image = UIImage(named:"photo3")
+        case 4:
+            view.image = UIImage(named:"photo4")
+        case 5:
+            view.image = UIImage(named:"photo5")
+        case 6:
+            view.image = UIImage(named:"photo6")
+        case 7:
+            view.image = UIImage(named:"photo7")
+        default:
+            view.image = UIImage(named:"photo1")
+        }
         return view
     }()
     
@@ -101,6 +120,7 @@ class HomeHeaderView:UITableViewHeaderFooterView {
     let notiButton:UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "bell"), for: .normal)
+        button.isHidden = true 
         return button
     }()
     
@@ -166,7 +186,7 @@ class HomeHeaderView:UITableViewHeaderFooterView {
     
     let createdButton:UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "edit"), for: .normal)
+        button.setImage(UIImage(named: "edit3"), for: .normal)
         return button
     }()
     
@@ -177,6 +197,11 @@ class HomeHeaderView:UITableViewHeaderFooterView {
         layoutIfNeeded()
         albumImageView.layer.cornerRadius = albumImageView.height / 2
         albumImageView.layer.masksToBounds = true
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
     }
     
     func configureUI() {
@@ -238,10 +263,11 @@ class HomeHeaderView:UITableViewHeaderFooterView {
         }
         
         albumImageView.snp.makeConstraints { make in
-            make.width.equalToSuperview().multipliedBy(0.247)
-            make.height.equalTo(albumImageView.snp.width)
+            make.height.equalToSuperview().multipliedBy(0.234)
+            make.width.equalTo(albumImageView.snp.height)
             make.leading.equalToSuperview()
-            make.top.equalTo(todayLabel.snp.bottom).offset(30).priority(300)
+            make.top.equalTo(todayLabel.snp.bottom).offset(28).priority(750)
+            make.bottom.equalToSuperview().offset(-20).priority(751)
         }
         
         createdButton.snp.makeConstraints { make in
@@ -258,14 +284,14 @@ class HomeHeaderView:UITableViewHeaderFooterView {
         }
         
         songTitleLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(artistTitleLabel.snp.top).offset(-10)
+            make.bottom.equalTo(artistTitleLabel.snp.top).offset(-8)
             make.leading.trailing.equalTo(artistTitleLabel)
             songTitleLabel.sizeToFit()
         }
         
         albumLabelImageView.snp.makeConstraints { make in
             make.leading.equalTo(artistTitleLabel)
-            make.top.equalTo(artistTitleLabel.snp.bottom)
+            make.top.equalTo(artistTitleLabel.snp.bottom).offset(6)
             make.width.equalTo(createdButton).multipliedBy(0.6)
             make.height.equalTo(albumLabelImageView.snp.width)
         }

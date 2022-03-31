@@ -2,41 +2,47 @@
 //  ProfileView.swift
 //  Omos
 //
-//  Created by sangheon on 2022/02/07.
+//  Created by sangheon on 2022/03/18.
 //
 
 import UIKit
-import SnapKit
 
 class ProfileView:BaseView {
-     
     let tableView:UITableView = {
-       let table = UITableView()
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        table.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: ProfileHeaderView.identifier)
+        let table = UITableView()
+        table.register(ProfileCell.self, forCellReuseIdentifier: ProfileCell.identifier)
+        table.register(MydjProfileHeader.self, forHeaderFooterViewReuseIdentifier: MydjProfileHeader.identifier)
+        table.register(AllRecordHeaderView.self, forHeaderFooterViewReuseIdentifier: AllRecordHeaderView.identifier)
+        table.separatorStyle = .none
         table.backgroundColor = .mainBackGround
-       return table
+        table.showsVerticalScrollIndicator = false
+        table.automaticallyAdjustsScrollIndicatorInsets = false
+        table.insetsContentViewsToSafeArea = false
+        table.contentInsetAdjustmentBehavior = .never
+        table.isScrollEnabled = true
+        return table
     }()
-
+    
+    
+    let loadingView = LoadingView()
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+    
+    }
     
     override func configureUI() {
         self.addSubview(tableView)
+        self.addSubview(loadingView)
+        
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        loadingView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        loadingView.isHidden = true 
     }
-}
-
-class ProfileHeaderView:UITableViewHeaderFooterView {
-    static let identifier = "ProfileHeaderView"
-    
-    override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: reuseIdentifier)
-
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
 }

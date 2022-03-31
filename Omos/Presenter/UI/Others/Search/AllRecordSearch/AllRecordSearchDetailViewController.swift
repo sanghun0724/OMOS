@@ -18,13 +18,14 @@ class AllRecordSearchDetailViewController:BaseViewController , UIScrollViewDeleg
     let bottomVC:BottomSheetViewController
     let bottomSheet:MDCBottomSheetController
     var isPaging = false
-    var hasNextPage = false
+    var hasNextPage = true
     var currentPage = -1
     var shortCellHeights:[IndexPath:CGFloat] = [:]
     var longCellHeights:[IndexPath:CGFloat] = [:]
     let viewModel:AllRecordSearchDetailViewModel
     let musicId:String
     var filterType = "date"
+    var lastPostId = 0
 
     init(viewModel:AllRecordSearchDetailViewModel,musicId:String) {
         self.viewModel = viewModel
@@ -45,7 +46,11 @@ class AllRecordSearchDetailViewController:BaseViewController , UIScrollViewDeleg
         bottomSheet.delegate = self
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
-        fetchRecord()
+        NotificationCenter.default.addObserver(self, selector: #selector(didRecieveReloadNotification), name: NSNotification.Name.reload, object: nil)
+    }
+    
+    @objc func didRecieveReloadNotification() {
+       fetchRecord()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,7 +85,8 @@ class AllRecordSearchDetailViewController:BaseViewController , UIScrollViewDeleg
     private func bind() {
         viewModel.oneMusicRecords
             .subscribe(onNext:{ [weak self] data in
-                self?.hasNextPage = self?.viewModel.currentOneMusicRecords.count ?? 0 > 300 ? false : true //다음페이지 있는지 확인
+                self?.hasNextPage = self?.lastPostId == self?.viewModel.currentOneMusicRecords.last?.recordID ?? 0 ? false : true
+                self?.lastPostId = self?.viewModel.currentOneMusicRecords.last?.recordID ?? 0
                 self?.isPaging = false //페이징 종료
                 self?.selfView.tableView.reloadData()
             }).disposed(by: disposeBag)
@@ -101,6 +107,7 @@ class AllRecordSearchDetailViewController:BaseViewController , UIScrollViewDeleg
                 self?.filterType = "date"
                 self?.fetchRecord()
                 self?.selfView.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+                self?.navigationItem.rightBarButtonItem?.tintColor = .white
             }).disposed(by: disposeBag)
         
         viewModel.likeFilter
@@ -108,6 +115,7 @@ class AllRecordSearchDetailViewController:BaseViewController , UIScrollViewDeleg
                 self?.viewModel.currentOneMusicRecords = []
                 self?.fetchRecord()
                 self?.selfView.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+                self?.navigationItem.rightBarButtonItem?.tintColor = .white
             }).disposed(by: disposeBag)
         
         viewModel.randomFilter
@@ -116,6 +124,13 @@ class AllRecordSearchDetailViewController:BaseViewController , UIScrollViewDeleg
                 self?.filterType = "random"
                 self?.fetchRecord()
                 self?.selfView.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+                self?.navigationItem.rightBarButtonItem?.tintColor = .white
+            }).disposed(by: disposeBag)
+        
+        viewModel.reportState
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.currentOneMusicRecords = []
+                self?.fetchRecord()
             }).disposed(by: disposeBag)
     }
 
@@ -139,13 +154,15 @@ class AllRecordSearchDetailViewController:BaseViewController , UIScrollViewDeleg
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
-
-      //계속 부르는 이유 -> 데이터 없어서 게속 스크롤 끝에 가있다고 인지해서 게속부름
-//        if offsetY > contentHeight - scrollView.frame.height {
-//            if isPaging == false && hasNextPage {
-//                beginPaging()
-//            }
-//        }
+        let height = scrollView.frame.height
+        
+        // 스크롤이 테이블 뷰 Offset의 끝에 가게 되면 다음 페이지를 호출
+        if offsetY > (contentHeight - height) {
+            print("hasNext222\(self.hasNextPage)")
+            if isPaging == false && hasNextPage {
+                beginPaging()
+            }
+        }
     }
 }
 

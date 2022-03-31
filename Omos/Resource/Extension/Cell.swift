@@ -38,13 +38,10 @@ class IntrinsicTableView: UITableView {
         var height: CGFloat = 0
         print("number \(number)")
              for i in 0..<number {
-              
                  guard let cell = cellForRow(at: IndexPath(row: i, section: 0)) else {
-                 
                      continue
                  }
                  height += cell.bounds.height
-//                 print(i)
              }
          
         return CGSize(width: contentSize.width, height: height)

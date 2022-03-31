@@ -79,13 +79,13 @@ class MydjCollectionCell:UICollectionViewCell {
     
     func configureModel(record:MyDjListResponse) {
         djImageView.setImage(with: record.profileURL ?? "")
-        djLabel.text = record.nickName
+        djLabel.text = record.nickname
     }
     
     func configureHome(record:recommendDjResponse) {
         self.homeInfo = record
         djImageView.setImage(with: record.profileURL ?? "" )
-        djLabel.text = record.nickName
+        djLabel.text = record.nickname
     }
     
     

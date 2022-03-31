@@ -19,10 +19,17 @@ class AllRecordCollectionCell:UICollectionViewCell {
     var detailInfo:ALine?
     var homeInfo:PopuralResponse?
     
+    let coverView:UIView = {
+        let view = UIView()
+        return view
+    }()
+    
     let backImageView:UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "test"))
         imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .mainBackGround
+        imageView.clipsToBounds = true
+        imageView.alpha = 0.4
         return imageView
     }()
     
@@ -44,24 +51,27 @@ class AllRecordCollectionCell:UICollectionViewCell {
     let titleLabel:UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.textAlignment = .center
         label.text = "노래제목이 들어갑니다.노래제목이 들어갑니다.노래제목이 들어갑니다."
-        label.font = .systemFont(ofSize: 12)
+        label.font = .systemFont(ofSize: 12,weight: .regular)
+        label.textAlignment = .left
         return label
     }()
     
     let subTitleLabel:UILabel = {
         let label = UILabel()
-        label.textColor = .white
-        label.textAlignment = .center
+        label.textColor = .mainGrey4
         label.text = "노래제목이 들어갑니다.노래제목이 들어갑니다.노래제목이 들어갑니다."
-        label.font = .systemFont(ofSize: 12)
+        label.font = .systemFont(ofSize: 12,weight: .light)
+        label.textAlignment = .left
         return label
     }()
     
     let descLabel:UILabel = {
         let label = UILabel()
         label.text = "record main title here..노래제목이 들어갑니다.노래제목이 들어갑니다.노래제목이 들어갑니다.노래제목이 들어갑니다"
+        label.font = .systemFont(ofSize: 16,weight: .light)
+        label.textColor = .white
+        label.textAlignment = .left
         label.numberOfLines = 2
         return label
     }()
@@ -70,6 +80,8 @@ class AllRecordCollectionCell:UICollectionViewCell {
         let label = UILabel()
         label.textColor = .white
         label.text = "by. nickname"
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 12,weight: .light)
         return label
     }()
     
@@ -82,6 +94,7 @@ class AllRecordCollectionCell:UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
+        backImageView.image = nil
     }
     
     override init(frame: CGRect) {
@@ -107,32 +120,44 @@ class AllRecordCollectionCell:UICollectionViewCell {
         self.detailInfo = record
         descLabel.text = record.recordTitle
         albumImageView.setImage(with: record.music.albumImageURL)
-        backImageView.setImage(with: record.music.albumImageURL)
-        nameLabel.text = record.nickname
+        backImageView.setImage(with: record.recordImageURL ?? "")
+        nameLabel.text = "by. \(record.nickname)"
         titleLabel.text = record.music.albumTitle
-        subTitleLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}
+        subTitleLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
+        if subTitleLabel.text?.first == " " {
+            subTitleLabel.text?.removeFirst()
+        }
     }
     
     func configureHome(record:PopuralResponse) {
         self.homeInfo = record
         descLabel.text = record.recordTitle
         albumImageView.setImage(with: record.music.albumImageURL)
-        backImageView.setImage(with: record.music.albumImageURL) //바까야함 
-        nameLabel.text = record.nickname
+        backImageView.setImage(with: record.recordImageURL) //바까야함 
+        nameLabel.text = "by. \(record.nickname)"
         titleLabel.text = record.music.albumTitle
-        subTitleLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}
+        subTitleLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
+        if subTitleLabel.text?.first == " " {
+            subTitleLabel.text?.removeFirst()
+        }
+        
     }
     
     
    private func configureUI() {
-        self.addSubview(backImageView)
+        self.addSubview(coverView)
+       coverView.addSubview(backImageView)
        labelCoverView.addSubview(titleLabel)
        labelCoverView.addSubview(albumImageView)
        labelCoverView.addSubview(subTitleLabel)
-       backImageView.addSubview(labelCoverView)
-       backImageView.addSubview(descLabel)
-       backImageView.addSubview(nameLabel)
+       coverView.addSubview(labelCoverView)
+       coverView.addSubview(descLabel)
+       coverView.addSubview(nameLabel)
         
+       coverView.snp.makeConstraints { make in
+           make.edges.equalToSuperview()
+       }
+       
        backImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -163,13 +188,14 @@ class AllRecordCollectionCell:UICollectionViewCell {
            make.leading.equalTo(albumImageView.snp.trailing).offset(10)
            make.trailing.equalToSuperview().offset(-6)
            make.top.equalToSuperview().offset(4)
-           make.bottom.equalTo(albumImageView.snp.centerY)
+           titleLabel.sizeToFit()
        }
        
        subTitleLabel.snp.makeConstraints { make in
            make.top.equalTo(titleLabel.snp.bottom).offset(4)
            make.trailing.leading.equalTo(titleLabel)
            make.bottom.equalToSuperview().offset(-6)
+           subTitleLabel.sizeToFit()
        }
        
        layoutIfNeeded()

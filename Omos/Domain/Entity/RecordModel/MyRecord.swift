@@ -29,7 +29,8 @@ struct MyRecordRespone: Codable {
 struct SaveRequest: Codable { // add imageURL or image data using form - data
         let category: String
         let isPublic: Bool
-        let musicID, recordContents, recordImageURL, recordTitle: String
+        let musicID, recordContents, recordTitle: String
+        let recordImageURL: String?
         let userID: Int
 
         enum CodingKeys: String, CodingKey {
@@ -50,6 +51,8 @@ struct SaveRespone:Codable {
 struct UpdateRequest:Codable {
     let contents:String
     let title:String
+    let isPublic: Bool
+    let recordImageUrl: String
 }
 
 struct PostRespone:Codable {
@@ -63,7 +66,8 @@ struct StateRespone:Codable {
 
 struct DetailRecordResponse:Codable {
        let category, createdDate: String
-       let isLiked, isPublic, isScraped: Bool
+       let isLiked, isScraped: Bool
+       let isPublic: Bool?
        let likeCnt: Int
        let music: Music
        let nickname, recordContents: String

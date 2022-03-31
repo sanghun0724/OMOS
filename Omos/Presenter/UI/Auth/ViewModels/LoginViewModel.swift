@@ -35,6 +35,7 @@ class LoginViewModel: BaseViewModel {
                 UserDefaults.standard.set(data.accessToken, forKey: "access")
                 UserDefaults.standard.set(data.refreshToken, forKey: "refresh")
                 UserDefaults.standard.set(data.userId, forKey: "user")
+                Account.currentUser = UserDefaults.standard.integer(forKey: "user")
                 self?.validSignIn.accept(true)
             case .failure(let error):
                 print(error)
@@ -67,7 +68,8 @@ class LoginViewModel: BaseViewModel {
             if let error = error {
                 print(error.localizedDescription)
             } else {
-                let id = user?.id
+                let id = user?.id ?? 0
+                print(id)
                 UserDefaults.standard.set("\(id)@kakao.com", forKey: "kakaoEmail")
                 LoginAPI.SNSLogin(request: .init(email: "\(id)@kakao.com", type: .KAKAO)) { [weak self] result in
                     switch result {

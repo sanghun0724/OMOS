@@ -27,18 +27,49 @@ class MydjProfileViewController:BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      
         bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         self.navigationItem.rightBarButtonItems?.removeAll()
         viewModel.fetchMyDjProfile(fromId: fromId, toId: toId)
-        viewModel.fetchUserRecords(fromId: fromId, toId: toId)
-        
+        viewModel.fetchUserRecords(toUserId: toId)
+        self.navigationController?.navigationBar.backgroundColor = .mainBlack
+        setNavigationItems()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.backgroundColor = .mainBackGround
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.backgroundColor = .mainBlack
+    }
+    
+    private func setNavigationItems() {
+        self.navigationItem.rightBarButtonItems?.removeAll()
+        let reportButton = UIBarButtonItem(image: UIImage(named: "report"), style: .plain, target: self, action: #selector(didTapReportButton))
+        reportButton.tintColor = .white
+        self.navigationItem.rightBarButtonItems = [reportButton]
+    }
+    
+    @objc func didTapReportButton() {
+        let action = UIAlertAction(title: "차단하기", style: .default) {[weak self] alert in
+            guard let id = self?.toId else { return }
+            print("userId입니다:\(id)")
+            self?.viewModel.userReport(userId: id)
+        }
+        action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
+        self.presentAlert(title: "", message: "이 DJ를 차단하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
     }
     
     override func configureUI() {
         super.configureUI()
         self.view.addSubview(selfView)
+        self.view.backgroundColor = .mainBlack
         
         selfView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
@@ -49,14 +80,10 @@ class MydjProfileViewController:BaseViewController {
     
     
     func bind() {
-        viewModel.profileLoading
-            .subscribe(onNext: { [weak self] loading in
-                self?.selfView.profileLoadingView.isHidden = !loading
-            }).disposed(by: disposeBag)
-        
+       
         viewModel.recordsLoading
             .subscribe(onNext: { [weak self] loading in
-                self?.selfView.recordsLoadingView.isHidden = !loading
+                self?.selfView.loadingView.isHidden = !loading
             }).disposed(by: disposeBag)
         
         viewModel.mydjProfile
@@ -69,6 +96,38 @@ class MydjProfileViewController:BaseViewController {
                 self?.selfView.tableView.reloadData()
             }).disposed(by: disposeBag)
         
+        viewModel.userReportState
+            .subscribe(onNext: { [weak self] _ in
+                NotificationCenter.default.post(name: NSNotification.Name.reload, object: nil, userInfo: nil);
+                for controller in (self?.navigationController?.viewControllers ?? [UIViewController()] )  as Array {
+                    
+                    if controller.isKind(of: HomeViewController.self) {
+                        self?.navigationController?.popToViewController(controller, animated: true)
+                        break
+                    }
+                    if controller.isKind(of: AllRecordCateDetailViewController.self) {
+                        self?.navigationController?.popToViewController(controller, animated: true)
+                        
+                        break
+                    }
+                    if controller.isKind(of: AllRecordSearchDetailViewController.self) {
+                        self?.navigationController?.popToViewController(controller, animated: true)
+                        break
+                    }
+                }
+                for controller in (self?.navigationController?.viewControllers ?? [UIViewController()] )  as Array {
+                    if controller.isKind(of: AllRecordViewController.self) {
+                        self?.navigationController?.popToViewController(controller, animated: true)
+                        break
+                    }
+                }
+                for controller in (self?.navigationController?.viewControllers ?? [UIViewController()] )  as Array {
+                    if controller.isKind(of: MyDJViewController.self) {
+                        self?.navigationController?.popToViewController(controller, animated: true)
+                        break
+                    }
+                }
+            }).disposed(by: disposeBag)
         
     }
     

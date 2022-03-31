@@ -11,15 +11,23 @@ import UIKit
 class HomeTableLastCell:UITableViewCell {
     static let identifier = "HomeTableLastCell"
     
+    let baseView:UIView = {
+        let view = UIView()
+        return view
+    }()
     
     let backImageView:UIImageView = {
         let imageView = UIImageView(image:UIImage(named: "photo2"))
         imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        imageView.alpha = 0.4
         return imageView
     }()
     
     let albumImageView:UIImageView = {
         let imageView = UIImageView(image:UIImage(named: "albumCover"))
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -78,14 +86,19 @@ class HomeTableLastCell:UITableViewCell {
     }
     
     func configureUI() {
-        self.addSubview(backImageView)
-        backImageView.addSubview(albumImageView)
-        backImageView.addSubview(trackTitleLabel)
-        backImageView.addSubview(artistTitleLabel)
-        backImageView.addSubview(albumTitleLabel)
-        backImageView.addSubview(albumLabelImageView)
-        backImageView.addSubview(decoView)
+        self.addSubview(baseView)
+        baseView.addSubview(backImageView)
+        baseView.addSubview(albumImageView)
+        baseView.addSubview(trackTitleLabel)
+        baseView.addSubview(artistTitleLabel)
+        baseView.addSubview(albumTitleLabel)
+        baseView.addSubview(albumLabelImageView)
+        baseView.addSubview(decoView)
         decoView.addSubview(arrowButton)
+        
+        baseView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         
         backImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -167,7 +180,8 @@ class LovedEmptyCell:UITableViewCell {
     }()
     
     let decoImageView:UIImageView = {
-        let imageView = UIImageView(image:UIImage(named: "keyboard_arrow_left"))
+        let imageView = UIImageView(image:UIImage(named: "orangeright"))
+        imageView.tintColor = .mainOrange
         return imageView
     }()
     
@@ -182,12 +196,12 @@ class LovedEmptyCell:UITableViewCell {
         self.addSubview(decoImageView)
         
         label.snp.makeConstraints { make in
-            make.leading.top.equalToSuperview()
+            make.leading.top.equalToSuperview().inset(16)
             label.sizeToFit()
         }
         
         decoLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
+            make.leading.equalToSuperview().inset(16)
             make.top.equalTo(label.snp.bottom).offset(16)
         }
         

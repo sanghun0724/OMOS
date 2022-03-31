@@ -38,10 +38,19 @@ class MyRecordTableCell:UITableViewCell {
     
     let titleLabel:UILabel = {
         let label = UILabel()
-        label.textColor = .white
-        label.textAlignment = .center
+        label.textColor = .mainGrey1
+        label.textAlignment = .left
         label.text = "노래제목이 들어갑니다.노래제목이 들어갑니다.노래제목이 들어갑니다."
-        label.font = .systemFont(ofSize: 12)
+        label.font = .systemFont(ofSize: 12,weight:.light)
+        return label
+    }()
+    
+    let artistLabel:UILabel = {
+        let label = UILabel()
+        label.textColor = .mainGrey4
+        label.textAlignment = .left
+        label.text = "가수"
+        label.font = .systemFont(ofSize: 12,weight:.light)
         return label
     }()
     
@@ -49,7 +58,8 @@ class MyRecordTableCell:UITableViewCell {
         let label = UILabel()
         label.textColor = .white
         label.text = "노래제목이 들어갑니다.노래제목이 들어갑니다.노래제목이 들어갑니다."
-        label.font = .systemFont(ofSize: 18)
+        label.font = .systemFont(ofSize: 16,weight:.light)
+        label.textAlignment = .left
         return label
     }()
     
@@ -57,15 +67,17 @@ class MyRecordTableCell:UITableViewCell {
         let label = UILabel()
         label.text = "record main title here..노래제목이 들어갑니다.노래제목이 들어갑니다.노래제목이 들어갑니다.노래제목이 들어갑니다"
         label.numberOfLines = 2
-        
+        label.font = .systemFont(ofSize: 12,weight:.light)
+        label.textAlignment = .left
         return label
     }()
     
     let nameLabel:UILabel = {
         let label = UILabel()
-        label.textColor = .white
+        label.textColor = .mainGrey6
         label.text = "2022 00 00 카테코리가 들어갑니다"
-        label.font = .systemFont(ofSize: 12)
+        label.font = .systemFont(ofSize: 12,weight:.light)
+        label.textAlignment = .left
         return label
     }()
     
@@ -101,6 +113,7 @@ class MyRecordTableCell:UITableViewCell {
         backCoverView.addSubview(albumImageView)
         backCoverView.addSubview(backGroundView)
         labelCoverView.addSubview(titleLabel)
+        labelCoverView.addSubview(artistLabel)
         backGroundView.addSubview(recordLabel)
         backGroundView.addSubview(labelCoverView)
         backGroundView.addSubview(descLabel)
@@ -129,8 +142,16 @@ class MyRecordTableCell:UITableViewCell {
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.right.left.equalToSuperview().inset(10)
             make.top.bottom.equalToSuperview()
+            make.leading.equalToSuperview().offset(8)
+            titleLabel.sizeToFit()
+        }
+        
+        artistLabel.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.leading.equalTo(titleLabel.snp.trailing).offset(2)
+            make.trailing.equalToSuperview().offset(-8)
+            artistLabel.sizeToFit()
         }
         
         recordLabel.snp.makeConstraints { make in
@@ -162,23 +183,24 @@ class MyRecordTableCell:UITableViewCell {
     
     func configureModel(record:MyRecordRespone) {
         albumImageView.setImage(with: record.music.albumImageURL)
-        titleLabel.text = record.music.musicTitle +  record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}
+        titleLabel.text = record.music.musicTitle
+        artistLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}
         recordLabel.text = record.recordTitle
         descLabel.text = record.recordContents
-        nameLabel.text = record.createdDate + " | " + record.category
+        nameLabel.text = record.createdDate.toDate() + " | " + record.category.getReverseCate()
         record.isPublic ? (lockImageView.image = UIImage(named:"unlock")) : (lockImageView.image = UIImage(named:"lock"))
         
     }
     
-    func configureUserRecordModel(record:UserRecordsResponse) {
+    func configureUserRecordModel(record:MyRecordRespone) {
         lockImageView.isHidden = true
         albumImageView.setImage(with: record.music.albumImageURL)
-        titleLabel.text = record.music.musicTitle +  record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}
+        titleLabel.text = record.music.musicTitle
+        artistLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}
         recordLabel.text = record.recordTitle
         descLabel.text = record.recordContents
-        nameLabel.text = record.createdDate + " | " + record.category
+        nameLabel.text = record.createdDate.toDate() + " | " + record.category.getReverseCate()
        // record.isPublic ? (lockImageView.image = UIImage(named:"unlock")) : (lockImageView.image = UIImage(named:"lock"))
-        
     }
     
 }

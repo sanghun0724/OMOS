@@ -34,6 +34,7 @@ class HomeViewController:BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func configureUI() {
@@ -50,8 +51,11 @@ class HomeViewController:BaseViewController {
     func bind() {
         viewModel.allLoading
             .subscribe(onNext: { [weak self] loading in
+                print("loading is \(loading)")
                 self?.selfView.loadingView.isHidden = !loading
-                self?.selfView.tableView.reloadData()
+                if !loading {
+                    self?.selfView.tableView.reloadData()
+                }
             }).disposed(by: disposeBag)
         
         selfView.floatingButton.rx.tap
@@ -60,20 +64,16 @@ class HomeViewController:BaseViewController {
                 let rp = SearchRepositoryImpl(searchAPI: SearchAPI())
                 let uc = SearchUseCase(searchRepository: rp)
                 let vm = SearchViewModel(usecase: uc)
-                let vc = SearchViewController(viewModel: vm, searchType: .main)
+                let vc = SearchViewController(viewModel: vm, searchType: .me)
                 self?.navigationController?.pushViewController(vc, animated: true)
             }).disposed(by: disposeBag)
-        
     }
-    
-    
 }
 
 
 extension HomeViewController:AllCollectCellprotocol {
     func collectionView(collectionViewCell: AllRecordCollectionCell?, cate: String, didTappedInTableViewCell: AllRecordTableCell) {
         
-        print("here")
         guard let postId = collectionViewCell?.homeInfo?.recordID,
               let userId = collectionViewCell?.homeInfo?.userID else { return }
 
@@ -91,6 +91,21 @@ extension HomeViewController:AllCollectCellprotocol {
              self.navigationController?.pushViewController(vc, animated: true)
          }
     }
+}
+
+extension HomeViewController:HomeTableMiddleCellprotocol {
+    func collectionView(collectionViewCell: MydjCollectionCell?, index: Int, didTappedInTableViewCell: HomeTableMiddleCell) {
+        guard let userId = collectionViewCell?.homeInfo?.userID else { return }
+        
+        let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+        let uc = RecordsUseCase(recordsRepository: rp)
+        let vm = MyDjProfileViewModel(usecase: uc)
+        let vc = MydjProfileViewController(viewModel: vm, toId: userId)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
     
 }
+
+
+

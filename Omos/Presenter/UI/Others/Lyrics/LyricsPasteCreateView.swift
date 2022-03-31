@@ -160,6 +160,7 @@ class LyricsPasteCreateView: BaseView {
     
     let stickerImageView:UIImageView = {
         let view = UIImageView(image:UIImage(named: "sticker"))
+        view.isHidden = true
         return view
     }()
     
@@ -169,6 +170,7 @@ class LyricsPasteCreateView: BaseView {
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 12)
         label.textColor = .mainGrey3
+        label.isHidden = true 
         return label
     }()
     
@@ -176,6 +178,13 @@ class LyricsPasteCreateView: BaseView {
         let view = UIView()
         return view
     }()
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        circleImageView.layoutIfNeeded()
+        circleImageView.layer.cornerRadius = circleImageView.height / 2
+        circleImageView.layer.masksToBounds = true
+    }
     
     
     override func configureUI() {

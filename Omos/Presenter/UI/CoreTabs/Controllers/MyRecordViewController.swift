@@ -29,6 +29,7 @@ class MyRecordViewController: BaseViewController {
         selfView.tableView.dataSource = self
         configureUI()
         setRightItems()
+        setRefreshControl()
         viewModel.myRecordFetch(userid: UserDefaults.standard.integer(forKey: "user"))
     }
     
@@ -36,11 +37,16 @@ class MyRecordViewController: BaseViewController {
         super.viewWillAppear(animated)
         if UserDefaults.standard.integer(forKey: "reload") == 1 {
             print("this is work")
-            viewModel.myRecordFetch(userid: UserDefaults.standard.integer(forKey: "user"))
+            viewModel.myRecordFetch(userid: Account.currentUser)
             selfView.tableView.reloadData()
             UserDefaults.standard.removeObject(forKey: "reload")
         }
         self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    func setRefreshControl() {
+        self.selfView.tableView.refreshControl = UIRefreshControl()
+        self.selfView.tableView.refreshControl?.addTarget(self, action: #selector(didPullRefresh), for: .valueChanged)
     }
     
     func setRightItems() {
@@ -48,7 +54,11 @@ class MyRecordViewController: BaseViewController {
         searchButton.tintColor = .white
         let createButton = UIBarButtonItem(image: UIImage(named: "plus-square"), style: .plain, target: self, action: #selector(didTapCreateButton))
         createButton.tintColor = .white
-        self.navigationItem.rightBarButtonItems = [searchButton,createButton]
+        self.navigationItem.rightBarButtonItems = [createButton]
+    }
+    
+    @objc func didPullRefresh() {
+        viewModel.myRecordFetch(userid: Account.currentUser)
     }
     
     @objc func didTapCreateButton() {
@@ -67,13 +77,16 @@ class MyRecordViewController: BaseViewController {
             make.left.right.bottom.equalToSuperview()
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
         }
-        
     }
     
     func bind() {
         viewModel.myRecords.subscribe(onNext: { [weak self] info in
             self?.myRecord = info
-            self?.selfView.tableView.reloadData()
+            DispatchQueue.main.async {
+                self?.selfView.tableView.refreshControl?.endRefreshing()
+                self?.selfView.tableView.reloadData()
+            }
+          
         }).disposed(by: disposeBag)
         
         viewModel.isEmpty
@@ -86,6 +99,12 @@ class MyRecordViewController: BaseViewController {
             .subscribe(onNext: { owner,loading in
                 print("loading\(loading)")
                 owner.selfView.loadingView.isHidden = !loading
+                guard let refreshing = owner.selfView.tableView.refreshControl?.isRefreshing else {
+                    return
+                }
+                if refreshing {
+                    owner.selfView.loadingView.isHidden = true
+                }
             }).disposed(by: disposeBag)
     }
     

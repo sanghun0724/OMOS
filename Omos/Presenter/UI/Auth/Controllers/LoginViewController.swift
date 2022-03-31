@@ -34,13 +34,21 @@ class LoginViewController:UIViewController {
         topView.coverView.backButton.isHidden = true
         bind()
         dismissKeyboardWhenTappedAround()
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(didRecieveLoginNotification), name: NSNotification.Name.loginInfo, object: nil)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         configureUI()
+    }
+    
+    @objc func didRecieveLoginNotification() {
+        let action = UIAlertAction(title: "완료", style: .default) { alert in
+            
+        }
+        action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
+        self.presentAlert(title: "", message: "회원가입이 완료되었습니다.\n다시 로그인 해주세요.", isCancelActionIncluded: false, preferredStyle: .alert, with: action)
     }
     
     func configureUI() {
@@ -59,6 +67,11 @@ class LoginViewController:UIViewController {
             make.bottom.equalToSuperview().inset(40)
         }
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+       
     }
     
     private func bind() {
@@ -142,24 +155,26 @@ class LoginViewController:UIViewController {
             .asDriver()
             .drive(onNext: { [weak self] in
                 self?.viewModel.loginLocal(email: (self?.topView.emailField.text)!, password: (self?.topView.passwordField.text)!)
-                
-                self?.viewModel.validSignIn.subscribe(onNext: { [weak self] valid in
-                    if valid {
-                        let vc = TabBarViewController()
-                        vc.modalPresentationStyle = .fullScreen
-                        self?.present(vc,animated: true)
-                    } else {
-                        self?.topView.emailField.layer.borderWidth = 1
-                        self?.topView.emailField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
-                        self?.topView.emailLabel.warningLabel.text = "입력하신 내용을 다시 확인해주세요."
-                        self?.topView.emailLabel.warningLabel.isHidden = false
-                        self?.topView.passwordField.layer.borderWidth = 1
-                        self?.topView.passwordField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
-                        self?.topView.passwordLabel.warningLabel.text = "입력하신 내용을 다시 확인해주세요."
-                        self?.topView.passwordLabel.warningLabel.isHidden = false
-                    }
-                }).disposed(by: self!.disposeBag)
             }).disposed(by: disposeBag)
+        
+        viewModel.validSignIn.subscribe(onNext: { [weak self] valid in
+            if valid {
+                print(UserDefaults.standard.integer(forKey: "user"))
+                let vc = TabBarViewController()
+                vc.modalPresentationStyle = .fullScreen
+                self?.present(vc,animated: true)
+            } else {
+                self?.topView.emailField.layer.borderWidth = 1
+                self?.topView.emailField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
+                self?.topView.emailLabel.warningLabel.text = "입력하신 내용을 다시 확인해주세요."
+                self?.topView.emailLabel.warningLabel.isHidden = false
+                self?.topView.passwordField.layer.borderWidth = 1
+                self?.topView.passwordField.layer.borderColor = .some(UIColor.mainOrange.cgColor)
+                self?.topView.passwordLabel.warningLabel.text = "입력하신 내용을 다시 확인해주세요."
+                self?.topView.passwordLabel.warningLabel.isHidden = false
+            }
+        }).disposed(by: disposeBag)
+        
         
         bottomView.kakaoButton.rx.tap
             .asDriver()
@@ -203,21 +218,21 @@ extension LoginViewController:ASAuthorizationControllerDelegate {
             let user = credential.user
             print("user:\(user)")
             UserDefaults.standard.set(user, forKey: "appleUser")
-            if let email = credential.email {
-                print("email:\(email)")
-                UserDefaults.standard.set(email, forKey: "appleEmail")
-
-            }
-            guard let appleEmail = UserDefaults.standard.string(forKey: "appleEmail") else {
-                print("애플 이메일이 없습니다")
-                return
-            }
-            LoginAPI.SNSLogin(request: .init(email:appleEmail , type: .APPLE)) { [weak self] result in
+            let email = credential.email
+            print("email:\(email)")
+            UserDefaults.standard.set(email ?? "" + "apple", forKey: "appleEmail")
+            
+            //앱 삭제후 다시 들어가면 위의 유저값만 받아올수 있으니 유저값이 서버에 있으면 다시 로그인 되는 로직들 필요 
+            
+            let appleEmail = UserDefaults.standard.string(forKey: "appleEmail")
+            
+            LoginAPI.SNSLogin(request: .init(email:appleEmail ?? "" , type: .APPLE)) { [weak self] result in
                 switch result {
                 case .success(let token):
                     UserDefaults.standard.set(token.accessToken, forKey: "access")
                     UserDefaults.standard.set(token.refreshToken, forKey: "refresh")
                     UserDefaults.standard.set(token.userId, forKey: "user")
+                    Account.currentUser = UserDefaults.standard.integer(forKey: "user")
                     let vc = TabBarViewController()
                     vc.modalPresentationStyle = .fullScreen
                     self?.present(vc,animated: true)

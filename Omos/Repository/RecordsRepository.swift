@@ -13,10 +13,10 @@ protocol RecordsRepository {
     func recordDetail(postId:Int,userId:Int) -> Single<DetailRecordResponse>
     func cateFetch(type:cateType,postId:Int?,size:Int,sort:String,userid:Int) -> Single<[CategoryRespone]>
     func myRecordFetch(userid:Int) -> Single<[MyRecordRespone]>
-    func save(cate:String,content:String,isPublic:Bool,musicId:String,title:String,userid:Int) -> Single<SaveRespone>
+    func save(cate:String,content:String,isPublic:Bool,musicId:String,title:String,userid:Int,recordImageUrl:String) -> Single<SaveRespone>
     func recordIspublic(postId:Int) -> Single<StateRespone>
     func recordDelete(postId:Int) -> Single<StateRespone>
-    func recordUpdate(postId:Int,request:UpdateRequest) -> Single<PostRespone>
+    func recordUpdate(postId:Int,request:UpdateRequest) -> Single<StateRespone>
     func oneMusicRecordFetch(musicId:String,request:OneMusicRecordRequest) -> Single<[OneMusicRecordRespone]>
     //MARK: Interaction API
     func saveScrap(postId:Int,userId:Int) -> Single<StateRespone>
@@ -30,5 +30,7 @@ protocol RecordsRepository {
     func deleteFollow(fromId:Int,toId:Int) -> Single<StateRespone>
     func myDjProfile(fromId:Int,toId:Int) -> Single<MyDjProfileResponse>
     func myDjList(userId:Int) -> Single<[MyDjListResponse]>
-    func userRecords(fromId:Int,toId:Int) -> Single<[UserRecordsResponse]>
+    func userRecords(fromId:Int,toId:Int) -> Single<[MyDjResponse]>
+    func reportRecord(postId:Int) -> Single<StateRespone>
+    func userReport(userId:Int) -> Single<StateRespone> 
 }

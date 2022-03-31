@@ -38,3 +38,11 @@ struct SNSSignUpResponse: Codable {
     let accessToken:String
     let refreshToken:String
 }
+
+struct EmailCheckRequest:Codable {
+    let email:String 
+}
+
+struct EmailCheckResponse:Codable {
+    let code:String
+}

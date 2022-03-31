@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import RxSwift
+import Kingfisher
 
 class MydjProfieView:BaseView {
     
@@ -22,32 +23,22 @@ class MydjProfieView:BaseView {
        return table
     }()
     
-    let profileLoadingView = LoadingView()
-    let recordsLoadingView = LoadingView()
+    let loadingView = LoadingView()
         
     override func configureUI() {
         self.addSubview(tableView)
-        self.addSubview(profileLoadingView)
-        self.addSubview(recordsLoadingView)
+        self.addSubview(loadingView)
         
         
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
-        profileLoadingView.snp.makeConstraints { make in
-            make.leading.trailing.top.equalToSuperview()
-            make.height.equalTo(Constant.mainHeight * 0.17)
+        loadingView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
         
-        profileLoadingView.isHidden = true
-        
-        recordsLoadingView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(Constant.mainHeight * 0.83)
-        }
-        
-        recordsLoadingView.isHidden = true
+        loadingView.isHidden = true
     }
     
 }
@@ -130,8 +121,15 @@ class MydjProfileHeader:UITableViewHeaderFooterView {
         return label
     }()
     
+    let settingButton:UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "setting"), for: .normal)
+        return button
+    }()
+    
     override func prepareForReuse() {
         super.prepareForReuse()
+        profileImageView.image = nil
         disposeBag = DisposeBag()
     }
     
@@ -158,7 +156,7 @@ class MydjProfileHeader:UITableViewHeaderFooterView {
         
         followerCountLabel.snp.makeConstraints { make in
             make.centerX.equalTo(followerTitleLabel)
-            make.top.equalTo(followerTitleLabel.snp.bottom)
+            make.top.equalTo(followerTitleLabel.snp.bottom).offset(2)
             followerCountLabel.sizeToFit()
         }
         
@@ -201,7 +199,7 @@ class MydjProfileHeader:UITableViewHeaderFooterView {
         
         recordCountLabel.snp.makeConstraints { make in
             make.centerX.equalTo(recordTitleLabel)
-            make.top.equalTo(recordTitleLabel.snp.bottom)
+            make.top.equalTo(recordTitleLabel.snp.bottom).offset(2)
             recordCountLabel.sizeToFit()
         }
         
@@ -213,8 +211,15 @@ class MydjProfileHeader:UITableViewHeaderFooterView {
         
         followingCountLabel.snp.makeConstraints { make in
             make.centerX.equalTo(followingTitleLabel)
-            make.top.equalTo(followingTitleLabel.snp.bottom)
+            make.top.equalTo(followingTitleLabel.snp.bottom).offset(2)
             followingCountLabel.sizeToFit()
+        }
+        
+        settingButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(6)
+            make.trailing.equalToSuperview().offset(-12)
+            make.width.equalToSuperview().multipliedBy(0.065)
+            make.height.equalTo(settingButton.snp.width)
         }
         
     }
@@ -230,21 +235,47 @@ class MydjProfileHeader:UITableViewHeaderFooterView {
         self.addSubview(followerCountLabel)
         self.addSubview(followingTitleLabel)
         self.addSubview(followingCountLabel)
+        self.addSubview(settingButton)
     }
     
     func configureModel(profile:MyDjProfileResponse) {
-        profileLabel.text = profile.profile.nickName
-        profileImageView.setImage(with: profile.profile.profileURL ?? "")
+        profileLabel.text = profile.profile.nickname
         followerCountLabel.text = "\(profile.count.followerCount)"
         followingCountLabel.text = "\(profile.count.followingCount)"
         recordCountLabel.text = "\(profile.count.recordsCount)"
         
-        if profile.isFollowed {
+        if profile.isFollowed ?? false {
             followButton.setTitle("팔로잉", for:  .normal)
             followButton.backgroundColor = .clear
             followButton.setTitleColor(.mainGrey4, for: .normal)
             followButton.layer.borderWidth = 1
         }
+        
+        guard let image = profile.profile.profileURL else {
+            profileImageView.image = UIImage(named: "albumCover")
+            print("default")
+            return
+        }
+        profileImageView.setImage(with: image)
+    }
+    
+    func configureMyProfile(profile:MyDjProfileResponse) {
+       
+        profileLabel.text = profile.profile.nickname
+        followerCountLabel.text = "\(profile.count.followerCount)"
+        followingCountLabel.text = "\(profile.count.followingCount)"
+        recordCountLabel.text = "\(profile.count.recordsCount)"
+        
+        guard let imageUrl = profile.profile.profileURL else {
+            profileImageView.image = UIImage(named: "albumCover")
+            print("default")
+            return
+        }
+//        let url = URL(string:imageUrl)
+//        let data = try! Data(contentsOf: url!)
+//        profileImageView.image = UIImage(data: data)
+        //profileImageView.setImageNocache(with: imageUrl)
+        profileImageView.setImage(with: imageUrl)
     }
     
 }

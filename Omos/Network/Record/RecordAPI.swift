@@ -70,6 +70,7 @@ class RecordAPI {
             case .success(let data):
                 print(data)
                 completion(.success(data))
+                NotificationCenter.default.post(name: NSNotification.Name.reload, object: nil, userInfo: nil);
             case .failure(let error):
                 print(error.localizedDescription)
                 completion(.failure(error))
@@ -96,6 +97,7 @@ class RecordAPI {
             case .success(let data):
                 print(data)
                 completion(.success(data))
+                NotificationCenter.default.post(name: NSNotification.Name.reload, object: nil, userInfo: nil);
             case .failure(let error):
                 print(error.localizedDescription)
                 completion(.failure(error))
@@ -103,12 +105,13 @@ class RecordAPI {
         }
     }
     
-    func recordUpdate(postId:Int,request:UpdateRequest,completion:@escaping(Result<PostRespone,Error>) -> Void) {
-        AF.request(RecordTarget.recordUpdate(postId: postId,request),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<PostRespone>) in
+    func recordUpdate(postId:Int,request:UpdateRequest,completion:@escaping(Result<StateRespone,Error>) -> Void) {
+        AF.request(RecordTarget.recordUpdate(postId: postId,request),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<StateRespone>) in
             switch response.result {
             case .success(let data):
                 print(data)
                 completion(.success(data))
+                NotificationCenter.default.post(name: NSNotification.Name.reload, object: nil, userInfo: nil);
             case .failure(let error):
                 print(error.localizedDescription)
                 completion(.failure(error))
@@ -251,8 +254,8 @@ class RecordAPI {
     }
     
 
-    func userRecords(fromId:Int,toId:Int,completion:@escaping(Result<[UserRecordsResponse],Error>) -> Void) {
-        AF.request(RecordTarget.userRecords(fromId: fromId, toId: toId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[UserRecordsResponse]>) in
+    func userRecords(fromId:Int,toId:Int,completion:@escaping(Result<[MyDjResponse],Error>) -> Void) {
+        AF.request(RecordTarget.userRecords(fromId: fromId, toId: toId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[MyDjResponse]>) in
             switch response.result {
             case .success(let data):
                 print(data)
@@ -264,4 +267,29 @@ class RecordAPI {
         }
     }
     
+    func reportRecord(postId:Int,completion:@escaping(Result<StateRespone,Error>) -> Void) {
+        AF.request(RecordTarget.reportRecord(postId: postId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<StateRespone>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func userReport(userId:Int,completion:@escaping(Result<StateRespone,Error>) -> Void) {
+        AF.request(MyProfileTarget.userReport(userId: userId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<StateRespone>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
 }
