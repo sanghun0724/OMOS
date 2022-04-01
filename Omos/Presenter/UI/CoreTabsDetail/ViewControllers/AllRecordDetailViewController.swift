@@ -17,15 +17,13 @@ class AllRecordDetailViewController:BaseViewController {
     let selfLongView = recordLongView()
     let selfLyricsView = LyricsRecordView()
     let postId:Int
-    let userId:Int
     let viewModel:AllRecordDetailViewModel
     let loadingView = LoadingView()
     var lyricsArr:[String] = []
     
-    init(viewModel:AllRecordDetailViewModel,postId:Int,userId:Int) {
+    init(viewModel:AllRecordDetailViewModel,postId:Int) {
         self.viewModel = viewModel
         self.postId = postId
-        self.userId = userId
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -37,7 +35,7 @@ class AllRecordDetailViewController:BaseViewController {
         super.viewDidLoad()
         selfLyricsView.tableView.delegate = self
         selfLyricsView.tableView.dataSource = self
-        viewModel.selectDetailFetch(postId: self.postId, userId: self.userId)
+        viewModel.selectDetailFetch(postId: self.postId,userId: Account.currentUser)
        // setNavigationItems()
         bind()
      
@@ -47,7 +45,6 @@ class AllRecordDetailViewController:BaseViewController {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = false
-       
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -326,7 +323,7 @@ class AllRecordDetailViewController:BaseViewController {
         selfShortView.cateLabel.text =  " | \(myRecord.category.getReverseCate() )"
         selfShortView.nicknameLabel.text = myRecord.nickname
         
-        
+        print("is lIked? \(myRecord.isLiked)")
         if myRecord.isLiked {
             selfShortView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
             selfShortView.likeCountLabel.textColor = .mainOrange

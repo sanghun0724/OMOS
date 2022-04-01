@@ -193,11 +193,8 @@ class CreateView: BaseView {
         return view
     }()
     
-    let stickerChoiceView = StickerView()
-    
     override func layoutSubviews() {
         super.layoutSubviews()
-        stickerChoiceView.isHidden = true
         circleImageView.layoutIfNeeded()
         circleImageView.layer.cornerRadius = circleImageView.height / 2
         circleImageView.layer.masksToBounds = true
@@ -343,10 +340,6 @@ class CreateView: BaseView {
             make.bottom.equalTo(lastView.snp.top)
         }
         
-        stickerChoiceView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview()
-        }
         
         mainTextView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
@@ -382,7 +375,6 @@ class CreateView: BaseView {
         
         textCoverView.addSubview(mainTextView)
         textCoverView.addSubview(mainfullTextView)
-        textCoverView.addSubview(stickerChoiceView)
         
         lastView.addSubview(remainTitle)
         lastView.addSubview(remainText)

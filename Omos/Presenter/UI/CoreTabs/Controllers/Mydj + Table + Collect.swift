@@ -158,7 +158,7 @@ extension MyDJViewController:UITableViewDelegate,UITableViewDataSource {
             let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
             let uc = RecordsUseCase(recordsRepository: rp)
             let vm = AllRecordDetailViewModel(usecase: uc)
-            let vc = AllRecordDetailViewController(viewModel: vm, postId: record.recordID, userId: record.userID)
+            let vc = AllRecordDetailViewController(viewModel: vm, postId: record.recordID)
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

@@ -113,7 +113,7 @@ extension InteractionRecordViewController:UITableViewDelegate,UITableViewDataSou
         let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
         let uc = RecordsUseCase(recordsRepository: rp)
         let vm = AllRecordDetailViewModel(usecase: uc)
-        let vc = AllRecordDetailViewController(viewModel: vm, postId: data.recordID, userId: Account.currentUser)
+        let vc = AllRecordDetailViewController(viewModel: vm, postId: data.recordID)
         self.navigationController?.pushViewController(vc, animated: true)
         
 

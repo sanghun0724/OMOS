@@ -12,6 +12,8 @@ import SnapKit
 import YPImagePicker
 import Mantis
 import Kingfisher
+import IRSticker_swift
+
 
 enum CreateType {
     case modify
@@ -19,14 +21,15 @@ enum CreateType {
 }
 
 class CreateViewController:BaseViewController {
-    
     let scrollView = UIScrollView()
     let category:String
     private let selfView = CreateView()
     let viewModel:CreateViewModel
     let type:CreateType
     lazy var awsHelper = AWSS3Helper()
-    
+    let stickerChoiceView = StickerView()
+    var animator: UIDynamicAnimator?
+    var selectedSticker: IRStickerView?
     
     init(viewModel:CreateViewModel,category:String,type:CreateType) {
         self.viewModel = viewModel
@@ -45,7 +48,7 @@ class CreateViewController:BaseViewController {
         selfView.mainTextView.delegate = self
         selfView.mainfullTextView.delegate = self
         bind()
-        
+        animator = UIDynamicAnimator.init(referenceView: selfView.textCoverView)
         if type == .create { setCreateViewinfo() }
         else { setModifyView() }
     }
@@ -53,6 +56,7 @@ class CreateViewController:BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setlongTextView(category)
+        self.scrollView.addSubview(stickerChoiceView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,6 +69,25 @@ class CreateViewController:BaseViewController {
         enableScrollWhenKeyboardAppeared(scrollView: scrollView)
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.backgroundColor = .mainBackGround
+    }
+    
+
+    private func setStickerView() {
+        
+        selfView.snp.remakeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+            make.top.equalToSuperview()
+        }
+        
+        
+        stickerChoiceView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+            make.top.equalTo(selfView.lastView.snp.top)
+            make.bottom.equalToSuperview()
+        }
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -88,9 +111,6 @@ class CreateViewController:BaseViewController {
         if type == .create {
             var imageUrl = "https://omos-image.s3.ap-northeast-2.amazonaws.com/record/\(viewModel.curTime).png"
             viewModel.saveRecord(cate: getCate(cate: category), content: mainText!, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: selfView.titleTextView.text, userid: Account.currentUser,recordImageURL: imageUrl )
-          
-            
-            print("check Point\(viewModel.curTime)")
         } else {
             var recordContent = ""
             if  selfView.mainTextView.text != viewModel.modifyDefaultModel?.recordTitle {
@@ -142,7 +162,6 @@ class CreateViewController:BaseViewController {
     }
     
     func setModifyView() {
-        print(viewModel.modifyDefaultModel!)
         selfView.cateLabel.text = "  | \(category)"
         selfView.circleImageView.setImage(with: viewModel.modifyDefaultModel?.music.albumImageURL ?? "")
         selfView.musicTitleLabel.text = viewModel.modifyDefaultModel?.music.musicTitle
@@ -199,10 +218,6 @@ class CreateViewController:BaseViewController {
                         break
                     }
                 }
-                
-                
-                
-                // print("here is \(self?.navigationController!.viewControllers ?? [UIViewController()])")
             }).disposed(by: disposeBag)
         
         viewModel.loading
@@ -219,7 +234,31 @@ class CreateViewController:BaseViewController {
         
         selfView.stickerImageView.rx.tap
             .subscribe(onNext: { [weak self] _ in
-                self?.selfView.stickerChoiceView.isHidden = false
+                self?.setStickerView()
+            }).disposed(by: disposeBag)
+        
+        stickerChoiceView.stickerImageView1.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                let sticker1 = IRStickerView(frame: CGRect.init(x: 100, y: 100, width: 150, height: 150), contentImage: UIImage.init(named: "free")!)
+                sticker1.enabledControl = false
+                sticker1.enabledBorder = false
+                sticker1.tag = 1
+                sticker1.delegate = self
+                self?.selfView.textCoverView.addSubview(sticker1)
+                sticker1.performTapOperation()
+                print(sticker1.bounds)
+            }).disposed(by: disposeBag)
+        
+        selfView.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                if (self?.selectedSticker != nil) {
+                    self?.selectedSticker!.enabledControl = false
+                    self?.selectedSticker!.enabledBorder = false;
+                    self?.selectedSticker = nil
+                    self?.scrollView.isScrollEnabled = true
+                }
             }).disposed(by: disposeBag)
     }
     
@@ -437,8 +476,6 @@ extension CreateViewController:CropViewControllerDelegate {
            
         }
         
-       
-       
         self.dismiss(animated: true,completion: nil)
         self.tabBarController?.tabBar.isHidden = true
     }
@@ -461,4 +498,32 @@ extension CreateViewController:CropViewControllerDelegate {
     }
     
     
+}
+
+
+extension CreateViewController:IRStickerViewDelegate {
+    func ir_StickerViewDidTapContentView(stickerView: IRStickerView) {
+        NSLog("Tap[%zd] ContentView", stickerView.tag)
+        if let selectedSticker = selectedSticker {
+            selectedSticker.enabledBorder = false
+            selectedSticker.enabledControl = false
+        }
+
+        selectedSticker = stickerView
+        selectedSticker!.enabledBorder = true
+        selectedSticker!.enabledControl = true
+        scrollView.isScrollEnabled = false
+    }
+    
+    func ir_StickerViewDidTapLeftTopControl(stickerView: IRStickerView) {
+        NSLog("Tap[%zd] DeleteControl", stickerView.tag);
+        stickerView.removeFromSuperview()
+        for subView in self.selfView.textCoverView.subviews {
+            if subView.isKind(of: IRStickerView.self)  {
+                let sticker = subView as! IRStickerView
+                sticker.performTapOperation()
+                break
+            }
+        }
+    }
 }
