@@ -115,7 +115,7 @@ extension ArtistAlbumViewController:UITableViewDelegate,UITableViewDataSource {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: AlbumTableCell.identifier, for: indexPath) as! AlbumTableCell
             let cellData = viewModel.currentArtistAlbum[indexPath.row]
-            cell.configureModel(album: cellData)
+            cell.configureModel(album: cellData,keyword: viewModel.currentKeyword)
             cell.selectionStyle = . none
             return cell
         } else {

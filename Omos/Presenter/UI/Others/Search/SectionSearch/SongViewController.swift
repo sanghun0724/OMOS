@@ -110,7 +110,7 @@ extension SongViewController:UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: SongTableCell.identifier, for: indexPath) as! SongTableCell
             viewModel.searchType == .me ? (cell.createdButton.isHidden = false) : (cell.createdButton.isHidden = true)
             let cellData = viewModel.currentTrack[indexPath.row]
-            cell.configureModel(track: cellData)
+            cell.configureModel(track: cellData,keyword: viewModel.currentKeyword)
             cell.selectionStyle = . none
             cell.createdButton.rx.tap
                 .asDriver()

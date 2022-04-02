@@ -92,6 +92,8 @@ class SearchAlbumDetailCell:UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        titleLabel.text = nil
+        subTitleLabel.text = nil
         disposeBag = DisposeBag()
     }
     

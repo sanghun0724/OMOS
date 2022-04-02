@@ -88,8 +88,8 @@ extension EntireViewController:UITableViewDelegate,UITableViewDataSource {
             guard let cellData = viewModel.currentTrack[safe:indexPath.row] else {
                 return cell
             }
-            cell.selectionStyle = . none
-            cell.configureModel(track: cellData)
+            cell.selectionStyle = .none
+            cell.configureModel(track: cellData,keyword:viewModel.currentKeyword)
             cell.createdButton.rx.tap
                 .asDriver()
                 .drive(onNext: { [weak self] _ in
@@ -102,7 +102,7 @@ extension EntireViewController:UITableViewDelegate,UITableViewDataSource {
             guard let cellData = viewModel.currentAlbum[safe: indexPath.row] else {
                 return cell
             }
-            cell.configureModel(album: cellData)
+            cell.configureModel(album: cellData,keyword:viewModel.currentKeyword)
             cell.selectionStyle = .none
             return cell
         case 2:
@@ -110,7 +110,7 @@ extension EntireViewController:UITableViewDelegate,UITableViewDataSource {
             guard let cellData = viewModel.currentArtist[safe: indexPath.row] else {
                 return cell
             }
-            cell.configureModel(artist: cellData)
+            cell.configureModel(artist: cellData,keyword:viewModel.currentKeyword)
             cell.selectionStyle = . none
             return cell
         default:
@@ -144,6 +144,7 @@ extension EntireViewController:UITableViewDelegate,UITableViewDataSource {
             let rp = SearchRepositoryImpl(searchAPI: SearchAPI())
             let uc = SearchUseCase(searchRepository: rp)
             let vm = SearchArtistDetailViewModel(usecase: uc)
+            vm.currentKeyword = viewModel.currentKeyword
             vm.searchType = viewModel.searchType
             let vc = SearchArtistViewController(viewModel: vm, artistData: cellData)
             self.navigationController?.pushViewController(vc, animated: true)

@@ -10,8 +10,7 @@ import UIKit
 
 class AlbumTableCell:UITableViewCell {
     static let identifier = "AlbumTableCell"
-    
-    
+
     let songImageView:UIImageView = {
         let view = UIImageView(image:UIImage(named: "albumSquare"))
         view.clipsToBounds = true
@@ -47,7 +46,13 @@ class AlbumTableCell:UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         confgirueUI()
-        
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        songImageView.image = nil
+        titleLabel.text = nil
+        subTitleLabel.text = nil
     }
     
     func confgirueUI() {
@@ -84,11 +89,16 @@ class AlbumTableCell:UITableViewCell {
         
     }
     
-    func configureModel(album:AlbumRespone) {
+    func configureModel(album:AlbumRespone,keyword:String) {
         songImageView.setImage(with: album.albumImageURL)
         titleLabel.text = album.albumTitle
         subTitleLabel.text = album.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
+        if subTitleLabel.text?.first == " " {
+            subTitleLabel.text?.removeFirst()
+        }
         createdLabel.text = album.releaseDate
+        titleLabel.asColor(targetString: keyword, color: .mainOrange)
+        subTitleLabel.asColor(targetString: keyword, color: .mainOrange)
     }
     
 }
