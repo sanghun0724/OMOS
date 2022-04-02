@@ -31,6 +31,7 @@ class CreateViewController:BaseViewController {
     var animator: UIDynamicAnimator?
     var selectedSticker: IRStickerView?
     
+    
     init(viewModel:CreateViewModel,category:String,type:CreateType) {
         self.viewModel = viewModel
         self.category = category
@@ -73,7 +74,7 @@ class CreateViewController:BaseViewController {
     
 
     private func setStickerView() {
-        
+        stickerChoiceView.isHidden = false
         selfView.snp.remakeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.equalToSuperview()
@@ -81,7 +82,7 @@ class CreateViewController:BaseViewController {
         }
         
         
-        stickerChoiceView.snp.makeConstraints { make in
+        stickerChoiceView.snp.remakeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.equalToSuperview()
             make.top.equalTo(selfView.lastView.snp.top)
@@ -96,6 +97,17 @@ class CreateViewController:BaseViewController {
     }
     
     @objc func didTapDone() {
+        for subView in self.selfView.textCoverView.subviews {
+            if subView.isKind(of: IRStickerView.self)  {
+                let sticker = subView as! IRStickerView
+                print(sticker.contentImage)
+                print(sticker.contentView.frame)
+                print(sticker.contentView.transform)
+              
+                
+            
+            }
+        }
         var mainText:String?
         if category == "한 줄 감상" {
             mainText = selfView.mainTextView.text
@@ -235,19 +247,84 @@ class CreateViewController:BaseViewController {
         selfView.stickerImageView.rx.tap
             .subscribe(onNext: { [weak self] _ in
                 self?.setStickerView()
+                self?.scrollView.layoutIfNeeded()
+                self?.scrollView.setContentOffset(CGPoint(x: 0, y: (self?.scrollView.contentSize.height)! - (self?.scrollView.bounds.size.height)!), animated: true)
             }).disposed(by: disposeBag)
         
+        stickerBind()
+    }
+    
+    func stickerBind() {
         stickerChoiceView.stickerImageView1.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
-                let sticker1 = IRStickerView(frame: CGRect.init(x: 100, y: 100, width: 150, height: 150), contentImage: UIImage.init(named: "free")!)
+                let sticker1 = IRStickerView(frame: CGRect.init(x: 100, y: 100, width: 150, height: 150), contentImage: UIImage.init(named: "sticker1")!)
                 sticker1.enabledControl = false
                 sticker1.enabledBorder = false
                 sticker1.tag = 1
                 sticker1.delegate = self
                 self?.selfView.textCoverView.addSubview(sticker1)
                 sticker1.performTapOperation()
-                print(sticker1.bounds)
+            }).disposed(by: disposeBag)
+        
+        stickerChoiceView.stickerImageView2.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                let sticker1 = IRStickerView(frame: CGRect.init(x: 100, y: 100, width: 150, height: 150), contentImage: UIImage.init(named: "sticker2")!)
+                sticker1.enabledControl = false
+                sticker1.enabledBorder = false
+                sticker1.tag = 2
+                sticker1.delegate = self
+                self?.selfView.textCoverView.addSubview(sticker1)
+                sticker1.performTapOperation()
+            }).disposed(by: disposeBag)
+        
+        stickerChoiceView.stickerImageView3.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                let sticker1 = IRStickerView(frame: CGRect.init(x: 100, y: 100, width: 150, height: 150), contentImage: UIImage.init(named: "ost")!)
+                sticker1.enabledControl = false
+                sticker1.enabledBorder = false
+                sticker1.tag = 3
+                sticker1.delegate = self
+                self?.selfView.textCoverView.addSubview(sticker1)
+                sticker1.performTapOperation()
+            }).disposed(by: disposeBag)
+        
+        stickerChoiceView.stickerImageView4.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                let sticker1 = IRStickerView(frame: CGRect.init(x: 100, y: 100, width: 150, height: 150), contentImage: UIImage.init(named: "sticker3")!)
+                sticker1.enabledControl = false
+                sticker1.enabledBorder = false
+                sticker1.tag = 4
+                sticker1.delegate = self
+                self?.selfView.textCoverView.addSubview(sticker1)
+                sticker1.performTapOperation()
+            }).disposed(by: disposeBag)
+        
+        stickerChoiceView.stickerImageView5.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                let sticker1 = IRStickerView(frame: CGRect.init(x: 100, y: 100, width: 150, height: 150), contentImage: UIImage.init(named: "sticker4")!)
+                sticker1.enabledControl = false
+                sticker1.enabledBorder = false
+                sticker1.tag = 5
+                sticker1.delegate = self
+                self?.selfView.textCoverView.addSubview(sticker1)
+                sticker1.performTapOperation()
+            }).disposed(by: disposeBag)
+        
+        stickerChoiceView.stickerImageView6.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                let sticker1 = IRStickerView(frame: CGRect.init(x: 100, y: 100, width: 150, height: 150), contentImage: UIImage.init(named: "oneline")!)
+                sticker1.enabledControl = false
+                sticker1.enabledBorder = false
+                sticker1.tag = 6
+                sticker1.delegate = self
+                self?.selfView.textCoverView.addSubview(sticker1)
+                sticker1.performTapOperation()
             }).disposed(by: disposeBag)
         
         selfView.rx.tapGesture()
@@ -259,9 +336,25 @@ class CreateViewController:BaseViewController {
                     self?.selectedSticker = nil
                     self?.scrollView.isScrollEnabled = true
                 }
+                if !((self?.stickerChoiceView.isHidden)!) {
+                    self?.selfView.snp.remakeConstraints { make in
+                        make.centerX.equalToSuperview()
+                        make.width.equalToSuperview()
+                        make.top.equalToSuperview()
+                        make.bottom.equalToSuperview()
+                    }
+                    
+                    
+                    self?.stickerChoiceView.snp.remakeConstraints({ make in
+                        make.centerX.equalToSuperview()
+                        make.width.equalToSuperview()
+                        make.top.equalToSuperview()
+                        make.height.equalTo(0)
+                    })
+                    self?.stickerChoiceView.isHidden = true
+                }
             }).disposed(by: disposeBag)
     }
-    
     
     func configureImagePicker() {
         var config = YPImagePickerConfiguration()

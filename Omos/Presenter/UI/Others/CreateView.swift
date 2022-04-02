@@ -392,13 +392,13 @@ class CreateView: BaseView {
 class StickerView:BaseView {
     
     let stickerImageView1:UIImageView = {
-        let imageView = UIImageView(image:UIImage(named: "oneline")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
+        let imageView = UIImageView(image:UIImage(named: "sticker1")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
                                                                                                           right: -10)))
         return imageView
     }()
     
     let stickerImageView2:UIImageView = {
-        let imageView = UIImageView(image:UIImage(named: "free")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
+        let imageView = UIImageView(image:UIImage(named: "sticker2")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
                                                                                                        right: -10)))
         return imageView
     }()
@@ -410,13 +410,13 @@ class StickerView:BaseView {
     }()
     
     let stickerImageView4:UIImageView = {
-        let imageView = UIImageView(image:UIImage(named: "lyrics")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
+        let imageView = UIImageView(image:UIImage(named: "sticker3")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
                                                                                                          right: -10)))
         return imageView
     }()
     
     let stickerImageView5:UIImageView = {
-        let imageView = UIImageView(image:UIImage(named: "story")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
+        let imageView = UIImageView(image:UIImage(named: "sticker4")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
                                                                                                        right: -10)))
         return imageView
     }()

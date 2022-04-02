@@ -45,7 +45,6 @@ class EntireViewController:BaseViewController {
     
     func bind() {
         Observable.zip(viewModel.album, viewModel.track, viewModel.artist)
-            .take(1)
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner,musics in

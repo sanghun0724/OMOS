@@ -97,6 +97,7 @@ class SearchViewController:BaseViewController {
             self?.selfView.bestTableView.isHidden = valid
         }).disposed(by: disposeBag)
         
+        
         selfView.searchViewController.searchBar.rx.text
             .debounce(.milliseconds(300),scheduler:MainScheduler.instance) //요청 오버헤드 방지
             .distinctUntilChanged()
@@ -106,6 +107,7 @@ class SearchViewController:BaseViewController {
                     return
                 }
                 print(text)
+                
                 //owner.viewModel.searchQeuryChanged(query: text)
             }).disposed(by: disposeBag)
         
@@ -188,6 +190,20 @@ extension SearchViewController:UISearchBarDelegate {
             self.addContentsView()
             self.selfView.isHidden = true
         }
+        if let child = self.children.first {
+            child.view?.isHidden = false
+            self.selfView.isHidden = true
+        }
     }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        if let child = self.children.first {
+            child.view?.isHidden = true
+            self.selfView.isHidden = false
+        }
+ 
+    }
+    
+    
     
 }

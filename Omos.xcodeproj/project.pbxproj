@@ -450,8 +450,8 @@
 			isa = PBXGroup;
 			children = (
 				B606195127DF0F14006508CA /* LyricsPasteViewController.swift */,
-				B606195327DF0F57006508CA /* LyricsPasteView.swift */,
 				B606195527DF20E7006508CA /* LyricsPasteCreateView.swift */,
+				B606195327DF0F57006508CA /* LyricsPasteView.swift */,
 				B606195727DF2437006508CA /* LyricsPasteCreateViewController.swift */,
 				B606195C27DF32E7006508CA /* Lyrics + Table.swift */,
 				B606195927DF2B85006508CA /* LyricsViewModel.swift */,
