@@ -196,6 +196,14 @@ class LoginViewController:UIViewController {
                 }).disposed(by: self!.disposeBag)
             }).disposed(by: disposeBag)
         
+        viewModel.kakaoError.subscribe(onNext: { [weak self] _ in
+            let action = UIAlertAction(title: "확인", style: .default) { alert in
+                
+            }
+            action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
+            self?.presentAlert(title: "", message: "카카오 로그인 시, 카카오 어플 설치가 필요합니다", isCancelActionIncluded: false, preferredStyle: .alert, with: action)
+        }).disposed(by: disposeBag)
+        
         bottomView.appleButton.addTarget(self, action: #selector(loginApple), for: .touchUpInside)
     }
     

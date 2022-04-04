@@ -1561,9 +1561,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Omos/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = omos;
-				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 사용을 허용하시겠습니까?";
+				INFOPLIST_KEY_NSCameraUsageDescription = "사진,동영상은  omos 레코드 작성시 메타데이터로 활용됩니다.  허용하시겠습니까?";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "마이크 사용을 허용하시겠습니까?";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "카메라 앨범 사용을 허용하시겠습니까?";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앨범의 사진,동영상은  omos 레코드 작성시 메타데이터로 활용됩니다.  허용하시겠습니까?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1596,9 +1596,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Omos/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = omos;
-				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 사용을 허용하시겠습니까?";
+				INFOPLIST_KEY_NSCameraUsageDescription = "사진,동영상은  omos 레코드 작성시 메타데이터로 활용됩니다.  허용하시겠습니까?";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "마이크 사용을 허용하시겠습니까?";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "카메라 앨범 사용을 허용하시겠습니까?";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앨범의 사진,동영상은  omos 레코드 작성시 메타데이터로 활용됩니다.  허용하시겠습니까?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
