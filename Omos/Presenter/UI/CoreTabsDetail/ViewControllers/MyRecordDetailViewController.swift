@@ -215,9 +215,11 @@ class MyRecordDetailViewController:BaseViewController {
                     self?.selfLyricsView.tableView.isScrollEnabled = false
                     self?.selfLyricsView.tableHeightConstraint!.update(offset: ceil(self?.selfLyricsView.tableView.intrinsicContentSize2.height ?? 100 ) )
                     self?.lyricsBind(myRecord: record)
+                    self?.navigationItem.rightBarButtonItems?.removeLast()
                 } else {
                     self?.configLong()
                     self?.setLongData(myRecord: record )
+                    self?.navigationItem.rightBarButtonItems?.removeLast()
                 }
             }).disposed(by: disposeBag)
         

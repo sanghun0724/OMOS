@@ -43,6 +43,14 @@ class AllRecordCateDetailViewModel:BaseViewModel {
         return currentCateRecords.count
     }
     
+    private func removeReportedRecord() {
+        for record in currentCateRecords {
+            if Account.currentReportRecordsId.contains(record.recordID) {
+                
+            }
+        }
+    }
+    
     //Interation
     func saveScrap(postId:Int,userId:Int) {
         usecase.saveScrap(postId: postId, userId: userId)

@@ -114,7 +114,8 @@ class AllRecordDetailViewController:BaseViewController {
             .asDriver()
             .drive(onNext:{ [weak self] _ in
                 let action = UIAlertAction(title: "신고하기", style: .default) { alert in
-                    self?.viewModel.reportRecord(postId: myRecord.recordID)
+                    //self?.viewModel.reportRecord(postId: myRecord.recordID)
+                    Account.currentReportRecordsId.append(myRecord.recordID)
                     self?.navigationController?.popViewController(animated: true)
                 }
                 action.setValue(UIColor.mainOrange, forKey: "titleTextColor")

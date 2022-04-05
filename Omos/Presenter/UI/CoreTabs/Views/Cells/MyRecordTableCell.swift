@@ -51,6 +51,8 @@ class MyRecordTableCell:UITableViewCell {
         label.textAlignment = .left
         label.text = "가수"
         label.font = .systemFont(ofSize: 12,weight:.light)
+        label.numberOfLines = 1
+        label.lineBreakMode = .byTruncatingTail
         return label
     }()
     
@@ -63,12 +65,14 @@ class MyRecordTableCell:UITableViewCell {
         return label
     }()
     
-    let descLabel:UILabel = {
+    let descLabel:UILabel() = {
         let label = UILabel()
         label.text = "record main title here..노래제목이 들어갑니다.노래제목이 들어갑니다.노래제목이 들어갑니다.노래제목이 들어갑니다"
-        label.numberOfLines = 2
+        label.numberOfLines = 0
         label.font = .systemFont(ofSize: 12,weight:.light)
         label.textAlignment = .left
+        label.textColor = .mainGrey3
+        label.contentMode = .bottom
         return label
     }()
     
@@ -103,19 +107,22 @@ class MyRecordTableCell:UITableViewCell {
         
         albumImageView.layer.cornerRadius = albumImageView.width / 2
         albumImageView.layer.masksToBounds = true
+         
+        
         
         labelCoverView.layer.cornerRadius = labelCoverView.height / 2
         labelCoverView.layer.masksToBounds = true
+        
     }
     
     private func configureUI() {
-        self.addSubview(backCoverView)
+        self.contentView.addSubview(backCoverView)
         backCoverView.addSubview(albumImageView)
         backCoverView.addSubview(backGroundView)
-        labelCoverView.addSubview(titleLabel)
-        labelCoverView.addSubview(artistLabel)
         backGroundView.addSubview(recordLabel)
         backGroundView.addSubview(labelCoverView)
+        backGroundView.addSubview(titleLabel)
+        backGroundView.addSubview(artistLabel)
         backGroundView.addSubview(descLabel)
         backGroundView.addSubview(nameLabel)
         backCoverView.addSubview(lockImageView)
@@ -126,8 +133,8 @@ class MyRecordTableCell:UITableViewCell {
         
         albumImageView.snp.makeConstraints { make in
             make.leading.bottom.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.64).priority(999)
-            make.width.equalTo(albumImageView.snp.height).priority(999)
+            make.height.equalToSuperview().multipliedBy(0.64)
+            make.width.equalTo(albumImageView.snp.height)
         }
         
         backGroundView.snp.makeConstraints { make in
@@ -135,50 +142,72 @@ class MyRecordTableCell:UITableViewCell {
             make.right.bottom.top.equalToSuperview()
         }
         
-        labelCoverView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(14)
-            make.top.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.157)
-        }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
-            make.leading.equalToSuperview().offset(8)
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview().offset(16)
             titleLabel.sizeToFit()
         }
+        titleLabel.layoutIfNeeded()
         
         artistLabel.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
+            make.top.equalToSuperview()
             make.leading.equalTo(titleLabel.snp.trailing).offset(2)
             make.trailing.equalToSuperview().offset(-8)
-            artistLabel.sizeToFit()
+            make.bottom.equalTo(titleLabel)
+            artistLabel.setContentCompressionResistancePriority(.init(0), for: .horizontal)
         }
+        artistLabel.layoutIfNeeded()
         
         recordLabel.snp.makeConstraints { make in
-            make.left.right.equalTo(titleLabel)
+            make.leading.equalToSuperview().offset(8)
+            make.trailing.equalToSuperview().offset(-8)
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
         }
         recordLabel.sizeToFit()
         
-        descLabel.snp.makeConstraints { make in
-            make.top.equalTo(recordLabel.snp.bottom).offset(10)
-            make.left.right.equalTo(recordLabel)
-        }
-        descLabel.sizeToFit()
-        
         nameLabel.snp.makeConstraints { make in
-            make.left.right.equalTo(descLabel)
+            make.left.right.equalTo(recordLabel)
             make.bottom.equalToSuperview()
+            nameLabel.sizeToFit()
         }
-        nameLabel.sizeToFit()
+        nameLabel.layoutIfNeeded()
+        
+        descLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(nameLabel.snp.top).offset(-10)
+            make.left.right.equalTo(recordLabel)
+            make.top.equalTo(recordLabel.snp.bottom).offset(10)
+            descLabel.sizeToFit()
+        }
+        descLabel.layoutIfNeeded()
         
         lockImageView.snp.makeConstraints { make in
             make.right.bottom.equalToSuperview()
         }
         lockImageView.sizeToFit()
         
-        layoutIfNeeded()
         
+//        layoutIfNeeded()
+        
+        
+        let wholeWidth = titleLabel.intrinsicContentSize.width + artistLabel.intrinsicContentSize.width + 16
+        if wholeWidth < backGroundView.width {
+            labelCoverView.snp.remakeConstraints { make in
+                make.leading.equalToSuperview().offset(8)
+                make.centerY.equalTo(titleLabel)
+                make.height.equalTo(titleLabel.height + 12)
+                make.width.equalTo(wholeWidth)
+            }
+        } else {
+            labelCoverView.snp.remakeConstraints { make in
+                make.leading.equalToSuperview().offset(8)
+                make.centerY.equalTo(titleLabel)
+                make.height.equalTo(titleLabel.height + 12)
+                make.trailing.equalToSuperview()
+            }
+        }
+        
+        labelCoverView.layoutIfNeeded()
     }
     
     func configureModel(record:MyRecordRespone) {
@@ -189,7 +218,6 @@ class MyRecordTableCell:UITableViewCell {
         descLabel.text = record.recordContents
         nameLabel.text = record.createdDate.toDate() + " | " + record.category.getReverseCate()
         record.isPublic ? (lockImageView.image = UIImage(named:"unlock")) : (lockImageView.image = UIImage(named:"lock"))
-        
     }
     
     func configureUserRecordModel(record:MyRecordRespone) {

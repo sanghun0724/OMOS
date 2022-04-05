@@ -131,7 +131,7 @@ class PasswordLabelView:BaseView {
 class labels:BaseView {
     let findButton:UIButton = {
        let button = UIButton()
-        button.setTitle("아이디찾기 | 비밀번호", for: .normal)
+        button.setTitle("비밀번호 찾기", for: .normal)
         return button
     }()
     
@@ -148,11 +148,11 @@ class labels:BaseView {
         self.addSubview(findButton)
         self.addSubview(signUpButton)
         
-//        findButton.snp.makeConstraints { make in
-//            make.left.top.bottom.equalToSuperview()
-//            make.height.equalTo(64)
-//        }
-//
+        findButton.snp.makeConstraints { make in
+            make.left.top.bottom.equalToSuperview()
+            make.height.equalTo(64)
+        }
+
 
         
         signUpButton.snp.makeConstraints { make in

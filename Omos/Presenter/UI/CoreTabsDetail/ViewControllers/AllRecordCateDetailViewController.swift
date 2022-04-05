@@ -145,8 +145,9 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
                 self?.viewModel.currentCateRecords = []
                 self?.fetchRecord()
             }).disposed(by: disposeBag)
-        
     }
+    
+    
     
     private func setTitle() {
         let label = UILabel()

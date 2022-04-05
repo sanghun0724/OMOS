@@ -34,13 +34,14 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
                 cell.configureModel(record: record)
                 cell.selectionStyle = .none
                 cell.selfView.tableView.reloadData()
+                
                 lyricsCellBind(cell: cell, data: record,indexPath: indexPath)
                 return cell
             case .A_LINE:
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateShortDetailCell.identifier, for: indexPath) as! AllRecordCateShortDetailCell
                 cell.configureModel(record: record)
                 shortCellBind(cell: cell, data: record)
-                cell.selectionStyle = . none
+                cell.selectionStyle = .none
                 cell.myView.lockButton.isHidden = true
                 return cell
             default:
