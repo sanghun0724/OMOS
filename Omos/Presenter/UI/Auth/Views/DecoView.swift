@@ -132,6 +132,8 @@ class labels:BaseView {
     let findButton:UIButton = {
        let button = UIButton()
         button.setTitle("비밀번호 찾기", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 14,weight:.light)
+        button.isHidden = true
         return button
     }()
     
@@ -139,7 +141,7 @@ class labels:BaseView {
     let signUpButton:UIButton = {
         let button = UIButton()
         button.setTitle("회원가입", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 14)
+        button.titleLabel?.font = .systemFont(ofSize: 14,weight:.light)
         button.setTitleColor(.mainGrey4, for: .normal)
         return button
     }()

@@ -93,10 +93,10 @@ class AlbumTableCell:UITableViewCell {
         songImageView.setImage(with: album.albumImageURL)
         titleLabel.text = album.albumTitle
         subTitleLabel.text = album.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
-        if subTitleLabel.text?.first == " " {
-            subTitleLabel.text?.removeFirst()
-        }
-        createdLabel.text = album.releaseDate
+//        if subTitleLabel.text?.first == " " {
+//            subTitleLabel.text?.removeFirst()
+//        }
+        createdLabel.text = " " + album.releaseDate
         titleLabel.asColor(targetString: keyword, color: .mainOrange)
         subTitleLabel.asColor(targetString: keyword, color: .mainOrange)
     }

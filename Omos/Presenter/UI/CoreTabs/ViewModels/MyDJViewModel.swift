@@ -29,6 +29,9 @@ class MyDjViewModel:BaseViewModel {
     func fetchMyDjRecord(userId:Int,request:MyDjRequest) {
         loading.onNext(true)
         usecase.MyDjAllRecord(userId:userId, MyDjRequest: request)
+            .map {
+                $0.filter{ !Account.currentReportRecordsId.contains($0.recordID) }
+            }
             .subscribe({ [weak self] event in
                 self?.loading.onNext(false)
                 switch event {

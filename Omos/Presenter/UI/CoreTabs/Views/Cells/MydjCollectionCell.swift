@@ -57,7 +57,7 @@ class MydjCollectionCell:UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        //djImageView.image = nil
+        djImageView.image = nil
         disposeBag = DisposeBag()
     }
     
@@ -78,14 +78,31 @@ class MydjCollectionCell:UICollectionViewCell {
     }
     
     func configureModel(record:MyDjListResponse) {
-        djImageView.setImage(with: record.profileURL ?? "")
         djLabel.text = record.nickname
+        guard let imageUrl = record.profileURL else {
+            djImageView.image = UIImage(named: "albumCover")
+            return
+        }
+        if imageUrl == "" {
+            djImageView.image = UIImage(named: "albumCover")
+        } else {
+            djImageView.setImage(with: imageUrl)
+        }
     }
     
     func configureHome(record:recommendDjResponse) {
         self.homeInfo = record
-        djImageView.setImage(with: record.profileURL ?? "" )
         djLabel.text = record.nickname
+        guard let imageUrl = record.profileURL else {
+            djImageView.image = UIImage(named: "albumCover")
+            return
+        }
+        if imageUrl == "" {
+            djImageView.image = UIImage(named: "albumCover")
+        } else {
+            djImageView.setImage(with: imageUrl)
+        }
+       
     }
     
     

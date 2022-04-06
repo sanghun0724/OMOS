@@ -27,6 +27,9 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             guard let record = viewModel.currentCateRecords[safe:indexPath.row] else { return UITableViewCell() }
+//            if Account.currentReportRecordsId.contains(record.recordID) {
+//                return UITableViewCell.init(frame: .zero)
+//            }
             switch self.myCateType {
             case .LYRICS:
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllrecordLyricsTableCell.identifier, for: indexPath) as! AllrecordLyricsTableCell
@@ -34,7 +37,7 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
                 cell.configureModel(record: record)
                 cell.selectionStyle = .none
                 cell.selfView.tableView.reloadData()
-                
+             
                 lyricsCellBind(cell: cell, data: record,indexPath: indexPath)
                 return cell
             case .A_LINE:
@@ -83,7 +86,8 @@ extension AllRecordCateDetailViewController:UITableViewDelegate,UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(
+            at: indexPath, animated: true)
         guard let record = viewModel.currentCateRecords[safe:indexPath.row] else { return }
       
         if Account.currentUser == record.userID {
@@ -153,6 +157,7 @@ extension AllRecordCateDetailViewController {
             .drive(onNext:{ [weak self] _ in
                 let action = UIAlertAction(title: "신고하기", style: .default) { alert in
                     self?.viewModel.reportRecord(postId: data.recordID)
+                    Account.currentReportRecordsId.append(data.recordID)
                 }
                 action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
                 self?.presentAlert(title: "", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
@@ -222,6 +227,7 @@ extension AllRecordCateDetailViewController {
             .drive(onNext:{ [weak self] _ in
                 let action = UIAlertAction(title: "신고하기", style: .default) { alert in
                     self?.viewModel.reportRecord(postId: data.recordID)
+                    Account.currentReportRecordsId.append(data.recordID)
                 }
                 action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
                 self?.presentAlert(title: "", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
@@ -288,6 +294,7 @@ extension AllRecordCateDetailViewController {
             .drive(onNext:{ [weak self] _ in
                 let action = UIAlertAction(title: "신고하기", style: .default) { alert in
                     self?.viewModel.reportRecord(postId: data.recordID)
+                    Account.currentReportRecordsId.append(data.recordID)
                 }
                 action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
                 self?.presentAlert(title: "", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)

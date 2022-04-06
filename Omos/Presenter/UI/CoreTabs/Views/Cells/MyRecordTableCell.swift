@@ -65,14 +65,14 @@ class MyRecordTableCell:UITableViewCell {
         return label
     }()
     
-    let descLabel:UILabel() = {
+    let descLabel:UILabel = {
         let label = UILabel()
         label.text = "record main title here..노래제목이 들어갑니다.노래제목이 들어갑니다.노래제목이 들어갑니다.노래제목이 들어갑니다"
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: 12,weight:.light)
-        label.textAlignment = .left
+//        label.textAlignment = .left
         label.textColor = .mainGrey3
-        label.contentMode = .bottom
+        label.contentMode = .bottomLeft
         return label
     }()
     
@@ -144,14 +144,14 @@ class MyRecordTableCell:UITableViewCell {
         
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().offset(8)
             make.leading.equalToSuperview().offset(16)
             titleLabel.sizeToFit()
         }
         titleLabel.layoutIfNeeded()
         
         artistLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().offset(8)
             make.leading.equalTo(titleLabel.snp.trailing).offset(2)
             make.trailing.equalToSuperview().offset(-8)
             make.bottom.equalTo(titleLabel)

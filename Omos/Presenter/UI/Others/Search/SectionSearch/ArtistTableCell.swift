@@ -74,9 +74,9 @@ class ArtistTableCell:UITableViewCell {
         songImageView.setImage(with:artist.artistImageURL ?? "")
         titleLabel.text = artist.artistName
         subTitleLabel.text = artist.genres.reduce("") { $0 + " \($1)" }
-        if subTitleLabel.text?.first == " " {
-            subTitleLabel.text?.removeFirst()
-        }
+//        if subTitleLabel.text?.first == " " {
+//            subTitleLabel.text?.removeFirst()
+//        }
         titleLabel.asColor(targetString: keyword, color: .mainOrange)
         subTitleLabel.asColor(targetString: keyword, color: .mainOrange)
     

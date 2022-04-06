@@ -27,11 +27,33 @@ class AllRecordViewModel:BaseViewModel {
                 case .success(let data):
                     print("success")
                     self?.currentSelectRecords = data
-                    self?.selectRecords.onNext(data)
+                    self?.removeReportedRecord()
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)
                 }
             }).disposed(by: disposeBag)
+    }
+    
+    private func removeReportedRecord() {
+        DispatchQueue.global().sync {
+            var stack = currentSelectRecords.aLine
+            currentSelectRecords.aLine = stack.filter{ !Account.currentReportRecordsId.contains( $0.recordID)}
+            
+            stack = currentSelectRecords.free
+            currentSelectRecords.free = stack.filter{ !Account.currentReportRecordsId.contains( $0.recordID)}
+            
+            stack = currentSelectRecords.ost
+            currentSelectRecords.ost = stack.filter{ !Account.currentReportRecordsId.contains( $0.recordID)}
+            
+            stack = currentSelectRecords.lyrics
+            currentSelectRecords.lyrics = stack.filter{ !Account.currentReportRecordsId.contains( $0.recordID)}
+            
+            stack = currentSelectRecords.story
+            currentSelectRecords.story = stack.filter{ !Account.currentReportRecordsId.contains( $0.recordID)}
+        }
+        DispatchQueue.global().sync {
+            self.selectRecords.onNext(.init(aLine: [], ost: [], lyrics: [], free: [], story: []))
+        }
     }
     
     func numberofSections() -> Int {

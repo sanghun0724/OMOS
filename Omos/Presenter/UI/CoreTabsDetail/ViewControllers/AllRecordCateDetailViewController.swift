@@ -89,8 +89,8 @@ class AllRecordCateDetailViewController:BaseViewController , UIScrollViewDelegat
             make.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
         }
-        selfView.tableView.layoutIfNeeded()
-        selfView.tableView.reloadData()
+        self.selfView.tableView.reloadData()
+        self.selfView.tableView.layoutIfNeeded()
     }
     
     

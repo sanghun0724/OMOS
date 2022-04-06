@@ -83,7 +83,7 @@ class AllRecordViewController: BaseViewController {
         viewModel.selectRecords
             .withUnretained(self)
             .subscribe(onNext: { owner,info in
-                owner.selectedRecords = info
+                owner.selectedRecords = owner.viewModel.currentSelectRecords
                 DispatchQueue.main.async {
                     owner.selfView.tableView.refreshControl?.endRefreshing()
                     owner.selfView.tableView.reloadData()

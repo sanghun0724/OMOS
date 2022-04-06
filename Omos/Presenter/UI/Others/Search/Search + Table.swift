@@ -57,7 +57,7 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource {
         } else {
             
               let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-              cell.textLabel?.text = "겔겔겔"
+             // cell.textLabel?.text = "겔겔겔"
               return cell
         }
         

@@ -89,22 +89,27 @@ class SongTableCell:UITableViewCell {
         songImageView.setImage(with: track.albumImageURL)
         titleLabel.text = track.musicTitle
         subTitleLabel.text = track.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
-        if subTitleLabel.text?.first == " " {
-            subTitleLabel.text?.removeFirst()
-        }
+//        DispatchQueue.global().sync {
+//            if subTitleLabel.text?.first == " " {
+//                subTitleLabel.text?.removeFirst()
+//            }
+//        }
+       
         titleLabel.asColor(targetString: keyword, color: .mainOrange)
-       // subTitleLabel.asColor(targetString: keyword, color: .mainOrange)
+        subTitleLabel.asColor(targetString: keyword, color: .mainOrange)
     }
     
     func configureModelArtistTrack(track:ArtistDetailRespone,keyword:String) {
         songImageView.setImage(with: track.albumImageURL)
         titleLabel.text = track.musicTitle
         subTitleLabel.text = track.artistName.reduce("") { $0 + " \($1)" }
-        if subTitleLabel.text?.first == " " {
-            subTitleLabel.text?.removeFirst()
-        }
+//        DispatchQueue.global().sync {
+//            if subTitleLabel.text?.first == " " {
+//                subTitleLabel.text?.removeFirst()
+//            }
+//        }
         titleLabel.asColor(targetString: keyword, color: .mainOrange)
-     //   subTitleLabel.asColor(targetString: keyword, color: .mainOrange)
+        subTitleLabel.asColor(targetString: keyword, color: .mainOrange)
 
     }
     
