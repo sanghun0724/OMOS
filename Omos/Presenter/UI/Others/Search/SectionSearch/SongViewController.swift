@@ -84,7 +84,7 @@ class SongViewController:BaseViewController,UIScrollViewDelegate {
         
         selfView.tableView.reloadSections(IndexSet(integer: 1), with: .none)
         
-        viewModel.trackFetch(request: .init(keyword: self.viewModel.currentKeyword, limit: 20, offset: pagingCount + 20))
+        viewModel.trackFetch(request: .init(keyword: self.viewModel.currentKeyword, limit: 20, offset: pagingCount + 20, type: 2))
         
     }
     
@@ -116,7 +116,7 @@ extension SongViewController:UITableViewDelegate,UITableViewDataSource {
                 .asDriver()
                 .drive(onNext: { [weak self] _ in
                     print("click")
-                    let vc = CategoryViewController(defaultModel: .init(musicId:cellData.musicID, imageURL: cellData.albumImageURL, musicTitle: cellData.musicTitle, subTitle: cellData.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}))
+                    let vc = CategoryViewController(defaultModel: .init(musicId:cellData.musicID , imageURL: cellData.albumImageURL ?? "", musicTitle: cellData.musicTitle, subTitle: cellData.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}))
                     self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: cell.disposeBag)
             return cell
@@ -134,7 +134,7 @@ extension SongViewController:UITableViewDelegate,UITableViewDataSource {
             let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
             let uc = RecordsUseCase(recordsRepository: rp)
             let vm = AllRecordSearchDetailViewModel(usecase: uc)
-            let vc = AllRecordSearchDetailViewController(viewModel: vm, musicId: cellData.musicID)
+            let vc = AllRecordSearchDetailViewController(viewModel: vm, musicId: cellData.musicID )
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

@@ -49,7 +49,8 @@ class SearchViewController:BaseViewController {
         navigationItem.rightBarButtonItems?.removeAll()
         bind()
         selfView.emptyView.isHidden = true
-        
+        selfView.emptyView.descriptionLabel.text = "검색 결과가 없습니다."
+        selfView.emptyView.imageView.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -99,16 +100,20 @@ class SearchViewController:BaseViewController {
         
         
         selfView.searchViewController.searchBar.rx.text
-            .debounce(.milliseconds(300),scheduler:MainScheduler.instance) //요청 오버헤드 방지
+            .debounce(.milliseconds(280),scheduler:MainScheduler.instance) //요청 오버헤드 방지
             .distinctUntilChanged()
             .withUnretained(self)
             .subscribe(onNext: { owner,text in
                 guard let text = text else {
                     return
                 }
-                print(text)
                 
-                //owner.viewModel.searchQeuryChanged(query: text)
+                owner.viewModel.trackSearchFetch(request: .init(keyword: text, limit: 10, offset: 0, type: 1))
+            }).disposed(by: disposeBag)
+        
+        viewModel.searchTrack
+            .subscribe(onNext: { [weak self] _  in
+                self?.selfView.tableView.reloadData()
             }).disposed(by: disposeBag)
         
         viewModel.errorMessage
@@ -184,7 +189,7 @@ extension SearchViewController:UISearchBarDelegate {
         viewModel.currentTrack = []
         viewModel.currentArtist = []
         viewModel.currentAlbum = []
-        viewModel.searchAllResult(request: .init(keyword: searchBar.text ?? "", limit: 20, offset: 0))
+        viewModel.searchAllResult(keyword: searchBar.text ?? "")
         viewModel.currentKeyword = searchBar.text ?? ""
         if self.children.isEmpty {
             self.addContentsView()

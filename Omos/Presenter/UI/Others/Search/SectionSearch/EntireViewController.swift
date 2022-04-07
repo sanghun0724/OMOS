@@ -93,7 +93,7 @@ extension EntireViewController:UITableViewDelegate,UITableViewDataSource {
             cell.createdButton.rx.tap
                 .asDriver()
                 .drive(onNext: { [weak self] _ in
-                    let vc = CategoryViewController(defaultModel: .init(musicId:cellData.musicID, imageURL: cellData.albumImageURL, musicTitle: cellData.musicTitle, subTitle: cellData.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}))
+                    let vc = CategoryViewController(defaultModel: .init(musicId:cellData.musicID , imageURL: cellData.albumImageURL , musicTitle: cellData.musicTitle, subTitle: cellData.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}))
                     self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: cell.disposeBag)
             return cell
@@ -110,6 +110,8 @@ extension EntireViewController:UITableViewDelegate,UITableViewDataSource {
             guard let cellData = viewModel.currentArtist[safe: indexPath.row] else {
                 return cell
             }
+            cell.titleLabel.attributedText = nil
+            cell.subTitleLabel.attributedText = nil
             cell.configureModel(artist: cellData,keyword:viewModel.currentKeyword)
             cell.selectionStyle = . none
             return cell

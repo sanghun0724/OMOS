@@ -62,8 +62,13 @@ class MydjProfileViewController:BaseViewController {
             print("userId입니다:\(id)")
             self?.viewModel.userReport(userId: id)
         }
+        let action2 = UIAlertAction(title: "차단하기", style: .default) {[weak self] alert in
+            guard let id = self?.toId else { return }
+            print("userId입니다:\(id)")
+            self?.viewModel.userReport(userId: id)
+        }
         action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
-        self.presentAlert(title: "", message: "이 DJ를 차단하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
+        self.presentAlert(title: "", message: "이 DJ를 차단하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action,action2)
     }
     
     override func configureUI() {

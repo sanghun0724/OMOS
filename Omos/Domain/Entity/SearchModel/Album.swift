@@ -13,6 +13,7 @@ struct MusicRequest:Codable {
     let keyword:String
     let limit:Int
     let offset:Int
+    let type:Int?
 }
 
 /// album

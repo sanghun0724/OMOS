@@ -95,7 +95,7 @@ class SignUpView:BaseView {
     
     lazy var views = [emailLabel,emailField,emailCheckView,passwordLabel,passwordField,repaswwordLabel,repasswordField]
     
-    private lazy var stack:UIStackView = {
+    lazy var stack:UIStackView = {
         let stack = UIStackView(arrangedSubviews: views)
         stack.axis = .vertical
         return stack

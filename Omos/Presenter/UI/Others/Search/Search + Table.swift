@@ -19,7 +19,7 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      
+        
         if tableView == selfView.bestTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: BestSearchTableCell.identifier, for: indexPath) as! BestSearchTableCell
             switch indexPath.row {
@@ -55,10 +55,10 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource {
             }
             return cell
         } else {
-            
-              let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-             // cell.textLabel?.text = "겔겔겔"
-              return cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+            guard let titleText = self.viewModel.currentSearchTrack[safe:indexPath.row] else { return  cell }
+            cell.textLabel?.text = titleText.musicTitle
+            return cell
         }
         
     }

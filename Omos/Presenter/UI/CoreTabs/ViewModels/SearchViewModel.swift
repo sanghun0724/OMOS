@@ -23,6 +23,9 @@ class SearchViewModel :BaseViewModel{
     var currentArtist:[ArtistRespone] = []
     var currentTrack:[TrackRespone] = []
     var currentKeyword = ""
+    let searchTrack = PublishSubject<[TrackTitleRespone]>()
+    var currentSearchTrack:[TrackTitleRespone] = []
+    
     
     let errorMessage = BehaviorSubject<String?>(value: nil)
     let isReload = BehaviorSubject<Bool>(value:false)
@@ -38,7 +41,7 @@ class SearchViewModel :BaseViewModel{
     
     
     
-    func searchAllResult(request:MusicRequest) {
+    func searchAllResult(keyword:String) {
         allLoading.onNext(true)
         trackLoading.onNext(true)
         albumLoading.onNext(true)
@@ -53,9 +56,9 @@ class SearchViewModel :BaseViewModel{
             }
         }).disposed(by: disposeBag)
         
-        albumFetch(request: request)
-        trackFetch(request: request)
-        artistFetch(request: request)
+        albumFetch(request: .init(keyword: keyword, limit: 20, offset: 0, type: nil))
+        trackFetch(request: .init(keyword: keyword, limit: 20, offset: 0, type: 2))
+        artistFetch(request: .init(keyword: keyword, limit: 20, offset: 0, type: nil))
     }
     
     func albumFetch(request:MusicRequest) {
@@ -94,6 +97,19 @@ class SearchViewModel :BaseViewModel{
                 case .success(let data):
                     self?.currentTrack += data
                     self?.track.onNext(data)
+                case .failure(let error):
+                    self?.errorMessage.onNext(error.localizedDescription)
+                }
+            }).disposed(by: disposeBag)
+    }
+    
+    func trackSearchFetch(request:MusicRequest) {
+        usecase.searchTrackFetch(request: request)
+            .subscribe({ [weak self] event in
+                switch event {
+                case .success(let data):
+                    self?.currentSearchTrack = data
+                    self?.searchTrack.onNext(data)
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)
                 }

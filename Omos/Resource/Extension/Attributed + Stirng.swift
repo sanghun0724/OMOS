@@ -195,6 +195,7 @@ extension UILabel {
         let fullText = text ?? ""
         let attributedString = NSMutableAttributedString(string: fullText)
         let range = (fullText as NSString).range(of: targetString)
+        print(targetString)
         attributedString.addAttribute(.foregroundColor, value: color, range: range)
         attributedText = attributedString
     }

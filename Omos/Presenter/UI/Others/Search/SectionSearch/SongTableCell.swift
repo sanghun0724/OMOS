@@ -86,7 +86,7 @@ class SongTableCell:UITableViewCell {
     }
     
     func configureModel(track:TrackRespone,keyword:String) {
-        songImageView.setImage(with: track.albumImageURL)
+        songImageView.setImage(with: track.albumImageURL )
         titleLabel.text = track.musicTitle
         subTitleLabel.text = track.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
 //        DispatchQueue.global().sync {

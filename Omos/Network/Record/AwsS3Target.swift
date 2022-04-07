@@ -14,7 +14,7 @@ enum AwsS3Target {
 
 extension AwsS3Target:TargetType {
     var baseURL: String {
-        return "http://ec2-3-37-146-80.ap-northeast-2.compute.amazonaws.com:8080" + "/s3"
+        return "http://ec2-3-39-121-23.ap-northeast-2.compute.amazonaws.com:8080" + "/s3"
     }
     
     var method: HTTPMethod {

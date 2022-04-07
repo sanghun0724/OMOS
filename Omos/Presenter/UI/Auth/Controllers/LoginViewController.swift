@@ -213,7 +213,12 @@ class LoginViewController:UIViewController {
         topView.labelsView.findButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] _ in
-                
+                let rp = AuthRepositoryImpl(loginAPI: LoginAPI())
+                let uc = LoginUseCase(authRepository: rp)
+                let vm = SignUpViewModel(usecase: uc)
+                let vc = UINavigationController(rootViewController: EmailCheckViewController(viewModel: vm))
+                vc.modalPresentationStyle = .fullScreen
+                self?.present(vc,animated:true)
             }).disposed(by: disposeBag)
         
         bottomView.appleButton.addTarget(self, action: #selector(loginApple), for: .touchUpInside)

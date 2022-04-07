@@ -258,7 +258,7 @@ class CreateViewController:BaseViewController {
         stickerChoiceView.stickerImageView1.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
-                let sticker1 = IRStickerView(frame: CGRect.init(x: 100, y: 100, width: 150, height: 150), contentImage: UIImage.init(named: "sticker1")!)
+                let sticker1 = IRStickerView(frame: CGRect.init(x: 100, y: 100, width: 80, height: 80), contentImage: UIImage.init(named: "sticker1")!)
                 sticker1.enabledControl = false
                 sticker1.enabledBorder = false
                 sticker1.tag = 1
@@ -270,7 +270,7 @@ class CreateViewController:BaseViewController {
         stickerChoiceView.stickerImageView2.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
-                let sticker1 = IRStickerView(frame: CGRect.init(x: 100, y: 100, width: 150, height: 150), contentImage: UIImage.init(named: "sticker2")!)
+                let sticker1 = IRStickerView(frame: CGRect.init(x: 100, y: 100, width: 80, height: 80), contentImage: UIImage.init(named: "sticker2")!)
                 sticker1.enabledControl = false
                 sticker1.enabledBorder = false
                 sticker1.tag = 2
@@ -282,7 +282,7 @@ class CreateViewController:BaseViewController {
         stickerChoiceView.stickerImageView3.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
-                let sticker1 = IRStickerView(frame: CGRect.init(x: 100, y: 100, width: 150, height: 150), contentImage: UIImage.init(named: "ost")!)
+                let sticker1 = IRStickerView(frame: CGRect.init(x: 100, y: 100, width: 80, height: 80), contentImage: UIImage.init(named: "ost")!)
                 sticker1.enabledControl = false
                 sticker1.enabledBorder = false
                 sticker1.tag = 3
@@ -294,7 +294,7 @@ class CreateViewController:BaseViewController {
         stickerChoiceView.stickerImageView4.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
-                let sticker1 = IRStickerView(frame: CGRect.init(x: 100, y: 100, width: 150, height: 150), contentImage: UIImage.init(named: "sticker3")!)
+                let sticker1 = IRStickerView(frame: CGRect.init(x: 100, y: 100, width: 80, height: 80), contentImage: UIImage.init(named: "sticker3")!)
                 sticker1.enabledControl = false
                 sticker1.enabledBorder = false
                 sticker1.tag = 4
@@ -306,7 +306,7 @@ class CreateViewController:BaseViewController {
         stickerChoiceView.stickerImageView5.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
-                let sticker1 = IRStickerView(frame: CGRect.init(x: 100, y: 100, width: 150, height: 150), contentImage: UIImage.init(named: "sticker4")!)
+                let sticker1 = IRStickerView(frame: CGRect.init(x: 100, y: 100, width: 80, height: 80), contentImage: UIImage.init(named: "sticker4")!)
                 sticker1.enabledControl = false
                 sticker1.enabledBorder = false
                 sticker1.tag = 5
@@ -318,7 +318,7 @@ class CreateViewController:BaseViewController {
         stickerChoiceView.stickerImageView6.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
-                let sticker1 = IRStickerView(frame: CGRect.init(x: 100, y: 100, width: 150, height: 150), contentImage: UIImage.init(named: "oneline")!)
+                let sticker1 = IRStickerView(frame: CGRect.init(x: 100, y: 100, width: 80, height: 80), contentImage: UIImage.init(named: "oneline")!)
                 sticker1.enabledControl = false
                 sticker1.enabledBorder = false
                 sticker1.tag = 6

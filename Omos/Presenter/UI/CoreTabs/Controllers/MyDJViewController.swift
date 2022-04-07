@@ -122,7 +122,6 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
             .subscribe(onNext: { [weak self] data in
                     self?.hasNextPage = self?.lastPostId == self?.viewModel.currentMyDjRecord.last?.recordID ?? 0 ? false : true
                     self?.lastPostId = self?.viewModel.currentMyDjRecord.last?.recordID ?? 0
-                    print("hasNext\(self?.hasNextPage)")
                     self?.isPaging = false //페이징 종료
                     self?.selfView.tableView.reloadData()
                     self?.selfView.tableView.layoutIfNeeded()

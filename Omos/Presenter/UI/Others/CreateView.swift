@@ -198,6 +198,7 @@ class CreateView: BaseView {
         circleImageView.layoutIfNeeded()
         circleImageView.layer.cornerRadius = circleImageView.height / 2
         circleImageView.layer.masksToBounds = true
+        
     }
     
     
@@ -481,7 +482,7 @@ class StickerView:BaseView {
             make.height.equalTo(stickerImageView6.snp.width).multipliedBy(1.0)
         }
        
-        
+        self.isHidden = true
     }
     
 }

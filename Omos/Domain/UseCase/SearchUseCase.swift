@@ -31,6 +31,10 @@ class SearchUseCase {
         return searchRepository.trackFetch(request: request)
     }
     
+    func searchTrackFetch(request:MusicRequest) -> Single<[TrackTitleRespone]> {
+        return searchRepository.searchTrackFetch(request: request)
+    }
+    
     func trackDetailFetch(trackId:String) -> Single<TrackRespone> {
         return searchRepository.trackDetailFetch(trackId: trackId)
     }
