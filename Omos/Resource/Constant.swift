@@ -26,3 +26,11 @@ struct Account {
         }
     }
 }
+
+struct RestApiUrl {
+#if DEBUG
+    static let restUrl = "http://ec2-3-39-121-23.ap-northeast-2.compute.amazonaws.com:8080/api"
+#else
+    static let restUrl = "http://ec2-3-37-146-80.ap-northeast-2.compute.amazonaws.com:8080/api"
+#endif
+}

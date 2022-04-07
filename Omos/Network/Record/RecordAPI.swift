@@ -97,6 +97,7 @@ class RecordAPI {
             case .success(let data):
                 print(data)
                 completion(.success(data))
+                
                 NotificationCenter.default.post(name: NSNotification.Name.reload, object: nil, userInfo: nil);
             case .failure(let error):
                 print(error.localizedDescription)
@@ -104,6 +105,7 @@ class RecordAPI {
             }
         }
     }
+    
     
     func recordUpdate(postId:Int,request:UpdateRequest,completion:@escaping(Result<StateRespone,Error>) -> Void) {
         AF.request(RecordTarget.recordUpdate(postId: postId,request),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<StateRespone>) in
@@ -292,4 +294,19 @@ class RecordAPI {
             }
         }
     }
+    
+    func awsDeleteImage(request:AwsDeleteImageRequest,completion:@escaping(Result<StateRespone,Error>) -> Void) {
+        AF.request(AwsS3Target.deleteImage(request),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<StateRespone>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    
 }

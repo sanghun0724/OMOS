@@ -559,7 +559,14 @@ extension CreateViewController:CropViewControllerDelegate {
             }
         } else {//711648447384992.png
             guard let str = viewModel.modifyDefaultModel?.recordImageURL else { return }
-            let startIndex = str.index(str.endIndex, offsetBy: -19)
+            var idx = 0
+            for i in 1..<str.count {
+                if str[str.index(str.endIndex, offsetBy: -i)] == "/" {
+                    idx = i-1
+                    break
+                }
+            }
+            let startIndex = str.index(str.endIndex, offsetBy: -idx)
             let endIndex = str.index(str.endIndex, offsetBy: -4)
             let defualtUrl = String(str[startIndex..<endIndex])
             

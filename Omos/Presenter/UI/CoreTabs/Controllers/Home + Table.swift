@@ -36,7 +36,7 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource {
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableMiddleCell.identifier,for:indexPath) as! HomeTableMiddleCell
-            cell.cellDelegate = self 
+            cell.cellDelegate = self
             cell.selectedRecords = viewModel.currentRecommentRecord
             cell.selectionStyle = .none
             return cell

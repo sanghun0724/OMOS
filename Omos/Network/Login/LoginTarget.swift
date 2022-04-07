@@ -19,11 +19,12 @@ enum LoginTarget {
     case logOut(userId:Int)
     case signout(userId:Int)
     case emailCheck(EmailCheckRequest)
+    case updatePassword(PWUpdateRequest)
 }
 
 extension LoginTarget:TargetType {
     var baseURL: String {
-        return "http://ec2-3-37-146-80.ap-northeast-2.compute.amazonaws.com:8080/api/auth"
+        return RestApiUrl.restUrl + "/auth"
     }
     
     var method: HTTPMethod {
@@ -38,6 +39,7 @@ extension LoginTarget:TargetType {
         case .logOut: return .delete
         case .signout: return .delete
         case .emailCheck: return .post
+        case .updatePassword: return .put
         }
     }
     
@@ -53,6 +55,7 @@ extension LoginTarget:TargetType {
         case .logOut(let user): return "/logout/\(user)"
         case .signout(let user): return "/signout/\(user)"
         case .emailCheck: return "/email"
+        case .updatePassword: return "/update/password"
         }
     }
     
@@ -66,6 +69,7 @@ extension LoginTarget:TargetType {
         case .SNSLogin(let request): return .body(request)
         case .SNSSignUp(let request): return .body(request)
         case .emailCheck(let request): return .body(request)
+        case .updatePassword(let request): return .body(request)
         default:
             return nil
         }

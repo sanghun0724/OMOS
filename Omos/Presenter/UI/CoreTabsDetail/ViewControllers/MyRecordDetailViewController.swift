@@ -257,6 +257,7 @@ class MyRecordDetailViewController:BaseViewController {
         viewModel.delete
             .subscribe(onNext: { [weak self] _ in
                 self?.viewModel.deleteRecord(postId: self?.postId ?? 0)
+                self?.deleteImage()
             }).disposed(by: disposeBag)
         
         viewModel.done
@@ -567,8 +568,24 @@ class MyRecordDetailViewController:BaseViewController {
     }
     
     
-    
+    private func deleteImage() {
+        guard let str = viewModel.currentMyRecordDetail?.recordImageURL else { return }
+        var idx = 0
+        for i in 1..<str.count {
+            if str[str.index(str.endIndex, offsetBy: -i)] == "/" {
+                idx = i-1
+                break
+            }
+        }
+        let startIndex = str.index(str.endIndex, offsetBy: -idx)
+        let endIndex = str.index(str.endIndex, offsetBy: 0)
+        let defualtUrl = String(str[startIndex..<endIndex])
+        
+        self.viewModel.awsDeleteImage(request: .init(directory: "record", fileName: defualtUrl))
+        print(defualtUrl)
+    }
 }
+
 
 
 class InstaDecoTopView:BaseView {

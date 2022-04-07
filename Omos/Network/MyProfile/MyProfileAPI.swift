@@ -23,7 +23,7 @@ class MyProfileAPI {
     }
     
     func updatePassword(request:PWUpdateRequest,completion:@escaping(Result<StateRespone,Error>) -> Void) {
-        AF.request(MyProfileTarget.updatePassword(request),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<StateRespone>) in
+        AF.request(LoginTarget.updatePassword(request),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<StateRespone>) in
             switch response.result {
             case .success(let data):
                 completion(.success(data))

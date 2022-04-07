@@ -82,6 +82,7 @@ class LoginViewModel: BaseViewModel {
                         UserDefaults.standard.set(token.accessToken, forKey: "access")
                         UserDefaults.standard.set(token.refreshToken, forKey: "refresh")
                         UserDefaults.standard.set(token.userId, forKey: "user")
+                        Account.currentUser = UserDefaults.standard.integer(forKey: "user")
                         self?.hasKakaoEmail.accept(true)
                     case .failure:
                         self?.hasKakaoEmail.accept(false)

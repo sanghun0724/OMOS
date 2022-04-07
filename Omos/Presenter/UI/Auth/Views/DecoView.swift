@@ -133,7 +133,6 @@ class labels:BaseView {
        let button = UIButton()
         button.setTitle("비밀번호 찾기", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14,weight:.light)
-        button.isHidden = true
         return button
     }()
     

@@ -17,7 +17,7 @@ enum FollowTarget {
 
 extension FollowTarget:TargetType {
     var baseURL: String {
-        return "http://ec2-3-37-146-80.ap-northeast-2.compute.amazonaws.com:8080/api/follow"
+        return RestApiUrl.restUrl + "/follow"
     }
     
     var method: HTTPMethod {

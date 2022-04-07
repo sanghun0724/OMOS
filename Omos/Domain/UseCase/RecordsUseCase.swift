@@ -101,4 +101,8 @@ class RecordsUseCase {
     func userReport(userId:Int) -> Single<StateRespone> {
         return recordsRepository.userReport(userId: userId)
     }
+    
+    func awsDeleteImage(request:AwsDeleteImageRequest) -> Single<StateRespone> {
+        return recordsRepository.awsDeleteImage(request:request)
+    }
 }

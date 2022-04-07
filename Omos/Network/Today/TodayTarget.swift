@@ -17,7 +17,7 @@ enum TodayTarget {
 
 extension TodayTarget:TargetType {
     var baseURL: String {
-        return "http://ec2-3-37-146-80.ap-northeast-2.compute.amazonaws.com:8080/api/today"
+        return RestApiUrl.restUrl + "/today"
     }
     
     var method: HTTPMethod {
