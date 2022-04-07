@@ -28,6 +28,7 @@ class AlbumViewController:BaseViewController {
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         selfView.emptyView.isHidden = !(viewModel.currentAlbum.isEmpty)
+        selfView.emptyView.descriptionLabel.text = "검색 결과가 없습니다."
     }
     
     

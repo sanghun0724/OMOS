@@ -235,7 +235,8 @@ class HomeHeaderView:UITableViewHeaderFooterView {
         }
         
         omosImageView.snp.makeConstraints { make in
-            make.leading.top.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.top.equalToSuperview().offset(14)
             make.width.equalToSuperview().multipliedBy(0.256)
             make.height.equalTo(omosImageView.snp.width).multipliedBy(0.204)
         }

@@ -34,6 +34,7 @@ class SongViewController:BaseViewController,UIScrollViewDelegate {
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         selfView.emptyView.isHidden = !(viewModel.currentTrack.isEmpty)
+        selfView.emptyView.descriptionLabel.text = "검색 결과가 없습니다."
     }
     
     

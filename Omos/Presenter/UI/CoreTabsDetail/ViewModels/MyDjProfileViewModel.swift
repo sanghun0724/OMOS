@@ -17,6 +17,7 @@ class MyDjProfileViewModel:BaseViewModel {
     var currentMydjProfile:MyDjProfileResponse? = nil
     let userRecords = PublishSubject<[MyRecordRespone]>()
     let userReportState = PublishSubject<Bool>()
+    let userBlockState = PublishSubject<Bool>()
     var currentUserRecrods:[MyRecordRespone] = []
     let usecase:RecordsUseCase
     let errorMessage = BehaviorSubject<String?>(value: nil)
@@ -74,6 +75,18 @@ class MyDjProfileViewModel:BaseViewModel {
                 switch event {
                 case .success(let data):
                     self?.userReportState.onNext(data.state)
+                case .failure(let error):
+                    self?.errorMessage.onNext(error.localizedDescription)
+                }
+            }).disposed(by: disposeBag)
+    }
+    
+    func blockObjcet(type:String,request:BlockRequest) {
+        usecase.blockObjcet(type: type, request: request)
+            .subscribe({ [weak self] event in
+                switch event {
+                case .success(let data):
+                    self?.userBlockState.onNext(data.state)
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)
                 }

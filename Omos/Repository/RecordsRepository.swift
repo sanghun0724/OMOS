@@ -34,4 +34,5 @@ protocol RecordsRepository {
     func reportRecord(postId:Int) -> Single<StateRespone>
     func userReport(userId:Int) -> Single<StateRespone>
     func awsDeleteImage(request:AwsDeleteImageRequest) -> Single<StateRespone>
+    func blockObjcet(type:String,request:BlockRequest) -> Single<StateRespone>
 }

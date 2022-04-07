@@ -308,5 +308,17 @@ class RecordAPI {
         }
     }
     
+    func blockObjcet(type:String,request:BlockRequest,completion:@escaping(Result<StateRespone,Error>) -> Void) {
+        AF.request(InteractionTarget.block(type: type, request),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<StateRespone>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
     
 }

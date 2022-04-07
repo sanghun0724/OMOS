@@ -122,7 +122,7 @@ class CreateView: BaseView {
     let mainfullTextView:UITextView = {
         let view = UITextView()
         view.text = "레코드 내용을 입력해주세요"
-        view.font = UIFont(name: "Cafe24Oneprettynight", size: 20)
+        view.font = .systemFont(ofSize: 16, weight: .light)
         view.isScrollEnabled = false
         view.textAlignment = .left
         view.backgroundColor = .mainBlack
