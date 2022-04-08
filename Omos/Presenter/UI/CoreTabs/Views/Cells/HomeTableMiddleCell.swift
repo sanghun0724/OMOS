@@ -63,7 +63,7 @@ class HomeTableMiddleCell:UITableViewCell {
 
 extension HomeTableMiddleCell: UICollectionViewDelegate,UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if self.selectedRecords?.count == 0 { return 5 }
+        if self.selectedRecords?.count ?? 0 > 0 { return 1 }
         return self.selectedRecords?.count ?? 5
     }
     

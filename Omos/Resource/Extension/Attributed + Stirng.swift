@@ -89,7 +89,7 @@ extension String {
 
 //라벨에 패딩값주기 
 class BasePaddingLabel: UILabel {
-    private var padding = UIEdgeInsets(top: 10.0, left: 16.0, bottom: 18, right: 16.0)
+    private var padding = UIEdgeInsets(top: 0, left: 16.0, bottom: 0, right: 16.0)
     
     convenience init(padding: UIEdgeInsets) {
         self.init()

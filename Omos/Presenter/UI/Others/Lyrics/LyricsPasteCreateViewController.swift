@@ -320,7 +320,7 @@ class LyricsPasteCreateViewController:BaseViewController {
         stickerChoiceView.stickerImageView4.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
-                let sticker1 = IRStickerView(frame: CGRect.init(x: 100, y: 100, width: 50, height: 50), contentImage: UIImage.init(named: "sticker3")!)
+                let sticker1 = IRStickerView(frame: CGRect.init(x: 100, y: 100, width: 50, height: 50), contentImage: UIImage.init(named: "lyrics")!)
                 sticker1.enabledControl = false
                 sticker1.enabledBorder = false
                 sticker1.tag = 4
@@ -332,7 +332,7 @@ class LyricsPasteCreateViewController:BaseViewController {
         stickerChoiceView.stickerImageView5.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
-                let sticker1 = IRStickerView(frame: CGRect.init(x: 100, y: 100, width: 150, height: 150), contentImage: UIImage.init(named: "sticker4")!)
+                let sticker1 = IRStickerView(frame: CGRect.init(x: 100, y: 100, width: 150, height: 150), contentImage: UIImage.init(named: "free")!)
                 sticker1.enabledControl = false
                 sticker1.enabledBorder = false
                 sticker1.tag = 5

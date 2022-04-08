@@ -204,6 +204,7 @@ class MyRecordDetailView:BaseView {
             make.left.equalTo(circleImageView.snp.right).offset(14)
             make.top.equalTo(circleImageView.snp.top)
             make.bottom.equalTo(circleImageView.snp.centerY)
+            make.trailing.equalToSuperview().offset(-16)
             musicTitleLabel.sizeToFit()
         }
         
