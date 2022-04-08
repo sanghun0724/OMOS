@@ -50,6 +50,20 @@ class SearchAPI {
         }
     }
     
+    func searchTrackFetch(request:MusicRequest,completion:@escaping(Result<[TrackTitleRespone],Error>) -> Void) {
+        AF.request(SearchTarget.searchTrack(request),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[TrackTitleRespone]>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    
     func albumDetailFetch(albumId:String,completion:@escaping(Result<[AlbumDetailRespone],Error>) -> Void) {
         AF.request(SearchTarget.searchAlbumDetail(albumId: albumId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[AlbumDetailRespone]>) in
             switch response.result {

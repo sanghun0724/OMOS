@@ -17,4 +17,20 @@ struct Constant {
 
 struct Account {
    static var currentUser = UserDefaults.standard.integer(forKey: "user")
+   static var currentReportRecordsId: [Int] {
+        get {
+            return UserDefaults.standard.array(forKey: "report") as? [Int] ?? []
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "report")
+        }
+    }
+}
+
+struct RestApiUrl {
+#if DEBUG
+    static let restUrl = "http://ec2-3-39-121-23.ap-northeast-2.compute.amazonaws.com:8080/api"
+#else
+    static let restUrl = "http://ec2-3-39-121-23.ap-northeast-2.compute.amazonaws.com:8080/api"
+#endif
 }

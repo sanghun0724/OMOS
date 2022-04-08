@@ -22,7 +22,7 @@ class HomeTableMiddleCell:UITableViewCell {
         }
     }
     weak var cellDelegate: HomeTableMiddleCellprotocol?
-    private var collectionView:UICollectionView!
+    var collectionView:UICollectionView!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -58,11 +58,12 @@ class HomeTableMiddleCell:UITableViewCell {
         self.selectedRecords = records
     }
     
+    
 }
 
 extension HomeTableMiddleCell: UICollectionViewDelegate,UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if self.selectedRecords?.count == 0 { return 5 }
+        if self.selectedRecords?.count ?? 0 > 0 { return 1 }
         return self.selectedRecords?.count ?? 5
     }
     
@@ -73,7 +74,6 @@ extension HomeTableMiddleCell: UICollectionViewDelegate,UICollectionViewDataSour
             return cell
         }
         cell.configureHome(record: data)
-       
         return cell
     }
     
@@ -81,6 +81,10 @@ extension HomeTableMiddleCell: UICollectionViewDelegate,UICollectionViewDataSour
         collectionView.deselectItem(at: indexPath, animated: false)
         let cell = collectionView.cellForItem(at: indexPath) as? MydjCollectionCell
         self.cellDelegate?.collectionView(collectionViewCell: cell, index: indexPath.item, didTappedInTableViewCell: self)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+       
     }
 
 }

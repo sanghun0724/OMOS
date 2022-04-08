@@ -89,7 +89,7 @@ extension String {
 
 //라벨에 패딩값주기 
 class BasePaddingLabel: UILabel {
-    private var padding = UIEdgeInsets(top: 10.0, left: 16.0, bottom: 18, right: 16.0)
+    private var padding = UIEdgeInsets(top: 0, left: 16.0, bottom: 0, right: 16.0)
     
     convenience init(padding: UIEdgeInsets) {
         self.init()
@@ -190,9 +190,37 @@ extension Date {
 
 }
 
+extension UILabel {
+    func asColor(targetString: String, color: UIColor) {
+        let fullText = text ?? ""
+        let attributedString = NSMutableAttributedString(string: fullText)
+        let range = (fullText as NSString).range(of: targetString)
+        print(targetString)
+        attributedString.addAttribute(.foregroundColor, value: color, range: range)
+        attributedText = attributedString
+    }
+}
 
 
 
+class VerticalAlignedLabel: UILabel {
+    
+    override func drawText(in rect: CGRect) {
+        var newRect = rect
+        switch contentMode {
+        case .top:
+            newRect.size.height = sizeThatFits(rect.size).height
+        case .bottom:
+            let height = sizeThatFits(rect.size).height
+            newRect.origin.y += rect.size.height - height
+            newRect.size.height = height
+        default:
+            ()
+        }
+        
+        super.drawText(in: newRect)
+    }
+}
 
 extension Notification.Name {
     static let follow = Notification.Name("follow")

@@ -83,7 +83,7 @@ class AllRecordViewController: BaseViewController {
         viewModel.selectRecords
             .withUnretained(self)
             .subscribe(onNext: { owner,info in
-                owner.selectedRecords = info
+                owner.selectedRecords = owner.viewModel.currentSelectRecords
                 DispatchQueue.main.async {
                     owner.selfView.tableView.refreshControl?.endRefreshing()
                     owner.selfView.tableView.reloadData()
@@ -120,7 +120,7 @@ extension AllRecordViewController:AllCollectCellprotocol {
             let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
             let uc = RecordsUseCase(recordsRepository: rp)
             let vm = AllRecordDetailViewModel(usecase: uc)
-            let vc = AllRecordDetailViewController(viewModel: vm, postId: postId, userId: userId)
+            let vc = AllRecordDetailViewController(viewModel: vm, postId: postId)
             self.navigationController?.pushViewController(vc, animated: true)
         }
         

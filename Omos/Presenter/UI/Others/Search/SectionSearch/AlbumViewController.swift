@@ -28,6 +28,7 @@ class AlbumViewController:BaseViewController {
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         selfView.emptyView.isHidden = !(viewModel.currentAlbum.isEmpty)
+        selfView.emptyView.descriptionLabel.text = "검색 결과가 없습니다."
     }
     
     
@@ -69,7 +70,7 @@ extension AlbumViewController:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AlbumTableCell.identifier, for: indexPath) as! AlbumTableCell
         let cellData = viewModel.currentAlbum[indexPath.row]
-        cell.configureModel(album: cellData)
+        cell.configureModel(album: cellData,keyword: viewModel.currentKeyword)
         cell.selectionStyle = . none
         return cell
     }

@@ -29,8 +29,8 @@ class ArtistViewController:BaseViewController {
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         selfView.emptyView.isHidden = !(viewModel.currentArtist.isEmpty)
+        selfView.emptyView.descriptionLabel.text = "검색 결과가 없습니다."
     }
-    
     
     override func configureUI() {
         super.configureUI()
@@ -71,7 +71,7 @@ extension ArtistViewController:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ArtistTableCell.identifier, for: indexPath) as! ArtistTableCell
         let cellData = viewModel.currentArtist[indexPath.row]
-        cell.configureModel(artist: cellData)
+        cell.configureModel(artist: cellData,keyword:viewModel.currentKeyword)
         cell.selectionStyle = .none
         return cell
     }
@@ -82,6 +82,7 @@ extension ArtistViewController:UITableViewDelegate,UITableViewDataSource {
         let rp = SearchRepositoryImpl(searchAPI: SearchAPI())
         let uc = SearchUseCase(searchRepository: rp)
         let vm = SearchArtistDetailViewModel(usecase: uc)
+        vm.currentKeyword = viewModel.currentKeyword
         vm.searchType = viewModel.searchType
         let vc = SearchArtistViewController(viewModel: vm, artistData: cellData)
         self.navigationController?.pushViewController(vc, animated: true)

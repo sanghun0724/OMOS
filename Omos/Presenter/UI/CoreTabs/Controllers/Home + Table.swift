@@ -36,7 +36,7 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource {
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableMiddleCell.identifier,for:indexPath) as! HomeTableMiddleCell
-            cell.cellDelegate = self 
+            cell.cellDelegate = self
             cell.selectedRecords = viewModel.currentRecommentRecord
             cell.selectionStyle = .none
             return cell
@@ -66,7 +66,7 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource {
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HomeHeaderView.identifier) as! HomeHeaderView
             header.notiButton.rx.tap
                 .asDriver()
-                .drive(onNext: { [weak self] _ in
+                .drive(onNext: { _ in
                   print("noti")
                 }).disposed(by: header.disposeBag)
             header.createdButton.rx.tap

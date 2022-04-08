@@ -10,20 +10,18 @@ import Alamofire
 
 enum MyProfileTarget {
     case myProfile(userId:Int)
-    case updatePassword(PWUpdateRequest)
     case updateProfile(ProfileUpdateRequest)
     case userReport(userId:Int)
 }
 
 extension MyProfileTarget:TargetType {
     var baseURL: String {
-        return "http://ec2-3-37-146-80.ap-northeast-2.compute.amazonaws.com:8080/api/user"
+        return RestApiUrl.restUrl + "/user"
     }
     
     var method: HTTPMethod {
         switch self {
         case .myProfile: return .get
-        case .updatePassword: return .put
         case .updateProfile: return .put
         case .userReport: return .put
         }
@@ -32,7 +30,7 @@ extension MyProfileTarget:TargetType {
         var path: String {
             switch self {
             case .myProfile(let user): return "/\(user)"
-            case .updatePassword: return "/update/password"
+            
             case .updateProfile: return "/update/profile"
             case .userReport(let user): return "/\(user)/report"
             }
@@ -40,7 +38,6 @@ extension MyProfileTarget:TargetType {
         
         var parameters: RequestParams? {
             switch self {
-            case .updatePassword(let request): return .body(request)
             case .updateProfile(let request): return .body(request)
             default:
                 return nil

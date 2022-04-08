@@ -80,7 +80,7 @@ extension MydjProfileViewController: UITableViewDelegate,UITableViewDataSource {
             let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
             let uc = RecordsUseCase(recordsRepository: rp)
             let vm = AllRecordDetailViewModel(usecase: uc)
-            let vc = AllRecordDetailViewController(viewModel: vm, postId: record.recordID, userId: toId)
+            let vc = AllRecordDetailViewController(viewModel: vm, postId: record.recordID)
             vc.selfLongView.nicknameLabel.isHidden = true
             vc.selfShortView.nicknameLabel.isHidden = true
             vc.selfLyricsView.nicknameLabel.isHidden = true

@@ -65,6 +65,23 @@ class SearchRepositoryImpl:SearchRepository {
         }
     }
     
+    func searchTrackFetch(request:MusicRequest) -> Single<[TrackTitleRespone]> {
+        return Single<[TrackTitleRespone]>.create { [weak self] single in
+            self?.searchAPI.searchTrackFetch(request: request, completion: { result in
+                switch result {
+                case .success(let data):
+                    single(.success(data))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    single(.failure(error))
+                }
+            })
+            
+            return Disposables.create()
+        }
+    }
+    
+    
     func albumDetailFetch(albumId:String) -> Single<[AlbumDetailRespone]> {
         return Single<[AlbumDetailRespone]>.create { [weak self] single in
             self?.searchAPI.albumDetailFetch(albumId:albumId , completion: { result in

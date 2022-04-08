@@ -70,11 +70,19 @@ class ArtistTableCell:UITableViewCell {
         
     }
     
-    func configureModel(artist:ArtistRespone) {
-        songImageView.setImage(with:artist.artistImageURL ?? "")
+    func configureModel(artist:ArtistRespone,keyword:String) {
         titleLabel.text = artist.artistName
         subTitleLabel.text = artist.genres.reduce("") { $0 + " \($1)" }
-    
+//        if subTitleLabel.text?.first == " " {
+//            subTitleLabel.text?.removeFirst()
+//        }
+        titleLabel.asColor(targetString: keyword, color: .mainOrange)
+        subTitleLabel.asColor(targetString: keyword, color: .mainOrange)
+        guard let url = artist.artistImageURL else {
+            songImageView.image = UIImage(named: "albumCover")
+            return
+        }
+        songImageView.setImage(with:url)
     }
     
     override func prepareForReuse() {

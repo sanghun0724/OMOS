@@ -57,13 +57,22 @@ class MydjProfileViewController:BaseViewController {
     }
     
     @objc func didTapReportButton() {
-        let action = UIAlertAction(title: "차단하기", style: .default) {[weak self] alert in
+        let action = UIAlertAction(title: "신고하기", style: .default) {[weak self] alert in
             guard let id = self?.toId else { return }
             print("userId입니다:\(id)")
             self?.viewModel.userReport(userId: id)
         }
+        let action2 = UIAlertAction(title: "차단하기", style: .default) {[weak self] alert in
+            guard let id = self?.toId else { return }
+            print("userId입니다:\(id)")
+            self?.viewModel.blockObjcet(type: "User", request: .init(fromUserId:self?.fromId ?? 0, toUserId: id))
+            self?.viewModel.deleteFollow(fromId: self?.fromId ?? 0, toId: id)
+            NotificationCenter.default.post(name: NSNotification.Name.followCancel, object: nil, userInfo: nil);
+            self?.backToView()
+        }
         action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
-        self.presentAlert(title: "", message: "이 DJ를 차단하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
+        action2.setValue(UIColor.mainOrange, forKey: "titleTextColor")
+        self.presentAlert(title: "", message: "이 DJ를 차단하거나 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action,action2)
     }
     
     override func configureUI() {
@@ -99,36 +108,40 @@ class MydjProfileViewController:BaseViewController {
         viewModel.userReportState
             .subscribe(onNext: { [weak self] _ in
                 NotificationCenter.default.post(name: NSNotification.Name.reload, object: nil, userInfo: nil);
-                for controller in (self?.navigationController?.viewControllers ?? [UIViewController()] )  as Array {
-                    
-                    if controller.isKind(of: HomeViewController.self) {
-                        self?.navigationController?.popToViewController(controller, animated: true)
-                        break
-                    }
-                    if controller.isKind(of: AllRecordCateDetailViewController.self) {
-                        self?.navigationController?.popToViewController(controller, animated: true)
-                        
-                        break
-                    }
-                    if controller.isKind(of: AllRecordSearchDetailViewController.self) {
-                        self?.navigationController?.popToViewController(controller, animated: true)
-                        break
-                    }
-                }
-                for controller in (self?.navigationController?.viewControllers ?? [UIViewController()] )  as Array {
-                    if controller.isKind(of: AllRecordViewController.self) {
-                        self?.navigationController?.popToViewController(controller, animated: true)
-                        break
-                    }
-                }
-                for controller in (self?.navigationController?.viewControllers ?? [UIViewController()] )  as Array {
-                    if controller.isKind(of: MyDJViewController.self) {
-                        self?.navigationController?.popToViewController(controller, animated: true)
-                        break
-                    }
-                }
+                self?.backToView()
             }).disposed(by: disposeBag)
         
+    }
+    
+    func backToView() {
+        for controller in (self.navigationController?.viewControllers ?? [UIViewController()] )  as Array {
+            
+            if controller.isKind(of: HomeViewController.self) {
+                self.navigationController?.popToViewController(controller, animated: true)
+                break
+            }
+            if controller.isKind(of: AllRecordCateDetailViewController.self) {
+                self.navigationController?.popToViewController(controller, animated: true)
+                
+                break
+            }
+            if controller.isKind(of: AllRecordSearchDetailViewController.self) {
+                self.navigationController?.popToViewController(controller, animated: true)
+                break
+            }
+        }
+        for controller in (self.navigationController?.viewControllers ?? [UIViewController()] )  as Array {
+            if controller.isKind(of: AllRecordViewController.self) {
+                self.navigationController?.popToViewController(controller, animated: true)
+                break
+            }
+        }
+        for controller in (self.navigationController?.viewControllers ?? [UIViewController()] )  as Array {
+            if controller.isKind(of: MyDJViewController.self) {
+                self.navigationController?.popToViewController(controller, animated: true)
+                break
+            }
+        }
     }
     
 }

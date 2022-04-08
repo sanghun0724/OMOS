@@ -27,9 +27,11 @@ class ProfileViewController: BaseViewController {
         bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
+        print("this is profile \(Account.currentUser)")
         viewModel.allFetch()
         setRefreshControl()
         NotificationCenter.default.addObserver(self, selector: #selector(didRecieveProfileReloadNotification), name: NSNotification.Name.follow, object: nil)
+        print(RestApiUrl.restUrl)
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -241,8 +241,8 @@ class recordLongView:BaseView {
         return view
     }()
     
-    var mainLabelView:BasePaddingLabel = {
-        let view = BasePaddingLabel()
+    var mainLabelView:UILabel = {
+        let view = UILabel()
         view.text = #"“한줄감상이나옵니다글자수는50자이내여야합니다한줄감상이나옵니다글자수는50자이내여야합니다한@@@@@@@@@@@@@@@@@@@@@줄감상”"#
         view.font = .systemFont(ofSize: 16, weight: .light)
         view.textAlignment = .left
@@ -355,6 +355,7 @@ class recordLongView:BaseView {
             make.left.equalTo(circleImageView.snp.right).offset(14)
             make.top.equalTo(circleImageView.snp.top)
             make.bottom.equalTo(circleImageView.snp.centerY)
+            make.trailing.equalToSuperview().offset(-16)
             musicTitleLabel.sizeToFit()
         }
         
@@ -464,15 +465,15 @@ class recordLongView:BaseView {
         }
         
         mainLabelView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.top.equalToSuperview().offset(16)
+            make.bottom.equalToSuperview().offset(-16)
             mainLabelView.sizeToFit()
         }
         print(mainLabelView.intrinsicContentSize.height)
 
         readMoreButton.snp.makeConstraints { make in
-            make.bottom.equalTo(mainLabelView.snp.bottom).offset(-2)
+            make.bottom.equalTo(textCoverView.snp.bottom).offset(-2)
             make.trailing.equalToSuperview().offset(-16)
             make.width.equalTo(readMoreButton.intrinsicContentSize.width)
             make.height.equalTo(readMoreButton.intrinsicContentSize.height)

@@ -256,7 +256,12 @@ class MydjProfileHeader:UITableViewHeaderFooterView {
             print("default")
             return
         }
-        profileImageView.setImage(with: image)
+        if image == "" {
+            profileImageView.image = UIImage(named: "albumCover")
+        } else {
+            profileImageView.setImage(with: image)
+        }
+      
     }
     
     func configureMyProfile(profile:MyDjProfileResponse) {
@@ -268,14 +273,18 @@ class MydjProfileHeader:UITableViewHeaderFooterView {
         
         guard let imageUrl = profile.profile.profileURL else {
             profileImageView.image = UIImage(named: "albumCover")
-            print("default")
             return
+        }
+        if imageUrl == "" {
+            profileImageView.image = UIImage(named: "albumCover")
+        } else {
+            profileImageView.setImage(with: imageUrl)
         }
 //        let url = URL(string:imageUrl)
 //        let data = try! Data(contentsOf: url!)
 //        profileImageView.image = UIImage(data: data)
         //profileImageView.setImageNocache(with: imageUrl)
-        profileImageView.setImage(with: imageUrl)
+       
     }
     
 }

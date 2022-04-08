@@ -34,7 +34,7 @@ class MyRecordDetailViewModel:BaseViewModel {
                 }
             }).disposed(by: disposeBag)
     }
-
+    
     
     
     
@@ -42,6 +42,18 @@ class MyRecordDetailViewModel:BaseViewModel {
         usecase.recordDelete(postId: postId)
             .subscribe({ [weak self] _ in
                 self?.done.onNext(true)
+            }).disposed(by: disposeBag)
+    }
+    
+    func awsDeleteImage(request:AwsDeleteImageRequest) {
+        usecase.awsDeleteImage(request: request)
+            .subscribe({ [weak self] event in
+                switch event {
+                case .success(let state):
+                    print("is delted Image? \(state)")
+                case .failure(let error):
+                    self?.errorMessage.onNext(error.localizedDescription)
+                }
             }).disposed(by: disposeBag)
     }
     

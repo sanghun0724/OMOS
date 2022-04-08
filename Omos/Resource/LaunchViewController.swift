@@ -11,7 +11,6 @@ class LaunchViewController:BaseViewController {
     
     let launchImageView:UIImageView = {
         let view = UIImageView(image:UIImage(named: "splash_logo"))
-        view.clipsToBounds = true
         view.contentMode = .scaleAspectFill
         return view
     }()

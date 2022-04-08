@@ -94,6 +94,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.7.0):
     - GoogleUtilities/Logger
+  - IRSticker-swift (1.0.1)
   - KakaoSDKAuth (2.8.5):
     - KakaoSDKCommon (= 2.8.5)
   - KakaoSDKCommon (2.8.5):
@@ -171,6 +172,7 @@ DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Core
   - Firebase/Messaging
+  - IRSticker-swift
   - KakaoSDKUser
   - Kingfisher
   - Mantis (~> 1.9.0)
@@ -196,6 +198,7 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
+    - IRSticker-swift
     - KakaoSDKAuth
     - KakaoSDKCommon
     - KakaoSDKUser
@@ -228,6 +231,7 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: aa3cb422fab2b05d2efac543a5720d1a85b9dea5
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
+  IRSticker-swift: 35ab14c73ce4625ed0ea638b070e35c379ea409b
   KakaoSDKAuth: a9033bd3fbbb9a8c74dcd0dbd7705f7a2bc50ff1
   KakaoSDKCommon: b98d08cf838effdc9b82aca7dee3e50c048880ca
   KakaoSDKUser: a76667bb06c1d5072178eea5cee4ac9fdba94679
@@ -249,6 +253,6 @@ SPEC CHECKSUMS:
   Tabman: 792ac76fd1ec95af175c93db880a3c47cabedc91
   YPImagePicker: f36043210c10b0783034eb1947d6e06e31c461e4
 
-PODFILE CHECKSUM: c54bc199d9b9853ee78383a846dbaf8ecd69cf4b
+PODFILE CHECKSUM: 169ac38a2e00abe89a9d7032e53977a9fcee580d
 
 COCOAPODS: 1.11.2

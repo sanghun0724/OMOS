@@ -30,6 +30,7 @@ class EntireViewController:BaseViewController {
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         selfView.emptyView.isHidden = !(viewModel.currentAlbum.isEmpty) && !(viewModel.currentTrack.isEmpty) && !(viewModel.currentArtist.isEmpty)
+        selfView.emptyView.descriptionLabel.text = "검색 결과가 없습니다."
     }
     
     override func configureUI() {
@@ -45,7 +46,6 @@ class EntireViewController:BaseViewController {
     
     func bind() {
         Observable.zip(viewModel.album, viewModel.track, viewModel.artist)
-            .take(1)
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .subscribe(onNext: { owner,musics in
@@ -89,12 +89,12 @@ extension EntireViewController:UITableViewDelegate,UITableViewDataSource {
             guard let cellData = viewModel.currentTrack[safe:indexPath.row] else {
                 return cell
             }
-            cell.selectionStyle = . none
-            cell.configureModel(track: cellData)
+            cell.selectionStyle = .none
+            cell.configureModel(track: cellData,keyword:viewModel.currentKeyword)
             cell.createdButton.rx.tap
                 .asDriver()
                 .drive(onNext: { [weak self] _ in
-                    let vc = CategoryViewController(defaultModel: .init(musicId:cellData.musicID, imageURL: cellData.albumImageURL, musicTitle: cellData.musicTitle, subTitle: cellData.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}))
+                    let vc = CategoryViewController(defaultModel: .init(musicId:cellData.musicID , imageURL: cellData.albumImageURL , musicTitle: cellData.musicTitle, subTitle: cellData.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}))
                     self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: cell.disposeBag)
             return cell
@@ -103,7 +103,7 @@ extension EntireViewController:UITableViewDelegate,UITableViewDataSource {
             guard let cellData = viewModel.currentAlbum[safe: indexPath.row] else {
                 return cell
             }
-            cell.configureModel(album: cellData)
+            cell.configureModel(album: cellData,keyword:viewModel.currentKeyword)
             cell.selectionStyle = .none
             return cell
         case 2:
@@ -111,7 +111,9 @@ extension EntireViewController:UITableViewDelegate,UITableViewDataSource {
             guard let cellData = viewModel.currentArtist[safe: indexPath.row] else {
                 return cell
             }
-            cell.configureModel(artist: cellData)
+            cell.titleLabel.attributedText = nil
+            cell.subTitleLabel.attributedText = nil
+            cell.configureModel(artist: cellData,keyword:viewModel.currentKeyword)
             cell.selectionStyle = . none
             return cell
         default:
@@ -145,6 +147,7 @@ extension EntireViewController:UITableViewDelegate,UITableViewDataSource {
             let rp = SearchRepositoryImpl(searchAPI: SearchAPI())
             let uc = SearchUseCase(searchRepository: rp)
             let vm = SearchArtistDetailViewModel(usecase: uc)
+            vm.currentKeyword = viewModel.currentKeyword
             vm.searchType = viewModel.searchType
             let vc = SearchArtistViewController(viewModel: vm, artistData: cellData)
             self.navigationController?.pushViewController(vc, animated: true)

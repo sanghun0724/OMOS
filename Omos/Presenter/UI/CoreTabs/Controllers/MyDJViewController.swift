@@ -51,7 +51,7 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
 //            timer?.fire()
         NotificationCenter.default.addObserver(self, selector: #selector(didRecieveFollowNotification), name: NSNotification.Name.follow, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(didRecieveFollowCacelNotification), name: NSNotification.Name.followCancel, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didRecieveFollowCancelNotification), name: NSNotification.Name.followCancel, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(didRecieveReloadNotification), name: NSNotification.Name.reload, object: nil)
         
@@ -69,7 +69,7 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
         self.selfView.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
     
-    @objc func didRecieveFollowCacelNotification(_ notification: Notification) {
+    @objc func didRecieveFollowCancelNotification(_ notification: Notification) {
         self.viewModel.fetchMyDjList(userId: Account.currentUser)
         self.selfView.collectionView.visibleCells.forEach({ cell in
             if let cell = cell as? MydjCollectionCell {
@@ -122,7 +122,6 @@ class MyDJViewController:BaseViewController , UIScrollViewDelegate {
             .subscribe(onNext: { [weak self] data in
                     self?.hasNextPage = self?.lastPostId == self?.viewModel.currentMyDjRecord.last?.recordID ?? 0 ? false : true
                     self?.lastPostId = self?.viewModel.currentMyDjRecord.last?.recordID ?? 0
-                    print("hasNext\(self?.hasNextPage)")
                     self?.isPaging = false //페이징 종료
                     self?.selfView.tableView.reloadData()
                     self?.selfView.tableView.layoutIfNeeded()

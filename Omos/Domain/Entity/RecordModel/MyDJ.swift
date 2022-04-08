@@ -85,3 +85,7 @@ struct UserRecordsResponse:Codable {
 }
 
 
+struct BlockRequest:Codable {
+   let fromUserId: Int
+   let toUserId:Int
+}

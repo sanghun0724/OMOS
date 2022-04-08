@@ -10,6 +10,9 @@ import SnapKit
 import AuthenticationServices
 import RxSwift
 import RxCocoa
+import KakaoSDKAuth
+import KakaoSDKUser
+import KakaoSDKCommon
 
 class LoginViewController:UIViewController {
     
@@ -196,6 +199,28 @@ class LoginViewController:UIViewController {
                 }).disposed(by: self!.disposeBag)
             }).disposed(by: disposeBag)
         
+        viewModel.kakaoError.subscribe(onNext: { [weak self] _ in
+            UserApi.shared.loginWithKakaoAccount {(oauthToken, error) in
+                    if let error = error {
+                        print(error)
+                    }
+                    else {
+                        self?.viewModel.getUserInfo()
+                    }
+                }
+        }).disposed(by: disposeBag)
+        
+        topView.labelsView.findButton.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] _ in
+                let rp = AuthRepositoryImpl(loginAPI: LoginAPI())
+                let uc = LoginUseCase(authRepository: rp)
+                let vm = SignUpViewModel(usecase: uc)
+                let vc = UINavigationController(rootViewController: EmailCheckViewController(viewModel: vm))
+                vc.modalPresentationStyle = .fullScreen
+                self?.present(vc,animated:true)
+            }).disposed(by: disposeBag)
+        
         bottomView.appleButton.addTarget(self, action: #selector(loginApple), for: .touchUpInside)
     }
     
@@ -232,6 +257,7 @@ extension LoginViewController:ASAuthorizationControllerDelegate {
                     UserDefaults.standard.set(token.accessToken, forKey: "access")
                     UserDefaults.standard.set(token.refreshToken, forKey: "refresh")
                     UserDefaults.standard.set(token.userId, forKey: "user")
+                    
                     Account.currentUser = UserDefaults.standard.integer(forKey: "user")
                     let vc = TabBarViewController()
                     vc.modalPresentationStyle = .fullScreen

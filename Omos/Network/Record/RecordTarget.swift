@@ -29,7 +29,7 @@ enum RecordTarget {
 
 extension RecordTarget:TargetType {
     var baseURL: String {
-        return "http://ec2-3-37-146-80.ap-northeast-2.compute.amazonaws.com:8080/api/records"
+        return RestApiUrl.restUrl + "/records"
     }
     
     var method: HTTPMethod {
@@ -54,7 +54,7 @@ extension RecordTarget:TargetType {
     
     var path: String {
         switch self {
-        case .select: return "/select"
+        case .select: return "/select/\(Account.currentUser)"
         case .recordDetail(let post,let user): return "/select/\(post)/user/\(user)"
         case .category(let cate, _): return "/select/category/\(cate)"
         case .myRecord(let user): return "/\(user)"

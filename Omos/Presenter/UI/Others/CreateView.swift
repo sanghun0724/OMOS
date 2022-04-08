@@ -122,7 +122,7 @@ class CreateView: BaseView {
     let mainfullTextView:UITextView = {
         let view = UITextView()
         view.text = "레코드 내용을 입력해주세요"
-        view.font = UIFont(name: "Cafe24Oneprettynight", size: 20)
+        view.font = .systemFont(ofSize: 16, weight: .light)
         view.isScrollEnabled = false
         view.textAlignment = .left
         view.backgroundColor = .mainBlack
@@ -193,14 +193,12 @@ class CreateView: BaseView {
         return view
     }()
     
-    let stickerChoiceView = StickerView()
-    
     override func layoutSubviews() {
         super.layoutSubviews()
-        stickerChoiceView.isHidden = true
         circleImageView.layoutIfNeeded()
         circleImageView.layer.cornerRadius = circleImageView.height / 2
         circleImageView.layer.masksToBounds = true
+        
     }
     
     
@@ -343,10 +341,6 @@ class CreateView: BaseView {
             make.bottom.equalTo(lastView.snp.top)
         }
         
-        stickerChoiceView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview()
-        }
         
         mainTextView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
@@ -382,7 +376,6 @@ class CreateView: BaseView {
         
         textCoverView.addSubview(mainTextView)
         textCoverView.addSubview(mainfullTextView)
-        textCoverView.addSubview(stickerChoiceView)
         
         lastView.addSubview(remainTitle)
         lastView.addSubview(remainText)
@@ -400,13 +393,13 @@ class CreateView: BaseView {
 class StickerView:BaseView {
     
     let stickerImageView1:UIImageView = {
-        let imageView = UIImageView(image:UIImage(named: "oneline")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
+        let imageView = UIImageView(image:UIImage(named: "sticker1")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
                                                                                                           right: -10)))
         return imageView
     }()
     
     let stickerImageView2:UIImageView = {
-        let imageView = UIImageView(image:UIImage(named: "free")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
+        let imageView = UIImageView(image:UIImage(named: "sticker2")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
                                                                                                        right: -10)))
         return imageView
     }()
@@ -424,7 +417,7 @@ class StickerView:BaseView {
     }()
     
     let stickerImageView5:UIImageView = {
-        let imageView = UIImageView(image:UIImage(named: "story")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
+        let imageView = UIImageView(image:UIImage(named: "free")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
                                                                                                        right: -10)))
         return imageView
     }()
@@ -489,7 +482,7 @@ class StickerView:BaseView {
             make.height.equalTo(stickerImageView6.snp.width).multipliedBy(1.0)
         }
        
-        
+        self.isHidden = true
     }
     
 }

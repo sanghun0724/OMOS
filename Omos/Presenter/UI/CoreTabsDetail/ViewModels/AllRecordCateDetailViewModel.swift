@@ -26,6 +26,9 @@ class AllRecordCateDetailViewModel:BaseViewModel {
     func selectRecordsShow(type: cateType, postId: Int?, size: Int, sort: String, userid: Int) {
         loading.onNext(true)
         usecase.cateFetch(type: type, postId: postId, size: size, sort: sort, userid: userid)
+            .map {
+                $0.filter{ !Account.currentReportRecordsId.contains($0.recordID) }
+            }
             .subscribe({ [weak self] event in
                 self?.loading.onNext(false)
                 switch event {
@@ -41,6 +44,22 @@ class AllRecordCateDetailViewModel:BaseViewModel {
     
     func numberofRows() -> Int {
         return currentCateRecords.count
+    }
+    
+    private func removeReportedRecord() {
+        var stack = currentCateRecords
+        DispatchQueue.global().sync {
+            for i in 0..<currentCateRecords.count {
+                if Account.currentReportRecordsId.contains(currentCateRecords[i].recordID) {
+                    stack.remove(at: i)
+                }
+            }
+            currentCateRecords = stack
+        }
+        DispatchQueue.global().sync {
+            self.cateRecords.onNext(stack)
+        }
+        
     }
     
     //Interation

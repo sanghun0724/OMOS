@@ -13,12 +13,12 @@ enum InteractionTarget {
     case deleteScrap(postId:Int,userId:Int)
     case saveLike(postId:Int,userId:Int)
     case deleteLike(postId:Int,userId:Int)
+    case block(type:String,BlockRequest)
 }
 
 extension InteractionTarget:TargetType {
     var baseURL: String {
-        return "http://ec2-3-37-146-80.ap-northeast-2.compute.amazonaws.com:8080/api/"
-    }
+        return RestApiUrl.restUrl   }
     
     var method: HTTPMethod {
         switch self {
@@ -26,6 +26,7 @@ extension InteractionTarget:TargetType {
         case .deleteScrap: return .delete
         case .saveLike: return .post
         case .deleteLike: return .delete
+        case .block: return .post
         }
     }
     
@@ -35,11 +36,13 @@ extension InteractionTarget:TargetType {
         case .deleteScrap(let post,let user): return "scrap/delete/\(post)/\(user)"
         case .saveLike(let post,let user): return "like/save/\(post)/\(user)"
         case .deleteLike(let post,let user): return "like/delete/\(post)/\(user)"
+        case .block(let type, _): return "/block/save/\(type)"
         }
     }
     
     var parameters: RequestParams? {
         switch self {
+        case .block( _,let request): return .body(request)
         default:
             return nil
         }

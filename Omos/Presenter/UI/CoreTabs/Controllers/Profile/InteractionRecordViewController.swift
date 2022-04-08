@@ -24,7 +24,7 @@ class InteractionRecordViewController:BaseViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
-    required init?(coder: NSCoder) {
+    required init?(coder: NSCoder) {  
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -34,6 +34,11 @@ class InteractionRecordViewController:BaseViewController {
         selfView.tableView.dataSource = self
         selfView.tableView.delegate = self
         type == .like ? (viewModel.fetchLikesRecords(userId: Account.currentUser)):(viewModel.fetchScrapRecords(userId: Account.currentUser))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func configureUI() {
@@ -113,7 +118,7 @@ extension InteractionRecordViewController:UITableViewDelegate,UITableViewDataSou
         let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
         let uc = RecordsUseCase(recordsRepository: rp)
         let vm = AllRecordDetailViewModel(usecase: uc)
-        let vc = AllRecordDetailViewController(viewModel: vm, postId: data.recordID, userId: Account.currentUser)
+        let vc = AllRecordDetailViewController(viewModel: vm, postId: data.recordID)
         self.navigationController?.pushViewController(vc, animated: true)
         
 

@@ -114,7 +114,7 @@ extension ArtistSongViewController:UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: SongTableCell.identifier, for: indexPath) as! SongTableCell
             viewModel.searchType == .me ? (cell.createdButton.isHidden = false) : (cell.createdButton.isHidden = true)
             let cellData = viewModel.currentArtistTrack[indexPath.row]
-            cell.configureModelArtistTrack(track: cellData)
+            cell.configureModelArtistTrack(track: cellData,keyword:viewModel.currentKeyword)
             cell.selectionStyle = . none
             cell.createdButton.rx.tap
                 .asDriver()

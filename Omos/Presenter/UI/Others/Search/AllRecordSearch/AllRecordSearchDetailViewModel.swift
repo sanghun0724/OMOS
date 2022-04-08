@@ -26,6 +26,9 @@ class AllRecordSearchDetailViewModel:BaseViewModel {
     func oneMusicRecordsFetch(musicId:String,request:OneMusicRecordRequest) {
         loading.onNext(true)
         usecase.oneMusicRecordFetch(musicId: musicId, request: request)
+            .map {
+                $0.filter{ !Account.currentReportRecordsId.contains($0.recordID) }
+            }
             .subscribe({ [weak self] event in
                 self?.loading.onNext(false)
                 switch event {

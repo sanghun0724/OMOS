@@ -9,11 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxGesture
-
-//protocol MydjCollectionCellProtocol:AnyObject {
-//    func didTapMydjCell()
-//}
-
+import Kingfisher
 
 class MydjCollectionCell:UICollectionViewCell {
     static let identifier = "MydjCollectionCell"
@@ -56,9 +52,9 @@ class MydjCollectionCell:UICollectionViewCell {
     }
     
     override func prepareForReuse() {
-        super.prepareForReuse()
-        //djImageView.image = nil
+        djImageView.image = nil
         disposeBag = DisposeBag()
+        super.prepareForReuse()
     }
     
     private func configureUI() {
@@ -78,14 +74,41 @@ class MydjCollectionCell:UICollectionViewCell {
     }
     
     func configureModel(record:MyDjListResponse) {
-        djImageView.setImage(with: record.profileURL ?? "")
         djLabel.text = record.nickname
+        guard let imageUrl = record.profileURL else {
+            djImageView.image = UIImage(named: "albumCover")
+            return
+        }
+        if ImageCache.default.isCached(forKey: imageUrl) {
+                      print("Image is cached")
+                      ImageCache.default.removeImage(forKey: imageUrl)
+             }
+        if imageUrl == "" {
+            djImageView.image = UIImage(named: "albumCover")
+        } else {
+            djImageView.setImage(with: imageUrl)
+        }
+    
     }
     
     func configureHome(record:recommendDjResponse) {
+        djImageView.image = nil
         self.homeInfo = record
-        djImageView.setImage(with: record.profileURL ?? "" )
         djLabel.text = record.nickname
+        guard let imageUrl = record.profileURL else {
+            djImageView.image = UIImage(named: "albumCover")
+            return
+        }
+        if ImageCache.default.isCached(forKey: imageUrl) {
+                      print("Image is cached")
+                      ImageCache.default.removeImage(forKey: imageUrl)
+             }
+        if imageUrl == "" {
+            djImageView.image = UIImage(named: "albumCover")
+        } else {
+            djImageView.setImage(with: imageUrl)
+        }
+       
     }
     
     
