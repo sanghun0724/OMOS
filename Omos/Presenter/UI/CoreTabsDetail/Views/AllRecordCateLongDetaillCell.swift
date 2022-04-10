@@ -41,11 +41,11 @@ class AllRecordCateLongDetailCell:UITableViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        //myView.myView.backImageView.image = nil
-//        myView.myView.likeButton.setImage(nil, for: .normal)
-//        myView.myView.scrapButton.setImage(nil, for: .normal)
-//        myView.myView.likeCountLabel.textColor = nil
-//        myView.myView.scrapCountLabel.textColor = nil
+        myView.backImageView.image = nil
+        myView.likeButton.setImage(nil, for: .normal)
+        myView.scrapButton.setImage(nil, for: .normal)
+        myView.likeCountLabel.textColor = nil
+        myView.scrapCountLabel.textColor = nil
         disposeBag = DisposeBag()
         myView.mainLabelView.text = nil
     }
@@ -57,7 +57,7 @@ class AllRecordCateLongDetailCell:UITableViewCell {
             myView.subMusicInfoLabel.text?.removeFirst()
         }
         myView.circleImageView.setImage(with: record.music.albumImageURL)
-        //myView.myView.backImageView.setImage(with: ) 추후 추가되면 삽입
+        myView.backImageView.setImage(with: record.recordImageURL ?? "")
         myView.titleLabel.text = record.recordTitle
         myView.createdLabel.text = record.createdDate.toDate()
         myView.cateLabel.text = " | \(record.category.getReverseCate())"
