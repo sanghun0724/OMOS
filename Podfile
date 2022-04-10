@@ -22,4 +22,7 @@ pod 'Tabman', '~> 2.11'
 pod 'ReadMoreTextView'
 pod 'MaterialComponents/BottomSheet'
 pod 'IRSticker-swift'
+pod 'Firebase/Crashlytics'
+pod 'Firebase/Analytics'
+pod 'Firebase/Core'
 end

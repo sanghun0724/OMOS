@@ -14,7 +14,7 @@ struct AWSConstants {
     let bucket = "omos-image"
     let region:Region = .apnortheast2
     let awsClient = AWSClient(
-        credentialProvider: .static(accessKeyId: "AKIAVIJ5RLU3AVRPOYOA", secretAccessKey: ""),
+        credentialProvider: .static(accessKeyId: "AKIAVIJ5RLU3AVRPOYOA", secretAccessKey: "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"),
         httpClientProvider: .createNew
     )
 }
