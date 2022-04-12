@@ -191,6 +191,7 @@
 		B6E12E8027C210B4008644B5 /* CreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E12E7F27C210B4008644B5 /* CreateView.swift */; };
 		B6E12E8227C210E6008644B5 /* CreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E12E8127C210E6008644B5 /* CreateViewModel.swift */; };
 		B6E8C91527B6AEFC00C32752 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E8C91427B6AEFC00C32752 /* Constant.swift */; };
+		B6E969632802CD23002653F9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6E969622802CD23002653F9 /* GoogleService-Info.plist */; };
 		B6E9B5CA27E717940045143F /* MyProfileTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E9B5C927E717940045143F /* MyProfileTarget.swift */; };
 		B6E9B5CC27E717A50045143F /* MyProfileAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E9B5CB27E717A50045143F /* MyProfileAPI.swift */; };
 		B6E9B5CE27E719E30045143F /* MyProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E9B5CD27E719E30045143F /* MyProfile.swift */; };
@@ -405,6 +406,7 @@
 		B6E12E7F27C210B4008644B5 /* CreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateView.swift; sourceTree = "<group>"; };
 		B6E12E8127C210E6008644B5 /* CreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewModel.swift; sourceTree = "<group>"; };
 		B6E8C91427B6AEFC00C32752 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		B6E969622802CD23002653F9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B6E9B5C927E717940045143F /* MyProfileTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileTarget.swift; sourceTree = "<group>"; };
 		B6E9B5CB27E717A50045143F /* MyProfileAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileAPI.swift; sourceTree = "<group>"; };
 		B6E9B5CD27E719E30045143F /* MyProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfile.swift; sourceTree = "<group>"; };
@@ -489,6 +491,7 @@
 		B609137E27AD3A7C00B439C3 /* Omos */ = {
 			isa = PBXGroup;
 			children = (
+				B6E969622802CD23002653F9 /* GoogleService-Info.plist */,
 				B6BFD15C27E89D8800DC3722 /* Omos.entitlements */,
 				B68454E927BE1D7A00F1E6B5 /* Network */,
 				B6AC277027BA28BB00A1FA5B /* OmosRelease.entitlements */,
@@ -1071,6 +1074,7 @@
 				B609137927AD3A7C00B439C3 /* Frameworks */,
 				B609137A27AD3A7C00B439C3 /* Resources */,
 				77902E746488D1AA0A59065A /* [CP] Embed Pods Frameworks */,
+				B6E969612802CC5E002653F9 /* Firebase Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -1155,6 +1159,7 @@
 				B601C53B27C0F50100DCD2AF /* Cafe24Oneprettynight.ttf in Resources */,
 				B6CC1D7627BA475900B5EE7E /* UseInfoText.rtf in Resources */,
 				B609138927AD3A8000B439C3 /* Assets.xcassets in Resources */,
+				B6E969632802CD23002653F9 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1184,6 +1189,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Omos/Pods-Omos-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		B6E969612802CC5E002653F9 /* Firebase Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Firebase Crashlytics";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${CONFIGURATION}\" != \"Debug\" ]; then\n    \"${PODS_ROOT}/FirebaseCrashlytics/run\"\n    \"${PODS_ROOT}/FirebaseCrashlytics/upload-symbols\" -gsp ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist -p ios ${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\nfi\n";
 		};
 		C30991860C975885134EA979 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1565,6 +1588,7 @@
 				CODE_SIGN_ENTITLEMENTS = Omos/Omos.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 2L2K3UD2LK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Omos/Info.plist;

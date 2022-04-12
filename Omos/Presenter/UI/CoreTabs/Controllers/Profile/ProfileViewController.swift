@@ -31,7 +31,6 @@ class ProfileViewController: BaseViewController {
         viewModel.allFetch()
         setRefreshControl()
         NotificationCenter.default.addObserver(self, selector: #selector(didRecieveProfileReloadNotification), name: NSNotification.Name.follow, object: nil)
-        print(RestApiUrl.restUrl)
     }
     
     override func viewWillAppear(_ animated: Bool) {

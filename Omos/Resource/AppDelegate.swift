@@ -19,7 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         KakaoSDK.initSDK(appKey: "23c5d162c97e7eb015313dc36f3b3794")
         FirebaseApp.configure()
-        
         return true
     }
 
