@@ -77,8 +77,8 @@ extension AllRecordTableCell: UICollectionViewDelegate,UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AllRecordCollectionCell.identifier, for: indexPath) as! AllRecordCollectionCell
         cell.backgroundColor = .mainBlack
-        guard let data = self.selectedRecords?[safe:indexPath.row] else {
-            guard let homeData = self.popuralRecords?[safe:indexPath.row] else { return cell }
+        guard let data = self.selectedRecords?[safe:indexPath.item] else {
+            guard let homeData = self.popuralRecords?[safe:indexPath.item] else { return cell }
             cell.configureHome(record: homeData)
             return cell
         }

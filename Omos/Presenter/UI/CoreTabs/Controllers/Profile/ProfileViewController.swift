@@ -37,7 +37,6 @@ class ProfileViewController: BaseViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.backgroundColor = .mainBlack
         self.tabBarController?.tabBar.isHidden = false
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -90,8 +89,7 @@ class ProfileViewController: BaseViewController {
             }
         }).disposed(by: disposeBag)
         
-        
-        
     }
+    
     
 }

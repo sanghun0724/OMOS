@@ -17,7 +17,6 @@ class TabBarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fatalError()
         setupControllers()
         if #available(iOS 15.0, *) {
             UITableView.appearance().sectionHeaderTopPadding = 0

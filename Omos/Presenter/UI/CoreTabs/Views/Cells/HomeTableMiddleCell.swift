@@ -14,7 +14,7 @@ protocol HomeTableMiddleCellprotocol:AnyObject {
 
 class HomeTableMiddleCell:UITableViewCell {
     static let identifier = "HomeTableMiddleCell"
-  
+    
     
     var selectedRecords:[recommendDjResponse]? {
         didSet {
@@ -29,21 +29,21 @@ class HomeTableMiddleCell:UITableViewCell {
         setUpCollection()
     }
     
-     private func setUpCollection() {
-            let layout = UICollectionViewFlowLayout()
-            layout.scrollDirection = .horizontal//Constant.mainWidth * 0.5
-         layout.itemSize = CGSize(width: Constant.mainHeight * 0.145 , height: Constant.mainHeight * 0.145) //비율정해서 설정하기
-            layout.minimumLineSpacing = 6
-            layout.minimumInteritemSpacing = 6
-            collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-            collectionView.register(MydjCollectionCell.self, forCellWithReuseIdentifier: MydjCollectionCell.identifier)
-            collectionView.register(EmptyCell.self, forCellWithReuseIdentifier: EmptyCell.identifier)
-            collectionView.delegate = self
-            collectionView.dataSource = self
-            self.addSubview(collectionView)
-            collectionView.showsHorizontalScrollIndicator = false
-            collectionView.backgroundColor = .mainBackGround
-        }
+    private func setUpCollection() {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal//Constant.mainWidth * 0.5
+        layout.itemSize = CGSize(width: Constant.mainHeight * 0.145 , height: Constant.mainHeight * 0.145) //비율정해서 설정하기
+        layout.minimumLineSpacing = 6
+        layout.minimumInteritemSpacing = 6
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(MydjCollectionCell.self, forCellWithReuseIdentifier: MydjCollectionCell.identifier)
+        collectionView.register(EmptyCell.self, forCellWithReuseIdentifier: EmptyCell.identifier)
+        collectionView.backgroundColor = .mainBackGround
+        //            collectionView.delegate = self
+        //            collectionView.dataSource = self
+        self.contentView.addSubview(collectionView)
+        collectionView.showsHorizontalScrollIndicator = false
+    }
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -58,18 +58,22 @@ class HomeTableMiddleCell:UITableViewCell {
         self.selectedRecords = records
     }
     
+    func setCollectionViewDataSourceDelegate() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.reloadData()
+    }
     
 }
 
 extension HomeTableMiddleCell: UICollectionViewDelegate,UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if self.selectedRecords?.count ?? 0 > 0 { return 1 }
         return self.selectedRecords?.count ?? 5
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MydjCollectionCell.identifier, for: indexPath) as! MydjCollectionCell
-        guard let data = self.selectedRecords?[safe:indexPath.row] else {
+        guard let data = self.selectedRecords?[safe:indexPath.item] else {
             print("data 없어요")
             return cell
         }
@@ -84,7 +88,7 @@ extension HomeTableMiddleCell: UICollectionViewDelegate,UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-       
+        
     }
-
+    
 }

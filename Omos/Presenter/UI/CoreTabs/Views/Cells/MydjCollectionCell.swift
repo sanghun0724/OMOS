@@ -38,10 +38,6 @@ class MydjCollectionCell:UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-            
-        contentView.addSubview(djImageView)
-        contentView.addSubview(djLabel)
         configureUI()
         
         layoutIfNeeded()
@@ -58,7 +54,8 @@ class MydjCollectionCell:UICollectionViewCell {
     }
     
     private func configureUI() {
-        
+        self.addSubview(djImageView)
+        self.addSubview(djLabel)
         djLabel.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.18)
@@ -95,18 +92,20 @@ class MydjCollectionCell:UICollectionViewCell {
         djImageView.image = nil
         self.homeInfo = record
         djLabel.text = record.nickname
-        guard let imageUrl = record.profileURL else {
-            djImageView.image = UIImage(named: "albumCover")
+        if let imageUrl = record.profileURL {
+            if ImageCache.default.isCached(forKey: imageUrl) {
+                          print("Image is cached")
+                          ImageCache.default.removeImage(forKey: imageUrl)
+                 }
+            if imageUrl == "" {
+                djImageView.image = UIImage(named: "albumCover")
+            } else {
+                djImageView.setImage(with: imageUrl)
+            }
+            
             return
-        }
-        if ImageCache.default.isCached(forKey: imageUrl) {
-                      print("Image is cached")
-                      ImageCache.default.removeImage(forKey: imageUrl)
-             }
-        if imageUrl == "" {
-            djImageView.image = UIImage(named: "albumCover")
         } else {
-            djImageView.setImage(with: imageUrl)
+            djImageView.image = UIImage(named: "albumCover")
         }
        
     }

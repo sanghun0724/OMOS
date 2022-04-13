@@ -29,9 +29,33 @@ extension ProfileViewController:UITableViewDelegate,UITableViewDataSource {
         switch indexPath.section {
         case 1:
             cell.configureScrap(record: recordData)
+            cell.selfViewOne.rx.tapGesture()
+                .when(.recognized)
+                .subscribe(onNext: { [weak self] _ in
+                    recordData.l
+                    self?.pushDetailView(record: <#T##MyProfileRecordResponse#>)
+                }).disposed(by: cell.disposeBag)
+            
+            cell.selfViewTwo.rx.tapGesture()
+                .when(.recognized)
+                .subscribe(onNext: { [weak self] _ in
+                    print("two")
+                }).disposed(by: cell.disposeBag)
+
             return cell
         case 2:
             cell.configureLike(record: recordData)
+            cell.selfViewOne.rx.tapGesture()
+                .when(.recognized)
+                .subscribe(onNext: { [weak self] _ in
+                    print("one")
+                }).disposed(by: cell.disposeBag)
+            
+            cell.selfViewTwo.rx.tapGesture()
+                .when(.recognized)
+                .subscribe(onNext: { [weak self] _ in
+                    print("two")
+                }).disposed(by: cell.disposeBag)
             return cell
         default:
             return UITableViewCell()
@@ -53,7 +77,6 @@ extension ProfileViewController:UITableViewDelegate,UITableViewDataSource {
                     self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: header.disposeBag)
 
-            
             return header
         } else {
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: AllRecordHeaderView.identifier) as! AllRecordHeaderView
