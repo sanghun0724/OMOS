@@ -32,29 +32,48 @@ extension ProfileViewController:UITableViewDelegate,UITableViewDataSource {
             cell.selfViewOne.rx.tapGesture()
                 .when(.recognized)
                 .subscribe(onNext: { [weak self] _ in
-                    recordData.l
-                    self?.pushDetailView(record: <#T##MyProfileRecordResponse#>)
+                    guard let recordID = recordData.scrappedRecords[safe:0]?.recordID else { return }
+                    let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+                    let uc = RecordsUseCase(recordsRepository: rp)
+                    let vm = AllRecordDetailViewModel(usecase: uc)
+                    let vc = AllRecordDetailViewController(viewModel: vm, postId: recordID)
+                    self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: cell.disposeBag)
             
             cell.selfViewTwo.rx.tapGesture()
                 .when(.recognized)
                 .subscribe(onNext: { [weak self] _ in
-                    print("two")
-                }).disposed(by: cell.disposeBag)
+                    guard let recordID = recordData.scrappedRecords[safe:1]?.recordID else { return }
+                    let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+                    let uc = RecordsUseCase(recordsRepository: rp)
+                    let vm = AllRecordDetailViewModel(usecase: uc)
+                    let vc = AllRecordDetailViewController(viewModel: vm, postId: recordID)
+                    self?.navigationController?.pushViewController(vc, animated: true)
 
+                }).disposed(by: cell.disposeBag)
             return cell
         case 2:
             cell.configureLike(record: recordData)
             cell.selfViewOne.rx.tapGesture()
                 .when(.recognized)
                 .subscribe(onNext: { [weak self] _ in
-                    print("one")
+                    guard let recordID = recordData.likedRecords[safe:0]?.recordID else { return }
+                    let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+                    let uc = RecordsUseCase(recordsRepository: rp)
+                    let vm = AllRecordDetailViewModel(usecase: uc)
+                    let vc = AllRecordDetailViewController(viewModel: vm, postId:recordID )
+                    self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: cell.disposeBag)
             
             cell.selfViewTwo.rx.tapGesture()
                 .when(.recognized)
                 .subscribe(onNext: { [weak self] _ in
-                    print("two")
+                    guard let recordID = recordData.likedRecords[safe:1]?.recordID else { return }
+                    let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+                    let uc = RecordsUseCase(recordsRepository: rp)
+                    let vm = AllRecordDetailViewModel(usecase: uc)
+                    let vc = AllRecordDetailViewController(viewModel: vm, postId: recordID)
+                    self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: cell.disposeBag)
             return cell
         default:

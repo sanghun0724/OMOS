@@ -143,7 +143,7 @@ class SearchViewController:BaseViewController {
 //            }).disposed(by: disposeBag)
     }
     
-    private func addContentsView() {
+    func addContentsView() {
         let topTabView = TopTabViewController(viewModel: self.viewModel )
         addChild(topTabView)
         self.view.addSubview(topTabView.view)
