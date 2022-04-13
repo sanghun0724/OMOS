@@ -201,12 +201,16 @@ extension SearchViewController:UISearchBarDelegate {
         }
     }
     
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+//    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+//
+//
+//    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if let child = self.children.first {
             child.view?.isHidden = true
             self.selfView.isHidden = false
         }
- 
     }
     
     
