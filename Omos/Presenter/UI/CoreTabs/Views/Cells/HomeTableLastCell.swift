@@ -151,7 +151,7 @@ class HomeTableLastCell:UITableViewCell {
     }
     
     func configureModel(record:LovedResponse) {
-        backImageView.setImage(with: record.music.albumImageURL) //바꿔야함
+        backImageView.setImage(with: record.recordImageURL ?? record.music.albumImageURL) //바꿔야함
         albumImageView.setImage(with: record.music.albumImageURL)
         trackTitleLabel.text = record.music.musicTitle
         artistTitleLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}

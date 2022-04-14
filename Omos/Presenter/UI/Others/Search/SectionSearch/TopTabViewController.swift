@@ -86,7 +86,6 @@ class TopTabViewController:TabmanViewController {
                 self.reloadData()
             }).disposed(by: disposeBag)
         
-        
     }
     
 }

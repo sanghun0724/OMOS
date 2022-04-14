@@ -124,16 +124,6 @@ class SearchViewModel :BaseViewModel{
     }
     
     func reduce() {
-        Observable.combineLatest(track, album, artist)
-        { $0.isEmpty && $1.isEmpty && $2.isEmpty }
-        .withUnretained(self)
-        .subscribe(onNext: { owner,empty in
-            if empty {
-                owner.isAllEmpty.onNext(true)
-            } else {
-                owner.isAllEmpty.onNext(false)
-            }
-        }).disposed(by: disposeBag)
         
         track.withUnretained(self)
             .subscribe(onNext: { owner,_ in

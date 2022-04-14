@@ -7,8 +7,11 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
 
 class ProfileCell:UITableViewCell {
+    var disposeBag = DisposeBag()
     static let identifier = "ProfileCell"
     
     let emptyLabel:UILabel = {
@@ -56,6 +59,11 @@ class ProfileCell:UITableViewCell {
         }
 //        emptyLabel.isHidden = true
 //
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
     }
     
     func configureLike(record:MyProfileRecordResponse) {
@@ -128,8 +136,7 @@ class ProfileCell:UITableViewCell {
             selfViewTwo.artistTitleLabel.text = record.scrappedRecords[1].music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"}
             selfViewTwo.trackTitleLabel.text = record.scrappedRecords[1].music.musicTitle
     }
-    
-    
+        
 }
 
 class ProfileRecordEmptyCell:UITableViewCell {

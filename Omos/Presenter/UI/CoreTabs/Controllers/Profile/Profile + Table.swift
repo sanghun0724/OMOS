@@ -29,9 +29,52 @@ extension ProfileViewController:UITableViewDelegate,UITableViewDataSource {
         switch indexPath.section {
         case 1:
             cell.configureScrap(record: recordData)
+            cell.selfViewOne.rx.tapGesture()
+                .when(.recognized)
+                .subscribe(onNext: { [weak self] _ in
+                    guard let recordID = recordData.scrappedRecords[safe:0]?.recordID else { return }
+                    let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+                    let uc = RecordsUseCase(recordsRepository: rp)
+                    let vm = AllRecordDetailViewModel(usecase: uc)
+                    let vc = AllRecordDetailViewController(viewModel: vm, postId: recordID)
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }).disposed(by: cell.disposeBag)
+            
+            cell.selfViewTwo.rx.tapGesture()
+                .when(.recognized)
+                .subscribe(onNext: { [weak self] _ in
+                    guard let recordID = recordData.scrappedRecords[safe:1]?.recordID else { return }
+                    let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+                    let uc = RecordsUseCase(recordsRepository: rp)
+                    let vm = AllRecordDetailViewModel(usecase: uc)
+                    let vc = AllRecordDetailViewController(viewModel: vm, postId: recordID)
+                    self?.navigationController?.pushViewController(vc, animated: true)
+
+                }).disposed(by: cell.disposeBag)
             return cell
         case 2:
             cell.configureLike(record: recordData)
+            cell.selfViewOne.rx.tapGesture()
+                .when(.recognized)
+                .subscribe(onNext: { [weak self] _ in
+                    guard let recordID = recordData.likedRecords[safe:0]?.recordID else { return }
+                    let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+                    let uc = RecordsUseCase(recordsRepository: rp)
+                    let vm = AllRecordDetailViewModel(usecase: uc)
+                    let vc = AllRecordDetailViewController(viewModel: vm, postId:recordID )
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }).disposed(by: cell.disposeBag)
+            
+            cell.selfViewTwo.rx.tapGesture()
+                .when(.recognized)
+                .subscribe(onNext: { [weak self] _ in
+                    guard let recordID = recordData.likedRecords[safe:1]?.recordID else { return }
+                    let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+                    let uc = RecordsUseCase(recordsRepository: rp)
+                    let vm = AllRecordDetailViewModel(usecase: uc)
+                    let vc = AllRecordDetailViewController(viewModel: vm, postId: recordID)
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }).disposed(by: cell.disposeBag)
             return cell
         default:
             return UITableViewCell()
@@ -53,7 +96,6 @@ extension ProfileViewController:UITableViewDelegate,UITableViewDataSource {
                     self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: header.disposeBag)
 
-            
             return header
         } else {
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: AllRecordHeaderView.identifier) as! AllRecordHeaderView

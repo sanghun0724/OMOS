@@ -36,9 +36,9 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource {
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableMiddleCell.identifier,for:indexPath) as! HomeTableMiddleCell
-            cell.cellDelegate = self
-            cell.selectedRecords = viewModel.currentRecommentRecord
             cell.selectionStyle = .none
+            cell.cellDelegate = self
+            cell.configureModel(records: viewModel.currentRecommentRecord)
             return cell
         case 3:
             guard let cellData = viewModel.currentLovedRecord else {
@@ -56,6 +56,12 @@ extension HomeViewController:UITableViewDelegate,UITableViewDataSource {
         }
       
         return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? HomeTableMiddleCell else { return }
+        cell.setCollectionViewDataSourceDelegate()
+       
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

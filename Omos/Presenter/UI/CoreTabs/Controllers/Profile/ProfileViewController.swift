@@ -31,14 +31,12 @@ class ProfileViewController: BaseViewController {
         viewModel.allFetch()
         setRefreshControl()
         NotificationCenter.default.addObserver(self, selector: #selector(didRecieveProfileReloadNotification), name: NSNotification.Name.follow, object: nil)
-        print(RestApiUrl.restUrl)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.backgroundColor = .mainBlack
         self.tabBarController?.tabBar.isHidden = false
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -91,8 +89,7 @@ class ProfileViewController: BaseViewController {
             }
         }).disposed(by: disposeBag)
         
-        
-        
     }
+    
     
 }

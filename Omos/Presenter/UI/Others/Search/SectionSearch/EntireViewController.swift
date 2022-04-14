@@ -53,10 +53,15 @@ class EntireViewController:BaseViewController {
                 owner.selfView.tableView.layoutIfNeeded()
             }).disposed(by: disposeBag)
         
-        viewModel.isAllEmpty
-            .subscribe(onNext: { [weak self] empty in
-                self?.selfView.emptyView.isHidden = !empty
-            }).disposed(by: disposeBag)
+        Observable.combineLatest(viewModel.track, viewModel.album, viewModel.artist)
+        { $0.isEmpty && $1.isEmpty && $2.isEmpty }
+        .withUnretained(self)
+        .subscribe(onNext: { owner,empty in
+            print("여기있다 \(empty)")
+            owner.selfView.emptyView.isHidden = !empty
+        }).disposed(by: disposeBag)
+        
+        
     }
     
 }

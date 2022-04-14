@@ -21,11 +21,7 @@ class TabBarViewController: UITabBarController {
         if #available(iOS 15.0, *) {
             UITableView.appearance().sectionHeaderTopPadding = 0
         }
-       
-     
         // upload to S3
-       
-        
     }
     
     private func setupControllers() {

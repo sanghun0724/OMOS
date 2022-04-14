@@ -65,6 +65,29 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        viewModel.currentTrack = []
+        viewModel.currentArtist = []
+        viewModel.currentAlbum = []
+        if let bestCell = tableView.cellForRow(at: indexPath) as? BestSearchTableCell {
+            viewModel.searchAllResult(keyword: bestCell.bestLabel.text ?? "")
+            selfView.searchViewController.searchBar.text = bestCell.bestLabel.text
+            viewModel.currentKeyword = bestCell.bestLabel.text ?? ""
+        } else if let searchCell = tableView.cellForRow(at: indexPath) {
+            viewModel.searchAllResult(keyword: searchCell.textLabel?.text ?? "")
+            selfView.searchViewController.searchBar.text = searchCell.textLabel?.text
+            viewModel.currentKeyword = searchCell.textLabel?.text ?? ""
+        } else {
+            return
+        }
+       
+        if self.children.isEmpty {
+            self.addContentsView()
+            self.selfView.isHidden = true
+        }
+        if let child = self.children.first {
+            child.view?.isHidden = false
+            self.selfView.isHidden = true
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
