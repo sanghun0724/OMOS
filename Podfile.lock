@@ -172,6 +172,7 @@ PODS:
   - RxSwift (6.5.0)
   - SnapKit (5.0.1)
   - SteviaLayout (4.7.3)
+  - SwiftLint (0.47.0)
   - Tabman (2.11.1):
     - Pageboy (~> 3.6.0)
   - YPImagePicker (5.2.1):
@@ -194,6 +195,7 @@ DEPENDENCIES:
   - RxGesture
   - RxSwift
   - SnapKit
+  - SwiftLint
   - Tabman (~> 2.11)
   - YPImagePicker
 
@@ -229,6 +231,7 @@ SPEC REPOS:
     - RxSwift
     - SnapKit
     - SteviaLayout
+    - SwiftLint
     - Tabman
     - YPImagePicker
 
@@ -263,9 +266,10 @@ SPEC CHECKSUMS:
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SteviaLayout: c2ecdcff57d44e38fd2f65e54ad52aeae28ca0c4
+  SwiftLint: d41cc46a2ae58ac6d9f26954bc89f1d72e71fdef
   Tabman: 792ac76fd1ec95af175c93db880a3c47cabedc91
   YPImagePicker: f36043210c10b0783034eb1947d6e06e31c461e4
 
-PODFILE CHECKSUM: 50c844c74d35554a4dc25e41bf9f82eab2f458c2
+PODFILE CHECKSUM: 8dcbbc34b6a628c26a888c8d12e225cb7bc5df73
 
 COCOAPODS: 1.11.2
