@@ -13,26 +13,25 @@ struct LoginRequest: Codable {
     let password: String
 }
 
-struct LoginResponse:Codable {
-    let userId:Int
-    let accessToken:String
-    let refreshToken:String
+struct LoginResponse: Codable {
+    let userId: Int
+    let accessToken: String
+    let refreshToken: String
 }
 
 /// SNS Login (KAKAO,APPLE)
-struct SNSLoginRequest:Codable {
-    let email:String
-    let type:SNSType
+struct SNSLoginRequest: Codable {
+    let email: String
+    let type: SNSType
 }
 
-enum SNSType:String,Codable {
+enum SNSType: String, Codable {
     case KAKAO
     case APPLE
 }
 
-struct SNSLoginResponse:Codable {
-    let userId:Int
-    let accessToken:String
-    let refreshToken:String
+struct SNSLoginResponse: Codable {
+    let userId: Int
+    let accessToken: String
+    let refreshToken: String
 }
-

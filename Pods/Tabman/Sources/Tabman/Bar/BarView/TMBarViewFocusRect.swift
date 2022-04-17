@@ -10,15 +10,15 @@ import UIKit
 
 /// Rect struct similar to CGRect that provides ability to take factors such as capacity and position into account.
 internal struct TMBarViewFocusRect {
-    
+
     // MARK: Properties
-    
+
     private let rect: CGRect
     private let maxRect: CGRect
     private let position: CGFloat
     private let capacity: CGFloat
     private let layoutDirection: UIUserInterfaceLayoutDirection
-    
+
     /// Origin of the original rect.
     var origin: CGPoint {
         return rect.origin
@@ -27,9 +27,9 @@ internal struct TMBarViewFocusRect {
     var size: CGSize {
         return rect.size
     }
-    
+
     // MARK: Init
-    
+
     /// Create a FocusRect with an original CGRect at a position.
     ///
     /// - Parameters:
@@ -44,7 +44,7 @@ internal struct TMBarViewFocusRect {
         self.capacity = CGFloat(capacity - 1) // Rect capacity is actually zero indexed
         self.layoutDirection = layoutDirection
     }
-    
+
     /// Get the rect of the FocusRect accounting for additional factors.
     ///
     /// - Parameter isProgressive: Whether the rect should be displayed as progressive (i.e. always increases from initial position)
@@ -54,7 +54,7 @@ internal struct TMBarViewFocusRect {
         switch isProgressive {
         case true:
             return progressiveRect(with: overscrollBehavior, for: rect)
-            
+
         case false:
             return rect(with: overscrollBehavior, for: rect)
         }
@@ -62,14 +62,14 @@ internal struct TMBarViewFocusRect {
 }
 
 private extension TMBarViewFocusRect {
-    
+
     func rect(with overscrollBehavior: TMBarIndicator.OverscrollBehavior,
               for rect: CGRect) -> CGRect {
         var rect = rect
         let isLeftToRight = layoutDirection == .leftToRight
-        
+
         switch overscrollBehavior {
-            
+
         case .bounce:
             if position < 0.0 {
                 let xOffset = rect.width * position
@@ -79,7 +79,7 @@ private extension TMBarViewFocusRect {
                 let xOffset = rect.width * delta
                 rect = rect.offsetBy(dx: isLeftToRight ? xOffset : -xOffset, dy: 0.0)
             }
-            
+
         case .compress:
             if position < 0.0 {
                 let delta = rect.width * position
@@ -94,25 +94,25 @@ private extension TMBarViewFocusRect {
                     rect.origin.x += delta
                 }
             }
-            
+
         default:
              break
         }
         return rect
     }
-    
+
     func progressiveRect(with overscrollBehavior: TMBarIndicator.OverscrollBehavior,
                          for rect: CGRect) -> CGRect {
         var rect = rect
         let isLeftToRight = layoutDirection == .leftToRight
-        
+
         if isLeftToRight {
             rect.size.width += rect.origin.x
             rect.origin.x = 0.0
         } else {
             rect.size.width = maxRect.size.width - rect.origin.x
         }
-        
+
         switch overscrollBehavior {
         case .bounce, .compress:
             if position < 0.0 {
@@ -126,7 +126,7 @@ private extension TMBarViewFocusRect {
                 let xOffset = (maxRect.size.width - rect.width) * delta
                 rect = rect.offsetBy(dx: isLeftToRight ? xOffset : -xOffset, dy: 0.0)
             }
-            
+
         default:
             break
         }

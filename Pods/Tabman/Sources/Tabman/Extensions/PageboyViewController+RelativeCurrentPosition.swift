@@ -10,7 +10,7 @@ import UIKit
 import Pageboy
 
 internal extension PageboyViewController {
-    
+
     var relativeCurrentPosition: CGFloat? {
         guard let position = self.currentPosition else {
             return nil

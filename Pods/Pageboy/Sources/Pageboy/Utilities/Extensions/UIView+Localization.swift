@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIView {
-    
+
     /// Whether the layout direction of the view is right to left.
     var layoutIsRightToLeft: Bool {
         var layoutDirection: UIUserInterfaceLayoutDirection!
@@ -18,7 +18,7 @@ extension UIView {
         }
         return layoutDirection == .rightToLeft
     }
-    
+
     private func getUserInterfaceLayoutDirection() -> UIUserInterfaceLayoutDirection {
         return UIView.userInterfaceLayoutDirection(for: semanticContentAttribute)
     }

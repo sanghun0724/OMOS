@@ -1,4 +1,3 @@
-
 //
 //  CPListItem+Kingfisher.swift
 //  Kingfisher
@@ -30,9 +29,9 @@ import CarPlay
 
 @available(iOS 14.0, *)
 extension KingfisherWrapper where Base: CPListItem {
-    
+
     // MARK: Setting Image
-    
+
     /// Sets an image to the image view with a source.
     ///
     /// - Parameters:
@@ -56,8 +55,7 @@ extension KingfisherWrapper where Base: CPListItem {
         placeholder: KFCrossPlatformImage? = nil,
         options: KingfisherOptionsInfo? = nil,
         progressBlock: DownloadProgressBlock? = nil,
-        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask?
-    {
+        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask? {
         let options = KingfisherParsedOptionsInfo(KingfisherManager.shared.defaultOptions + (options ?? []))
         return setImage(
             with: source,
@@ -67,7 +65,7 @@ extension KingfisherWrapper where Base: CPListItem {
             completionHandler: completionHandler
         )
     }
-    
+
     /// Sets an image to the image view with a requested resource.
     ///
     /// - Parameters:
@@ -91,8 +89,7 @@ extension KingfisherWrapper where Base: CPListItem {
         placeholder: KFCrossPlatformImage? = nil,
         options: KingfisherOptionsInfo? = nil,
         progressBlock: DownloadProgressBlock? = nil,
-        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask?
-    {
+        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask? {
         return setImage(
             with: resource?.convertToSource(),
             placeholder: placeholder,
@@ -106,8 +103,7 @@ extension KingfisherWrapper where Base: CPListItem {
         placeholder: KFCrossPlatformImage? = nil,
         parsedOptions: KingfisherParsedOptionsInfo,
         progressBlock: DownloadProgressBlock? = nil,
-        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask?
-    {
+        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask? {
         var mutatingSelf = self
         guard let source = source else {
             /**
@@ -129,7 +125,7 @@ extension KingfisherWrapper where Base: CPListItem {
             completionHandler?(.failure(KingfisherError.imageSettingError(reason: .emptySource)))
             return nil
         }
-        
+
         var options = parsedOptions
         if !options.keepCurrentImageWhileLoading {
             /**
@@ -147,24 +143,24 @@ extension KingfisherWrapper where Base: CPListItem {
             }
             #endif
         }
-        
+
         let issuedIdentifier = Source.Identifier.next()
         mutatingSelf.taskIdentifier = issuedIdentifier
-        
+
         if let block = progressBlock {
             options.onDataReceived = (options.onDataReceived ?? []) + [ImageLoadingProgressSideEffect(block)]
         }
-        
+
         if let provider = ImageProgressiveProvider(options, refresh: { image in
             self.base.setImage(image)
         }) {
             options.onDataReceived = (options.onDataReceived ?? []) + [provider]
         }
-        
+
         options.onDataReceived?.forEach {
             $0.onShouldApply = { issuedIdentifier == self.taskIdentifier }
         }
-        
+
         let task = KingfisherManager.shared.retrieveImage(
             with: source,
             options: options,
@@ -183,15 +179,15 @@ extension KingfisherWrapper where Base: CPListItem {
                         completionHandler?(.failure(error))
                         return
                     }
-                    
+
                     mutatingSelf.imageTask = nil
                     mutatingSelf.taskIdentifier = nil
-                    
+
                     switch result {
                         case .success(let value):
                             self.base.setImage(value.image)
                             completionHandler?(result)
-                            
+
                         case .failure:
                             if let image = options.onFailureImage {
                                 /**
@@ -208,7 +204,7 @@ extension KingfisherWrapper where Base: CPListItem {
                                     self.base.setImage(unwrapped)
                                 }
                                 #endif
-                                
+
                             } else {
                                 #if compiler(>=5.4)
                                 self.base.setImage(nil)
@@ -219,13 +215,13 @@ extension KingfisherWrapper where Base: CPListItem {
                 }
             }
         )
-        
+
         mutatingSelf.imageTask = task
         return task
     }
-    
+
     // MARK: Cancelling Image
-    
+
     /// Cancel the image download task bounded to the image view if it is running.
     /// Nothing will happen if the downloading has already finished.
     public func cancelDownloadTask() {

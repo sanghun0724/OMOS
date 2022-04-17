@@ -16,12 +16,12 @@ import Foundation
 import Alamofire
 import KakaoSDKCommon
 
-public class AuthRequestAdapter : RequestInterceptor {
+public class AuthRequestAdapter: RequestInterceptor {
     public init() {}
-    
+
     public func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         var urlRequest = urlRequest
-                
+
         if let accessToken = AUTH.tokenManager.getToken()?.accessToken {
             urlRequest.headers.add(.authorization(bearerToken: accessToken))
         }

@@ -10,9 +10,9 @@ import UIKit
 
 /// 'Grid' view containig vertical / horizontal stack views.
 internal final class TMBarViewLayoutGrid: UIView {
-    
+
     // MARK: Properties
-    
+
     private let verticalStack: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -25,7 +25,7 @@ internal final class TMBarViewLayoutGrid: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-    
+
     var horizontalSpacing: CGFloat {
         get {
             return horizontalStack.spacing
@@ -34,29 +34,29 @@ internal final class TMBarViewLayoutGrid: UIView {
             horizontalStack.spacing = newValue
         }
     }
-    
+
     // MARK: Init
-    
+
     init(with mainView: UIView) {
         super.init(frame: .zero)
         initialize(with: mainView)
     }
-    
+
     @available(*, unavailable)
     init() {
         fatalError("Use init(with mainView:)")
     }
-    
+
     @available(*, unavailable)
     override init(frame: CGRect) {
         fatalError("Use init(with mainView:)")
     }
-    
+
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("Use init(with mainView:)")
     }
-    
+
     private func initialize(with view: UIView) {
         addSubview(verticalStack)
         NSLayoutConstraint.activate([
@@ -65,25 +65,25 @@ internal final class TMBarViewLayoutGrid: UIView {
             verticalStack.trailingAnchor.constraint(equalTo: trailingAnchor),
             verticalStack.bottomAnchor.constraint(equalTo: bottomAnchor)
             ])
-        
+
         verticalStack.addArrangedSubview(horizontalStack)
         horizontalStack.addArrangedSubview(view)
     }
-    
+
     // MARK: Layout
-    
+
     func addTopSubview(_ view: UIView) {
         verticalStack.insertArrangedSubview(view, at: 0)
     }
-    
+
     func addBottomSubview(_ view: UIView) {
         verticalStack.addArrangedSubview(view)
     }
-    
+
     func addLeadingSubview(_ view: UIView) {
         horizontalStack.insertArrangedSubview(view, at: 0)
     }
-    
+
     func addTrailingSubview(_ view: UIView) {
         horizontalStack.addArrangedSubview(view)
     }

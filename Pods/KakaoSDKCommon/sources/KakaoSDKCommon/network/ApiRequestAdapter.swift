@@ -15,13 +15,13 @@
 import Foundation
 import Alamofire
 
-public class ApiRequestAdapter : RequestInterceptor{
+public class ApiRequestAdapter: RequestInterceptor {
     private let kaHeader: String
-    
+
     public init(kaHeader: String = Constants.kaHeader) {
         self.kaHeader = kaHeader
-    }    
-    
+    }
+
     public func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         var urlRequest = urlRequest
         urlRequest.setValue(Constants.kaHeader, forHTTPHeaderField: "KA")

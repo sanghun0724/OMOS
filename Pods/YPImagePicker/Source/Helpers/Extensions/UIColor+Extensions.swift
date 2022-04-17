@@ -23,7 +23,7 @@ extension UIColor {
             return UIColor(r: 247, g: 247, b: 247)
         }
     }
-    
+
     /// The color for text labels that contain primary content.
     ///
     /// Like `.label`, but backwards-compatible with iOS 12 and lower.
@@ -33,14 +33,14 @@ extension UIColor {
         }
         return .black
     }
-    
+
     static var ypSecondaryLabel: UIColor {
         if #available(iOS 13, *) {
             return .secondaryLabel
         }
         return UIColor(r: 153, g: 153, b: 153)
     }
-    
+
     /// The color for content layered on top of the main background.
     ///
     /// Like `.secondarySystemBackground`, but backwards-compatible with iOS 12 and lower.
@@ -50,7 +50,7 @@ extension UIColor {
         }
         return UIColor(r: 247, g: 247, b: 247)
     }
-    
+
     /// The color for the main background of your interface.
     ///
     /// Like `.systemBackground`, but backwards-compatible with iOS 12 and lower.
@@ -60,7 +60,7 @@ extension UIColor {
         }
         return .white
     }
-    
+
     /// The base blue color.
     ///
     /// Like `.systemBlue`, but backwards-compatible with iOS 12 and lower.
@@ -70,7 +70,7 @@ extension UIColor {
         }
         return UIColor(r: 10, g: 120, b: 254)
     }
-    
+
     /// The base gray color.
     ///
     /// Like `.systemGray`, but backwards-compatible with iOS 12 and lower.
@@ -80,7 +80,7 @@ extension UIColor {
         }
         return .gray
     }
-    
+
     /// The color for red, compatible with dark mode in iOS 13.
     ///
     /// Like `.red`, but backwards-compatible with iOS 12 and lower.
@@ -89,6 +89,6 @@ extension UIColor {
             return .systemRed
         }
         return .red
-        
+
     }
 }

@@ -23,8 +23,6 @@ struct MyRecordRespone: Codable {
     }
 }
 
-
-
 // MARK: - MyRecord
 struct SaveRequest: Codable { // add imageURL or image data using form - data
         let category: String
@@ -43,28 +41,26 @@ struct SaveRequest: Codable { // add imageURL or image data using form - data
         }
 }
 
-struct SaveRespone:Codable {
-    let state:Bool
+struct SaveRespone: Codable {
+    let state: Bool
 }
 
-
-struct UpdateRequest:Codable {
-    let contents:String
-    let title:String
+struct UpdateRequest: Codable {
+    let contents: String
+    let title: String
     let isPublic: Bool
     let recordImageUrl: String
 }
 
-struct PostRespone:Codable {
-    let postId:Int
+struct PostRespone: Codable {
+    let postId: Int
 }
 
-struct StateRespone:Codable {
-    let state:Bool
+struct StateRespone: Codable {
+    let state: Bool
 }
 
-
-struct DetailRecordResponse:Codable {
+struct DetailRecordResponse: Codable {
        let category, createdDate: String
        let isLiked, isScraped: Bool
        let isPublic: Bool?

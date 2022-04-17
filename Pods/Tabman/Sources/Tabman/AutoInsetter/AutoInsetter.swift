@@ -10,14 +10,14 @@ import UIKit
 
 /// Engine that provides Auto Insetting to UIViewControllers.
 internal final class AutoInsetter {
-    
+
     // MARK: Properties
-    
+
     private var currentContentInsets = [UIScrollView: UIEdgeInsets]()
     private var currentContentOffsets = [UIScrollView: CGPoint]()
-    
+
     private let insetStore: InsetStore = DefaultInsetStore()
-    
+
     /// Whether auto-insetting is enabled.
     @available(*, deprecated, message: "Use enable(for:)")
     public var isEnabled: Bool {
@@ -28,30 +28,30 @@ internal final class AutoInsetter {
             if newValue {
                 _enable(for: nil)
             }
-        } 
+        }
     }
     private var _isEnabled: Bool = false
-    
+
     // MARK: Init
-    
+
     init() {}
-    
+
     // MARK: State
-    
+
     /// Enable Auto Insetting for a view controller.
     ///
     /// - Parameter viewController: View controller that will provide insetting.
     func enable(for viewController: UIViewController?) {
         _enable(for: viewController)
     }
-    
+
     private func _enable(for viewController: UIViewController?) {
         _isEnabled = true
         viewController?.automaticallyAdjustsScrollViewInsets = false
     }
-    
+
     // MARK: Insetting
-    
+
     /// Inset a view controller by a set of required insets.
     ///
     /// - Parameters:
@@ -62,7 +62,7 @@ internal final class AutoInsetter {
         guard let viewController = viewController, _isEnabled else {
             return
         }
-        
+
         if #available(iOS 11, *) {
             if requiredInsetSpec.additionalRequiredInsets != viewController.additionalSafeAreaInsets {
                 viewController.additionalSafeAreaInsets = requiredInsetSpec.additionalRequiredInsets
@@ -74,9 +74,9 @@ internal final class AutoInsetter {
             viewController.forEachEmbeddedScrollView { (scrollView) in
                 let calculator = self.makeInsetCalculator(for: scrollView, viewController: viewController)
                 let executor = InsetExecutor(view: scrollView, calculator: calculator, spec: requiredInsetSpec)
-    
+
                 executor.execute(store: insetStore)
-    
+
                 viewController.view.setNeedsLayout()
             }
         }
@@ -84,10 +84,10 @@ internal final class AutoInsetter {
 }
 
 extension AutoInsetter {
-    
+
     @available(iOS, deprecated: 11)
     private func makeInsetCalculator(for scrollView: UIScrollView, viewController: UIViewController) -> InsetCalculator {
-        
+
         if let tableView = scrollView as? UITableView {
             return TableViewInsetCalculator(view: tableView, viewController: viewController)
         } else if let collectionView = scrollView as? UICollectionView {
@@ -99,7 +99,7 @@ extension AutoInsetter {
 
 // MARK: - Utilities
 private extension AutoInsetter {
-    
+
     /// Check whether a view controller is an 'embedded' view controller type (i.e. UITableViewController)
     ///
     /// - Parameters:

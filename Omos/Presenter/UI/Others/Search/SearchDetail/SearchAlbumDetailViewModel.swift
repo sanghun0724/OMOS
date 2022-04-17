@@ -8,16 +8,15 @@
 import Foundation
 import RxSwift
 
-class SearchAlbumDetailViewModel:BaseViewModel {
-    
+class SearchAlbumDetailViewModel: BaseViewModel {
     let albumDetails = PublishSubject<[AlbumDetailRespone]>()
-    var currentAlbumDetails:[AlbumDetailRespone] = []
+    var currentAlbumDetails: [AlbumDetailRespone] = []
     let errorMessage = BehaviorSubject<String?>(value: nil)
     let isEmpty = PublishSubject<Bool>()
-    let loading = BehaviorSubject<Bool>(value:false)
-    let usecase:SearchUseCase
-    
-    func albumDetailFetch(albumId:String) {
+    let loading = BehaviorSubject<Bool>(value: false)
+    let usecase: SearchUseCase
+
+    func albumDetailFetch(albumId: String) {
         loading.onNext(true)
         usecase.albumDetialFetch(albumId: albumId)
             .subscribe({ [weak self] result in
@@ -31,13 +30,13 @@ class SearchAlbumDetailViewModel:BaseViewModel {
                 }
             }).disposed(by: disposeBag)
     }
-    
-    init(usecase:SearchUseCase) {
+
+    init(usecase: SearchUseCase) {
         self.usecase = usecase
         super.init()
-        //self.reduce()
+        // self.reduce()
     }
-    
+
 //    func reduce() {
 //        musics
 //            .withUnretained(self)
@@ -49,5 +48,5 @@ class SearchAlbumDetailViewModel:BaseViewModel {
 //                }
 //            }).disposed(by: disposeBag)
 //    }
-    
+
 }

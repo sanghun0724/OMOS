@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - PageboyAutoScrollerHandler
 extension PageboyViewController: PageboyAutoScrollerHandler {
-    
+
     func autoScroller(didRequestAutoScroll autoScroller: PageboyAutoScroller, animated: Bool) {
         scrollToPage(.next, animated: animated)
     }

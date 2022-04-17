@@ -15,8 +15,8 @@
 import Foundation
 
 extension URL {
-  public func params() -> [String:Any]? {
-    var dict = [String:Any]()
+  public func params() -> [String: Any]? {
+    var dict = [String: Any]()
 
     if let components = URLComponents(url: self, resolvingAgainstBaseURL: false) {
       if let queryItems = components.queryItems {

@@ -9,8 +9,8 @@
 import UIKit
 
 /// Data source to a `TMBar` that is primarily responsible for providing a bar with contents.
-public protocol TMBarDataSource: class {
-    
+public protocol TMBarDataSource: AnyObject {
+
     /// Provide a `BarItem` for an index in the bar.
     ///
     /// - Parameters:
@@ -21,8 +21,8 @@ public protocol TMBarDataSource: class {
 }
 
 /// Delegate to a `TMBar` that is primarily responsible for handling user interaction within the bar.
-public protocol TMBarDelegate: class {
-    
+public protocol TMBarDelegate: AnyObject {
+
     /// Bar requires scrolling to a new page following a user interaction.
     ///
     /// - Parameters:
@@ -66,15 +66,15 @@ public protocol BaseTMBar: AnyObject { }
 ///
 /// The default implementation of `TMBar` in Tabman is `TMBarView`.
 public protocol TMBar: BaseTMBar where Self: UIView {
-    
+
     /// Object that acts as a data source to the bar.
     var dataSource: TMBarDataSource? { get set }
     /// Object that acts as a delegate to the bar.
     var delegate: TMBarDelegate? { get set }
-    
+
     /// Items that are currently displayed in the bar.
     var items: [TMBarItemable]? { get }
-    
+
     /// Reload the data within the bar.
     ///
     /// - Parameters:
@@ -82,7 +82,7 @@ public protocol TMBar: BaseTMBar where Self: UIView {
     ///   - context: The context for the reload.
     func reloadData(at indexes: ClosedRange<Int>,
                     context: TMBarReloadContext)
-    
+
     /// Update the display in the bar for a particular page position.
     ///
     /// - Parameters:

@@ -10,32 +10,32 @@ import UIKit
 
 /// Simple indicator that displays as a horizontal line.
 open class TMLineBarIndicator: TMBarIndicator {
-    
+
     // MARK: Types
-    
+
     public enum Weight {
         case light
         case medium
         case heavy
         case custom(value: CGFloat)
     }
-    
+
     public enum CornerStyle {
         case square
         case rounded
         case eliptical
     }
-    
+
     // MARK: Properties
-    
+
     private var weightConstraint: NSLayoutConstraint?
-    
+
     open override var displayMode: TMBarIndicator.DisplayMode {
         return .bottom
     }
 
     // MARK: Customization
-    
+
     /// Color of the line.
     open override var tintColor: UIColor! {
         didSet {
@@ -70,22 +70,22 @@ open class TMLineBarIndicator: TMBarIndicator {
             setNeedsLayout()
         }
     }
-    
+
     // MARK: Lifecycle
-    
+
     open override func layout(in view: UIView) {
         super.layout(in: view)
-        
+
         let heightConstraint = heightAnchor.constraint(equalToConstant: weight.rawValue)
         heightConstraint.isActive = true
         self.weightConstraint = heightConstraint
-        
+
         backgroundColor = self.tintColor
     }
-    
+
     open override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         superview?.layoutIfNeeded()
         layer.cornerRadius = cornerStyle.cornerRadius(for: weight.rawValue,
                                                       in: bounds)
@@ -93,7 +93,7 @@ open class TMLineBarIndicator: TMBarIndicator {
 }
 
 private extension TMLineBarIndicator.Weight {
-    
+
     var rawValue: CGFloat {
         switch self {
         case .light:
@@ -109,7 +109,7 @@ private extension TMLineBarIndicator.Weight {
 }
 
 private extension TMLineBarIndicator.CornerStyle {
-    
+
     func cornerRadius(for weight: CGFloat, in frame: CGRect) -> CGFloat {
         switch self {
         case .square:

@@ -6,9 +6,8 @@
 //
 
 import Foundation
-import UIKit
 import SnapKit
-
+import UIKit
 
 extension UIViewController {
     // MARK: 빈 화면을 눌렀을 때 키보드가 내려가도록 처리
@@ -18,11 +17,11 @@ extension UIViewController {
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
     }
-    
+
     @objc func dismissKeyboard() {
         self.view.endEditing(false)
     }
-    
+
     // MARK: 취소와 확인이 뜨는 UIAlertController
     func presentAlert(title: String, message: String? = nil,
                       isCancelActionIncluded: Bool = false,
@@ -39,7 +38,7 @@ extension UIViewController {
         }
         self.present(alert, animated: true, completion: nil)
     }
-    
+
     // MARK: 커스텀 UIAction이 뜨는 UIAlertController
     func presentAlert(title: String, message: String? = nil,
                       isCancelActionIncluded: Bool = false,
@@ -51,7 +50,7 @@ extension UIViewController {
 //        alert.setValue(NSAttributedString(string: alert.message!, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16,weight: UIFont.Weight.regular),NSAttributedString.Key.foregroundColor :UIColor.white]), forKey: "attributedMessage")
         alert.view.tintColor = .mainGrey3
         actions.forEach { alert.addAction($0) }
-        
+
         if isCancelActionIncluded {
             let actionCancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
             alert.addAction(actionCancel)
@@ -60,7 +59,7 @@ extension UIViewController {
 //            alert.view.addConstraint(height)
         self.present(alert, animated: true, completion: nil)
     }
-    
+
     // MARK: UIWindow의 rootViewController를 변경하여 화면전환
     func changeRootViewController(_ viewControllerToPresent: UIViewController) {
         if let window = UIApplication.shared.windows.first {
@@ -71,25 +70,25 @@ extension UIViewController {
             self.present(viewControllerToPresent, animated: true, completion: nil)
         }
     }
-    
+
     // MARK: 커스텀 하단 경고창
     func presentBottomAlert(message: String, target: ConstraintRelatableTarget? = nil, offset: Double? = -12) {
         let alertSuperview = UIView()
         alertSuperview.backgroundColor = UIColor.black.withAlphaComponent(0.9)
         alertSuperview.layer.cornerRadius = 10
         alertSuperview.isHidden = true
-    
+
         let alertLabel = UILabel()
         alertLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 20)
         alertLabel.textColor = UIColor.black
         alertLabel.backgroundColor = .white
-        
+
         self.view.addSubview(alertSuperview)
         alertSuperview.snp.makeConstraints { make in
             make.bottom.equalTo(target ?? self.view.safeAreaLayoutGuide).offset(-12)
             make.centerX.equalToSuperview()
         }
-        
+
         alertSuperview.addSubview(alertLabel)
         alertLabel.snp.makeConstraints { make in
             make.top.equalTo(6)
@@ -97,7 +96,7 @@ extension UIViewController {
             make.leading.equalTo(12)
             make.trailing.equalTo(-12)
         }
-        
+
         alertLabel.text = message
         alertSuperview.alpha = 1.0
         alertSuperview.isHidden = false
@@ -111,20 +110,19 @@ extension UIViewController {
             }
         )
     }
-    
+
     // MARK: 인디케이터 표시
     func showIndicator() {
         IndicatorView.shared.show()
         IndicatorView.shared.showIndicator()
     }
-    
+
     // MARK: 인디케이터 숨김
     func dismissIndicator() {
         IndicatorView.shared.dismiss()
     }
-    
- 
-    func setBlurEffect(view : UIView){
+
+    func setBlurEffect(view: UIView) {
         let blur = UIBlurEffect(style: .regular)
         let blurView = UIVisualEffectView(effect: blur)
         blurView.frame = view.bounds
@@ -146,8 +144,8 @@ extension UIViewController {
 //            }
 //        }
 //    }
-    
-    func setNavigationView(){
+
+    func setNavigationView() {
          navigationController?.isNavigationBarHidden = false
          navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -157,21 +155,11 @@ extension UIViewController {
      }
 }
 
-
-
-
-
-extension UIWindow
-
-{
-
+extension UIWindow {
     func replaceRootViewController(_ replacementController: UIViewController, animated: Bool, completion: (() -> Void)?) {
-
            let snapshotImageView = UIImageView(image: self.snapshot())
 
            self.addSubview(snapshotImageView)
-
- 
 
            let dismissCompletion = { () -> Void in // dismiss all modal view controllers
 
@@ -180,49 +168,28 @@ extension UIWindow
                self.bringSubviewToFront(snapshotImageView)
 
                if animated {
-
                    UIView.animate(withDuration: 0.4, animations: { () -> Void in
-
                        snapshotImageView.alpha = 0
-
-                   }, completion: { (success) -> Void in
-
+                   }, completion: { _ -> Void in
                        snapshotImageView.removeFromSuperview()
 
                        completion?()
-
                    })
-
-               }
-
-               else {
-
+               } else {
                    snapshotImageView.removeFromSuperview()
 
                    completion?()
-
                }
-
            }
 
            if self.rootViewController!.presentedViewController != nil {
-
                self.rootViewController!.dismiss(animated: false, completion: dismissCompletion)
-
-           }
-
-           else {
-
+           } else {
                dismissCompletion()
-
            }
-
        }
 
-    
-
     func snapshot() -> UIImage {
-
         UIGraphicsBeginImageContextWithOptions(bounds.size, false, UIScreen.main.scale)
 
         drawHierarchy(in: bounds, afterScreenUpdates: true)
@@ -232,7 +199,5 @@ extension UIWindow
         UIGraphicsEndImageContext()
 
         return result
-
     }
-
 }

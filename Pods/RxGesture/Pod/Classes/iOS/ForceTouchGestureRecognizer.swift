@@ -10,7 +10,7 @@ public class ForceTouchGestureRecognizer: UIGestureRecognizer {
     public var force: CGFloat {
         touch?.force ?? 0
     }
-    
+
     public var maximumPossibleForce: CGFloat {
         touch?.maximumPossibleForce ?? 0
     }
@@ -42,13 +42,13 @@ public class ForceTouchGestureRecognizer: UIGestureRecognizer {
         touch = first
         state = .began
     }
-    
+
     public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
         super.touchesMoved(touches, with: event)
         guard let touch = touch, touches.contains(touch), touch.phase == .moved else { return }
         state = .changed
     }
-    
+
     public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
         super.touchesEnded(touches, with: event)
         guard let touch = touch, touches.contains(touch), touch.phase == .ended else { return }
@@ -118,11 +118,11 @@ extension ObservableType where Element: ForceTouchGestureRecognizer {
     }
 }
 
-private func lerp<T : FloatingPoint>(_ v0: T, _ v1: T, _ t: T) -> T {
+private func lerp<T: FloatingPoint>(_ v0: T, _ v1: T, _ t: T) -> T {
     v0 + (v1 - v0) * t
 }
 
-private func lerp<T : FloatingPoint>(mapMin: T, to min: T, mapMax: T, to max: T, value: T) -> T {
+private func lerp<T: FloatingPoint>(mapMin: T, to min: T, mapMax: T, to max: T, value: T) -> T {
     lerp(min, max, (value - mapMin) / (mapMax - mapMin))
 }
 

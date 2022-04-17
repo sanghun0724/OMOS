@@ -21,29 +21,27 @@ public class SdkUtils {
         }
         return returnValue
     }
-    
+
     static public func toJsonString<T: Encodable>(_ value: T) -> String? {
         if let jsonData = try? SdkJSONEncoder.custom.encode(value) {
-            return String(data:jsonData, encoding: .utf8)
-        }
-        else {
+            return String(data: jsonData, encoding: .utf8)
+        } else {
             return nil
         }
     }
-    
-    static public func toJsonObject(_ data: Data) -> [String:Any]? {
-        return (try? JSONSerialization.jsonObject(with: data, options:[])) as? [String : Any]
-    }
-    
 
-    static public func makeUrlStringWithParameters(_ url:String, parameters:[String:Any]?) -> String? {
-        guard var components = URLComponents(string:url) else { return nil }
+    static public func toJsonObject(_ data: Data) -> [String: Any]? {
+        return (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any]
+    }
+
+    static public func makeUrlStringWithParameters(_ url: String, parameters: [String: Any]?) -> String? {
+        guard var components = URLComponents(string: url) else { return nil }
         components.queryItems = parameters?.urlQueryItems
         return components.url?.absoluteString
     }
-    
-    static public func makeUrlWithParameters(_ url:String, parameters:[String:Any]?) -> URL? {
-        guard let finalStringUrl = makeUrlStringWithParameters(url, parameters:parameters) else { return nil }
-        return URL(string:finalStringUrl)
+
+    static public func makeUrlWithParameters(_ url: String, parameters: [String: Any]?) -> URL? {
+        guard let finalStringUrl = makeUrlStringWithParameters(url, parameters: parameters) else { return nil }
+        return URL(string: finalStringUrl)
     }
 }

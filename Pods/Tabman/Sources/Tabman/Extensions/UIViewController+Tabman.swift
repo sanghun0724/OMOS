@@ -10,19 +10,19 @@ import UIKit
 import Pageboy
 
 extension UIViewController {
-    
+
     /// Parent TabmanViewController if it exists.
     public var tabmanParent: TabmanViewController? {
         return pageboyParent as? TabmanViewController
     }
-    
+
     /// All bar items that are associated with the index of this view controller
     /// if within within a `TabmanViewController`.
     public var tabmanBarItems: [TMBarItemable]? {
         guard let tabViewController = tabmanParent, let index = pageboyPageIndex else {
             return nil
         }
-        
+
         var allItems = [TMBarItemable]()
         tabViewController.bars.forEach({
             guard let items = $0.items, items.count > index else {

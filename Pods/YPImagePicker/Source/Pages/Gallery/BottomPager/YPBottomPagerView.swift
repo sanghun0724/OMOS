@@ -10,33 +10,33 @@ import UIKit
 import Stevia
 
 final class YPBottomPagerView: UIView {
-    
+
     var header = YPPagerMenu()
     var scrollView = UIScrollView()
-    
+
     convenience init() {
         self.init(frame: .zero)
         backgroundColor = .offWhiteOrBlack
-        
+
         sv(
             scrollView,
             header
         )
-        
+
         layout(
             0,
             |scrollView|,
             0,
             |header| ~ 44
         )
-        
+
         if #available(iOS 11.0, *) {
             header.Bottom == safeAreaLayoutGuide.Bottom
         } else {
             header.bottom(0)
         }
         header.heightConstraint?.constant = (YPConfig.hidesBottomBar || (YPConfig.screens.count == 1)) ? 0 : 44
-        
+
         clipsToBounds = false
         setupScrollView()
     }

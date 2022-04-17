@@ -9,17 +9,17 @@
 import UIKit
 
 internal extension UIApplication {
-    
+
     static var safeShared: UIApplication? {
         guard #available(iOSApplicationExtension 8, *) else {
             return nil
         }
-        
+
         guard UIApplication.responds(to: NSSelectorFromString("sharedApplication")),
             let unmanagedSharedApplication = UIApplication.perform(NSSelectorFromString("sharedApplication")) else {
             return nil
         }
-        
+
         return unmanagedSharedApplication.takeUnretainedValue() as? UIApplication
     }
 }

@@ -16,9 +16,7 @@
     }
 
     /// For more information take a look at `DelegateProxyType`.
-    open class RxNavigationControllerDelegateProxy
-        : DelegateProxy<UINavigationController, UINavigationControllerDelegate>
-        , DelegateProxyType {
+    open class RxNavigationControllerDelegateProxy: DelegateProxy<UINavigationController, UINavigationControllerDelegate>, DelegateProxyType {
 
         /// Typed parent object.
         public weak private(set) var navigationController: UINavigationController?

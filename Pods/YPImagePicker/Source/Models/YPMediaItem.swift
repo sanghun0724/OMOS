@@ -12,7 +12,7 @@ import AVFoundation
 import Photos
 
 public class YPMediaPhoto {
-    
+
     public var image: UIImage { return modifiedImage ?? originalImage }
     public let originalImage: UIImage
     public var modifiedImage: UIImage?
@@ -20,7 +20,7 @@ public class YPMediaPhoto {
     public let exifMeta: [String: Any]?
     public var asset: PHAsset?
     public var url: URL?
-    
+
     public init(image: UIImage,
                 exifMeta: [String: Any]? = nil,
                 fromCamera: Bool = false,
@@ -36,7 +36,7 @@ public class YPMediaPhoto {
 }
 
 public class YPMediaVideo {
-    
+
     public var thumbnail: UIImage
     public var url: URL
     public let fromCamera: Bool
@@ -75,7 +75,7 @@ public extension Array where Element == YPMediaItem {
         }
         return nil
     }
-    
+
     var singleVideo: YPMediaVideo? {
         if let f = first, case let .video(v) = f {
             return v

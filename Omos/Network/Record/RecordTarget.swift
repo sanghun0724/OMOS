@@ -5,33 +5,33 @@
 //  Created by sangheon on 2022/03/02.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 enum RecordTarget {
     case select
-    case category(cate:cateType,request:CateRequest)
-    case recordDetail(postId:Int,userId:Int)
-    case myRecord(userid:Int)
+    case category(cate: cateType, request: CateRequest)
+    case recordDetail(postId: Int, userId: Int)
+    case myRecord(userid: Int)
     case save(SaveRequest)
-    case recordIspublic(postId:Int)
-    case recordDelete(postId:Int)
-    case recordUpdate(postId:Int,UpdateRequest)
-    case oneMusicRecord(musicId:String,OneMusicRecordRequest)
-    case MyDjAllRecord(userId:Int,MyDjRequest)
-    case userRecords(fromId:Int,toId:Int)
-    //Profile like&scrap
-    case likeRecords(userId:Int)
-    case scrapRecords(userId:Int)
-    case myProfileRecords(userId:Int)
-    case reportRecord(postId:Int)
+    case recordIspublic(postId: Int)
+    case recordDelete(postId: Int)
+    case recordUpdate(postId: Int, UpdateRequest)
+    case oneMusicRecord(musicId: String, OneMusicRecordRequest)
+    case MyDjAllRecord(userId: Int, MyDjRequest)
+    case userRecords(fromId: Int, toId: Int)
+    // Profile like&scrap
+    case likeRecords(userId: Int)
+    case scrapRecords(userId: Int)
+    case myProfileRecords(userId: Int)
+    case reportRecord(postId: Int)
 }
 
-extension RecordTarget:TargetType {
+extension RecordTarget: TargetType {
     var baseURL: String {
-        return RestApiUrl.restUrl + "/records"
+        RestApiUrl.restUrl + "/records"
     }
-    
+
     var method: HTTPMethod {
         switch self {
         case .select: return .get
@@ -51,38 +51,36 @@ extension RecordTarget:TargetType {
         case .reportRecord: return .put
         }
     }
-    
+
     var path: String {
         switch self {
         case .select: return "/select/\(Account.currentUser)"
-        case .recordDetail(let post,let user): return "/select/\(post)/user/\(user)"
+        case .recordDetail(let post, let user): return "/select/\(post)/user/\(user)"
         case .category(let cate, _): return "/select/category/\(cate)"
         case .myRecord(let user): return "/\(user)"
         case .save: return "/save"
         case .recordIspublic(let id): return "/\(id)/ispublic"
         case .recordDelete(let id): return "/delete/\(id)"
-        case .recordUpdate(let id,_): return "/update/\(id)"
-        case .oneMusicRecord(let id,_): return "/select/music/\(id)"
-        case .MyDjAllRecord(let user,_): return "/select/\(user)/my-dj"
-        case .userRecords(let from,let to): return "/select/user/\(from)/\(to)"
+        case .recordUpdate(let id, _): return "/update/\(id)"
+        case .oneMusicRecord(let id, _): return "/select/music/\(id)"
+        case .MyDjAllRecord(let user, _): return "/select/\(user)/my-dj"
+        case .userRecords(let from, let to): return "/select/user/\(from)/\(to)"
         case .likeRecords(let user): return "/select/\(user)/liked-records"
         case .scrapRecords(let user): return "/select/\(user)/scrapped-records"
         case .myProfileRecords(let user): return "select/\(user)/my-records"
         case .reportRecord(let post): return "/\(post)/report"
         }
     }
-    
+
     var parameters: RequestParams? {
         switch self {
-        case .category(_,let request): return .query(request)
+        case .category(_, let request): return .query(request)
         case .save(let request): return .body(request)
-        case .recordUpdate(_,let request): return .body(request)
-        case .oneMusicRecord(_,let request): return .query(request)
+        case .recordUpdate(_, let request): return .body(request)
+        case .oneMusicRecord(_, let request): return .query(request)
         case .MyDjAllRecord(_, let request): return .query(request)
         default:
             return nil
         }
     }
-    
-    
 }

@@ -42,6 +42,7 @@
 		B6183CD827D906300035AA06 /* MyRecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CD727D9062F0035AA06 /* MyRecordDetailViewModel.swift */; };
 		B62A770527F0489600B427D0 /* SotoS3 in Frameworks */ = {isa = PBXBuildFile; productRef = B62A770427F0489600B427D0 /* SotoS3 */; };
 		B62A770727F049A800B427D0 /* AWSHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62A770627F049A800B427D0 /* AWSHelper.swift */; };
+		B63028302809D60800270283 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = B630282F2809D60800270283 /* .swiftlint.yml */; };
 		B630D2FA27C7756A00E66F22 /* MydjTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2F927C7756A00E66F22 /* MydjTableCell.swift */; };
 		B630D2FC27C7761D00E66F22 /* Mydj + Table + Collect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2FB27C7761D00E66F22 /* Mydj + Table + Collect.swift */; };
 		B630D2FF27C78C0E00E66F22 /* BestSearchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2FE27C78C0E00E66F22 /* BestSearchTableCell.swift */; };
@@ -252,6 +253,7 @@
 		B6183CD527D8F7490035AA06 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		B6183CD727D9062F0035AA06 /* MyRecordDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordDetailViewModel.swift; sourceTree = "<group>"; };
 		B62A770627F049A800B427D0 /* AWSHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSHelper.swift; sourceTree = "<group>"; };
+		B630282F2809D60800270283 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		B630D2F927C7756A00E66F22 /* MydjTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MydjTableCell.swift; sourceTree = "<group>"; };
 		B630D2FB27C7761D00E66F22 /* Mydj + Table + Collect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mydj + Table + Collect.swift"; sourceTree = "<group>"; };
 		B630D2FE27C78C0E00E66F22 /* BestSearchTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSearchTableCell.swift; sourceTree = "<group>"; };
@@ -471,6 +473,7 @@
 		B609137327AD3A7C00B439C3 = {
 			isa = PBXGroup;
 			children = (
+				B630282F2809D60800270283 /* .swiftlint.yml */,
 				B609137E27AD3A7C00B439C3 /* Omos */,
 				B6A0299A27B23D3500D3D3C9 /* OmosTests */,
 				B609137D27AD3A7C00B439C3 /* Products */,
@@ -1075,7 +1078,7 @@
 				B609137A27AD3A7C00B439C3 /* Resources */,
 				77902E746488D1AA0A59065A /* [CP] Embed Pods Frameworks */,
 				B6E969612802CC5E002653F9 /* Firebase Crashlytics */,
-				B64A13AB280960220093D817 /* ShellScript */,
+				B64A13AB280960220093D817 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -1158,6 +1161,7 @@
 				B609138C27AD3A8000B439C3 /* LaunchScreen.storyboard in Resources */,
 				B6CC1D7827BA536A00B5EE7E /* PrivateInfoText.rtf in Resources */,
 				B601C53B27C0F50100DCD2AF /* Cafe24Oneprettynight.ttf in Resources */,
+				B63028302809D60800270283 /* .swiftlint.yml in Resources */,
 				B6CC1D7627BA475900B5EE7E /* UseInfoText.rtf in Resources */,
 				B609138927AD3A8000B439C3 /* Assets.xcassets in Resources */,
 				B6E969632802CD23002653F9 /* GoogleService-Info.plist in Resources */,
@@ -1191,7 +1195,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Omos/Pods-Omos-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B64A13AB280960220093D817 /* ShellScript */ = {
+		B64A13AB280960220093D817 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1200,6 +1204,7 @@
 			);
 			inputPaths = (
 			);
+			name = SwiftLint;
 			outputFileListPaths = (
 			);
 			outputPaths = (

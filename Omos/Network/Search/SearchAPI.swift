@@ -5,14 +5,13 @@
 //  Created by sangheon on 2022/03/06.
 //
 
+import Alamofire
 import Foundation
 import RxSwift
-import Alamofire
 
 class SearchAPI {
-    
-    func albumFetch(request:MusicRequest,completion:@escaping(Result<[AlbumRespone],Error>) -> Void) {
-        AF.request(SearchTarget.searchAlbum(request),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[AlbumRespone]>) in
+    func albumFetch(request: MusicRequest, completion:@escaping(Result<[AlbumRespone], Error>) -> Void) {
+        AF.request(SearchTarget.searchAlbum(request), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[AlbumRespone]>) in
             switch response.result {
             case .success(let data):
                 print(data)
@@ -23,9 +22,9 @@ class SearchAPI {
             }
         }
     }
-    
-    func artistFetch(request:MusicRequest,completion:@escaping(Result<[ArtistRespone],Error>) -> Void) {
-        AF.request(SearchTarget.searchArtist(request),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[ArtistRespone]>) in
+
+    func artistFetch(request: MusicRequest, completion:@escaping(Result<[ArtistRespone], Error>) -> Void) {
+        AF.request(SearchTarget.searchArtist(request), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[ArtistRespone]>) in
             switch response.result {
             case .success(let data):
                 print(data)
@@ -36,9 +35,9 @@ class SearchAPI {
             }
         }
     }
-    
-    func trackFetch(request:MusicRequest,completion:@escaping(Result<[TrackRespone],Error>) -> Void) {
-        AF.request(SearchTarget.searchTrack(request),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[TrackRespone]>) in
+
+    func trackFetch(request: MusicRequest, completion:@escaping(Result<[TrackRespone], Error>) -> Void) {
+        AF.request(SearchTarget.searchTrack(request), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[TrackRespone]>) in
             switch response.result {
             case .success(let data):
                 print(data)
@@ -49,9 +48,9 @@ class SearchAPI {
             }
         }
     }
-    
-    func searchTrackFetch(request:MusicRequest,completion:@escaping(Result<[TrackTitleRespone],Error>) -> Void) {
-        AF.request(SearchTarget.searchTrack(request),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[TrackTitleRespone]>) in
+
+    func searchTrackFetch(request: MusicRequest, completion:@escaping(Result<[TrackTitleRespone], Error>) -> Void) {
+        AF.request(SearchTarget.searchTrack(request), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[TrackTitleRespone]>) in
             switch response.result {
             case .success(let data):
                 print(data)
@@ -62,10 +61,9 @@ class SearchAPI {
             }
         }
     }
-    
-    
-    func albumDetailFetch(albumId:String,completion:@escaping(Result<[AlbumDetailRespone],Error>) -> Void) {
-        AF.request(SearchTarget.searchAlbumDetail(albumId: albumId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[AlbumDetailRespone]>) in
+
+    func albumDetailFetch(albumId: String, completion:@escaping(Result<[AlbumDetailRespone], Error>) -> Void) {
+        AF.request(SearchTarget.searchAlbumDetail(albumId: albumId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[AlbumDetailRespone]>) in
             switch response.result {
             case .success(let data):
                 print(data)
@@ -76,9 +74,9 @@ class SearchAPI {
             }
         }
     }
-    
-    func trackDetailFetch(trackId:String,completion:@escaping(Result<TrackRespone,Error>) -> Void) {
-        AF.request(SearchTarget.searchTrackDetail(trackId: trackId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<TrackRespone>) in
+
+    func trackDetailFetch(trackId: String, completion:@escaping(Result<TrackRespone, Error>) -> Void) {
+        AF.request(SearchTarget.searchTrackDetail(trackId: trackId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<TrackRespone>) in
             switch response.result {
             case .success(let data):
                 print(data)
@@ -89,9 +87,9 @@ class SearchAPI {
             }
         }
     }
-    
-    func ArtistDetailTrackFetch(artistId:String,completion:@escaping(Result<[ArtistDetailRespone],Error>) -> Void) {
-        AF.request(SearchTarget.searchArtistTrack(artistId: artistId),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[ArtistDetailRespone]>) in
+
+    func ArtistDetailTrackFetch(artistId: String, completion:@escaping(Result<[ArtistDetailRespone], Error>) -> Void) {
+        AF.request(SearchTarget.searchArtistTrack(artistId: artistId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[ArtistDetailRespone]>) in
             switch response.result {
             case .success(let data):
                 print(data)
@@ -102,9 +100,9 @@ class SearchAPI {
             }
         }
     }
-    
-    func ArtistDetailAlbumFetch(artistId:String,request:ArtistRequest,completion:@escaping(Result<[AlbumRespone],Error>) -> Void) {
-        AF.request(SearchTarget.searchArtistAlbum(artistId: artistId, request),interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response:AFDataResponse<[AlbumRespone]>) in
+
+    func ArtistDetailAlbumFetch(artistId: String, request: ArtistRequest, completion:@escaping(Result<[AlbumRespone], Error>) -> Void) {
+        AF.request(SearchTarget.searchArtistAlbum(artistId: artistId, request), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[AlbumRespone]>) in
             switch response.result {
             case .success(let data):
                 completion(.success(data))
@@ -114,6 +112,4 @@ class SearchAPI {
             }
         }
     }
-    
-    
 }

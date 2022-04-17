@@ -26,7 +26,7 @@ struct YPAlert {
         alert.addAction(UIAlertAction(title: YPConfig.wordings.ok, style: UIAlertAction.Style.default, handler: nil))
         return alert
     }
-    
+
     static func videoTooShortAlert(_ sourceView: UIView) -> UIAlertController {
         let msg = String(format: YPConfig.wordings.videoDurationPopup.tooShortMessage,
                          "\(YPConfig.video.minimumTimeLimit)")

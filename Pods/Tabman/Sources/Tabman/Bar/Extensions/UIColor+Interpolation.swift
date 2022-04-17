@@ -9,11 +9,11 @@
 import UIKit
 
 internal extension UIColor {
-    
+
     func interpolate(with other: UIColor, percent: CGFloat) -> UIColor? {
         return UIColor.interpolate(betweenColor: self, and: other, percent: percent)
     }
-    
+
     static func interpolate(betweenColor colorA: UIColor,
                             and colorB: UIColor,
                             percent: CGFloat) -> UIColor? {
@@ -24,7 +24,7 @@ internal extension UIColor {
         guard colorA.getRed(&redA, green: &greenA, blue: &blueA, alpha: &alphaA) else {
             return nil
         }
-        
+
         var redB: CGFloat = 0.0
         var greenB: CGFloat = 0.0
         var blueB: CGFloat = 0.0
@@ -32,12 +32,12 @@ internal extension UIColor {
         guard colorB.getRed(&redB, green: &greenB, blue: &blueB, alpha: &alphaB) else {
             return nil
         }
-        
+
         let iRed = CGFloat(redA + percent * (redB - redA))
         let iBlue = CGFloat(blueA + percent * (blueB - blueA))
         let iGreen = CGFloat(greenA + percent * (greenB - greenA))
         let iAlpha = CGFloat(alphaA + percent * (alphaB - alphaA))
-        
+
         return UIColor(red: iRed, green: iGreen, blue: iBlue, alpha: iAlpha)
     }
 }

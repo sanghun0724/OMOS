@@ -7,19 +7,19 @@
 
 import Foundation
 
-struct PWUpdateRequest:Codable {
-    let password:String
-    let userId:Int
+struct PWUpdateRequest: Codable {
+    let password: String
+    let userId: Int
 }
 
-struct myProfileResponse:Codable {
-   let nickname:String
+struct myProfileResponse: Codable {
+   let nickname: String
    let profileUrl: String?
    let userId: Int
 }
 
-struct ProfileUpdateRequest:Codable {
-   let nickname:String
+struct ProfileUpdateRequest: Codable {
+   let nickname: String
    let profileUrl: String?
    let userId: Int
 }

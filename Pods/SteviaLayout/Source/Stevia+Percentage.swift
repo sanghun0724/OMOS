@@ -19,7 +19,7 @@ public postfix func % (v: CGFloat) -> SteviaPercentage {
 }
 
 public extension UIView {
-    
+
     /**
      Adds an Autolayout constraint for sizing the view.
      
@@ -41,7 +41,7 @@ public extension UIView {
         height(p)
         return self
     }
-    
+
     /**
      Adds an Autolayout constraint for setting the view's width.
      
@@ -62,7 +62,7 @@ public extension UIView {
         }
         return self
     }
-    
+
     /**
      Adds an Autolayout constraint for setting the view's height.
      
@@ -89,7 +89,7 @@ public extension UIView {
         }
         return self
     }
-    
+
     /** Sets the top margin for a view.
      
     Example Usage :
@@ -108,7 +108,7 @@ public extension UIView {
         }
         return self
     }
-    
+
     /** Sets the left margin for a view.
      
      Example Usage :
@@ -127,7 +127,7 @@ public extension UIView {
         }
         return self
     }
-    
+
     /** Sets the right margin for a view.
      
      Example Usage :
@@ -150,7 +150,7 @@ public extension UIView {
         }
         return self
     }
-    
+
     /** Sets the bottom margin for a view.
      
      Example Usage :
@@ -173,7 +173,7 @@ public extension UIView {
         }
         return self
     }
-    
+
     /** Sets the leading margin for a view.
      
     Example Usage :
@@ -203,7 +203,7 @@ public extension UIView {
         }
         return self
     }
-    
+
     /** Sets the trailing margin for a view.
      
     Example Usage :
@@ -217,7 +217,7 @@ public extension UIView {
     */
     @discardableResult
     func trailing(_ p: SteviaPercentage) -> UIView {
-        
+
         // Percent based (multipliers) with leading or trailing attributes
         // are not available so we introduce an intermediary layout guide.
         // |-[layoutGuide(== x % width)-[view]

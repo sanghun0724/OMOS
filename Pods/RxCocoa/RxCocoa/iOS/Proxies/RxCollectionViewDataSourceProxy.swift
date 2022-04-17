@@ -17,25 +17,21 @@ extension UICollectionView: HasDataSource {
 
 private let collectionViewDataSourceNotSet = CollectionViewDataSourceNotSet()
 
-private final class CollectionViewDataSourceNotSet
-    : NSObject
-    , UICollectionViewDataSource {
+private final class CollectionViewDataSourceNotSet: NSObject, UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         0
     }
-    
+
     // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         rxAbstractMethod(message: dataSourceNotSet)
     }
-    
+
 }
 
 /// For more information take a look at `DelegateProxyType`.
-open class RxCollectionViewDataSourceProxy
-    : DelegateProxy<UICollectionView, UICollectionViewDataSource>
-    , DelegateProxyType {
+open class RxCollectionViewDataSourceProxy: DelegateProxy<UICollectionView, UICollectionViewDataSource>, DelegateProxyType {
 
     /// Typed parent object.
     public weak private(set) var collectionView: UICollectionView?

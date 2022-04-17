@@ -7,26 +7,26 @@
 
 import Foundation
 
-fileprivate let dateFormatter : DateFormatter = {
+private let dateFormatter: DateFormatter = {
     let f = DateFormatter()
     f.locale = Locale(identifier: "ko_kr")
     return f
 }()
 
-extension Date{
-    var dateString : String{
+extension Date {
+    var dateString: String {
         dateFormatter.dateFormat = "M월 d일"
         return dateFormatter.string(from: self)
     }
-    var timeString : String{
+    var timeString: String {
         dateFormatter.dateFormat = "a HH:mm"
         return dateFormatter.string(from: self)
     }
-    var dateTimeString : String{
+    var dateTimeString: String {
         dateFormatter.dateFormat = "d일 a HH시"
         return dateFormatter.string(from: self)
     }
-    static var currentTimeStamp: Int64{
-            return Int64(Date().timeIntervalSince1970 * 1000)
+    static var currentTimeStamp: Int64 {
+            Int64(Date().timeIntervalSince1970 * 1_000)
         }
 }

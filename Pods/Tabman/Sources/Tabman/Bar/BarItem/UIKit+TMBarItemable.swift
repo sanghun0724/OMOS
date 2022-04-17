@@ -19,7 +19,7 @@ extension UINavigationItem: TMBarItemable {
         }
         set {}
     }
-    
+
     public var badgeValue: String? {
         get {
             return nil

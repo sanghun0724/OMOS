@@ -61,7 +61,7 @@ open class YPImagePicker: UINavigationController {
     private func didSelect(items: [YPMediaItem]) {
         _didFinishPicking?(items, false)
     }
-    
+
     private let loadingView = YPLoadingView()
     private let picker: YPPickerVC!
 
@@ -83,7 +83,7 @@ open class YPImagePicker: UINavigationController {
             transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
             transition.type = CATransitionType.fade
             self?.view.layer.add(transition, forKey: nil)
-            
+
             // Multiple items flow
             if items.count > 1 {
                 if YPConfig.library.skipSelectionsGallery {
@@ -97,7 +97,7 @@ open class YPImagePicker: UINavigationController {
                     return
                 }
             }
-            
+
             // One item flow
             let item = items.first!
             switch item {
@@ -113,7 +113,7 @@ open class YPImagePicker: UINavigationController {
                     }
                     self?.didSelect(items: [mediaItem])
                 }
-                
+
                 func showCropVC(photo: YPMediaPhoto, completion: @escaping (_ aphoto: YPMediaPhoto) -> Void) {
                     switch YPConfig.showsCrop {
                     case .rectangle, .circle:
@@ -127,7 +127,7 @@ open class YPImagePicker: UINavigationController {
                         completion(photo)
                     }
                 }
-                
+
                 if YPConfig.showsPhotoFilters {
                     let filterVC = YPPhotoFiltersVC(inputPhoto: photo,
                                                     isFromSelectionVC: false)
@@ -155,11 +155,11 @@ open class YPImagePicker: UINavigationController {
             }
         }
     }
-    
+
     deinit {
         ypLog("Picker deinited 👍")
     }
-    
+
     private func setupLoadingView() {
         view.sv(
             loadingView
@@ -173,7 +173,7 @@ extension YPImagePicker: YPPickerVCDelegate {
     func libraryHasNoItems() {
         self.imagePickerDelegate?.imagePickerHasNoItemsInLibrary(self)
     }
-    
+
     func shouldAddToSelection(indexPath: IndexPath, numSelections: Int) -> Bool {
         return self.imagePickerDelegate?.shouldAddToSelection(indexPath: indexPath, numSelections: numSelections)
             ?? true

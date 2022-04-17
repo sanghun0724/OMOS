@@ -10,10 +10,10 @@ import UIKit
 
 // MARK: - PageboyViewController transition configuration.
 extension PageboyViewController {
-    
+
     /// Transition for a page scroll.
     public final class Transition {
-        
+
         /// Style for the transition.
         ///
         /// - push: Slide the new page in (Default).
@@ -26,14 +26,14 @@ extension PageboyViewController {
             case moveIn
             case reveal
         }
-        
+
         /// The style for the transition.
         public let style: Style
         /// The duration of the transition.
         public let duration: TimeInterval
-        
+
         // MARK: Init
-        
+
         /// Initialize a transition.
         ///
         /// - Parameters:
@@ -48,9 +48,9 @@ extension PageboyViewController {
 
 // MARK: - Custom PageboyViewController transitioning.
 internal extension PageboyViewController {
-    
+
     // MARK: Set Up
-    
+
     private func prepareForTransition() {
         guard transitionDisplayLink == nil else {
             return
@@ -61,18 +61,18 @@ internal extension PageboyViewController {
         displayLink.add(to: .main, forMode: .common)
         transitionDisplayLink = displayLink
     }
-    
+
     private func clearUpAfterTransition() {
         transitionDisplayLink?.invalidate()
         transitionDisplayLink = nil
     }
-    
+
     // MARK: Animation
-    
+
     @objc func displayLinkDidTick() {
         self.activeTransitionOperation?.tick()
     }
-    
+
     /// Perform a transition to a new page index.
     ///
     /// - Parameters:
@@ -127,7 +127,7 @@ internal extension PageboyViewController {
 }
 
 extension PageboyViewController: TransitionOperationDelegate {
-    
+
     func transitionOperation(_ operation: TransitionOperation,
                              didFinish finished: Bool) {
         transitionDisplayLink?.isPaused = true
@@ -135,7 +135,7 @@ extension PageboyViewController: TransitionOperationDelegate {
 
         clearUpAfterTransition()
     }
-    
+
     func transitionOperation(_ operation: TransitionOperation,
                              didUpdateWith percentComplete: CGFloat) {
 
@@ -160,7 +160,7 @@ extension PageboyViewController: TransitionOperationDelegate {
 }
 
 internal extension CATransition {
-    
+
     func configure(from: PageboyViewController.Transition) {
         duration = from.duration
         type = CATransitionType(rawValue: from.style.rawValue)

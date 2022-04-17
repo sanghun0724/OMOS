@@ -10,10 +10,10 @@ import UIKit
 
 /// Specification for Auto Insetting values.
 internal protocol AutoInsetSpec {
-    
+
     /// The insets that are required IN addition to UIKit components / safe area.
     var additionalRequiredInsets: UIEdgeInsets { get }
-    
+
     /// All insets that are required INCLUDING UIKit components / safe area.
     var allRequiredInsets: UIEdgeInsets { get }
 }

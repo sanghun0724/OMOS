@@ -24,14 +24,12 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-
 @available(iOS 13.0, *)
 public typealias HoverConfiguration = Configuration<UIHoverGestureRecognizer>
 @available(iOS 13.0, *)
 public typealias HoverControlEvent = ControlEvent<UIHoverGestureRecognizer>
 @available(iOS 13.0, *)
 public typealias HoverObservable = Observable<UIHoverGestureRecognizer>
-
 
 @available(iOS 13.0, *)
 extension Factory where Gesture == RxGestureRecognizer {

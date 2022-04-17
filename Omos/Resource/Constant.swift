@@ -19,7 +19,7 @@ struct Account {
    static var currentUser = UserDefaults.standard.integer(forKey: "user")
    static var currentReportRecordsId: [Int] {
         get {
-            return UserDefaults.standard.array(forKey: "report") as? [Int] ?? []
+            UserDefaults.standard.array(forKey: "report") as? [Int] ?? []
         }
         set {
             UserDefaults.standard.set(newValue, forKey: "report")

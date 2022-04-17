@@ -30,15 +30,15 @@ import UIKit
 
 struct ToolBarButtonImageBuilder {
     static func rotateCCWImage() -> UIImage? {
-        var rotateImage: UIImage? = nil
-        
+        var rotateImage: UIImage?
+
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 18, height: 21), false, 0.0)
-        
+
         //// Draw rectangle
         let rectanglePath = UIBezierPath(rect: CGRect(x: 0, y: 9, width: 12, height: 12))
         UIColor.white.setFill()
         rectanglePath.fill()
-        
+
         //// Draw triangle
         let trianglePath = UIBezierPath()
         trianglePath.move(to: CGPoint(x: 5, y: 3))
@@ -48,26 +48,26 @@ struct ToolBarButtonImageBuilder {
         trianglePath.close()
         UIColor.white.setFill()
         trianglePath.fill()
-        
+
         //// Bezier Drawing
         let bezierPath = UIBezierPath()
         bezierPath.move(to: CGPoint(x: 10, y: 3))
-        
+
         bezierPath.addCurve(to: CGPoint(x: 17.5, y: 11), controlPoint1: CGPoint(x: 15, y: 3), controlPoint2: CGPoint(x: 17.5, y: 5.91))
         UIColor.white.setStroke()
         bezierPath.lineWidth = 1
         bezierPath.stroke()
         rotateImage = UIGraphicsGetImageFromCurrentImageContext()
-        
+
         UIGraphicsEndImageContext()
-        
+
         return rotateImage
     }
-    
+
     static func rotateCWImage() -> UIImage? {
         guard let rotateCCWImage = self.rotateCCWImage(), let cgImage = rotateCCWImage.cgImage else { return nil }
-        
-        UIGraphicsBeginImageContextWithOptions(rotateCCWImage.size, false,  rotateCCWImage.scale )
+
+        UIGraphicsBeginImageContextWithOptions(rotateCCWImage.size, false, rotateCCWImage.scale )
         let context = UIGraphicsGetCurrentContext()
         context?.translateBy(x: rotateCCWImage.size.width, y: rotateCCWImage.size.height)
         context?.rotate(by: .pi)
@@ -76,24 +76,24 @@ struct ToolBarButtonImageBuilder {
         UIGraphicsEndImageContext()
         return rotateCWImage
     }
-    
+
     static func flipHorizontally() -> UIImage? {
-        var flippedImage: UIImage? = nil
-        
+        var flippedImage: UIImage?
+
         let wholeWidth = 24
         let wholeHeight = 24
         UIGraphicsBeginImageContextWithOptions(CGSize(width: wholeWidth, height: wholeHeight), false, 0.0)
-        
+
         let arrowWidth = 5
         let arrowHeight = 6
         let topbarWidth = wholeWidth - arrowWidth
         let topbarY = arrowHeight / 2 - 1
-        
+
         // topbar
         let rectangle2Path = UIBezierPath(rect: CGRect(x: 0, y: topbarY, width: topbarWidth, height: 1))
         UIColor.white.setFill()
         rectangle2Path.fill()
-        
+
         // left arrow
         let leftarrowPath = UIBezierPath()
         leftarrowPath.move(to: CGPoint(x: 0, y: topbarY))
@@ -103,7 +103,7 @@ struct ToolBarButtonImageBuilder {
         leftarrowPath.close()
         UIColor.white.setFill()
         leftarrowPath.fill()
-        
+
         // right arrow
         let rightarrowPath = UIBezierPath()
         rightarrowPath.move(to: CGPoint(x: wholeWidth, y: topbarY))
@@ -113,10 +113,10 @@ struct ToolBarButtonImageBuilder {
         rightarrowPath.close()
         UIColor.white.setFill()
         rightarrowPath.fill()
-        
+
         let mirrorWidth = wholeWidth / 2 - 1
         let mirrowHeight = wholeHeight - 8
-        
+
         // left mirror
         let leftMirror = UIBezierPath()
         leftMirror.move(to: CGPoint(x: 0, y: wholeHeight))
@@ -126,7 +126,7 @@ struct ToolBarButtonImageBuilder {
         leftMirror.close()
         UIColor.white.setFill()
         leftMirror.fill()
-        
+
         // right mirror
         let rightMirror = UIBezierPath()
         rightMirror.move(to: CGPoint(x: wholeWidth, y: wholeHeight))
@@ -136,18 +136,18 @@ struct ToolBarButtonImageBuilder {
         rightMirror.close()
         UIColor.white.setFill()
         rightMirror.fill()
-        
+
         flippedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
+
         return flippedImage
 
     }
-    
+
     static func flipVertically() -> UIImage? {
         guard let flippedHorizontallyImage = self.flipHorizontally(), let cgImage = flippedHorizontallyImage.cgImage else { return nil }
-        
-        UIGraphicsBeginImageContextWithOptions(flippedHorizontallyImage.size, false,  flippedHorizontallyImage.scale )
+
+        UIGraphicsBeginImageContextWithOptions(flippedHorizontallyImage.size, false, flippedHorizontallyImage.scale )
         let context = UIGraphicsGetCurrentContext()
         context?.rotate(by: -.pi / 2)
         context?.translateBy(x: -flippedHorizontallyImage.size.height, y: 0)
@@ -156,47 +156,46 @@ struct ToolBarButtonImageBuilder {
         UIGraphicsEndImageContext()
         return fippedVerticallyImage
     }
-    
+
     static func clampImage() -> UIImage? {
-        var clampImage: UIImage? = nil
-        
+        var clampImage: UIImage?
+
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 22, height: 16), false, 0.0)
-        
+
         //// Color Declarations
         let outerBox = UIColor(red: 1, green: 1, blue: 1, alpha: 0.553)
         let innerBox = UIColor(red: 1, green: 1, blue: 1, alpha: 0.773)
-        
+
         //// Rectangle Drawing
         let rectanglePath = UIBezierPath(rect: CGRect(x: 0, y: 3, width: 13, height: 13))
         UIColor.white.setFill()
         rectanglePath.fill()
-        
-        
+
         //// Outer
         //// Top Drawing
         let topPath = UIBezierPath(rect: CGRect(x: 0, y: 0, width: 22, height: 2))
         outerBox.setFill()
         topPath.fill()
-        
+
         //// Side Drawing
         let sidePath = UIBezierPath(rect: CGRect(x: 19, y: 2, width: 3, height: 14))
         outerBox.setFill()
         sidePath.fill()
-        
+
         //// Rectangle 2 Drawing
         let rectangle2Path = UIBezierPath(rect: CGRect(x: 14, y: 3, width: 4, height: 13))
         innerBox.setFill()
-        rectangle2Path.fill()        
-        
+        rectangle2Path.fill()
+
         clampImage = UIGraphicsGetImageFromCurrentImageContext()
-        
+
         UIGraphicsEndImageContext()
         return clampImage
     }
-    
+
     static func resetImage() -> UIImage? {
-        var resetImage: UIImage? = nil
-        
+        var resetImage: UIImage?
+
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 22, height: 18), false, 0.0)            //// Bezier 2 Drawing
         let bezier2Path = UIBezierPath()
         bezier2Path.move(to: CGPoint(x: 22, y: 9))
@@ -214,7 +213,7 @@ struct ToolBarButtonImageBuilder {
         bezier2Path.close()
         UIColor.white.setFill()
         bezier2Path.fill()
-        
+
         //// Polygon Drawing
         let polygonPath = UIBezierPath()
         polygonPath.move(to: CGPoint(x: 5, y: 15))
@@ -224,18 +223,18 @@ struct ToolBarButtonImageBuilder {
         polygonPath.close()
         UIColor.white.setFill()
         polygonPath.fill()
-        
+
         resetImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
+
         return resetImage
     }
-    
+
     static func alterCropper90DegreeImage() -> UIImage? {
-        var rotateCropperImage: UIImage? = nil
-        
+        var rotateCropperImage: UIImage?
+
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 22, height: 22), false, 0.0)
-        
+
         //// Draw rectangle
         let rectanglePath1 = UIBezierPath(rect: CGRect(x: 1, y: 5, width: 20, height: 11))
         UIColor.white.setStroke()
@@ -246,12 +245,12 @@ struct ToolBarButtonImageBuilder {
         UIColor.white.setStroke()
         rectanglePath2.lineWidth = 1
         rectanglePath2.stroke()
-        
+
         rotateCropperImage = UIGraphicsGetImageFromCurrentImageContext()
-        
+
         UIGraphicsEndImageContext()
-        
+
         return rotateCropperImage
     }
-    
+
 }

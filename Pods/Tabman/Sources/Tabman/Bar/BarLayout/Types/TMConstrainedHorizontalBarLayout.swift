@@ -14,9 +14,9 @@ import UIKit
 /// You should use this layout if you want to a horizontal layout with a limited amount of buttons, such as a tab bar.
 /// It's also worth noting that the button width is set to `bounds.size.width / visibleButtonCount` rather than using intrinsic sizing.
 open class TMConstrainedHorizontalBarLayout: TMHorizontalBarLayout {
-    
+
     // MARK: Properties
-    
+
     // swiftlint:disable unused_setter_value
     @available(*, unavailable)
     open override var contentMode: TMBarLayout.ContentMode {
@@ -27,7 +27,7 @@ open class TMConstrainedHorizontalBarLayout: TMHorizontalBarLayout {
             fatalError("\(type(of: self)) does not support updating contentMode")
         }
     }
-    
+
     // swiftlint:disable unused_setter_value
     @available(*, unavailable)
     open override var interButtonSpacing: CGFloat {
@@ -38,7 +38,7 @@ open class TMConstrainedHorizontalBarLayout: TMHorizontalBarLayout {
             fatalError("\(type(of: self)) does not support updating interButtonSpacing")
         }
     }
-   
+
     private var viewWidthConstraints: [NSLayoutConstraint]?
     /// The number of buttons to be visible in the layout.
     ///
@@ -51,29 +51,29 @@ open class TMConstrainedHorizontalBarLayout: TMHorizontalBarLayout {
             constrain(views: stackView.arrangedSubviews, for: visibleButtonCount)
         }
     }
-    
+
     // MARK: Lifecycle
-    
+
     open override func layout(in view: UIView) {
         super.layout(in: view)
         super.interButtonSpacing = 0.0
     }
-    
+
     open override func insert(buttons: [TMBarButton], at index: Int) {
         super.insert(buttons: buttons, at: index)
-        
+
         // Constrain button widths to visible count on insertion
         constrain(views: stackView.arrangedSubviews, for: visibleButtonCount)
     }
 }
 
 private extension TMConstrainedHorizontalBarLayout {
-    
+
     func constrain(views: [UIView], for maximumCount: Int) {
         if let oldConstraints = viewWidthConstraints {
             NSLayoutConstraint.deactivate(oldConstraints)
         }
-        
+
         var constraints = [NSLayoutConstraint]()
         let itemViews = views.filter { !($0 is SeparatorView) }
         let multiplier = 1.0 / CGFloat(min(maximumCount, itemViews.count))

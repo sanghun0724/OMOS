@@ -31,26 +31,20 @@ struct CategoryRespone: Codable {
     }
 }
 
-
-
-enum cateType:String,Codable {
+enum cateType: String, Codable {
     case A_LINE
     case OST
     case STORY
     case LYRICS
-    case FREE 
-    //정렬
+    case FREE
+    // 정렬
     case ASC = "ASC"
     case DESC = "DESC"
 }
 
-
 struct CateRequest: Codable {
-    let postId:Int?
-    let size:Int
-    let sortType:String
-    let userid:Int
+    let postId: Int?
+    let size: Int
+    let sortType: String
+    let userid: Int
 }
-
-
-

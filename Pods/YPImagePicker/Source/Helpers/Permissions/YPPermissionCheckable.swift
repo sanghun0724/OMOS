@@ -39,7 +39,7 @@ internal extension YPPermissionCheckable where Self: UIViewController {
     func checkLibraryPermission() {
         YPPermissionManager.checkLibraryPermissionAndAskIfNeeded(sourceVC: self) { _ in }
     }
-    
+
     func checkCameraPermission() {
         YPPermissionManager.checkCameraPermissionAndAskIfNeeded(sourceVC: self) { _ in }
     }

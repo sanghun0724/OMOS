@@ -9,10 +9,10 @@ import Foundation
 import RxSwift
 
 protocol TodayRepository {
-    var todayAPI:TodayAPI { get }
-    init(todayAPI:TodayAPI)
+    var todayAPI: TodayAPI { get }
+    init(todayAPI: TodayAPI)
     func popuralRecord() -> Single<[PopuralResponse]>
-    func lovedRecord(userId:Int) -> Single<LovedResponse>
+    func lovedRecord(userId: Int) -> Single<LovedResponse>
     func recommendDJRecord() -> Single<[recommendDjResponse]>
     func todayRecord() -> Single<TodayTrackResponse>
 }

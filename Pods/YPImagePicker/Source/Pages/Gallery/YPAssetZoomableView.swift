@@ -24,9 +24,9 @@ final class YPAssetZoomableView: UIScrollView {
     public var videoView = YPVideoView()
     public var squaredZoomScale: CGFloat = 1
     public var minWidthForItem: CGFloat? = YPConfig.library.minWidthForItem
-    
+
     fileprivate var currentAsset: PHAsset?
-    
+
     // Image view of the asset for convenience. Can be video preview image view or photo image view.
     public var assetImageView: UIImageView {
         return isVideoMode ? videoView.previewImageView : photoImageView
@@ -44,7 +44,7 @@ final class YPAssetZoomableView: UIScrollView {
             setZoomScale(1, animated: isAnimated)
         }
     }
-    
+
     /// Re-apply correct scrollview settings if image has already been adjusted in
     /// multiple selection mode so that user can see where they left off.
     public func applyStoredCropPosition(_ scp: YPLibrarySelection) {
@@ -56,7 +56,7 @@ final class YPAssetZoomableView: UIScrollView {
             setContentOffset(contentOffset, animated: false)
         }
     }
-    
+
     public func setVideo(_ video: PHAsset,
                          mediaManager: LibraryMediaManager,
                          storedCropPosition: YPLibrarySelection?,
@@ -65,19 +65,19 @@ final class YPAssetZoomableView: UIScrollView {
         mediaManager.imageManager?.fetchPreviewFor(video: video) { [weak self] preview in
             guard let strongSelf = self else { return }
             guard strongSelf.currentAsset != video else { completion() ; return }
-            
+
             if strongSelf.videoView.isDescendant(of: strongSelf) == false {
                 strongSelf.isVideoMode = true
                 strongSelf.photoImageView.removeFromSuperview()
                 strongSelf.addSubview(strongSelf.videoView)
             }
-            
+
             strongSelf.videoView.setPreviewImage(preview)
-            
+
             strongSelf.setAssetFrame(for: strongSelf.videoView, with: preview)
-            
+
             completion()
-            
+
             // Stored crop position in multiple selection
             if let scp173 = storedCropPosition {
                 strongSelf.applyStoredCropPosition(scp173)
@@ -95,7 +95,7 @@ final class YPAssetZoomableView: UIScrollView {
             strongSelf.zoomableViewDelegate?.ypAssetZoomableViewDidLayoutSubviews(strongSelf)
         }
     }
-    
+
     public func setImage(_ photo: PHAsset,
                          mediaManager: LibraryMediaManager,
                          storedCropPosition: YPLibrarySelection?,
@@ -106,32 +106,32 @@ final class YPAssetZoomableView: UIScrollView {
             return
         }
         currentAsset = photo
-        
+
         mediaManager.imageManager?.fetch(photo: photo) { [weak self] image, isLowResIntermediaryImage in
             guard let strongSelf = self else { return }
-            
+
             if strongSelf.photoImageView.isDescendant(of: strongSelf) == false {
                 strongSelf.isVideoMode = false
                 strongSelf.videoView.removeFromSuperview()
                 strongSelf.videoView.showPlayImage(show: false)
                 strongSelf.videoView.deallocate()
                 strongSelf.addSubview(strongSelf.photoImageView)
-            
+
                 strongSelf.photoImageView.contentMode = .scaleAspectFill
                 strongSelf.photoImageView.clipsToBounds = true
             }
-            
+
             strongSelf.photoImageView.image = image
-           
+
             strongSelf.setAssetFrame(for: strongSelf.photoImageView, with: image)
-                
+
             // Stored crop position in multiple selection
             if let scp173 = storedCropPosition {
                 strongSelf.applyStoredCropPosition(scp173)
                 // add update CropInfo after multiple
                 updateCropInfo()
             }
-            
+
             completion(isLowResIntermediaryImage)
         }
     }
@@ -174,15 +174,15 @@ final class YPAssetZoomableView: UIScrollView {
 // MARK: - Private
 
 fileprivate extension YPAssetZoomableView {
-    
+
     func setAssetFrame(`for` view: UIView, with image: UIImage) {
         // Reseting the previous scale
         self.minimumZoomScale = 1
         self.zoomScale = 1
-        
+
         // Calculating and setting the image view frame depending on screenWidth
         let screenWidth = YPImagePickerConfiguration.screenWidth
-        
+
         let w = image.size.width
         let h = image.size.height
 
@@ -197,7 +197,7 @@ fileprivate extension YPAssetZoomableView {
             aspectRatio = w / h
             view.frame.size.width = screenWidth * aspectRatio
             view.frame.size.height = screenWidth
-            
+
             if let minWidth = minWidthForItem {
                 let k = minWidth / screenWidth
                 zoomScale = (h / w) * k
@@ -206,47 +206,47 @@ fileprivate extension YPAssetZoomableView {
             view.frame.size.width = screenWidth
             view.frame.size.height = screenWidth
         }
-        
+
         // Centering image view
         view.center = center
         centerAssetView()
-        
+
         // Setting new scale
         minimumZoomScale = zoomScale
         self.zoomScale = zoomScale
     }
-    
+
     /// Calculate zoom scale which will fit the image to square
     func calculateSquaredZoomScale() -> CGFloat {
         guard let image = assetImageView.image else {
             ypLog("No image"); return 1.0
         }
-        
+
         var squareZoomScale: CGFloat = 1.0
         let w = image.size.width
         let h = image.size.height
-        
+
         if w > h { // Landscape
             squareZoomScale = (w / h)
         } else if h > w { // Portrait
             squareZoomScale = (h / w)
         }
-        
+
         return squareZoomScale
     }
-    
+
     // Centring the image frame
     func centerAssetView() {
         let assetView = isVideoMode ? videoView : photoImageView
         let scrollViewBoundsSize = self.bounds.size
         var assetFrame = assetView.frame
         let assetSize = assetView.frame.size
-        
+
         assetFrame.origin.x = (assetSize.width < scrollViewBoundsSize.width) ?
             (scrollViewBoundsSize.width - assetSize.width) / 2.0 : 0
         assetFrame.origin.y = (assetSize.height < scrollViewBoundsSize.height) ?
             (scrollViewBoundsSize.height - assetSize.height) / 2.0 : 0.0
-        
+
         assetView.frame = assetFrame
     }
 }
@@ -256,29 +256,29 @@ extension YPAssetZoomableView: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return isVideoMode ? videoView : photoImageView
     }
-    
+
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         zoomableViewDelegate?.ypAssetZoomableViewScrollViewDidZoom()
-        
+
         centerAssetView()
     }
-    
+
     func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
         guard let view = view, view == photoImageView || view == videoView else { return }
-        
+
         // prevent to zoom out
         if YPConfig.library.onlySquare && scale < squaredZoomScale {
             self.fitImage(true, animated: true)
         }
-        
+
         zoomableViewDelegate?.ypAssetZoomableViewScrollViewDidEndZooming()
         cropAreaDidChange()
     }
-    
+
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         cropAreaDidChange()
     }
-    
+
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         cropAreaDidChange()
     }

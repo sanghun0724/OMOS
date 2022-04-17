@@ -10,47 +10,47 @@ import UIKit
 
 /// Container for BarButton objects and related controllers.
 public final class TMBarButtonCollection<BarButton: TMBarButton>: TMTransitionStyleable {
-    
+
     // MARK: Types
-    
+
     public typealias Customization = (BarButton) -> Void
-    
+
     // MARK: Buttons
-    
+
     /// All bar buttons.
     public internal(set) var all = [BarButton]() {
         didSet {
             self.stateController = TMBarButtonStateController(for: all)
             self.interactionController = TMBarButtonInteractionController(for: all, handler: self)
-            
+
             for button in all {
                 customization?(button)
             }
         }
     }
-    
+
     private var customization: Customization?
-    
+
     /// Controller which handles button state updates.
     internal private(set) var stateController: TMBarButtonStateController!
     /// Controller which handles button interaction.
     internal private(set) var interactionController: TMBarButtonInteractionController!
-    
+
     /// External handler that responds to interaction controller events.
     internal weak var interactionHandler: TMBarButtonInteractionHandler?
-    
+
     // MARK: Customization
-    
+
     /// Style to use when transitioning between buttons.
     public var transitionStyle: TMTransitionStyle = .progressive
-    
+
     // MARK: Init
-    
+
     internal init() {
         self.stateController = TMBarButtonStateController(for: all)
         self.interactionController = TMBarButtonInteractionController(for: all, handler: self)
     }
-    
+
     // MARK: Customization
 
     /**
@@ -66,9 +66,9 @@ public final class TMBarButtonCollection<BarButton: TMBarButton>: TMTransitionSt
             customize(button)
         }
     }
-    
+
     // MARK: Utility
-    
+
     /// Get a button that is associated with a bar item.
     ///
     /// - Parameter item: Item to search for.
@@ -79,7 +79,7 @@ public final class TMBarButtonCollection<BarButton: TMBarButton>: TMTransitionSt
         }
         return all[index]
     }
-    
+
     /// Get buttons associated with bar items.
     ///
     /// - Parameter items: Items to search for.
@@ -90,7 +90,7 @@ public final class TMBarButtonCollection<BarButton: TMBarButton>: TMTransitionSt
 }
 
 extension TMBarButtonCollection: TMBarButtonInteractionHandler {
-    
+
     func barButtonInteraction(controller: TMBarButtonInteractionController,
                               didHandlePressOf button: TMBarButton,
                               at index: Int) {

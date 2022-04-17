@@ -9,7 +9,7 @@
 import UIKit
 
 public protocol PageboyViewControllerDelegate: class {
-    
+
     /// The page view controller will begin scrolling to a new page.
     ///
     /// - Parameters:
@@ -21,7 +21,7 @@ public protocol PageboyViewControllerDelegate: class {
                                willScrollToPageAt index: PageboyViewController.PageIndex,
                                direction: PageboyViewController.NavigationDirection,
                                animated: Bool)
-    
+
     /// The page view controller did scroll to an offset between pages.
     ///
     /// - Parameters:
@@ -43,7 +43,7 @@ public protocol PageboyViewControllerDelegate: class {
     func pageboyViewController(_ pageboyViewController: PageboyViewController,
                                didCancelScrollToPageAt index: PageboyViewController.PageIndex,
                                returnToPageAt previousIndex: PageboyViewController.PageIndex)
-    
+
     /// The page view controller did complete scroll to a new page.
     ///
     /// - Parameters:
@@ -55,7 +55,7 @@ public protocol PageboyViewControllerDelegate: class {
                                didScrollToPageAt index: PageboyViewController.PageIndex,
                                direction: PageboyViewController.NavigationDirection,
                                animated: Bool)
-    
+
     /// The page view controller did reload.
     ///
     /// - Parameters:

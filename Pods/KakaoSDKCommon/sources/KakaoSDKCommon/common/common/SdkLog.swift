@@ -29,7 +29,7 @@ public enum LogEvent: String {
 }
 
 /// :nodoc: 로그레벨입니다.
-public enum LogLevel : Int {
+public enum LogLevel: Int {
     case v = 0
     case d = 1
     case i = 2
@@ -40,31 +40,30 @@ public enum LogLevel : Int {
 /// :nodoc: SdkLog 클래스 입니다.
 open class SdkLog {
     public static let shared = SdkLog()
-    
+
     public let maxLogs = 10
-    
+
     var _debugLogs = [String]()
-    public var debugLogs : [String] {
+    public var debugLogs: [String] {
         get {
             return _debugLogs
         }
     }
-    
-    public var debugLog : String {
+
+    public var debugLog: String {
         get {
-            if let appVersion = Bundle.main.object(forInfoDictionaryKey:"CFBundleShortVersionString") as? String {
+            if let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
                 return "\("==== sdk version: \(KakaoSDK.shared.sdkVersion())\n")\("==== app version: \(appVersion)\n\n\n")\(_debugLogs.joined(separator: "\n"))"
-            }
-            else {
+            } else {
                 return _debugLogs.joined(separator: "\n")
             }
         }
     }
-    
-    public let developLoglevel : LogLevel
-    public let releaseLogLevel : LogLevel
-    
-    public init(developLogLevel : LogLevel = LogLevel.d, releaseLogLevel: LogLevel = LogLevel.i) {
+
+    public let developLoglevel: LogLevel
+    public let releaseLogLevel: LogLevel
+
+    public init(developLogLevel: LogLevel = LogLevel.d, releaseLogLevel: LogLevel = LogLevel.i) {
         self.developLoglevel = developLogLevel
         self.releaseLogLevel = releaseLogLevel
     }
@@ -84,7 +83,7 @@ open class SdkLog {
         formatter.timeZone = TimeZone.current
         return formatter
     }
-    
+
     public func clearLog() {
         _debugLogs.removeAll()
     }
@@ -93,42 +92,42 @@ open class SdkLog {
         let components = filePath.components(separatedBy: "/")
         return components.isEmpty ? "" : components.last!
     }
-    
-    class func sdkprint(_ object: Any, filename: String = #file, line: Int = #line, column: Int = #column, funcName: String = #function, logEvent:LogEvent = LogEvent.e, printLogLevel: LogLevel = LogLevel.e) {
+
+    class func sdkprint(_ object: Any, filename: String = #file, line: Int = #line, column: Int = #column, funcName: String = #function, logEvent: LogEvent = LogEvent.e, printLogLevel: LogLevel = LogLevel.e) {
         // Only allowing in DEBUG mode
         #if DEBUG
-        if (printLogLevel.rawValue >= SdkLog.shared.developLoglevel.rawValue) {
+        if printLogLevel.rawValue >= SdkLog.shared.developLoglevel.rawValue {
             Swift.print("\(Date().toString()) \(logEvent.rawValue)[\(SdkLog.sourceFileName(filePath: filename)) \(line):\(column)] -> \(object)")
         }
         #endif
-        
+
         if KakaoSDK.shared.isLoggingEnable() {
-            if (printLogLevel.rawValue >= SdkLog.shared.releaseLogLevel.rawValue) {
-                if (SdkLog.shared._debugLogs.count >= SdkLog.shared.maxLogs) {
+            if printLogLevel.rawValue >= SdkLog.shared.releaseLogLevel.rawValue {
+                if SdkLog.shared._debugLogs.count >= SdkLog.shared.maxLogs {
                     SdkLog.shared._debugLogs.removeFirst()
                 }
-                
+
                 SdkLog.shared._debugLogs.append("\(Date().toSimpleString()) \(logEvent.rawValue) -> \(object)")
             }
         }
     }
-    
+
     public class func v( _ object: Any, filename: String = #file, line: Int = #line, column: Int = #column, funcName: String = #function) {
         sdkprint(object, filename: filename, line: line, column: column, funcName: funcName, logEvent: LogEvent.v, printLogLevel: LogLevel.v)
     }
-    
+
     public class func d( _ object: Any, filename: String = #file, line: Int = #line, column: Int = #column, funcName: String = #function) {
         sdkprint(object, filename: filename, line: line, column: column, funcName: funcName, logEvent: LogEvent.d, printLogLevel: LogLevel.d)
     }
-    
+
     public class func i( _ object: Any, filename: String = #file, line: Int = #line, column: Int = #column, funcName: String = #function) {
         sdkprint(object, filename: filename, line: line, column: column, funcName: funcName, logEvent: LogEvent.i, printLogLevel: LogLevel.i)
     }
-    
+
     public class func w( _ object: Any, filename: String = #file, line: Int = #line, column: Int = #column, funcName: String = #function) {
         sdkprint(object, filename: filename, line: line, column: column, funcName: funcName, logEvent: LogEvent.w, printLogLevel: LogLevel.w)
     }
-    
+
     public class func e( _ object: Any, filename: String = #file, line: Int = #line, column: Int = #column, funcName: String = #function) {
         sdkprint(object, filename: filename, line: line, column: column, funcName: funcName, logEvent: LogEvent.e, printLogLevel: LogLevel.e)
     }
@@ -138,7 +137,7 @@ extension Date {
     public func toString() -> String {
         return SdkLog.dateFormatter.string(from: self as Date)
     }
-    
+
     public func toSimpleString() -> String {
         return SdkLog.simpleDateFormatter.string(from: self as Date)
     }

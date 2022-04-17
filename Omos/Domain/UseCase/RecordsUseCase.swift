@@ -9,104 +9,103 @@ import Foundation
 import RxSwift
 
 class RecordsUseCase {
-    
-    private let recordsRepository:RecordsRepository
-    
-    init(recordsRepository:RecordsRepository) {
+    private let recordsRepository: RecordsRepository
+
+    init(recordsRepository: RecordsRepository) {
         self.recordsRepository = recordsRepository
     }
-    
+
     func selectRecord() -> Single<SelectResponse> {
-        return recordsRepository.selectRecord()
+        recordsRepository.selectRecord()
     }
-    
-    func recordDetail(postId:Int,userId:Int) -> Single<DetailRecordResponse> {
-        return recordsRepository.recordDetail(postId: postId, userId: userId)
+
+    func recordDetail(postId: Int, userId: Int) -> Single<DetailRecordResponse> {
+        recordsRepository.recordDetail(postId: postId, userId: userId)
     }
-    
-    func cateFetch(type:cateType,postId:Int?,size:Int,sort:String,userid:Int) -> Single<[CategoryRespone]> {
-        return recordsRepository.cateFetch(type:type,postId:postId,size:size,sort:sort,userid:userid)
+
+    func cateFetch(type: cateType, postId: Int?, size: Int, sort: String, userid: Int) -> Single<[CategoryRespone]> {
+        recordsRepository.cateFetch(type: type, postId: postId, size: size, sort: sort, userid: userid)
     }
-    
-    func myRecordFetch(userid:Int) -> Single<[MyRecordRespone]> {
-        return recordsRepository.myRecordFetch(userid: userid)
+
+    func myRecordFetch(userid: Int) -> Single<[MyRecordRespone]> {
+        recordsRepository.myRecordFetch(userid: userid)
     }
-    
-    func save(cate:String,content:String,isPublic:Bool,musicId:String,title:String,userid:Int,recordImageUrl:String) -> Single<SaveRespone> {
-        return recordsRepository.save(cate: cate, content: content, isPublic: isPublic, musicId: musicId, title: title, userid: userid,recordImageUrl:recordImageUrl)
+
+    func save(cate: String, content: String, isPublic: Bool, musicId: String, title: String, userid: Int, recordImageUrl: String) -> Single<SaveRespone> {
+        recordsRepository.save(cate: cate, content: content, isPublic: isPublic, musicId: musicId, title: title, userid: userid, recordImageUrl: recordImageUrl)
     }
-    
-    func recordIspublic(postId:Int) -> Single<StateRespone> {
-        return recordsRepository.recordIspublic(postId: postId)
+
+    func recordIspublic(postId: Int) -> Single<StateRespone> {
+        recordsRepository.recordIspublic(postId: postId)
     }
-    
-    func recordDelete(postId:Int) -> Single<StateRespone> {
-        return recordsRepository.recordDelete(postId: postId)
+
+    func recordDelete(postId: Int) -> Single<StateRespone> {
+        recordsRepository.recordDelete(postId: postId)
     }
-    
-    func recordUpdate(postId:Int,request:UpdateRequest) -> Single<StateRespone> {
-        return recordsRepository.recordUpdate(postId: postId,request:request)
+
+    func recordUpdate(postId: Int, request: UpdateRequest) -> Single<StateRespone> {
+        recordsRepository.recordUpdate(postId: postId, request: request)
     }
-    
-    func oneMusicRecordFetch(musicId:String,request:OneMusicRecordRequest) -> Single<[OneMusicRecordRespone]> {
-        return recordsRepository.oneMusicRecordFetch(musicId: musicId, request: request)
+
+    func oneMusicRecordFetch(musicId: String, request: OneMusicRecordRequest) -> Single<[OneMusicRecordRespone]> {
+        recordsRepository.oneMusicRecordFetch(musicId: musicId, request: request)
     }
-    
-    //MARK: Interaction API
-    func saveScrap(postId:Int,userId:Int) -> Single<StateRespone> {
-        return recordsRepository.saveScrap(postId: postId, userId: userId)
+
+    // MARK: Interaction API
+    func saveScrap(postId: Int, userId: Int) -> Single<StateRespone> {
+        recordsRepository.saveScrap(postId: postId, userId: userId)
     }
-    
-    func deleteScrap(postId:Int,userId:Int) -> Single<StateRespone> {
-        return recordsRepository.deleteScrap(postId: postId, userId: userId)
+
+    func deleteScrap(postId: Int, userId: Int) -> Single<StateRespone> {
+        recordsRepository.deleteScrap(postId: postId, userId: userId)
     }
-    
-    func saveLike(postId:Int,userId:Int) -> Single<StateRespone> {
-        return recordsRepository.saveLike(postId: postId, userId: userId)
+
+    func saveLike(postId: Int, userId: Int) -> Single<StateRespone> {
+        recordsRepository.saveLike(postId: postId, userId: userId)
     }
-    
-    func deleteLike(postId:Int,userId:Int) -> Single<StateRespone> {
-        return recordsRepository.deleteLike(postId: postId, userId: userId)
+
+    func deleteLike(postId: Int, userId: Int) -> Single<StateRespone> {
+        recordsRepository.deleteLike(postId: postId, userId: userId)
     }
-    
-    //MARK: Mydj
-    func MyDjAllRecord(userId:Int,MyDjRequest:MyDjRequest) -> Single<[MyDjResponse]> {
-        return recordsRepository.MyDjAllRecord(userId: userId, MyDjRequest: MyDjRequest)
+
+    // MARK: Mydj
+    func MyDjAllRecord(userId: Int, MyDjRequest: MyDjRequest) -> Single<[MyDjResponse]> {
+        recordsRepository.MyDjAllRecord(userId: userId, MyDjRequest: MyDjRequest)
     }
-    
-    func saveFollow(fromId:Int,toId:Int) -> Single<StateRespone> {
-        return recordsRepository.saveFollow(fromId: fromId, toId: toId)
+
+    func saveFollow(fromId: Int, toId: Int) -> Single<StateRespone> {
+        recordsRepository.saveFollow(fromId: fromId, toId: toId)
     }
-     
-    func deleteFollow(fromId:Int,toId:Int) -> Single<StateRespone> {
-        return recordsRepository.deleteFollow(fromId: fromId, toId: toId)
+
+    func deleteFollow(fromId: Int, toId: Int) -> Single<StateRespone> {
+        recordsRepository.deleteFollow(fromId: fromId, toId: toId)
     }
-    
-    func myDjProfile(fromId:Int,toId:Int) -> Single<MyDjProfileResponse> {
-        return recordsRepository.myDjProfile(fromId: fromId, toId: toId)
+
+    func myDjProfile(fromId: Int, toId: Int) -> Single<MyDjProfileResponse> {
+        recordsRepository.myDjProfile(fromId: fromId, toId: toId)
     }
-    
-    func myDjList(userId:Int) -> Single<[MyDjListResponse]> {
-        return recordsRepository.myDjList(userId: userId)
+
+    func myDjList(userId: Int) -> Single<[MyDjListResponse]> {
+        recordsRepository.myDjList(userId: userId)
     }
-    
-    func userRecords(fromId:Int,toId:Int) -> Single<[MyDjResponse]> {
-        return recordsRepository.userRecords(fromId: fromId, toId: toId)
+
+    func userRecords(fromId: Int, toId: Int) -> Single<[MyDjResponse]> {
+        recordsRepository.userRecords(fromId: fromId, toId: toId)
     }
-    
-    func reportRecord(postId:Int) -> Single<StateRespone> {
-        return recordsRepository.reportRecord(postId: postId)
+
+    func reportRecord(postId: Int) -> Single<StateRespone> {
+        recordsRepository.reportRecord(postId: postId)
     }
-    
-    func userReport(userId:Int) -> Single<StateRespone> {
-        return recordsRepository.userReport(userId: userId)
+
+    func userReport(userId: Int) -> Single<StateRespone> {
+        recordsRepository.userReport(userId: userId)
     }
-    
-    func awsDeleteImage(request:AwsDeleteImageRequest) -> Single<StateRespone> {
-        return recordsRepository.awsDeleteImage(request:request)
+
+    func awsDeleteImage(request: AwsDeleteImageRequest) -> Single<StateRespone> {
+        recordsRepository.awsDeleteImage(request: request)
     }
-    
-    func blockObjcet(type:String,request:BlockRequest) -> Single<StateRespone> {
-        return recordsRepository.blockObjcet(type: type, request: request)
+
+    func blockObjcet(type: String, request: BlockRequest) -> Single<StateRespone> {
+        recordsRepository.blockObjcet(type: type, request: request)
     }
 }

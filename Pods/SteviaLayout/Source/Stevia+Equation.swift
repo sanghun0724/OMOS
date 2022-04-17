@@ -14,14 +14,14 @@ public struct SteviaAttribute {
     let attribute: NSLayoutConstraint.Attribute
     let constant: CGFloat?
     let multiplier: CGFloat?
-    
+
     init(view: UIView, attribute: NSLayoutConstraint.Attribute) {
         self.view = view
         self.attribute = attribute
         self.constant = nil
         self.multiplier = nil
     }
-    
+
     init(view: UIView, attribute: NSLayoutConstraint.Attribute, constant: CGFloat?, multiplier: CGFloat?) {
         self.view = view
         self.attribute = attribute
@@ -31,51 +31,51 @@ public struct SteviaAttribute {
 }
 
 public extension UIView {
-    
+
     var Width: SteviaAttribute {
         return SteviaAttribute(view: self, attribute: .width)
     }
-    
+
     var Height: SteviaAttribute {
         return SteviaAttribute(view: self, attribute: .height)
     }
-    
+
     var Top: SteviaAttribute {
         return SteviaAttribute(view: self, attribute: .top)
     }
-    
+
     var Bottom: SteviaAttribute {
         return SteviaAttribute(view: self, attribute: .bottom)
     }
-    
+
     var Left: SteviaAttribute {
         return SteviaAttribute(view: self, attribute: .left)
     }
-    
+
     var Right: SteviaAttribute {
         return SteviaAttribute(view: self, attribute: .right)
     }
-    
+
     var Leading: SteviaAttribute {
         return SteviaAttribute(view: self, attribute: .leading)
     }
-    
+
     var Trailing: SteviaAttribute {
         return SteviaAttribute(view: self, attribute: .trailing)
     }
-    
+
     var CenterX: SteviaAttribute {
         return SteviaAttribute(view: self, attribute: .centerX)
     }
-    
+
     var CenterY: SteviaAttribute {
         return SteviaAttribute(view: self, attribute: .centerY)
     }
-    
+
     var FirstBaseline: SteviaAttribute {
         return SteviaAttribute(view: self, attribute: .firstBaseline)
     }
-    
+
     var LastBaseline: SteviaAttribute {
         return SteviaAttribute(view: self, attribute: .lastBaseline)
     }
@@ -134,17 +134,17 @@ public func == (left: SteviaAttribute, right: SteviaAttribute) -> NSLayoutConstr
                                           multiplier: multiplier,
                                           constant: constant)
     }
-    
+
     return NSLayoutConstraint()
 }
 
 func commonParent(with viewA: UIView, and viewB: UIView) -> UIView? {
-    
+
     // Both views should have a superview
     guard viewA.superview != nil && viewB.superview != nil else {
         return nil
     }
-    
+
     // Find the common parent
     var spv = viewA.superview
     while spv != nil {

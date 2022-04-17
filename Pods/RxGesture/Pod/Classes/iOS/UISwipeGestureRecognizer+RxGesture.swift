@@ -28,7 +28,7 @@ public enum SwipeDirection {
     case right, left, up, down
 
     fileprivate typealias SwipeGestureRecognizerDirection = UISwipeGestureRecognizer.Direction
-    
+
     fileprivate var direction: SwipeGestureRecognizerDirection {
         switch self {
         case .right: return .right
@@ -67,7 +67,7 @@ extension Reactive where Base: RxGestureView {
      Returns an observable `UISwipeGestureRecognizer` events sequence
      - parameter configuration: A closure that allows to fully configure the gesture recognizer
      */
-    private func swipeGesture(direction: SwipeDirection,configuration: SwipeConfiguration? = nil) -> SwipeControlEvent {
+    private func swipeGesture(direction: SwipeDirection, configuration: SwipeConfiguration? = nil) -> SwipeControlEvent {
         gesture(make(direction: direction, configuration: configuration))
     }
 
@@ -75,7 +75,7 @@ extension Reactive where Base: RxGestureView {
      Returns an observable `UISwipeGestureRecognizer` events sequence
      - parameter configuration: A closure that allows to fully configure the gesture recognizer
      */
-    public func swipeGesture(_ directions: Set<SwipeDirection>,configuration: SwipeConfiguration? = nil) -> SwipeControlEvent {
+    public func swipeGesture(_ directions: Set<SwipeDirection>, configuration: SwipeConfiguration? = nil) -> SwipeControlEvent {
         let source = Observable.merge(directions.map {
             swipeGesture(direction: $0, configuration: configuration).asObservable()
         })
@@ -86,7 +86,7 @@ extension Reactive where Base: RxGestureView {
      Returns an observable `UISwipeGestureRecognizer` events sequence
      - parameter configuration: A closure that allows to fully configure the gesture recognizer
      */
-    public func swipeGesture(_ directions: SwipeDirection...,configuration: SwipeConfiguration? = nil) -> SwipeControlEvent {
+    public func swipeGesture(_ directions: SwipeDirection..., configuration: SwipeConfiguration? = nil) -> SwipeControlEvent {
         swipeGesture(Set(directions), configuration: configuration)
     }
 

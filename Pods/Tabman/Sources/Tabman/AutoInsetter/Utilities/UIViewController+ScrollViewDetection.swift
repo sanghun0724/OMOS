@@ -9,7 +9,7 @@
 import UIKit
 
 internal extension UIViewController {
-    
+
     var embeddedScrollViews: [UIScrollView?] {
         if let tableViewController = self as? UITableViewController { // UITableViewController
             return [tableViewController.tableView]
@@ -19,10 +19,10 @@ internal extension UIViewController {
             return scrollViews(in: self.view)
         }
     }
-    
+
     func scrollViews(in view: UIView) -> [UIScrollView] {
         var scrollViews = [UIScrollView]()
-        
+
         for subview in view.subviews {
             // if current view is scroll view add it and ignore the subviews
             // - as it can be assumed they will be insetted correctly within the parent scroll view.
@@ -34,15 +34,15 @@ internal extension UIViewController {
         }
         return scrollViews
     }
-    
+
     func forEachEmbeddedScrollView(_ action: (UIScrollView) -> Void) {
         for scrollView in self.embeddedScrollViews {
             guard let scrollView = scrollView, scrollView.window != nil else { continue }
-            
+
             action(scrollView)
         }
     }
-    
+
     func shouldEvaluateEmbeddedScrollViews() -> Bool {
         if self is UIPageViewController { // Ignore UIPageViewController
             return false

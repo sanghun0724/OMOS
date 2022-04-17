@@ -16,7 +16,7 @@ internal class PatchedPageViewController: UIPageViewController {
                     super.setViewControllers(viewControllers, direction: direction, animated: false, completion: nil)
                 }
             }
-            
+
             completion?(isFinished)
         }
     }

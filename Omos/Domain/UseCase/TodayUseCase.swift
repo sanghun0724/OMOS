@@ -9,26 +9,25 @@ import Foundation
 import RxSwift
 
 class TodayUseCase {
-    private let todayRepository:TodayRepository
-    
-    init(todayRepository:TodayRepository) {
+    private let todayRepository: TodayRepository
+
+    init(todayRepository: TodayRepository) {
         self.todayRepository = todayRepository
     }
-    
+
     func popuralRecord() -> Single<[PopuralResponse]> {
-        return todayRepository.popuralRecord()
+        todayRepository.popuralRecord()
     }
-    
-    func lovedRecord(userId:Int) -> Single<LovedResponse> {
-        return todayRepository.lovedRecord(userId: userId)
+
+    func lovedRecord(userId: Int) -> Single<LovedResponse> {
+        todayRepository.lovedRecord(userId: userId)
     }
-    
+
     func recommendDJRecord() -> Single<[recommendDjResponse]> {
-        return todayRepository.recommendDJRecord()
+        todayRepository.recommendDJRecord()
     }
-    
+
     func todayRecord() -> Single<TodayTrackResponse> {
-        return todayRepository.todayRecord()
+        todayRepository.todayRecord()
     }
-    
 }

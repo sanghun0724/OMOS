@@ -8,8 +8,8 @@
 
 import Foundation
 
-internal protocol TMBarButtonInteractionHandler: class {
-    
+internal protocol TMBarButtonInteractionHandler: AnyObject {
+
     func barButtonInteraction(controller: TMBarButtonInteractionController,
                               didHandlePressOf button: TMBarButton,
                               at index: Int)
@@ -19,26 +19,26 @@ internal protocol TMBarButtonInteractionHandler: class {
 internal final class TMBarButtonInteractionController: TMBarButtonController, Hashable, Equatable {
 
     // MARK: Properties
-    
+
     private weak var handler: TMBarButtonInteractionHandler?
-    
+
     // MARK: Init
-    
+
     init(for barButtons: [TMBarButton], handler: TMBarButtonInteractionHandler) {
         self.handler = handler
         super.init(for: barButtons)
-        
+
         barButtons.forEach({ (button) in
             button.addTarget(self, action: #selector(barButtonPressed(_:)), for: .touchUpInside)
         })
     }
-    
+
     override init(for barButtons: [TMBarButton]?) {
         fatalError("Use init(for barButtons: handler:)")
     }
-    
+
     // MARK: Actions
-    
+
     @objc private func barButtonPressed(_ sender: TMBarButton) {
         guard let index = barButtons.firstIndex(where: { $0.object === sender }) else {
             return

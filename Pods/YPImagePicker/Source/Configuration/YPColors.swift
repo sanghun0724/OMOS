@@ -9,20 +9,20 @@
 import UIKit
 
 public struct YPColors {
-    
+
     // MARK: - Common
-    
+
     /// The common tint color which is used for done buttons in navigation bar, multiple items selection and so on.
     public var tintColor = UIColor.ypSystemBlue
-    
+
     /// A color for navigation bar spinner.
     /// Default is nil, which is default iOS gray UIActivityIndicator.
     public var navigationBarActivityIndicatorColor: UIColor?
-    
+
     /// A color for circle for selected items in multiple selection
     /// Default is nil, which takes tintColor.
     public var multipleItemsSelectedCircleColor: UIColor?
-    
+
     /// The background color of the bottom of photo and video screens.
     public var photoVideoScreenBackgroundColor: UIColor = .offWhiteOrBlack
 
@@ -34,7 +34,7 @@ public struct YPColors {
 
     /// A color for background of the asset container. You can see it when bouncing the image.
     public var assetViewBackgroundColor: UIColor = .offWhiteOrBlack
-    
+
     /// A color for background in filters.
     public var filterBackgroundColor: UIColor = .offWhiteOrBlack
 
@@ -57,26 +57,26 @@ public struct YPColors {
     public var defaultNavigationBarColor: UIColor = .offWhiteOrBlack
 
     // MARK: - Trimmer
-    
+
     /// The color of the main border of the view
     public var trimmerMainColor: UIColor = .ypLabel
     /// The color of the handles on the side of the view
     public var trimmerHandleColor: UIColor = .ypSystemBackground
     /// The color of the position indicator
     public var positionLineColor: UIColor = .ypSystemBackground
-    
+
     // MARK: - Cover selector
-    
+
     /// The color of the cover selector border
     public var coverSelectorBorderColor: UIColor = .offWhiteOrBlack
-    
+
     // MARK: - Progress bar
-    
+
     /// The color for the progress bar when processing video or images. The all track color.
     public var progressBarTrackColor: UIColor = .ypSystemBackground
     /// The color of completed track for the progress bar
     public var progressBarCompletedColor: UIColor?
-    
+
     /// The color of the Album's NavigationBar background
     public var albumBarTintColor: UIColor = .ypSystemBackground
     /// The color of the Album's left and right items color

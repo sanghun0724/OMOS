@@ -8,12 +8,12 @@
 import UIKit
 
 public class RatioSelector: UIView {
-    
-    var didGetRatio: ((Double)->Void) = { _ in }
+
+    var didGetRatio: ((Double) -> Void) = { _ in }
     private var type: RatioType = .vertical
     private var originalRatioH: Double = 0.0
     private var ratios: [RatioItemType] = []
-    
+
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsHorizontalScrollIndicator = false
@@ -33,7 +33,7 @@ public class RatioSelector: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
+
     init(type: RatioType, originalRatioH: Double, ratios: [RatioItemType] = []) {
         super.init(frame: .zero)
         self.type = type
@@ -46,25 +46,25 @@ public class RatioSelector: UIView {
         super.init(frame: frame)
         setupViews()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupViews()
     }
-    
+
     func update(fixedRatioManager: FixedRatioManager?) {
         guard let fixedRatioManager = fixedRatioManager else { return }
         ratios = fixedRatioManager.ratios
         type = fixedRatioManager.type
         originalRatioH = fixedRatioManager.originalRatioH
-        
+
         if let ratioItemViews = stackView.arrangedSubviews as? [RatioItemView] {
             for ratioView in ratioItemViews {
                 ratioView.type = type
             }
         }
     }
-    
+
     func reset() {
         if let ratioItemViews = stackView.arrangedSubviews as? [RatioItemView] {
             for ratioView in ratioItemViews {
@@ -72,17 +72,17 @@ public class RatioSelector: UIView {
             }
         }
     }
-    
+
     private func addRatioItems() {
         for (index, item) in ratios.enumerated() {
             let itemView = RatioItemView(type: type, item: item)
-            itemView.selected = index == 0            
+            itemView.selected = index == 0
             stackView.addArrangedSubview(itemView)
 
             itemView.didGetRatio = {[weak self] ratio in
                 let ratioValue = (self?.type == .horizontal) ? ratio.ratioH : ratio.ratioV
                 self?.didGetRatio(ratioValue)
-                
+
                 if let ratioItemViews = self?.stackView.arrangedSubviews as? [RatioItemView] {
                     for ratioView in ratioItemViews {
                         ratioView.selected = ratio.nameH == ratioView.ratio.nameH ? true : false
@@ -94,7 +94,7 @@ public class RatioSelector: UIView {
 
     private func setupViews() {
         translatesAutoresizingMaskIntoConstraints = false
-        
+
         addSubview(scrollView)
         scrollView.addSubview(stackView)
 
@@ -109,10 +109,9 @@ public class RatioSelector: UIView {
         stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         stackView.widthAnchor.constraint(greaterThanOrEqualTo: scrollView.widthAnchor).isActive = true
         stackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor).isActive = true
-        
+
         scrollView.contentInset = .init(top: 0, left: 15, bottom: 0, right: 15)
 
         addRatioItems()
     }
 }
-

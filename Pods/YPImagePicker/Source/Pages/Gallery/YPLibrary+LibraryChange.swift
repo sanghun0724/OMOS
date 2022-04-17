@@ -13,7 +13,7 @@ extension YPLibraryVC: PHPhotoLibraryChangeObserver {
     func registerForLibraryChanges() {
         PHPhotoLibrary.shared().register(self)
     }
-    
+
     public func photoLibraryDidChange(_ changeInstance: PHChange) {
         guard let fetchResult = self.mediaManager.fetchResult,
               let collectionChanges = changeInstance.changeDetails(for: fetchResult) else {

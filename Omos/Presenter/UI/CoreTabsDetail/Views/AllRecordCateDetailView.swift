@@ -5,12 +5,11 @@
 //  Created by sangheon on 2022/02/28.
 //
 
-import UIKit
 import ReadMoreTextView
+import UIKit
 
-class AllRecordCateDetailView:BaseView {
-    
-    let tableView:UITableView = {
+class AllRecordCateDetailView: BaseView {
+    let tableView: UITableView = {
        let table = UITableView()
         table.register(AllRecordCateLongDetailCell.self, forCellReuseIdentifier: AllRecordCateLongDetailCell.identifier)
         table.register(AllRecordCateShortDetailCell.self, forCellReuseIdentifier: AllRecordCateShortDetailCell.identifier)
@@ -25,20 +24,20 @@ class AllRecordCateDetailView:BaseView {
     }()
     let emptyView = EmptyView()
     let loadingView = LoadingView()
-    
+
     override func configureUI() {
         self.addSubview(tableView)
         self.addSubview(emptyView)
         self.addSubview(loadingView)
-        
+
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
+
         emptyView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
+
         loadingView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }

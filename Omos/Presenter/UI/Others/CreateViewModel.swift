@@ -8,24 +8,22 @@
 import Foundation
 import RxSwift
 
-class CreateViewModel:BaseViewModel {
-    
+class CreateViewModel: BaseViewModel {
     let curTime = "\(Account.currentUser)\(Date.currentTimeStamp)"
-    var modifyDefaultModel:DetailRecordResponse? = nil 
-    var defaultModel:recordSaveDefaultModel = .init(musicId: "", imageURL: "", musicTitle: "", subTitle: "") // create할때 있는놈들
+    var modifyDefaultModel: DetailRecordResponse?
+    var defaultModel: recordSaveDefaultModel = .init(musicId: "", imageURL: "", musicTitle: "", subTitle: "") // create할때 있는놈들
     let errorMessage = BehaviorSubject<String?>(value: nil)
-    let loading = BehaviorSubject<Bool>(value:false)
+    let loading = BehaviorSubject<Bool>(value: false)
     let state = PublishSubject<Bool>()
-    var currentState:Bool = true
-    let usecase:RecordsUseCase
-    
-    init(usecase:RecordsUseCase) {
+    var currentState: Bool = true
+    let usecase: RecordsUseCase
+
+    init(usecase: RecordsUseCase) {
         self.usecase = usecase
         super.init()
-        
     }
-    
-    func saveRecord(cate:String, content:String, isPublic:Bool,musicId: String, title: String, userid: Int,recordImageURL:String) {
+
+    func saveRecord(cate: String, content: String, isPublic: Bool, musicId: String, title: String, userid: Int, recordImageURL: String) {
         loading.onNext(false)
         usecase.save(cate: cate, content: content, isPublic: isPublic, musicId: musicId, title: title, userid: userid, recordImageUrl: recordImageURL)
             .subscribe({ [weak self] event in
@@ -39,13 +37,13 @@ class CreateViewModel:BaseViewModel {
                 }
             }).disposed(by: disposeBag)
     }
-    
-    func updateRecord(postId:Int,request:UpdateRequest) {
+
+    func updateRecord(postId: Int, request: UpdateRequest) {
         usecase.recordUpdate(postId: postId, request: request)
             .subscribe({ [weak self] event in
                 self?.loading.onNext(true)
                 switch event {
-                case .success(let data):
+                case .success( _):
                     self?.currentState = true
                     self?.state.onNext(true)
                 case .failure(let error):
@@ -53,6 +51,4 @@ class CreateViewModel:BaseViewModel {
                 }
             }).disposed(by: disposeBag)
     }
-    
-    
 }

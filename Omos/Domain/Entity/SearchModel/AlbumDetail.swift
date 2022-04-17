@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct AlbumDetailRespone:Codable {
+struct AlbumDetailRespone: Codable {
     let artists: [Artist]
     let musicID, musicTitle: String
-    
+
     enum CodingKeys: String, CodingKey {
         case artists
         case musicID = "musicId"

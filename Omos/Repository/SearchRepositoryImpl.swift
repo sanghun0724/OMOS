@@ -5,20 +5,19 @@
 //  Created by sangheon on 2022/03/06.
 //
 
+import Alamofire
 import Foundation
 import RxSwift
-import Alamofire
 
-class SearchRepositoryImpl:SearchRepository {
-    
-    var searchAPI:SearchAPI
-    
+class SearchRepositoryImpl: SearchRepository {
+    var searchAPI: SearchAPI
+
     required init(searchAPI: SearchAPI) {
         self.searchAPI = searchAPI
     }
-    
+
     func albumFetch(request: MusicRequest) -> Single<[AlbumRespone]> {
-        return Single<[AlbumRespone]>.create { [weak self] single in
+        Single<[AlbumRespone]>.create { [weak self] single in
             self?.searchAPI.albumFetch(request: request, completion: { result in
                 switch result {
                 case .success(let data):
@@ -28,13 +27,13 @@ class SearchRepositoryImpl:SearchRepository {
                     single(.failure(error))
                 }
             })
-            
+
             return Disposables.create()
         }
     }
-    
+
     func artistFetch(request: MusicRequest) -> Single<[ArtistRespone]> {
-        return Single<[ArtistRespone]>.create { [weak self] single in
+        Single<[ArtistRespone]>.create { [weak self] single in
             self?.searchAPI.artistFetch(request: request, completion: { result in
                 switch result {
                 case .success(let data):
@@ -44,13 +43,13 @@ class SearchRepositoryImpl:SearchRepository {
                     single(.failure(error))
                 }
             })
-            
+
             return Disposables.create()
         }
     }
-    
+
     func trackFetch(request: MusicRequest) -> Single<[TrackRespone]> {
-        return Single<[TrackRespone]>.create { [weak self] single in
+        Single<[TrackRespone]>.create { [weak self] single in
             self?.searchAPI.trackFetch(request: request, completion: { result in
                 switch result {
                 case .success(let data):
@@ -60,13 +59,13 @@ class SearchRepositoryImpl:SearchRepository {
                     single(.failure(error))
                 }
             })
-            
+
             return Disposables.create()
         }
     }
-    
-    func searchTrackFetch(request:MusicRequest) -> Single<[TrackTitleRespone]> {
-        return Single<[TrackTitleRespone]>.create { [weak self] single in
+
+    func searchTrackFetch(request: MusicRequest) -> Single<[TrackTitleRespone]> {
+        Single<[TrackTitleRespone]>.create { [weak self] single in
             self?.searchAPI.searchTrackFetch(request: request, completion: { result in
                 switch result {
                 case .success(let data):
@@ -76,15 +75,14 @@ class SearchRepositoryImpl:SearchRepository {
                     single(.failure(error))
                 }
             })
-            
+
             return Disposables.create()
         }
     }
-    
-    
-    func albumDetailFetch(albumId:String) -> Single<[AlbumDetailRespone]> {
-        return Single<[AlbumDetailRespone]>.create { [weak self] single in
-            self?.searchAPI.albumDetailFetch(albumId:albumId , completion: { result in
+
+    func albumDetailFetch(albumId: String) -> Single<[AlbumDetailRespone]> {
+        Single<[AlbumDetailRespone]>.create { [weak self] single in
+            self?.searchAPI.albumDetailFetch(albumId: albumId, completion: { result in
                 switch result {
                 case .success(let data):
                     single(.success(data))
@@ -93,14 +91,14 @@ class SearchRepositoryImpl:SearchRepository {
                     single(.failure(error))
                 }
             })
-            
+
             return Disposables.create()
         }
     }
-    
-    func trackDetailFetch(trackId:String) -> Single<TrackRespone> {
-        return Single<TrackRespone>.create { [weak self] single in
-            self?.searchAPI.trackDetailFetch(trackId:trackId , completion: { result in
+
+    func trackDetailFetch(trackId: String) -> Single<TrackRespone> {
+        Single<TrackRespone>.create { [weak self] single in
+            self?.searchAPI.trackDetailFetch(trackId: trackId, completion: { result in
                 switch result {
                 case .success(let data):
                     single(.success(data))
@@ -109,14 +107,14 @@ class SearchRepositoryImpl:SearchRepository {
                     single(.failure(error))
                 }
             })
-            
+
             return Disposables.create()
         }
     }
-    
-    func artistDetailTrackFetch(artistId:String) -> Single<[ArtistDetailRespone]> {
-        return Single<[ArtistDetailRespone]>.create { [weak self] single in
-            self?.searchAPI.ArtistDetailTrackFetch(artistId:artistId , completion: { result in
+
+    func artistDetailTrackFetch(artistId: String) -> Single<[ArtistDetailRespone]> {
+        Single<[ArtistDetailRespone]>.create { [weak self] single in
+            self?.searchAPI.ArtistDetailTrackFetch(artistId: artistId, completion: { result in
                 switch result {
                 case .success(let data):
                     single(.success(data))
@@ -125,13 +123,13 @@ class SearchRepositoryImpl:SearchRepository {
                     single(.failure(error))
                 }
             })
-            
+
             return Disposables.create()
         }
     }
-    
-    func artistDetailAlbumFetch(artistId:String,request:ArtistRequest) -> Single<[AlbumRespone]> {
-        return Single<[AlbumRespone]>.create { [weak self] single in
+
+    func artistDetailAlbumFetch(artistId: String, request: ArtistRequest) -> Single<[AlbumRespone]> {
+        Single<[AlbumRespone]>.create { [weak self] single in
             self?.searchAPI.ArtistDetailAlbumFetch(artistId: artistId, request: request, completion: { result in
                 switch result {
                 case .success(let data):
@@ -141,9 +139,8 @@ class SearchRepositoryImpl:SearchRepository {
                     single(.failure(error))
                 }
             })
-            
+
             return Disposables.create()
         }
     }
-    
 }

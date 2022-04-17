@@ -12,18 +12,18 @@ import UIKit
 ///
 /// Probably the most commonly seen example of a bar button.
 open class TMLabelBarButton: TMBarButton {
-    
+
     // MARK: Defaults
-    
+
     private struct Defaults {
         static let contentInset = UIEdgeInsets(top: 12.0, left: 0.0, bottom: 12.0, right: 0.0)
         static let font = UIFont.preferredFont(forTextStyle: .headline)
         static let text = "Item"
         static let badgeLeadingInset: CGFloat = 8.0
     }
-    
+
     // MARK: Types
-    
+
     /// Vertical alignment of the label within the bar button.
     ///
     /// - `.center`: Center the label vertically in the button.
@@ -34,9 +34,9 @@ open class TMLabelBarButton: TMBarButton {
         case top
         case bottom
     }
-    
+
     // MARK: Properties
-    
+
     open override var intrinsicContentSize: CGSize {
         if let fontIntrinsicContentSize = self.fontIntrinsicContentSize {
             return fontIntrinsicContentSize
@@ -44,12 +44,12 @@ open class TMLabelBarButton: TMBarButton {
         return super.intrinsicContentSize
     }
     private var fontIntrinsicContentSize: CGSize?
-    
+
     private let label = AnimateableLabel()
     private let badgeContainer = UIView()
     private var badgeContainerLeading: NSLayoutConstraint?
     private var badgeContainerWidth: NSLayoutConstraint?
-    
+
     open override var contentInset: UIEdgeInsets {
         get {
             return super.contentInset
@@ -59,7 +59,7 @@ open class TMLabelBarButton: TMBarButton {
             calculateFontIntrinsicContentSize(for: text)
         }
     }
-    
+
     /// Text to display in the button.
     open var text: String? {
         get {
@@ -80,7 +80,7 @@ open class TMLabelBarButton: TMBarButton {
     /// Color of the text when selected.
     open var selectedTintColor: UIColor! {
         didSet {
-            if isSelected  {
+            if isSelected {
                 label.textColor = selectedTintColor
             }
         }
@@ -116,7 +116,7 @@ open class TMLabelBarButton: TMBarButton {
             label.adjustsFontForContentSizeCategory = newValue
         }
     }
-    
+
     /// How to vertically align the label within the button. Defaults to `.center`.
     ///
     /// - Note: This will only apply when the button is larger than
@@ -130,12 +130,12 @@ open class TMLabelBarButton: TMBarButton {
     private var labelTopConstraint: NSLayoutConstraint?
     private var labelCenterConstraint: NSLayoutConstraint?
     private var labelBottomConstraint: NSLayoutConstraint?
-    
+
     // MARK: Lifecycle
-    
+
     open override func layout(in view: UIView) {
         super.layout(in: view)
-        
+
         view.addSubview(label)
         view.addSubview(badgeContainer)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -156,16 +156,16 @@ open class TMLabelBarButton: TMBarButton {
         ]
         self.badgeContainerLeading = badgeContainerLeading
         self.badgeContainerWidth = badgeContainerWidth
-        
+
         self.labelCenterConstraint = labelCenterConstraint
         self.labelTopConstraint = label.topAnchor.constraint(equalTo: view.topAnchor)
         self.labelBottomConstraint = view.bottomAnchor.constraint(equalTo: label.bottomAnchor)
-        
+
         NSLayoutConstraint.activate(constraints)
-        
+
         label.textAlignment = .center
         label.setContentCompressionResistancePriority(.required, for: .vertical)
-        
+
         adjustsAlphaOnSelection = false
         label.text = Defaults.text
         label.font = self.font
@@ -176,13 +176,13 @@ open class TMLabelBarButton: TMBarButton {
         }
         selectedTintColor = .systemBlue
         contentInset = Defaults.contentInset
-        
+
         calculateFontIntrinsicContentSize(for: label.text)
     }
-    
+
     open override func layoutBadge(_ badge: TMBadgeView, in view: UIView) {
         super.layoutBadge(badge, in: view)
-        
+
         badgeContainer.addSubview(badge)
         badge.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -192,39 +192,39 @@ open class TMLabelBarButton: TMBarButton {
             badge.centerYAnchor.constraint(equalTo: badgeContainer.centerYAnchor)
             ])
     }
-    
+
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        
+
         UIView.performWithoutAnimation {
             update(for: selectionState)
         }
     }
-    
+
     open override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         badge.layoutIfNeeded()
         updateBadgeConstraints()
     }
-    
+
     open override func populate(for item: TMBarItemable) {
         super.populate(for: item)
-        
+
         label.text = item.title
         calculateFontIntrinsicContentSize(for: item.title)
-    
+
         updateBadgeConstraints()
     }
-    
+
     open override func update(for selectionState: TMBarButton.SelectionState) {
         super.update(for: selectionState)
-        
+
         let transitionColor = tintColor.interpolate(with: selectedTintColor,
                                                     percent: selectionState.rawValue)
-        
+
         label.textColor = transitionColor
-        
+
         // Because we can't animate nicely between fonts 😩
         // Cross dissolve on 'end' states between font properties.
         if let selectedFont = self.selectedFont {
@@ -239,15 +239,15 @@ open class TMLabelBarButton: TMBarButton {
             }
         }
     }
-    
+
     // MARK: Layout
-    
+
     private func updateBadgeConstraints() {
         let isBadgeVisible = badge.value != nil
         badgeContainerWidth?.constant =  isBadgeVisible ? badge.bounds.size.width : 0.0
         badgeContainerLeading?.constant = isBadgeVisible ? Defaults.badgeLeadingInset : 0.0
     }
-    
+
     private func updateAlignmentConstraints() {
         switch verticalAlignment {
         case .center:
@@ -267,7 +267,7 @@ open class TMLabelBarButton: TMBarButton {
 }
 
 private extension TMLabelBarButton {
-    
+
     /// Calculates an intrinsic content size based on font properties.
     ///
     /// Make the intrinsic size a calculated size based off a
@@ -281,23 +281,23 @@ private extension TMLabelBarButton {
         let string = value as NSString
         let font = self.font
         let selectedFont = self.selectedFont ?? self.font
-        
+
         let fontRect = string.boundingRect(with: .zero, options: .usesFontLeading, attributes: [.font: font], context: nil)
         let selectedFontRect = string.boundingRect(with: .zero, options: .usesFontLeading, attributes: [.font: selectedFont], context: nil)
-        
+
         var largestWidth = max(selectedFontRect.size.width, fontRect.size.width)
         var largestHeight = max(selectedFontRect.size.height, fontRect.size.height)
-        
+
         largestWidth += contentInset.left + contentInset.right
         largestHeight += contentInset.top + contentInset.bottom
-        
+
         self.fontIntrinsicContentSize = CGSize(width: largestWidth, height: largestHeight)
         invalidateIntrinsicContentSize()
     }
 }
 
 private extension TMLabelBarButton {
-    
+
     func makeTextLayer(for label: UILabel) -> CATextLayer {
         let layer = CATextLayer()
         layer.frame = label.convert(label.frame, to: self)

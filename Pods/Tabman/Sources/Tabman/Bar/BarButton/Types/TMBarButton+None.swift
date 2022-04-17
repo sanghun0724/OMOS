@@ -9,14 +9,14 @@
 import UIKit
 
 extension TMBarButton {
-    
+
     /// Button that is zero height and hidden.
     ///
     /// Use this if you do not want visible buttons in the bar.
     public final class None: TMBarButton {
-        
+
         // MARK: Properties
-        
+
         // swiftlint:disable unused_setter_value
         public override var isHidden: Bool {
             get {
@@ -26,12 +26,12 @@ extension TMBarButton {
                 super.isHidden = true
             }
         }
-        
+
         // MARK: Lifecycle
-        
+
         public override func layout(in view: UIView) {
             super.layout(in: view)
-            
+
             super.isHidden = true
         }
     }

@@ -10,18 +10,18 @@ import UIKit
 import Stevia
 
 final class YPPagerMenu: UIView {
-    
+
     var didSetConstraints = false
     var menuItems = [YPMenuItem]()
-    
+
     convenience init() {
         self.init(frame: .zero)
         backgroundColor = .offWhiteOrBlack
         clipsToBounds = true
     }
-    
+
     var separators = [UIView]()
-    
+
     func setUpMenuItemsConstraints() {
         let screenWidth = YPImagePickerConfiguration.screenWidth
         let menuItemWidth: CGFloat = screenWidth / CGFloat(menuItems.count)
@@ -30,18 +30,18 @@ final class YPPagerMenu: UIView {
             sv(
                 m
             )
-            
+
             m.fillVertically().width(menuItemWidth)
             if let pm = previousMenuItem {
                 pm-0-m
             } else {
                 |m
             }
-            
+
             previousMenuItem = m
         }
     }
-    
+
     override func updateConstraints() {
         super.updateConstraints()
         if !didSetConstraints {
@@ -49,7 +49,7 @@ final class YPPagerMenu: UIView {
         }
         didSetConstraints = true
     }
-    
+
     func refreshMenuItems() {
         didSetConstraints = false
         updateConstraints()

@@ -8,13 +8,13 @@
 import Foundation
 
 ///  Track + TrackDetail
-struct TrackRespone:Codable {
-    let musicID : String
+struct TrackRespone: Codable {
+    let musicID: String
     let musicTitle: String
     let artists: [Artist]
     let albumImageURL: String
     let releaseDate, albumTitle, albumID: String
-    
+
     enum CodingKeys: String, CodingKey {
         case musicID = "musicId"
         case musicTitle, artists
@@ -24,6 +24,6 @@ struct TrackRespone:Codable {
     }
 }
 
-struct TrackTitleRespone:Codable {
-    let musicTitle:String
+struct TrackTitleRespone: Codable {
+    let musicTitle: String
 }

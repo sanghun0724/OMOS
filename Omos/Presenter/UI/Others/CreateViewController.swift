@@ -5,44 +5,42 @@
 //  Created by sangheon on 2022/02/20.
 //
 
-import UIKit
-import RxSwift
-import RxCocoa
-import SnapKit
-import YPImagePicker
-import Mantis
-import Kingfisher
 import IRSticker_swift
-
+import Kingfisher
+import Mantis
+import RxCocoa
+import RxSwift
+import SnapKit
+import UIKit
+import YPImagePicker
 
 enum CreateType {
     case modify
     case create
 }
 
-class CreateViewController:BaseViewController {
+class CreateViewController: BaseViewController {
     let scrollView = UIScrollView()
-    let category:String
+    let category: String
     private let selfView = CreateView()
-    let viewModel:CreateViewModel
-    let type:CreateType
+    let viewModel: CreateViewModel
+    let type: CreateType
     lazy var awsHelper = AWSS3Helper()
     let stickerChoiceView = StickerView()
     var animator: UIDynamicAnimator?
     var selectedSticker: IRStickerView?
-    
-    
-    init(viewModel:CreateViewModel,category:String,type:CreateType) {
+
+    init(viewModel: CreateViewModel, category: String, type: CreateType) {
         self.viewModel = viewModel
         self.category = category
         self.type = type
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         selfView.titleTextView.delegate = self
@@ -50,16 +48,15 @@ class CreateViewController:BaseViewController {
         selfView.mainfullTextView.delegate = self
         bind()
         animator = UIDynamicAnimator.init(referenceView: selfView.textCoverView)
-        if type == .create { setCreateViewinfo() }
-        else { setModifyView() }
+        if type == .create { setCreateViewinfo() } else { setModifyView() }
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setlongTextView(category)
         self.scrollView.addSubview(stickerChoiceView)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
@@ -71,7 +68,6 @@ class CreateViewController:BaseViewController {
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.backgroundColor = .mainBackGround
     }
-    
 
     private func setStickerView() {
         stickerChoiceView.isHidden = false
@@ -80,35 +76,30 @@ class CreateViewController:BaseViewController {
             make.width.equalToSuperview()
             make.top.equalToSuperview()
         }
-        
-        
+
         stickerChoiceView.snp.remakeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.equalToSuperview()
             make.top.equalTo(selfView.lastView.snp.top)
             make.bottom.equalToSuperview()
         }
-        
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         removeListeners()
     }
-    
+
     @objc func didTapDone() {
         for subView in self.selfView.textCoverView.subviews {
-            if subView.isKind(of: IRStickerView.self)  {
+            if subView.isKind(of: IRStickerView.self) {
                 let sticker = subView as! IRStickerView
                 print(sticker.contentImage)
                 print(sticker.contentView.frame)
                 print(sticker.contentView.transform)
-              
-                
-            
             }
         }
-        var mainText:String?
+        var mainText: String?
         if category == "한 줄 감상" {
             mainText = selfView.mainTextView.text
         } else {
@@ -119,10 +110,10 @@ class CreateViewController:BaseViewController {
             setAlert()
             return
         }
-        
+
         if type == .create {
             var imageUrl = "https://omos-image.s3.ap-northeast-2.amazonaws.com/record/\(viewModel.curTime).png"
-            viewModel.saveRecord(cate: getCate(cate: category), content: mainText!, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: selfView.titleTextView.text, userid: Account.currentUser,recordImageURL: imageUrl )
+            viewModel.saveRecord(cate: getCate(cate: category), content: mainText!, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: selfView.titleTextView.text, userid: Account.currentUser, recordImageURL: imageUrl )
         } else {
             var recordContent = ""
             if  selfView.mainTextView.text != viewModel.modifyDefaultModel?.recordTitle {
@@ -130,24 +121,22 @@ class CreateViewController:BaseViewController {
             } else {
                 recordContent = selfView.mainfullTextView.text
             }
-            
+
             if ImageCache.default.isCached(forKey: viewModel.modifyDefaultModel?.recordImageURL ?? "") {
                           print("Image is cached")
                           ImageCache.default.removeImage(forKey: viewModel.modifyDefaultModel?.recordImageURL ?? "")
                  }
-            viewModel.updateRecord(postId: viewModel.modifyDefaultModel?.recordID ?? 0, request: .init(contents: recordContent, title: selfView.titleTextView.text,isPublic:  !(selfView.lockButton.isSelected),recordImageUrl: viewModel.modifyDefaultModel?.recordImageURL ?? "" ))
+            viewModel.updateRecord(postId: viewModel.modifyDefaultModel?.recordID ?? 0, request: .init(contents: recordContent, title: selfView.titleTextView.text, isPublic: !(selfView.lockButton.isSelected), recordImageUrl: viewModel.modifyDefaultModel?.recordImageURL ?? "" ))
         }
-        
     }
-    
+
     private func setAlert() {
-        let action = UIAlertAction(title: "확인", style: .default) { alert in
-            
+        let action = UIAlertAction(title: "확인", style: .default) { _ in
         }
         action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
         self.presentAlert(title: "", message: "내용이나 제목을 채워주세요", isCancelActionIncluded: false, preferredStyle: .alert, with: action)
     }
-    
+
     private func setCreateViewinfo() {
         selfView.cateLabel.text = "  | \(category)"
         selfView.circleImageView.setImage(with: viewModel.defaultModel.imageURL)
@@ -156,23 +145,23 @@ class CreateViewController:BaseViewController {
         textViewDidChange(selfView.mainfullTextView)
         // get the current date and time
         let currentDateTime = Date()
-        
+
         // get the user's calendar
         let userCalendar = Calendar.current
-        
+
         // choose which date and time components are needed
         let requestedComponents: Set<Calendar.Component> = [
             .year,
             .month,
             .day
         ]
-        
+
         // get the components
         let dateTimeComponents = userCalendar.dateComponents(requestedComponents, from: currentDateTime)
-        
+
         selfView.createdField.text = "\(dateTimeComponents.year!) \(dateTimeComponents.month!) \(dateTimeComponents.day!)"
     }
-    
+
     func setModifyView() {
         selfView.cateLabel.text = "  | \(category)"
         selfView.circleImageView.setImage(with: viewModel.modifyDefaultModel?.music.albumImageURL ?? "")
@@ -185,38 +174,37 @@ class CreateViewController:BaseViewController {
         selfView.mainTextView.textColor = .white
         selfView.mainfullTextView.textColor = .white
         selfView.titleTextView.textColor = .white
-        
+
         textViewDidChange(selfView.mainfullTextView)
     }
-    
+
     override func configureUI() {
         super.configureUI()
     }
-    
+
     private func bind() {
         selfView.imageAddButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] _ in
                 self?.configureImagePicker()
             }).disposed(by: disposeBag)
-        
+
         viewModel.state
-            .subscribe(onNext: { [weak self] info in
-                
+            .subscribe(onNext: { [weak self] _ in
                 for controller in (self?.navigationController?.viewControllers ?? [UIViewController()] )  as Array {
                     if controller.isKind(of: MyRecordViewController.self) {
                         self?.navigationController?.popToViewController(controller, animated: true)
                         UserDefaults.standard.set(1, forKey: "reload")
                         break
                     }
-                    
+
                     if controller.isKind(of: HomeViewController.self) {
                         self?.navigationController?.popToViewController(controller, animated: true)
                         break
                     }
                     if controller.isKind(of: AllRecordCateDetailViewController.self) {
                         self?.navigationController?.popToViewController(controller, animated: true)
-                        
+
                         break
                     }
                     if controller.isKind(of: AllRecordSearchDetailViewController.self) {
@@ -231,33 +219,31 @@ class CreateViewController:BaseViewController {
                     }
                 }
             }).disposed(by: disposeBag)
-        
+
         viewModel.loading
-            .subscribe(onNext: { [weak self] loading in
-                
+            .subscribe(onNext: { [weak self] _ in
             }).disposed(by: disposeBag)
-        
+
         selfView.lockButton.rx.tap
-            .scan(false) { (lastState, newValue) in
+            .scan(false) { lastState, _ in
                 !lastState
             }
             .bind(to: selfView.lockButton.rx.isSelected)
             .disposed(by: disposeBag)
-        
+
         selfView.stickerImageView.rx.tap
             .subscribe(onNext: { [weak self] _ in
-                let action = UIAlertAction(title: "확인", style: .default) {[weak self] alert in
-                    
+                let action = UIAlertAction(title: "확인", style: .default) {[weak self] _ in
                 }
                 self?.presentAlert(title: "", message: "베타 기능입니다. 레코드에 반영은 되지 않습니다.", isCancelActionIncluded: false, preferredStyle: .alert, with: action )
                 self?.setStickerView()
                 self?.scrollView.layoutIfNeeded()
                 self?.scrollView.setContentOffset(CGPoint(x: 0, y: (self?.scrollView.contentSize.height)! - (self?.scrollView.bounds.size.height)!), animated: true)
             }).disposed(by: disposeBag)
-        
+
         stickerBind()
     }
-    
+
     func stickerBind() {
         stickerChoiceView.stickerImageView1.rx.tapGesture()
             .when(.recognized)
@@ -270,7 +256,7 @@ class CreateViewController:BaseViewController {
                 self?.selfView.textCoverView.addSubview(sticker1)
                 sticker1.performTapOperation()
             }).disposed(by: disposeBag)
-        
+
         stickerChoiceView.stickerImageView2.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
@@ -282,7 +268,7 @@ class CreateViewController:BaseViewController {
                 self?.selfView.textCoverView.addSubview(sticker1)
                 sticker1.performTapOperation()
             }).disposed(by: disposeBag)
-        
+
         stickerChoiceView.stickerImageView3.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
@@ -294,7 +280,7 @@ class CreateViewController:BaseViewController {
                 self?.selfView.textCoverView.addSubview(sticker1)
                 sticker1.performTapOperation()
             }).disposed(by: disposeBag)
-        
+
         stickerChoiceView.stickerImageView4.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
@@ -306,7 +292,7 @@ class CreateViewController:BaseViewController {
                 self?.selfView.textCoverView.addSubview(sticker1)
                 sticker1.performTapOperation()
             }).disposed(by: disposeBag)
-        
+
         stickerChoiceView.stickerImageView5.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
@@ -318,7 +304,7 @@ class CreateViewController:BaseViewController {
                 self?.selfView.textCoverView.addSubview(sticker1)
                 sticker1.performTapOperation()
             }).disposed(by: disposeBag)
-        
+
         stickerChoiceView.stickerImageView6.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
@@ -330,13 +316,13 @@ class CreateViewController:BaseViewController {
                 self?.selfView.textCoverView.addSubview(sticker1)
                 sticker1.performTapOperation()
             }).disposed(by: disposeBag)
-        
+
         selfView.rx.tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
-                if (self?.selectedSticker != nil) {
+                if self?.selectedSticker != nil {
                     self?.selectedSticker!.enabledControl = false
-                    self?.selectedSticker!.enabledBorder = false;
+                    self?.selectedSticker!.enabledBorder = false
                     self?.selectedSticker = nil
                     self?.scrollView.isScrollEnabled = true
                 }
@@ -347,8 +333,7 @@ class CreateViewController:BaseViewController {
                         make.top.equalToSuperview()
                         make.bottom.equalToSuperview()
                     }
-                    
-                    
+
                     self?.stickerChoiceView.snp.remakeConstraints({ make in
                         make.centerX.equalToSuperview()
                         make.width.equalToSuperview()
@@ -359,7 +344,7 @@ class CreateViewController:BaseViewController {
                 }
             }).disposed(by: disposeBag)
     }
-    
+
     func configureImagePicker() {
         var config = YPImagePickerConfiguration()
         config.wordings.libraryTitle = "보관함"
@@ -386,8 +371,8 @@ class CreateViewController:BaseViewController {
         }
         present(picker, animated: true, completion: nil)
     }
-    
-    func setlongTextView(_ category:String) {
+
+    func setlongTextView(_ category: String) {
         if category == "한 줄 감상" {
             selfView.mainfullTextView.isHidden = true
             self.view.addSubview(scrollView)
@@ -409,7 +394,7 @@ class CreateViewController:BaseViewController {
             scrollView.showsVerticalScrollIndicator = false
             return
         }
-        
+
         selfView.remainTextCount.text = "0/796"
         selfView.mainTextView.isHidden = true
         self.view.addSubview(scrollView)
@@ -420,20 +405,20 @@ class CreateViewController:BaseViewController {
             make.bottom.equalToSuperview()
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
         }
-        
+
         selfView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.equalToSuperview()
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
         }
-        
+
         selfView.mainfullTextView.translatesAutoresizingMaskIntoConstraints = false
         selfView.mainfullTextView.heightAnchor.constraint(equalToConstant: Constant.mainHeight * 0.49).isActive = true
         scrollView.showsVerticalScrollIndicator = false
     }
-    
-    private func getCate(cate:String) -> String {
+
+    private func getCate(cate: String) -> String {
         switch cate {
         case "한 줄 감상":
             return "A_LINE"
@@ -449,14 +434,10 @@ class CreateViewController:BaseViewController {
             return "FREE"
         }
     }
-    
 }
-
-
 
 extension CreateViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        
         switch textView {
         case selfView.titleTextView:
             if textView.text == "레코드 제목을 입력해주세요" {
@@ -476,11 +457,9 @@ extension CreateViewController: UITextViewDelegate {
         default:
             return
         }
-        
     }
-    
+
     func textViewDidEndEditing(_ textView: UITextView) {
-        
         switch textView {
         case selfView.titleTextView:
             if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
@@ -503,16 +482,14 @@ extension CreateViewController: UITextViewDelegate {
         default:
             return
         }
-        
     }
-    
+
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let inputString = text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard let oldString = textView.text, let newRange = Range(range, in: oldString) else { return true }
         let newString = oldString.replacingCharacters(in: newRange, with: inputString).trimmingCharacters(in: .whitespacesAndNewlines)
         let characterCount = newString.count
-        
-        
+
         switch textView {
         case selfView.titleTextView:
             guard characterCount <= 36 else { return false }
@@ -526,86 +503,76 @@ extension CreateViewController: UITextViewDelegate {
         default:
             return true
         }
-        
+
         return true
     }
-    
+
     func textViewDidChange(_ textView: UITextView) {
         let size = CGSize(width: view.frame.width, height: .infinity)
         let estimatedSize = textView.sizeThatFits(size)
-        
+
         textView.constraints.forEach { constraint in
             if constraint.firstAttribute == .height {
                 guard constraint.constant != estimatedSize.height else {
                     return
                 }
                 // Disable the scroll
-                if estimatedSize.height <  Constant.mainHeight * 0.49 {
-                    constraint.constant =  Constant.mainHeight * 0.49
+                if estimatedSize.height < Constant.mainHeight * 0.49 {
+                    constraint.constant = Constant.mainHeight * 0.49
                 } else {
                     constraint.constant = estimatedSize.height
                     // scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height-scrollView.bounds.height), animated: true)
-                    
+
                 }
             }
         }
     }
 }
 
-
-extension CreateViewController:CropViewControllerDelegate {
+extension CreateViewController: CropViewControllerDelegate {
     func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation, cropInfo: CropInfo) {
         selfView.imageView.image = cropped
-        
+
         if type == .create {
-            awsHelper.uploadImage(cropped, sender: self, imageName: "record/\(viewModel.curTime)" , type: .record) { _ in
-               
+            awsHelper.uploadImage(cropped, sender: self, imageName: "record/\(viewModel.curTime)", type: .record) { _ in
             }
-        } else {//711648447384992.png
+        } else {// 711648447384992.png
             guard let str = viewModel.modifyDefaultModel?.recordImageURL else { return }
             var idx = 0
             for i in 1..<str.count {
                 if str[str.index(str.endIndex, offsetBy: -i)] == "/" {
-                    idx = i-1
+                    idx = i - 1
                     break
                 }
             }
             let startIndex = str.index(str.endIndex, offsetBy: -idx)
             let endIndex = str.index(str.endIndex, offsetBy: -4)
             let defualtUrl = String(str[startIndex..<endIndex])
-            
-            awsHelper.uploadImage(cropped, sender: self, imageName: "record/\(defualtUrl)" , type: .record) { _ in
 
+            awsHelper.uploadImage(cropped, sender: self, imageName: "record/\(defualtUrl)", type: .record) { _ in
             }
-           
         }
-        
-        self.dismiss(animated: true,completion: nil)
+
+        self.dismiss(animated: true, completion: nil)
         self.tabBarController?.tabBar.isHidden = true
     }
-    
+
     func cropViewControllerDidFailToCrop(_ cropViewController: CropViewController, original: UIImage) {
-        
     }
-    
+
     func cropViewControllerDidCancel(_ cropViewController: CropViewController, original: UIImage) {
         self.dismiss(animated: true, completion: nil)
         self.tabBarController?.tabBar.isHidden = true
     }
-    
+
     func cropViewControllerDidBeginResize(_ cropViewController: CropViewController) {
-        
     }
-    
+
     func cropViewControllerDidEndResize(_ cropViewController: CropViewController, original: UIImage, cropInfo: CropInfo) {
-        
     }
-    
-    
 }
 
-
-extension CreateViewController:IRStickerViewDelegate {
+extension CreateViewController: IRStickerViewDelegate {
     func ir_StickerViewDidTapContentView(stickerView: IRStickerView) {
         NSLog("Tap[%zd] ContentView", stickerView.tag)
         if let selectedSticker = selectedSticker {
@@ -618,12 +585,12 @@ extension CreateViewController:IRStickerViewDelegate {
         selectedSticker!.enabledControl = true
         scrollView.isScrollEnabled = false
     }
-    
+
     func ir_StickerViewDidTapLeftTopControl(stickerView: IRStickerView) {
-        NSLog("Tap[%zd] DeleteControl", stickerView.tag);
+        NSLog("Tap[%zd] DeleteControl", stickerView.tag)
         stickerView.removeFromSuperview()
         for subView in self.selfView.textCoverView.subviews {
-            if subView.isKind(of: IRStickerView.self)  {
+            if subView.isKind(of: IRStickerView.self) {
                 let sticker = subView as! IRStickerView
                 sticker.performTapOperation()
                 break

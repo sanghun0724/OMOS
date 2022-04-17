@@ -13,9 +13,9 @@ import Pageboy
 /// can directly manipulate, control and display the status of the page view controller. It also handles
 /// automatic insetting of child view controller contents.
 open class TabmanViewController: PageboyViewController, PageboyViewControllerDelegate, TMBarDelegate {
-    
+
     // MARK: Types
-    
+
     /// Location of the bar in the view controller.
     ///
     /// - top: Pin to the top of the safe area.
@@ -30,17 +30,17 @@ open class TabmanViewController: PageboyViewController, PageboyViewControllerDel
         case navigationItem(item: UINavigationItem)
         case custom(view: UIView, layout: ((UIView) -> Void)?)
     }
-    
+
     // MARK: Views
-    
+
     internal let topBarContainer = UIStackView()
     internal let bottomBarContainer = UIStackView()
-    
+
     /// All bars that have been added to the view controller.
     public private(set) var bars = [TMBar]()
-    
+
     // MARK: Layout
-    
+
     private var requiredInsets: Insets?
     private let insetter = AutoInsetter()
     /// Whether to automatically adjust child view controller content insets with bar geometry.
@@ -70,42 +70,42 @@ open class TabmanViewController: PageboyViewController, PageboyViewControllerDel
     }()
     private var barLayoutGuideTop: NSLayoutConstraint?
     private var barLayoutGuideBottom: NSLayoutConstraint?
-    
+
     // MARK: Init
-    
+
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         initialize()
     }
-    
+
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initialize()
     }
-    
+
     private func initialize() {
         delegate = self
     }
-    
+
     // MARK: Lifecycle
-    
+
     open override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         if automaticallyAdjustsChildInsets {
             insetter.enable(for: self)
         }
-        
+
         configureBarLayoutGuide(barLayoutGuide)
         layoutContainers(in: view)
     }
-    
+
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+
         setNeedsInsetsUpdate()
     }
-    
+
     /// A method for calculating insets that are required to layout content between the bars
     /// that have been added.
     ///
@@ -116,23 +116,23 @@ open class TabmanViewController: PageboyViewController, PageboyViewControllerDel
     open func calculateRequiredInsets() -> Insets {
         return Insets.for(tabmanViewController: self)
     }
-    
+
     // MARK: Pageboy
-    
+
     /// :nodoc:
     open override func insertPage(at index: PageboyViewController.PageIndex,
                                   then updateBehavior: PageboyViewController.PageUpdateBehavior) {
         bars.forEach({ $0.reloadData(at: index...index, context: .insertion) })
         super.insertPage(at: index, then: updateBehavior)
     }
-    
+
     /// :nodoc:
     open override func deletePage(at index: PageboyViewController.PageIndex,
                                   then updateBehavior: PageboyViewController.PageUpdateBehavior) {
         bars.forEach({ $0.reloadData(at: index...index, context: .deletion) })
         super.deletePage(at: index, then: updateBehavior)
     }
-    
+
     /// :nodoc:
     open func pageboyViewController(_ pageboyViewController: PageboyViewController,
                                     willScrollToPageAt index: PageIndex,
@@ -140,14 +140,14 @@ open class TabmanViewController: PageboyViewController, PageboyViewControllerDel
                                     animated: Bool) {
         let viewController = dataSource?.viewController(for: self, at: index)
         setNeedsInsetsUpdate(to: viewController)
-        
+
         if animated {
             updateActiveBars(to: CGFloat(index),
                              direction: direction,
                              animated: true)
         }
     }
-    
+
     /// :nodoc:
     open func pageboyViewController(_ pageboyViewController: PageboyViewController,
                                     didScrollTo position: CGPoint,
@@ -159,7 +159,7 @@ open class TabmanViewController: PageboyViewController, PageboyViewControllerDel
                              animated: false)
         }
     }
-    
+
     /// :nodoc:
     open func pageboyViewController(_ pageboyViewController: PageboyViewController,
                                     didScrollToPageAt index: PageIndex,
@@ -169,27 +169,27 @@ open class TabmanViewController: PageboyViewController, PageboyViewControllerDel
                          direction: direction,
                          animated: false)
     }
-    
+
     /// :nodoc:
     open func pageboyViewController(_ pageboyViewController: PageboyViewController,
                                     didCancelScrollToPageAt index: PageboyViewController.PageIndex,
                                     returnToPageAt previousIndex: PageboyViewController.PageIndex) {
     }
-    
+
     /// :nodoc:
     open func pageboyViewController(_ pageboyViewController: PageboyViewController,
                                     didReloadWith currentViewController: UIViewController,
                                     currentPageIndex: PageIndex) {
         setNeedsInsetsUpdate(to: currentViewController)
-        
+
         guard let pageCount = pageboyViewController.pageCount else {
             return
         }
         bars.forEach({ $0.reloadData(at: 0...pageCount - 1, context: .full) })
     }
-    
+
     // MARK: TMBarDelegate
-    
+
     /// :nodoc:
     open func bar(_ bar: TMBar,
                   didRequestScrollTo index: PageboyViewController.PageIndex) {
@@ -199,7 +199,7 @@ open class TabmanViewController: PageboyViewController, PageboyViewControllerDel
 
 // MARK: - Bar Layout
 extension TabmanViewController {
-    
+
     /// Add a new `TMBar` to the view controller.
     ///
     /// - Parameters:
@@ -211,19 +211,19 @@ extension TabmanViewController {
                        at location: BarLocation) {
         bar.dataSource = dataSource
         bar.delegate = self
-        
+
         if bars.contains(where: { $0 === bar }) == false {
             bars.append(bar)
         }
         layoutView(bar, at: location)
-        
+
         updateBar(bar, to: relativeCurrentPosition, animated: false)
-        
+
         if let pageCount = self.pageCount, pageCount > 0 {
             bar.reloadData(at: 0...pageCount - 1, context: .full)
         }
     }
-    
+
     /// Remove a `TMBar` from the view controller.
     ///
     /// - Parameter bar: Bar to remove.
@@ -231,16 +231,16 @@ extension TabmanViewController {
         guard let index = bars.firstIndex(where: { $0 === bar }) else {
             return
         }
-        
+
         bars.remove(at: index)
         bar.removeFromSuperview()
     }
-    
+
     private func layoutContainers(in view: UIView) {
-        
+
         topBarContainer.axis = .vertical
         view.addSubview(topBarContainer)
-        
+
         topBarContainer.translatesAutoresizingMaskIntoConstraints = false
         var topConstraints = [
             topBarContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -252,10 +252,10 @@ extension TabmanViewController {
             topConstraints.append(topBarContainer.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor))
         }
         NSLayoutConstraint.activate(topConstraints)
-        
+
         bottomBarContainer.axis = .vertical
         view.addSubview(bottomBarContainer)
-        
+
         bottomBarContainer.translatesAutoresizingMaskIntoConstraints = false
         var bottomConstraints = [
             bottomBarContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -268,11 +268,11 @@ extension TabmanViewController {
         }
         NSLayoutConstraint.activate(bottomConstraints)
     }
-    
+
     private func layoutView(_ view: UIView,
                             at location: BarLocation) {
         view.removeFromSuperview()
-        
+
         switch location {
         case .top:
             topBarContainer.addArrangedSubview(view)
@@ -293,23 +293,23 @@ extension TabmanViewController {
             }
         case .navigationItem(let item):
             let container = ViewTitleViewContainer(for: view)
-            
+
             container.frame = CGRect(x: 0.0, y: 0.0, width: 300, height: 50)
             container.layoutIfNeeded()
-            
+
             item.titleView = container
         }
     }
-    
+
     private func configureBarLayoutGuide(_ guide: UILayoutGuide) {
         guard barLayoutGuide.owningView == nil else {
             return
         }
-        
+
         view.addLayoutGuide(barLayoutGuide)
         let barLayoutGuideTop = barLayoutGuide.topAnchor.constraint(equalTo: view.topAnchor)
         let barLayoutGuideBottom = view.bottomAnchor.constraint(equalTo: barLayoutGuide.bottomAnchor)
-        
+
         NSLayoutConstraint.activate([
             barLayoutGuide.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             barLayoutGuideTop,
@@ -323,7 +323,7 @@ extension TabmanViewController {
 
 // MARK: - Bar Management
 private extension TabmanViewController {
-    
+
     func updateActiveBars(to position: CGFloat?,
                           direction: NavigationDirection = .neutral,
                           animated: Bool) {
@@ -331,7 +331,7 @@ private extension TabmanViewController {
                                             direction: direction,
                                             animated: animated) })
     }
-    
+
     func updateBar(_ bar: TMBar,
                    to position: CGFloat?,
                    direction: NavigationDirection = .neutral,
@@ -349,16 +349,16 @@ private extension TabmanViewController {
 
 // MARK: - Insetting
 internal extension TabmanViewController {
-    
+
     func setNeedsInsetsUpdate() {
         setNeedsInsetsUpdate(to: currentViewController)
     }
-    
+
     func setNeedsInsetsUpdate(to viewController: UIViewController?) {
         guard viewIfLoaded?.window != nil else {
             return
         }
-        
+
         let insets = calculateRequiredInsets()
         self.requiredInsets = insets
 

@@ -9,7 +9,7 @@
 import UIKit
 
 extension TMBar {
-    
+
     /// Create a hideable bar.
     ///
     /// - Parameter trigger: Trigger which causes the hide / show.
@@ -24,9 +24,9 @@ extension TMBar {
 /// Supports manual show/hide triggering and also automatic triggers
 /// such as time.
 open class TMHidingBar: UIView {
-    
+
     // MARK: Types
-    
+
     /// Trigger that causes bar to hide.
     ///
     /// - time: Time based, will hide after a duration.
@@ -35,7 +35,7 @@ open class TMHidingBar: UIView {
         case time(duration: TimeInterval)
         case manual
     }
-    
+
     /// Transition to perform for hide / show animations.
     ///
     /// - drawer: Collapse upwards like a closing drawer.
@@ -44,9 +44,9 @@ open class TMHidingBar: UIView {
         case drawer
         case fade
     }
-    
+
     // MARK: Properties
-    
+
     /// Bar that is embedded and hidden / shown.
     public let bar: TMBar
     private var barView: UIView {
@@ -57,34 +57,34 @@ open class TMHidingBar: UIView {
     /// Trigger that causes the bar to hide.
     public let trigger: Trigger
     private var triggerHandler: TMAutoHidingTriggerHandler?
-    
+
     /// Transition to use when hiding and showing the bar.
     ///
     /// Defaults to `.drawer`.
     open var hideTransition: Transition = .drawer
-    
+
     // MARK: Init
-    
+
     internal init(for bar: TMBar, trigger: Trigger) {
         self.bar = bar
         self.trigger = trigger
         super.init(frame: .zero)
-        
+
         self.triggerHandler = makeTriggerHandler(for: trigger)
-        
+
         layout(barView: barView)
     }
-    
+
     public required init?(coder aDecoder: NSCoder) {
         fatalError("Interface Builder is not supported")
     }
-    
+
     // MARK: Layout
-    
+
     private func layout(barView: UIView) {
         addSubview(barView)
         barView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         let barViewTopPin = barView.topAnchor.constraint(equalTo: topAnchor)
         NSLayoutConstraint.activate([
             barView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -92,12 +92,12 @@ open class TMHidingBar: UIView {
             barView.trailingAnchor.constraint(equalTo: trailingAnchor),
             heightAnchor.constraint(equalTo: barView.heightAnchor, multiplier: 1.0)
             ])
-        
+
         self.barViewTopPin = barViewTopPin
     }
-    
+
     // MARK: Triggers
-    
+
     private func makeTriggerHandler(for trigger: Trigger) -> TMAutoHidingTriggerHandler? {
         switch trigger {
         case .time(let duration):
@@ -107,9 +107,9 @@ open class TMHidingBar: UIView {
             return TMAutoHidingTriggerHandler(for: self)
         }
     }
-    
+
     // MARK: Animations
-    
+
     /// Hide the bar.
     ///
     /// - Parameters:
@@ -119,9 +119,9 @@ open class TMHidingBar: UIView {
         guard isHidden == false else {
             return
         }
-        
+
         if animated {
-            switch hideTransition  {
+            switch hideTransition {
             case .drawer:
                 barViewTopPin?.constant = -barView.bounds.size.height
                 UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut, animations: {
@@ -148,7 +148,7 @@ open class TMHidingBar: UIView {
             isHidden = true
         }
     }
-    
+
     /// Show the bar.
     ///
     /// - Parameters:
@@ -157,21 +157,21 @@ open class TMHidingBar: UIView {
     open func show(animated: Bool, completion: ((Bool) -> Void)?) {
         triggerHandler?.invalidate(animated: animated, completion: completion)
     }
-    
+
     internal func performShow(animated: Bool, completion: ((Bool) -> Void)?) {
         guard isHidden else {
             return
         }
-        
+
         if animated {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                 self.isHidden = false
-                
+
                 switch self.hideTransition {
                 case .drawer:
                     self.barViewTopPin?.constant = -self.barView.bounds.size.height
                     self.layoutIfNeeded()
-                    
+
                     self.barViewTopPin?.constant = 0.0
                     UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn, animations: {
                         self.layoutIfNeeded()
@@ -197,7 +197,7 @@ open class TMHidingBar: UIView {
 
 // MARK: - Bar Lifecycle
 extension TMHidingBar: TMBar {
-    
+
     /// :nodoc:
     public var dataSource: TMBarDataSource? {
         get {
@@ -206,7 +206,7 @@ extension TMHidingBar: TMBar {
             bar.dataSource = newValue
         }
     }
-    
+
     /// :nodoc:
     public var delegate: TMBarDelegate? {
         get {
@@ -215,21 +215,21 @@ extension TMHidingBar: TMBar {
             bar.delegate = newValue
         }
     }
-    
+
     /// :nodoc:
     public var items: [TMBarItemable]? {
         return bar.items
     }
-    
+
     /// :nodoc:
     public func reloadData(at indexes: ClosedRange<Int>, context: TMBarReloadContext) {
         bar.reloadData(at: indexes, context: context)
     }
-    
+
     /// :nodoc:
     public func update(for position: CGFloat, capacity: Int, direction: TMBarUpdateDirection, animation: TMAnimation) {
         bar.update(for: position, capacity: capacity, direction: direction, animation: animation)
-        
+
         triggerHandler?.invalidate()
     }
 }

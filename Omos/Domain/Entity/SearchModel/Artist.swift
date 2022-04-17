@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct ArtistRespone:Codable {
+struct ArtistRespone: Codable {
     let artistName, artistID: String
     let artistImageURL: String?
     let genres: [String]
-    
+
     enum CodingKeys: String, CodingKey {
         case artistName
         case artistID = "artistId"

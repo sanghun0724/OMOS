@@ -10,7 +10,7 @@ import UIKit
 import Stevia
 
 final class YPCropView: UIView {
-    
+
     let containerView = UIView()
     let imageView = UIImageView()
     let topCurtain = UIView()
@@ -30,9 +30,9 @@ final class YPCropView: UIView {
     }
 
     convenience init(image: UIImage) {
-        
+
         self.init(frame: .zero)
-        
+
         let ratio: Double
         switch YPConfig.showsCrop {
         case .rectangle(ratio: let configuredRatio):
@@ -40,7 +40,7 @@ final class YPCropView: UIView {
         default:
             ratio = 1
         }
-        
+
         setupViewHierarchy()
         setupLayout(with: image, ratio: ratio)
         setupImage(image, with: ratio)
@@ -50,9 +50,9 @@ final class YPCropView: UIView {
         grid.isCircle = isCircle
         grid.isHidden = !YPConfig.showsCropGridOverlay
     }
-        
+
     private func setupViewHierarchy() {
-        
+
         sv(
             containerView.sv(
                 imageView,
@@ -66,38 +66,38 @@ final class YPCropView: UIView {
             toolbar
         )
     }
-    
+
     private func setupLayout(with image: UIImage, ratio: Double) {
-        
+
         let horizontalCurtainMinWidth: CGFloat = ratio < 1 ? defaultCurtainPadding : 0
-        
+
         containerView.leading(0)
         containerView.trailing(0)
-        
+
         topCurtain.height(>=defaultCurtainPadding)
         bottomCurtain.height(>=defaultCurtainPadding)
-        
+
         leadingCurtain.width(>=horizontalCurtainMinWidth)
         leadingCurtain.Top == topCurtain.Bottom
         leadingCurtain.Bottom == bottomCurtain.Top
-        
+
         trailingCurtain.width(>=horizontalCurtainMinWidth)
         trailingCurtain.Top == topCurtain.Bottom
         trailingCurtain.Bottom == bottomCurtain.Top
-    
+
         cropArea.Top == topCurtain.Bottom
         cropArea.Bottom == bottomCurtain.Top
-          
+
         |leadingCurtain--0--cropArea--0--trailingCurtain|
 
         grid.followEdges(cropArea)
-        
+
         layout(
             0,
             |containerView|,
             |toolbar| ~ 44
         )
-        
+
         layout(
             0,
             |topCurtain|,
@@ -105,20 +105,20 @@ final class YPCropView: UIView {
             |bottomCurtain|,
             0
         )
-    
+
         if #available(iOS 11.0, *) {
             toolbar.Bottom == safeAreaLayoutGuide.Bottom
         } else {
             toolbar.bottom(0)
         }
-                
+
         let complementRatio: CGFloat = CGFloat(1.0 / ratio)
         cropArea.Height == cropArea.Width * complementRatio
         cropArea.centerInContainer()
     }
-    
+
     private func setupImage(_ image: UIImage, with ratio: Double) {
-        
+
         // Fit image differently depnding on its ratio.
         let imageRatio: Double = Double(image.size.width / image.size.height)
         if ratio > imageRatio {
@@ -132,40 +132,40 @@ final class YPCropView: UIView {
         } else {
             imageView.followEdges(cropArea)
         }
-        
+
         // Fit imageView to image's bounds
         imageView.Width == imageView.Height * CGFloat(imageRatio)
     }
-    
+
     private func applyStyle() {
-        
+
         backgroundColor = .ypSystemBackground
         clipsToBounds = true
-        
+
         imageView.style { i in
             i.isUserInteractionEnabled = true
             i.isMultipleTouchEnabled = true
         }
-        
+
         topCurtain.style(curtainStyle)
         bottomCurtain.style(curtainStyle)
         leadingCurtain.style(curtainStyle)
         trailingCurtain.style(curtainStyle)
-        
+
         cropArea.style { v in
             v.backgroundColor =  isCircle ? YPConfig.colors.cropOverlayColor : .clear
             v.isCircle = isCircle
             v.isUserInteractionEnabled = false
         }
-        
+
         toolbar.style { t in
             t.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
             t.setShadowImage(UIImage(), forToolbarPosition: .any)
         }
     }
-    
+
     private func curtainStyle(v: UIView) {
-        
+
         v.backgroundColor = YPConfig.colors.cropOverlayColor
         v.isUserInteractionEnabled = false
     }
@@ -180,7 +180,7 @@ final class YPCropAreaView: UIView {
     }
 
     override func draw(_ rect: CGRect) {
-        
+
         super.draw(rect)
 
         guard isCircle else { return }

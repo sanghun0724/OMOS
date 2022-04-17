@@ -21,16 +21,14 @@ final private class PickerViewDataSourceNotSet: NSObject, UIPickerViewDataSource
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         0
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         0
     }
 }
 
 /// For more information take a look at `DelegateProxyType`.
-public class RxPickerViewDataSourceProxy
-    : DelegateProxy<UIPickerView, UIPickerViewDataSource>
-    , DelegateProxyType {
+public class RxPickerViewDataSourceProxy: DelegateProxy<UIPickerView, UIPickerViewDataSource>, DelegateProxyType {
 
     /// Typed parent object.
     public weak private(set) var pickerView: UIPickerView?

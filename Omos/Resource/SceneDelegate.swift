@@ -5,40 +5,36 @@
 //  Created by sangheon on 2022/02/04.
 //
 
-import UIKit
-import KakaoSDKAuth
-import AuthenticationServices
-import RxSwift
-import RxRelay
 import Alamofire
+import AuthenticationServices
+import KakaoSDKAuth
+import RxRelay
+import RxSwift
+import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         if let url = URLContexts.first?.url {
-            if (AuthApi.isKakaoTalkLoginUrl(url)) {
+            if AuthApi.isKakaoTalkLoginUrl(url) {
                 _ = AuthController.handleOpenUrl(url: url)
             }
         }
     }
-    
 
     var window: UIWindow?
     let disposeBag = DisposeBag()
     let kakaoValid = PublishRelay<Bool>()
     let appleValid = PublishRelay<Bool>()
     let localValid = PublishRelay<Bool>()
-    
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: scene)
         self.window?.overrideUserInterfaceStyle = .dark
-        let uc = LoginUseCase(authRepository:AuthRepositoryImpl(loginAPI: LoginAPI()))
+        let uc = LoginUseCase(authRepository: AuthRepositoryImpl(loginAPI: LoginAPI()))
         let vm = LoginViewModel(usecase: uc)
 
-        Observable.combineLatest(kakaoValid, appleValid,localValid)
-        { $0 || $1 || $2 }
+        Observable.combineLatest(kakaoValid, appleValid, localValid) { $0 || $1 || $2 }
         .observe(on: MainScheduler.instance)
         .subscribe(onNext: { [weak self] valid in
             print("is it valid? \(valid)")
@@ -53,7 +49,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         }).disposed(by: disposeBag)
 
-        //local 확인  -> accesstoken 필요한 API 호출해봄
+        // local 확인  -> accesstoken 필요한 API 호출해봄
         let recordAPI = RecordAPI()
         recordAPI.select { [weak self] result in
             switch result {
@@ -66,8 +62,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         }
 
-
-        //snsToken 확인
+        // snsToken 확인
         LoginViewModel.hasKaKaoToken { [weak self] valid in
             if valid {
                 self?.kakaoValid.accept(true)
@@ -80,7 +75,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         print(UserDefaults.standard.string(forKey: "appleUser") ?? "XX")
-          appleIDProvider.getCredentialState(forUserID:UserDefaults.standard.string(forKey: "appleUser") ?? "") { [weak self] (credentialState, error) in
+          appleIDProvider.getCredentialState(forUserID: UserDefaults.standard.string(forKey: "appleUser") ?? "") { [weak self] credentialState, _ in
               print(credentialState)
               switch credentialState {
               case .authorized:
@@ -99,7 +94,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                   break
               }
           }
-        
+
 //        UserDefaults.standard.set("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvcmlnaW5AbmF2ZXIuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY3ODM2MTMyMn0.q6YbvSmVFOoU2-Rnp1a9iav1TTlbdV0aPQQ_E8OiOv34XwGfPWCRrOriMkSOpo7MkddJo5O2QyRjqZk29b7jfw",forKey:"access")
 //        UserDefaults.standard.set("eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NDY4MDM3MDV9.ZImb_c8Q6WSl2KaIDjMGs_tKfQPbgM57qDL6LFQFFnSksh0tGLxdflBVHQ4Ll76PglZg8ez86_QfyR6Jc75Lmw",forKey: "refresh")
 //        UserDefaults.standard.set(71,forKey: "user")
@@ -107,9 +102,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.rootViewController = LaunchViewController()
         self.window?.makeKeyAndVisible()
         self.window?.backgroundColor = .mainBackGround
-       
     }
-    
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
@@ -138,7 +131,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
 }
-

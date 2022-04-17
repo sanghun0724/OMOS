@@ -6,14 +6,13 @@
 //
 
 import UIKit
-//import SnapKit
+// import SnapKit
 
-class MyRecordView:BaseView {
-    
+class MyRecordView: BaseView {
     let emptyView = EmptyView()
     let loadingView = LoadingView()
-    
-    let tableView:UITableView = {
+
+    let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(MyRecordTableCell.self, forCellReuseIdentifier: MyRecordTableCell.identifier)
         table.backgroundColor = .mainBlack
@@ -23,27 +22,26 @@ class MyRecordView:BaseView {
 //        table.insetsContentViewsToSafeArea = false
         return table
     }()
-    
+
     override func configureUI() {
         self.addSubview(tableView)
         self.addSubview(loadingView)
         self.addSubview(emptyView)
         emptyView.isHidden = true
         loadingView.isHidden = true
-        
+
         loadingView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
+
         emptyView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
+
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
-        tableView.tableHeaderView = UIView(frame:CGRect(x: 0, y: 0, width: tableView.contentSize.width, height: CGFloat.leastNormalMagnitude))
+
+        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.contentSize.width, height: CGFloat.leastNormalMagnitude))
     }
-    
 }

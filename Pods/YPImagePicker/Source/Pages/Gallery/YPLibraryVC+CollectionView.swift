@@ -10,24 +10,24 @@ import UIKit
 
 extension YPLibraryVC {
     var isLimitExceeded: Bool { return selectedItems.count >= YPConfig.library.maxNumberOfItems }
-    
+
     func setupCollectionView() {
         v.collectionView.dataSource = self
         v.collectionView.delegate = self
         v.collectionView.register(YPLibraryViewCell.self, forCellWithReuseIdentifier: "YPLibraryViewCell")
-        
+
         // Long press on cell to enable multiple selection
         let longPressGR = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(longPressGR:)))
         longPressGR.minimumPressDuration = 0.5
         v.collectionView.addGestureRecognizer(longPressGR)
     }
-    
+
     /// When tapping on the cell with long press, clear all previously selected cells.
     @objc func handleLongPress(longPressGR: UILongPressGestureRecognizer) {
         if isMultipleSelectionEnabled || isProcessing || YPConfig.library.maxNumberOfItems <= 1 {
             return
         }
-        
+
         if longPressGR.state == .began {
             let point = longPressGR.location(in: v.collectionView)
             guard let indexPath = v.collectionView.indexPathForItem(at: point) else {
@@ -36,11 +36,11 @@ extension YPLibraryVC {
             startMultipleSelection(at: indexPath)
         }
     }
-    
+
     func startMultipleSelection(at indexPath: IndexPath) {
         currentlySelectedIndex = indexPath.row
         toggleMultipleSelection()
-        
+
         // Update preview.
         changeAsset(mediaManager.getAsset(at: indexPath.row))
 
@@ -51,9 +51,9 @@ extension YPLibraryVC {
         }
         v.refreshImageCurtainAlpha()
     }
-    
+
     // MARK: - Library collection view cell managing
-    
+
     /// Removes cell from selection
     func deselect(indexPath: IndexPath) {
         if let positionIndex = selectedItems.firstIndex(where: {
@@ -64,7 +64,7 @@ extension YPLibraryVC {
             // Refresh the numbers
             let selectedIndexPaths = selectedItems.map { IndexPath(row: $0.index, section: 0) }
             v.collectionView.reloadItems(at: selectedIndexPaths)
-			
+
             // Replace the current selected image with the previously selected one
             if let previouslySelectedIndexPath = selectedIndexPaths.last {
                 v.collectionView.deselectItem(at: indexPath, animated: false)
@@ -72,11 +72,11 @@ extension YPLibraryVC {
                 currentlySelectedIndex = previouslySelectedIndexPath.row
                 changeAsset(mediaManager.getAsset(at: previouslySelectedIndexPath.row))
             }
-			
+
             checkLimit()
         }
     }
-    
+
     /// Adds cell to selection
     func addToSelection(indexPath: IndexPath) {
         if !(delegate?.libraryViewShouldAddToSelection(indexPath: indexPath,
@@ -92,13 +92,13 @@ extension YPLibraryVC {
         selectedItems.append(newSelection)
         checkLimit()
     }
-    
+
     func isInSelectionPool(indexPath: IndexPath) -> Bool {
         return selectedItems.contains(where: {
             $0.assetIdentifier == mediaManager.getAsset(at: indexPath.row)?.localIdentifier
 		})
     }
-    
+
     /// Checks if there can be selected more items. If no - present warning.
     func checkLimit() {
         v.maxNumberWarningView.isHidden = !isLimitExceeded || isMultipleSelectionEnabled == false
@@ -112,7 +112,7 @@ extension YPLibraryVC: UICollectionViewDataSource {
 }
 
 extension YPLibraryVC: UICollectionViewDelegate {
-    
+
     public func collectionView(_ collectionView: UICollectionView,
                                cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "YPLibraryViewCell", for: indexPath) as? YPLibraryViewCell else {
@@ -135,13 +135,13 @@ extension YPLibraryVC: UICollectionViewDelegate {
                                         cell.imageView.image = image
                                     }
         }
-        
+
         let isVideo = (asset.mediaType == .video)
         cell.durationLabel.isHidden = !isVideo
         cell.durationLabel.text = isVideo ? YPHelper.formattedStrigFrom(asset.duration) : ""
         cell.multipleSelectionIndicator.isHidden = !isMultipleSelectionEnabled
         cell.isSelected = currentlySelectedIndex == indexPath.row
-        
+
         // Set correct selection number
         if let index = selectedItems.firstIndex(where: { $0.assetIdentifier == asset.localIdentifier }) {
             let currentSelection = selectedItems[index]
@@ -163,20 +163,20 @@ extension YPLibraryVC: UICollectionViewDelegate {
         }
         return cell
     }
-    
+
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let previouslySelectedIndexPath = IndexPath(row: currentlySelectedIndex, section: 0)
         currentlySelectedIndex = indexPath.row
 
         changeAsset(mediaManager.getAsset(at: indexPath.row))
         panGestureHelper.resetToOriginalState()
-        
+
         // Only scroll cell to top if preview is hidden.
         if !panGestureHelper.isImageShown {
             collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
         }
         v.refreshImageCurtainAlpha()
-            
+
         if isMultipleSelectionEnabled {
             let cellIsInTheSelectionPool = isInSelectionPool(indexPath: indexPath)
             let cellIsCurrentlySelected = previouslySelectedIndexPath.row == currentlySelectedIndex
@@ -192,7 +192,7 @@ extension YPLibraryVC: UICollectionViewDelegate {
         } else {
             selectedItems.removeAll()
             addToSelection(indexPath: indexPath)
-            
+
             // Force deseletion of previously selected cell.
             // In the case where the previous cell was loaded from iCloud, a new image was fetched
             // which triggered photoLibraryDidChange() and reloadItems() which breaks selection.
@@ -202,11 +202,11 @@ extension YPLibraryVC: UICollectionViewDelegate {
             }
         }
     }
-    
+
     public func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         return isProcessing == false
     }
-    
+
     public func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
         return isProcessing == false
     }

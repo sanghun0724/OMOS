@@ -7,17 +7,16 @@
 
 import Foundation
 
-
 // shared
-struct MusicRequest:Codable {
-    let keyword:String
-    let limit:Int
-    let offset:Int
-    let type:Int?
+struct MusicRequest: Codable {
+    let keyword: String
+    let limit: Int
+    let offset: Int
+    let type: Int?
 }
 
 /// album
-struct AlbumRespone:Codable {
+struct AlbumRespone: Codable {
     let albumID, albumImageURL, albumTitle: String
     let artists: [Artist]
     let releaseDate: String
@@ -28,5 +27,3 @@ struct AlbumRespone:Codable {
         case albumTitle, artists, releaseDate
     }
 }
-
-

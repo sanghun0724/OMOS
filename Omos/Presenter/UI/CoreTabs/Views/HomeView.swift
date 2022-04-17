@@ -6,12 +6,11 @@
 //
 
 import Foundation
-import UIKit
 import RxSwift
+import UIKit
 
-class HomeView:BaseView {
-    
-    let tableView:UITableView = {
+class HomeView: BaseView {
+    let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(AllRecordTableCell.self, forCellReuseIdentifier: AllRecordTableCell.identifier)
         table.register(HomeTableMiddleCell.self, forCellReuseIdentifier: HomeTableMiddleCell.identifier)
@@ -27,16 +26,16 @@ class HomeView:BaseView {
         table.contentInsetAdjustmentBehavior = .never
         return table
     }()
-    
-    let floatingButton:UIButton = {
+
+    let floatingButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .mainGrey4
         button.setImage(UIImage(named: "edit2"), for: .normal)
         return button
     }()
-    
+
     let loadingView = LoadingView()
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         layoutIfNeeded()
@@ -44,166 +43,162 @@ class HomeView:BaseView {
         floatingButton.layer.masksToBounds = true
         floatingButton.layer.cornerRadius = floatingButton.height / 2
     }
-    
+
     override func configureUI() {
         self.addSubview(tableView)
         self.addSubview(floatingButton)
         self.addSubview(loadingView)
-        
+
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
+
         floatingButton.snp.makeConstraints { make in
             make.trailing.bottom.equalToSuperview().inset(16)
             make.width.equalToSuperview().multipliedBy(0.17)
             make.height.equalTo(floatingButton.snp.width)
         }
-        
+
         loadingView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
-        
     }
-    
 }
 
-
-class HomeHeaderView:UITableViewHeaderFooterView {
+class HomeHeaderView: UITableViewHeaderFooterView {
     static let identifier = "HomeHeaderView"
     var disposeBag = DisposeBag()
-    
-    let groundView:UIView = {
+
+    let groundView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
         return view
     }()
-    let backImageView:UIImageView = {
-        let view = UIImageView(image:UIImage(named:"photo1"))
+    let backImageView: UIImageView = {
+        let view = UIImageView(image: UIImage(named: "photo1"))
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
         let random = Int.random(in: 1...7)
         switch random {
         case 1:
-            view.image = UIImage(named:"photo1")
+            view.image = UIImage(named: "photo1")
         case 2:
-            view.image = UIImage(named:"photo2")
+            view.image = UIImage(named: "photo2")
         case 3:
-            view.image = UIImage(named:"photo3")
+            view.image = UIImage(named: "photo3")
         case 4:
-            view.image = UIImage(named:"photo4")
+            view.image = UIImage(named: "photo4")
         case 5:
-            view.image = UIImage(named:"photo5")
+            view.image = UIImage(named: "photo5")
         case 6:
-            view.image = UIImage(named:"photo6")
+            view.image = UIImage(named: "photo6")
         case 7:
-            view.image = UIImage(named:"photo7")
+            view.image = UIImage(named: "photo7")
         default:
-            view.image = UIImage(named:"photo1")
+            view.image = UIImage(named: "photo1")
         }
         return view
     }()
-    
-    let backView:UIView = {
+
+    let backView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
         return view
     }()
-    
-    let omosImageView:UIImageView = {
+
+    let omosImageView: UIImageView = {
         let view = UIImageView(image: UIImage(named: "logo"))
         view.contentMode = .scaleAspectFit
         return view
     }()
-    
-    let notiButton:UIButton = {
+
+    let notiButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "bell"), for: .normal)
-        button.isHidden = true 
+        button.isHidden = true
         return button
     }()
-    
-    let decoLabel1:UILabel = {
+
+    let decoLabel1: UILabel = {
         let label = UILabel()
         label.text = "현재 OMOS DJ들이"
         label.textColor = .white
         label.font = .systemFont(ofSize: 16, weight: .light)
         return label
     }()
-    
-    let decoLabel2:UILabel = {
+
+    let decoLabel2: UILabel = {
         let label = UILabel()
         label.text = "가장 많이 기록하고 있는,"
         label.textColor = .white
         label.font = .systemFont(ofSize: 16, weight: .light)
         return label
     }()
-    
-    let todayLabel:UILabel = {
+
+    let todayLabel: UILabel = {
         let label = UILabel()
         label.text = "오늘의 노래"
         label.textColor = .white
         label.font = .systemFont(ofSize: 22, weight: .medium)
         return label
     }()
-    
-    let albumImageView:UIImageView = {
-        let view = UIImageView(image:UIImage(named: "albumCover"))
+
+    let albumImageView: UIImageView = {
+        let view = UIImageView(image: UIImage(named: "albumCover"))
         view.contentMode = .scaleAspectFill
         return view
     }()
-    
-    let songTitleLabel:UILabel = {
+
+    let songTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "노래 재목이 들어갑니다."
         label.textColor = .white
         label.font = .systemFont(ofSize: 16, weight: .light)
         return label
     }()
-    
-    let artistTitleLabel:UILabel = {
+
+    let artistTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "가수 이름이 들어갑니다"
         label.textColor = .white
         label.font = .systemFont(ofSize: 14, weight: .light)
         return label
     }()
-    
-    let albumTitleLabel:UILabel = {
+
+    let albumTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "앨범 제목이 들어갑니다."
         label.textColor = .white
         label.font = .systemFont(ofSize: 12, weight: .light)
         return label
     }()
-    
-    let albumLabelImageView:UIImageView = {
-        let view = UIImageView(image:UIImage(named: "disc"))
+
+    let albumLabelImageView: UIImageView = {
+        let view = UIImageView(image: UIImage(named: "disc"))
         view.contentMode = .scaleAspectFill
         return view
     }()
-    
-    let createdButton:UIButton = {
+
+    let createdButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "edit3"), for: .normal)
         return button
     }()
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         configureUI()
-        
+
         layoutIfNeeded()
         albumImageView.layer.cornerRadius = albumImageView.height / 2
         albumImageView.layer.masksToBounds = true
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
     }
-    
+
     func configureUI() {
         self.addSubview(groundView)
         groundView.addSubview(backImageView)
@@ -219,50 +214,50 @@ class HomeHeaderView:UITableViewHeaderFooterView {
         backView.addSubview(albumTitleLabel)
         backView.addSubview(albumLabelImageView)
         backView.addSubview(createdButton)
-        
+
         groundView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
+
         backImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
+
         backView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
             make.bottom.equalToSuperview()
             make.top.equalToSuperview().offset(44)
         }
-        
+
         omosImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview()
             make.top.equalToSuperview().offset(14)
             make.width.equalToSuperview().multipliedBy(0.256)
             make.height.equalTo(omosImageView.snp.width).multipliedBy(0.204)
         }
-        
+
         notiButton.snp.makeConstraints { make in
             make.top.trailing.equalToSuperview()
             make.height.width.equalTo(24)
         }
-        
+
         decoLabel1.snp.makeConstraints { make in
             make.top.equalTo(omosImageView.snp.bottom).offset(24)
             make.leading.equalToSuperview()
             decoLabel1.sizeToFit()
         }
-        
+
         decoLabel2.snp.makeConstraints { make in
             make.leading.equalToSuperview()
             make.top.equalTo(decoLabel1.snp.bottom)
         }
-        
+
         todayLabel.snp.makeConstraints { make in
             make.top.equalTo(decoLabel2.snp.bottom).offset(16)
             make.leading.equalToSuperview()
             todayLabel.sizeToFit()
         }
-        
+
         albumImageView.snp.makeConstraints { make in
             make.height.equalToSuperview().multipliedBy(0.234)
             make.width.equalTo(albumImageView.snp.height)
@@ -270,41 +265,38 @@ class HomeHeaderView:UITableViewHeaderFooterView {
             make.top.equalTo(todayLabel.snp.bottom).offset(28).priority(750)
             make.bottom.equalToSuperview().offset(-20).priority(751)
         }
-        
+
         createdButton.snp.makeConstraints { make in
             make.trailing.bottom.equalTo(albumImageView)
             make.height.equalTo(albumImageView.snp.height).multipliedBy(0.28)
             make.width.equalTo(createdButton.snp.height)
         }
-        
+
         artistTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(albumImageView.snp.centerY)
             make.leading.equalTo(albumImageView.snp.trailing).offset(24)
             make.trailing.equalToSuperview()
             artistTitleLabel.sizeToFit()
         }
-        
+
         songTitleLabel.snp.makeConstraints { make in
             make.bottom.equalTo(artistTitleLabel.snp.top).offset(-8)
             make.leading.trailing.equalTo(artistTitleLabel)
             songTitleLabel.sizeToFit()
         }
-        
+
         albumLabelImageView.snp.makeConstraints { make in
             make.leading.equalTo(artistTitleLabel)
             make.top.equalTo(artistTitleLabel.snp.bottom).offset(6)
             make.width.equalTo(createdButton).multipliedBy(0.6)
             make.height.equalTo(albumLabelImageView.snp.width)
         }
-        
+
         albumTitleLabel.snp.makeConstraints { make in
             make.leading.equalTo(albumLabelImageView.snp.trailing).offset(6)
             make.centerY.equalTo(albumLabelImageView)
             make.trailing.equalToSuperview()
             albumTitleLabel.sizeToFit()
         }
-        
-        
-        
     }
 }

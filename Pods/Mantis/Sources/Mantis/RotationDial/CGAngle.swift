@@ -13,9 +13,9 @@ public class CGAngle: NSObject, Comparable {
     public static func < (lhs: CGAngle, rhs: CGAngle) -> Bool {
         return lhs.radians < rhs.radians
     }
-    
+
     public var radians: CGFloat = 0.0
-    
+
     @inlinable public var degrees: CGFloat {
         get {
             return radians / CGFloat.pi * 180.0
@@ -33,23 +33,22 @@ public class CGAngle: NSObject, Comparable {
         self.radians = degrees / 180.0 * CGFloat.pi
     }
 
-    
     override public var description: String {
         return String(format: "%0.2f°", degrees)
     }
-    
+
     static public func +(lhs: CGAngle, rhs: CGAngle) -> CGAngle {
         return CGAngle(radians: lhs.radians + rhs.radians)
     }
-    
+
     static public func *(lhs: CGAngle, rhs: CGAngle) -> CGAngle {
         return CGAngle(radians: lhs.radians * rhs.radians)
     }
-    
+
     static public func -(lhs: CGAngle, rhs: CGAngle) -> CGAngle {
         return CGAngle(radians: lhs.radians - rhs.radians)
     }
-    
+
     static public prefix func -(rhs: CGAngle) -> CGAngle {
         return CGAngle(radians: -rhs.radians)
     }
@@ -64,5 +63,3 @@ public class CGAngle: NSObject, Comparable {
     }
 
 }
-
-

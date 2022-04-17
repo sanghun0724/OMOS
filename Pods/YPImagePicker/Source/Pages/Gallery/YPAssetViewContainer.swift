@@ -26,7 +26,7 @@ final class YPAssetViewContainer: UIView {
     public var onlySquare = YPConfig.library.onlySquare
     public var isShown = true
     public var spinnerIsShown = false
-    
+
     private let spinner = UIActivityIndicatorView(style: .white)
     private var shouldCropToSquare = YPConfig.library.isSquareByDefault
     private var isMultipleSelectionEnabled = false
@@ -128,7 +128,7 @@ final class YPAssetViewContainer: UIView {
         let isImageASquare = selectedAssetImage.size.width == selectedAssetImage.size.height
         squareCropButton.isHidden = isImageASquare
     }
-    
+
     // MARK: - Multiple selection
 
     /// Use this to update the multiple selection mode UI state for the YPAssetViewContainer
@@ -144,13 +144,13 @@ final class YPAssetViewContainer: UIView {
 extension YPAssetViewContainer: YPAssetZoomableViewDelegate {
     public func ypAssetZoomableViewDidLayoutSubviews(_ zoomableView: YPAssetZoomableView) {
         let newFrame = zoomableView.assetImageView.convert(zoomableView.assetImageView.bounds, to: self)
-        
+
         if let itemOverlay = itemOverlay {
             // update grid position
             itemOverlay.frame = frame.intersection(newFrame)
             itemOverlay.layoutIfNeeded()
         }
-        
+
         // Update play imageView position - bringing the playImageView from the videoView to assetViewContainer,
         // but the controll for appearing it still in videoView.
         if zoomableView.videoView.playImageView.isDescendant(of: self) == false {
@@ -158,7 +158,7 @@ extension YPAssetViewContainer: YPAssetZoomableViewDelegate {
             zoomableView.videoView.playImageView.centerInContainer()
         }
     }
-    
+
     public func ypAssetZoomableViewScrollViewDidZoom() {
         guard let itemOverlay = itemOverlay else {
             return
@@ -169,7 +169,7 @@ extension YPAssetViewContainer: YPAssetZoomableViewDelegate {
             }
         }
     }
-    
+
     public func ypAssetZoomableViewScrollViewDidEndZooming() {
         guard let itemOverlay = itemOverlay else {
             return
@@ -186,11 +186,11 @@ extension YPAssetViewContainer: UIGestureRecognizerDelegate {
         otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
-    
+
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         return !spinnerIsShown && !(touch.view is UIButton)
     }
-    
+
     @objc
     private func handleTouchDown(sender: UILongPressGestureRecognizer) {
         guard let itemOverlay = itemOverlay else {

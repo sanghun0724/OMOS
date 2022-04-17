@@ -9,10 +9,10 @@
 import Foundation
 
 extension PageboyViewController {
- 
+
     /// A page index.
     public typealias PageIndex = Int
-    
+
     /// The index of a page in the page view controller.
     ///
     /// - next: The next page if available.
@@ -33,7 +33,7 @@ internal typealias Page = PageboyViewController.Page
 internal typealias PageIndex = PageboyViewController.PageIndex
 
 internal extension Page {
-    
+
     /// PageIndex value for page.
     ///
     /// - Parameter pageViewController: PageboyViewController which contains page.
@@ -41,7 +41,7 @@ internal extension Page {
     func indexValue(in pageViewController: PageboyViewController) -> PageIndex {
         return Page.indexValue(for: self, in: pageViewController)
     }
-    
+
     /// Convert a Page to a PageIndex.
     ///
     /// - Parameters:
