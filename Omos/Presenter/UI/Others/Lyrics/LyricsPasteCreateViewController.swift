@@ -17,7 +17,7 @@ import UIKit
 import YPImagePicker
 
 class LyricsPasteCreateViewController: BaseViewController {
-    var defaultModel: recordSaveDefaultModel = .init(musicId: "", imageURL: "", musicTitle: "", subTitle: "")
+    var defaultModel: RecordSaveDefaultModel = .init(musicId: "", imageURL: "", musicTitle: "", subTitle: "")
     let scrollView = UIScrollView()
     var cancellables = Set<AnyCancellable>()
     let selfView = LyricsPasteCreateView()

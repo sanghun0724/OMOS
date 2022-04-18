@@ -54,35 +54,35 @@ extension AllRecordViewController: UITableViewDelegate, UITableViewDataSource {
             headerView.label.text = "한 줄 감상"
             headerView.button.rx.tap.asDriver()
                 .drive(onNext: { [weak self] in
-                    let vc = AllRecordCateDetailViewController(viewModel: vm, cateType: .A_LINE)
+                    let vc = AllRecordCateDetailViewController(viewModel: vm, cateType: .aLine)
                     self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: headerView.disposeBag)
         case 1:
             headerView.label.text = "내인생의 OST"
             headerView.button.rx.tap.asDriver()
                 .drive(onNext: { [weak self] in
-                    let vc = AllRecordCateDetailViewController(viewModel: vm, cateType: .OST)
+                    let vc = AllRecordCateDetailViewController(viewModel: vm, cateType: .ost)
                     self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: headerView.disposeBag)
         case 2:
             headerView.label.text = "노래속 나의 이야기"
             headerView.button.rx.tap.asDriver()
                 .drive(onNext: { [weak self] in
-                    let vc = AllRecordCateDetailViewController(viewModel: vm, cateType: .STORY)
+                    let vc = AllRecordCateDetailViewController(viewModel: vm, cateType: .story)
                     self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: headerView.disposeBag)
         case 3:
             headerView.label.text = "나만의 가사 해석"
             headerView.button.rx.tap.asDriver()
                 .drive(onNext: { [weak self] in
-                    let vc = AllRecordCateDetailViewController(viewModel: vm, cateType: .LYRICS)
+                    let vc = AllRecordCateDetailViewController(viewModel: vm, cateType: .lyrics)
                     self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: headerView.disposeBag)
         case 4:
             headerView.label.text = "자유 공간"
             headerView.button.rx.tap.asDriver()
                 .drive(onNext: { [weak self] in
-                    let vc = AllRecordCateDetailViewController(viewModel: vm, cateType: .FREE)
+                    let vc = AllRecordCateDetailViewController(viewModel: vm, cateType: .free)
                     self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: headerView.disposeBag)
         default:

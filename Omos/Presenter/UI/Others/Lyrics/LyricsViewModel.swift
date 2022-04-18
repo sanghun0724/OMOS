@@ -11,7 +11,7 @@ class LyricsViewModel: BaseViewModel {
     let curTime = "\(Account.currentUser)\(Date.currentTimeStamp)"
     var lyricsStringArray: [String] = []
     var modifyDefaultModel: DetailRecordResponse? // Lyrics로 바꿔야함
-    var defaultModel: recordSaveDefaultModel = .init(musicId: "", imageURL: "", musicTitle: "", subTitle: "") // create할때 있는놈들
+    var defaultModel: RecordSaveDefaultModel = .init(musicId: "", imageURL: "", musicTitle: "", subTitle: "") // create할때 있는놈들
     let errorMessage = BehaviorSubject<String?>(value: nil)
     let loading = BehaviorSubject<Bool>(value: false)
     let state = PublishSubject<Bool>()

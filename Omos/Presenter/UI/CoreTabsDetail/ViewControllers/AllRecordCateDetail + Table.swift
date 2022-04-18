@@ -30,7 +30,7 @@ extension AllRecordCateDetailViewController: UITableViewDelegate, UITableViewDat
 //                return UITableViewCell.init(frame: .zero)
 //            }
             switch self.myCateType {
-            case .LYRICS:
+            case .lyrics:
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllrecordLyricsTableCell.identifier, for: indexPath) as! AllrecordLyricsTableCell
                 cell.selfView.tableHeightConstraint?.deactivate()
                 cell.configureModel(record: record)
@@ -39,7 +39,7 @@ extension AllRecordCateDetailViewController: UITableViewDelegate, UITableViewDat
 
                 lyricsCellBind(cell: cell, data: record, indexPath: indexPath)
                 return cell
-            case .A_LINE:
+            case .aLine:
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateShortDetailCell.identifier, for: indexPath) as! AllRecordCateShortDetailCell
                 cell.configureModel(record: record)
                 shortCellBind(cell: cell, data: record)
@@ -105,7 +105,7 @@ extension AllRecordCateDetailViewController: UITableViewDelegate, UITableViewDat
 
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            if self.myCateType != .A_LINE, self.myCateType != .LYRICS {
+            if self.myCateType != .aLine, self.myCateType != .lyrics {
                 return shortCellHeights[indexPath] ?? 500
             }
         }

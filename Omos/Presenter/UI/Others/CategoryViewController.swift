@@ -12,7 +12,7 @@ import RxSwift
 import SnapKit
 import UIKit
 
-struct recordSaveDefaultModel {
+struct RecordSaveDefaultModel {
     let musicId: String
     let imageURL: String
     let musicTitle: String
@@ -21,9 +21,9 @@ struct recordSaveDefaultModel {
 
 class CategoryViewController: BaseViewController {
     private let selfView = CategoryView()
-    let defaultModel: recordSaveDefaultModel
+    let defaultModel: RecordSaveDefaultModel
 
-    init(defaultModel: recordSaveDefaultModel) {
+    init(defaultModel: RecordSaveDefaultModel) {
         self.defaultModel = defaultModel
         super.init(nibName: nil, bundle: nil)
     }

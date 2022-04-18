@@ -142,15 +142,15 @@ class AllRecordCateDetailViewController: BaseViewController, UIScrollViewDelegat
     private func setTitle() {
         let label = UILabel()
         switch self.myCateType {
-        case .A_LINE:
+        case .aLine:
             label.text = "한 줄 감상"
-        case .LYRICS:
+        case .lyrics:
             label.text = "나만의 가사해석"
-        case .STORY:
+        case .story:
             label.text = "노래 속 나의 이야기"
-        case .FREE:
+        case .free:
             label.text = "자유 공간"
-        case .OST:
+        case .ost:
             label.text = "내 인생의 OST"
         default:
             fatalError()

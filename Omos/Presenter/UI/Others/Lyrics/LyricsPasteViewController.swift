@@ -10,9 +10,9 @@ import UIKit
 
 class LyricsPasteViewController: BaseViewController {
     let selfView = LyricsPastView()
-    let defaultModel: recordSaveDefaultModel
+    let defaultModel: RecordSaveDefaultModel
 
-    init(defaultModel: recordSaveDefaultModel) {
+    init(defaultModel: RecordSaveDefaultModel) {
         self.defaultModel = defaultModel
         super.init(nibName: nil, bundle: nil)
     }
