@@ -13,6 +13,6 @@ protocol TodayRepository {
     init(todayAPI: TodayAPI)
     func popuralRecord() -> Single<[PopuralResponse]>
     func lovedRecord(userId: Int) -> Single<LovedResponse>
-    func recommendDJRecord() -> Single<[recommendDjResponse]>
+    func recommendDJRecord() -> Single<[RecommendDjResponse]>
     func todayRecord() -> Single<TodayTrackResponse>
 }

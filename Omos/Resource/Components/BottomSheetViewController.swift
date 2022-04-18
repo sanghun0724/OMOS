@@ -37,7 +37,7 @@ class BottomSheetViewController: UIViewController {
         let table = UITableView()
 
         table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        table.register(filterCell.self, forCellReuseIdentifier: filterCell.identifier)
+        table.register(FilterCell.self, forCellReuseIdentifier: FilterCell.identifier)
         return table
     }()
 
@@ -60,7 +60,7 @@ extension BottomSheetViewController: UITableViewDelegate, UITableViewDataSource 
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if type == .MyRecord {
+        if type == .myRecord {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             cell.backgroundColor = .mainBackGround
             switch indexPath.row {
@@ -77,7 +77,7 @@ extension BottomSheetViewController: UITableViewDelegate, UITableViewDataSource 
 
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: filterCell.identifier, for: indexPath) as! filterCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: FilterCell.identifier, for: indexPath) as! FilterCell
             cell.backgroundColor = .mainBackGround
             cell.checkImageView.isHidden = true
             switch indexPath.row {
@@ -104,7 +104,7 @@ extension BottomSheetViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         dismiss(animated: true)
-        if type == .MyRecord {
+        if type == .myRecord {
             switch indexPath.row {
             case 0:
                 myRecordVM?.delete.onNext(true)
@@ -114,7 +114,7 @@ extension BottomSheetViewController: UITableViewDelegate, UITableViewDataSource 
             default:
                 print("defualt")
             }
-        } else if type == .AllcateRecord {
+        } else if type == .allcateRecord {
             switch indexPath.row {
             case 0:
                 allRecordVM?.recentFilter.onNext(true)

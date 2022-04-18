@@ -70,7 +70,7 @@ class RecordsUseCase {
 
     // MARK: Mydj
     func myDjAllRecord(userId: Int, myDjRequest: MyDjRequest) -> Single<[MyDjResponse]> {
-        recordsRepository.myDjAllRecord(userId: userId, MyDjRequest: MyDjRequest)
+        recordsRepository.myDjAllRecord(userId: userId, myDjRequest: myDjRequest)
     }
 
     func saveFollow(fromId: Int, toId: Int) -> Single<StateRespone> {

@@ -28,7 +28,7 @@ class MyRecordDetailViewController: BaseViewController {
     init(posetId: Int, viewModel: MyRecordDetailViewModel) {
         self.postId = posetId
         self.viewModel = viewModel
-        self.bottomVC = BottomSheetViewController(type: .MyRecord, myRecordVM: viewModel, allRecordVM: nil, searchTrackVM: nil)
+        self.bottomVC = BottomSheetViewController(type: .myRecord, myRecordVM: viewModel, allRecordVM: nil, searchTrackVM: nil)
         self.bottomSheet = MDCBottomSheetController(contentViewController: bottomVC)
         super.init(nibName: nil, bundle: nil)
     }

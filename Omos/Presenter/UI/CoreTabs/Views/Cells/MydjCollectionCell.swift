@@ -15,7 +15,7 @@ class MydjCollectionCell: UICollectionViewCell {
     static let identifier = "MydjCollectionCell"
 
     var disposeBag = DisposeBag()
-    var homeInfo: recommendDjResponse?
+    var homeInfo: RecommendDjResponse?
 
     let djImageView: UIImageView = {
        let imageView = UIImageView(image: UIImage(named: "albumCover"))
@@ -84,7 +84,7 @@ class MydjCollectionCell: UICollectionViewCell {
         }
     }
 
-    func configureHome(record: recommendDjResponse) {
+    func configureHome(record: RecommendDjResponse) {
         djImageView.image = nil
         self.homeInfo = record
         djLabel.text = record.nickname

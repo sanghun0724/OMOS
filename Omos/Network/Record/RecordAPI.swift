@@ -33,7 +33,7 @@ class RecordAPI {
         }
     }
 
-    func categoryFetch(cateType: cateType, request: CateRequest, completion:@escaping(Result<[CategoryRespone], Error>) -> Void) {
+    func categoryFetch(cateType: CateType, request: CateRequest, completion:@escaping(Result<[CategoryRespone], Error>) -> Void) {
         AF.request(RecordTarget.category(cate: cateType, request: request), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[CategoryRespone]>) in
             switch response.result {
             case .success(let data):
@@ -183,7 +183,7 @@ class RecordAPI {
 
     // MARK: MyDj API
     func myDjAllRecord(userId: Int, myDjRequest: MyDjRequest, completion:@escaping(Result<[MyDjResponse], Error>) -> Void) {
-        AF.request(RecordTarget.myDjAllRecord(userId: userId, MyDjRequest), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[MyDjResponse]>) in
+        AF.request(RecordTarget.myDjAllRecord(userId: userId, myDjRequest), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[MyDjResponse]>) in
             switch response.result {
             case .success(let data):
                 print(data)

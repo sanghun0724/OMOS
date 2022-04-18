@@ -13,7 +13,7 @@ import UIKit
 class AllRecordDetailViewController: BaseViewController {
     let scrollView = UIScrollView()
     let selfShortView = MyRecordDetailView()
-    let selfLongView = recordLongView()
+    let selfLongView = RecordLongView()
     let selfLyricsView = LyricsRecordView()
     let postId: Int
     let viewModel: AllRecordDetailViewModel

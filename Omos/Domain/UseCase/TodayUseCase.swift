@@ -23,7 +23,7 @@ class TodayUseCase {
         todayRepository.lovedRecord(userId: userId)
     }
 
-    func recommendDJRecord() -> Single<[recommendDjResponse]> {
+    func recommendDJRecord() -> Single<[RecommendDjResponse]> {
         todayRepository.recommendDJRecord()
     }
 

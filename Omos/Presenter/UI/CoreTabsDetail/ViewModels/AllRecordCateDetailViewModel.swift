@@ -19,7 +19,7 @@ class AllRecordCateDetailViewModel: BaseViewModel {
     let errorMessage = BehaviorSubject<String?>(value: nil)
     let usecase: RecordsUseCase
 
-    func selectRecordsShow(type: cateType, postId: Int?, size: Int, sort: String, userid: Int) {
+    func selectRecordsShow(type: CateType, postId: Int?, size: Int, sort: String, userid: Int) {
         loading.onNext(true)
         usecase.cateFetch(type: type, postId: postId, size: size, sort: sort, userid: userid)
             .map {

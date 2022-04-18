@@ -33,8 +33,8 @@ class TodayAPI {
         }
     }
 
-    func recommedRecord(completion:@escaping(Result<[recommendDjResponse], Error>) -> Void) {
-        AF.request(TodayTarget.recommendDJRecord, interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[recommendDjResponse]>) in
+    func recommedRecord(completion:@escaping(Result<[RecommendDjResponse], Error>) -> Void) {
+        AF.request(TodayTarget.recommendDJRecord, interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[RecommendDjResponse]>) in
             switch response.result {
             case .success(let data):
                 completion(.success(data))

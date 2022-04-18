@@ -15,8 +15,8 @@ class MyProfileRepositoryImpl: MyProfileRepository {
         self.myProfileAPI = myProfileAPI
     }
 
-    func myProfile(userId: Int) -> Single<myProfileResponse> {
-        Single<myProfileResponse>.create { [weak self] single in
+    func myProfile(userId: Int) -> Single<MyProfileResponse> {
+        Single<MyProfileResponse>.create { [weak self] single in
             self?.myProfileAPI.myProfile(userId: userId, completion: { result in
                 switch result {
                 case .success(let data):

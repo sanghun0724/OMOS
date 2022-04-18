@@ -47,8 +47,8 @@ class TodayRepositoryImpl: TodayRepository {
         }
     }
 
-    func recommendDJRecord() -> Single<[recommendDjResponse]> {
-        Single<[recommendDjResponse]>.create { [weak self] single in
+    func recommendDJRecord() -> Single<[RecommendDjResponse]> {
+        Single<[RecommendDjResponse]>.create { [weak self] single in
             self?.todayAPI.recommedRecord( completion: { result in
                 switch result {
                 case .success(let data):

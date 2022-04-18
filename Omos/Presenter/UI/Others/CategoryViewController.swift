@@ -114,7 +114,7 @@ class CategoryViewController: BaseViewController {
     }
 
     // MARK: Local Func
-    private func checkOther(_ selectedView: reactangleView) {
+    private func checkOther(_ selectedView: ReactangleView) {
         var views = [
             selfView.oneLineView,
             selfView.myOstView,

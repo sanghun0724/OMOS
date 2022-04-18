@@ -15,7 +15,7 @@ protocol HomeTableMiddleCellprotocol: AnyObject {
 class HomeTableMiddleCell: UITableViewCell {
     static let identifier = "HomeTableMiddleCell"
 
-    var selectedRecords: [recommendDjResponse]? {
+    var selectedRecords: [RecommendDjResponse]? {
         didSet {
             collectionView.reloadData()
         }
@@ -53,7 +53,7 @@ class HomeTableMiddleCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configureModel(records: [recommendDjResponse]) {
+    func configureModel(records: [RecommendDjResponse]) {
         self.selectedRecords = records
     }
 

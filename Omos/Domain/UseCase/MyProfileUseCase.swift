@@ -15,7 +15,7 @@ class MyProfileUseCase {
         self.myProfileRepository = myProfileRepository
     }
 
-    func myProfile(userId: Int) -> Single<myProfileResponse> {
+    func myProfile(userId: Int) -> Single<MyProfileResponse> {
         myProfileRepository.myProfile(userId: userId)
     }
 

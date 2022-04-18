@@ -114,7 +114,7 @@ class SearchRepositoryImpl: SearchRepository {
 
     func artistDetailTrackFetch(artistId: String) -> Single<[ArtistDetailRespone]> {
         Single<[ArtistDetailRespone]>.create { [weak self] single in
-            self?.searchAPI.ArtistDetailTrackFetch(artistId: artistId, completion: { result in
+            self?.searchAPI.artistDetailTrackFetch(artistId: artistId, completion: { result in
                 switch result {
                 case .success(let data):
                     single(.success(data))
@@ -130,7 +130,7 @@ class SearchRepositoryImpl: SearchRepository {
 
     func artistDetailAlbumFetch(artistId: String, request: ArtistRequest) -> Single<[AlbumRespone]> {
         Single<[AlbumRespone]>.create { [weak self] single in
-            self?.searchAPI.ArtistDetailAlbumFetch(artistId: artistId, request: request, completion: { result in
+            self?.searchAPI.artistDetailAlbumFetch(artistId: artistId, request: request, completion: { result in
                 switch result {
                 case .success(let data):
                     single(.success(data))

@@ -25,12 +25,12 @@ class AllRecordCateDetailViewController: BaseViewController, UIScrollViewDelegat
     var tableViewReload = true
     var lastPostId = 0
     let viewModel: AllRecordCateDetailViewModel
-    let myCateType: cateType
+    let myCateType: CateType
 
-    init(viewModel: AllRecordCateDetailViewModel, cateType: cateType) {
+    init(viewModel: AllRecordCateDetailViewModel, cateType: CateType) {
         self.viewModel = viewModel
         self.myCateType = cateType
-        self.bottomVC = BottomSheetViewController(type: .AllcateRecord, myRecordVM: nil, allRecordVM: viewModel, searchTrackVM: nil)
+        self.bottomVC = BottomSheetViewController(type: .allcateRecord, myRecordVM: nil, allRecordVM: viewModel, searchTrackVM: nil)
         self.bottomSheet = MDCBottomSheetController(contentViewController: bottomVC)
         super.init(nibName: nil, bundle: nil)
     }

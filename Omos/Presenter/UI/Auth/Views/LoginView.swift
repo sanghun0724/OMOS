@@ -58,8 +58,8 @@ class LoginTopView: BaseView {
         return labelView
     }()
 
-    let labelsView: labels = {
-        let view = labels()
+    let labelsView: Labels = {
+        let view = Labels()
         return view
     }()
 

@@ -20,7 +20,7 @@ class LyriscTableCell: UITableViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.backgroundColor = .LyricsBack
+        self.backgroundColor = .lyricsBack
         contentView.addSubview(label)
 
         label.snp.makeConstraints { make in

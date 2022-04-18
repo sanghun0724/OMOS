@@ -45,7 +45,7 @@ class SearchArtistTopTabViewController: TabmanViewController {
         // 간격
         ctBar.layout.interButtonSpacing = 35
 
-        ctBar.backgroundView.style = .custom(view: tabBarBackgroundView())
+        ctBar.backgroundView.style = .custom(view: TabBarBackgroundView())
 
         // 선택 / 안선택 색 + font size
         ctBar.buttons.customize { button in

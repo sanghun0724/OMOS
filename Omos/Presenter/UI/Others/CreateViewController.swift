@@ -541,7 +541,7 @@ extension CreateViewController: CropViewControllerDelegate {
             var idx = 0
             for index in 1..<str.count {
                 if str[str.index(str.endIndex, offsetBy: -index)] == "/" {
-                    index = index - 1
+                    idx = index - 1
                     break
                 }
             }

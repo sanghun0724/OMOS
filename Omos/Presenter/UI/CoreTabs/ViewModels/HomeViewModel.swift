@@ -14,8 +14,8 @@ class HomeViewModel: BaseViewModel {
     var currentPopuralRecord: [PopuralResponse] = []
     let lovedRecord = PublishSubject<LovedResponse>()
     var currentLovedRecord: LovedResponse?
-    let recommendRecord = PublishSubject<[recommendDjResponse]>()
-    var currentRecommentRecord: [recommendDjResponse] = []
+    let recommendRecord = PublishSubject<[RecommendDjResponse]>()
+    var currentRecommentRecord: [RecommendDjResponse] = []
     let todayRecord = PublishSubject<TodayTrackResponse>()
     var currentTodayRecord: TodayTrackResponse?
 
@@ -76,9 +76,9 @@ class HomeViewModel: BaseViewModel {
     func fetchRecommendDj() {
         recommendLoading.onNext(true)
         usecase.recommendDJRecord()
-            .subscribe({ [weak self] event in
+            .subscribe({ [weak self] result in
                 self?.recommendLoading.onNext(false)
-                switch event {
+                switch result {
                 case .success(let data):
                     self?.currentRecommentRecord = data
                     self?.recommendRecord.onNext(data)

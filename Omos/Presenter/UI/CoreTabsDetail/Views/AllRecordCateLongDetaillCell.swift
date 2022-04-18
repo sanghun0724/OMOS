@@ -305,8 +305,8 @@ class RecordLongView: BaseView {
         return label
     }()
 
-    let readMoreButton: adjustButton = {
-        let button = adjustButton()
+    let readMoreButton: AdjustButton = {
+        let button = AdjustButton()
         button.setTitle(" 더 보기", for: .normal)
         button.setTitleColor(UIColor.mainGrey6, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)

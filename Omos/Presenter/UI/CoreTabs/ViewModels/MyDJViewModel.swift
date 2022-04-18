@@ -27,13 +27,13 @@ class MyDjViewModel: BaseViewModel {
 
     func fetchMyDjRecord(userId: Int, request: MyDjRequest) {
         loading.onNext(true)
-        usecase.MyDjAllRecord(userId: userId, MyDjRequest: request)
+        usecase.myDjAllRecord(userId: userId, myDjRequest: request)
             .map {
                 $0.filter { !Account.currentReportRecordsId.contains($0.recordID) }
             }
-            .subscribe({ [weak self] event in
+            .subscribe({ [weak self] result in
                 self?.loading.onNext(false)
-                switch event {
+                switch result {
                 case .success(let data):
                     self?.currentMyDjRecord += data
                     self?.myDjRecord.onNext(data)

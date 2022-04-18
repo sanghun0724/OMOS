@@ -9,8 +9,8 @@ import Alamofire
 import Foundation
 
 class MyProfileAPI {
-    func myProfile(userId: Int, completion:@escaping(Result<myProfileResponse, Error>) -> Void) {
-        AF.request(MyProfileTarget.myProfile(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<myProfileResponse>) in
+    func myProfile(userId: Int, completion:@escaping(Result<MyProfileResponse, Error>) -> Void) {
+        AF.request(MyProfileTarget.myProfile(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<MyProfileResponse>) in
             switch response.result {
             case .success(let data):
                 completion(.success(data))

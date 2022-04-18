@@ -32,14 +32,14 @@ struct CategoryRespone: Codable {
 }
 
 enum CateType: String, Codable {
-    case A_LINE
-    case OST
-    case STORY
-    case LYRICS
-    case FREE
+    case aLine = "A_LINE"
+    case ost  = "OST"
+    case story = "STORY"
+    case lyrics = "LYRICS"
+    case free = "FREE"
     // 정렬
-    case ASC = "ASC"
-    case DESC = "DESC"
+    case asc = "ASC"
+    case desc = "DESC"
 }
 
 struct CateRequest: Codable {
