@@ -32,8 +32,8 @@ class IntrinsicTableView: UITableView {
         let number = numberOfRows(inSection: 0)
         var height: CGFloat = 0
         print("number \(number)")
-             for i in 0..<number {
-                 guard let cell = cellForRow(at: IndexPath(row: i, section: 0)) else {
+             for idx in 0..<number {
+                 guard let cell = cellForRow(at: IndexPath(row: idx, section: 0)) else {
                      continue
                  }
                  height += cell.bounds.height

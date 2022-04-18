@@ -48,7 +48,7 @@ struct TodayTrackResponse: Codable {
     }
 }
 
-struct recommendDjResponse: Codable {
+struct RecommendDjResponse: Codable {
     let nickname: String
     let profileURL: String?
     let userID: Int

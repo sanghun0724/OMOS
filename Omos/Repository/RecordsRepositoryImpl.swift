@@ -224,9 +224,9 @@ class RecordsRepositoryImpl: RecordsRepository {
         }
     }
 
-    func MyDjAllRecord(userId: Int, MyDjRequest: MyDjRequest) -> Single<[MyDjResponse]> {
+    func MyDjAllRecord(userId: Int, myDjRequest: MyDjRequest) -> Single<[MyDjResponse]> {
         Single<[MyDjResponse]>.create { [weak self] single in
-            self?.recordAPI.MyDjAllRecord(userId: userId, MyDjRequest: MyDjRequest, completion: { result in
+            self?.recordAPI.MyDjAllRecord(userId: userId, myDjRequest: myDjRequest, completion: { result in
                 switch result {
                 case .success(let data):
                     single(.success(data))

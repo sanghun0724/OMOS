@@ -78,7 +78,7 @@ class ArtistAlbumViewController: BaseViewController, UIScrollViewDelegate {
 //                  beginPaging()
 //              }
 //          }
-//      }
+      }
 
     func beginPaging() {
         isPaging = true
@@ -138,3 +138,4 @@ extension ArtistAlbumViewController: UITableViewDelegate, UITableViewDataSource 
         0
     }
 }
+ 

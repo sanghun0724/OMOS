@@ -1078,7 +1078,7 @@
 				B609137A27AD3A7C00B439C3 /* Resources */,
 				77902E746488D1AA0A59065A /* [CP] Embed Pods Frameworks */,
 				B6E969612802CC5E002653F9 /* Firebase Crashlytics */,
-				B64A13AB280960220093D817 /* SwiftLint */,
+				B64A13AB280960220093D817 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -1195,7 +1195,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Omos/Pods-Omos-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B64A13AB280960220093D817 /* SwiftLint */ = {
+		B64A13AB280960220093D817 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1204,14 +1204,14 @@
 			);
 			inputPaths = (
 			);
-			name = SwiftLint;
+			name = "Run Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PODS_ROOT}/SwiftLint/swiftlint autocorrect\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PODS_ROOT}/SwiftLint/swiftlint \n";
 		};
 		B6E969612802CC5E002653F9 /* Firebase Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;

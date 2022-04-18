@@ -50,7 +50,6 @@ class LyricsPasteViewController: BaseViewController {
 
         text.enumerateSubstrings(in: text.startIndex..., options: .byParagraphs) { substring, range, _, _ in
             let nsRange = NSRange(range, in: text)
-
             if  let substring = substring,
                 !substring.isEmpty {
                     lyricsArr.append(substring)

@@ -88,7 +88,7 @@ class SearchAPI {
         }
     }
 
-    func ArtistDetailTrackFetch(artistId: String, completion:@escaping(Result<[ArtistDetailRespone], Error>) -> Void) {
+    func artistDetailTrackFetch(artistId: String, completion:@escaping(Result<[ArtistDetailRespone], Error>) -> Void) {
         AF.request(SearchTarget.searchArtistTrack(artistId: artistId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[ArtistDetailRespone]>) in
             switch response.result {
             case .success(let data):
@@ -101,7 +101,7 @@ class SearchAPI {
         }
     }
 
-    func ArtistDetailAlbumFetch(artistId: String, request: ArtistRequest, completion:@escaping(Result<[AlbumRespone], Error>) -> Void) {
+    func artistDetailAlbumFetch(artistId: String, request: ArtistRequest, completion:@escaping(Result<[AlbumRespone], Error>) -> Void) {
         AF.request(SearchTarget.searchArtistAlbum(artistId: artistId, request), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[AlbumRespone]>) in
             switch response.result {
             case .success(let data):

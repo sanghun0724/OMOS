@@ -40,14 +40,14 @@ extension UIImageView {
 
     // 서버에서 받아온 이미지 cornerRadius적용하기
     func download(url: String?, rounded: Bool = true) {
-        guard let _url = url else {
+        guard let tmpUrl = url else {
             return
         }
         if rounded {
             let processor = ResizingImageProcessor(referenceSize: self.frame.size) |> RoundCornerImageProcessor(cornerRadius: self.frame.size.width / 2)
-            self.kf.setImage(with: URL(string: _url), placeholder: nil, options: [.processor(processor)])
+            self.kf.setImage(with: URL(string: tmpUrl), placeholder: nil, options: [.processor(processor)])
         } else {
-            self.kf.setImage(with: URL(string: _url))
+            self.kf.setImage(with: URL(string: tmpUrl))
         }
     }
 

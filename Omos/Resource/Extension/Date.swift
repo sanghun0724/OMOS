@@ -8,9 +8,9 @@
 import Foundation
 
 private let dateFormatter: DateFormatter = {
-    let f = DateFormatter()
-    f.locale = Locale(identifier: "ko_kr")
-    return f
+    let format = DateFormatter()
+    format.locale = Locale(identifier: "ko_kr")
+    return format
 }()
 
 extension Date {

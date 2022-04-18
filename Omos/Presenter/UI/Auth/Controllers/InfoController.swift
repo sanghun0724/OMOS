@@ -35,9 +35,9 @@ class InfoController: UIViewController {
         let url = Bundle.main.url(forResource: file, withExtension: "rtf")!
         let opts: [NSAttributedString.DocumentReadingOptionKey: Any] =
             [.documentType: NSAttributedString.DocumentType.rtf]
-        var d: NSDictionary?
-        let s = try! NSAttributedString(url: url, options: opts, documentAttributes: &d)
+        var dic: NSDictionary?
+        let attText = try? NSAttributedString(url: url, options: opts, documentAttributes: &dic)
 //        let new = NSAttributedString(string: s.string, attributes: [.foregroundColor: UIColor.red])
-        self.infoView.text = s.string
+        self.infoView.text = attText?.string
     }
 }

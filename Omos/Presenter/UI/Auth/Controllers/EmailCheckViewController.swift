@@ -41,8 +41,8 @@ class EmailCheckViewController: BaseViewController {
         loadingView.backgroundColor = .clear
         dismissKeyboardWhenTappedAround()
         bind()
-        for i in 3...6 {
-            topView.stack.arrangedSubviews[i].isHidden = true
+        for idx in 3...6 {
+            topView.stack.arrangedSubviews[idx].isHidden = true
         }
         self.navigationController?.navigationBar.isHidden = true
     }

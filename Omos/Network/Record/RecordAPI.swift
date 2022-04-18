@@ -182,8 +182,8 @@ class RecordAPI {
     }
 
     // MARK: MyDj API
-    func MyDjAllRecord(userId: Int, MyDjRequest: MyDjRequest, completion:@escaping(Result<[MyDjResponse], Error>) -> Void) {
-        AF.request(RecordTarget.MyDjAllRecord(userId: userId, MyDjRequest), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[MyDjResponse]>) in
+    func myDjAllRecord(userId: Int, myDjRequest: MyDjRequest, completion:@escaping(Result<[MyDjResponse], Error>) -> Void) {
+        AF.request(RecordTarget.myDjAllRecord(userId: userId, MyDjRequest), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[MyDjResponse]>) in
             switch response.result {
             case .success(let data):
                 print(data)

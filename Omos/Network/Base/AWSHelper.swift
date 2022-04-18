@@ -18,7 +18,7 @@ struct AWSConstants {
     )
 }
 
-enum awsType {
+enum AwsType {
     case profile
     case record
 }
@@ -27,7 +27,7 @@ class AWSS3Helper {
     let bucket = AWSConstants().bucket
     let s3 = S3(client: AWSConstants().awsClient, region: AWSConstants().region)
 
-    func uploadImage(_ image: UIImage, sender: UIViewController, imageName: String, type: awsType, completion: @escaping (String?) -> Void) {
+    func uploadImage(_ image: UIImage, sender: UIViewController, imageName: String, type: AwsType, completion: @escaping (String?) -> Void) {
         // check internet connection
         var imageData: Data = .init(count: 0)
 

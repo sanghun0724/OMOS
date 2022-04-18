@@ -107,7 +107,7 @@ class CategoryView: BaseView {
     }
 }
 
-class reactangleView: BaseView {
+class ReactangleView: BaseView {
 let coverImageView: UIView = {
     let view = UIView()
     view.backgroundColor = .mainBlack

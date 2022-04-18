@@ -18,7 +18,7 @@ enum RecordTarget {
     case recordDelete(postId: Int)
     case recordUpdate(postId: Int, UpdateRequest)
     case oneMusicRecord(musicId: String, OneMusicRecordRequest)
-    case MyDjAllRecord(userId: Int, MyDjRequest)
+    case myDjAllRecord(userId: Int, MyDjRequest)
     case userRecords(fromId: Int, toId: Int)
     // Profile like&scrap
     case likeRecords(userId: Int)
@@ -43,7 +43,7 @@ extension RecordTarget: TargetType {
         case .recordDelete: return .delete
         case .recordUpdate: return .put
         case .oneMusicRecord: return .get
-        case .MyDjAllRecord: return .get
+        case .myDjAllRecord: return .get
         case .userRecords: return .get
         case .likeRecords: return .get
         case .scrapRecords: return .get
@@ -63,7 +63,7 @@ extension RecordTarget: TargetType {
         case .recordDelete(let id): return "/delete/\(id)"
         case .recordUpdate(let id, _): return "/update/\(id)"
         case .oneMusicRecord(let id, _): return "/select/music/\(id)"
-        case .MyDjAllRecord(let user, _): return "/select/\(user)/my-dj"
+        case .myDjAllRecord(let user, _): return "/select/\(user)/my-dj"
         case .userRecords(let from, let to): return "/select/user/\(from)/\(to)"
         case .likeRecords(let user): return "/select/\(user)/liked-records"
         case .scrapRecords(let user): return "/select/\(user)/scrapped-records"
@@ -78,7 +78,7 @@ extension RecordTarget: TargetType {
         case .save(let request): return .body(request)
         case .recordUpdate(_, let request): return .body(request)
         case .oneMusicRecord(_, let request): return .query(request)
-        case .MyDjAllRecord(_, let request): return .query(request)
+        case .myDjAllRecord(_, let request): return .query(request)
         default:
             return nil
         }

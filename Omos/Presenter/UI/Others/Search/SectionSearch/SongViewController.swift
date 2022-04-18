@@ -108,7 +108,7 @@ extension SongViewController: UITableViewDelegate, UITableViewDataSource {
                 .asDriver()
                 .drive(onNext: { [weak self] _ in
                     print("click")
-                    let vc = CategoryViewController(defaultModel: .init(musicId: cellData.musicID, imageURL: cellData.albumImageURL , musicTitle: cellData.musicTitle, subTitle: cellData.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }))
+                    let vc = CategoryViewController(defaultModel: .init(musicId: cellData.musicID, imageURL: cellData.albumImageURL, musicTitle: cellData.musicTitle, subTitle: cellData.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }))
                     self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: cell.disposeBag)
             return cell

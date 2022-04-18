@@ -99,7 +99,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: AllRecordHeaderView.identifier) as! AllRecordHeaderView
             if section == 1 {
                 header.label.text = "스크랩한 레코드"
-                if viewModel.currentMyProfileRecord.likedRecords.count == 0 {
+                if viewModel.currentMyProfileRecord.likedRecords.isEmpty {
                     header.button.isHidden = true
                 } else {
                     header.button.isHidden = false
@@ -112,7 +112,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                     }).disposed(by: header.disposeBag)
             } else {
                 header.label.text = "공감한 레코드"
-                if viewModel.currentMyProfileRecord.scrappedRecords.count == 0 {
+                if viewModel.currentMyProfileRecord.scrappedRecords.isEmpty {
                     header.button.isHidden = true
                } else {
                    header.button.isHidden = false

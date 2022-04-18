@@ -65,7 +65,7 @@ class ProfileCell: UITableViewCell {
     }
 
     func configureLike(record: MyProfileRecordResponse) {
-        if record.likedRecords.count == 0 {
+        if record.likedRecords.isEmpty {
             self.backgroundColor = .mainBlack
             emptyLabel.text = "아직 공감한\n레코드가 없어요"
             emptyLabel.isHidden = false
@@ -101,7 +101,7 @@ class ProfileCell: UITableViewCell {
     }
 
     func configureScrap(record: MyProfileRecordResponse) {
-        if record.scrappedRecords.count == 0 {
+        if record.scrappedRecords.isEmpty {
             self.backgroundColor = .mainBlack
             emptyLabel.isHidden = false
             selfViewOne.isHidden = true

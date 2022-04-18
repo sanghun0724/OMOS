@@ -32,8 +32,6 @@ extension AwsS3Target: TargetType {
     var parameters: RequestParams? {
         switch self {
         case .deleteImage(let request): return .query(request)
-        default:
-            return nil
         }
     }
 }

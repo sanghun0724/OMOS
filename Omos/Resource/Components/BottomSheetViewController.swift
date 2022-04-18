@@ -10,8 +10,8 @@ import MaterialComponents.MaterialBottomSheet
 import UIKit
 
 enum SheetType {
-    case MyRecord
-    case AllcateRecord
+    case myRecord
+    case allcateRecord
     case searchTrack
 }
 
@@ -140,7 +140,7 @@ extension BottomSheetViewController: UITableViewDelegate, UITableViewDataSource 
     }
 }
 
-class filterCell: UITableViewCell {
+class FilterCell: UITableViewCell {
     static let identifier = "filterCell"
 
     let filterLabel: UILabel = {

@@ -59,7 +59,7 @@ extension UITextView {
     }
 }
 
-class tabBarBackgroundView: BaseView {
+class TabBarBackgroundView: BaseView {
     override func configureUI() {
         super.configureUI()
     }
@@ -78,7 +78,7 @@ extension UIStackView {
     }
 }
 
-class adjustButton: UIButton {
+class AdjustButton: UIButton {
     override var intrinsicContentSize: CGSize {
            let labelSize = titleLabel?.sizeThatFits(CGSize(width: frame.width, height: .greatestFiniteMagnitude)) ?? .zero
            let desiredButtonSize = CGSize(width: labelSize.width + titleEdgeInsets.left + titleEdgeInsets.right, height: labelSize.height + titleEdgeInsets.top + titleEdgeInsets.bottom)
@@ -89,9 +89,9 @@ class adjustButton: UIButton {
 
 extension UIView {
     public func removeAllConstraints() {
-        var _superview = self.superview
+        var vsuperview = self.superview
 
-        while let superview = _superview {
+        while let superview = vsuperview {
             for constraint in superview.constraints {
                 if let first = constraint.firstItem as? UIView, first == self {
                     superview.removeConstraint(constraint)
@@ -102,7 +102,7 @@ extension UIView {
                 }
             }
 
-            _superview = superview.superview
+            vsuperview = superview.superview
         }
 
         self.removeConstraints(self.constraints)

@@ -52,11 +52,11 @@ class MyRecordDetailViewController: BaseViewController {
 
     private func setNavigationItems() {
         self.navigationItem.rightBarButtonItems?.removeAll()
-        let InstaButton = UIBarButtonItem(image: UIImage(named: "instagram"), style: .plain, target: self, action: #selector(didTapInstagram))
-        InstaButton.tintColor = .white
+        let instaButton = UIBarButtonItem(image: UIImage(named: "instagram"), style: .plain, target: self, action: #selector(didTapInstagram))
+        instaButton.tintColor = .white
         let moreButton = UIBarButtonItem(image: UIImage(named: "more"), style: .plain, target: self, action: #selector(didTapMoreButton))
         moreButton.tintColor = .white
-        self.navigationItem.rightBarButtonItems = [moreButton, InstaButton]
+        self.navigationItem.rightBarButtonItems = [moreButton, instaButton]
     }
 
     @objc func didTapInstagram() {
@@ -550,9 +550,9 @@ class MyRecordDetailViewController: BaseViewController {
     private func deleteImage() {
         guard let str = viewModel.currentMyRecordDetail?.recordImageURL else { return }
         var idx = 0
-        for i in 1..<str.count {
-            if str[str.index(str.endIndex, offsetBy: -i)] == "/" {
-                idx = i - 1
+        for idx in 1..<str.count {
+            if str[str.index(str.endIndex, offsetBy: -idx)] == "/" {
+                idx = idx - 1
                 break
             }
         }

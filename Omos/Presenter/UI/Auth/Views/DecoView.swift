@@ -122,7 +122,7 @@ class PasswordLabelView: BaseView {
     }
 }
 
-class labels: BaseView {
+class Labels: BaseView {
     let findButton: UIButton = {
        let button = UIButton()
         button.setTitle("비밀번호 찾기", for: .normal)

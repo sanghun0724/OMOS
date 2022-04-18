@@ -43,7 +43,7 @@ class CreateViewModel: BaseViewModel {
             .subscribe({ [weak self] event in
                 self?.loading.onNext(true)
                 switch event {
-                case .success( _):
+                case .success:
                     self?.currentState = true
                     self?.state.onNext(true)
                 case .failure(let error):

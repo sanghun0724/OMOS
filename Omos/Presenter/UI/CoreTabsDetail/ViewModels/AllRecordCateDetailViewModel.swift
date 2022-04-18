@@ -45,9 +45,9 @@ class AllRecordCateDetailViewModel: BaseViewModel {
     private func removeReportedRecord() {
         var stack = currentCateRecords
         DispatchQueue.global().sync {
-            for i in 0..<currentCateRecords.count {
-                if Account.currentReportRecordsId.contains(currentCateRecords[i].recordID) {
-                    stack.remove(at: i)
+            for idx in 0..<currentCateRecords.count {
+                if Account.currentReportRecordsId.contains(currentCateRecords[idx].recordID) {
+                    stack.remove(at: idx)
                 }
             }
             currentCateRecords = stack

@@ -140,7 +140,7 @@ class AllRecordCateLongDetailCell: UITableViewCell {
     }
 }
 
-class recordLongView: BaseView {
+class RecordLongView: BaseView {
 //    var heightConst:Constraint? = nil
 
     /// 1

@@ -12,7 +12,7 @@ struct PWUpdateRequest: Codable {
     let userId: Int
 }
 
-struct myProfileResponse: Codable {
+struct MyProfileResponse: Codable {
    let nickname: String
    let profileUrl: String?
    let userId: Int

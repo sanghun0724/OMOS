@@ -93,8 +93,6 @@ class AllRecordCateDetailViewController: BaseViewController, UIScrollViewDelegat
             .subscribe(onNext: { [weak self] _ in
                 self?.hasNextPage = self?.lastPostId == self?.viewModel.currentCateRecords.last?.recordID ?? 0 ? false : true
                 self?.lastPostId = self?.viewModel.currentCateRecords.last?.recordID ?? 0
-                print("hasNext\(self?.hasNextPage)")
-//                self?.hasNextPage = self?.viewModel.currentCateRecords.count ?? 0 > 200 ? false : true //다음페이지 있는지 확인
                 self?.isPaging = false // 페이징 종료
                 self?.selfView.tableView.reloadData()
                 self?.selfView.tableView.layoutIfNeeded()
