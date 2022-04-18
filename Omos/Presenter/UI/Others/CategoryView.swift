@@ -8,13 +8,13 @@
 import UIKit
 
 class CategoryView: BaseView {
-    let oneLineView: reactangleView = {
-        let view = reactangleView()
+    let oneLineView: ReactangleView = {
+        let view = ReactangleView()
         return view
     }()
 
-    let myOstView: reactangleView = {
-        let view = reactangleView()
+    let myOstView: ReactangleView = {
+        let view = ReactangleView()
         view.titleLabel.text = "내 인생의 OST"
         view.subTitleLabel.text = "당신의 인생곡을 들려주세요."
         view.stickerImageView.image = UIImage(named: "ost")
@@ -22,24 +22,24 @@ class CategoryView: BaseView {
         return view
     }()
 
-    let myStoryView: reactangleView = {
-        let view = reactangleView()
+    let myStoryView: ReactangleView = {
+        let view = ReactangleView()
         view.titleLabel.text = "노래 속 나의 이야기"
         view.subTitleLabel.text = "노래로 떠올려보는 나의 이야기"
         view.stickerImageView.image = UIImage(named: "story")
         return view
     }()
 
-    let lyricsView: reactangleView = {
-        let view = reactangleView()
+    let lyricsView: ReactangleView = {
+        let view = ReactangleView()
         view.titleLabel.text = "나만의 가사해석"
         view.subTitleLabel.text = "노래에 담긴 깊은 뜻을 살펴볼까요?"
         view.stickerImageView.image = UIImage(named: "lyrics")
         return view
     }()
 
-    let freeView: reactangleView = {
-        let view = reactangleView()
+    let freeView: ReactangleView = {
+        let view = ReactangleView()
         view.titleLabel.text = "자유 공간"
         view.subTitleLabel.text = "당신이 노래를 통해 표현하고 싶은 모든 것을 써내려가는 공간"
         view.stickerImageView.image = UIImage(named: "free")

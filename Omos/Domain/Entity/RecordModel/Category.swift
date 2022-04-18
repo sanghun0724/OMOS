@@ -31,7 +31,7 @@ struct CategoryRespone: Codable {
     }
 }
 
-enum cateType: String, Codable {
+enum CateType: String, Codable {
     case A_LINE
     case OST
     case STORY

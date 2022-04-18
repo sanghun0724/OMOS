@@ -12,7 +12,7 @@ import UIKit
 class AllRecordCateLongDetailCell: UITableViewCell {
     static let identifier = "AllRecordCateDetailCell"
     var disposeBag = DisposeBag()
-    let myView = recordLongView()
+    let myView = RecordLongView()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

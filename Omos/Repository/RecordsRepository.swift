@@ -11,7 +11,7 @@ protocol RecordsRepository {
     init(recordAPI: RecordAPI)
     func selectRecord() -> Single<SelectResponse>
     func recordDetail(postId: Int, userId: Int) -> Single<DetailRecordResponse>
-    func cateFetch(type: cateType, postId: Int?, size: Int, sort: String, userid: Int) -> Single<[CategoryRespone]>
+    func cateFetch(type: CateType, postId: Int?, size: Int, sort: String, userid: Int) -> Single<[CategoryRespone]>
     func myRecordFetch(userid: Int) -> Single<[MyRecordRespone]>
     func save(cate: String, content: String, isPublic: Bool, musicId: String, title: String, userid: Int, recordImageUrl: String) -> Single<SaveRespone>
     func recordIspublic(postId: Int) -> Single<StateRespone>

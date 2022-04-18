@@ -10,7 +10,7 @@ import Foundation
 
 enum RecordTarget {
     case select
-    case category(cate: cateType, request: CateRequest)
+    case category(cate: CateType, request: CateRequest)
     case recordDetail(postId: Int, userId: Int)
     case myRecord(userid: Int)
     case save(SaveRequest)

@@ -23,7 +23,7 @@ class RecordsUseCase {
         recordsRepository.recordDetail(postId: postId, userId: userId)
     }
 
-    func cateFetch(type: cateType, postId: Int?, size: Int, sort: String, userid: Int) -> Single<[CategoryRespone]> {
+    func cateFetch(type: CateType, postId: Int?, size: Int, sort: String, userid: Int) -> Single<[CategoryRespone]> {
         recordsRepository.cateFetch(type: type, postId: postId, size: size, sort: sort, userid: userid)
     }
 
@@ -69,8 +69,8 @@ class RecordsUseCase {
     }
 
     // MARK: Mydj
-    func MyDjAllRecord(userId: Int, MyDjRequest: MyDjRequest) -> Single<[MyDjResponse]> {
-        recordsRepository.MyDjAllRecord(userId: userId, MyDjRequest: MyDjRequest)
+    func myDjAllRecord(userId: Int, myDjRequest: MyDjRequest) -> Single<[MyDjResponse]> {
+        recordsRepository.myDjAllRecord(userId: userId, MyDjRequest: MyDjRequest)
     }
 
     func saveFollow(fromId: Int, toId: Int) -> Single<StateRespone> {

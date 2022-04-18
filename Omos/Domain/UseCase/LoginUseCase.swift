@@ -9,33 +9,33 @@ import Foundation
 import RxSwift
 
 class LoginUseCase {
-    private let AuthRepository: AuthRepository
+    private let authRepository: AuthRepository
 
     func signIn(email: String, password: String) -> Single<LoginResponse> {
-        AuthRepository.signIn(email, password)
+        authRepository.signIn(email, password)
     }
 
     func signUp(email: String, password: String, nickname: String) -> Single<SignUpRespone> {
-       AuthRepository.localSignUp(email, password, nickname)
+        authRepository.localSignUp(email, password, nickname)
     }
 
     func checkEmail(email: String) -> Single<CheckEmailRespone> {
-        AuthRepository.checkEmail(email: email)
+        authRepository.checkEmail(email: email)
     }
 
     func snsLogin(email: String, type: SNSType) -> Single<SNSLoginResponse> {
-        AuthRepository.snsLogin(email: email, type: type)
+        authRepository.snsLogin(email: email, type: type)
     }
 
     func snsSignUp(email: String, nickName: String, type: SNSType) -> Single<SNSSignUpResponse> {
-        AuthRepository.snsSignUp(email: email, nickName: nickName, type: type)
+        authRepository.snsSignUp(email: email, nickName: nickName, type: type)
     }
 
     func emailVerify(email: String) -> Single<EmailCheckResponse> {
-        AuthRepository.emailVerify(email: email)
+        authRepository.emailVerify(email: email)
     }
 
     init(authRepository: AuthRepository) {
-        self.AuthRepository = authRepository
+        self.authRepository = authRepository
     }
 }

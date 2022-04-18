@@ -48,7 +48,7 @@ class RecordsRepositoryImpl: RecordsRepository {
         }
     }
 
-    func cateFetch(type: cateType, postId: Int?, size: Int, sort: String, userid: Int) -> Single<[CategoryRespone]> {
+    func cateFetch(type: CateType, postId: Int?, size: Int, sort: String, userid: Int) -> Single<[CategoryRespone]> {
         Single<[CategoryRespone]>.create { [weak self] single in
             self?.recordAPI.categoryFetch(cateType: type, request: .init(postId: postId, size: size, sortType: sort, userid: userid), completion: { result in
                 switch result {

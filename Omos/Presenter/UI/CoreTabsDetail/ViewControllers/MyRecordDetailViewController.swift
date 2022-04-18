@@ -550,9 +550,9 @@ class MyRecordDetailViewController: BaseViewController {
     private func deleteImage() {
         guard let str = viewModel.currentMyRecordDetail?.recordImageURL else { return }
         var idx = 0
-        for idx in 1..<str.count {
-            if str[str.index(str.endIndex, offsetBy: -idx)] == "/" {
-                idx = idx - 1
+        for index in 1..<str.count {
+            if str[str.index(str.endIndex, offsetBy: -index)] == "/" {
+                idx = index - 1
                 break
             }
         }
