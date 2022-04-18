@@ -33,7 +33,7 @@ struct CategoryRespone: Codable {
 
 enum CateType: String, Codable {
     case aLine = "A_LINE"
-    case ost  = "OST"
+    case ost = "OST"
     case story = "STORY"
     case lyrics = "LYRICS"
     case free = "FREE"

@@ -43,7 +43,7 @@ class LyricsViewModel: BaseViewModel {
             .subscribe({ [weak self] event in
                 self?.loading.onNext(true)
                 switch event {
-                case .success(let data):
+                case .success:
                     self?.currentState = true
                     self?.state.onNext(true)
                 case .failure(let error):
