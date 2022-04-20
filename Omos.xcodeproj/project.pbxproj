@@ -153,6 +153,8 @@
 		B6ADDCFD280FE53D00D90E46 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ADDCFC280FE53D00D90E46 /* LoadingCell.swift */; };
 		B6ADDCFF280FE6D300D90E46 /* InstaDecoTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ADDCFE280FE6D300D90E46 /* InstaDecoTopView.swift */; };
 		B6ADDD01280FE82500D90E46 /* CoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ADDD00280FE82500D90E46 /* CoverView.swift */; };
+		B6ADDD03280FE94A00D90E46 /* AccountOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ADDD02280FE94A00D90E46 /* AccountOutView.swift */; };
+		B6ADDD05280FFAF300D90E46 /* BestHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ADDD04280FFAF300D90E46 /* BestHeaderView.swift */; };
 		B6B1BB5727BB7E1900DF2528 /* AllRecordCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B1BB5627BB7E1900DF2528 /* AllRecordCollectionCell.swift */; };
 		B6B1BB5A27BBCE1000DF2528 /* MyRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B1BB5927BBCE1000DF2528 /* MyRecordView.swift */; };
 		B6B1BB5C27BBCF6000DF2528 /* MyRecordTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B1BB5B27BBCF6000DF2528 /* MyRecordTableCell.swift */; };
@@ -163,7 +165,7 @@
 		B6BC148727BFF6C50067D8FB /* MyRecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BC148627BFF6C40067D8FB /* MyRecordDetailViewController.swift */; };
 		B6BC148927BFF6F80067D8FB /* MyRecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BC148827BFF6F80067D8FB /* MyRecordDetailView.swift */; };
 		B6BFD15E27E9096900DC3722 /* InstagramShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BFD15D27E9096800DC3722 /* InstagramShareView.swift */; };
-		B6C3AD4527B95B1E00D5D69D /* Attributed + Stirng.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C3AD4427B95B1E00D5D69D /* Attributed + Stirng.swift */; };
+		B6C3AD4527B95B1E00D5D69D /* Attributed+Stirng.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C3AD4427B95B1E00D5D69D /* Attributed+Stirng.swift */; };
 		B6C969B727D1B7C100BA4E58 /* MyRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C969B627D1B7C100BA4E58 /* MyRecord.swift */; };
 		B6C969B927D1F44500BA4E58 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C969B827D1F44500BA4E58 /* HomeView.swift */; };
 		B6CC1D7427BA437A00B5EE7E /* InfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CC1D7327BA437A00B5EE7E /* InfoController.swift */; };
@@ -369,6 +371,8 @@
 		B6ADDCFC280FE53D00D90E46 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		B6ADDCFE280FE6D300D90E46 /* InstaDecoTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaDecoTopView.swift; sourceTree = "<group>"; };
 		B6ADDD00280FE82500D90E46 /* CoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverView.swift; sourceTree = "<group>"; };
+		B6ADDD02280FE94A00D90E46 /* AccountOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountOutView.swift; sourceTree = "<group>"; };
+		B6ADDD04280FFAF300D90E46 /* BestHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestHeaderView.swift; sourceTree = "<group>"; };
 		B6B1BB5627BB7E1900DF2528 /* AllRecordCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordCollectionCell.swift; sourceTree = "<group>"; };
 		B6B1BB5927BBCE1000DF2528 /* MyRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordView.swift; sourceTree = "<group>"; };
 		B6B1BB5B27BBCF6000DF2528 /* MyRecordTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordTableCell.swift; sourceTree = "<group>"; };
@@ -380,7 +384,7 @@
 		B6BC148827BFF6F80067D8FB /* MyRecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordDetailView.swift; sourceTree = "<group>"; };
 		B6BFD15C27E89D8800DC3722 /* Omos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Omos.entitlements; sourceTree = "<group>"; };
 		B6BFD15D27E9096800DC3722 /* InstagramShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramShareView.swift; sourceTree = "<group>"; };
-		B6C3AD4427B95B1E00D5D69D /* Attributed + Stirng.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attributed + Stirng.swift"; sourceTree = "<group>"; };
+		B6C3AD4427B95B1E00D5D69D /* Attributed+Stirng.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attributed+Stirng.swift"; sourceTree = "<group>"; };
 		B6C969B627D1B7C100BA4E58 /* MyRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecord.swift; sourceTree = "<group>"; };
 		B6C969B827D1F44500BA4E58 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		B6CC1D7327BA437A00B5EE7E /* InfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoController.swift; sourceTree = "<group>"; };
@@ -548,6 +552,7 @@
 				B66AD44D27C6963B0012686B /* MydjView.swift */,
 				B6C969B827D1F44500BA4E58 /* HomeView.swift */,
 				B6DCFA5527E45F4B006283FE /* ProfileView.swift */,
+				B6ADDD02280FE94A00D90E46 /* AccountOutView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -661,6 +666,7 @@
 				B682185727B3AA4F00B58E19 /* SearchListView.swift */,
 				B630D2FE27C78C0E00E66F22 /* BestSearchTableCell.swift */,
 				B6D4BB2B27CA86FB00D6741B /* SearchResultDetailView.swift */,
+				B6ADDD04280FFAF300D90E46 /* BestHeaderView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -857,7 +863,7 @@
 				B689A9C927AE94E7005F26E4 /* UIVIew.swift */,
 				B689A9CA27AE94E8005F26E4 /* UIViewController.swift */,
 				B682185B27B3C0BB00B58E19 /* MyError.swift */,
-				B6C3AD4427B95B1E00D5D69D /* Attributed + Stirng.swift */,
+				B6C3AD4427B95B1E00D5D69D /* Attributed+Stirng.swift */,
 				B6FE837727D07B4800401FC5 /* Cell.swift */,
 				B69E42D027E3836200CAD5F1 /* Garbage.swift */,
 			);
@@ -1278,7 +1284,7 @@
 				B606195D27DF32E7006508CA /* Lyrics+Table.swift in Sources */,
 				B6FE837827D07B4800401FC5 /* Cell.swift in Sources */,
 				B6183CD827D906300035AA06 /* MyRecordDetailViewModel.swift in Sources */,
-				B6C3AD4527B95B1E00D5D69D /* Attributed + Stirng.swift in Sources */,
+				B6C3AD4527B95B1E00D5D69D /* Attributed+Stirng.swift in Sources */,
 				B6DCFA6127E4B835006283FE /* ProfileChangeViewController.swift in Sources */,
 				B68454F527BE310100F1E6B5 /* MyAuthenticator.swift in Sources */,
 				B64601D927DB18DA0076C2E5 /* LaunchViewController.swift in Sources */,
@@ -1324,6 +1330,7 @@
 				B646051B27CB60120022E062 /* SongViewController.swift in Sources */,
 				B6DCFA5827E4616E006283FE /* ProfileCell.swift in Sources */,
 				B6670FAC27B5542100BABF40 /* ButtonView.swift in Sources */,
+				B6ADDD03280FE94A00D90E46 /* AccountOutView.swift in Sources */,
 				B6DFD2CB27CC93EE00645F52 /* SearchArtistTopTabView.swift in Sources */,
 				B6BC148427BFC8FE0067D8FB /* SignUpViewModel.swift in Sources */,
 				B6D4BB2C27CA86FB00D6741B /* SearchResultDetailView.swift in Sources */,
@@ -1446,6 +1453,7 @@
 				B606195427DF0F57006508CA /* LyricsPasteView.swift in Sources */,
 				B682185227B39F6500B58E19 /* AuthRepositoryImpl.swift in Sources */,
 				B64601DB27DB32800076C2E5 /* AllRecordDetailViewModel.swift in Sources */,
+				B6ADDD05280FFAF300D90E46 /* BestHeaderView.swift in Sources */,
 				B66AD44E27C6963B0012686B /* MydjView.swift in Sources */,
 				B6B1BB5C27BBCF6000DF2528 /* MyRecordTableCell.swift in Sources */,
 				B689A9CF27AE94E9005F26E4 /* UIViewController.swift in Sources */,

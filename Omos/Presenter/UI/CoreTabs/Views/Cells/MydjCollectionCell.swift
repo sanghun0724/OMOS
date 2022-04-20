@@ -77,7 +77,7 @@ class MydjCollectionCell: UICollectionViewCell {
                       print("Image is cached")
                       ImageCache.default.removeImage(forKey: imageUrl)
              }
-        if imageUrl == "" {
+        if imageUrl.isEmpty {
             djImageView.image = UIImage(named: "albumCover")
         } else {
             djImageView.setImage(with: imageUrl)
@@ -93,7 +93,7 @@ class MydjCollectionCell: UICollectionViewCell {
                           print("Image is cached")
                           ImageCache.default.removeImage(forKey: imageUrl)
                  }
-            if imageUrl == "" {
+            if imageUrl.isEmpty {
                 djImageView.image = UIImage(named: "albumCover")
             } else {
                 djImageView.setImage(with: imageUrl)

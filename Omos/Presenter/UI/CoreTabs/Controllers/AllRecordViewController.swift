@@ -38,7 +38,8 @@ class AllRecordViewController: BaseViewController {
         self.tabBarController?.tabBar.isHidden = false
     }
 
-    @objc func didRecieveReloadNotification() {
+    @objc
+    func didRecieveReloadNotification() {
         viewModel.selectRecordsShow()
     }
 

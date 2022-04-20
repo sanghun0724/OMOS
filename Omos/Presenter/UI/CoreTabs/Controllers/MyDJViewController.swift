@@ -66,7 +66,8 @@ class MyDJViewController: BaseViewController, UIScrollViewDelegate {
         self.selfView.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
 
-    @objc func didRecieveFollowCancelNotification(_ notification: Notification) {
+    @objc
+    func didRecieveFollowCancelNotification(_ notification: Notification) {
         self.viewModel.fetchMyDjList(userId: Account.currentUser)
         self.selfView.collectionView.visibleCells.forEach({ cell in
             if let cell = cell as? MydjCollectionCell {
@@ -77,7 +78,8 @@ class MyDJViewController: BaseViewController, UIScrollViewDelegate {
         viewModel.fetchMyDjRecord(userId: Account.currentUser, request: .init(postId: viewModel.currentMyDjRecord.last?.recordID, size: 6))
     }
 
-    @objc func didRecieveFollowNotification(_ notification: Notification) {
+    @objc
+    func didRecieveFollowNotification(_ notification: Notification) {
         self.viewModel.fetchMyDjList(userId: Account.currentUser)
         self.selfView.collectionView.visibleCells.forEach({ cell in
             if let cell = cell as? MydjCollectionCell {

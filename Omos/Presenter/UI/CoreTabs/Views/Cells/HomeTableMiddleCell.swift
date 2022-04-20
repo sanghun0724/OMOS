@@ -14,20 +14,21 @@ protocol HomeTableMiddleCellprotocol: AnyObject {
 
 class HomeTableMiddleCell: UITableViewCell {
     static let identifier = "HomeTableMiddleCell"
-
+    
     var selectedRecords: [RecommendDjResponse]? {
         didSet {
             collectionView.reloadData()
         }
     }
     weak var cellDelegate: HomeTableMiddleCellprotocol?
-    var collectionView: UICollectionView!
-
+    var collectionView: UICollectionView
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        self.collectionView = UICollectionView()
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUpCollection()
     }
-
+    
     private func setUpCollection() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal// Constant.mainWidth * 0.5
@@ -43,20 +44,20 @@ class HomeTableMiddleCell: UITableViewCell {
         self.contentView.addSubview(collectionView)
         collectionView.showsHorizontalScrollIndicator = false
     }
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         collectionView.frame = contentView.bounds
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     func configureModel(records: [RecommendDjResponse]) {
         self.selectedRecords = records
     }
-
+    
     func setCollectionViewDataSourceDelegate() {
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -68,7 +69,7 @@ extension HomeTableMiddleCell: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         self.selectedRecords?.count ?? 5
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MydjCollectionCell.identifier, for: indexPath) as! MydjCollectionCell
         guard let data = self.selectedRecords?[safe:indexPath.item] else {
@@ -78,13 +79,13 @@ extension HomeTableMiddleCell: UICollectionViewDelegate, UICollectionViewDataSou
         cell.configureHome(record: data)
         return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: false)
         let cell = collectionView.cellForItem(at: indexPath) as? MydjCollectionCell
         self.cellDelegate?.collectionView(collectionViewCell: cell, index: indexPath.item, didTappedInTableViewCell: self)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
     }
 }
