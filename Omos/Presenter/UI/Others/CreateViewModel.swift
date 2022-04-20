@@ -23,7 +23,7 @@ class CreateViewModel: BaseViewModel {
         super.init()
     }
 
-    func saveRecord(saveParameter:SaveParameter) {
+    func saveRecord(saveParameter: SaveParameter) {
         loading.onNext(false)
         usecase.save(saveParameter: saveParameter)
             .subscribe({ [weak self] event in

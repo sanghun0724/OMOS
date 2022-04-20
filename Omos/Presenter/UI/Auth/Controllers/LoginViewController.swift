@@ -45,7 +45,8 @@ class LoginViewController: UIViewController {
         configureUI()
     }
 
-    @objc func didRecieveLoginNotification() {
+    @objc
+    func didRecieveLoginNotification() {
         let action = UIAlertAction(title: "완료", style: .default) { _ in
         }
         action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
@@ -214,7 +215,8 @@ class LoginViewController: UIViewController {
     }
 
     // MARK: APPLE LOGIN
-    @objc func loginApple() {
+    @objc
+    func loginApple() {
         let request = ASAuthorizationAppleIDProvider().createRequest()
         request.requestedScopes = [.fullName, .email]
         let controller = ASAuthorizationController(authorizationRequests: [request])

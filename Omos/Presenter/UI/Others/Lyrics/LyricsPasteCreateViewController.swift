@@ -76,7 +76,8 @@ class LyricsPasteCreateViewController: BaseViewController {
         removeListeners()
     }
 
-    @objc func didTapDone() {
+    @objc
+    func didTapDone() {
         guard let titleText = selfView.titleTextView.text else {
             return
         }
@@ -92,20 +93,19 @@ class LyricsPasteCreateViewController: BaseViewController {
                 guard let desc = cell.textView.text else {
                     return
                 }
-                if desc == "" || desc == "가사해석을 적어주세요." {
+                if desc.isEmpty || desc == "가사해석을 적어주세요." {
                     state = false
                 }
                 content += (desc + "\n")
             }
         }
         print(content)
-        if selfView.titleTextView.text == "" || selfView.titleTextView.text == "레코드 제목을 입력해주세요" || !state {
+        if selfView.titleTextView.text.isEmpty || selfView.titleTextView.text == "레코드 제목을 입력해주세요" || !state {
             setAlert()
             return
         }
 
         if type == .create {
-            //(cate: "LYRICS", content: content, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: titleText, userid: Account.currentUser, recordImageUrl: "https://omos-image.s3.ap-northeast-2.amazonaws.com/record/\(viewModel.curTime).png")
             viewModel.saveRecord(saveParameter: .init(cate: "LYRICS", content: content, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: titleText, userid: Account.currentUser, recordImageUrl: "https://omos-image.s3.ap-northeast-2.amazonaws.com/record/\(viewModel.curTime).png"))
         } else {
             if ImageCache.default.isCached(forKey: viewModel.modifyDefaultModel?.recordImageURL ?? "") {
@@ -247,7 +247,7 @@ class LyricsPasteCreateViewController: BaseViewController {
 
         selfView.stickerImageView.rx.tap
             .subscribe(onNext: { [weak self] _ in
-                let action = UIAlertAction(title: "확인", style: .default) {[weak self] _ in
+                let action = UIAlertAction(title: "확인", style: .default) { _ in
                 }
                 self?.presentAlert(title: "", message: "베타 기능입니다. 레코드에 반영은 되지 않습니다.", isCancelActionIncluded: false, preferredStyle: .alert, with: action )
                 self?.setStickerView()

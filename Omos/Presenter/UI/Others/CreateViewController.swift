@@ -90,11 +90,12 @@ class CreateViewController: BaseViewController {
         removeListeners()
     }
 
-    @objc func didTapDone() {
+    @objc
+    func didTapDone() {
         for subView in self.selfView.textCoverView.subviews {
             if subView.isKind(of: IRStickerView.self) {
                 let sticker = subView as! IRStickerView
-                print(sticker.contentImage)
+                print(sticker.contentImage!)
                 print(sticker.contentView.frame)
                 print(sticker.contentView.transform)
             }
@@ -105,14 +106,13 @@ class CreateViewController: BaseViewController {
         } else {
             mainText = selfView.mainfullTextView.text
         }
-        let backImage = selfView.imageView.image
-        if selfView.titleTextView.text == "레코드 제목을 입력해주세요" || selfView.titleTextView.text == "" || mainText == #""레코드 내용을 입력해주세요""# || mainText == "레코드 내용을 입력해주세요" || mainText == "" {
+        if selfView.titleTextView.text == "레코드 제목을 입력해주세요" || selfView.titleTextView.text.isEmpty || mainText == #""레코드 내용을 입력해주세요""# || mainText == "레코드 내용을 입력해주세요" || mainText == "" {
             setAlert()
             return
         }
 
         if type == .create {
-            var imageUrl = "https://omos-image.s3.ap-northeast-2.amazonaws.com/record/\(viewModel.curTime).png"
+            let imageUrl = "https://omos-image.s3.ap-northeast-2.amazonaws.com/record/\(viewModel.curTime).png"
             viewModel.saveRecord(saveParameter: .init(cate: getCate(cate: category), content: mainText!, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: selfView.titleTextView.text, userid: Account.currentUser, recordImageUrl: imageUrl))
         } else {
             var recordContent = ""
@@ -220,9 +220,9 @@ class CreateViewController: BaseViewController {
                 }
             }).disposed(by: disposeBag)
 
-        viewModel.loading
-            .subscribe(onNext: { [weak self] _ in
-            }).disposed(by: disposeBag)
+//        viewModel.loading
+//            .subscribe(onNext: { [weak self] _ in
+//            }).disposed(by: disposeBag)
 
         selfView.lockButton.rx.tap
             .scan(false) { lastState, _ in
@@ -233,7 +233,7 @@ class CreateViewController: BaseViewController {
 
         selfView.stickerImageView.rx.tap
             .subscribe(onNext: { [weak self] _ in
-                let action = UIAlertAction(title: "확인", style: .default) {[weak self] _ in
+                let action = UIAlertAction(title: "확인", style: .default) { _ in
                 }
                 self?.presentAlert(title: "", message: "베타 기능입니다. 레코드에 반영은 되지 않습니다.", isCancelActionIncluded: false, preferredStyle: .alert, with: action )
                 self?.setStickerView()

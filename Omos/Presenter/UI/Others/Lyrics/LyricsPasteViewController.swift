@@ -38,7 +38,8 @@ class LyricsPasteViewController: BaseViewController {
         self.navigationItem.rightBarButtonItem = doneButton
     }
 
-    @objc func didTapDone() {
+    @objc
+    func didTapDone() {
         if selfView.mainLyricsTextView.text == "해석하고 싶은 가사를 복사해 붙여놓고,\n줄바꿈을 통해 마디구분을 해주세요." || selfView.mainLyricsTextView.text.isEmpty {
             print("비어이")
             return

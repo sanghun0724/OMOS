@@ -58,7 +58,8 @@ class MyDJViewController: BaseViewController, UIScrollViewDelegate {
 //        timer?.invalidate()
 //    }
 
-    @objc func didRecieveReloadNotification() {
+    @objc
+    func didRecieveReloadNotification() {
         isDjcliked = false
         viewModel.fetchMyDjList(userId: Account.currentUser)
         viewModel.fetchMyDjRecord(userId: Account.currentUser, request: .init(postId: viewModel.currentMyDjRecord.last?.recordID, size: 6))

@@ -53,11 +53,13 @@ class AllRecordViewController: BaseViewController {
         self.navigationItem.rightBarButtonItem = searchButton
     }
 
-    @objc func didPullRefresh() {
+    @objc
+    func didPullRefresh() {
         viewModel.selectRecordsShow()
     }
 
-    @objc func didTapSearchButton() {
+    @objc
+    func didTapSearchButton() {
         let rp = SearchRepositoryImpl(searchAPI: SearchAPI())
         let uc = SearchUseCase(searchRepository: rp)
         let vm = SearchViewModel(usecase: uc)
