@@ -56,7 +56,8 @@ class AllRecordDetailViewController: BaseViewController {
         self.navigationItem.rightBarButtonItems = [moreButton]
     }
 
-    @objc func didTapMoreButton() {
+    @objc
+    func didTapMoreButton() {
     }
 
     override func configureUI() {

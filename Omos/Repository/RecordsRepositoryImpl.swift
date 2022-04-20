@@ -80,7 +80,7 @@ class RecordsRepositoryImpl: RecordsRepository {
         }
     }
 
-    func save(saveParameter:SaveParameter) -> Single<SaveRespone> {
+    func save(saveParameter: SaveParameter) -> Single<SaveRespone> {
         Single<SaveRespone>.create { [weak self] single in
             self?.recordAPI.saveFetch(request: .init(category: saveParameter.cate, isPublic: saveParameter.isPublic, musicID: saveParameter.musicId, recordContents: saveParameter.content, recordTitle: saveParameter.title, recordImageURL: saveParameter.recordImageUrl, userID: saveParameter.userid), completion: { result in
                 switch result {

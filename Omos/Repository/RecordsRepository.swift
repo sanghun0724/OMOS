@@ -13,7 +13,7 @@ protocol RecordsRepository {
     func recordDetail(postId: Int, userId: Int) -> Single<DetailRecordResponse>
     func cateFetch(type: CateType, postId: Int?, size: Int, sort: String, userid: Int) -> Single<[CategoryRespone]>
     func myRecordFetch(userid: Int) -> Single<[MyRecordRespone]>
-    func save(saveParameter:SaveParameter) -> Single<SaveRespone>
+    func save(saveParameter: SaveParameter) -> Single<SaveRespone>
     func recordIspublic(postId: Int) -> Single<StateRespone>
     func recordDelete(postId: Int) -> Single<StateRespone>
     func recordUpdate(postId: Int, request: UpdateRequest) -> Single<StateRespone>

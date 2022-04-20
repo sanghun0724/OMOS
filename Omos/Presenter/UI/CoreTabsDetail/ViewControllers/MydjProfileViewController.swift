@@ -55,7 +55,8 @@ class MydjProfileViewController: BaseViewController {
         self.navigationItem.rightBarButtonItems = [reportButton]
     }
 
-    @objc func didTapReportButton() {
+    @objc
+    func didTapReportButton() {
         let action = UIAlertAction(title: "신고하기", style: .default) {[weak self] _ in
             guard let id = self?.toId else { return }
             print("userId입니다:\(id)")
