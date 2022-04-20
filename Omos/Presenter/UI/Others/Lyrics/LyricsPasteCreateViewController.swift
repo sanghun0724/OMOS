@@ -105,7 +105,8 @@ class LyricsPasteCreateViewController: BaseViewController {
         }
 
         if type == .create {
-            viewModel.saveRecord(cate: "LYRICS", content: content, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: titleText, userid: Account.currentUser, recordImageUrl: "https://omos-image.s3.ap-northeast-2.amazonaws.com/record/\(viewModel.curTime).png")
+            //(cate: "LYRICS", content: content, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: titleText, userid: Account.currentUser, recordImageUrl: "https://omos-image.s3.ap-northeast-2.amazonaws.com/record/\(viewModel.curTime).png")
+            viewModel.saveRecord(saveParameter: .init(cate: "LYRICS", content: content, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: titleText, userid: Account.currentUser, recordImageUrl: "https://omos-image.s3.ap-northeast-2.amazonaws.com/record/\(viewModel.curTime).png"))
         } else {
             if ImageCache.default.isCached(forKey: viewModel.modifyDefaultModel?.recordImageURL ?? "") {
                           print("Image is cached")

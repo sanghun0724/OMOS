@@ -31,8 +31,8 @@ class RecordsUseCase {
         recordsRepository.myRecordFetch(userid: userid)
     }
 
-    func save(cate: String, content: String, isPublic: Bool, musicId: String, title: String, userid: Int, recordImageUrl: String) -> Single<SaveRespone> {
-        recordsRepository.save(cate: cate, content: content, isPublic: isPublic, musicId: musicId, title: title, userid: userid, recordImageUrl: recordImageUrl)
+    func save(saveParameter: SaveParameter) -> Single<SaveRespone> {
+        recordsRepository.save(saveParameter: saveParameter)
     }
 
     func recordIspublic(postId: Int) -> Single<StateRespone> {

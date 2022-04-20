@@ -113,7 +113,7 @@ class CreateViewController: BaseViewController {
 
         if type == .create {
             var imageUrl = "https://omos-image.s3.ap-northeast-2.amazonaws.com/record/\(viewModel.curTime).png"
-            viewModel.saveRecord(cate: getCate(cate: category), content: mainText!, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: selfView.titleTextView.text, userid: Account.currentUser, recordImageURL: imageUrl )
+            viewModel.saveRecord(saveParameter: .init(cate: getCate(cate: category), content: mainText!, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: selfView.titleTextView.text, userid: Account.currentUser, recordImageUrl: imageUrl))
         } else {
             var recordContent = ""
             if  selfView.mainTextView.text != viewModel.modifyDefaultModel?.recordTitle {
