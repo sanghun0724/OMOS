@@ -159,6 +159,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SwiftLint.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Tabman.xcscheme</key>
 		<dict>
 			<key>isShown</key>

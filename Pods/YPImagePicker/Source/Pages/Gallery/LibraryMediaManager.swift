@@ -10,7 +10,7 @@ import UIKit
 import Photos
 
 class LibraryMediaManager {
-    
+
     weak var v: YPLibraryView?
     var collection: PHAssetCollection?
     internal var fetchResult: PHFetchResult<PHAsset>?
@@ -27,31 +27,31 @@ class LibraryMediaManager {
             return false
         }
     }
-    
+
     func initialize() {
         imageManager = PHCachingImageManager()
         resetCachedAssets()
     }
-    
+
     func resetCachedAssets() {
         imageManager?.stopCachingImagesForAllAssets()
         previousPreheatRect = .zero
     }
-    
+
     func updateCachedAssets(in collectionView: UICollectionView) {
         let screenWidth = YPImagePickerConfiguration.screenWidth
         let size = screenWidth / 4 * UIScreen.main.scale
         let cellSize = CGSize(width: size, height: size)
-        
+
         var preheatRect = collectionView.bounds
         preheatRect = preheatRect.insetBy(dx: 0.0, dy: -0.5 * preheatRect.height)
-        
+
         let delta = abs(preheatRect.midY - previousPreheatRect.midY)
         if delta > collectionView.bounds.height / 3.0 {
-            
+
             var addedIndexPaths: [IndexPath] = []
             var removedIndexPaths: [IndexPath] = []
-            
+
             previousPreheatRect.differenceWith(rect: preheatRect, removedHandler: { removedRect in
                 let indexPaths = collectionView.aapl_indexPathsForElementsInRect(removedRect)
                 removedIndexPaths += indexPaths
@@ -59,13 +59,13 @@ class LibraryMediaManager {
                 let indexPaths = collectionView.aapl_indexPathsForElementsInRect(addedRect)
                 addedIndexPaths += indexPaths
             })
-            
+
             guard let assetsToStartCaching = fetchResult?.assetsAtIndexPaths(addedIndexPaths),
                   let assetsToStopCaching = fetchResult?.assetsAtIndexPaths(removedIndexPaths) else {
                 print("Some problems in fetching and caching assets.")
                 return
             }
-            
+
             imageManager?.startCachingImages(for: assetsToStartCaching,
                                              targetSize: cellSize,
                                              contentMode: .aspectFill,
@@ -77,13 +77,13 @@ class LibraryMediaManager {
             previousPreheatRect = preheatRect
         }
     }
-    
+
     func fetchVideoUrlAndCrop(for videoAsset: PHAsset,
                               cropRect: CGRect,
                               callback: @escaping (_ videoURL: URL?) -> Void) {
         fetchVideoUrlAndCropWithDuration(for: videoAsset, cropRect: cropRect, duration: nil, callback: callback)
     }
-    
+
     func fetchVideoUrlAndCropWithDuration(for videoAsset: PHAsset,
                                           cropRect: CGRect,
                                           duration: CMTime?,
@@ -94,13 +94,13 @@ class LibraryMediaManager {
         imageManager?.requestAVAsset(forVideo: videoAsset, options: videosOptions) { asset, _, _ in
             do {
                 guard let asset = asset else { ypLog("Don't have the asset"); return }
-                
+
                 let assetComposition = AVMutableComposition()
                 let assetMaxDuration = self.getMaxVideoDuration(between: duration, andAssetDuration: asset.duration)
                 let trackTimeRange = CMTimeRangeMake(start: CMTime.zero, duration: assetMaxDuration)
-                
+
                 // 1. Inserting audio and video tracks in composition
-                
+
                 guard let videoTrack = asset.tracks(withMediaType: AVMediaType.video).first,
                       let videoCompositionTrack = assetComposition
                         .addMutableTrack(withMediaType: .video,
@@ -115,9 +115,9 @@ class LibraryMediaManager {
                                      preferredTrackID: kCMPersistentTrackID_Invalid) {
                     try audioCompositionTrack.insertTimeRange(trackTimeRange, of: audioTrack, at: CMTime.zero)
                 }
-                
+
                 try videoCompositionTrack.insertTimeRange(trackTimeRange, of: videoTrack, at: CMTime.zero)
-                
+
                 // Layer Instructions
                 let layerInstructions = AVMutableVideoCompositionLayerInstruction(assetTrack: videoCompositionTrack)
                 var transform = videoTrack.preferredTransform
@@ -128,19 +128,19 @@ class LibraryMediaManager {
                 transform.ty -= cropRect.minY
                 layerInstructions.setTransform(transform, at: CMTime.zero)
                 videoCompositionTrack.preferredTransform = transform
-                
+
                 // CompositionInstruction
                 let mainInstructions = AVMutableVideoCompositionInstruction()
                 mainInstructions.timeRange = trackTimeRange
                 mainInstructions.layerInstructions = [layerInstructions]
-                
+
                 // Video Composition
                 let videoComposition = AVMutableVideoComposition(propertiesOf: asset)
                 videoComposition.instructions = [mainInstructions]
                 videoComposition.renderSize = cropRect.size // needed?
-                
+
                 // 5. Configuring export session
-                
+
                 let fileURL = URL(fileURLWithPath: NSTemporaryDirectory())
                     .appendingUniquePathComponent(pathExtension: YPConfig.video.fileType.fileExtension)
                 let exportSession = assetComposition
@@ -186,7 +186,7 @@ class LibraryMediaManager {
             }
         }
     }
-    
+
     private func getMaxVideoDuration(between duration: CMTime?, andAssetDuration assetDuration: CMTime) -> CMTime {
         guard let duration = duration else { return assetDuration }
 
@@ -196,7 +196,7 @@ class LibraryMediaManager {
             return duration
         }
     }
-    
+
     @objc func onTickExportTimer(sender: Timer) {
         if let exportSession = sender.userInfo as? AVAssetExportSession {
             if let v = v {
@@ -204,7 +204,7 @@ class LibraryMediaManager {
                     v.updateProgress(exportSession.progress)
                 }
             }
-            
+
             if exportSession.progress > 0.99 {
                 sender.invalidate()
                 v?.updateProgress(0)
@@ -212,7 +212,7 @@ class LibraryMediaManager {
             }
         }
     }
-    
+
     func forseCancelExporting() {
         for s in self.currentExportSessions {
             s.cancelExport()

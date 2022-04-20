@@ -34,7 +34,7 @@ extension KFImage {
     /// Represents a binder for `KFImage`. It takes responsibility as an `ObjectBinding` and performs
     /// image downloading and progress reporting based on `KingfisherManager`.
     class ImageBinder: ObservableObject {
-        
+
         init() {}
 
         var downloadTask: DownloadTask?
@@ -46,9 +46,9 @@ extension KFImage {
 
         // Do not use @Published due to https://github.com/onevcat/Kingfisher/issues/1717. Revert to @Published once
         // we can drop iOS 12.
-        var loaded = false                           { willSet { objectWillChange.send() } }
-        var loadedImage: KFCrossPlatformImage? = nil { willSet { objectWillChange.send() } }
-        var progress: Progress = .init()             { willSet { objectWillChange.send() } }
+        var loaded = false { willSet { objectWillChange.send() } }
+        var loadedImage: KFCrossPlatformImage? { willSet { objectWillChange.send() } }
+        var progress: Progress = .init() { willSet { objectWillChange.send() } }
 
         func start<HoldingView: KFImageHoldingView>(context: Context<HoldingView>) {
             guard let source = context.source else {
@@ -59,7 +59,7 @@ extension KFImage {
             }
 
             loading = true
-            
+
             progress = .init()
             downloadTask = KingfisherManager.shared
                 .retrieveImage(
@@ -77,7 +77,7 @@ extension KFImage {
                             self.downloadTask = nil
                             self.loading = false
                         }
-                        
+
                         switch result {
                         case .success(let value):
                             CallbackQueue.mainCurrentOrAsync.execute {
@@ -100,14 +100,14 @@ extension KFImage {
                                 }
                                 self.loaded = true
                             }
-                            
+
                             CallbackQueue.mainAsync.execute {
                                 context.onFailureDelegate.call(error)
                             }
                         }
                 })
         }
-        
+
         private func updateProgress(downloaded: Int64, total: Int64) {
             progress.totalUnitCount = total
             progress.completedUnitCount = downloaded

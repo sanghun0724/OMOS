@@ -10,7 +10,7 @@ import UIKit
 import Stevia
 
 final class YPFilterCollectionViewCell: UICollectionViewCell {
-    
+
     let name = UILabel()
     let imageView = UIImageView()
     override var isHighlighted: Bool { didSet {
@@ -31,26 +31,26 @@ final class YPFilterCollectionViewCell: UICollectionViewCell {
 				: YPConfig.fonts.filterSelectionUnSelectedFont
         }
     }
-    
+
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         sv(
             name,
             imageView
         )
-        
+
         |name|.top(0)
         |imageView|.bottom(0).heightEqualsWidth()
-        
+
         name.font = YPConfig.fonts.filterNameFont
         name.textColor = UIColor.ypSecondaryLabel
         name.textAlignment = .center
-        
+
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        
+
         self.clipsToBounds = false
         self.layer.shadowColor = UIColor.ypLabel.cgColor
         self.layer.shadowOpacity = 0.2

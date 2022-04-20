@@ -25,4 +25,5 @@ pod 'IRSticker-swift'
 pod 'Firebase/Crashlytics'
 pod 'Firebase/Analytics'
 pod 'Firebase/Core'
+pod 'SwiftLint'
 end

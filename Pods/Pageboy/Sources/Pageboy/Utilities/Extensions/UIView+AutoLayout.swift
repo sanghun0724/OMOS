@@ -9,7 +9,7 @@
 import UIKit
 
 internal extension UIView {
-    
+
     @discardableResult
     func pinToSuperviewEdges(priority: UILayoutPriority = .required) -> [NSLayoutConstraint] {
         guard let superview = guardForSuperview() else {
@@ -20,8 +20,6 @@ internal extension UIView {
             #endif
         }
 
-
-        
         return addConstraints(priority: priority, { () -> [NSLayoutConstraint] in
             return [
                 topAnchor.constraint(equalTo: superview.topAnchor),
@@ -31,7 +29,7 @@ internal extension UIView {
             ]
         })
     }
-    
+
     @discardableResult
     func matchWidth(to view: UIView,
                     priority: UILayoutPriority = .required) -> NSLayoutConstraint? {
@@ -44,7 +42,7 @@ internal extension UIView {
                                        multiplier: 1.0,
                                        constant: 0.0)]
         })
-        
+
         guard let constraint = constraints.first else {
             #if DEBUG
             fatalError("Could not add matchWidth constraint")
@@ -54,7 +52,7 @@ internal extension UIView {
         }
         return constraint
     }
-    
+
     @discardableResult
     func matchHeight(to view: UIView,
                      priority: UILayoutPriority = .required) -> NSLayoutConstraint? {
@@ -67,7 +65,7 @@ internal extension UIView {
                                        multiplier: 1.0,
                                        constant: 0.0)]
         })
-        
+
         guard let constraint = constraints.first else {
             #if DEBUG
             fatalError("Could not add matchHeight constraint")
@@ -77,14 +75,14 @@ internal extension UIView {
         }
         return constraint
     }
-    
+
     // MARK: Utilities
-    
+
     private func prepareForAutoLayout(_ completion: () -> Void) {
         translatesAutoresizingMaskIntoConstraints = false
         completion()
     }
-    
+
     @discardableResult
     private func addConstraints(priority: UILayoutPriority, _ completion: () -> [NSLayoutConstraint]) -> [NSLayoutConstraint] {
         let constraints = completion()
@@ -94,7 +92,7 @@ internal extension UIView {
         }
         return constraints
     }
-    
+
     private func guardForSuperview() -> UIView? {
         guard let superview = superview else {
             #if DEBUG

@@ -14,24 +14,24 @@ protocol YPBottomPagerDelegate: AnyObject {
     func pagerDidSelectController(_ vc: UIViewController)
 }
 open class YPBottomPager: UIViewController, UIScrollViewDelegate {
-    
+
     weak var delegate: YPBottomPagerDelegate?
     var controllers = [UIViewController]() { didSet { reload() } }
-    
+
     var v = YPBottomPagerView()
-    
+
     var currentPage = 0
-    
+
     var currentController: UIViewController {
         return controllers[currentPage]
     }
-    
+
     override open func loadView() {
         v.scrollView.contentInsetAdjustmentBehavior = .never
         v.scrollView.delegate = self
         view = v
     }
-    
+
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         delegate?.pagerScrollViewDidScroll(scrollView)
     }
@@ -47,7 +47,7 @@ open class YPBottomPager: UIViewController, UIScrollViewDelegate {
             }
         }
     }
-    
+
     func reload() {
         let screenWidth = YPImagePickerConfiguration.screenWidth
         let viewWidth: CGFloat = screenWidth
@@ -62,10 +62,10 @@ open class YPBottomPager: UIViewController, UIScrollViewDelegate {
             c.view.width(viewWidth)
             equal(heights: c.view, v.scrollView)
         }
-        
+
         let scrollableWidth: CGFloat = CGFloat(controllers.count) * CGFloat(viewWidth)
         v.scrollView.contentSize = CGSize(width: scrollableWidth, height: 0)
-        
+
         // Build headers
         for (index, c) in controllers.enumerated() {
             let menuItem = YPMenuItem()
@@ -76,17 +76,17 @@ open class YPBottomPager: UIViewController, UIScrollViewDelegate {
                                       for: .touchUpInside)
             v.header.menuItems.append(menuItem)
         }
-        
+
         let currentMenuItem = v.header.menuItems[0]
         currentMenuItem.select()
         v.header.refreshMenuItems()
     }
-    
+
     @objc
     func tabTapped(_ b: UIButton) {
         showPage(b.tag)
     }
-    
+
     func showPage(_ page: Int, animated: Bool = true) {
         let screenWidth = YPImagePickerConfiguration.screenWidth
         let x = CGFloat(page) * screenWidth
@@ -109,7 +109,7 @@ open class YPBottomPager: UIViewController, UIScrollViewDelegate {
         }
         delegate?.pagerDidSelectController(controllers[page])
     }
-    
+
     func startOnPage(_ page: Int) {
         currentPage = page
         let screenWidth = YPImagePickerConfiguration.screenWidth

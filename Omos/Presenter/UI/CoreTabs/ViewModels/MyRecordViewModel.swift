@@ -8,22 +8,21 @@
 import Foundation
 import RxSwift
 
-class MyRecordViewModel:BaseViewModel {
-    
-    let loading = BehaviorSubject<Bool>(value:false)
-    let myRecords = BehaviorSubject<[MyRecordRespone]>(value:[])
+class MyRecordViewModel: BaseViewModel {
+    let loading = BehaviorSubject<Bool>(value: false)
+    let myRecords = BehaviorSubject<[MyRecordRespone]>(value: [])
     let isEmpty = PublishSubject<Bool>()
-    var currentMyRecords:[MyRecordRespone] = []
+    var currentMyRecords: [MyRecordRespone] = []
     let errorMessage = BehaviorSubject<String?>(value: nil)
-    let usecase:RecordsUseCase
-    
-    init(usecase:RecordsUseCase) {
+    let usecase: RecordsUseCase
+
+    init(usecase: RecordsUseCase) {
         self.usecase = usecase
         super.init()
         self.reduce()
     }
-    
-    func myRecordFetch(userid:Int) {
+
+    func myRecordFetch(userid: Int) {
         loading.onNext(true)
         usecase.myRecordFetch(userid: userid)
             .subscribe({ [weak self] event in
@@ -37,12 +36,11 @@ class MyRecordViewModel:BaseViewModel {
                 }
             }).disposed(by: disposeBag)
     }
-    
-    
+
     func reduce() {
         myRecords
             .withUnretained(self)
-            .subscribe(onNext: { owner,record in
+            .subscribe(onNext: { owner, record in
                 if record.isEmpty {
                     owner.isEmpty.onNext(true)
                 } else {
@@ -50,5 +48,4 @@ class MyRecordViewModel:BaseViewModel {
                 }
             }).disposed(by: disposeBag)
     }
-    
 }

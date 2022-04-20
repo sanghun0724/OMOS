@@ -10,7 +10,7 @@
 import UIKit
 
 public extension UIView {
-    
+
     /**
      Centers the view in its container.
      
@@ -28,7 +28,7 @@ public extension UIView {
         }
         return self
     }
-    
+
     /**
      Centers the view horizontally (X axis) in its container.
      
@@ -46,7 +46,7 @@ public extension UIView {
         }
         return self
     }
-    
+
     /**
      Centers the view vertically (Y axis) in its container.
      
@@ -64,7 +64,7 @@ public extension UIView {
         }
         return self
     }
-    
+
     /**
      Centers the view horizontally (X axis) in its container, with an offset
      
@@ -82,7 +82,7 @@ public extension UIView {
         }
         return self
     }
-    
+
     /**
      Centers the view vertically (Y axis) in its container, with an offset
      

@@ -8,7 +8,7 @@
 import UIKit
 
 class RatioItemView: UIView {
-    var didGetRatio: ((RatioItemType)->Void) = { _ in }
+    var didGetRatio: ((RatioItemType) -> Void) = { _ in }
     var selected = false {
         didSet {
             UIView.animate(withDuration: 0.2) {
@@ -17,7 +17,7 @@ class RatioItemView: UIView {
             }
         }
     }
-    
+
     private lazy var titleLabel: PaddingLabel = {
         let label = PaddingLabel()
         label.textAlignment = .center
@@ -27,34 +27,34 @@ class RatioItemView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     var ratio: RatioItemType!
-    
+
     var type: RatioType! {
         didSet {
             titleLabel.text = type == .vertical ? ratio.nameV : ratio.nameH
         }
     }
-    
+
     init(type: RatioType, item: RatioItemType) {
         super.init(frame: .zero)
         self.ratio = item
         self.type = type
         setup()
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func setup() {
         titleLabel.text = type == .vertical ? ratio.nameV : ratio.nameH
         addSubview(titleLabel)
-        translatesAutoresizingMaskIntoConstraints = false        
+        translatesAutoresizingMaskIntoConstraints = false
         titleLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
         titleLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         titleLabel.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
@@ -62,35 +62,35 @@ class RatioItemView: UIView {
         titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         let gesture = UITapGestureRecognizer(target: self, action: #selector(tap))
         addGestureRecognizer(gesture)
-        
+
         layer.cornerRadius = 10
         clipsToBounds = true
-        
+
     }
-    
+
     @objc private func tap() {
         selected = !selected
         self.didGetRatio(ratio)
     }
 }
 
-fileprivate class PaddingLabel: UILabel {
+private class PaddingLabel: UILabel {
     var topInset: CGFloat = 4.0
     var bottomInset: CGFloat = 4.0
     var leftInset: CGFloat = 10.0
     var rightInset: CGFloat = 10.0
-    
+
     override func drawText(in rect: CGRect) {
         let insets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
         super.drawText(in: rect.inset(by: insets))
     }
-    
+
     override var intrinsicContentSize: CGSize {
         let size = super.intrinsicContentSize
         return CGSize(width: size.width + leftInset + rightInset,
                       height: size.height + topInset + bottomInset)
     }
-    
+
     override var bounds: CGRect {
         didSet {
             // ensures this works within stack views if multi-line

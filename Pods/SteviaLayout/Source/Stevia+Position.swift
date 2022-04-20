@@ -10,7 +10,7 @@
 import UIKit
 
 public extension UIView {
-    
+
     /** Sets the left margin for a view.
      
     Example Usage :
@@ -26,7 +26,7 @@ public extension UIView {
     func left(_ points: CGFloat) -> Self {
         return position(.left, points: points)
     }
-    
+
     /** Sets the right margin for a view.
      
     Example Usage :
@@ -42,7 +42,7 @@ public extension UIView {
     func right(_ points: CGFloat) -> Self {
         return position(.right, points: -points)
     }
-    
+
     /** Sets the top margin for a view.
      
     Example Usage :
@@ -58,7 +58,7 @@ public extension UIView {
     func top(_ points: CGFloat) -> Self {
         return position(.top, points: points)
     }
-    
+
     /** Sets the bottom margin for a view.
      
     Example Usage :
@@ -90,7 +90,7 @@ public extension UIView {
     func left(_ fm: SteviaFlexibleMargin) -> Self {
         return position(.left, relatedBy: fm.relation, points: fm.points)
     }
-    
+
     /** Sets the right margin for a view.
      
     Example Usage :
@@ -115,7 +115,7 @@ public extension UIView {
         }
         return position(.right, relatedBy: n.relation, points: n.points)
     }
-    
+
     /** Sets the top margin for a view.
      
     Example Usage :
@@ -131,7 +131,7 @@ public extension UIView {
     func top(_ fm: SteviaFlexibleMargin) -> Self {
         return position(.top, relatedBy: fm.relation, points: fm.points)
     }
-    
+
     /** Sets the bottom margin for a view.
      
     Example Usage :
@@ -156,7 +156,7 @@ public extension UIView {
         }
         return position(.bottom, relatedBy: n.relation, points: n.points)
     }
-    
+
     /** Sets the leading margin for a view.
      
     Example Usage :
@@ -168,17 +168,17 @@ public extension UIView {
      
     - Returns: itself for chaining purposes
     */
-    
+
     @discardableResult
     func leading(_ points: CGFloat) -> UIView {
         return position(.leading, points: points)
     }
-    
+
     @discardableResult
     func leading(_ fm: SteviaFlexibleMargin) -> UIView {
         return position(.leading, relatedBy: fm.relation, points: fm.points)
     }
-    
+
     /** Sets the trailing margin for a view.
      
     Example Usage :
@@ -205,7 +205,7 @@ public extension UIView {
         }
         return position(.trailing, relatedBy: invertedRelation!, points: -fm.points)
     }
-    
+
     fileprivate func position(_ position: NSLayoutConstraint.Attribute,
                               relatedBy: NSLayoutConstraint.Relation = .equal,
                               points: CGFloat) -> Self {

@@ -5,24 +5,24 @@
 //  Created by sangheon on 2022/03/06.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 enum SearchTarget {
     case searchAlbum(MusicRequest)
     case searchArtist(MusicRequest)
     case searchTrack(MusicRequest)
-    case searchAlbumDetail(albumId:String)
-    case searchTrackDetail(trackId:String)
-    case searchArtistTrack(artistId:String)
-    case searchArtistAlbum(artistId:String,ArtistRequest)
+    case searchAlbumDetail(albumId: String)
+    case searchTrackDetail(trackId: String)
+    case searchArtistTrack(artistId: String)
+    case searchArtistAlbum(artistId: String, ArtistRequest)
 }
 
-extension SearchTarget:TargetType {
+extension SearchTarget: TargetType {
     var baseURL: String {
-        return RestApiUrl.restUrl + "/search"
+        RestApiUrl.restUrl + "/search"
     }
-    
+
     var method: HTTPMethod {
         switch self {
         case .searchAlbum: return .get
@@ -34,7 +34,7 @@ extension SearchTarget:TargetType {
         case .searchArtistAlbum: return .get
         }
     }
-    
+
     var path: String {
         switch self {
         case .searchAlbum: return "/album"
@@ -43,10 +43,10 @@ extension SearchTarget:TargetType {
         case .searchAlbumDetail(let id): return "/album/\(id)"
         case .searchTrackDetail(let id): return "track/\(id)"
         case .searchArtistTrack(let id): return "/artist/\(id)/hot-tracks"
-        case .searchArtistAlbum(let id,_): return "/artist/\(id)/albums"
+        case .searchArtistAlbum(let id, _): return "/artist/\(id)/albums"
         }
     }
-    
+
     var parameters: RequestParams? {
         switch self {
         case .searchAlbum(let request): return .query(request)
@@ -55,9 +55,7 @@ extension SearchTarget:TargetType {
         case .searchAlbumDetail: return nil
         case .searchTrackDetail: return nil
         case .searchArtistTrack: return nil
-        case .searchArtistAlbum(_,let request): return .query(request)
+        case .searchArtistAlbum(_, let request): return .query(request)
         }
     }
-    
-    
 }

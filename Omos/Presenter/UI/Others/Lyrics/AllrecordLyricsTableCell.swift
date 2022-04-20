@@ -6,20 +6,19 @@
 //
 
 import Foundation
-import UIKit
-import RxSwift
 import RxCocoa
 import RxGesture
+import RxSwift
+import UIKit
 
-
-class AllrecordLyricsTableCell:UITableViewCell {
+class AllrecordLyricsTableCell: UITableViewCell {
     static let identifier = "AllrecordLyricsTableCell"
     var disposeBag = DisposeBag()
     var hiddenFlag = true
     let selfView = LyricsRecordView()
-    var lyricsText:String = "" {
+    var lyricsText: String = "" {
         didSet {
-            lyricsText.enumerateSubstrings(in: lyricsText.startIndex..., options: .byParagraphs) { [weak self] substring, range, _, stop in
+            lyricsText.enumerateSubstrings(in: lyricsText.startIndex..., options: .byParagraphs) { [weak self] substring, _, _, _ in
                 if  let substring = substring,
                     !substring.isEmpty {
                     self?.lyricsArr.append(substring)
@@ -27,58 +26,53 @@ class AllrecordLyricsTableCell:UITableViewCell {
             }
         }
     }
-    var lyricsArr:[String] = []
-    
-    let readMoreButton:UIButton = {
+    var lyricsArr: [String] = []
+
+    let readMoreButton: UIButton = {
         let button = UIButton()
         button.setTitle("더 보기", for: .normal)
         button.setTitleColor(.mainGrey6, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
         return button
     }()
-    
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-          super.init(style: style , reuseIdentifier: reuseIdentifier)
+          super.init(style: style, reuseIdentifier: reuseIdentifier)
         selfView.tableView.dataSource = self
         selfView.tableView.delegate = self
       }
-   
+
     override func layoutSubviews() {
         super.layoutSubviews()
         configureUI()
-        
+
         selfView.circleImageView.layer.cornerRadius = selfView.circleImageView.height / 2
         selfView.circleImageView.layer.masksToBounds = true
         selfView.lockButton.isHidden = true
     }
-    
-    
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
+
     func configureUI() {
         self.contentView.addSubview(selfView)
-        
+
         selfView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         lyricsArr = []
         lyricsText = ""
         disposeBag = DisposeBag()
     }
-    
-    func configureModel(record:CategoryRespone) {
+
+    func configureModel(record: CategoryRespone) {
         selfView.musicTitleLabel.text = record.music.musicTitle
-        selfView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
+        selfView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
         if selfView.subMusicInfoLabel.text?.first == " " {
             selfView.subMusicInfoLabel.text?.removeFirst()
         }
@@ -101,13 +95,11 @@ class AllrecordLyricsTableCell:UITableViewCell {
             selfView.scrapButton.setImage( UIImage(named: "fillStar"), for: .normal)
             selfView.scrapCountLabel.textColor = .mainOrange
         }
-
-
     }
 
-    func configureOneMusic(record:OneMusicRecordRespone) {
+    func configureOneMusic(record: OneMusicRecordRespone) {
         selfView.musicTitleLabel.text = record.music.musicTitle
-        selfView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
+        selfView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
         if selfView.subMusicInfoLabel.text?.first == " " {
             selfView.subMusicInfoLabel.text?.removeFirst()
         }
@@ -120,7 +112,7 @@ class AllrecordLyricsTableCell:UITableViewCell {
         selfView.likeCountLabel.text = String(record.likeCnt)
         selfView.scrapCountLabel.text = String(record.scrapCnt)
         selfView.cateLabel.text = " | \(record.category.getReverseCate())"
-        
+
         if record.isLiked {
             selfView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
             selfView.likeCountLabel.textColor = .mainOrange
@@ -132,9 +124,9 @@ class AllrecordLyricsTableCell:UITableViewCell {
         }
     }
 
-    func configureMyDjRecord(record:MyDjResponse) {
+    func configureMyDjRecord(record: MyDjResponse) {
         selfView.musicTitleLabel.text = record.music.musicTitle
-        selfView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)"} + "- \(record.music.albumTitle)"
+        selfView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
         if selfView.subMusicInfoLabel.text?.first == " " {
             selfView.subMusicInfoLabel.text?.removeFirst()
         }
@@ -147,7 +139,7 @@ class AllrecordLyricsTableCell:UITableViewCell {
         selfView.likeCountLabel.text = String(record.likeCnt)
         selfView.scrapCountLabel.text = String(record.scrapCnt)
         selfView.cateLabel.text = " | \(record.category.getReverseCate())"
-        
+
         if record.isLiked {
             selfView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
             selfView.likeCountLabel.textColor = .mainOrange
@@ -158,11 +150,9 @@ class AllrecordLyricsTableCell:UITableViewCell {
             selfView.scrapCountLabel.textColor = .mainOrange
         }
     }
-
 }
 
-
-extension AllrecordLyricsTableCell:UITableViewDelegate,UITableViewDataSource {
+extension AllrecordLyricsTableCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print( "cell count \(lyricsArr.count)")
         return lyricsArr.count
@@ -174,9 +164,9 @@ extension AllrecordLyricsTableCell:UITableViewDelegate,UITableViewDataSource {
             if indexPath.row == 0 {
                 cell.label.text = lyricsArr[0]
             } else {
-                cell.label.text = lyricsArr[safe:indexPath.row/2] ?? " "
+                cell.label.text = lyricsArr[safe:indexPath.row / 2] ?? " "
             }
-            
+
             cell.selectionStyle = .none
             cell.layoutIfNeeded()
             return cell
@@ -191,13 +181,11 @@ extension AllrecordLyricsTableCell:UITableViewDelegate,UITableViewDataSource {
         }
     }
 
-
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        UITableView.automaticDimension
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return CGFloat.leastNormalMagnitude
+        CGFloat.leastNormalMagnitude
     }
-
 }

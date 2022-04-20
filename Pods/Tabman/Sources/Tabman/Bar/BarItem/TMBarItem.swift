@@ -17,8 +17,8 @@ internal let TMBarItemableNeedsUpdateNotification = Notification.Name(rawValue: 
 /// Tabman adds extensions to UIKit components to natively support `TMBarItemable`, such as `UINavigationItem` and
 /// `UITabBarItem`. Therefore for example, simply returning a `UIViewController` `navigationItem` as a `TMBarItemable` is
 /// fully supported.
-public protocol TMBarItemable: class {
-    
+public protocol TMBarItemable: AnyObject {
+
     /// Title of the item.
     var title: String? { get set }
     /// Image to display.
@@ -26,7 +26,7 @@ public protocol TMBarItemable: class {
     /// - Note: If you want the image to be colored by tint colors when within a `TMBar`,
     /// you must use the `.alwaysTemplate` image rendering mode.
     var image: UIImage? { get set }
-    
+
     /// Badge value to display.
     var badgeValue: String? { get set }
 
@@ -35,7 +35,7 @@ public protocol TMBarItemable: class {
 
     /// A brief description of the result of performing an action on the accessibility element, in a localized string.
     var accessibilityHint: String? { get set }
-    
+
     /// Inform the bar that the item has been updated.
     ///
     /// This will notify any button that is responsible for the item
@@ -46,7 +46,7 @@ public protocol TMBarItemable: class {
 }
 
 extension TMBarItemable {
-    
+
     public func setNeedsUpdate() {
         NotificationCenter.default.post(name: TMBarItemableNeedsUpdateNotification, object: self)
     }
@@ -54,7 +54,7 @@ extension TMBarItemable {
 
 /// :nodoc:
 extension TMBarItemable {
-    
+
     // swiftlint:disable unused_setter_value
 
     public var accessibilityLabel: String? {
@@ -63,7 +63,7 @@ extension TMBarItemable {
         }
         set {}
     }
-    
+
     public var accessibilityHint: String? {
         get {
             return nil
@@ -74,20 +74,20 @@ extension TMBarItemable {
 
 /// Default `TMBarItemable` that can be displayed in a `TMBar`.
 open class TMBarItem: TMBarItemable {
-    
+
     // MARK: Properties
-    
+
     open var title: String? {
-        didSet  {
-            setNeedsUpdate()
-        }
-    }
-    open var image: UIImage?  {
         didSet {
             setNeedsUpdate()
         }
     }
-    
+    open var image: UIImage? {
+        didSet {
+            setNeedsUpdate()
+        }
+    }
+
     open var badgeValue: String? {
         didSet {
             setNeedsUpdate()
@@ -107,9 +107,9 @@ open class TMBarItem: TMBarItemable {
     }
 
     public var isAccessibilityElement: Bool { return true }
-        
+
     // MARK: Init
-    
+
     /// Create an Item with a title.
     ///
     /// - Parameters:
@@ -118,7 +118,7 @@ open class TMBarItem: TMBarItemable {
     public convenience init(title: String, badgeValue: String? = nil) {
         self.init(with: title, image: nil, badgeValue: badgeValue)
     }
-    
+
     /// Create an Item with an image.
     ///
     /// - Parameters:
@@ -127,7 +127,7 @@ open class TMBarItem: TMBarItemable {
     public convenience init(image: UIImage, badgeValue: String? = nil) {
         self.init(with: nil, image: image, badgeValue: badgeValue)
     }
-    
+
     /// Create an Item with a title and an image.
     ///
     /// - Parameters:
@@ -137,7 +137,7 @@ open class TMBarItem: TMBarItemable {
     public convenience init(title: String, image: UIImage, badgeValue: String? = nil) {
         self.init(with: title, image: image, badgeValue: badgeValue)
     }
-    
+
     private init(with title: String?, image: UIImage?, badgeValue: String?) {
         self.title = title
         self.image = image

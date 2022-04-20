@@ -9,12 +9,12 @@
 import UIKit
 
 internal extension UIScrollView {
-    
+
     /// Whether the scroll view can be assumed to be interactively scrolling
     var isProbablyActiveInScroll: Bool {
         return isTracking || isDecelerating
     }
-    
+
     func cancelTouches() {
         panGestureRecognizer.isEnabled = false
         panGestureRecognizer.isEnabled = true

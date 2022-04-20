@@ -7,39 +7,37 @@
 
 import UIKit
 
-extension MyRecordViewController: UITableViewDelegate,UITableViewDataSource {
-    
+extension MyRecordViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myRecord.count
+        myRecord.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MyRecordTableCell.identifier, for: indexPath) as! MyRecordTableCell
         let data = myRecord[indexPath.row]
-        cell.configureModel(record:data)
+        cell.configureModel(record: data)
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UIScreen.main.bounds.height / 5
+        UIScreen.main.bounds.height / 5
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         let data = myRecord[indexPath.row]
         let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
         let uc = RecordsUseCase(recordsRepository: rp)
         let vm = MyRecordDetailViewModel(usecase: uc)
-        let vc = MyRecordDetailViewController(posetId: data.recordID,viewModel: vm)
+        let vc = MyRecordDetailViewController(posetId: data.recordID, viewModel: vm)
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return nil
+        nil
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat.leastNormalMagnitude
+        CGFloat.leastNormalMagnitude
     }
-    
 }

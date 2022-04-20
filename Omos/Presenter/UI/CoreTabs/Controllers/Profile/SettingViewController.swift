@@ -5,14 +5,13 @@
 //  Created by sangheon on 2022/03/18.
 //
 
-import UIKit
+import KakaoSDKAuth
 import KakaoSDKCommon
 import KakaoSDKUser
-import KakaoSDKAuth
+import UIKit
 
-class SettingViewController:BaseViewController {
-    
-    let tableView:UITableView = {
+class SettingViewController: BaseViewController {
+    let tableView: UITableView = {
         let table = UITableView()
         table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         table.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: "header")
@@ -22,18 +21,17 @@ class SettingViewController:BaseViewController {
         table.isScrollEnabled = false
         return table
     }()
-    let viewModel:ProfileViewModel
-    
-    init(viewModel:ProfileViewModel) {
+    let viewModel: ProfileViewModel
+
+    init(viewModel: ProfileViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
+
     override func viewDidLoad() {
         bind()
         super.viewDidLoad()
@@ -41,27 +39,27 @@ class SettingViewController:BaseViewController {
         tableView.dataSource = self
         self.view.backgroundColor = .mainBackGround
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
     }
-    
+
     override func configureUI() {
         super.configureUI()
         self.view.addSubview(tableView)
-        
+
         tableView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.leading.trailing.bottom.equalToSuperview()
         }
     }
-    
+
     func bind() {
         viewModel.logoutState
             .subscribe(onNext: { [weak self] state in
                 if state {
-                    let uc = LoginUseCase(authRepository:AuthRepositoryImpl(loginAPI: LoginAPI()))
+                    let uc = LoginUseCase(authRepository: AuthRepositoryImpl(loginAPI: LoginAPI()))
                     let vm = LoginViewModel(usecase: uc)
                     let vc = LoginViewController(viewModel: vm)
                     UIApplication.shared.windows.first?.rootViewController = vc
@@ -69,28 +67,26 @@ class SettingViewController:BaseViewController {
                     self?.navigationController?.popToRootViewController(animated: false)
                 }
             }).disposed(by: disposeBag)
-        
     }
-    
+
     private func logout() {
         // KAKAKO 로그아웃
-        UserApi.shared.logout {(error) in
+        UserApi.shared.logout {error in
             if let error = error {
                 print(error)
-            }
-            else {
+            } else {
                 print("로그아웃 성공")
             }
         }
         // APPLE 로그아웃 은 각자 해야함 화면 돌려주기만 하기
-        //reset UserDefault
+        // reset UserDefault
         resetDefaults()
         viewModel.logOut(userId: Account.currentUser)
         Account.currentUser = -1
         // local
-        
+
     }
-    
+
     private func resetDefaults() {
         let defaults = UserDefaults.standard
         let dictionary = defaults.dictionaryRepresentation()
@@ -98,20 +94,17 @@ class SettingViewController:BaseViewController {
             defaults.removeObject(forKey: key)
         }
     }
-    
 }
 
-
-extension SettingViewController:UITableViewDelegate,UITableViewDataSource {
-    
+extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        2
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        2
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.backgroundColor = .mainBackGround
@@ -134,12 +127,10 @@ extension SettingViewController:UITableViewDelegate,UITableViewDataSource {
                 print("")
             }
         }
-        
-        
+
         return cell
     }
-    
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header")!
         if section == 0 {
@@ -149,7 +140,7 @@ extension SettingViewController:UITableViewDelegate,UITableViewDataSource {
         }
         return header
     }
-    
+
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let view = view as? UITableViewHeaderFooterView {
             view.backgroundView?.backgroundColor = .mainBackGround
@@ -157,10 +148,10 @@ extension SettingViewController:UITableViewDelegate,UITableViewDataSource {
             view.textLabel?.textColor = .mainOrange
         }
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
@@ -175,8 +166,8 @@ extension SettingViewController:UITableViewDelegate,UITableViewDataSource {
         } else {
             switch indexPath.row {
             case 0:
-                //logout
-                let action = UIAlertAction(title: "로그아웃", style: .default) { alert in
+                // logout
+                let action = UIAlertAction(title: "로그아웃", style: .default) { _ in
                     self.logout()
                 }
                 action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
@@ -188,22 +179,19 @@ extension SettingViewController:UITableViewDelegate,UITableViewDataSource {
                 print("")
             }
         }
-        
     }
-    
+
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView()
         view.backgroundColor = .mainBlack1
         return view
     }
-    
+
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 0 {
             return 0.5
         } else {
             return 0
         }
-        
     }
-    
 }

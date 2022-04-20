@@ -5,24 +5,23 @@
 //  Created by sangheon on 2022/02/06.
 //
 
-import UIKit
-import RxSwift
 import RxCocoa
+import RxSwift
+import UIKit
 
-class HomeViewController:BaseViewController {
-    
+class HomeViewController: BaseViewController {
     let selfView = HomeView()
-    let viewModel:HomeViewModel
-    
-    init(viewModel:HomeViewModel) {
+    let viewModel: HomeViewModel
+
+    init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
@@ -30,24 +29,23 @@ class HomeViewController:BaseViewController {
         selfView.tableView.delegate = self
         viewModel.allHomeDataFetch(userId: Account.currentUser)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         self.tabBarController?.tabBar.isHidden = false
     }
-    
+
     override func configureUI() {
         super.configureUI()
         self.view.addSubview(selfView)
-        
+
         selfView.snp.makeConstraints { make in
             make.top.trailing.leading.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
         }
-        
     }
-    
+
     func bind() {
         viewModel.allLoading
             .subscribe(onNext: { [weak self] loading in
@@ -57,7 +55,7 @@ class HomeViewController:BaseViewController {
                     self?.selfView.tableView.reloadData()
                 }
             }).disposed(by: disposeBag)
-        
+
         selfView.floatingButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] _ in
@@ -70,10 +68,8 @@ class HomeViewController:BaseViewController {
     }
 }
 
-
-extension HomeViewController:AllCollectCellprotocol {
+extension HomeViewController: AllCollectCellprotocol {
     func collectionView(collectionViewCell: AllRecordCollectionCell?, cate: String, didTappedInTableViewCell: AllRecordTableCell) {
-        
         guard let postId = collectionViewCell?.homeInfo?.recordID,
               let userId = collectionViewCell?.homeInfo?.userID else { return }
 
@@ -93,19 +89,14 @@ extension HomeViewController:AllCollectCellprotocol {
     }
 }
 
-extension HomeViewController:HomeTableMiddleCellprotocol {
+extension HomeViewController: HomeTableMiddleCellprotocol {
     func collectionView(collectionViewCell: MydjCollectionCell?, index: Int, didTappedInTableViewCell: HomeTableMiddleCell) {
         guard let userId = collectionViewCell?.homeInfo?.userID else { return }
-        
+
         let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
         let uc = RecordsUseCase(recordsRepository: rp)
         let vm = MyDjProfileViewModel(usecase: uc)
         let vc = MydjProfileViewController(viewModel: vm, toId: userId)
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
 }
-
-
-

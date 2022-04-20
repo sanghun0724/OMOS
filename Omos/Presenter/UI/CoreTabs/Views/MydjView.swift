@@ -8,13 +8,12 @@
 import Foundation
 import UIKit
 
-class MydjView:BaseView {
-    
+class MydjView: BaseView {
     let cellSize = UIScreen.main.bounds.width * 0.21
-    
-    var collectionView:UICollectionView!
-    
-    let tableView:UITableView = {
+
+    var collectionView: UICollectionView!
+
+    let tableView: UITableView = {
         let table = UITableView()
         table.register(AllRecordCateShortDetailCell.self, forCellReuseIdentifier: AllRecordCateShortDetailCell.identifier)
         table.register(AllRecordCateLongDetailCell.self, forCellReuseIdentifier: AllRecordCateLongDetailCell.identifier)
@@ -26,10 +25,10 @@ class MydjView:BaseView {
         table.automaticallyAdjustsScrollIndicatorInsets = false
         return table
     }()
-    
+
     let loadingView = LoadingView()
     let emptyView = EmptyView()
-    
+
     override func configureUI() {
         super.configureUI()
         addSubview(tableView)
@@ -38,34 +37,33 @@ class MydjView:BaseView {
         addSubview(loadingView)
         emptyView.isHidden = true
         loadingView.isHidden = true
-        
+
         collectionView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(cellSize+6)
+            make.height.equalTo(cellSize + 6)
         }
-        
+
         tableView.snp.makeConstraints { make in
             make.top.equalTo(collectionView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
-        
+
         loadingView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
+
         emptyView.snp.makeConstraints { make in
             make.top.equalTo(collectionView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
         emptyView.descriptionLabel.text = "구독한 DJ가 없습니다."
         loadingView.backgroundColor = .mainBackGround
-        
     }
-    
+
     func setUpCollection() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: cellSize , height: cellSize) //비율정해서 설정하기
+        layout.itemSize = CGSize(width: cellSize, height: cellSize) // 비율정해서 설정하기
         layout.minimumLineSpacing = 6
         layout.minimumInteritemSpacing = 6
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -75,7 +73,4 @@ class MydjView:BaseView {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .mainBackGround
     }
-
 }
-
-

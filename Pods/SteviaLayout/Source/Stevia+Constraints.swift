@@ -12,7 +12,7 @@ import UIKit
 // MARK: - Shortcut
 
 public extension UIView {
-    
+
     /**
      Helper for creating and adding NSLayoutConstraint but with default values provided.
      
@@ -127,7 +127,7 @@ public extension UIView {
             spv.addConstraints(cs)
         }
     }
-    
+
     /**
      Enforce a view to keep height and width equal at all times, essentially
      forcing it to be a square.
@@ -147,6 +147,6 @@ public extension UIView {
         }
         return self
     }
-    
+
 }
 #endif

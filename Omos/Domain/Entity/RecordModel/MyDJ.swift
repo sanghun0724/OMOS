@@ -7,13 +7,12 @@
 
 import Foundation
 
-
-struct MyDjRequest:Codable {
-    let postId:Int?
-    let size:Int
+struct MyDjRequest: Codable {
+    let postId: Int?
+    let size: Int
 }
 
-struct MyDjResponse:Codable {
+struct MyDjResponse: Codable {
        let music: Music
        let recordID: Int
        let recordTitle, recordContents: String
@@ -35,9 +34,7 @@ struct MyDjResponse:Codable {
        }
 }
 
-
-
-struct MyDjProfileResponse:Codable {
+struct MyDjProfileResponse: Codable {
     let count: Count
     let isFollowed: Bool?
     let profile: MyDjListResponse
@@ -61,8 +58,7 @@ struct MyDjListResponse: Codable {
     }
 }
 
-
-struct UserRecordsResponse:Codable {
+struct UserRecordsResponse: Codable {
        let music: Music
        let recordID: Int
        let recordTitle, recordContents: String
@@ -84,8 +80,7 @@ struct UserRecordsResponse:Codable {
        }
 }
 
-
-struct BlockRequest:Codable {
+struct BlockRequest: Codable {
    let fromUserId: Int
-   let toUserId:Int
+   let toUserId: Int
 }

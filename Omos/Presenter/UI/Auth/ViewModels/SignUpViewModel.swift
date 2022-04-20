@@ -5,27 +5,25 @@
 //  Created by sangheon on 2022/02/18.
 //
 
-import UIKit
-import RxSwift
 import RxRelay
+import RxSwift
+import UIKit
 
-class SignUpViewModel:BaseViewModel {
-    
-    
+class SignUpViewModel: BaseViewModel {
     let validSignUp = PublishRelay<Bool>()
     let validEmail = PublishRelay<Bool>()
     let validEmailCheck = PublishRelay<Bool>()
     let emailCheckCode = PublishRelay<EmailCheckResponse>()
-    var currentEmailCheckCode:EmailCheckResponse = .init(code: "")
+    var currentEmailCheckCode: EmailCheckResponse = .init(code: "")
     let loading = PublishRelay<Bool>()
-    let usecase:LoginUseCase
-    
-    init(usecase:LoginUseCase) {
+    let usecase: LoginUseCase
+
+    init(usecase: LoginUseCase) {
         self.usecase = usecase
         super.init()
     }
-    
-    //SignUP API Caller
+
+    // SignUP API Caller
     func signUp() {
         guard let email = UserDefaults.standard.string(forKey: "email"),
                 let password = UserDefaults.standard.string(forKey: "password"),
@@ -33,9 +31,9 @@ class SignUpViewModel:BaseViewModel {
                     return
                 }
         print("sign \(email),\(password),\(nickname)")
-        
+
         usecase.signUp(email: email, password: password, nickname: nickname)
-            .subscribe( { [weak self] event in
+            .subscribe({ [weak self] event in
                 switch event {
                 case .success:
                     self?.validSignUp.accept(true)
@@ -44,9 +42,9 @@ class SignUpViewModel:BaseViewModel {
                 }
             }).disposed(by: disposeBag)
     }
-    
+
     func kakaoSignUp() {
-        guard let email =  UserDefaults.standard.string(forKey: "kakaoEmail"),
+        guard let email = UserDefaults.standard.string(forKey: "kakaoEmail"),
               let nickname = UserDefaults.standard.string(forKey: "nickname") else {
                   return
               }
@@ -61,9 +59,9 @@ class SignUpViewModel:BaseViewModel {
             }
         }).disposed(by: disposeBag)
     }
-    
+
     func appleSignUp() {
-        guard let email =  UserDefaults.standard.string(forKey: "appleEmail"),
+        guard let email = UserDefaults.standard.string(forKey: "appleEmail"),
               let nickname = UserDefaults.standard.string(forKey: "nickname") else {
                   return
               }
@@ -77,17 +75,17 @@ class SignUpViewModel:BaseViewModel {
             }
         }).disposed(by: disposeBag)
     }
-    
-    //MARK: Check Button Logic
-    func isChecked(_ button:UIButton) {
+
+    // MARK: Check Button Logic
+    func isChecked(_ button: UIButton) {
         if button.backgroundColor == .white {
             button.backgroundColor = .mainOrange
-        } else  {
+        } else {
             button.backgroundColor = .white
         }
     }
-    
-    func hasSameName(email:String) {
+
+    func hasSameName(email: String) {
         usecase.checkEmail(email: email).subscribe({ [weak self] event in
             switch event {
             case .success(let data):
@@ -99,8 +97,8 @@ class SignUpViewModel:BaseViewModel {
             }
         }).disposed(by: disposeBag)
     }
-    
-    func emailVerify(email:String) {
+
+    func emailVerify(email: String) {
         loading.accept(true)
         usecase.emailVerify(email: email).subscribe({ [weak self] event in
             self?.loading.accept(false)
@@ -112,7 +110,5 @@ class SignUpViewModel:BaseViewModel {
                 print(error.localizedDescription)
             }
         }).disposed(by: disposeBag)
-    
     }
-    
 }

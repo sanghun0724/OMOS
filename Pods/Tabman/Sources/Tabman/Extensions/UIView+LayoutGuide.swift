@@ -17,22 +17,22 @@ extension UIView {
             return nil
         }
     }
-    
+
     @available(iOS 11.0, *)
     var safeAreaTopAnchor: NSLayoutYAxisAnchor {
         return internalSafeAreaLayoutGuide?.topAnchor ?? topAnchor
     }
-    
+
     @available(iOS 11.0, *)
     var safeAreaBottomAnchor: NSLayoutYAxisAnchor {
         return internalSafeAreaLayoutGuide?.bottomAnchor ?? bottomAnchor
     }
-    
+
     @available(iOS 11.0, *)
     var safeAreaTrailingAnchor: NSLayoutXAxisAnchor {
         return internalSafeAreaLayoutGuide?.trailingAnchor ?? trailingAnchor
     }
-    
+
     @available(iOS 11.0, *)
     var safeAreaLeadingAnchor: NSLayoutXAxisAnchor {
         return internalSafeAreaLayoutGuide?.leadingAnchor ?? leadingAnchor

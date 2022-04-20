@@ -13,7 +13,7 @@ struct PopuralResponse: Codable {
     let recordID: Int
     let recordImageURL, recordTitle: String
     let userID: Int
-    
+
     enum CodingKeys: String, CodingKey {
         case music, nickname
         case recordID = "recordId"
@@ -23,12 +23,11 @@ struct PopuralResponse: Codable {
     }
 }
 
-
-struct LovedResponse:Codable {
+struct LovedResponse: Codable {
     let recordID: Int
     let music: Music
     let recordImageURL: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case recordID = "recordId"
         case music
@@ -36,11 +35,11 @@ struct LovedResponse:Codable {
     }
 }
 
-struct TodayTrackResponse:Codable {
+struct TodayTrackResponse: Codable {
     let albumImageURL, albumTitle: String
     let artists: [Artist]
     let musicID, musicTitle: String
-    
+
     enum CodingKeys: String, CodingKey {
         case albumImageURL = "albumImageUrl"
         case albumTitle, artists
@@ -49,11 +48,11 @@ struct TodayTrackResponse:Codable {
     }
 }
 
-struct recommendDjResponse:Codable {
-    let nickname:String
-    let profileURL:String?
+struct RecommendDjResponse: Codable {
+    let nickname: String
+    let profileURL: String?
     let userID: Int
-    
+
     enum CodingKeys: String, CodingKey {
         case nickname
         case profileURL = "profileUrl"

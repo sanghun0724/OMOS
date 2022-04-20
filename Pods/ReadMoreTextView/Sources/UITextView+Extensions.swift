@@ -9,7 +9,7 @@
 import UIKit
 
 extension UITextView {
-    
+
     /**
      Calls provided `test` block if point is in gliph range and there is no link detected at this point.
      Will pass in to `test` a character index that corresponds to `point`.
@@ -24,7 +24,7 @@ extension UITextView {
         }
         return test(charIndex)
     }
-    
+
     /**
      Returns true if point is in text bounding rect adjusted with padding.
      Bounding rect will be enlarged with positive padding values and decreased with negative values.
@@ -35,25 +35,25 @@ extension UITextView {
         boundingRect = boundingRect.insetBy(dx: -(padding.left + padding.right), dy: -(padding.top + padding.bottom))
         return boundingRect.contains(aPoint)
     }
-    
+
     /**
      Returns index of character for glyph at provided point. Returns `nil` if point is out of any glyph.
      */
     public func charIndexForPointInGlyphRect(point aPoint: CGPoint) -> Int? {
         let point = CGPoint(x: aPoint.x, y: aPoint.y - textContainerInset.top)
         let glyphIndex = layoutManager.glyphIndex(for: point, in: textContainer)
-        let glyphRect = layoutManager.boundingRect(forGlyphRange: NSMakeRange(glyphIndex, 1), in: textContainer)
+        let glyphRect = layoutManager.boundingRect(forGlyphRange: NSRange(location: glyphIndex, length: 1), in: textContainer)
         if glyphRect.contains(point) {
             return layoutManager.characterIndexForGlyph(at: glyphIndex)
         } else {
             return nil
         }
     }
-    
+
 }
 
 extension NSLayoutManager {
-    
+
     /**
      Returns characters range that completely fits into container.
      */
@@ -62,7 +62,7 @@ extension NSLayoutManager {
         rangeThatFits = self.characterRange(forGlyphRange: rangeThatFits, actualGlyphRange: nil)
         return rangeThatFits
     }
-    
+
     /**
      Returns bounding rect in provided container for characters in provided range.
      */
@@ -71,5 +71,5 @@ extension NSLayoutManager {
         let boundingRect = self.boundingRect(forGlyphRange: glyphRange, in: container)
         return boundingRect
     }
-    
+
 }

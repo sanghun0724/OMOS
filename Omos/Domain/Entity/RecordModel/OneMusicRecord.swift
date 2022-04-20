@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct OneMusicRecordRespone:Codable {
+struct OneMusicRecordRespone: Codable {
        let music: Music
        let recordID: Int
        let recordTitle, recordContents, createdDate: String
@@ -29,9 +29,9 @@ struct OneMusicRecordRespone:Codable {
        }
 }
 
-struct OneMusicRecordRequest:Codable {
-    let postId:Int?
-    let size:Int
-    let userId:Int
-    let sortType:String
+struct OneMusicRecordRequest: Codable {
+    let postId: Int?
+    let size: Int
+    let userId: Int
+    let sortType: String
 }

@@ -10,14 +10,14 @@ import Foundation
 
 struct LocalizedHelper {
     private static var bundle: Bundle?
-        
+
     static func setBundle(_ bundle: Bundle) {
         guard let resourceBundleURL = bundle.url(
             forResource: "MantisResources", withExtension: "bundle")
             else { return }
         LocalizedHelper.bundle = Bundle(url: resourceBundleURL)
     }
-    
+
     static func getString(
         _ key: String,
         localizationConfig: LocalizationConfig = Mantis.localizationConfig,
@@ -27,7 +27,7 @@ struct LocalizedHelper {
 
 #if MANTIS_SPM
         let bundle = localizationConfig.bundle ?? Bundle.module
-        
+
         return NSLocalizedString(
             key,
             tableName: localizationConfig.tableName,
@@ -39,7 +39,7 @@ struct LocalizedHelper {
         guard let bundle = LocalizedHelper.bundle ?? (localizationConfig.bundle ?? Mantis.bundle) else {
             return value
         }
-        
+
         return NSLocalizedString(
             key,
             tableName: localizationConfig.tableName,

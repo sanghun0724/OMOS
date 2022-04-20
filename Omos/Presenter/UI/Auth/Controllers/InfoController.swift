@@ -8,9 +8,8 @@
 import Foundation
 import UIKit
 
-class InfoController:UIViewController {
-    
-    let infoView:UITextView = {
+class InfoController: UIViewController {
+    let infoView: UITextView = {
         let info = UITextView()
 //        info.textContainer.lineBreakMode = .byTruncatingTail
         info.adjustsFontForContentSizeCategory = true
@@ -20,28 +19,25 @@ class InfoController:UIViewController {
         info.font = .systemFont(ofSize: 16)
         return info
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .mainBackGround
         self.view.addSubview(infoView)
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         infoView.frame = view.bounds
     }
-    
-    func getInfoView(file:String) {
+
+    func getInfoView(file: String) {
         let url = Bundle.main.url(forResource: file, withExtension: "rtf")!
-        let opts : [NSAttributedString.DocumentReadingOptionKey : Any] =
-            [.documentType : NSAttributedString.DocumentType.rtf]
-        var d : NSDictionary? = nil
-        let s = try! NSAttributedString(url: url, options: opts, documentAttributes: &d)
+        let opts: [NSAttributedString.DocumentReadingOptionKey: Any] =
+            [.documentType: NSAttributedString.DocumentType.rtf]
+        var dic: NSDictionary?
+        let attText = try? NSAttributedString(url: url, options: opts, documentAttributes: &dic)
 //        let new = NSAttributedString(string: s.string, attributes: [.foregroundColor: UIColor.red])
-        self.infoView.text = s.string
+        self.infoView.text = attText?.string
     }
-    
 }
-
-

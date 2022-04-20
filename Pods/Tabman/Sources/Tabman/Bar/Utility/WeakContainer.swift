@@ -9,13 +9,13 @@
 import Foundation
 
 internal class WeakContainer<T: AnyObject> {
-    
+
     // MARK: Properties
-    
+
     private(set) weak var object: T?
-    
+
     // MARK: Init
-    
+
     init(for object: T) {
         self.object = object
     }

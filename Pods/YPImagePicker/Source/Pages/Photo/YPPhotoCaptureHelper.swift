@@ -21,7 +21,7 @@ internal final class YPPhotoCaptureHelper: NSObject {
         let deviceHasFlash = device?.hasFlash ?? false
         return !isFrontCamera && deviceHasFlash
     }
-    
+
     private let sessionQueue = DispatchQueue(label: "YPPhotoCaptureHelperQueue", qos: .background)
     private let session = AVCaptureSession()
     private var deviceInput: AVCaptureDeviceInput?
@@ -39,19 +39,19 @@ internal final class YPPhotoCaptureHelper: NSObject {
 extension YPPhotoCaptureHelper {
     func shoot(completion: @escaping (Data) -> Void) {
         block = completion
-        
+
         // Set current device orientation
         setCurrentOrienation()
-        
+
         let settings = photoCaptureSettings()
         photoOutput.capturePhoto(with: settings, delegate: self)
     }
-    
+
     func start(with previewView: UIView, completion: @escaping () -> Void) {
         self.previewView = previewView
         sessionQueue.async { [weak self] in
             guard let self = self else { return }
-            
+
             if !self.isCaptureSessionSetup {
                 self.setupCaptureSession()
             }
@@ -60,7 +60,7 @@ extension YPPhotoCaptureHelper {
             }
         }
     }
-    
+
     func stopCamera() {
         if session.isRunning {
             sessionQueue.async { [weak self] in
@@ -68,21 +68,21 @@ extension YPPhotoCaptureHelper {
             }
         }
     }
-    
+
     func zoom(began: Bool, scale: CGFloat) {
         guard let device = device else {
             return
         }
-        
+
         if began {
             initVideoZoomFactor = device.videoZoomFactor
             return
         }
-        
+
         do {
             try device.lockForConfiguration()
             defer { device.unlockForConfiguration() }
-            
+
             var minAvailableVideoZoomFactor: CGFloat = 1.0
             if #available(iOS 11.0, *) {
                 minAvailableVideoZoomFactor = device.minAvailableVideoZoomFactor
@@ -92,7 +92,7 @@ extension YPPhotoCaptureHelper {
                 maxAvailableVideoZoomFactor = device.maxAvailableVideoZoomFactor
             }
             maxAvailableVideoZoomFactor = min(maxAvailableVideoZoomFactor, YPConfig.maxCameraZoomFactor)
-            
+
             let desiredZoomFactor = initVideoZoomFactor * scale
             device.videoZoomFactor = max(minAvailableVideoZoomFactor,
                                          min(desiredZoomFactor, maxAvailableVideoZoomFactor))
@@ -100,7 +100,7 @@ extension YPPhotoCaptureHelper {
             ypLog("Error: \(error)")
         }
     }
-    
+
     func flipCamera(completion: @escaping () -> Void) {
         sessionQueue.async { [weak self] in
             self?.flip()
@@ -109,12 +109,12 @@ extension YPPhotoCaptureHelper {
             }
         }
     }
-    
+
     func focus(on point: CGPoint) {
         guard let device = device else {
             return
         }
-        
+
         setFocusPointOnDevice(device: device, point: point)
     }
 }
@@ -128,22 +128,22 @@ extension YPPhotoCaptureHelper: AVCapturePhotoCaptureDelegate {
 
 // MARK: - Private
 private extension YPPhotoCaptureHelper {
-    
+
     // MARK: Setup
-    
+
     private func photoCaptureSettings() -> AVCapturePhotoSettings {
         var settings = AVCapturePhotoSettings()
-        
+
         // Catpure Heif when available.
         if #available(iOS 11.0, *) {
             if photoOutput.availablePhotoCodecTypes.contains(.hevc) {
                 settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
             }
         }
-        
+
         // Catpure Highest Quality possible.
         settings.isHighResolutionPhotoEnabled = true
-        
+
         // Set flash mode.
         if let deviceInput = deviceInput {
             if deviceInput.device.isFlashAvailable {
@@ -164,10 +164,10 @@ private extension YPPhotoCaptureHelper {
                 }
             }
         }
-        
+
         return settings
     }
-    
+
     private func setupCaptureSession() {
         session.beginConfiguration()
         session.sessionPreset = .photo
@@ -190,14 +190,14 @@ private extension YPPhotoCaptureHelper {
         session.commitConfiguration()
         isCaptureSessionSetup = true
     }
-    
+
     private func tryToSetupPreview() {
         if !isPreviewSetup {
             setupPreview()
             isPreviewSetup = true
         }
     }
-    
+
     private func setupPreview() {
         videoLayer = AVCaptureVideoPreviewLayer(session: session)
         DispatchQueue.main.async {
@@ -206,9 +206,9 @@ private extension YPPhotoCaptureHelper {
             self.previewView.layer.addSublayer(self.videoLayer)
         }
     }
-    
+
     // MARK: Other
-    
+
     private func startCamera(completion: @escaping (() -> Void)) {
         if !session.isRunning {
             sessionQueue.async { [weak self] in
@@ -228,7 +228,7 @@ private extension YPPhotoCaptureHelper {
             }
         }
     }
-    
+
     private func flip() {
         session.resetInputs()
         guard let di = deviceInput else { return }
@@ -238,7 +238,7 @@ private extension YPPhotoCaptureHelper {
             session.addInput(deviceInput)
         }
     }
-    
+
     private func setCurrentOrienation() {
         let connection = photoOutput.connection(with: .video)
         let orientation = YPDeviceOrientationHelper.shared.currentDeviceOrientation

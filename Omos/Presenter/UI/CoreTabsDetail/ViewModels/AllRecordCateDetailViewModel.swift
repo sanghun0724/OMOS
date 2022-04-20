@@ -8,26 +8,22 @@
 import Foundation
 import RxSwift
 
-
-
-class AllRecordCateDetailViewModel:BaseViewModel {
-    
+class AllRecordCateDetailViewModel: BaseViewModel {
     let recentFilter = PublishSubject<Bool>()
     let likeFilter = PublishSubject<Bool>()
     let randomFilter = PublishSubject<Bool>()
-    let loading = BehaviorSubject<Bool>(value:false)
+    let loading = BehaviorSubject<Bool>(value: false)
     let cateRecords = BehaviorSubject<[CategoryRespone]>(value: [])
-    var currentCateRecords:[CategoryRespone] = []
+    var currentCateRecords: [CategoryRespone] = []
     let reportState = PublishSubject<Bool>()
     let errorMessage = BehaviorSubject<String?>(value: nil)
-    let usecase:RecordsUseCase
-    
-    
-    func selectRecordsShow(type: cateType, postId: Int?, size: Int, sort: String, userid: Int) {
+    let usecase: RecordsUseCase
+
+    func selectRecordsShow(type: CateType, postId: Int?, size: Int, sort: String, userid: Int) {
         loading.onNext(true)
         usecase.cateFetch(type: type, postId: postId, size: size, sort: sort, userid: userid)
             .map {
-                $0.filter{ !Account.currentReportRecordsId.contains($0.recordID) }
+                $0.filter { !Account.currentReportRecordsId.contains($0.recordID) }
             }
             .subscribe({ [weak self] event in
                 self?.loading.onNext(false)
@@ -41,17 +37,17 @@ class AllRecordCateDetailViewModel:BaseViewModel {
                 }
             }).disposed(by: disposeBag)
     }
-    
+
     func numberofRows() -> Int {
-        return currentCateRecords.count
+        currentCateRecords.count
     }
-    
+
     private func removeReportedRecord() {
         var stack = currentCateRecords
         DispatchQueue.global().sync {
-            for i in 0..<currentCateRecords.count {
-                if Account.currentReportRecordsId.contains(currentCateRecords[i].recordID) {
-                    stack.remove(at: i)
+            for idx in 0..<currentCateRecords.count {
+                if Account.currentReportRecordsId.contains(currentCateRecords[idx].recordID) {
+                    stack.remove(at: idx)
                 }
             }
             currentCateRecords = stack
@@ -59,39 +55,38 @@ class AllRecordCateDetailViewModel:BaseViewModel {
         DispatchQueue.global().sync {
             self.cateRecords.onNext(stack)
         }
-        
     }
-    
-    //Interation
-    func saveScrap(postId:Int,userId:Int) {
+
+    // Interation
+    func saveScrap(postId: Int, userId: Int) {
         usecase.saveScrap(postId: postId, userId: userId)
             .subscribe({ event in
                 print(event)
             }).disposed(by: disposeBag)
     }
-    
-    func deleteScrap(postId:Int,userId:Int) {
+
+    func deleteScrap(postId: Int, userId: Int) {
         usecase.deleteScrap(postId: postId, userId: userId)
             .subscribe({ event in
                 print(event)
             }).disposed(by: disposeBag)
     }
-    
-    func saveLike(postId:Int,userId:Int) {
+
+    func saveLike(postId: Int, userId: Int) {
         usecase.saveLike(postId: postId, userId: userId)
             .subscribe({ event in
                 print(event)
             }).disposed(by: disposeBag)
     }
-    
-    func deleteLike(postId:Int,userId:Int) {
+
+    func deleteLike(postId: Int, userId: Int) {
         usecase.deleteLike(postId: postId, userId: userId)
             .subscribe({ event in
                 print(event)
             }).disposed(by: disposeBag)
     }
-    
-    func reportRecord(postId:Int) {
+
+    func reportRecord(postId: Int) {
         usecase.reportRecord(postId: postId)
             .subscribe({ [weak self] event in
                 switch event {
@@ -102,12 +97,9 @@ class AllRecordCateDetailViewModel:BaseViewModel {
                 }
             }).disposed(by: disposeBag)
     }
-    
-    
-    init(usecase:RecordsUseCase) {
+
+    init(usecase: RecordsUseCase) {
         self.usecase = usecase
         super.init()
     }
-    
-    
 }

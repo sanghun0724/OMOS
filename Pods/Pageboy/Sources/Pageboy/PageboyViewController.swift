@@ -12,14 +12,14 @@ import UIKit
 
 /// A simple, highly informative page view controller.
 open class PageboyViewController: UIViewController {
-    
+
     // MARK: Types
-    
+
     /// Completion of a page scroll.
     public typealias PageScrollCompletion = (_ newViewController: UIViewController, _ animated: Bool, _ finished: Bool) -> Void
 
     // MARK: Properties
-    
+
     internal var pageViewController: UIPageViewController?
     internal var previousPagePosition: CGFloat?
     internal var expectedTransitionIndex: PageIndex?
@@ -41,9 +41,9 @@ open class PageboyViewController: UIViewController {
             reconfigurePageViewController()
         }
     }
-    
+
     #if os(iOS)
-    
+
     /// The minimum number of fingers that can be touching the page view for the pan gesture to be recognized.
     open var minimumNumberOfTouches: Int {
         get {
@@ -62,7 +62,7 @@ open class PageboyViewController: UIViewController {
             pageViewController?.scrollView?.panGestureRecognizer.maximumNumberOfTouches = newValue
         }
     }
-    
+
     /// Preferred status bar style of the current view controller.
     open override var preferredStatusBarStyle: UIStatusBarStyle {
         if let currentViewController = currentViewController {
@@ -77,9 +77,9 @@ open class PageboyViewController: UIViewController {
         }
         return super.prefersStatusBarHidden
     }
-    
+
     #endif
-    
+
     /// The object that is the data source for the page view controller. (Defaults to self)
     open weak var dataSource: PageboyViewControllerDataSource? {
         didSet {
@@ -88,8 +88,7 @@ open class PageboyViewController: UIViewController {
     }
     /// The object that is the delegate for the page view controller.
     open weak var delegate: PageboyViewControllerDelegate?
-    
-    
+
     // default is YES. if NO, we immediately call -touchesShouldBegin:withEvent:inContentView:. this has no effect on presses
     open var delaysContentTouches: Bool = true {
         didSet {
@@ -105,7 +104,7 @@ open class PageboyViewController: UIViewController {
             pageViewController?.isDoubleSided = isDoubleSided
         }
     }
-    
+
     /// Whether the page view controller is currently being touched.
     open var isTracking: Bool {
         return pageViewController?.scrollView?.isTracking ?? false
@@ -158,17 +157,17 @@ open class PageboyViewController: UIViewController {
     internal var transitionDisplayLink: CADisplayLink?
     /// The active transition operation.
     internal var activeTransitionOperation: TransitionOperation?
-    
+
     /// The number of view controllers in the page view controller.
     internal var viewControllerCount: Int?
     /// A map of view controllers and related page indexes.
     internal lazy var viewControllerIndexMap = IndexedObjectMap<UIViewController>()
-    
+
     /// The number of pages in the page view controller.
     public var pageCount: Int? {
         return viewControllerCount
     }
-    
+
     /// The page index that is currently the target of a transition. This will align with currentIndex if no transition is active.
     internal var targetIndex: PageIndex?
     /// The page index that the page view controller is currently at.
@@ -193,20 +192,20 @@ open class PageboyViewController: UIViewController {
         let orientatedCurrentPosition = navigationOrientation == .horizontal ? currentPosition?.x : currentPosition?.y
         return orientatedCurrentPosition?.truncatingRemainder(dividingBy: 1) == 0
     }
-    
+
     /// Auto Scroller for automatic time-based page transitions.
     public let autoScroller = PageboyAutoScroller()
-    
+
     // MARK: Lifecycle
 
     open override func viewDidLoad() {
         super.viewDidLoad()
 
         autoScroller.handler = self
-        
+
         setUpPageViewController()
     }
-    
+
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -219,7 +218,7 @@ open class PageboyViewController: UIViewController {
                           force: true)
         }
     }
-    
+
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
@@ -227,7 +226,7 @@ open class PageboyViewController: UIViewController {
             autoScroller.resume()
         }
     }
-    
+
     open override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
@@ -246,9 +245,9 @@ open class PageboyViewController: UIViewController {
             self?.pageViewController?.scrollView?.delegate = self
         }
     }
-    
+
     // MARK: View Controller Updates
-    
+
     /// Scroll the page view controller to a new page.
     ///
     /// - parameter page: The index of the new page.
@@ -268,7 +267,7 @@ open class PageboyViewController: UIViewController {
         }
         return result
     }
-    
+
     /// Insert a new page into the page view controller.
     ///
     /// - Parameters:
@@ -276,7 +275,7 @@ open class PageboyViewController: UIViewController {
     ///   - updateBehavior: Behavior to execute after the page was inserted.
     open func insertPage(at index: PageIndex,
                          then updateBehavior: PageUpdateBehavior = .scrollToUpdate) {
-        
+
         verifyNewPageCount(then: { (oldPageCount, newPageCount) in
         assert(newPageCount > oldPageCount,
                     "Attempt to insert page at \(index) but there are only \(newPageCount) pages after the update")
@@ -288,7 +287,7 @@ open class PageboyViewController: UIViewController {
 
             viewControllerCount = newPageCount
             viewControllerIndexMap.removeAll()
-            
+
             pageViewController?.scrollView?.cancelTouches()
             view.isUserInteractionEnabled = false
             performUpdates(for: index, viewController: newViewController,
@@ -302,7 +301,7 @@ open class PageboyViewController: UIViewController {
             })
         })
     }
-    
+
     /// Delete an existing page from the page view controller.
     ///
     /// - Parameters:
@@ -317,7 +316,7 @@ open class PageboyViewController: UIViewController {
                    "Attempt to delete page at \(index) but there are \(newPageCount) pages after the update")
 
             let sanitizedIndex = min(index, newPageCount - 1)
-            
+
             let newViewController: UIViewController?
             let newIndex: Int?
             if sanitizedIndex >= 0 {
@@ -344,9 +343,9 @@ open class PageboyViewController: UIViewController {
             })
         })
     }
-    
+
     // MARK: Page Data
-    
+
     /// Get the page index of a view controller.
     ///
     /// - Parameter viewController: View controller.
@@ -358,7 +357,7 @@ open class PageboyViewController: UIViewController {
 
 // MARK: - Paging Updates
 extension PageboyViewController {
-    
+
     /// Scroll the page view controller to a new page.
     ///
     /// - parameter page: The index of the new page.
@@ -441,7 +440,7 @@ extension PageboyViewController {
             return false
         }
     }
-    
+
     private func isSafeToScrollToANewPage(ignoringPosition: Bool) -> Bool {
         guard let pageViewController = pageViewController else {
             return false
@@ -469,12 +468,12 @@ extension PageboyViewController {
             self.setNeedsStatusBarAppearanceUpdate()
         }
         #endif
-        
+
         guard let currentIndex = currentIndex else { // no index - reset
             currentPosition = nil
             return
         }
-        
+
         // ensure position keeps in sync
         currentPosition = CGPoint(x: navigationOrientation == .horizontal ? CGFloat(currentIndex) : 0.0,
                                   y: navigationOrientation == .vertical ? CGFloat(currentIndex) : 0.0)

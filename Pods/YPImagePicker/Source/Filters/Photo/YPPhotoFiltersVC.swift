@@ -14,14 +14,14 @@ protocol IsMediaFilterVC: AnyObject {
 }
 
 open class YPPhotoFiltersVC: UIViewController, IsMediaFilterVC, UIGestureRecognizerDelegate {
-    
+
     required public init(inputPhoto: YPMediaPhoto, isFromSelectionVC: Bool) {
         super.init(nibName: nil, bundle: nil)
-        
+
         self.inputPhoto = inputPhoto
         self.isFromSelectionVC = isFromSelectionVC
     }
-    
+
     public var inputPhoto: YPMediaPhoto!
     public var isFromSelectionVC = false
 
@@ -31,7 +31,7 @@ open class YPPhotoFiltersVC: UIViewController, IsMediaFilterVC, UIGestureRecogni
     fileprivate let filters: [YPFilter] = YPConfig.filters
 
     fileprivate var selectedFilter: YPFilter?
-    
+
     fileprivate var filteredThumbnailImagesArray: [UIImage] = []
     fileprivate var thumbnailImageForFiltering: CIImage? // Small image for creating filters thumbnails
     fileprivate var currentlySelectedImageThumbnail: UIImage? // Used for comparing with original image when tapped
@@ -41,12 +41,12 @@ open class YPPhotoFiltersVC: UIViewController, IsMediaFilterVC, UIGestureRecogni
     override open var prefersStatusBarHidden: Bool { return YPConfig.hidesStatusBar }
     override open func loadView() { view = v }
     required public init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-    
+
     // MARK: - Life Cycle ♻️
 
     override open func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Setup of main image an thumbnail images
         v.imageView.image = inputPhoto.image
         thumbnailImageForFiltering = thumbFromImage(inputPhoto.image)
@@ -68,14 +68,14 @@ open class YPPhotoFiltersVC: UIViewController, IsMediaFilterVC, UIGestureRecogni
                 self.v.filtersLoader.stopAnimating()
             }
         }
-        
+
         // Setup of Collection View
         v.collectionView.register(YPFilterCollectionViewCell.self, forCellWithReuseIdentifier: "FilterCell")
         v.collectionView.dataSource = self
         v.collectionView.delegate = self
 
         view.backgroundColor = YPConfig.colors.filterBackgroundColor
-        
+
         // Setup of Navigation Bar
         title = YPConfig.wordings.filter
         if isFromSelectionVC {
@@ -86,10 +86,10 @@ open class YPPhotoFiltersVC: UIViewController, IsMediaFilterVC, UIGestureRecogni
             navigationItem.leftBarButtonItem?.setFont(font: YPConfig.fonts.leftBarButtonFont, forState: .normal)
         }
         setupRightBarButton()
-        
+
         YPHelper.changeBackButtonIcon(self)
         YPHelper.changeBackButtonTitle(self)
-        
+
         // Touch preview to see original image.
         let touchDownGR = UILongPressGestureRecognizer(target: self,
                                                        action: #selector(handleTouchDown))
@@ -98,9 +98,9 @@ open class YPPhotoFiltersVC: UIViewController, IsMediaFilterVC, UIGestureRecogni
         v.imageView.addGestureRecognizer(touchDownGR)
         v.imageView.isUserInteractionEnabled = true
     }
-    
+
     // MARK: Setup - ⚙️
-    
+
     fileprivate func setupRightBarButton() {
         let rightBarButtonTitle = isFromSelectionVC ? YPConfig.wordings.done : YPConfig.wordings.next
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: rightBarButtonTitle,
@@ -110,7 +110,7 @@ open class YPPhotoFiltersVC: UIViewController, IsMediaFilterVC, UIGestureRecogni
         navigationItem.rightBarButtonItem?.tintColor = YPConfig.colors.tintColor
         navigationItem.rightBarButtonItem?.setFont(font: YPConfig.fonts.rightBarButtonFont, forState: .normal)
     }
-    
+
     // MARK: - Methods 🏓
 
     @objc
@@ -123,7 +123,7 @@ open class YPPhotoFiltersVC: UIViewController, IsMediaFilterVC, UIGestureRecogni
         default: ()
         }
     }
-    
+
     fileprivate func thumbFromImage(_ img: UIImage) -> CIImage {
         let k = img.size.width / img.size.height
         let scale = UIScreen.main.scale
@@ -136,20 +136,20 @@ open class YPPhotoFiltersVC: UIViewController, IsMediaFilterVC, UIGestureRecogni
         UIGraphicsEndImageContext()
         return smallImage!.toCIImage()!
     }
-    
+
     // MARK: - Actions 🥂
 
     @objc
     func cancel() {
         didCancel?()
     }
-    
+
     @objc
     func save() {
         guard let didSave = didSave else {
             return ypLog("Don't have saveCallback")
         }
-        
+
         self.navigationItem.rightBarButtonItem = YPLoaders.defaultLoader
 
         DispatchQueue.global().async {
@@ -173,7 +173,7 @@ extension YPPhotoFiltersVC: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return filteredThumbnailImagesArray.count
     }
-    
+
     public func collectionView(_ collectionView: UICollectionView,
                                cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let filter = filters[indexPath.row]

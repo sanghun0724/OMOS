@@ -10,7 +10,7 @@
 import UIKit
 
 public extension UIAppearance {
-    
+
     /** Applies a styling block on an element.
      
     Example Usage:

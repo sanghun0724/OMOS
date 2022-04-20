@@ -14,31 +14,31 @@ public protocol YPSelectionsGalleryCellDelegate: AnyObject {
 }
 
 public class YPSelectionsGalleryCell: UICollectionViewCell {
-    
+
     weak var delegate: YPSelectionsGalleryCellDelegate?
     let imageView = UIImageView()
     let editIcon = UIView()
     let editSquare = UIView()
     let removeButton = UIButton()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-    
+
         sv(
             imageView,
             editIcon,
             editSquare,
             removeButton
         )
-        
+
         imageView.fillContainer()
         editIcon.size(32).left(12).bottom(12)
         editSquare.size(16)
         editSquare.CenterY == editIcon.CenterY
         editSquare.CenterX == editIcon.CenterX
-        
+
         removeButton.top(12).trailing(12)
-        
+
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.2
         layer.shadowOffset = CGSize(width: 4, height: 7)
@@ -59,21 +59,21 @@ public class YPSelectionsGalleryCell: UICollectionViewCell {
         removeButton.setImage(YPConfig.icons.removeImage, for: .normal)
         removeButton.addTarget(self, action: #selector(removeButtonTapped), for: .touchUpInside)
     }
-    
+
     @objc
     func removeButtonTapped() {
         delegate?.selectionsGalleryCellDidTapRemove(cell: self)
     }
-    
+
     func setEditable(_ editable: Bool) {
         self.editIcon.isHidden = !editable
         self.editSquare.isHidden = !editable
     }
-    
+
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     public override var isHighlighted: Bool {
         didSet {
             UIView.animate(withDuration: 0.5,

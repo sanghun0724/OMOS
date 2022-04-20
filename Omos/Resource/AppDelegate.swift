@@ -5,16 +5,12 @@
 //  Created by sangheon on 2022/02/04.
 //
 
-import UIKit
-import KakaoSDKCommon
 import FirebaseCore
-
+import KakaoSDKCommon
+import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         KakaoSDK.initSDK(appKey: "23c5d162c97e7eb015313dc36f3b3794")
@@ -35,7 +31,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-
 }
-

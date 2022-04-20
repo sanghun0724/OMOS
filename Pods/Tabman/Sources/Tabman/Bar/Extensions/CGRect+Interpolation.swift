@@ -9,7 +9,7 @@
 import UIKit
 
 extension CGRect {
-    
+
     func interpolate(with other: CGRect, progress: CGFloat) -> CGRect {
         return CGRect(x: (other.origin.x - origin.x) * progress,
                       y: (other.origin.y - origin.y) * progress,

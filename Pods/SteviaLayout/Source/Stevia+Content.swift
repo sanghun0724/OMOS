@@ -10,7 +10,7 @@
 import UIKit
 
 public extension UIButton {
-    
+
     /**
      Sets the title of the button for normal State
      
@@ -23,7 +23,7 @@ public extension UIButton {
         setTitle(t, for: .normal)
         return self
     }
-    
+
     /**
      Sets the localized key for the button's title in normal State
      
@@ -37,7 +37,7 @@ public extension UIButton {
         text(NSLocalizedString(t, comment: ""))
         return self
     }
-    
+
     /**
      Sets the image of the button in normal State
      
@@ -74,7 +74,7 @@ public extension UILabel {
         text = t
         return self
     }
-    
+
     /**
      Sets the label localization key but in a chainable fashion
      Essentially a shortcut for `text = NSLocalizedString("X", comment: "")`

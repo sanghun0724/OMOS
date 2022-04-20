@@ -9,7 +9,7 @@
 import Pageboy
 
 extension PageboyViewController.NavigationDirection {
-    
+
     var barUpdateDirection: TMBarUpdateDirection {
         switch self {
         case .forward:

@@ -8,8 +8,7 @@
 import Foundation
 import UIKit
 
-
-extension AllRecordDetailViewController:UITableViewDelegate,UITableViewDataSource {
+extension AllRecordDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print( "cell count \(lyricsArr.count)")
         return lyricsArr.count
@@ -21,7 +20,7 @@ extension AllRecordDetailViewController:UITableViewDelegate,UITableViewDataSourc
             if indexPath.row == 0 {
                 cell.label.text = lyricsArr[0]
             }
-            cell.label.text = lyricsArr[safe:indexPath.row/2] ?? " "
+            cell.label.text = lyricsArr[safe:indexPath.row / 2] ?? " "
             cell.selectionStyle = .none
             cell.layoutIfNeeded()
             return cell
@@ -36,13 +35,11 @@ extension AllRecordDetailViewController:UITableViewDelegate,UITableViewDataSourc
         }
     }
 
-
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        UITableView.automaticDimension
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return CGFloat.leastNormalMagnitude
+        CGFloat.leastNormalMagnitude
     }
-
 }

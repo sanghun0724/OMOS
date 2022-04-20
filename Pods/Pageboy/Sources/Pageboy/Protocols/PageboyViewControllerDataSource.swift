@@ -9,13 +9,13 @@
 import UIKit
 
 public protocol PageboyViewControllerDataSource: class {
-    
+
     /// The number of view controllers to display.
     ///
     /// - Parameter pageboyViewController: The Page view controller.
     /// - Returns: The total number of view controllers to display.
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int
-    
+
     /// The view controller to display at a page index.
     ///
     /// - Parameters:
@@ -24,7 +24,7 @@ public protocol PageboyViewControllerDataSource: class {
     /// - Returns: The view controller to display
     func viewController(for pageboyViewController: PageboyViewController,
                         at index: PageboyViewController.PageIndex) -> UIViewController?
-    
+
     /// The default page index to display in the Pageboy view controller.
     ///
     /// - Parameter pageboyViewController: The Pageboy view controller

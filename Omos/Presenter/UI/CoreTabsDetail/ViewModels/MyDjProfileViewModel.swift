@@ -5,24 +5,22 @@
 //  Created by sangheon on 2022/03/13.
 //
 
-
 import RxSwift
 
-class MyDjProfileViewModel:BaseViewModel {
-    
-    let isEmpty = BehaviorSubject<Bool>(value:false)
-    let profileLoading = BehaviorSubject<Bool>(value:false)
-    let recordsLoading = BehaviorSubject<Bool>(value:false)
+class MyDjProfileViewModel: BaseViewModel {
+    let isEmpty = BehaviorSubject<Bool>(value: false)
+    let profileLoading = BehaviorSubject<Bool>(value: false)
+    let recordsLoading = BehaviorSubject<Bool>(value: false)
     let mydjProfile = PublishSubject<MyDjProfileResponse>()
-    var currentMydjProfile:MyDjProfileResponse? = nil
+    var currentMydjProfile: MyDjProfileResponse?
     let userRecords = PublishSubject<[MyRecordRespone]>()
     let userReportState = PublishSubject<Bool>()
     let userBlockState = PublishSubject<Bool>()
-    var currentUserRecrods:[MyRecordRespone] = []
-    let usecase:RecordsUseCase
+    var currentUserRecrods: [MyRecordRespone] = []
+    let usecase: RecordsUseCase
     let errorMessage = BehaviorSubject<String?>(value: nil)
-    
-    func fetchMyDjProfile(fromId:Int,toId:Int) {
+
+    func fetchMyDjProfile(fromId: Int, toId: Int) {
         profileLoading.onNext(true)
         usecase.myDjProfile(fromId: fromId, toId: toId)
             .subscribe({ [weak self] event in
@@ -36,8 +34,8 @@ class MyDjProfileViewModel:BaseViewModel {
                 }
             }).disposed(by: disposeBag)
     }
-    
-    func fetchUserRecords(toUserId:Int) {
+
+    func fetchUserRecords(toUserId: Int) {
         recordsLoading.onNext(true)
         usecase.myRecordFetch(userid: toUserId)
             .subscribe({ [weak self] event in
@@ -51,25 +49,25 @@ class MyDjProfileViewModel:BaseViewModel {
                 }
             }).disposed(by: disposeBag)
     }
-    
-    //follow
-    func saveFollow(fromId:Int,toId:Int) {
+
+    // follow
+    func saveFollow(fromId: Int, toId: Int) {
         usecase.saveFollow(fromId: fromId, toId: toId)
             .subscribe({ state in
                 print(state)
-        NotificationCenter.default.post(name: NSNotification.Name.follow, object: nil, userInfo: nil);
+        NotificationCenter.default.post(name: NSNotification.Name.follow, object: nil, userInfo: nil)
             }).disposed(by: disposeBag)
     }
-    
-    func deleteFollow(fromId:Int,toId:Int) {
+
+    func deleteFollow(fromId: Int, toId: Int) {
         usecase.deleteFollow(fromId: fromId, toId: toId)
             .subscribe({ state in
                 print(state)
-        NotificationCenter.default.post(name: NSNotification.Name.followCancel, object: nil, userInfo: nil);
+        NotificationCenter.default.post(name: NSNotification.Name.followCancel, object: nil, userInfo: nil)
             }).disposed(by: disposeBag)
     }
-    
-    func userReport(userId:Int) {
+
+    func userReport(userId: Int) {
         usecase.userReport(userId: userId)
             .subscribe({ [weak self] event in
                 switch event {
@@ -80,8 +78,8 @@ class MyDjProfileViewModel:BaseViewModel {
                 }
             }).disposed(by: disposeBag)
     }
-    
-    func blockObjcet(type:String,request:BlockRequest) {
+
+    func blockObjcet(type: String, request: BlockRequest) {
         usecase.blockObjcet(type: type, request: request)
             .subscribe({ [weak self] event in
                 switch event {
@@ -92,23 +90,21 @@ class MyDjProfileViewModel:BaseViewModel {
                 }
             }).disposed(by: disposeBag)
     }
-    
-   
-    init(usecase:RecordsUseCase) {
+
+    init(usecase: RecordsUseCase) {
         self.usecase = usecase
         super.init()
     }
-    
+
     func reduce() {
         mydjProfile
             .withUnretained(self)
-            .subscribe(onNext: { owner,record in
+            .subscribe(onNext: { owner, _ in
                 if owner.currentMydjProfile == nil {
                     owner.isEmpty.onNext(true)
                 } else {
                     owner.isEmpty.onNext(false)
                 }
             }).disposed(by: disposeBag)
-
     }
 }

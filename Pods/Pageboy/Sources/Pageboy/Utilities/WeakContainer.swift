@@ -9,16 +9,16 @@
 import Foundation
 
 internal final class WeakWrapper<T: AnyObject> {
-    
+
     private(set) weak var object: T?
-    
+
     init(_ object: T) {
         self.object = object
     }
 }
 
 extension WeakWrapper: Equatable {
-    
+
     static func == (lhs: WeakWrapper, rhs: WeakWrapper) -> Bool {
         return lhs.object === rhs.object
     }

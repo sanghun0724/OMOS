@@ -12,9 +12,9 @@ import UIKit
 ///
 /// Attention: You should not directly use `BarLayout`, but instead inherit from it or use an available subclass such as `TMHorizontalBarLayout`.
 open class TMBarLayout: TMBarViewFocusProvider, TMTransitionStyleable {
-    
+
     // MARK: Types
-    
+
     /// How to display the contents of the layout.
     ///
     /// - `.intrinsic`: The layout and contents will be intrinsically sized, taking up as much space as required.
@@ -23,7 +23,7 @@ open class TMBarLayout: TMBarViewFocusProvider, TMTransitionStyleable {
         case intrinsic
         case fit
     }
-    
+
     /// How to align the layout in the parent.
     ///
     /// - `.leading`: The layout will be aligned from the leading edge of the parent.
@@ -36,23 +36,23 @@ open class TMBarLayout: TMBarViewFocusProvider, TMTransitionStyleable {
         case centerDistributed
         case trailing
     }
-    
+
     // MARK: Properties
-    
+
     /// Container view which contains actual contents
     public let view = UIView()
     /// The parent of the layout.
     private weak var parent: TMBarLayoutParent!
-    
+
     /// Layout Guides that provide inset values.
     private weak var insetGuides: TMBarLayoutInsetGuides!
     public var layoutGuide: UILayoutGuide {
         return insetGuides!.content
     }
-    
+
     /// Constraint that is active when constraining width to a `.fit` contentMode.
     private var widthConstraint: NSLayoutConstraint?
-    
+
     /**
      The content mode in which to display the content in the layout.
      
@@ -105,13 +105,13 @@ open class TMBarLayout: TMBarViewFocusProvider, TMTransitionStyleable {
             parent.alignment = newValue
         }
     }
-    
+
     // MARK: Init
-    
+
     public required init() {}
-    
+
     // MARK: Lifecycle
-    
+
     internal func layout(parent: TMBarLayoutParent,
                          insetGuides: TMBarLayoutInsetGuides) {
         self.parent = parent
@@ -119,13 +119,13 @@ open class TMBarLayout: TMBarViewFocusProvider, TMTransitionStyleable {
 
         layout(in: view)
     }
-    
+
     /// Layout the `BarLayout`.
     ///
     /// - Parameter view: The view to use as the root of the layout.
     open func layout(in view: UIView) {
     }
-    
+
     /// Insert new bar buttons into the layout from a specified index.
     ///
     /// - Parameters:
@@ -151,7 +151,7 @@ open class TMBarLayout: TMBarViewFocusProvider, TMTransitionStyleable {
     open func focusArea(for position: CGFloat, capacity: Int) -> CGRect {
         return .zero
     }
-    
+
     /// Inform that the layout requires a reload of its contents.
     ///
     /// - Note: This will only be applied if the layout has previously
@@ -163,7 +163,7 @@ open class TMBarLayout: TMBarViewFocusProvider, TMTransitionStyleable {
 }
 
 private extension TMBarLayout {
-    
+
     /// Update any constraints that are needed to satisfy a new ContentMode.
     ///
     /// - Parameter contentMode: New ContentMode to display.
@@ -172,7 +172,7 @@ private extension TMBarLayout {
         case .fit:
             self.widthConstraint = view.widthAnchor.constraint(equalTo: insetGuides.content.widthAnchor)
             widthConstraint?.isActive = true
-            
+
         default:
             widthConstraint?.isActive = false
         }

@@ -8,33 +8,32 @@
 import Foundation
 import RxSwift
 
-class MyDjViewModel:BaseViewModel {
-    
-    let cellHeight = PublishSubject<IndexPath>() 
+class MyDjViewModel: BaseViewModel {
+    let cellHeight = PublishSubject<IndexPath>()
     let myDjRecord = PublishSubject<[MyDjResponse]>()
-    var currentMyDjRecord:[MyDjResponse] = []
+    var currentMyDjRecord: [MyDjResponse] = []
     let myDjList = PublishSubject<[MyDjListResponse]>()
-    var currentMyDjList:[MyDjListResponse] = []
+    var currentMyDjList: [MyDjListResponse] = []
     let loading = PublishSubject<Bool>()
-    let isEmpty = BehaviorSubject<Bool>(value:false)
+    let isEmpty = BehaviorSubject<Bool>(value: false)
     let errorMessage = BehaviorSubject<String?>(value: nil)
-    
+
     let userRecords = PublishSubject<[MyDjResponse]>()
-    var currentUserRecrods:[MyDjResponse] = []
+    var currentUserRecrods: [MyDjResponse] = []
     let recordsLoading = PublishSubject<Bool>()
-    
+
     let reportState = PublishSubject<Bool>()
-    let usecase:RecordsUseCase
-    
-    func fetchMyDjRecord(userId:Int,request:MyDjRequest) {
+    let usecase: RecordsUseCase
+
+    func fetchMyDjRecord(userId: Int, request: MyDjRequest) {
         loading.onNext(true)
-        usecase.MyDjAllRecord(userId:userId, MyDjRequest: request)
+        usecase.myDjAllRecord(userId: userId, myDjRequest: request)
             .map {
-                $0.filter{ !Account.currentReportRecordsId.contains($0.recordID) }
+                $0.filter { !Account.currentReportRecordsId.contains($0.recordID) }
             }
-            .subscribe({ [weak self] event in
+            .subscribe({ [weak self] result in
                 self?.loading.onNext(false)
-                switch event {
+                switch result {
                 case .success(let data):
                     self?.currentMyDjRecord += data
                     self?.myDjRecord.onNext(data)
@@ -43,8 +42,8 @@ class MyDjViewModel:BaseViewModel {
                 }
             }).disposed(by: disposeBag)
     }
-    
-    func fetchUserRecords(fromId:Int,toId:Int) {
+
+    func fetchUserRecords(fromId: Int, toId: Int) {
         recordsLoading.onNext(true)
         usecase.userRecords(fromId: fromId, toId: toId)
             .subscribe({ [weak self] event in
@@ -58,9 +57,8 @@ class MyDjViewModel:BaseViewModel {
                 }
             }).disposed(by: disposeBag)
     }
-    
-    
-    func fetchMyDjList(userId:Int) {
+
+    func fetchMyDjList(userId: Int) {
         usecase.myDjList(userId: userId)
             .subscribe({ [weak self] event in
                 switch event {
@@ -72,42 +70,41 @@ class MyDjViewModel:BaseViewModel {
                 }
             }).disposed(by: disposeBag)
     }
-    
-    
+
     func numberofRows() -> Int {
-        return currentMyDjRecord.count
+        currentMyDjRecord.count
     }
-    
-    //Interation
-    func saveScrap(postId:Int,userId:Int) {
+
+    // Interation
+    func saveScrap(postId: Int, userId: Int) {
         usecase.saveScrap(postId: postId, userId: userId)
             .subscribe({ event in
                 print(event)
             }).disposed(by: disposeBag)
     }
-    
-    func deleteScrap(postId:Int,userId:Int) {
+
+    func deleteScrap(postId: Int, userId: Int) {
         usecase.deleteScrap(postId: postId, userId: userId)
             .subscribe({ event in
                 print(event)
             }).disposed(by: disposeBag)
     }
-    
-    func saveLike(postId:Int,userId:Int) {
+
+    func saveLike(postId: Int, userId: Int) {
         usecase.saveLike(postId: postId, userId: userId)
             .subscribe({ event in
                 print(event)
             }).disposed(by: disposeBag)
     }
-    
-    func deleteLike(postId:Int,userId:Int) {
+
+    func deleteLike(postId: Int, userId: Int) {
         usecase.deleteLike(postId: postId, userId: userId)
             .subscribe({ event in
                 print(event)
             }).disposed(by: disposeBag)
     }
-    
-    func reportRecord(postId:Int) {
+
+    func reportRecord(postId: Int) {
         usecase.reportRecord(postId: postId)
             .subscribe({ [weak self] event in
                 switch event {
@@ -118,25 +115,22 @@ class MyDjViewModel:BaseViewModel {
                 }
             }).disposed(by: disposeBag)
     }
-    
-    
-    init(usecase:RecordsUseCase) {
+
+    init(usecase: RecordsUseCase) {
         self.usecase = usecase
         super.init()
         self.reduce()
     }
-    
+
     func reduce() {
         myDjRecord
             .withUnretained(self)
-            .subscribe(onNext: { owner,record in
+            .subscribe(onNext: { owner, _ in
                 if owner.currentMyDjRecord.isEmpty {
                     owner.isEmpty.onNext(true)
                 } else {
                     owner.isEmpty.onNext(false)
                 }
             }).disposed(by: disposeBag)
-        
     }
-    
 }

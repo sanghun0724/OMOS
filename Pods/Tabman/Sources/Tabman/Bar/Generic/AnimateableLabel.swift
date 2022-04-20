@@ -10,15 +10,15 @@ import UIKit
 import QuartzCore
 
 internal class AnimateableLabel: UIView {
-    
+
     // MARK: Properties
-    
+
     override var intrinsicContentSize: CGSize {
         return textLayer.preferredFrameSize()
     }
-    
+
     private let textLayer = CATextLayer()
-    
+
     var text: String? {
         didSet {
             textLayer.string = text
@@ -47,7 +47,7 @@ internal class AnimateableLabel: UIView {
             textLayer.alignmentMode = caTextLayerAlignmentMode(from: textAlignment) ?? .left
         }
     }
-    
+
     private var _adjustsFontForContentSizeCategory = false
     /// A Boolean that indicates whether the object automatically updates its font when the device's content size category changes.
     ///
@@ -62,36 +62,36 @@ internal class AnimateableLabel: UIView {
             reloadTextLayerForCurrentFont()
         }
     }
-    
+
     // MARK: Init
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
-    
+
     private func commonInit() {
-        
+
         textLayer.truncationMode = .end
         textLayer.contentsScale = UIScreen.main.scale
         layer.addSublayer(textLayer)
     }
-    
+
     // MARK: Lifecycle
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         textLayer.frame = bounds
     }
-    
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        
+
         if #available(iOS 10, *) {
             guard traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory else {
                 return
@@ -99,7 +99,7 @@ internal class AnimateableLabel: UIView {
             reloadTextLayerForCurrentFont()
         }
     }
-    
+
     private func reloadTextLayerForCurrentFont() {
         if #available(iOS 11, *), adjustsFontForContentSizeCategory, let font = font, let textStyle = font.fontDescriptor.object(forKey: .textStyle) as? UIFont.TextStyle {
             let font = UIFontMetrics(forTextStyle: textStyle).scaledFont(for: font)
@@ -116,7 +116,7 @@ internal class AnimateableLabel: UIView {
 }
 
 private extension AnimateableLabel {
-    
+
     func caTextLayerAlignmentMode(from alignment: NSTextAlignment?) -> CATextLayerAlignmentMode? {
         guard let alignment = alignment else {
             return nil

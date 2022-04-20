@@ -71,7 +71,7 @@ extension FixedRatioManager {
     private func contains(ratioItem: RatioItemType) -> Bool {
         var contains = false
         ratios.forEach {
-            if ($0.nameH == ratioItem.nameH || $0.nameV == ratioItem.nameV) {
+            if $0.nameH == ratioItem.nameH || $0.nameV == ratioItem.nameV {
                 contains = true
             }
         }
@@ -115,7 +115,7 @@ extension FixedRatioManager {
     }
 
     private func appendToTail(ratioItems: [RatioItemType]) {
-        ratioItems.forEach{
+        ratioItems.forEach {
             appendToTail(ratioItem: $0)
         }
     }

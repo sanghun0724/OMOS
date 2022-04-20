@@ -14,27 +14,27 @@
 
 import Foundation
 
-public class SdkJSONEncoder : JSONEncoder {
+public class SdkJSONEncoder: JSONEncoder {
     public static var `default`: SdkJSONEncoder { return SdkJSONEncoder() }
-    public static var `custom`: SdkJSONEncoder { return SdkJSONEncoder(useCustomStrategy:true) }
-    
-   init(useCustomStrategy:Bool = false) {
+    public static var `custom`: SdkJSONEncoder { return SdkJSONEncoder(useCustomStrategy: true) }
+
+   init(useCustomStrategy: Bool = false) {
         super.init()
-        if (useCustomStrategy) {
+        if useCustomStrategy {
             self.keyEncodingStrategy = .convertToSnakeCase
         }
     }
 }
 
-public class SdkJSONDecoder : JSONDecoder {
+public class SdkJSONDecoder: JSONDecoder {
     public static var `default`: SdkJSONDecoder { return SdkJSONDecoder() }
-    public static var `custom`: SdkJSONDecoder { return SdkJSONDecoder(useCustomStrategy:true) }
-    public static var `customIso8601Date`: SdkJSONDecoder { return SdkJSONDecoder(useCustomStrategy:true, dateStrategy: .iso8601) }
-    public static var `customSecondsSince1970`: SdkJSONDecoder { return SdkJSONDecoder(useCustomStrategy:true, dateStrategy: .secondsSince1970) }
-    
-    init(useCustomStrategy:Bool = false, dateStrategy: DateDecodingStrategy? = nil) {
+    public static var `custom`: SdkJSONDecoder { return SdkJSONDecoder(useCustomStrategy: true) }
+    public static var `customIso8601Date`: SdkJSONDecoder { return SdkJSONDecoder(useCustomStrategy: true, dateStrategy: .iso8601) }
+    public static var `customSecondsSince1970`: SdkJSONDecoder { return SdkJSONDecoder(useCustomStrategy: true, dateStrategy: .secondsSince1970) }
+
+    init(useCustomStrategy: Bool = false, dateStrategy: DateDecodingStrategy? = nil) {
         super.init()
-        if (useCustomStrategy) {
+        if useCustomStrategy {
             self.keyDecodingStrategy = .convertFromSnakeCase
         }
         if let dateStrategy = dateStrategy {

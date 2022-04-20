@@ -53,7 +53,7 @@ public enum Source {
     /// The target image should be got from network remotely. The associated `Resource`
     /// value defines detail information like image URL and cache key.
     case network(Resource)
-    
+
     /// The target image should be provided in a data format. Normally, it can be an image
     /// from local storage or in any other encoding format (like Base64).
     case provider(ImageDataProvider)
@@ -87,9 +87,9 @@ extension Source: Hashable {
             return r1.cacheKey == r2.cacheKey && r1.downloadURL == r2.downloadURL
         case (.provider(let p1), .provider(let p2)):
             return p1.cacheKey == p2.cacheKey && p1.contentURL == p2.contentURL
-        case (.provider(_), .network(_)):
+        case (.provider, .network):
             return false
-        case (.network(_), .provider(_)):
+        case (.network, .provider):
             return false
         }
     }

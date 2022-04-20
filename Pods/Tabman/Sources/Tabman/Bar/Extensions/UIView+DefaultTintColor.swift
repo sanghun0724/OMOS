@@ -9,7 +9,7 @@
 import UIKit
 
 internal extension UIView {
-    
+
     /// The default tintColor of UIView
     class var defaultTintColor: UIColor {
         let view = UIView()

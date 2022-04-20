@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIView {
-    
+
     func crossDissolve(duration: TimeInterval = 0.25,
                        during animations: @escaping () -> Void,
                        completion: ((Bool) -> Void)? = nil) {

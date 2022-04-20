@@ -8,22 +8,20 @@
 import Foundation
 import RxSwift
 
-class SearchArtistDetailViewModel:BaseViewModel {
-    
+class SearchArtistDetailViewModel: BaseViewModel {
     var currentKeyword = ""
-    var searchType:SearchType = .main
+    var searchType: SearchType = .main
     let artistTrack = PublishSubject<[ArtistDetailRespone]>()
-    var currentArtistTrack:[ArtistDetailRespone] = []
+    var currentArtistTrack: [ArtistDetailRespone] = []
     let artistAlbum = PublishSubject<[AlbumRespone]>()
-    var currentArtistAlbum:[AlbumRespone] = []
+    var currentArtistAlbum: [AlbumRespone] = []
     let errorMessage = BehaviorSubject<String?>(value: nil)
     let isEmpty = PublishSubject<Bool>()
-    let trackLoading = BehaviorSubject<Bool>(value:false)
-    let albumLoading = BehaviorSubject<Bool>(value:false)
-    let usecase:SearchUseCase
-    
-    
-    func artistDetailTrackFetch(artistId:String) {
+    let trackLoading = BehaviorSubject<Bool>(value: false)
+    let albumLoading = BehaviorSubject<Bool>(value: false)
+    let usecase: SearchUseCase
+
+    func artistDetailTrackFetch(artistId: String) {
         trackLoading.onNext(true)
         usecase.artistDetailTrackFetch(artistId: artistId)
             .subscribe({ [weak self] event in
@@ -37,8 +35,8 @@ class SearchArtistDetailViewModel:BaseViewModel {
                 }
             }).disposed(by: disposeBag)
     }
-    
-    func artistDetailAlbumFetch(artistId:String,request:ArtistRequest) {
+
+    func artistDetailAlbumFetch(artistId: String, request: ArtistRequest) {
         albumLoading.onNext(true)
         usecase.artistDetailAlbumFetch(artistId: artistId, request: request)
             .subscribe({ [weak self] event in
@@ -52,17 +50,13 @@ class SearchArtistDetailViewModel:BaseViewModel {
                 }
             }).disposed(by: disposeBag)
     }
-    
 
-    
-    
-    
-    init(usecase:SearchUseCase) {
+    init(usecase: SearchUseCase) {
         self.usecase = usecase
         super.init()
-        //self.reduce()
+        // self.reduce()
     }
-    
+
 //    func reduce() {
 //        musics
 //            .withUnretained(self)

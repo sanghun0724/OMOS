@@ -7,12 +7,12 @@
 
 import UIKit
 
-class LoadingView:UIView {
+class LoadingView: UIView {
     let spinner = UIActivityIndicatorView(style: .large)
-    
-    override init(frame:CGRect) {
+
+    override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         addSubview(spinner)
         spinner.translatesAutoresizingMaskIntoConstraints = false
         spinner.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
@@ -20,7 +20,7 @@ class LoadingView:UIView {
         spinner.startAnimating()
         self.backgroundColor = .mainBackGround
      }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init((coder:) has not been implemented")
     }

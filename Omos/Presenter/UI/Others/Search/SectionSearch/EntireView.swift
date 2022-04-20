@@ -7,9 +7,8 @@
 
 import UIKit
 
-class EntireView:BaseView {
-    
-    let tableView:UITableView = {
+class EntireView: BaseView {
+    let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(SongTableCell.self, forCellReuseIdentifier: SongTableCell.identifier)
         table.register(AlbumTableCell.self, forCellReuseIdentifier: AlbumTableCell.identifier)
@@ -20,22 +19,21 @@ class EntireView:BaseView {
         table.automaticallyAdjustsScrollIndicatorInsets = false
         return table
     }()
-    
+
     let emptyView = EmptyView()
-    
+
     override func configureUI() {
         super.configureUI()
         self.addSubview(tableView)
         self.addSubview(emptyView)
-        
+
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
+
         emptyView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        emptyView.isHidden = true 
-        
+        emptyView.isHidden = true
     }
 }

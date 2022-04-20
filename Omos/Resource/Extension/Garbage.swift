@@ -5,9 +5,9 @@
 //  Created by sangheon on 2022/03/17.
 //
 
-//import Foundation
+// import Foundation
 
-//UIView.animate(withDuration: 0) { [weak self] in
+// UIView.animate(withDuration: 0) { [weak self] in
 //    
 //    guard let valid = self?.expandedIndexSet2.contains(indexPath.row) else { return }
 //    if valid {
@@ -23,11 +23,9 @@
 //        }
 //        cell.readMoreButton.isHidden = false
 //    }
-//}
+// }
 
-
-
-//func setStackViews() {
+// func setStackViews() {
 //    for i in 0..<lyricsArr.count {
 //        let labelView:BasePaddingLabel = {
 //            let label = BasePaddingLabel()
@@ -66,18 +64,17 @@
 //        }
 //
 //    }
-//}
+// }
 
-
-//var lyricsArr:[String] = []
-//myRecord.recordContents.enumerateSubstrings(in: myRecord.recordContents.startIndex..., options: .byParagraphs) { substring, range, _, stop in
+// var lyricsArr:[String] = []
+// myRecord.recordContents.enumerateSubstrings(in: myRecord.recordContents.startIndex..., options: .byParagraphs) { substring, range, _, stop in
 //    if  let substring = substring,
 //        !substring.isEmpty {
 //        lyricsArr.append(substring)
 //    }
-//}
+// }
 //
-//for i in 0..<lyricsArr.count {
+// for i in 0..<lyricsArr.count {
 //    let labelView:BasePaddingLabel = {
 //        let label = BasePaddingLabel()
 //        label.text = ""
@@ -98,7 +95,7 @@
 //        labelView.backgroundColor = .mainBlack
 //        labelView.text = lyricsArr[i]
 //    }
-//}
-//selfLyricsView.reloadInputViews()
+// }
+// selfLyricsView.reloadInputViews()
 //
 //// selfLyricsView.dummyView3.isHidden = true

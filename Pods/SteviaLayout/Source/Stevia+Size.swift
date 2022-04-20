@@ -10,7 +10,7 @@
 import UIKit
 
 public extension UIView {
-    
+
     /**
      Adds an Autolayout constraint for sizing the view.
      
@@ -32,7 +32,7 @@ public extension UIView {
         height(points)
         return self
     }
-    
+
     /**
      Adds an Autolayout constraint for setting the view's height.
      
@@ -56,7 +56,7 @@ public extension UIView {
     func height(_ points: CGFloat) -> Self {
         return size(.height, points: points)
     }
-    
+
     /**
      Adds an Autolayout constraint for setting the view's width.
      
@@ -74,7 +74,7 @@ public extension UIView {
     func width(_ points: CGFloat) -> Self {
         return size(.width, points: points)
     }
-    
+
     /**
      Adds an Autolayout constraint for setting the view's height.
      
@@ -98,7 +98,7 @@ public extension UIView {
     func height(_ fm: SteviaFlexibleMargin) -> Self {
         return size(.height, relatedBy: fm.relation, points: fm.points)
     }
-    
+
     /**
      Adds an Autolayout constraint for setting the view's width.
      
@@ -116,7 +116,7 @@ public extension UIView {
     func width(_ fm: SteviaFlexibleMargin) -> Self {
         return size(.width, relatedBy: fm.relation, points: fm.points)
     }
-    
+
     fileprivate func size(_ attribute: NSLayoutConstraint.Attribute,
                           relatedBy: NSLayoutConstraint.Relation = .equal,
                           points: CGFloat) -> Self {

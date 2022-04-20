@@ -7,14 +7,14 @@
 
 import Foundation
 
-public enum MyError:Error {
+public enum MyError: Error {
     case badResponse
     case badUrl
     case encoding
 }
 
 extension MyError: LocalizedError {
-    public var errorDescription:String? {
+    public var errorDescription: String? {
         switch self {
         case .badResponse:
             return "네트워크 상태가 좋지 않습니다."

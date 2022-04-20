@@ -27,8 +27,8 @@ extension Dictionary {
         }
         return parts.joined(separator: "&")
     }
-    
-    public var urlQueryItems: [URLQueryItem]? {        
+
+    public var urlQueryItems: [URLQueryItem]? {
         let queryItems = self.map { (key, value) in
             URLQueryItem(name: String(describing: key),
                          value: String(describing: value))
@@ -38,7 +38,7 @@ extension Dictionary {
 }
 
 extension Dictionary where Key == String, Value == Any? {
-    public func filterNil() -> [String:Any]? {
+    public func filterNil() -> [String: Any]? {
         let filteredNil = self.filter({ $0.value != nil }).mapValues({ $0! })
         return (!filteredNil.isEmpty) ? filteredNil : nil
     }
@@ -46,10 +46,9 @@ extension Dictionary where Key == String, Value == Any? {
 
 extension Dictionary where Key == String, Value: Any {
     public func toJsonString() -> String? {
-        if let data = try? JSONSerialization.data(withJSONObject: self, options:[]) {
-            return String(data:data, encoding: .utf8)
-        }
-        else {
+        if let data = try? JSONSerialization.data(withJSONObject: self, options: []) {
+            return String(data: data, encoding: .utf8)
+        } else {
             return nil
         }
     }
@@ -62,4 +61,3 @@ public extension Dictionary {
         }
     }
 }
-

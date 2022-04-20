@@ -10,30 +10,30 @@ import UIKit
 
 /// Indicator that displays a circular dot centered along the X-axis.
 open class TMDotBarIndicator: TMBarIndicator {
-    
+
     // MARK: Types
-    
+
     public enum Size {
         case small
         case medium
         case large
         case custom(size: CGSize)
     }
-    
+
     // MARK: Properties
-    
+
     private let dotContainer = UIView()
     private let dotLayer = CAShapeLayer()
-    
+
     private var widthConstraint: NSLayoutConstraint?
     private var heightConstraint: NSLayoutConstraint?
-    
+
     open override var displayMode: TMBarIndicator.DisplayMode {
         return .bottom
     }
-    
+
     // MARK: Customization
-    
+
     open var size: Size = .medium {
         didSet {
             guard size.rawValue != oldValue.rawValue else {
@@ -48,12 +48,12 @@ open class TMDotBarIndicator: TMBarIndicator {
             dotLayer.fillColor = tintColor.cgColor
         }
     }
-    
+
     // MARK: Lifecycle
-    
+
     open override func layout(in view: UIView) {
         super.layout(in: view)
-        
+
         view.addSubview(dotContainer)
         dotContainer.translatesAutoresizingMaskIntoConstraints = false
         let widthConstraint = dotContainer.widthAnchor.constraint(equalToConstant: size.rawValue.width)
@@ -67,20 +67,20 @@ open class TMDotBarIndicator: TMBarIndicator {
             ])
         self.widthConstraint = widthConstraint
         self.heightConstraint = heightConstraint
-        
+
         dotLayer.fillColor = tintColor.cgColor
         dotContainer.layer.addSublayer(dotLayer)
     }
-    
+
     // MARK: Layout
-    
+
     open override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         dotLayer.frame = dotContainer.bounds
         dotLayer.path = dotPath(for: size.rawValue).cgPath
     }
-    
+
     private func update(for size: CGSize) {
         widthConstraint?.constant = size.width
         heightConstraint?.constant = size.height
@@ -89,7 +89,7 @@ open class TMDotBarIndicator: TMBarIndicator {
 }
 
 private extension TMDotBarIndicator {
-    
+
     func dotPath(for size: CGSize) -> UIBezierPath {
         let path = UIBezierPath(ovalIn: CGRect(x: 0.0,
                                                y: 0.0,
@@ -100,7 +100,7 @@ private extension TMDotBarIndicator {
 }
 
 private extension TMDotBarIndicator.Size {
-    
+
     var rawValue: CGSize {
         switch self {
         case .small:

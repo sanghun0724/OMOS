@@ -6,21 +6,20 @@
 //
 
 import Foundation
-import UIKit
 import RxSwift
+import UIKit
 
-
-extension AllRecordViewController:UITableViewDelegate,UITableViewDataSource {
+extension AllRecordViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        1
     }
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.numberofSections()
+        viewModel.numberofSections()
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordTableCell.identifier,for:indexPath) as! AllRecordTableCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordTableCell.identifier, for: indexPath) as! AllRecordTableCell
         guard let model = self.selectedRecords else { return  AllRecordTableCell() }
         cell.backgroundColor = .mainBackGround
         switch indexPath.section {
@@ -45,7 +44,7 @@ extension AllRecordViewController:UITableViewDelegate,UITableViewDataSource {
         cell.cellDelegate = self
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: AllRecordHeaderView.identifier) as! AllRecordHeaderView
         let uc = RecordsUseCase(recordsRepository: RecordsRepositoryImpl(recordAPI: RecordAPI()))
@@ -55,35 +54,35 @@ extension AllRecordViewController:UITableViewDelegate,UITableViewDataSource {
             headerView.label.text = "한 줄 감상"
             headerView.button.rx.tap.asDriver()
                 .drive(onNext: { [weak self] in
-                    let vc = AllRecordCateDetailViewController(viewModel: vm, cateType: .A_LINE)
+                    let vc = AllRecordCateDetailViewController(viewModel: vm, cateType: .aLine)
                     self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: headerView.disposeBag)
         case 1:
             headerView.label.text = "내인생의 OST"
             headerView.button.rx.tap.asDriver()
                 .drive(onNext: { [weak self] in
-                    let vc = AllRecordCateDetailViewController(viewModel: vm, cateType: .OST)
+                    let vc = AllRecordCateDetailViewController(viewModel: vm, cateType: .ost)
                     self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: headerView.disposeBag)
         case 2:
             headerView.label.text = "노래속 나의 이야기"
             headerView.button.rx.tap.asDriver()
                 .drive(onNext: { [weak self] in
-                    let vc = AllRecordCateDetailViewController(viewModel: vm, cateType: .STORY)
+                    let vc = AllRecordCateDetailViewController(viewModel: vm, cateType: .story)
                     self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: headerView.disposeBag)
         case 3:
             headerView.label.text = "나만의 가사 해석"
             headerView.button.rx.tap.asDriver()
                 .drive(onNext: { [weak self] in
-                    let vc = AllRecordCateDetailViewController(viewModel: vm, cateType: .LYRICS)
+                    let vc = AllRecordCateDetailViewController(viewModel: vm, cateType: .lyrics)
                     self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: headerView.disposeBag)
         case 4:
             headerView.label.text = "자유 공간"
             headerView.button.rx.tap.asDriver()
                 .drive(onNext: { [weak self] in
-                    let vc = AllRecordCateDetailViewController(viewModel: vm, cateType: .FREE)
+                    let vc = AllRecordCateDetailViewController(viewModel: vm, cateType: .free)
                     self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: headerView.disposeBag)
         default:
@@ -91,18 +90,17 @@ extension AllRecordViewController:UITableViewDelegate,UITableViewDataSource {
         }
         return headerView
     }
-    
+
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         (view as! UITableViewHeaderFooterView).contentView.backgroundColor = UIColor.mainBackGround
         (view as! UITableViewHeaderFooterView).textLabel?.textColor = UIColor.white
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UIScreen.main.bounds.height / 4.72
+        UIScreen.main.bounds.height / 4.72
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return UIScreen.main.bounds.height / 17
+        UIScreen.main.bounds.height / 17
     }
-    
 }

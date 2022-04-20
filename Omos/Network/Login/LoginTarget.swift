@@ -10,23 +10,23 @@ import Alamofire
 enum LoginTarget {
     case login(LoginRequest)
     case getUserDetails(UserDetailRequest)
-    //case kakaoLogin()
+    // case kakaoLogin()
     case checkEmail(CheckEmailRequest)
     case signUp(SignUpRequest)
     case doRefresh(RefreshRequest)
     case SNSLogin(SNSLoginRequest)
     case SNSSignUp(SNSSignUpRequest)
-    case logOut(userId:Int)
-    case signout(userId:Int)
+    case logOut(userId: Int)
+    case signout(userId: Int)
     case emailCheck(EmailCheckRequest)
     case updatePassword(PWUpdateRequest)
 }
 
-extension LoginTarget:TargetType {
+extension LoginTarget: TargetType {
     var baseURL: String {
-        return RestApiUrl.restUrl + "/auth"
+        RestApiUrl.restUrl + "/auth"
     }
-    
+
     var method: HTTPMethod {
         switch self {
         case .login: return .post
@@ -42,11 +42,11 @@ extension LoginTarget:TargetType {
         case .updatePassword: return .put
         }
     }
-    
+
     var path: String {
         switch self {
         case .login: return "/login"
-        case .getUserDetails: return "/details" //it could be changed
+        case .getUserDetails: return "/details" // it could be changed
         case .signUp: return "/signup"
         case .doRefresh: return "/post"
         case .checkEmail: return "/check-email"
@@ -58,7 +58,7 @@ extension LoginTarget:TargetType {
         case .updatePassword: return "/update/password"
         }
     }
-    
+
     var parameters: RequestParams? {
         switch self {
         case .login(let request): return .body(request)
@@ -74,6 +74,4 @@ extension LoginTarget:TargetType {
             return nil
         }
     }
-    
-    
 }

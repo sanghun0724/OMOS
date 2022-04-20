@@ -9,7 +9,7 @@
 import UIKit
 
 extension TMBar {
-    
+
     /// Embed the bar in a 'system' bar that will mimick `UINavigationBar` and `UITabBar`.
     ///
     /// - Returns: System bar.
@@ -22,11 +22,11 @@ extension TMBar {
 ///
 /// Contains an internal `TMBar` and forwards on all bar responsibility to this instance.
 public final class TMSystemBar: UIView {
-    
+
     // MARK: Properties
-    
+
     public let bar: TMBar
-    
+
     private lazy var contentView = makeContentView()
     private var barView: UIView? {
         return bar
@@ -36,7 +36,7 @@ public final class TMSystemBar: UIView {
     private lazy var backgroundView = TMBarBackgroundView(style: self.backgroundStyle)
 
     private var hasExtendedEdges: Bool = false
-    
+
     @available(*, unavailable)
     public override var backgroundColor: UIColor? {
         didSet {}
@@ -60,40 +60,40 @@ public final class TMSystemBar: UIView {
             }
         }
     }
-    
+
     // MARK: Init
-    
+
     public required init?(coder aDecoder: NSCoder) {
         fatalError("Interface Builder is not supported")
     }
-    
+
     /// Create a system bar.
     ///
     /// - Parameter bar: Bar to embed in the system bar.
     internal init(for bar: TMBar) {
         self.bar = bar
-        
+
         if #available(iOS 13, *) {
             backgroundStyle = .blur(style: .systemMaterial)
         } else {
             backgroundStyle = .blur(style: .extraLight)
         }
-        
+
         super.init(frame: .zero)
-        
+
         layout(in: self)
     }
-    
+
     private func layout(in view: UIView) {
         guard let barView = self.barView else {
             fatalError("For some reason we couldn't get barView - this should be impossible.")
         }
-        
+
         // Extended views
-        
+
         view.addSubview(extendingView)
         extendingView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         extendingView.addSubview(backgroundView)
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -102,9 +102,9 @@ public final class TMSystemBar: UIView {
             backgroundView.trailingAnchor.constraint(equalTo: extendingView.trailingAnchor),
             backgroundView.bottomAnchor.constraint(equalTo: extendingView.bottomAnchor)
             ])
-        
+
         // Content
-        
+
         view.addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -113,20 +113,20 @@ public final class TMSystemBar: UIView {
             contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             ])
-        
+
         removeSubviewBackgrounds(from: barView)
         contentView.addArrangedSubview(barView)
     }
-    
+
     // MARK: Layout
-    
+
     public override func layoutSubviews() {
         super.layoutSubviews()
         superview?.layoutIfNeeded()
-        
+
         extendViewEdgesIfNeeded()
     }
-    
+
     private func extendViewEdgesIfNeeded() {
         guard let superview = self.superview, !hasExtendedEdges else {
             return
@@ -137,12 +137,12 @@ public final class TMSystemBar: UIView {
         }
         hasExtendedEdges = true
         viewController.view.layoutIfNeeded()
-        
+
         var constraints = [
             extendingView.leadingAnchor.constraint(equalTo: leadingAnchor),
             extendingView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ]
-        
+
         let safeAreaInsets: UIEdgeInsets
         if #available(iOS 11, *) {
             safeAreaInsets = viewController.view.safeAreaInsets
@@ -152,9 +152,9 @@ public final class TMSystemBar: UIView {
                                           bottom: viewController.bottomLayoutGuide.length,
                                           right: 0.0)
         }
-        
+
         let isNavigationBarNotVisible = viewController.navigationController?.isNavigationBarHidden != false
-        
+
         let relativeFrame = viewController.view.convert(self.frame, from: superview)
         if ceil(relativeFrame.origin.y) == safeAreaInsets.top, isNavigationBarNotVisible { // Pin to top anchor
             constraints.append(contentsOf: [
@@ -176,10 +176,10 @@ public final class TMSystemBar: UIView {
             contentView.insertArrangedSubview(makeSeparatorView(), at: 0)
             contentView.addArrangedSubview(makeSeparatorView())
         }
-        
+
         NSLayoutConstraint.activate(constraints)
     }
-    
+
     /// Traverses superview responder chain for the next `UIViewController`.
     ///
     /// Not so nice, but prevents having to inject a reference `UIViewController` as we need the layout guides.
@@ -195,7 +195,7 @@ public final class TMSystemBar: UIView {
         }
         return nil
     }
-    
+
     /// Removes backgrounds from any subviews (including TMBarBackgroundView)
     ///
     /// - Parameter view: View to remove backgrounds from.
@@ -210,7 +210,7 @@ public final class TMSystemBar: UIView {
 }
 
 extension TMSystemBar: TMBar {
-    
+
     /// :nodoc:
     public var dataSource: TMBarDataSource? {
         get {
@@ -219,7 +219,7 @@ extension TMSystemBar: TMBar {
             bar.dataSource = newValue
         }
     }
-    
+
     /// :nodoc:
     public var delegate: TMBarDelegate? {
         get {
@@ -228,18 +228,18 @@ extension TMSystemBar: TMBar {
             bar.delegate = newValue
         }
     }
-    
+
     /// :nodoc:
     public var items: [TMBarItemable]? {
         return bar.items
     }
-    
+
     /// :nodoc:
     public func reloadData(at indexes: ClosedRange<Int>,
                            context: TMBarReloadContext) {
         bar.reloadData(at: indexes, context: context)
     }
-    
+
     /// :nodoc:
     public func update(for pagePosition: CGFloat, capacity: Int, direction: TMBarUpdateDirection, animation: TMAnimation) {
         bar.update(for: pagePosition, capacity: capacity, direction: direction, animation: animation)
@@ -247,13 +247,13 @@ extension TMSystemBar: TMBar {
 }
 
 private extension TMSystemBar {
-    
+
     func makeContentView() -> UIStackView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         return stackView
     }
-    
+
     func makeSeparatorView() -> SeparatorView {
         let view = SeparatorView()
         view.backgroundColor = self.separatorColor

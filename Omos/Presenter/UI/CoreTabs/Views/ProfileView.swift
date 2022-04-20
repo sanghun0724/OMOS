@@ -7,8 +7,8 @@
 
 import UIKit
 
-class ProfileView:BaseView {
-    let tableView:UITableView = {
+class ProfileView: BaseView {
+    let tableView: UITableView = {
         let table = UITableView()
         table.register(ProfileCell.self, forCellReuseIdentifier: ProfileCell.identifier)
         table.register(MydjProfileHeader.self, forHeaderFooterViewReuseIdentifier: MydjProfileHeader.identifier)
@@ -22,27 +22,25 @@ class ProfileView:BaseView {
         table.isScrollEnabled = true
         return table
     }()
-    
-    
+
     let loadingView = LoadingView()
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
-    
     }
-    
+
     override func configureUI() {
         self.addSubview(tableView)
         self.addSubview(loadingView)
-        
+
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
+
         loadingView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
-        loadingView.isHidden = true 
+
+        loadingView.isHidden = true
     }
 }

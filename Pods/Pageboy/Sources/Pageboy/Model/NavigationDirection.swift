@@ -9,7 +9,7 @@
 import UIKit
 
 extension PageboyViewController {
- 
+
     public enum NavigationDirection {
         case neutral
         case forward
@@ -19,13 +19,13 @@ extension PageboyViewController {
 internal typealias NavigationDirection = PageboyViewController.NavigationDirection
 
 internal extension PageboyViewController.NavigationDirection {
-    
+
     var rawValue: UIPageViewController.NavigationDirection {
         switch self {
-            
+
         case .reverse:
             return .reverse
-            
+
         default:
             return .forward
         }

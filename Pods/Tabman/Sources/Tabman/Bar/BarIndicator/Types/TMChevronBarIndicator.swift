@@ -10,30 +10,30 @@ import UIKit
 
 /// Indicator that displays a vertical chevron centered along the X-axis.
 open class TMChevronBarIndicator: TMBarIndicator {
-    
+
     // MARK: Types
-    
+
     public enum Size {
         case small
         case medium
         case large
         case custom(size: CGSize)
     }
-    
+
     // MARK: Properties
-    
+
     private let chevronContainer = UIView()
     private let chevronLayer = CAShapeLayer()
-    
+
     private var widthConstraint: NSLayoutConstraint?
     private var heightConstraint: NSLayoutConstraint?
-    
+
     open override var displayMode: TMBarIndicator.DisplayMode {
         return .bottom
     }
-    
+
     // MARK: Customization
-    
+
     /// Size of the chevron.
     ///
     /// Options:
@@ -55,12 +55,12 @@ open class TMChevronBarIndicator: TMBarIndicator {
             chevronLayer.fillColor = tintColor.cgColor
         }
     }
-    
+
     // MARK: Lifecycle
-    
+
     open override func layout(in view: UIView) {
         super.layout(in: view)
-        
+
         view.addSubview(chevronContainer)
         chevronContainer.translatesAutoresizingMaskIntoConstraints = false
         let widthConstraint = chevronContainer.widthAnchor.constraint(equalToConstant: size.rawValue.width)
@@ -74,20 +74,20 @@ open class TMChevronBarIndicator: TMBarIndicator {
             ])
         self.widthConstraint = widthConstraint
         self.heightConstraint = heightConstraint
-        
+
         chevronLayer.fillColor = tintColor.cgColor
         chevronContainer.layer.addSublayer(chevronLayer)
     }
-    
+
     // MARK: Layout
-    
+
     open override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         chevronLayer.frame = chevronContainer.bounds
         chevronLayer.path = chevronPath(for: size.rawValue).cgPath
     }
-    
+
     private func update(for size: CGSize) {
         widthConstraint?.constant = size.width
         heightConstraint?.constant = size.height
@@ -96,7 +96,7 @@ open class TMChevronBarIndicator: TMBarIndicator {
 }
 
 private extension TMChevronBarIndicator {
-    
+
     func chevronPath(for size: CGSize) -> UIBezierPath {
         let path = UIBezierPath()
         path.move(to: CGPoint(x: 0.0, y: size.height))
@@ -108,7 +108,7 @@ private extension TMChevronBarIndicator {
 }
 
 private extension TMChevronBarIndicator.Size {
-    
+
     var rawValue: CGSize {
         switch self {
         case .small:

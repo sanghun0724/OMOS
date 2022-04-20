@@ -10,7 +10,7 @@ import UIKit
 
 /// A view that displays a specified background style.
 open class TMBarBackgroundView: UIView {
-    
+
     /// Style of background.
     ///
     /// - clear: No visible background.
@@ -23,7 +23,7 @@ open class TMBarBackgroundView: UIView {
         case blur(style: UIBlurEffect.Style)
         case custom(view: UIView)
     }
-    
+
     // MARK: Properties
 
     /**
@@ -36,27 +36,27 @@ open class TMBarBackgroundView: UIView {
             update(for: style)
         }
     }
-    
+
     @available(*, unavailable)
     open override var backgroundColor: UIColor? {
         didSet {
         }
     }
-    
+
     private var backgroundView: UIView?
-    
+
     // MARK: Init
-    
+
     public init(style: Style = .clear) {
         self.style = style
         super.init(frame: .zero)
-        
+
         isUserInteractionEnabled = false
         super.backgroundColor = .clear
-        
+
         update(for: style)
     }
-    
+
     @available(*, unavailable)
     public required init?(coder aDecoder: NSCoder) {
         fatalError("Use init(style:)")
@@ -64,10 +64,10 @@ open class TMBarBackgroundView: UIView {
 }
 
 private extension TMBarBackgroundView {
-    
+
     func update(for style: Style) {
         cleanUp(backgroundView: backgroundView)
-        
+
         guard let backgroundView = view(for: style) else {
             return
         }
@@ -81,7 +81,7 @@ private extension TMBarBackgroundView {
             backgroundView.bottomAnchor.constraint(equalTo: bottomAnchor)
             ])
     }
-    
+
     func view(for style: Style) -> UIView? {
         switch style {
         case .flat(let color):
@@ -100,7 +100,7 @@ private extension TMBarBackgroundView {
             return nil
         }
     }
-    
+
     func cleanUp(backgroundView: UIView?) {
         backgroundView?.removeFromSuperview()
     }

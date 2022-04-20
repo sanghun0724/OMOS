@@ -69,7 +69,7 @@ public protocol ImageDownloaderDelegate: AnyObject {
     ///
     ///  If this method is implemented, `imageDownloader(_:didDownload:for:)` will not be called anymore.
     func imageDownloader(_ downloader: ImageDownloader, didDownload data: Data, with dataTask: SessionDataTask) -> Data?
-  
+
     /// Called when the `ImageDownloader` object successfully downloaded image data from specified URL. This is
     /// your last chance to verify or modify the downloaded data before Kingfisher tries to perform addition
     /// processing on the image data.
@@ -140,14 +140,14 @@ extension ImageDownloaderDelegate {
     public func isValidStatusCode(_ code: Int, for downloader: ImageDownloader) -> Bool {
         return (200..<400).contains(code)
     }
-  
+
     public func imageDownloader(_ downloader: ImageDownloader, didDownload data: Data, with task: SessionDataTask) -> Data? {
         guard let url = task.originalURL else {
             return data
         }
         return imageDownloader(downloader, didDownload: data, for: url)
     }
-  
+
     public func imageDownloader(_ downloader: ImageDownloader, didDownload data: Data, for url: URL) -> Data? {
         return data
     }

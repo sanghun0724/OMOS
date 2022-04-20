@@ -10,7 +10,7 @@
 import UIKit
 
 public extension UIView {
-    
+
     /**
      
      Lays out the views on both axis.
@@ -36,14 +36,14 @@ public extension UIView {
     func layout(_ objects: Any...) -> [UIView] {
         return layout(objects)
     }
-    
+
     @discardableResult
     func layout(_ objects: [Any]) -> [UIView] {
         var previousMargin: CGFloat?
         var previousFlexibleMargin: SteviaFlexibleMargin?
-        
+
         for (i, o) in objects.enumerated() {
-            
+
             func viewLogic(_ v: UIView) {
                 if let pm = previousMargin {
                     if i == 1 {
@@ -81,7 +81,7 @@ public extension UIView {
                     tryStackViewVerticallyWithPreviousView(v, index: i, objects: objects)
                 }
             }
-            
+
             switch o {
             case let v as UIView:
                 viewLogic(v)
@@ -89,7 +89,7 @@ public extension UIView {
                 let m = cgFloatMarginFromObject(o)
                 previousMargin = m // Store margin for next pass
                 if i != 0 && i == (objects.count - 1) {
-                    //Last Margin, Bottom
+                    // Last Margin, Bottom
                     if let previousView = objects[i-1] as? UIView {
                         previousView.bottom(m)
                     } else if let va = objects[i-1] as? [UIView] {
@@ -99,14 +99,14 @@ public extension UIView {
             case let fm as SteviaFlexibleMargin:
                 previousFlexibleMargin = fm // Store margin for next pass
                 if i != 0 && i == (objects.count - 1) {
-                    //Last Margin, Bottom
+                    // Last Margin, Bottom
                     if let previousView = objects[i-1] as? UIView {
                         previousView.bottom(fm)
                     } else if let va = objects[i-1] as? [UIView] {
                         va.first!.bottom(fm)
                     }
                 }
-            case _ as String:() //Do nothin' !
+            case _ as String:() // Do nothin' !
             case let a as [UIView]:
                 align(horizontally: a)
                 let v = a.first!
@@ -116,7 +116,7 @@ public extension UIView {
         }
         return objects.map {$0 as? UIView }.compactMap {$0}
     }
-    
+
     fileprivate func cgFloatMarginFromObject(_ o: Any) -> CGFloat {
         var m: CGFloat = 0
         if let i = o as? Int {
@@ -128,14 +128,14 @@ public extension UIView {
         }
         return m
     }
-    
+
     fileprivate func tryStackViewVerticallyWithPreviousView(_ view: UIView,
                                                             index: Int, objects: [Any]) {
         if let pv = previousViewFromIndex(index, objects: objects) {
             pv.stackV(v: view)
         }
     }
-    
+
     fileprivate func previousViewFromIndex(_ index: Int, objects: [Any]) -> UIView? {
         if index != 0 {
             if let previousView = objects[index-1] as? UIView {
@@ -144,12 +144,12 @@ public extension UIView {
         }
         return nil
     }
-    
+
     @discardableResult
     fileprivate func stackV(m points: CGFloat = 0, v: UIView) -> UIView {
         return stack(.vertical, points: points, v: v)
     }
-    
+
     fileprivate func stack(_ axis: NSLayoutConstraint.Axis,
                            points: CGFloat = 0, v: UIView) -> UIView {
         let a: NSLayoutConstraint.Attribute = axis == .vertical ? .top : .left

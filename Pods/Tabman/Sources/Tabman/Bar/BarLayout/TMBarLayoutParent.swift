@@ -14,13 +14,13 @@ import UIKit
 /// contained within to handle content inset and other properties that are accessible from the
 /// layout but expected that a parent view is responsible for.
 internal protocol TMBarLayoutParent: TMTransitionStyleable {
-    
+
     /// Content inset that is applied to the frame of the layout.
     var contentInset: UIEdgeInsets { get set }
-    
+
     /// Alignment that is applied to the layout.
     var alignment: TMBarLayout.Alignment { get set }
-    
+
     /// Bar layout requires a reload of its contents.
     ///
     /// - Parameter layout: Layout.

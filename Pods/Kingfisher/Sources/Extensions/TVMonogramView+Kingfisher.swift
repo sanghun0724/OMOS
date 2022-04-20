@@ -58,8 +58,7 @@ extension KingfisherWrapper where Base: TVMonogramView {
         placeholder: KFCrossPlatformImage? = nil,
         options: KingfisherOptionsInfo? = nil,
         progressBlock: DownloadProgressBlock? = nil,
-        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask?
-    {
+        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask? {
         let options = KingfisherParsedOptionsInfo(KingfisherManager.shared.defaultOptions + (options ?? .empty))
         return setImage(
             with: source,
@@ -75,8 +74,7 @@ extension KingfisherWrapper where Base: TVMonogramView {
         placeholder: KFCrossPlatformImage? = nil,
         parsedOptions: KingfisherParsedOptionsInfo,
         progressBlock: DownloadProgressBlock? = nil,
-        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask?
-    {
+        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask? {
         var mutatingSelf = self
         guard let source = source else {
             base.image = placeholder
@@ -147,7 +145,7 @@ extension KingfisherWrapper where Base: TVMonogramView {
         mutatingSelf.imageTask = task
         return task
     }
-    
+
     /// Sets an image to the image view with a requested resource.
     ///
     /// - Parameters:
@@ -171,8 +169,7 @@ extension KingfisherWrapper where Base: TVMonogramView {
         placeholder: KFCrossPlatformImage? = nil,
         options: KingfisherOptionsInfo? = nil,
         progressBlock: DownloadProgressBlock? = nil,
-        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask?
-    {
+        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask? {
         return setImage(
             with: resource?.convertToSource(),
             placeholder: placeholder,
@@ -196,7 +193,7 @@ private var imageTaskKey: Void?
 // MARK: Properties
 @available(tvOS 12.0, *)
 extension KingfisherWrapper where Base: TVMonogramView {
-    
+
     public private(set) var taskIdentifier: Source.Identifier.Value? {
         get {
             let box: Box<Source.Identifier.Value>? = getAssociatedObject(base, &taskIdentifierKey)

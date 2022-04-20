@@ -17,63 +17,63 @@ import UIKit
 
 public class Constants {
     static public let responseType = "code"
-    
-    static public let kaHeader : String = generateKaHeader()
+
+    static public let kaHeader: String = generateKaHeader()
     static func generateKaHeader() -> String {
-    
+
         let sdkVersion = KakaoSDK.shared.sdkVersion()
 
         let sdkType = KakaoSDK.shared.sdkType().rawValue
-        
+
         let osVersion = UIDevice.current.systemVersion
-        
+
         var langCode = Locale.current.languageCode
-        if (Locale.preferredLanguages.count > 0) {
-            if let preferredLanguage = Locale.preferredLanguages.first {                
-                if let languageCode = Locale.components(fromIdentifier:preferredLanguage)[NSLocale.Key.languageCode.rawValue] {
+        if Locale.preferredLanguages.count > 0 {
+            if let preferredLanguage = Locale.preferredLanguages.first {
+                if let languageCode = Locale.components(fromIdentifier: preferredLanguage)[NSLocale.Key.languageCode.rawValue] {
                     langCode = languageCode
                 }
             }
         }
         let countryCode = Locale.current.regionCode
-        
+
         let lang = "\(langCode ?? "")-\(countryCode ?? "")"
         let resX = "\(Int(UIScreen.main.bounds.width))"
         let resY = "\(Int(UIScreen.main.bounds.height))"
         let device = UIDevice.current.model.replacingOccurrences(of: " ", with: "_")
         let appBundleId = Bundle.main.bundleIdentifier
         let appVersion = self.appVersion()
-        
+
         return "sdk/\(sdkVersion) sdk_type/\(sdkType) os/ios-\(osVersion) lang/\(lang) res/\(resX)x\(resY) device/\(device) origin/\(appBundleId ?? "") app_ver/\(appVersion ?? "")"
     }
-    
+
     static public func appVersion() -> String? {
-        var appVersion = Bundle.main.object(forInfoDictionaryKey:"CFBundleShortVersionString") as? String
+        var appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
         if appVersion == nil {
-            appVersion = Bundle.main.object(forInfoDictionaryKey:(kCFBundleVersionKey as String)) as? String
+            appVersion = Bundle.main.object(forInfoDictionaryKey: (kCFBundleVersionKey as String)) as? String
         }
         appVersion = appVersion?.replacingOccurrences(of: " ", with: "_")
         return appVersion
     }
 }
 
-///:nodoc:
-public enum SdkType : String {
+///: nodoc:
+public enum SdkType: String {
     case Swift = "swift"
     case RxSwift = "rx_swift"
 }
 
-///:nodoc:
+///: nodoc:
 public class ApprovalType {
     public static let shared = ApprovalType()
-    public var type : String?
-    
+    public var type: String?
+
     public init() {
         self.type = nil
     }
 }
 
-///:nodoc:
+///: nodoc:
 public enum ApiType {
     case KApi
     case KAuth
