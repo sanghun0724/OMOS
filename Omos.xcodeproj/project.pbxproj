@@ -149,6 +149,8 @@
 		B6ABCCFA27CF5E480003B47A /* RecordsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ABCCF927CF5E480003B47A /* RecordsRepository.swift */; };
 		B6ABCCFC27CF5E650003B47A /* RecordsRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ABCCFB27CF5E650003B47A /* RecordsRepositoryImpl.swift */; };
 		B6ABCCFE27CF5EDE0003B47A /* RecordsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ABCCFD27CF5EDE0003B47A /* RecordsUseCase.swift */; };
+		B6ADDCFB280FE39100D90E46 /* RecordLongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ADDCFA280FE39100D90E46 /* RecordLongView.swift */; };
+		B6ADDCFD280FE53D00D90E46 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ADDCFC280FE53D00D90E46 /* LoadingCell.swift */; };
 		B6B1BB5727BB7E1900DF2528 /* AllRecordCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B1BB5627BB7E1900DF2528 /* AllRecordCollectionCell.swift */; };
 		B6B1BB5A27BBCE1000DF2528 /* MyRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B1BB5927BBCE1000DF2528 /* MyRecordView.swift */; };
 		B6B1BB5C27BBCF6000DF2528 /* MyRecordTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B1BB5B27BBCF6000DF2528 /* MyRecordTableCell.swift */; };
@@ -361,6 +363,8 @@
 		B6ABCCFB27CF5E650003B47A /* RecordsRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsRepositoryImpl.swift; sourceTree = "<group>"; };
 		B6ABCCFD27CF5EDE0003B47A /* RecordsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsUseCase.swift; sourceTree = "<group>"; };
 		B6AC277027BA28BB00A1FA5B /* OmosRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OmosRelease.entitlements; sourceTree = "<group>"; };
+		B6ADDCFA280FE39100D90E46 /* RecordLongView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordLongView.swift; sourceTree = "<group>"; };
+		B6ADDCFC280FE53D00D90E46 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		B6B1BB5627BB7E1900DF2528 /* AllRecordCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordCollectionCell.swift; sourceTree = "<group>"; };
 		B6B1BB5927BBCE1000DF2528 /* MyRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordView.swift; sourceTree = "<group>"; };
 		B6B1BB5B27BBCF6000DF2528 /* MyRecordTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordTableCell.swift; sourceTree = "<group>"; };
@@ -919,6 +923,16 @@
 			path = Record;
 			sourceTree = "<group>";
 		};
+		B6ADDCF9280FE36200D90E46 /* AllCateLong */ = {
+			isa = PBXGroup;
+			children = (
+				B6DFD2D127CCB4D800645F52 /* AllRecordCateLongDetaillCell.swift */,
+				B6ADDCFA280FE39100D90E46 /* RecordLongView.swift */,
+				B6ADDCFC280FE53D00D90E46 /* LoadingCell.swift */,
+			);
+			path = AllCateLong;
+			sourceTree = "<group>";
+		};
 		B6B1BB5827BBCDF500DF2528 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -1026,7 +1040,7 @@
 		B6FE837E27D09C0B00401FC5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B6DFD2D127CCB4D800645F52 /* AllRecordCateLongDetaillCell.swift */,
+				B6ADDCF9280FE36200D90E46 /* AllCateLong */,
 				B6FE838027D0B37F00401FC5 /* AllRecordCateShortDetailCell.swift */,
 				B6BC148827BFF6F80067D8FB /* MyRecordDetailView.swift */,
 				B6D4BB2127CA5D7C00D6741B /* AllRecordDetailView.swift */,
@@ -1337,6 +1351,7 @@
 				B697F20927E0D08300F34AB5 /* TodayUseCase.swift in Sources */,
 				B606195A27DF2B85006508CA /* LyricsViewModel.swift in Sources */,
 				B689A9D127AE94E9005F26E4 /* Color.swift in Sources */,
+				B6ADDCFB280FE39100D90E46 /* RecordLongView.swift in Sources */,
 				B6B1BB5E27BBD06600DF2528 /* MyRecord+Table.swift in Sources */,
 				B642344527DCA9A600C1083D /* AllRecordCateDetail+Table.swift in Sources */,
 				B697F20527E0A47C00F34AB5 /* Today.swift in Sources */,
@@ -1377,6 +1392,7 @@
 				B69E42D527E3A8F900CAD5F1 /* MyRecordDetail+Table.swift in Sources */,
 				B6ABCCFC27CF5E650003B47A /* RecordsRepositoryImpl.swift in Sources */,
 				B6DCFA6527E4D852006283FE /* AccountOutViewController.swift in Sources */,
+				B6ADDCFD280FE53D00D90E46 /* LoadingCell.swift in Sources */,
 				B6E9B5D227E73D000045143F /* MyProfileRepository.swift in Sources */,
 				B6ABCCF627CF45020003B47A /* RecordAPI.swift in Sources */,
 				B6BC148927BFF6F80067D8FB /* MyRecordDetailView.swift in Sources */,

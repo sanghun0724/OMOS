@@ -1,18 +1,18 @@
 //
-//  AllRecordCateShortDetailCell.swift
+//  AllRecordCateDetailCell.swift
 //  Omos
 //
-//  Created by sangheon on 2022/03/03.
+//  Created by sangheon on 2022/02/28.
 //
 
 import Foundation
 import RxSwift
 import UIKit
 
-class AllRecordCateShortDetailCell: UITableViewCell {
-    static let identifier = "AllRecordCateShortDetailCell"
+class AllRecordCateLongDetailCell: UITableViewCell {
+    static let identifier = "AllRecordCateDetailCell"
     var disposeBag = DisposeBag()
-    let myView = MyRecordDetailView()
+    let myView = RecordLongView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -31,28 +31,42 @@ class AllRecordCateShortDetailCell: UITableViewCell {
         self.addSubview(myView)
         
         myView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.leading.trailing.top.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
         myView.lockButton.isHidden = true
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        myView.backImageView.image = nil
+        myView.likeButton.setImage(nil, for: .normal)
+        myView.scrapButton.setImage(nil, for: .normal)
+        myView.likeCountLabel.textColor = nil
+        myView.scrapCountLabel.textColor = nil
         disposeBag = DisposeBag()
+        myView.mainLabelView.text = nil
     }
     
     func configureModel(record: CategoryRespone) {
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
+        if myView.subMusicInfoLabel.text?.first == " " {
+            myView.subMusicInfoLabel.text?.removeFirst()
+        }
         myView.circleImageView.setImage(with: record.music.albumImageURL)
         myView.backImageView.setImage(with: record.recordImageURL ?? "")
         myView.titleLabel.text = record.recordTitle
-        myView.mainLabelView.text = record.recordContents
         myView.createdLabel.text = record.createdDate.toDate()
+        myView.cateLabel.text = " | \(record.category.getReverseCate())"
+        myView.mainLabelView.text = record.recordContents
         myView.nicknameLabel.text = record.nickname
         myView.likeCountLabel.text = String(record.likeCnt)
         myView.scrapCountLabel.text = String(record.scrapCnt)
-        myView.cateLabel.text = " | \(record.category.getReverseCate())"
+        
+        if myView.mainLabelView.maxNumberOfLines < 3 {
+            myView.readMoreButton.isHidden = true
+        }
         
         if record.isLiked {
             myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
@@ -74,19 +88,22 @@ class AllRecordCateShortDetailCell: UITableViewCell {
         myView.circleImageView.setImage(with: record.music.albumImageURL)
         myView.backImageView.setImage(with: record.recordImageURL ?? "" )
         myView.titleLabel.text = record.recordTitle
-        myView.mainLabelView.text = record.recordContents
         myView.createdLabel.text = record.createdDate.toDate()
+        myView.mainLabelView.text = record.recordContents
         myView.nicknameLabel.text = record.nickname
         myView.likeCountLabel.text = String(record.likeCnt)
         myView.scrapCountLabel.text = String(record.scrapCnt)
         myView.cateLabel.text = " | \(record.category.getReverseCate())"
+        if myView.mainLabelView.maxNumberOfLines < 3 {
+            myView.readMoreButton.isHidden = true
+        }
         if record.isLiked {
             myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
             myView.likeCountLabel.textColor = .mainOrange
         }
         
         if record.isScraped {
-            myView.scrapButton.setImage(UIImage(named: "fillStar"), for: .normal)
+            myView.scrapButton.setImage( UIImage(named: "fillStar"), for: .normal)
             myView.scrapCountLabel.textColor = .mainOrange
         }
     }
@@ -100,19 +117,24 @@ class AllRecordCateShortDetailCell: UITableViewCell {
         myView.circleImageView.setImage(with: record.music.albumImageURL)
         myView.backImageView.setImage(with: record.recordImageURL ?? "")
         myView.titleLabel.text = record.recordTitle
-        myView.mainLabelView.text = record.recordContents
         myView.createdLabel.text = record.createdDate.toDate()
+        myView.mainLabelView.text = record.recordContents
         myView.nicknameLabel.text = record.nickname
         myView.likeCountLabel.text = String(record.likeCnt)
         myView.scrapCountLabel.text = String(record.scrapCnt)
         myView.cateLabel.text = " | \(record.category.getReverseCate())"
+        
+        if myView.mainLabelView.maxNumberOfLines < 3 {
+            myView.readMoreButton.isHidden = true
+        }
+        
         if record.isLiked {
             myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
             myView.likeCountLabel.textColor = .mainOrange
         }
         
         if record.isScraped {
-            myView.scrapButton.setImage(UIImage(named: "fillStar"), for: .normal)
+            myView.scrapButton.setImage( UIImage(named: "fillStar"), for: .normal)
             myView.scrapCountLabel.textColor = .mainOrange
         }
     }
