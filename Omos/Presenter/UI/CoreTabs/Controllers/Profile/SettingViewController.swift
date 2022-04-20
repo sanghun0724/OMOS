@@ -171,7 +171,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                     self.logout()
                 }
                 action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
-                self.presentAlert(title: "", message: "정말 로그아웃 하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
+                self.presentAlert(title: "", with: action, message: "정말 로그아웃 하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert)
             case 1:
                 let vc = AccountOutViewController(viewModel: viewModel)
                 self.navigationController?.pushViewController(vc, animated: true)

@@ -72,7 +72,7 @@ class MydjProfileViewController: BaseViewController {
         }
         action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
         action2.setValue(UIColor.mainOrange, forKey: "titleTextColor")
-        self.presentAlert(title: "", message: "이 DJ를 차단하거나 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action, action2)
+        self.presentAlert(title: "", with: action, action2, message: "이 DJ를 차단하거나 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert)
     }
 
     override func configureUI() {

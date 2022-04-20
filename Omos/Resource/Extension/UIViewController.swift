@@ -24,7 +24,7 @@ extension UIViewController {
     }
 
     // MARK: 취소와 확인이 뜨는 UIAlertController
-    func presentAlert(title: String, message: String? = nil,isCancelActionIncluded: Bool = false,preferredStyle style: UIAlertController.Style = .alert,handler: ((UIAlertAction) -> Void)? = nil) {
+    func presentAlert(title: String, message: String? = nil, isCancelActionIncluded: Bool = false, preferredStyle style: UIAlertController.Style = .alert, handler: ((UIAlertAction) -> Void)? = nil) {
         self.dismissIndicator()
         let alert = UIAlertController(title: title, message: message, preferredStyle: style)
         let actionDone = UIAlertAction(title: "확인", style: .default, handler: handler)
@@ -38,7 +38,7 @@ extension UIViewController {
     }
 
     // MARK: 커스텀 UIAction이 뜨는 UIAlertController
-    func presentAlert(title: String, message: String? = nil,isCancelActionIncluded: Bool = false,preferredStyle style: UIAlertController.Style = .alert,with actions: UIAlertAction ...) {
+    func presentAlert(title: String, with actions: UIAlertAction ..., message: String? = nil, isCancelActionIncluded: Bool = false, preferredStyle style: UIAlertController.Style = .alert) {
         self.dismissIndicator()
         let alert = UIAlertController(title: title, message: message, preferredStyle: style)
         alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = UIColor.mainBackGround

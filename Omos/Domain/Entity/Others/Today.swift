@@ -11,7 +11,7 @@ struct PopuralResponse: Codable {
     let music: Music
     let nickname: String
     let recordID: Int
-    let recordImageURL,recordTitle: String
+    let recordImageURL, recordTitle: String
     let userID: Int
 
     enum CodingKeys: String, CodingKey {

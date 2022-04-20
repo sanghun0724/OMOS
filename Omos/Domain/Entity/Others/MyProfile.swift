@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct PWUpdateRequest: Codable {
     let password: String
     let userId: Int

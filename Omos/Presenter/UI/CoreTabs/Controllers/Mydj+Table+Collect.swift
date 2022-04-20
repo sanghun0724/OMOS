@@ -203,7 +203,7 @@ extension MyDJViewController {
                     Account.currentReportRecordsId.append(data.recordID)
                 }
                 action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
-                self?.presentAlert(title: "", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
+                self?.presentAlert(title: "", with: action, message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert)
             }).disposed(by: cell.disposeBag)
 
         cell.selfView.likeButton.rx.tap
@@ -270,7 +270,7 @@ extension MyDJViewController {
                     Account.currentReportRecordsId.append(data.recordID)
                 }
                 action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
-                self?.presentAlert(title: "", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
+                self?.presentAlert(title: "", with: action, message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert)
             }).disposed(by: cell.disposeBag)
 
         cell.myView.likeButton.rx.tap
@@ -337,7 +337,7 @@ extension MyDJViewController {
                     Account.currentReportRecordsId.append(data.recordID)
                 }
                 action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
-                self?.presentAlert(title: "", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
+                self?.presentAlert(title: "", with: action, message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert)
             }).disposed(by: cell.disposeBag)
 
         cell.myView.likeButton.rx.tap

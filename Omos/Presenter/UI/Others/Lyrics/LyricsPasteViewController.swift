@@ -46,11 +46,9 @@ class LyricsPasteViewController: BaseViewController {
         }
         var lyricsArr: [String] = []
 
-        let textView = selfView.mainLyricsTextView
         guard let text = selfView.mainLyricsTextView.text else { return }
 
-        text.enumerateSubstrings(in: text.startIndex..., options: .byParagraphs) { substring, range, _, _ in
-            let nsRange = NSRange(range, in: text)
+        text.enumerateSubstrings(in: text.startIndex..., options: .byParagraphs) { substring, _, _, _ in
             if  let substring = substring,
                 !substring.isEmpty {
                     lyricsArr.append(substring)

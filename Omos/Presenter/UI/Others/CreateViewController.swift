@@ -106,7 +106,7 @@ class CreateViewController: BaseViewController {
         } else {
             mainText = selfView.mainfullTextView.text
         }
-        if selfView.titleTextView.text == "레코드 제목을 입력해주세요" || selfView.titleTextView.text.isEmpty || mainText == #""레코드 내용을 입력해주세요""# || mainText == "레코드 내용을 입력해주세요" || mainText == "" {
+        if selfView.titleTextView.text == "레코드 제목을 입력해주세요" || selfView.titleTextView.text.isEmpty || mainText == #""레코드 내용을 입력해주세요""# || mainText == "레코드 내용을 입력해주세요" || ((mainText?.isEmpty) != nil) {
             setAlert()
             return
         }
@@ -134,7 +134,7 @@ class CreateViewController: BaseViewController {
         let action = UIAlertAction(title: "확인", style: .default) { _ in
         }
         action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
-        self.presentAlert(title: "", message: "내용이나 제목을 채워주세요", isCancelActionIncluded: false, preferredStyle: .alert, with: action)
+        self.presentAlert(title: "", with: action, message: "내용이나 제목을 채워주세요", isCancelActionIncluded: false, preferredStyle: .alert)
     }
 
     private func setCreateViewinfo() {
@@ -235,7 +235,7 @@ class CreateViewController: BaseViewController {
             .subscribe(onNext: { [weak self] _ in
                 let action = UIAlertAction(title: "확인", style: .default) { _ in
                 }
-                self?.presentAlert(title: "", message: "베타 기능입니다. 레코드에 반영은 되지 않습니다.", isCancelActionIncluded: false, preferredStyle: .alert, with: action )
+                self?.presentAlert(title: "", with: action, message: "베타 기능입니다. 레코드에 반영은 되지 않습니다.", isCancelActionIncluded: false, preferredStyle: .alert)
                 self?.setStickerView()
                 self?.scrollView.layoutIfNeeded()
                 self?.scrollView.setContentOffset(CGPoint(x: 0, y: (self?.scrollView.contentSize.height)! - (self?.scrollView.bounds.size.height)!), animated: true)

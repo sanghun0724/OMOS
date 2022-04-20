@@ -67,7 +67,8 @@ class BaseViewController: UIViewController {
         self.navigationItem.backButtonTitle = ""
     }
 
-    @objc func didTapNotification() {
+    @objc
+    func didTapNotification() {
         print("noti")
     }
 
@@ -75,7 +76,8 @@ class BaseViewController: UIViewController {
         view.backgroundColor = .mainBackGround
     }
 
-    @objc private func keyboardWillShow(notification: NSNotification) {
+    @objc
+    private func keyboardWillShow(notification: NSNotification) {
         guard let scrollView = scrollView else { return }
         guard let userInfo = notification.userInfo else { return }
         var keyboardFrame: CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
@@ -86,7 +88,8 @@ class BaseViewController: UIViewController {
         scrollView.contentInset = contentInset
     }
 
-    @objc private func keyboardWillHide(notification: NSNotification) {
+    @objc
+    private func keyboardWillHide(notification: NSNotification) {
         guard let scrollView = scrollView else { return }
         let contentInset: UIEdgeInsets = .zero
         scrollView.contentInset = contentInset
