@@ -11,7 +11,7 @@ import UIKit
 class MydjView: BaseView {
     let cellSize = UIScreen.main.bounds.width * 0.21
 
-    var collectionView = UICollectionView()
+    var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
 
     let tableView: UITableView = {
         let table = UITableView()

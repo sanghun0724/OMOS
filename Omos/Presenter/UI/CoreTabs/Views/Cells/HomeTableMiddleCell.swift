@@ -24,7 +24,7 @@ class HomeTableMiddleCell: UITableViewCell {
     var collectionView: UICollectionView
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        self.collectionView = UICollectionView()
+        self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUpCollection()
     }
