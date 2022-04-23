@@ -20,7 +20,7 @@ extension AllRecordDetailViewController: UITableViewDelegate, UITableViewDataSou
             if indexPath.row == 0 {
                 cell.label.text = lyricsArr[0]
             }
-            cell.label.text = lyricsArr[safe:indexPath.row / 2] ?? " "
+            cell.label.text = lyricsArr[safe:indexPath.row ] ?? " "
             cell.selectionStyle = .none
             cell.layoutIfNeeded()
             return cell

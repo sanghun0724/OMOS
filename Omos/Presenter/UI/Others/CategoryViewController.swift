@@ -125,6 +125,7 @@ class CategoryViewController: BaseViewController {
         
         for idx in 0...4 where views[idx] == selectedView {
             views.remove(at: idx)
+            break
         }
         
         for view in views {

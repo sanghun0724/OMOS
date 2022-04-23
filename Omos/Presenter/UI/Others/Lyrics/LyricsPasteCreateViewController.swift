@@ -93,8 +93,9 @@ class LyricsPasteCreateViewController: BaseViewController {
                 guard let desc = cell.textView.text else {
                     return
                 }
-                if desc.isEmpty || desc == "가사해석을 적어주세요." {
+                if desc.isEmpty || desc == "가사해석을 적어주세요" {
                     state = false
+                    return 
                 }
                 content += (desc + "\n")
             }

@@ -164,7 +164,8 @@ extension AllrecordLyricsTableCell: UITableViewDelegate, UITableViewDataSource {
             if indexPath.row == 0 {
                 cell.label.text = lyricsArr[0]
             } else {
-                cell.label.text = lyricsArr[safe:indexPath.row / 2] ?? " "
+                //MARK: Fix todo 
+                cell.label.text = lyricsArr[safe:indexPath.row] ?? " "
             }
 
             cell.selectionStyle = .none
