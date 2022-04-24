@@ -81,6 +81,7 @@ class HomeViewModel: BaseViewModel {
                 switch result {
                 case .success(let data):
                     self?.currentRecommentRecord = data
+                    self?.currentRecommentRecord = [RecommendDjResponse(nickname: "Ilish", profileURL: Optional("https://omos-image.s3.ap-northeast-2.amazonaws.com/profile/103.png"), userID: 103), RecommendDjResponse(nickname: "맹고", profileURL: Optional("https://omos-image.s3.ap-northeast-2.amazonaws.com/profile/120.png"), userID: 120), RecommendDjResponse(nickname: "지지니", profileURL: nil, userID: 123)]
                     self?.recommendRecord.onNext(data)
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)

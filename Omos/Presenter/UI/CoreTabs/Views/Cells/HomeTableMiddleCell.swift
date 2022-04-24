@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
 protocol HomeTableMiddleCellprotocol: AnyObject {
     func collectionView(collectionViewCell: MydjCollectionCell?, index: Int, didTappedInTableViewCell: HomeTableMiddleCell)
@@ -21,12 +22,16 @@ class HomeTableMiddleCell: UITableViewCell {
         }
     }
     weak var cellDelegate: HomeTableMiddleCellprotocol?
-    var collectionView: UICollectionView
+    var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUpCollection()
+        collectionView.reloadData()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func setUpCollection() {
@@ -38,9 +43,9 @@ class HomeTableMiddleCell: UITableViewCell {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(MydjCollectionCell.self, forCellWithReuseIdentifier: MydjCollectionCell.identifier)
         collectionView.register(EmptyCell.self, forCellWithReuseIdentifier: EmptyCell.identifier)
+        collectionView.delegate = self
+        collectionView.dataSource = self
         collectionView.backgroundColor = .mainBackGround
-        //            collectionView.delegate = self
-        //            collectionView.dataSource = self
         self.contentView.addSubview(collectionView)
         collectionView.showsHorizontalScrollIndicator = false
     }
@@ -50,17 +55,19 @@ class HomeTableMiddleCell: UITableViewCell {
         collectionView.frame = contentView.bounds
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     func configureModel(records: [RecommendDjResponse]) {
         self.selectedRecords = records
+        print(records)
     }
     
-    func setCollectionViewDataSourceDelegate() {
-        collectionView.delegate = self
-        collectionView.dataSource = self
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        resetCollectionView()
+    }
+    
+    private func resetCollectionView() {
+        guard !(selectedRecords?.isEmpty ?? true) else { return }
+        selectedRecords = []
         collectionView.reloadData()
     }
 }

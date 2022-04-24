@@ -46,7 +46,7 @@ class MydjCollectionCell: UICollectionViewCell {
     }
 
     override func prepareForReuse() {
-        djImageView.image = nil
+        djImageView.image = UIImage(named: "albumCover")
         disposeBag = DisposeBag()
         super.prepareForReuse()
     }
@@ -85,23 +85,22 @@ class MydjCollectionCell: UICollectionViewCell {
     }
 
     func configureHome(record: RecommendDjResponse) {
-        djImageView.image = nil
-        self.homeInfo = record
         djLabel.text = record.nickname
-        if let imageUrl = record.profileURL {
-            if ImageCache.default.isCached(forKey: imageUrl) {
-                          print("Image is cached")
-                          ImageCache.default.removeImage(forKey: imageUrl)
-                 }
-            if imageUrl.isEmpty {
-                djImageView.image = UIImage(named: "albumCover")
-            } else {
-                djImageView.setImage(with: imageUrl)
-            }
-
-            return
-        } else {
-            djImageView.image = UIImage(named: "albumCover")
-        }
+        self.homeInfo = record
+        guard let imageUrl = record.profileURL else { return }
+        djImageView.setImage(with: imageUrl)
+//        if let imageUrl = record.profileURL {
+//            if ImageCache.default.isCached(forKey: imageUrl) {
+//                          print("Image is cached")
+//                          ImageCache.default.removeImage(forKey: imageUrl)
+//                 }
+//            if imageUrl.isEmpty {
+//                djImageView.image = UIImage(named: "albumCover")
+//            } else {
+//                djImageView.setImage(with: imageUrl)
+//            }
+//        } else {
+//            djImageView.image = UIImage(named: "albumCover")
+//        }
     }
 }

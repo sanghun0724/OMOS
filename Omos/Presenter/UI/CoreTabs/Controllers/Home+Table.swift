@@ -37,6 +37,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             cell.cellDelegate = self
             cell.configureModel(records: viewModel.currentRecommentRecord)
+            cell.collectionView.reloadData()
             return cell
         case 3:
             guard let cellData = viewModel.currentLovedRecord else {
@@ -57,8 +58,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let cell = cell as? HomeTableMiddleCell else { return }
-        cell.setCollectionViewDataSourceDelegate()
+//        guard let cell = cell as? HomeTableMiddleCell else { return }
+//        cell.setCollectionViewDataSourceDelegate()
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
