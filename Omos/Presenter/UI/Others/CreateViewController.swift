@@ -106,9 +106,13 @@ class CreateViewController: BaseViewController {
         } else {
             mainText = selfView.mainfullTextView.text
         }
-        if selfView.titleTextView.text == "레코드 제목을 입력해주세요" || selfView.titleTextView.text.isEmpty || mainText == #""레코드 내용을 입력해주세요""# || mainText == "레코드 내용을 입력해주세요" || ((mainText?.isEmpty) != nil) {
+        if selfView.titleTextView.text == "레코드 제목을 입력해주세요" || selfView.titleTextView.text.isEmpty || mainText == #""레코드 내용을 입력해주세요""# || mainText == "레코드 내용을 입력해주세요" || mainText?.isEmpty ?? true {
             setAlert()
             return
+        }
+        
+        if let image = selfView.imageView.image {
+            saveImage(image: image)
         }
 
         if type == .create {
@@ -527,14 +531,11 @@ extension CreateViewController: UITextViewDelegate {
             }
         }
     }
-}
-
-extension CreateViewController: CropViewControllerDelegate {
-    func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation, cropInfo: CropInfo) {
-        selfView.imageView.image = cropped
-
+    
+    private func saveImage(image:UIImage) {
         if type == .create {
-            awsHelper.uploadImage(cropped, sender: self, imageName: "record/\(viewModel.curTime)", type: .record) { _ in
+            awsHelper.uploadImage(image, sender: self, imageName: "record/\(viewModel.curTime)", type: .record) { [weak self] _ in
+                try? self?.awsHelper.awsClient.syncShutdown()
             }
         } else {// 711648447384992.png
             guard let str = viewModel.modifyDefaultModel?.recordImageURL else { return }
@@ -549,9 +550,16 @@ extension CreateViewController: CropViewControllerDelegate {
             let endIndex = str.index(str.endIndex, offsetBy: -4)
             let defualtUrl = String(str[startIndex..<endIndex])
 
-            awsHelper.uploadImage(cropped, sender: self, imageName: "record/\(defualtUrl)", type: .record) { _ in
+            awsHelper.uploadImage(image, sender: self, imageName: "record/\(defualtUrl)", type: .record) { [weak self] _ in
+                try? self?.awsHelper.awsClient.syncShutdown()
             }
         }
+    }
+}
+
+extension CreateViewController: CropViewControllerDelegate {
+    func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation, cropInfo: CropInfo) {
+        selfView.imageView.image = cropped
 
         self.dismiss(animated: true, completion: nil)
         self.tabBarController?.tabBar.isHidden = true

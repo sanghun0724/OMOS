@@ -65,6 +65,10 @@ class AWSS3Helper {
             try? self?.awsClient.syncShutdown()
         })
     }
+    
+    deinit {
+        try? self.awsClient.syncShutdown()
+    }
 }
 
 struct AwsDeleteImageRequest: Codable {
