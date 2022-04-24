@@ -40,7 +40,6 @@
 		B6183CD227D895D30035AA06 /* AllRecordSearchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CD127D895D30035AA06 /* AllRecordSearchDetailViewController.swift */; };
 		B6183CD627D8F7490035AA06 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CD527D8F7490035AA06 /* BottomSheetViewController.swift */; };
 		B6183CD827D906300035AA06 /* MyRecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CD727D9062F0035AA06 /* MyRecordDetailViewModel.swift */; };
-		B62A770527F0489600B427D0 /* SotoS3 in Frameworks */ = {isa = PBXBuildFile; productRef = B62A770427F0489600B427D0 /* SotoS3 */; };
 		B62A770727F049A800B427D0 /* AWSHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62A770627F049A800B427D0 /* AWSHelper.swift */; };
 		B63028302809D60800270283 /* p.swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = B630282F2809D60800270283 /* p.swiftlint.yml */; };
 		B630D2FA27C7756A00E66F22 /* MydjTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2F927C7756A00E66F22 /* MydjTableCell.swift */; };
@@ -204,6 +203,7 @@
 		B6EF88A927BD3AC2006F6A8F /* EmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EF88A827BD3AC2006F6A8F /* EmptyCell.swift */; };
 		B6F0596E27C3490E00CCB242 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F0596D27C3490E00CCB242 /* CategoryView.swift */; };
 		B6F68BD6280DB82200149BE3 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = B6F68BD5280DB82200149BE3 /* .swiftlint.yml */; };
+		B6FD744828150F7C0074C7CB /* SotoS3 in Frameworks */ = {isa = PBXBuildFile; productRef = B6FD744728150F7C0074C7CB /* SotoS3 */; };
 		B6FE837827D07B4800401FC5 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FE837727D07B4800401FC5 /* Cell.swift */; };
 		B6FE837A27D07CE700401FC5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FE837927D07CE700401FC5 /* Category.swift */; };
 		B6FE837C27D093E500401FC5 /* AllRecordCateDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FE837B27D093E500401FC5 /* AllRecordCateDetailViewModel.swift */; };
@@ -438,7 +438,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21B827FA49CA17F32C953880 /* Pods_Omos.framework in Frameworks */,
-				B62A770527F0489600B427D0 /* SotoS3 in Frameworks */,
+				B6FD744828150F7C0074C7CB /* SotoS3 in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1103,7 +1103,7 @@
 			);
 			name = Omos;
 			packageProductDependencies = (
-				B62A770427F0489600B427D0 /* SotoS3 */,
+				B6FD744728150F7C0074C7CB /* SotoS3 */,
 			);
 			productName = Omos;
 			productReference = B609137C27AD3A7C00B439C3 /* Omos.app */;
@@ -1158,7 +1158,7 @@
 			);
 			mainGroup = B609137327AD3A7C00B439C3;
 			packageReferences = (
-				B62A770327F0489600B427D0 /* XCRemoteSwiftPackageReference "soto" */,
+				B6FD744628150F7C0074C7CB /* XCRemoteSwiftPackageReference "soto" */,
 			);
 			productRefGroup = B609137D27AD3A7C00B439C3 /* Products */;
 			projectDirPath = "";
@@ -1768,7 +1768,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		B62A770327F0489600B427D0 /* XCRemoteSwiftPackageReference "soto" */ = {
+		B6FD744628150F7C0074C7CB /* XCRemoteSwiftPackageReference "soto" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/soto-project/soto";
 			requirement = {
@@ -1779,9 +1779,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		B62A770427F0489600B427D0 /* SotoS3 */ = {
+		B6FD744728150F7C0074C7CB /* SotoS3 */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B62A770327F0489600B427D0 /* XCRemoteSwiftPackageReference "soto" */;
+			package = B6FD744628150F7C0074C7CB /* XCRemoteSwiftPackageReference "soto" */;
 			productName = SotoS3;
 		};
 /* End XCSwiftPackageProductDependency section */

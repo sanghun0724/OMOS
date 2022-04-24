@@ -56,7 +56,7 @@ extension RecordTarget: TargetType {
         switch self {
         case .select: return "/select/\(Account.currentUser)"
         case let .recordDetail(post, user): return "/select/\(post)/user/\(user)"
-        case .category(let cate, _): return "/select/category/\(cate)"
+        case .category(let cate, _): return "/select/category/\(cate.rawValue)"
         case .myRecord(let user): return "/\(user)"
         case .save: return "/save"
         case .recordIspublic(let id): return "/\(id)/ispublic"

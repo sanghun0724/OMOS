@@ -9,23 +9,19 @@ import NIO
 import SotoS3
 import UIKit
 
-struct AWSConstants {
-    let bucket = "omos-image"
-    let region: Region = .apnortheast2
-    let awsClient = AWSClient(
-        credentialProvider: .static(accessKeyId: "AKIAVIJ5RLU3AVRPOYOA", secretAccessKey: "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"),
-        httpClientProvider: .createNew
-    )
-}
-
 enum AwsType {
     case profile
     case record
 }
 
 class AWSS3Helper {
-    let bucket = AWSConstants().bucket
-    let s3 = S3(client: AWSConstants().awsClient, region: AWSConstants().region)
+    let bucket = "omos-image"
+    let region: Region = .apnortheast2
+    let awsClient = AWSClient(
+        credentialProvider: .static(accessKeyId: "AKIAVIJ5RLU3AVRPOYOA", secretAccessKey: "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"),
+        httpClientProvider: .createNew
+    )
+    lazy var s3 = S3(client: awsClient, region: region)
 
     func uploadImage(_ image: UIImage, sender: UIViewController, imageName: String, type: AwsType, completion: @escaping (String?) -> Void) {
         // check internet connection
@@ -57,14 +53,16 @@ class AWSS3Helper {
 
         let futureOutput = s3.putObject(putObjectRequest)
 
-        futureOutput.whenSuccess({ response in
+        futureOutput.whenSuccess({ [weak self] response in
             print(response)
             completion(fileName)
+            try? self?.awsClient.syncShutdown()
         })
 
-        futureOutput.whenFailure({ error in
+        futureOutput.whenFailure({ [weak self] error in
             print(error.localizedDescription)
             completion(nil)
+            try? self?.awsClient.syncShutdown()
         })
     }
 }
