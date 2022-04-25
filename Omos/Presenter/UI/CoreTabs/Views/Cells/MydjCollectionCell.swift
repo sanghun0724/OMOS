@@ -87,20 +87,10 @@ class MydjCollectionCell: UICollectionViewCell {
     func configureHome(record: RecommendDjResponse) {
         djLabel.text = record.nickname
         self.homeInfo = record
-        guard let imageUrl = record.profileURL else { return }
+        guard let imageUrl = record.profileURL else {
+            djImageView.image = UIImage(named: "albumCover")
+            return
+        }
         djImageView.setImage(with: imageUrl)
-//        if let imageUrl = record.profileURL {
-//            if ImageCache.default.isCached(forKey: imageUrl) {
-//                          print("Image is cached")
-//                          ImageCache.default.removeImage(forKey: imageUrl)
-//                 }
-//            if imageUrl.isEmpty {
-//                djImageView.image = UIImage(named: "albumCover")
-//            } else {
-//                djImageView.setImage(with: imageUrl)
-//            }
-//        } else {
-//            djImageView.image = UIImage(named: "albumCover")
-//        }
     }
 }
