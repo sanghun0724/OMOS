@@ -82,10 +82,12 @@ class BaseViewController: UIViewController {
         guard let userInfo = notification.userInfo else { return }
         var keyboardFrame: CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
         keyboardFrame = self.view.convert(keyboardFrame, from: nil) // 주석처리하고 돌려보기
-
         var contentInset: UIEdgeInsets = scrollView.contentInset
         contentInset.bottom = keyboardFrame.size.height + 20
         scrollView.contentInset = contentInset
+        let keyboardHeight = [ "keyboardHeight": keyboardFrame.size.height]
+        NotificationCenter.default.post(name: Notification.Name.keyBoardShow, object: nil , userInfo: keyboardHeight)
+        
     }
 
     @objc
@@ -93,5 +95,6 @@ class BaseViewController: UIViewController {
         guard let scrollView = scrollView else { return }
         let contentInset: UIEdgeInsets = .zero
         scrollView.contentInset = contentInset
+        NotificationCenter.default.post(name: Notification.Name.keyBoardHide, object: nil, userInfo: nil)
     }
 }

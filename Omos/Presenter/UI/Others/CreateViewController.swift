@@ -49,6 +49,8 @@ class CreateViewController: BaseViewController {
         bind()
         animator = UIDynamicAnimator.init(referenceView: selfView.textCoverView)
         if type == .create { setCreateViewinfo() } else { setModifyView() }
+       
+        //selfView.mainTextView.inputAccessoryView = selfView.lastView
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -67,6 +69,7 @@ class CreateViewController: BaseViewController {
         enableScrollWhenKeyboardAppeared(scrollView: scrollView)
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.backgroundColor = .mainBackGround
+        NotificationCenter.default.addObserver(self, selector: #selector(notificationReceived(_:)), name: .keyBoardShow, object: nil)
     }
 
     private func setStickerView() {
@@ -90,6 +93,11 @@ class CreateViewController: BaseViewController {
         removeListeners()
     }
 
+    @objc func notificationReceived(_ notification: Notification) {
+        guard let keyboardHeight = notification.userInfo?["keyboardHeight"] as? CGFloat else { return }
+        print ("keyboardHeight: \(keyboardHeight)")
+    }
+    
     @objc
     func didTapDone() {
         for subView in self.selfView.textCoverView.subviews {

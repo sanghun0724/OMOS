@@ -166,6 +166,8 @@ extension Notification.Name {
     static let reload = Notification.Name("reload")
     static let loginInfo = Notification.Name("login")
     static let profileReload = Notification.Name("profile")
+    static let keyBoardShow = Notification.Name("keyBoardShow")
+    static let keyBoardHide = Notification.Name("keyBoardHide")
 }
 
 class VerticalAlignedLabel: UILabel {
