@@ -49,8 +49,14 @@ class CreateViewController: BaseViewController {
         bind()
         animator = UIDynamicAnimator.init(referenceView: selfView.textCoverView)
         if type == .create { setCreateViewinfo() } else { setModifyView() }
-       
-        //selfView.mainTextView.inputAccessoryView = selfView.lastView
+        selfView.dummyLastView.removeFromSuperview()
+        //self.view.addSubview(selfView.dummyLastView)
+//        selfView.dummyLastView.snp.remakeConstraints { make in
+//            make.height.equalTo(Constant.mainHeight * 0.13)
+//        }
+        selfView.dummyLastView.frame = .init(x: 0, y: 0, width: 10, height: Constant.mainHeight * 0.13)
+        selfView.mainTextView.inputAccessoryView = selfView.dummyLastView
+        
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -93,9 +99,18 @@ class CreateViewController: BaseViewController {
         removeListeners()
     }
 
-    @objc func notificationReceived(_ notification: Notification) {
+    @objc
+    func notificationReceived(_ notification: Notification) {
         guard let keyboardHeight = notification.userInfo?["keyboardHeight"] as? CGFloat else { return }
         print ("keyboardHeight: \(keyboardHeight)")
+//        selfView.lastView.snp.remakeConstraints { make in
+//            make.height.equalTo(Constant.mainHeight * 13)
+//            make.leading.trailing.equalToSuperview()
+//            make.top.equalToSuperview()
+//        }
+        
+        //selfView.lastView.frame = .init(x: 0, y: 20, width: Constant.mainWidth, height: Constant.mainHeight * 13)
+
     }
     
     @objc

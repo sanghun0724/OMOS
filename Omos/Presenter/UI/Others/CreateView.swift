@@ -137,6 +137,12 @@ class CreateView: BaseView {
         view.backgroundColor = .mainBlack
         return view
     }()
+    
+    let dummyLastView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .red
+        return view
+    }()
 
     let dummyView2: UIView = {
         let view = UIView()
@@ -287,6 +293,13 @@ class CreateView: BaseView {
             make.bottom.equalToSuperview()
             make.height.equalTo(mainHeight * 0.13)
         }
+        
+        dummyLastView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.height.equalTo(mainHeight * 0.13)
+        }
+        
 
         dummyView2.snp.makeConstraints { make in
             make.leading.trailing.top.equalToSuperview()
@@ -353,6 +366,7 @@ class CreateView: BaseView {
         self.addSubview(titleImageView)
         self.addSubview(textCoverView)
         self.addSubview(lastView)
+        self.addSubview(dummyLastView)
         topLabelView.addSubview(circleImageView)
         topLabelView.addSubview(musicTitleLabel)
         topLabelView.addSubview(subMusicInfoLabel)
