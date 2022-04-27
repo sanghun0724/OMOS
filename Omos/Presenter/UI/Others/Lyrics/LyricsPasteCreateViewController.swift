@@ -51,6 +51,7 @@ class LyricsPasteCreateViewController: BaseViewController {
         animator = UIDynamicAnimator.init(referenceView: selfView.tableView)
         
         if type == .create { setCreateViewinfo() } else { setModifyView() }
+        setScrollView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -68,12 +69,47 @@ class LyricsPasteCreateViewController: BaseViewController {
         let doneButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(didTapDone))
         doneButton.tintColor = .white
         self.navigationItem.rightBarButtonItem = doneButton
-        enableScrollWhenKeyboardAppeared(scrollView: self.scrollView)
+        registerNotifications()
+    }
+    
+    private func registerNotifications() {
+        enableScrollWhenKeyboardAppeared(scrollView: scrollView)
+        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardShowNoti(_:)), name: .keyBoardShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardHideNoti(_:)), name: .keyBoardHide, object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        removeNotifications()
+    }
+    
+    private func removeNotifications() {
         removeListeners()
+        NotificationCenter.default.removeObserver(self, name: .keyBoardShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .keyBoardHide, object: nil)
+    }
+    
+    @objc
+    func KeyboardHideNoti(_ notification: Notification) {
+        selfView.addSubview(selfView.lastView)
+        selfView.lastView.snp.remakeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.height.equalTo(Constant.mainHeight * 0.13)
+        }
+    }
+
+    @objc
+    func KeyboardShowNoti(_ notification: Notification) {
+        guard let keyboardHeight = notification.userInfo?["keyboardHeight"] as? CGFloat else { return }
+        selfView.lastView.removeFromSuperview()
+        self.view.addSubview(selfView.lastView)
+        self.view.bringSubviewToFront(selfView.lastView)
+        selfView.lastView.snp.remakeConstraints { make in
+            make.height.equalTo(selfView.inputAccessoryViewContentHeightSum_mx + 20)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-keyboardHeight)
+        }
     }
     
     @objc
@@ -163,7 +199,6 @@ class LyricsPasteCreateViewController: BaseViewController {
     
     override func configureUI() {
         super.configureUI()
-        setScrollView()
         scrollView.addSubview(stickerChoiceView)
         setStickerView()
         hideStickerView()

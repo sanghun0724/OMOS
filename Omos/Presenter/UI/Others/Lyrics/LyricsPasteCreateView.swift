@@ -10,7 +10,8 @@ import UIKit
 
 class LyricsPasteCreateView: BaseView {
     var tableHeightConstraint: Constraint?
-
+    var inputAccessoryViewContentHeightSum_mx: CGFloat = 0.0
+    
     /// 1
     let topLabelView: UIView = {
         let view = UIView()
@@ -118,6 +119,12 @@ class LyricsPasteCreateView: BaseView {
 
     /// 4
     let lastView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .mainBlack
+        return view
+    }()
+    
+    let dummyLastView: UIView = {
         let view = UIView()
         view.backgroundColor = .mainBlack
         return view
@@ -272,6 +279,13 @@ class LyricsPasteCreateView: BaseView {
             make.bottom.equalToSuperview()
             make.height.equalTo(mainHeight * 0.13)
         }
+        
+        dummyLastView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.height.equalTo(mainHeight * 0.13)
+        }
+        
 
         dummyView2.snp.makeConstraints { make in
             make.leading.trailing.top.equalToSuperview()
@@ -315,13 +329,14 @@ class LyricsPasteCreateView: BaseView {
         }
 
         /// 3
-
         tableView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(titleImageView.snp.bottom)
             self.tableHeightConstraint = make.height.greaterThanOrEqualTo(1_200).constraint
-            make.bottom.equalTo(lastView.snp.top).priority(751)
+            make.bottom.equalTo(dummyLastView.snp.top).priority(751)
         }
+        
+        operateLastViewHeight()
     }
 
     func addSubviews() {
@@ -329,6 +344,7 @@ class LyricsPasteCreateView: BaseView {
         self.addSubview(topLabelView)
         self.addSubview(titleImageView)
         self.addSubview(tableView)
+        self.addSubview(dummyLastView)
         self.addSubview(lastView)
         topLabelView.addSubview(circleImageView)
         topLabelView.addSubview(musicTitleLabel)
@@ -348,5 +364,13 @@ class LyricsPasteCreateView: BaseView {
         lastView.addSubview(dummyView2)
         lastView.addSubview(stickerImageView)
         lastView.addSubview(stickerLabel)
+    }
+    
+    private func operateLastViewHeight() {
+        let remainTextHeight = remainText.height + remainTextCount.height
+        let remainTitleHeight = remainTitle.height + remainTitleCount.height
+        let stickerHeight = stickerImageView.height + stickerLabel.height
+        
+        self.inputAccessoryViewContentHeightSum_mx = [remainTextHeight, remainTitleHeight, stickerHeight].max()!
     }
 }

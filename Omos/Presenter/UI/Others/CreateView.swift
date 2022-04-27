@@ -141,7 +141,7 @@ class CreateView: BaseView {
     
     let dummyLastView: UIView = {
         let view = UIView()
-        view.backgroundColor = .red
+        view.backgroundColor = .mainBlack
         return view
     }()
 

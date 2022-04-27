@@ -64,9 +64,13 @@ class CreateViewController: BaseViewController {
         let doneButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(didTapDone))
         doneButton.tintColor = .white
         self.navigationItem.rightBarButtonItem = doneButton
-        enableScrollWhenKeyboardAppeared(scrollView: scrollView)
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.backgroundColor = .mainBackGround
+        registerNotifications()
+    }
+    
+    private func registerNotifications() {
+        enableScrollWhenKeyboardAppeared(scrollView: scrollView)
         NotificationCenter.default.addObserver(self, selector: #selector(KeyboardShowNoti(_:)), name: .keyBoardShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(KeyboardHideNoti(_:)), name: .keyBoardHide, object: nil)
     }
@@ -89,6 +93,10 @@ class CreateViewController: BaseViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        removeNotifications()
+    }
+    
+    private func removeNotifications() {
         removeListeners()
         NotificationCenter.default.removeObserver(self, name: .keyBoardShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: .keyBoardHide, object: nil)
