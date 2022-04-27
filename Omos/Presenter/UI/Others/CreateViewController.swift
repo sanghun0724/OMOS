@@ -49,14 +49,6 @@ class CreateViewController: BaseViewController {
         bind()
         animator = UIDynamicAnimator.init(referenceView: selfView.textCoverView)
         if type == .create { setCreateViewinfo() } else { setModifyView() }
-        selfView.dummyLastView.removeFromSuperview()
-        //self.view.addSubview(selfView.dummyLastView)
-//        selfView.dummyLastView.snp.remakeConstraints { make in
-//            make.height.equalTo(Constant.mainHeight * 0.13)
-//        }
-        selfView.dummyLastView.frame = .init(x: 0, y: 0, width: 10, height: Constant.mainHeight * 0.13)
-        selfView.mainTextView.inputAccessoryView = selfView.dummyLastView
-        
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -75,7 +67,8 @@ class CreateViewController: BaseViewController {
         enableScrollWhenKeyboardAppeared(scrollView: scrollView)
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.backgroundColor = .mainBackGround
-        NotificationCenter.default.addObserver(self, selector: #selector(notificationReceived(_:)), name: .keyBoardShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardShowNoti(_:)), name: .keyBoardShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardHideNoti(_:)), name: .keyBoardHide, object: nil)
     }
 
     private func setStickerView() {
@@ -97,20 +90,30 @@ class CreateViewController: BaseViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         removeListeners()
+        NotificationCenter.default.removeObserver(self, name: .keyBoardShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .keyBoardHide, object: nil)
+    }
+    
+    @objc
+    func KeyboardHideNoti(_ notification: Notification) {
+        selfView.addSubview(selfView.lastView)
+        selfView.lastView.snp.remakeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.height.equalTo(Constant.mainHeight * 0.13)
+        }
     }
 
     @objc
-    func notificationReceived(_ notification: Notification) {
+    func KeyboardShowNoti(_ notification: Notification) {
         guard let keyboardHeight = notification.userInfo?["keyboardHeight"] as? CGFloat else { return }
-        print ("keyboardHeight: \(keyboardHeight)")
-//        selfView.lastView.snp.remakeConstraints { make in
-//            make.height.equalTo(Constant.mainHeight * 13)
-//            make.leading.trailing.equalToSuperview()
-//            make.top.equalToSuperview()
-//        }
-        
-        //selfView.lastView.frame = .init(x: 0, y: 20, width: Constant.mainWidth, height: Constant.mainHeight * 13)
-
+        selfView.lastView.removeFromSuperview()
+        self.view.addSubview(selfView.lastView)
+        selfView.lastView.snp.remakeConstraints { make in
+            make.height.equalTo(selfView.inputAccessoryViewContentHeightSum_mx + 20)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-keyboardHeight)
+        }
     }
     
     @objc

@@ -9,6 +9,7 @@ import UIKit
 
 class CreateView: BaseView {
     var imageFileName = ""
+    var inputAccessoryViewContentHeightSum_mx: CGFloat = 0.0
 
     /// 1
     let topLabelView: UIView = {
@@ -300,7 +301,6 @@ class CreateView: BaseView {
             make.height.equalTo(mainHeight * 0.13)
         }
         
-
         dummyView2.snp.makeConstraints { make in
             make.leading.trailing.top.equalToSuperview()
             make.height.equalTo(0.5)
@@ -347,7 +347,7 @@ class CreateView: BaseView {
         textCoverView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(titleImageView.snp.bottom)
-            make.bottom.equalTo(lastView.snp.top)
+            make.bottom.equalTo(dummyLastView.snp.top)
         }
 
         mainTextView.snp.makeConstraints { make in
@@ -358,6 +358,8 @@ class CreateView: BaseView {
         mainfullTextView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        operateLastViewHeight()
     }
 
     func addSubviews() {
@@ -365,8 +367,8 @@ class CreateView: BaseView {
         self.addSubview(topLabelView)
         self.addSubview(titleImageView)
         self.addSubview(textCoverView)
-        self.addSubview(lastView)
         self.addSubview(dummyLastView)
+        self.addSubview(lastView)
         topLabelView.addSubview(circleImageView)
         topLabelView.addSubview(musicTitleLabel)
         topLabelView.addSubview(subMusicInfoLabel)
@@ -388,6 +390,14 @@ class CreateView: BaseView {
         lastView.addSubview(dummyView2)
         lastView.addSubview(stickerImageView)
         lastView.addSubview(stickerLabel)
+    }
+    
+    private func operateLastViewHeight() {
+        let remainTextHeight = remainText.height + remainTextCount.height
+        let remainTitleHeight = remainTitle.height + remainTitleCount.height
+        let stickerHeight = stickerImageView.height + stickerLabel.height
+        
+        self.inputAccessoryViewContentHeightSum_mx = [remainTextHeight, remainTitleHeight, stickerHeight].max()!
     }
 }
 

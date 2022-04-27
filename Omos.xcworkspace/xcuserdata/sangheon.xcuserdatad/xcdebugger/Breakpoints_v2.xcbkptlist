@@ -62,8 +62,8 @@
             filePath = "Omos/Presenter/UI/Others/CreateViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "607"
-            endingLineNumber = "607"
+            startingLineNumber = "610"
+            endingLineNumber = "610"
             landmarkName = "ir_StickerViewDidTapContentView(stickerView:)"
             landmarkType = "7">
          </BreakpointContent>
