@@ -48,7 +48,7 @@ class TextTableCell: UITableViewCell, UITextViewDelegate {
         view.font = .systemFont(ofSize: 16, weight: .light)
         view.autocorrectionType = .no
         view.autocapitalizationType = .none
-        
+        view.inputAccessoryView = .none
         return view
     }()
     

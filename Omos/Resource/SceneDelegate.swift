@@ -102,6 +102,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.rootViewController = LaunchViewController()
         self.window?.makeKeyAndVisible()
         self.window?.backgroundColor = .mainBackGround
+        
+        Constant.statuBarHeight.isZero ? (Constant.statuBarHeight = scene.statusBarManager?.statusBarFrame.height ?? 44):()
+
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

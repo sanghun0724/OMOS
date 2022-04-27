@@ -73,6 +73,7 @@ class CreateView: BaseView {
         textView.backgroundColor = nil
         textView.autocorrectionType = .no
         textView.autocapitalizationType = .none
+        textView.inputAccessoryView = .none
         return textView
     }()
 
@@ -116,6 +117,7 @@ class CreateView: BaseView {
         view.textColor = .mainGrey7
         view.autocorrectionType = .no
         view.autocapitalizationType = .none
+        view.inputAccessoryView = .none
         return view
     }()
 
@@ -129,6 +131,7 @@ class CreateView: BaseView {
         view.textColor = .mainGrey7
         view.autocorrectionType = .no
         view.autocapitalizationType = .none
+        view.inputAccessoryView = .none
         return view
     }()
 

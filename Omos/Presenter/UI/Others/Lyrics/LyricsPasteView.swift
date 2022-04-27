@@ -8,6 +8,9 @@
 import UIKit
 
 class LyricsPastView: BaseView {
+    var inputAccessoryViewContentHeightSum_mx: CGFloat = 0.0
+    var top_bottomHeightSum: CGFloat = 0.0
+    
     /// 1
     let topLabelView: UIView = {
         let view = UIView()
@@ -51,11 +54,24 @@ class LyricsPastView: BaseView {
         view.textColor = .mainGrey7
         view.autocorrectionType = .no
         view.autocapitalizationType = .none
+        view.inputAccessoryView = .none
+        return view
+    }()
+    
+    let textCoverView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .mainBlack
         return view
     }()
 
     /// 4
     let lastView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .mainBlack
+        return view
+    }()
+    
+    let dummLastView: UIView = {
         let view = UIView()
         view.backgroundColor = .mainBlack
         return view
@@ -88,8 +104,10 @@ class LyricsPastView: BaseView {
     override func configureUI() {
         super.configureUI()
         self.addSubview(topLabelView)
-        self.addSubview(mainLyricsTextView)
+        self.addSubview(textCoverView)
+        self.addSubview(dummLastView)
         self.addSubview(lastView)
+        textCoverView.addSubview(mainLyricsTextView)
         topLabelView.addSubview(circleImageView)
         topLabelView.addSubview(musicTitleLabel)
         topLabelView.addSubview(subMusicInfoLabel)
@@ -129,6 +147,12 @@ class LyricsPastView: BaseView {
             make.bottom.equalToSuperview()
             make.height.equalTo(Constant.mainHeight * 0.13)
         }
+        
+        dummLastView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.height.equalTo(Constant.mainHeight * 0.13)
+        }
 
         remainText.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
@@ -148,15 +172,29 @@ class LyricsPastView: BaseView {
         }
 
         // 2
-        mainLyricsTextView.snp.makeConstraints { make in
+        textCoverView.snp.makeConstraints { make in
             make.top.equalTo(topLabelView.snp.bottom)
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(lastView.snp.top)
+            make.bottom.equalTo(dummLastView.snp.top)
+        }
+        
+        mainLyricsTextView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
 
         layoutIfNeeded()
 
         circleImageView.layer.cornerRadius = circleImageView.height / 2
         circleImageView.layer.masksToBounds = true
+        
+        operateViewHeight()
+    }
+    
+    private func operateViewHeight() {
+        let remainTextHeight = remainText.height + remainTextCount.height
+        let topViewHeight = topLabelView.height + lastView.height + Constant.statuBarHeight
+        
+        self.top_bottomHeightSum = Constant.mainHeight - topViewHeight
+        self.inputAccessoryViewContentHeightSum_mx = remainTextHeight
     }
 }

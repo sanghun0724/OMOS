@@ -55,22 +55,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "92A0A37F-83AD-4764-B80D-D40DE7468BE7"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Omos/Presenter/UI/Others/CreateViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "618"
-            endingLineNumber = "618"
-            landmarkName = "ir_StickerViewDidTapContentView(stickerView:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "4E44A464-EB7E-4EDC-B857-276A7F76DE3A"
             shouldBeEnabled = "No"
             ignoreCount = "0"

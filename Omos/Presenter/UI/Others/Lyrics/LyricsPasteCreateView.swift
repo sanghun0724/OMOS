@@ -74,6 +74,7 @@ class LyricsPasteCreateView: BaseView {
         textView.backgroundColor = nil
         textView.autocorrectionType = .no
         textView.autocapitalizationType = .none
+        textView.inputAccessoryView = .none
         return textView
     }()
 

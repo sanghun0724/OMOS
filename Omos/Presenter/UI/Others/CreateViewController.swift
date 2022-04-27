@@ -566,7 +566,7 @@ extension CreateViewController: UITextViewDelegate {
         }
     }
     
-    private func saveImage(image:UIImage) {
+    private func saveImage(image: UIImage) {
         if type == .create {
             awsHelper.uploadImage(image, sender: self, imageName: "record/\(viewModel.curTime)", type: .record) { [weak self] _ in
                 try? self?.awsHelper.awsClient.syncShutdown()

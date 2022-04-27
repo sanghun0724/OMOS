@@ -33,4 +33,5 @@ struct Constant {
    static let LoginTopViewHeight = 0.6
    static let mainHeight = UIScreen.main.bounds.height
    static let mainWidth = UIScreen.main.bounds.width
+    static var statuBarHeight: CGFloat = 0.0
 }

@@ -84,6 +84,7 @@ extension HomeTableMiddleCell: UICollectionViewDelegate, UICollectionViewDataSou
             return cell
         }
         cell.configureHome(record: data)
+        cell.reloadInputViews()
         return cell
     }
     
