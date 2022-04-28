@@ -5,9 +5,10 @@
 //  Created by sangheon on 2022/03/11.
 //
 
-import Foundation
-import UIKit
+
 import Kingfisher
+import UIKit
+import Foundation
 
 protocol HomeTableMiddleCellprotocol: AnyObject {
     func collectionView(collectionViewCell: MydjCollectionCell?, index: Int, didTappedInTableViewCell: HomeTableMiddleCell)
@@ -95,5 +96,6 @@ extension HomeTableMiddleCell: UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
     }
 }

@@ -86,7 +86,7 @@ class BaseViewController: UIViewController {
         contentInset.bottom = keyboardFrame.size.height + 20
         scrollView.contentInset = contentInset
         let keyboardHeight = [ "keyboardHeight": keyboardFrame.size.height]
-        NotificationCenter.default.post(name: Notification.Name.keyBoardShow, object: nil , userInfo: keyboardHeight)
+        NotificationCenter.default.post(name: Notification.Name.keyBoardShow, object: nil, userInfo: keyboardHeight)
     }
 
     @objc
@@ -95,6 +95,5 @@ class BaseViewController: UIViewController {
         guard let scrollView = scrollView else { return }
         let contentInset: UIEdgeInsets = .zero
         scrollView.contentInset = contentInset
-      
     }
 }
