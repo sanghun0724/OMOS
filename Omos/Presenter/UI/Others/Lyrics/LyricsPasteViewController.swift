@@ -12,7 +12,7 @@ class LyricsPasteViewController: BaseViewController {
     let selfView = LyricsPastView()
     let scrollView = UIScrollView()
     let defaultModel: RecordSaveDefaultModel
-    var barHeight:CGFloat = 44
+    var barHeight: CGFloat = 44
 
     init(defaultModel: RecordSaveDefaultModel) {
         self.defaultModel = defaultModel
@@ -163,7 +163,13 @@ extension LyricsPasteViewController: UITextViewDelegate {
         let newString = oldString.replacingCharacters(in: newRange, with: inputString).trimmingCharacters(in: .whitespacesAndNewlines)
         let characterCount = newString.count
 
-        guard characterCount <= 250 else { return false }
+        guard characterCount <= 250 else {
+            let action = UIAlertAction(title: "확인", style: .default) { _ in
+            }
+            action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
+            self.presentAlert(title: "", with: action, message: "글자 제한수를 초과하였습니다. 글자 제한수를 확인해 주세요.", isCancelActionIncluded: false, preferredStyle: .alert)
+            return false
+        }
         selfView.remainTextCount.text = "\(characterCount)/250"
 
         return true
