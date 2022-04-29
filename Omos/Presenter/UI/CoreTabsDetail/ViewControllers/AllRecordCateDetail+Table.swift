@@ -49,7 +49,7 @@ extension AllRecordCateDetailViewController: UITableViewDelegate, UITableViewDat
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateLongDetailCell.identifier, for: indexPath) as! AllRecordCateLongDetailCell
                 cell.configureModel(record: record)
-//                cell.layoutIfNeeded()
+                cell.layoutIfNeeded()
 //                cell.myView.circleImageView.layer.cornerRadius = cell.myView.circleImageView.height / 2
 //                cell.myView.circleImageView.layer.masksToBounds = true
 
