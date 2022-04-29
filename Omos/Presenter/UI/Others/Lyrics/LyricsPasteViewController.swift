@@ -105,7 +105,6 @@ class LyricsPasteViewController: BaseViewController {
 
     override func configureUI() {
         super.configureUI()
-     
     }
     
     private func setSelfView() {

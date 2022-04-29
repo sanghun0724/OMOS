@@ -57,22 +57,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
     }
 
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        guard let cell = cell as? HomeTableMiddleCell else { return }
-//        cell.setCollectionViewDataSourceDelegate()
-    }
-
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: AllRecordHeaderView.identifier) as! AllRecordHeaderView
         header.button.isHidden = true
         switch section {
         case 0:
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HomeHeaderView.identifier) as! HomeHeaderView
-            header.notiButton.rx.tap
-                .asDriver()
-                .drive(onNext: { _ in
-                  print("noti")
-                }).disposed(by: header.disposeBag)
             header.createdButton.rx.tap
                 .throttle(RxTimeInterval.seconds(1), scheduler: MainScheduler.instance)
                 .subscribe(onNext: { [weak self] _ in
@@ -117,7 +107,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         case 3:
             return Constant.mainHeight * 0.201
         default:
-            print("de other")
+            print("default")
         }
 
         return 100

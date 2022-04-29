@@ -28,7 +28,6 @@ extension TargetType {
             let queryParams = params.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
             var components = URLComponents(string: url.appendingPathComponent(path).absoluteString)
             components?.queryItems = queryParams
-            print(components!.url!)
             urlRequest.url = components?.url
         case .body(let request):
             let params = request?.toDictionary() ?? [:]
@@ -36,7 +35,6 @@ extension TargetType {
         default:
             print("param is nil")
         }
-        
         return urlRequest
     }
 }
