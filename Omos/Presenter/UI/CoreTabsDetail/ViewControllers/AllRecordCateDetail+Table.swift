@@ -49,9 +49,9 @@ extension AllRecordCateDetailViewController: UITableViewDelegate, UITableViewDat
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateLongDetailCell.identifier, for: indexPath) as! AllRecordCateLongDetailCell
                 cell.configureModel(record: record)
-                cell.layoutIfNeeded()
-                cell.myView.circleImageView.layer.cornerRadius = cell.myView.circleImageView.height / 2
-                cell.myView.circleImageView.layer.masksToBounds = true
+//                cell.layoutIfNeeded()
+//                cell.myView.circleImageView.layer.cornerRadius = cell.myView.circleImageView.height / 2
+//                cell.myView.circleImageView.layer.masksToBounds = true
 
                 if expandedIndexSet.contains(indexPath.row) {
                     // cell.layoutIfNeeded()
@@ -106,32 +106,31 @@ extension AllRecordCateDetailViewController: UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
             if self.myCateType != .aLine, self.myCateType != .lyrics {
-                return shortCellHeights[indexPath] ?? 500
+                return 500
             }
         }
 
-        return UITableView.automaticDimension
+        return  UITableView.automaticDimension
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.section == 0 {
-//            if self.myCateType == .A_LINE  || self.myCateType == .LYRICS {
-//                return shortCellHeights[indexPath] ?? Constant.mainHeight * 0.63
-//            }
-//        }
+        if indexPath.section == 0 {
+            if self.myCateType == .asc || self.myCateType == .lyrics {
+                return Constant.mainHeight * 0.63
+            }
+        }
         return UITableView.automaticDimension
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        tableView.layoutIfNeeded()
-
+     
     }
 
-    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if cell.height == 44.0 { return }
-        shortCellHeights[indexPath] = cell.height
-        longCellHeights[indexPath] = cell.height
-    }
+//    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+////        if cell.height == 44.0 { return }
+////        shortCellHeights[indexPath] = cell.height
+////        longCellHeights[indexPath] = cell.height
+//    }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         UIView()
@@ -339,11 +338,8 @@ extension AllRecordCateDetailViewController {
             .asDriver()
             .drive(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                print(indexPath)
                     self.expandedIndexSet.insert(indexPath.row)
-
                 self.selfView.tableView.reloadRows(at: [indexPath], with: .none)
-                print(self.expandedIndexSet)
             })
             .disposed(by: cell.disposeBag)
         }

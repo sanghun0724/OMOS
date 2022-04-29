@@ -320,7 +320,6 @@ class RecordLongView: BaseView {
             make.bottom.equalToSuperview().offset(-16)
             mainLabelView.sizeToFit()
         }
-        print(mainLabelView.intrinsicContentSize.height)
         
         readMoreButton.snp.makeConstraints { make in
             make.bottom.equalTo(textCoverView.snp.bottom).offset(-2)
@@ -328,9 +327,6 @@ class RecordLongView: BaseView {
             make.width.equalTo(readMoreButton.intrinsicContentSize.width)
             make.height.equalTo(readMoreButton.intrinsicContentSize.height)
         }
-        //        print(readMoreButton.intrinsicContentSize.width)
-        //        print(readMoreButton.intrinsicContentSize.height)
-        
     }
     
     func addSubviews() {
@@ -361,5 +357,7 @@ class RecordLongView: BaseView {
         lastView.addSubview(scrapCountLabel)
         lastView.addSubview(dummyView3)
     }
+    
+    
 }
 
