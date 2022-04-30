@@ -105,7 +105,6 @@ extension MyDJViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.myView.mainLabelView.layoutIfNeeded()
                     cell.myView.readMoreButton.isHidden = true
                 } else {
-                    print( cell.myView.mainLabelView.maxNumberOfLines)
                     if  cell.myView.mainLabelView.maxNumberOfLines < 4 {
                         cell.myView.readMoreButton.isHidden = true
                     } else {
@@ -114,8 +113,7 @@ extension MyDJViewController: UITableViewDelegate, UITableViewDataSource {
                         cell.myView.readMoreButton.isHidden = false
                     }
                 }
-//                print(cell.frame)
-//                print(cell.myView.mainLabelView.intrinsicContentSize)
+
                 cell.selectionStyle = . none
                 longCellBind(cell: cell, data: record)
                 cell.myView.lockButton.isHidden = true

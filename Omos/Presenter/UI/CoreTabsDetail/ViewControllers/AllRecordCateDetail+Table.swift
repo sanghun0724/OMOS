@@ -52,7 +52,8 @@ extension AllRecordCateDetailViewController: UITableViewDelegate, UITableViewDat
                 cell.layoutIfNeeded()
 //                cell.myView.circleImageView.layer.cornerRadius = cell.myView.circleImageView.height / 2
 //                cell.myView.circleImageView.layer.masksToBounds = true
-
+                //MARK: todo fix : 여기서 max number부르지말고 텍스트 숫자 기준으로 해서 넘으면 셀에서 줄이거나 여기서 메시지 받고 줄여주기
+                
                 if expandedIndexSet.contains(indexPath.row) {
                     // cell.layoutIfNeeded()
                     cell.myView.mainLabelView.numberOfLines = 0
@@ -106,31 +107,31 @@ extension AllRecordCateDetailViewController: UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
             if self.myCateType != .aLine, self.myCateType != .lyrics {
-                return 500
+                return shortCellHeights[indexPath] ?? Constant.mainHeight * 0.63
             }
         }
 
-        return  UITableView.automaticDimension
+        return  longCellHeights[indexPath] ?? UITableView.automaticDimension
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            if self.myCateType == .asc || self.myCateType == .lyrics {
-                return Constant.mainHeight * 0.63
-            }
-        }
-        return UITableView.automaticDimension
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if indexPath.section == 0 {
+//            if self.myCateType == .asc || self.myCateType == .lyrics {
+//                return Constant.mainHeight * 0.63
+//            }
+//        }
+//        return UITableView.automaticDimension
+//    }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
      
     }
 
-//    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-////        if cell.height == 44.0 { return }
-////        shortCellHeights[indexPath] = cell.height
-////        longCellHeights[indexPath] = cell.height
-//    }
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if cell.height == 44.0 { return }
+        shortCellHeights[indexPath] = cell.height
+        longCellHeights[indexPath] = cell.height
+    }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         UIView()

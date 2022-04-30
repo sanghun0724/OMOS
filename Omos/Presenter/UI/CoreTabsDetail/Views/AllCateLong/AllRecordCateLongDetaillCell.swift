@@ -51,9 +51,9 @@ class AllRecordCateLongDetailCell: UITableViewCell {
     func configureModel(record: CategoryRespone) {
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
-        if myView.subMusicInfoLabel.text?.first == " " {
-            myView.subMusicInfoLabel.text?.removeFirst()
-        }
+//        if myView.subMusicInfoLabel.text?.first == " " {
+//            myView.subMusicInfoLabel.text?.removeFirst()
+//        }
         myView.circleImageView.setImage(with: record.music.albumImageURL)
         myView.backImageView.setImage(with: record.recordImageURL ?? "")
         myView.titleLabel.text = record.recordTitle
@@ -64,9 +64,9 @@ class AllRecordCateLongDetailCell: UITableViewCell {
         myView.likeCountLabel.text = String(record.likeCnt)
         myView.scrapCountLabel.text = String(record.scrapCnt)
         
-        if myView.mainLabelView.maxNumberOfLines < 3 {
-            myView.readMoreButton.isHidden = true
-        }
+//        if myView.mainLabelView.maxNumberOfLines < 3 {
+//            myView.readMoreButton.isHidden = true
+//        }
         
         if record.isLiked {
             myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
@@ -88,9 +88,9 @@ class AllRecordCateLongDetailCell: UITableViewCell {
     func configureOneMusic(record: OneMusicRecordRespone) {
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
-        if myView.subMusicInfoLabel.text?.first == " " {
-            myView.subMusicInfoLabel.text?.removeFirst()
-        }
+//        if myView.subMusicInfoLabel.text?.first == " " {
+//            myView.subMusicInfoLabel.text?.removeFirst()
+//        }
         myView.circleImageView.setImage(with: record.music.albumImageURL)
         myView.backImageView.setImage(with: record.recordImageURL ?? "" )
         myView.titleLabel.text = record.recordTitle
@@ -123,9 +123,9 @@ class AllRecordCateLongDetailCell: UITableViewCell {
     func configureMyDjRecord(record: MyDjResponse) {
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
-        if myView.subMusicInfoLabel.text?.first == " " {
-            myView.subMusicInfoLabel.text?.removeFirst()
-        }
+//        if myView.subMusicInfoLabel.text?.first == " " {
+//            myView.subMusicInfoLabel.text?.removeFirst()
+//        }
         myView.circleImageView.setImage(with: record.music.albumImageURL)
         myView.backImageView.setImage(with: record.recordImageURL ?? "")
         myView.titleLabel.text = record.recordTitle
