@@ -62,15 +62,16 @@ extension AllRecordCateDetailViewController: UITableViewDelegate, UITableViewDat
                     cell.myView.mainLabelView.layoutIfNeeded()
                     cell.myView.readMoreButton.isHidden = true
                 } else {
-                    if cell.myView.mainLabelView.maxNumberOfLines < 4 {
-                        cell.myView.readMoreButton.isHidden = true
-                    } else {
-                        cell.myView.mainLabelView.numberOfLines = 3
-                        cell.myView.mainLabelView.sizeToFit()
-                        cell.myView.readMoreButton.isHidden = false
-                    }
+//                    if cell.myView.mainLabelView.maxNumberOfLines < 4 {
+//                        cell.myView.readMoreButton.isHidden = true
+//                    } else {
+//                        cell.myView.mainLabelView.numberOfLines = 3
+//                        cell.myView.mainLabelView.sizeToFit()
+//                        cell.myView.readMoreButton.isHidden = false
+//                    }
                 }
-
+                cell.layer.shouldRasterize = true
+                cell.layer.rasterizationScale = UIScreen.main.scale
                 longCellBind(cell: cell, data: record, indexPath: indexPath)
                 cell.myView.lockButton.isHidden = true
                 cell.selectionStyle = . none

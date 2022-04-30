@@ -11,11 +11,13 @@ class RecordLongView: BaseView {
     let topLabelView: UIView = {
         let view = UIView()
         view.backgroundColor = .mainBackGround
+        view.isOpaque = true
         return view
     }()
     
     let circleImageView: UIImageView = {
         let view = UIImageView(image: UIImage(named: "albumCover"))
+        view.isOpaque = true
         return view
     }()
     
@@ -24,6 +26,7 @@ class RecordLongView: BaseView {
         label.text = "노래 제목이 들어있습니다"
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .white
+        label.isOpaque = true
         return label
     }()
     
@@ -32,6 +35,7 @@ class RecordLongView: BaseView {
         label.text = "가수이름이 들어갑니다. 앨범제목이 들어갑니다."
         label.font = .systemFont(ofSize: 12, weight: .light)
         label.textColor = .mainGrey1
+        label.isOpaque = true
         return label
     }()
     
@@ -39,6 +43,7 @@ class RecordLongView: BaseView {
     let titleImageView: UIView = {
         let view = UIView()
         view.backgroundColor = .mainBackGround
+        view.isOpaque = true
         return view
     }()
     
@@ -48,6 +53,7 @@ class RecordLongView: BaseView {
         view.clipsToBounds = true
         view.backgroundColor = .mainBackGround
         view.alpha = 0.4
+        view.isOpaque = true
         return view
     }()
     
@@ -56,6 +62,7 @@ class RecordLongView: BaseView {
         label.text = "백예린 노래"
         label.font = .systemFont(ofSize: 22, weight: .light)
         label.textColor = .white
+        label.isOpaque = true
         return label
     }()
     
@@ -64,6 +71,7 @@ class RecordLongView: BaseView {
         label.text = "2020 00 00"
         label.font = .systemFont(ofSize: 12, weight: .light)
         label.textColor = .mainGrey1
+        label.isOpaque = true
         return label
     }()
     
@@ -72,12 +80,14 @@ class RecordLongView: BaseView {
         label.text = " | 한줄감상"
         label.font = .systemFont(ofSize: 12)
         label.textColor = .mainGrey1
+        label.isOpaque = true
         return label
     }()
     
     let reportButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "report"), for: .normal)
+        button.isOpaque = true
         return button
     }()
     
@@ -85,6 +95,7 @@ class RecordLongView: BaseView {
         let button = UIButton()
         button.setImage(UIImage(named: "unlock"), for: .normal)
         button.setImage(UIImage(named: "lock"), for: .selected)
+        button.isOpaque = true
         return button
     }()
     
@@ -92,17 +103,18 @@ class RecordLongView: BaseView {
     let textCoverView: UIView = {
         let view = UIView()
         view.backgroundColor = .mainBlack
+        view.isOpaque = true
         return view
     }()
     
     var mainLabelView: UILabel = {
         let view = UILabel()
-        view.text = #"“한줄감상이나옵니다글자수는50자이내여야합니다한줄감상이나옵니다글자수는50자이내여야합니다한@@@@@@@@@@@@@@@@@@@@@줄감상”"#
         view.font = .systemFont(ofSize: 16, weight: .light)
         view.textAlignment = .left
         view.backgroundColor = .mainBlack
         view.textColor = .mainGrey1
         view.numberOfLines = 0
+        view.isOpaque = true
         return view
     }()
     
@@ -110,12 +122,14 @@ class RecordLongView: BaseView {
     let lastView: UIView = {
         let view = UIView()
         view.backgroundColor = .mainBlack
+        view.isOpaque = true
         return view
     }()
     
     let dummyView2: UIView = {
         let view = UIView()
         view.backgroundColor = .mainBlack1
+        view.isOpaque = true
         return view
     }()
     
@@ -124,12 +138,14 @@ class RecordLongView: BaseView {
         label.text = "DJ닉네임이들어갑니다다다"
         label.font = .systemFont(ofSize: 14, weight: .light)
         label.textColor = .mainGrey3
+        label.isOpaque = true
         return label
     }()
     
     let likeButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "emptyLove"), for: .normal)
+        button.isOpaque = true
         return button
     }()
     
@@ -138,12 +154,14 @@ class RecordLongView: BaseView {
         label.text = "122"
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 12)
+        label.isOpaque = true
         return label
     }()
     
     let scrapButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "emptyStar"), for: .normal)
+        button.isOpaque = true
         return button
     }()
     
@@ -152,12 +170,14 @@ class RecordLongView: BaseView {
         label.text = "144"
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 12)
+        label.isOpaque = true
         return label
     }()
     
     let dummyView3: UIView = {
         let view = UIView()
         view.backgroundColor = .mainBlack1
+        view.isOpaque = true
         return view
     }()
     
@@ -166,6 +186,7 @@ class RecordLongView: BaseView {
         label.text = " 더보기"
         label.font = .systemFont(ofSize: 14, weight: .medium)
         label.backgroundColor = .mainBlack
+        label.isOpaque = true
         return label
     }()
     
@@ -175,6 +196,7 @@ class RecordLongView: BaseView {
         button.setTitleColor(UIColor.mainGrey6, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
         button.backgroundColor = .mainBlack
+        button.isOpaque = true
         return button
     }()
     

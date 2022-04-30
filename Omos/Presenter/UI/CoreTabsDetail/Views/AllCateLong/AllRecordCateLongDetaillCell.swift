@@ -68,6 +68,16 @@ class AllRecordCateLongDetailCell: UITableViewCell {
 //            myView.readMoreButton.isHidden = true
 //        }
         
+        let textCount = Array(record.recordContents).count
+        
+        if textCount < 80 {
+            myView.readMoreButton.isHidden = true
+        } else {
+            myView.mainLabelView.numberOfLines = 3
+            myView.mainLabelView.sizeToFit()
+            myView.readMoreButton.isHidden = false
+        }
+        
         if record.isLiked {
             myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
             myView.likeCountLabel.textColor = .mainOrange
