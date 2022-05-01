@@ -49,6 +49,7 @@ class AllRecordCateLongDetailCell: UITableViewCell {
     }
     
     func configureModel(record: CategoryRespone) {
+        myView.mainLabelView.text = record.recordContents
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
 //        if myView.subMusicInfoLabel.text?.first == " " {
@@ -59,7 +60,6 @@ class AllRecordCateLongDetailCell: UITableViewCell {
         myView.titleLabel.text = record.recordTitle
         myView.createdLabel.text = record.createdDate.toDate()
         myView.cateLabel.text = " | \(record.category.getReverseCate())"
-        myView.mainLabelView.text = record.recordContents
         myView.nicknameLabel.text = record.nickname
         myView.likeCountLabel.text = String(record.likeCnt)
         myView.scrapCountLabel.text = String(record.scrapCnt)
@@ -69,7 +69,6 @@ class AllRecordCateLongDetailCell: UITableViewCell {
 //        }
         
         let textCount = Array(record.recordContents).count
-        
         if textCount < 80 {
             myView.readMoreButton.isHidden = true
         } else {

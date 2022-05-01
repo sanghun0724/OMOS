@@ -49,27 +49,15 @@ extension AllRecordCateDetailViewController: UITableViewDelegate, UITableViewDat
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateLongDetailCell.identifier, for: indexPath) as! AllRecordCateLongDetailCell
                 cell.configureModel(record: record)
-                cell.layoutIfNeeded()
-//                cell.myView.circleImageView.layer.cornerRadius = cell.myView.circleImageView.height / 2
-//                cell.myView.circleImageView.layer.masksToBounds = true
-                //MARK: todo fix : 여기서 max number부르지말고 텍스트 숫자 기준으로 해서 넘으면 셀에서 줄이거나 여기서 메시지 받고 줄여주기
-                
+                //cell.layoutIfNeeded()
                 if expandedIndexSet.contains(indexPath.row) {
-                    // cell.layoutIfNeeded()
                     cell.myView.mainLabelView.numberOfLines = 0
                     cell.myView.mainLabelView.sizeToFit()
                     cell.myView.mainLabelView.setNeedsLayout()
                     cell.myView.mainLabelView.layoutIfNeeded()
                     cell.myView.readMoreButton.isHidden = true
-                } else {
-//                    if cell.myView.mainLabelView.maxNumberOfLines < 4 {
-//                        cell.myView.readMoreButton.isHidden = true
-//                    } else {
-//                        cell.myView.mainLabelView.numberOfLines = 3
-//                        cell.myView.mainLabelView.sizeToFit()
-//                        cell.myView.readMoreButton.isHidden = false
-//                    }
                 }
+                
                 cell.layer.shouldRasterize = true
                 cell.layer.rasterizationScale = UIScreen.main.scale
                 longCellBind(cell: cell, data: record, indexPath: indexPath)
