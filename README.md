@@ -1,4 +1,7 @@
 
+[![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+ ### >>> [APP STORE LINK](https://apps.apple.com/kr/app/omos/id1615388062?l=ko, "APPSTORE link") <<<
 
 [- 🔴 omos에 대한 소개](#omos-소개)  
 [- 💡 주요 기능들](#주요-기능)  
