@@ -37,6 +37,7 @@ xcuserdata/
 *.dSYM.zip
 *.dSYM
 Omos/Resource/Constant.swift
+.swp
 
 ## Playgrounds
 timeline.xctimeline
