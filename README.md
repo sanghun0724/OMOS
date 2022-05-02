@@ -14,7 +14,7 @@
 　　　[- URLConvertible을 활용하여 손쉽게 RefreshToken 갱신](#urlconvertible을-활용하여-손쉽게-refreshtoken-갱신)    
 　　　[- 분리된 UseCase들 (ISP원칙)](#분리된-useCase들-(isp원칙))    
 　　　[- Single 로 간편한 NetworkCall](#single-로-간편한-networkCall)     
-　　　[- CI Travis CI -> Github Action](#ci-travis-ci-->-github-action)    
+　　　[- CI Travis CI >> Github Action](#ci-travis-ci->>-github-action)    
    
 # omos 소개
 
@@ -148,7 +148,7 @@ extension Encodable {
 
 ### Single 로 간편한 NetworkCall
 
-### CI Travis CI -> Github Action
+### CI Travis CI >> Github Action
 
 
 
