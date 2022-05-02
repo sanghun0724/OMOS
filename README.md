@@ -1,14 +1,19 @@
 
 
 [- 🔴 omos에 대한 소개](#omos-소개)  
-[- 💡 주요 기능들](#💡-주요-기능)  
-[- 🏛 omos프로젝트 구조](#프로젝트-구조)  
-   [- MVVM **Clean Architecture**](#MVVM 기반 **Clean Architecture**)  
-
-
-
-
-## omos 소개
+[- 💡 주요 기능들](#주요-기능)  
+[- 📒 omos Project Architecture](#omos-project-architecture)  
+　　　[- MVVM **Clean Architecture**](##mvvm-clean-architecture-기반)  
+   　[- URLRequestConvertible 기반 **Network Layer**](##urlrequestconvertible-기반-**network-layer**)   
+[- 라이브러리](#라이브러리)    
+[- 📒 프로젝트 기술 TALK](#프로젝트-기술-talk)    
+　　　[- UI based only Code](###ui-based-only-code)   
+　　　[- URLConvertible을 활용하여 손쉽게 RefreshToken 갱신](###urlconvertible을-활용하여-손쉽게-refreshtoken-갱신)    
+   　[- 분리된 UseCase들 (ISP원칙)](###분리된-useCase들-(isp원칙))    
+    [- Single 로 간편한 NetworkCall](###single-로-간편한-networkCall)     
+    [- CI Travis CI -> Github Action](###ci-travis-ci-->-github-action)    
+   
+# omos 소개
 
 🎧 **음악을 통해 자신만의 기록을 담고, 함께 감성을 공유하는 서비스**
 - 음악을 매개로 기록하고 창작하는 감성 기록 SNS 서비스
@@ -17,7 +22,7 @@
 - 공개 기능을 바탕으로 다른 사용자들과 감성을 나누고, 서로 공감
 ### >>>>> [omos 소개 페이지로 이동](https://melodious-passbook-4b9.notion.site/omos-488a3f87b45e49f5bdc458d77c25cb39) <<<<<
 
-# 💡 주요 기능
+# 주요 기능
 
 | 로그인 | 회원가입 1 | 회원가입 2 | 비밀번호 찾기 | 
 |:--------:|:--------:|:--------:|:--------:|
@@ -48,13 +53,13 @@
 |<img src=https://user-images.githubusercontent.com/66512239/165915770-9933ae62-4d78-4dff-b1a1-5001ffb2413b.png width=200>|<img src=https://user-images.githubusercontent.com/66512239/165915781-11a846c6-c3ec-4f27-88a0-0c50bd811835.png width=200>|<img src=https://user-images.githubusercontent.com/66512239/165921607-633ee32d-8600-4338-ac8e-43242f28be04.png width=200>|<img src=https://user-images.githubusercontent.com/66512239/165921617-a725fd90-1136-4ac3-a4ce-0ee518c27dfc.png width=200>|<img src=https://user-images.githubusercontent.com/66512239/165915787-626727b7-13e9-45da-af49-acdd89e99205.png width=200>|
 
 
-## 🌚 omos Project Architecture
-### MVVM Clean Architecture 기반 
+# omos Project Architecture
+## MVVM Clean Architecture 기반 
 - 좀 더 가독성 좋은, 좀 더 클린한, 좀 더 가벼운 ㅗ드를 위해 MVVM 구조를 사용하게 되었습니다. 
 - 기존 VC의 책임을 분산시켜 MVC의 단점을 보완하고 코드를 객체지향적으로 짜고자 고민하였습니다. 
 <img src=https://user-images.githubusercontent.com/66512239/165925082-1ee71828-5480-4c85-a482-fa18b6efb4a2.png width=500>
 
-### URLRequestConvertible 기반 **Network Layer**
+## URLRequestConvertible 기반 **Network Layer**
     
  ```swift
  protocol TargetType: URLRequestConvertible {
@@ -104,7 +109,7 @@ extension Encodable {
    
  ```
 
-## 🎨 라이브러리
+# 라이브러리
 
 #### Firebase/analatics/Crashtics
 
@@ -130,9 +135,9 @@ extension Encodable {
 
 #### 
 
-## 🍏 프로젝트 기술 TALK
+# 프로젝트 기술 TALK
 
-### UI based Code (w/o storyboard)
+### UI based Only Code
 
 ### URLConvertible을 활용하여 손쉽게 RefreshToken 갱신 
 
@@ -140,7 +145,7 @@ extension Encodable {
 
 ### Single 로 간편한 NetworkCall
 
-### CI/CI Travis CI 
+### CI Travis CI -> Github Action
 
 
 
