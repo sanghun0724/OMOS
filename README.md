@@ -58,7 +58,7 @@
 
 # omos Project Architecture
 ## MVVM Clean Architecture 기반 
-- 좀 더 가독성 좋은, 좀 더 클린한, 좀 더 가벼운 ㅗ드를 위해 MVVM 구조를 사용하게 되었습니다. 
+- 좀 더 가독성 좋은, 좀 더 클린한, 좀 더 가벼운 코드를 위해 MVVM 구조를 사용하게 되었습니다. 
 - 기존 VC의 책임을 분산시켜 MVC의 단점을 보완하고 코드를 객체지향적으로 짜고자 고민하였습니다. 
 <img src=https://user-images.githubusercontent.com/66512239/165925082-1ee71828-5480-4c85-a482-fa18b6efb4a2.png width=500>
 
