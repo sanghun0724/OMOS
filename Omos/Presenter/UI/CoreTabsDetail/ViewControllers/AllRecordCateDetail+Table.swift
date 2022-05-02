@@ -26,9 +26,6 @@ extension AllRecordCateDetailViewController: UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             guard let record = viewModel.currentCateRecords[safe:indexPath.row] else { return UITableViewCell() }
-//            if Account.currentReportRecordsId.contains(record.recordID) {
-//                return UITableViewCell.init(frame: .zero)
-//            }
             switch self.myCateType {
             case .lyrics:
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllrecordLyricsTableCell.identifier, for: indexPath) as! AllrecordLyricsTableCell
