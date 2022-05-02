@@ -1,6 +1,6 @@
 
 
-[- 🔴 omos에 대한 소개](##omos-소개)  
+[- 🔴 omos에 대한 소개](#omos-소개)  
 [- 💡 주요 기능들](#💡-주요-기능)  
 [- 🏛 omos프로젝트 구조](#프로젝트-구조)  
    [- MVVM **Clean Architecture**](#MVVM 기반 **Clean Architecture**)  
