@@ -45,11 +45,12 @@ class LoginViewController: UIViewController {
         configureUI()
     }
 
-    @objc func didRecieveLoginNotification() {
+    @objc
+    func didRecieveLoginNotification() {
         let action = UIAlertAction(title: "완료", style: .default) { _ in
         }
         action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
-        self.presentAlert(title: "", message: "회원가입이 완료되었습니다.\n다시 로그인 해주세요.", isCancelActionIncluded: false, preferredStyle: .alert, with: action)
+        self.presentAlert(title: "", with: action, message: "회원가입이 완료되었습니다.\n다시 로그인 해주세요.", isCancelActionIncluded: false, preferredStyle: .alert)
     }
 
     func configureUI() {
@@ -214,7 +215,8 @@ class LoginViewController: UIViewController {
     }
 
     // MARK: APPLE LOGIN
-    @objc func loginApple() {
+    @objc
+    func loginApple() {
         let request = ASAuthorizationAppleIDProvider().createRequest()
         request.requestedScopes = [.fullName, .email]
         let controller = ASAuthorizationController(authorizationRequests: [request])

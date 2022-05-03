@@ -47,7 +47,8 @@ class AllRecordSearchDetailViewController: BaseViewController, UIScrollViewDeleg
         NotificationCenter.default.addObserver(self, selector: #selector(didRecieveReloadNotification), name: NSNotification.Name.reload, object: nil)
     }
 
-    @objc func didRecieveReloadNotification() {
+    @objc
+    func didRecieveReloadNotification() {
        fetchRecord()
     }
 
@@ -59,7 +60,8 @@ class AllRecordSearchDetailViewController: BaseViewController, UIScrollViewDeleg
         self.navigationItem.rightBarButtonItem = filterButton
     }
 
-    @objc func didTapfilterButton() {
+    @objc
+    func didTapfilterButton() {
         self.navigationItem.rightBarButtonItem?.tintColor = .mainOrange
         bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = Constant.mainHeight * 0.28
         self.present(bottomSheet, animated: true)

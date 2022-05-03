@@ -16,7 +16,8 @@ extension UITableViewCell {
     }
 
     // MARK: 인디케이터 숨김
-    @objc func dismissIndicator() {
+    @objc
+    func dismissIndicator() {
         IndicatorView.shared.dismiss()
     }
 }

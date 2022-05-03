@@ -31,9 +31,9 @@ extension FollowTarget: TargetType {
 
     var path: String {
         switch self {
-        case .saveFollow(let from, let to): return "/save/\(from)/\(to)"
-        case .deleteFollow(let from, let to): return "/delete/\(from)/\(to)"
-        case .myDjProfile(let from, let to): return "/select/\(from)/\(to)"
+        case let .saveFollow(from, to): return "/save/\(from)/\(to)"
+        case let .deleteFollow(from, to): return "/delete/\(from)/\(to)"
+        case let .myDjProfile(from, to): return "/select/\(from)/\(to)"
         case .myDjList(let user): return "/select/myDj/\(user)"
         }
     }

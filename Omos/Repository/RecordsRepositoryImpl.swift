@@ -80,9 +80,9 @@ class RecordsRepositoryImpl: RecordsRepository {
         }
     }
 
-    func save(cate: String, content: String, isPublic: Bool, musicId: String, title: String, userid: Int, recordImageUrl: String) -> Single<SaveRespone> {
+    func save(saveParameter: SaveParameter) -> Single<SaveRespone> {
         Single<SaveRespone>.create { [weak self] single in
-            self?.recordAPI.saveFetch(request: .init(category: cate, isPublic: isPublic, musicID: musicId, recordContents: content, recordTitle: title, recordImageURL: recordImageUrl, userID: userid), completion: { result in
+            self?.recordAPI.saveFetch(request: .init(category: saveParameter.cate, isPublic: saveParameter.isPublic, musicID: saveParameter.musicId, recordContents: saveParameter.content, recordTitle: saveParameter.title, recordImageURL: saveParameter.recordImageUrl, userID: saveParameter.userid), completion: { result in
                 switch result {
                 case .success(let data):
                     single(.success(data))

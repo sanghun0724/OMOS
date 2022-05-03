@@ -52,11 +52,13 @@ class AllRecordCateDetailViewController: BaseViewController, UIScrollViewDelegat
         NotificationCenter.default.addObserver(self, selector: #selector(didRecieveReloadNotification), name: NSNotification.Name.reload, object: nil)
     }
 
-    @objc func didRecieveReloadNotification() {
+    @objc
+    private func didRecieveReloadNotification() {
         fetchRecord()
     }
 
-    @objc func didTapfilterButton() {
+    @objc
+    private func didTapfilterButton() {
         self.navigationItem.rightBarButtonItem?.tintColor = .mainOrange
         bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = Constant.mainHeight * 0.28
         self.present(bottomSheet, animated: true)
@@ -153,7 +155,7 @@ class AllRecordCateDetailViewController: BaseViewController, UIScrollViewDelegat
         case .ost:
             label.text = "내 인생의 OST"
         default:
-            fatalError()
+            print("default")
         }
         label.font = .systemFont(ofSize: 22, weight: .bold)
         label.tintColor = .white

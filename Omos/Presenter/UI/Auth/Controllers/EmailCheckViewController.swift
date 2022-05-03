@@ -91,7 +91,7 @@ class EmailCheckViewController: BaseViewController {
                     let action = UIAlertAction(title: "확인", style: .default) { _ in
                     }
                     action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
-                    self?.presentAlert(title: "", message: "이메일 인증을 완료해주세요.", isCancelActionIncluded: false, preferredStyle: .alert, with: action)
+                    self?.presentAlert(title: "", with: action, message: "이메일 인증을 완료해주세요.", isCancelActionIncluded: false, preferredStyle: .alert)
                 }
             }).disposed(by: disposeBag)
 

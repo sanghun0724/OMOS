@@ -13,7 +13,7 @@ struct SelectResponse: Codable {
     var lyrics: [ALine]
     var free: [ALine]
     var story: [ALine]
-
+    
     enum CodingKeys: String, CodingKey {
         case aLine = "A_LINE"
         case ost = "OST"
@@ -26,19 +26,19 @@ struct SelectResponse: Codable {
 // MARK: - ALine
 struct ALine: Codable {
     let music: Music
-        let nickname: String
-        let recordID: Int
-        let recordImageURL: String?
-        let recordTitle: String
-        let userID: Int
-
-        enum CodingKeys: String, CodingKey {
-            case music, nickname
-            case recordID = "recordId"
-            case recordImageURL = "recordImageUrl"
-            case recordTitle
-            case userID = "userId"
-        }
+    let nickname: String
+    let recordID: Int
+    let recordImageURL: String?
+    let recordTitle: String
+    let userID: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case music, nickname
+        case recordID = "recordId"
+        case recordImageURL = "recordImageUrl"
+        case recordTitle
+        case userID = "userId"
+    }
 }
 
 // MARK: - Music
@@ -46,7 +46,7 @@ struct Music: Codable {
     let albumImageURL, albumTitle: String
     let artists: [Artist]
     let musicID, musicTitle: String
-
+    
     enum CodingKeys: String, CodingKey {
         case albumImageURL = "albumImageUrl"
         case albumTitle, artists
@@ -58,7 +58,7 @@ struct Music: Codable {
 // MARK: - Artist
 struct Artist: Codable {
     let artistID, artistName: String
-
+    
     enum CodingKeys: String, CodingKey {
         case artistID = "artistId"
         case artistName

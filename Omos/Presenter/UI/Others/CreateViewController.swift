@@ -64,9 +64,15 @@ class CreateViewController: BaseViewController {
         let doneButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(didTapDone))
         doneButton.tintColor = .white
         self.navigationItem.rightBarButtonItem = doneButton
-        enableScrollWhenKeyboardAppeared(scrollView: scrollView)
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.backgroundColor = .mainBackGround
+        registerNotifications()
+    }
+    
+    private func registerNotifications() {
+        enableScrollWhenKeyboardAppeared(scrollView: scrollView)
+        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardShowNoti(_:)), name: .keyBoardShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardHideNoti(_:)), name: .keyBoardHide, object: nil)
     }
 
     private func setStickerView() {
@@ -87,14 +93,43 @@ class CreateViewController: BaseViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        removeNotifications()
+    }
+    
+    private func removeNotifications() {
         removeListeners()
+        NotificationCenter.default.removeObserver(self, name: .keyBoardShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .keyBoardHide, object: nil)
+    }
+    
+    @objc
+    func KeyboardHideNoti(_ notification: Notification) {
+        selfView.addSubview(selfView.lastView)
+        selfView.lastView.snp.remakeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.height.equalTo(Constant.mainHeight * 0.13)
+        }
     }
 
-    @objc func didTapDone() {
+    @objc
+    func KeyboardShowNoti(_ notification: Notification) {
+        guard let keyboardHeight = notification.userInfo?["keyboardHeight"] as? CGFloat else { return }
+        selfView.lastView.removeFromSuperview()
+        self.view.addSubview(selfView.lastView)
+        selfView.lastView.snp.remakeConstraints { make in
+            make.height.equalTo(selfView.inputAccessoryViewContentHeightSum_mx + 20)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-keyboardHeight)
+        }
+    }
+    
+    @objc
+    func didTapDone() {
         for subView in self.selfView.textCoverView.subviews {
             if subView.isKind(of: IRStickerView.self) {
                 let sticker = subView as! IRStickerView
-                print(sticker.contentImage)
+                print(sticker.contentImage!)
                 print(sticker.contentView.frame)
                 print(sticker.contentView.transform)
             }
@@ -105,15 +140,18 @@ class CreateViewController: BaseViewController {
         } else {
             mainText = selfView.mainfullTextView.text
         }
-        let backImage = selfView.imageView.image
-        if selfView.titleTextView.text == "레코드 제목을 입력해주세요" || selfView.titleTextView.text == "" || mainText == #""레코드 내용을 입력해주세요""# || mainText == "레코드 내용을 입력해주세요" || mainText == "" {
+        if selfView.titleTextView.text == "레코드 제목을 입력해주세요" || selfView.titleTextView.text.isEmpty || mainText == #""레코드 내용을 입력해주세요""# || mainText == "레코드 내용을 입력해주세요" || mainText?.isEmpty ?? true {
             setAlert()
             return
         }
+        
+        if let image = selfView.imageView.image {
+            saveImage(image: image)
+        }
 
         if type == .create {
-            var imageUrl = "https://omos-image.s3.ap-northeast-2.amazonaws.com/record/\(viewModel.curTime).png"
-            viewModel.saveRecord(cate: getCate(cate: category), content: mainText!, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: selfView.titleTextView.text, userid: Account.currentUser, recordImageURL: imageUrl )
+            let imageUrl = "https://omos-image.s3.ap-northeast-2.amazonaws.com/record/\(viewModel.curTime).png"
+            viewModel.saveRecord(saveParameter: .init(cate: getCate(cate: category), content: mainText!, isPublic: !(selfView.lockButton.isSelected), musicId: viewModel.defaultModel.musicId, title: selfView.titleTextView.text, userid: Account.currentUser, recordImageUrl: imageUrl))
         } else {
             var recordContent = ""
             if  selfView.mainTextView.text != viewModel.modifyDefaultModel?.recordTitle {
@@ -134,7 +172,7 @@ class CreateViewController: BaseViewController {
         let action = UIAlertAction(title: "확인", style: .default) { _ in
         }
         action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
-        self.presentAlert(title: "", message: "내용이나 제목을 채워주세요", isCancelActionIncluded: false, preferredStyle: .alert, with: action)
+        self.presentAlert(title: "", with: action, message: "내용이나 제목을 채워주세요", isCancelActionIncluded: false, preferredStyle: .alert)
     }
 
     private func setCreateViewinfo() {
@@ -220,9 +258,9 @@ class CreateViewController: BaseViewController {
                 }
             }).disposed(by: disposeBag)
 
-        viewModel.loading
-            .subscribe(onNext: { [weak self] _ in
-            }).disposed(by: disposeBag)
+//        viewModel.loading
+//            .subscribe(onNext: { [weak self] _ in
+//            }).disposed(by: disposeBag)
 
         selfView.lockButton.rx.tap
             .scan(false) { lastState, _ in
@@ -233,9 +271,9 @@ class CreateViewController: BaseViewController {
 
         selfView.stickerImageView.rx.tap
             .subscribe(onNext: { [weak self] _ in
-                let action = UIAlertAction(title: "확인", style: .default) {[weak self] _ in
+                let action = UIAlertAction(title: "확인", style: .default) { _ in
                 }
-                self?.presentAlert(title: "", message: "베타 기능입니다. 레코드에 반영은 되지 않습니다.", isCancelActionIncluded: false, preferredStyle: .alert, with: action )
+                self?.presentAlert(title: "", with: action, message: "베타 기능입니다. 레코드에 반영은 되지 않습니다.", isCancelActionIncluded: false, preferredStyle: .alert)
                 self?.setStickerView()
                 self?.scrollView.layoutIfNeeded()
                 self?.scrollView.setContentOffset(CGPoint(x: 0, y: (self?.scrollView.contentSize.height)! - (self?.scrollView.bounds.size.height)!), animated: true)
@@ -527,14 +565,11 @@ extension CreateViewController: UITextViewDelegate {
             }
         }
     }
-}
-
-extension CreateViewController: CropViewControllerDelegate {
-    func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation, cropInfo: CropInfo) {
-        selfView.imageView.image = cropped
-
+    
+    private func saveImage(image: UIImage) {
         if type == .create {
-            awsHelper.uploadImage(cropped, sender: self, imageName: "record/\(viewModel.curTime)", type: .record) { _ in
+            awsHelper.uploadImage(image, sender: self, imageName: "record/\(viewModel.curTime)", type: .record) { [weak self] _ in
+                try? self?.awsHelper.awsClient.syncShutdown()
             }
         } else {// 711648447384992.png
             guard let str = viewModel.modifyDefaultModel?.recordImageURL else { return }
@@ -549,9 +584,16 @@ extension CreateViewController: CropViewControllerDelegate {
             let endIndex = str.index(str.endIndex, offsetBy: -4)
             let defualtUrl = String(str[startIndex..<endIndex])
 
-            awsHelper.uploadImage(cropped, sender: self, imageName: "record/\(defualtUrl)", type: .record) { _ in
+            awsHelper.uploadImage(image, sender: self, imageName: "record/\(defualtUrl)", type: .record) { [weak self] _ in
+                try? self?.awsHelper.awsClient.syncShutdown()
             }
         }
+    }
+}
+
+extension CreateViewController: CropViewControllerDelegate {
+    func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation, cropInfo: CropInfo) {
+        selfView.imageView.image = cropped
 
         self.dismiss(animated: true, completion: nil)
         self.tabBarController?.tabBar.isHidden = true

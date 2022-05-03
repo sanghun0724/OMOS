@@ -28,9 +28,10 @@ class AllRecordTableCell: UITableViewCell {
         }
     }
     weak var cellDelegate: AllCollectCellprotocol?
-    private var collectionView: UICollectionView!
+    private var collectionView: UICollectionView
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setCollectionView()
     }

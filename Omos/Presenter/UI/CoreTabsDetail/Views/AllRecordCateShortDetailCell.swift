@@ -13,34 +13,34 @@ class AllRecordCateShortDetailCell: UITableViewCell {
     static let identifier = "AllRecordCateShortDetailCell"
     var disposeBag = DisposeBag()
     let myView = MyRecordDetailView()
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         configureUI()
     }
-
+    
     func configureUI() {
         self.addSubview(myView)
-
+        
         myView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         myView.lockButton.isHidden = true
     }
-
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
     }
-
+    
     func configureModel(record: CategoryRespone) {
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
@@ -53,18 +53,24 @@ class AllRecordCateShortDetailCell: UITableViewCell {
         myView.likeCountLabel.text = String(record.likeCnt)
         myView.scrapCountLabel.text = String(record.scrapCnt)
         myView.cateLabel.text = " | \(record.category.getReverseCate())"
-
+        
         if record.isLiked {
             myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
             myView.likeCountLabel.textColor = .mainOrange
+        } else {
+            myView.likeButton.setImage(UIImage(named: "emptyLove"), for: .normal)
+            myView.likeCountLabel.textColor = .white
         }
-
+        
         if record.isScraped {
             myView.scrapButton.setImage( UIImage(named: "fillStar"), for: .normal)
             myView.scrapCountLabel.textColor = .mainOrange
+        } else {
+            myView.scrapButton.setImage( UIImage(named: "emptyStar"), for: .normal)
+            myView.scrapCountLabel.textColor = .white
         }
     }
-
+    
     func configureOneMusic(record: OneMusicRecordRespone) {
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
@@ -80,17 +86,24 @@ class AllRecordCateShortDetailCell: UITableViewCell {
         myView.likeCountLabel.text = String(record.likeCnt)
         myView.scrapCountLabel.text = String(record.scrapCnt)
         myView.cateLabel.text = " | \(record.category.getReverseCate())"
+        
         if record.isLiked {
             myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
             myView.likeCountLabel.textColor = .mainOrange
+        } else {
+            myView.likeButton.setImage(UIImage(named: "emptyLove"), for: .normal)
+            myView.likeCountLabel.textColor = .white
         }
-
+        
         if record.isScraped {
-            myView.scrapButton.setImage(UIImage(named: "fillStar"), for: .normal)
+            myView.scrapButton.setImage( UIImage(named: "fillStar"), for: .normal)
             myView.scrapCountLabel.textColor = .mainOrange
+        } else {
+            myView.scrapButton.setImage( UIImage(named: "emptyStar"), for: .normal)
+            myView.scrapCountLabel.textColor = .white
         }
     }
-
+    
     func configureMyDjRecord(record: MyDjResponse) {
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
@@ -106,14 +119,21 @@ class AllRecordCateShortDetailCell: UITableViewCell {
         myView.likeCountLabel.text = String(record.likeCnt)
         myView.scrapCountLabel.text = String(record.scrapCnt)
         myView.cateLabel.text = " | \(record.category.getReverseCate())"
+        
         if record.isLiked {
             myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
             myView.likeCountLabel.textColor = .mainOrange
+        } else {
+            myView.likeButton.setImage(UIImage(named: "emptyLove"), for: .normal)
+            myView.likeCountLabel.textColor = .white
         }
-
+        
         if record.isScraped {
-            myView.scrapButton.setImage(UIImage(named: "fillStar"), for: .normal)
+            myView.scrapButton.setImage( UIImage(named: "fillStar"), for: .normal)
             myView.scrapCountLabel.textColor = .mainOrange
+        } else {
+            myView.scrapButton.setImage( UIImage(named: "emptyStar"), for: .normal)
+            myView.scrapCountLabel.textColor = .white
         }
     }
 }

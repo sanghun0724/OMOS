@@ -9,6 +9,7 @@ import UIKit
 
 class CreateView: BaseView {
     var imageFileName = ""
+    var inputAccessoryViewContentHeightSum_mx: CGFloat = 0.0
 
     /// 1
     let topLabelView: UIView = {
@@ -72,6 +73,7 @@ class CreateView: BaseView {
         textView.backgroundColor = nil
         textView.autocorrectionType = .no
         textView.autocapitalizationType = .none
+        textView.inputAccessoryView = .none
         return textView
     }()
 
@@ -115,6 +117,7 @@ class CreateView: BaseView {
         view.textColor = .mainGrey7
         view.autocorrectionType = .no
         view.autocapitalizationType = .none
+        view.inputAccessoryView = .none
         return view
     }()
 
@@ -128,11 +131,18 @@ class CreateView: BaseView {
         view.textColor = .mainGrey7
         view.autocorrectionType = .no
         view.autocapitalizationType = .none
+        view.inputAccessoryView = .none
         return view
     }()
 
     /// 4
     let lastView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .mainBlack
+        return view
+    }()
+    
+    let dummyLastView: UIView = {
         let view = UIView()
         view.backgroundColor = .mainBlack
         return view
@@ -175,6 +185,7 @@ class CreateView: BaseView {
     let stickerImageView: UIButton = {
         let view = UIButton()
         view.setImage(UIImage(named: "sticker"), for: .normal)
+        view.isHidden = true
         return view
     }()
 
@@ -184,6 +195,7 @@ class CreateView: BaseView {
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 12)
         label.textColor = .mainGrey3
+        label.isHidden = true
         return label
     }()
 
@@ -287,7 +299,13 @@ class CreateView: BaseView {
             make.bottom.equalToSuperview()
             make.height.equalTo(mainHeight * 0.13)
         }
-
+        
+        dummyLastView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.height.equalTo(mainHeight * 0.13)
+        }
+        
         dummyView2.snp.makeConstraints { make in
             make.leading.trailing.top.equalToSuperview()
             make.height.equalTo(0.5)
@@ -334,7 +352,7 @@ class CreateView: BaseView {
         textCoverView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(titleImageView.snp.bottom)
-            make.bottom.equalTo(lastView.snp.top)
+            make.bottom.equalTo(dummyLastView.snp.top)
         }
 
         mainTextView.snp.makeConstraints { make in
@@ -345,6 +363,8 @@ class CreateView: BaseView {
         mainfullTextView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        operateLastViewHeight()
     }
 
     func addSubviews() {
@@ -352,6 +372,7 @@ class CreateView: BaseView {
         self.addSubview(topLabelView)
         self.addSubview(titleImageView)
         self.addSubview(textCoverView)
+        self.addSubview(dummyLastView)
         self.addSubview(lastView)
         topLabelView.addSubview(circleImageView)
         topLabelView.addSubview(musicTitleLabel)
@@ -375,42 +396,44 @@ class CreateView: BaseView {
         lastView.addSubview(stickerImageView)
         lastView.addSubview(stickerLabel)
     }
+    
+    private func operateLastViewHeight() {
+        let remainTextHeight = remainText.height + remainTextCount.height
+        let remainTitleHeight = remainTitle.height + remainTitleCount.height
+        let stickerHeight = stickerImageView.height + stickerLabel.height
+        
+        self.inputAccessoryViewContentHeightSum_mx = [remainTextHeight, remainTitleHeight, stickerHeight].max()!
+    }
 }
 
 class StickerView: BaseView {
     let stickerImageView1: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "sticker1")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
-                                                                                                          right: -10)))
+        let imageView = UIImageView(image: UIImage(named: "sticker1")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10, right: -10)))
         return imageView
     }()
 
     let stickerImageView2: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "sticker2")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
-                                                                                                       right: -10)))
+        let imageView = UIImageView(image: UIImage(named: "sticker2")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10, right: -10)))
         return imageView
     }()
 
     let stickerImageView3: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "ost")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
-                                                                                                      right: -10)))
+        let imageView = UIImageView(image: UIImage(named: "ost")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10, right: -10)))
         return imageView
     }()
 
     let stickerImageView4: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "lyrics")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
-                                                                                                         right: -10)))
+        let imageView = UIImageView(image: UIImage(named: "lyrics")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10, right: -10)))
         return imageView
     }()
 
     let stickerImageView5: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "free")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
-                                                                                                       right: -10)))
+        let imageView = UIImageView(image: UIImage(named: "free")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10, right: -10)))
         return imageView
     }()
 
     let stickerImageView6: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "oneline")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10,
-                                                                                                          right: -10)))
+        let imageView = UIImageView(image: UIImage(named: "oneline")?.withAlignmentRectInsets(UIEdgeInsets(top: -10, left: -10, bottom: -10, right: -10)))
         return imageView
     }()
 

@@ -43,11 +43,13 @@ class ProfileViewController: BaseViewController {
         self.navigationController?.navigationBar.backgroundColor = .mainBackGround
     }
 
-    @objc func didRecieveProfileReloadNotification() {
+    @objc
+    func didRecieveProfileReloadNotification() {
         viewModel.allFetch()
     }
 
-    @objc func didPullRefresh() {
+    @objc
+    func didPullRefresh() {
         viewModel.allFetch()
     }
 
