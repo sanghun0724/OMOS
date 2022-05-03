@@ -56,7 +56,8 @@ class AllRecordDetailViewController: BaseViewController {
         self.navigationItem.rightBarButtonItems = [moreButton]
     }
 
-    @objc func didTapMoreButton() {
+    @objc
+    func didTapMoreButton() {
     }
 
     override func configureUI() {
@@ -114,7 +115,7 @@ class AllRecordDetailViewController: BaseViewController {
                     self?.navigationController?.popViewController(animated: true)
                 }
                 action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
-                self?.presentAlert(title: "", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
+                self?.presentAlert(title: "", with: action, message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert)
             }).disposed(by: disposeBag)
 
         selfShortView.likeButton.rx.tap
@@ -182,7 +183,7 @@ class AllRecordDetailViewController: BaseViewController {
                     self?.navigationController?.popViewController(animated: true)
                 }
                 action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
-                self?.presentAlert(title: "", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
+                self?.presentAlert(title: "", with: action, message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert)
             }).disposed(by: disposeBag)
 
         selfLongView.likeButton.rx.tap
@@ -389,7 +390,7 @@ class AllRecordDetailViewController: BaseViewController {
                     self?.navigationController?.popViewController(animated: true)
                 }
                 action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
-                self?.presentAlert(title: "", message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert, with: action)
+                self?.presentAlert(title: "", with: action, message: "이 레코드를 신고하시겠어요?", isCancelActionIncluded: true, preferredStyle: .alert)
             }).disposed(by: disposeBag)
 
         selfLyricsView.likeButton.rx.tap

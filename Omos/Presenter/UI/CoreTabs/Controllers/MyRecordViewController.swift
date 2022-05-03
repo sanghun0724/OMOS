@@ -56,16 +56,19 @@ class MyRecordViewController: BaseViewController {
         self.navigationItem.rightBarButtonItems = [createButton]
     }
 
-    @objc func didPullRefresh() {
+    @objc
+    func didPullRefresh() {
         viewModel.myRecordFetch(userid: Account.currentUser)
     }
 
-    @objc func didTapCreateButton() {
+    @objc
+    func didTapCreateButton() {
         let vc = SearchViewController(viewModel: SearchViewModel(usecase: SearchUseCase(searchRepository: SearchRepositoryImpl(searchAPI: SearchAPI()))), searchType: .me)
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
-    @objc func didTapSearchButton() {
+    @objc
+    func didTapSearchButton() {
         print("search")
     }
 

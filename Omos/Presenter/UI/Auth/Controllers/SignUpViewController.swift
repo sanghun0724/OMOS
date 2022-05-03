@@ -73,7 +73,7 @@ class SignUpViewController: UIViewController {
         }
     }
 
-    func bind() {
+   private func bind() {
         topView.coverView.backButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in

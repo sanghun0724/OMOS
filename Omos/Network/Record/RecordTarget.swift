@@ -55,8 +55,8 @@ extension RecordTarget: TargetType {
     var path: String {
         switch self {
         case .select: return "/select/\(Account.currentUser)"
-        case .recordDetail(let post, let user): return "/select/\(post)/user/\(user)"
-        case .category(let cate, _): return "/select/category/\(cate)"
+        case let .recordDetail(post, user): return "/select/\(post)/user/\(user)"
+        case .category(let cate, _): return "/select/category/\(cate.rawValue)"
         case .myRecord(let user): return "/\(user)"
         case .save: return "/save"
         case .recordIspublic(let id): return "/\(id)/ispublic"
@@ -64,7 +64,7 @@ extension RecordTarget: TargetType {
         case .recordUpdate(let id, _): return "/update/\(id)"
         case .oneMusicRecord(let id, _): return "/select/music/\(id)"
         case .myDjAllRecord(let user, _): return "/select/\(user)/my-dj"
-        case .userRecords(let from, let to): return "/select/user/\(from)/\(to)"
+        case let .userRecords(from, to): return "/select/user/\(from)/\(to)"
         case .likeRecords(let user): return "/select/\(user)/liked-records"
         case .scrapRecords(let user): return "/select/\(user)/scrapped-records"
         case .myProfileRecords(let user): return "select/\(user)/my-records"

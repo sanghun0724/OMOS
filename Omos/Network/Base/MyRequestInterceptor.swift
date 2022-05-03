@@ -27,7 +27,7 @@ final class MyRequestInterceptor: RequestInterceptor {
             return
         }
 
-        /* TODO: 여기서 리프레쉬 받아오면 되유
+        /* 여기서 리프레쉬 받아오면 되유
         RefreshTokenAPI.refreshToken { result in
             switch result {
             case .success(let accessToken):

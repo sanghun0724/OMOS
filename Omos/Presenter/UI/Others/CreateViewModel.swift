@@ -23,9 +23,9 @@ class CreateViewModel: BaseViewModel {
         super.init()
     }
 
-    func saveRecord(cate: String, content: String, isPublic: Bool, musicId: String, title: String, userid: Int, recordImageURL: String) {
+    func saveRecord(saveParameter: SaveParameter) {
         loading.onNext(false)
-        usecase.save(cate: cate, content: content, isPublic: isPublic, musicId: musicId, title: title, userid: userid, recordImageUrl: recordImageURL)
+        usecase.save(saveParameter: saveParameter)
             .subscribe({ [weak self] event in
                 self?.loading.onNext(true)
                 switch event {

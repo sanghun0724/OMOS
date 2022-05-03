@@ -249,7 +249,7 @@ class MydjProfileHeader: UITableViewHeaderFooterView {
             print("default")
             return
         }
-        if image == "" {
+        if image.isEmpty {
             profileImageView.image = UIImage(named: "albumCover")
         } else {
             profileImageView.setImage(with: image)
@@ -266,7 +266,7 @@ class MydjProfileHeader: UITableViewHeaderFooterView {
             profileImageView.image = UIImage(named: "albumCover")
             return
         }
-        if imageUrl == "" {
+        if imageUrl.isEmpty {
             profileImageView.image = UIImage(named: "albumCover")
         } else {
             profileImageView.setImage(with: imageUrl)

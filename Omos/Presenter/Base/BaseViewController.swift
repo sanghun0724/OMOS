@@ -67,7 +67,8 @@ class BaseViewController: UIViewController {
         self.navigationItem.backButtonTitle = ""
     }
 
-    @objc func didTapNotification() {
+    @objc
+    func didTapNotification() {
         print("noti")
     }
 
@@ -75,18 +76,22 @@ class BaseViewController: UIViewController {
         view.backgroundColor = .mainBackGround
     }
 
-    @objc private func keyboardWillShow(notification: NSNotification) {
+    @objc
+    private func keyboardWillShow(notification: NSNotification) {
         guard let scrollView = scrollView else { return }
         guard let userInfo = notification.userInfo else { return }
-        var keyboardFrame: CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        var keyboardFrame: CGRect = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         keyboardFrame = self.view.convert(keyboardFrame, from: nil) // 주석처리하고 돌려보기
-
         var contentInset: UIEdgeInsets = scrollView.contentInset
         contentInset.bottom = keyboardFrame.size.height + 20
         scrollView.contentInset = contentInset
+        let keyboardHeight = [ "keyboardHeight": keyboardFrame.size.height]
+        NotificationCenter.default.post(name: Notification.Name.keyBoardShow, object: nil, userInfo: keyboardHeight)
     }
 
-    @objc private func keyboardWillHide(notification: NSNotification) {
+    @objc
+    private func keyboardWillHide(notification: NSNotification) {
+        NotificationCenter.default.post(name: Notification.Name.keyBoardHide, object: nil, userInfo: nil)
         guard let scrollView = scrollView else { return }
         let contentInset: UIEdgeInsets = .zero
         scrollView.contentInset = contentInset

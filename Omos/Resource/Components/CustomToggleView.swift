@@ -69,11 +69,13 @@ class CustomToggleView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    @objc func didTapItem1(_ sender: UIButton) {
+    @objc
+    func didTapItem1(_ sender: UIButton) {
         delegate?.item1ButtonTaped()
         update(for: .item1, sender: sender)
     }
-    @objc func didTapItem2(_ sender: UIButton) {
+    @objc
+    func didTapItem2(_ sender: UIButton) {
         delegate?.item2ButtonTaped()
         update(for: .item2, sender: sender)
         print("qwe")

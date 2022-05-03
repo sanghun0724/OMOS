@@ -9,7 +9,7 @@ import UIKit
 
 class LyriscTableCell: UITableViewCell {
     static let identifier = "LyriscTableCell"
-
+    
     let label: UILabel = {
         let label = UILabel()
         label.text = ""
@@ -17,12 +17,12 @@ class LyriscTableCell: UITableViewCell {
         label.numberOfLines = 0
         return label
     }()
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         self.backgroundColor = .lyricsBack
         contentView.addSubview(label)
-
+        
         label.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview().inset(10)
             make.leading.trailing.equalToSuperview().inset(16)
@@ -37,28 +37,31 @@ protocol TextTableCellProtocol: AnyObject {
 
 class TextTableCell: UITableViewCell, UITextViewDelegate {
     static let identifier = "TextTableCell"
-
+    
     weak var delegate: TextTableCellProtocol?
-
+    
     let textView: UITextView = {
-      let view = UITextView()
+        let view = UITextView()
         view.text = "가사해석을 적어주세요"
         view.textColor = .mainGrey7
         view.isScrollEnabled = false
         view.font = .systemFont(ofSize: 16, weight: .light)
-      return view
+        view.autocorrectionType = .no
+        view.autocapitalizationType = .none
+        view.inputAccessoryView = .none
+        return view
     }()
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-       // textView.delegate = self
+        // textView.delegate = self
     }
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         self.addSubview(textView)
         contentView.addSubview(textView)
-
+        
         textView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview().inset(10)
             make.leading.equalToSuperview().offset(16)
@@ -66,12 +69,12 @@ class TextTableCell: UITableViewCell, UITextViewDelegate {
             textView.sizeToFit()
         }
     }
-
-//    func textViewDidChange(_ textView: UITextView) {
-//        if let delegate = delegate {
-//            delegate.updateTextViewHeight(self, textView)
-//        }
-//        print("check")
-//    }
-
+    
+    //    func textViewDidChange(_ textView: UITextView) {
+    //        if let delegate = delegate {
+    //            delegate.updateTextViewHeight(self, textView)
+    //        }
+    //        print("check")
+    //    }
+    
 }

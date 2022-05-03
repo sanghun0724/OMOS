@@ -98,4 +98,4 @@
 // }
 // selfLyricsView.reloadInputViews()
 //
-//// selfLyricsView.dummyView3.isHidden = true
+// selfLyricsView.dummyView3.isHidden = true
