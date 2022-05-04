@@ -239,7 +239,7 @@ class LyricsPasteCreateViewController: BaseViewController {
         selfView.titleTextView.textColor = .white
         selfView.imageView.setImage(with: viewModel.modifyDefaultModel?.recordImageURL ?? "")
         selfView.remainTitleCount.text = "\(viewModel.modifyDefaultModel?.recordTitle.count ?? 0)/36"
-        selfView.remainTextCount.text = "\(viewModel.modifyDefaultModel?.recordContents.count ?? 0)/380"
+        selfView.remainTextCount.text = "\(viewModel.modifyDefaultModel?.recordContents.count ?? 0)/1100"
     }
     
     private func bind() {
@@ -468,7 +468,7 @@ extension LyricsPasteCreateViewController: UITextViewDelegate {
             if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 textView.text = "가사해석을 적어주세요"
                 textView.textColor = .mainGrey7
-                // selfView.remainTextCount.text = "\(0)/250"
+                // selfView.remainTextCount.text = "\(0)/1100"
             }
         }
     }
@@ -484,8 +484,8 @@ extension LyricsPasteCreateViewController: UITextViewDelegate {
         } else {
             textCellsArray[textView.tag] = characterCount
             totalString = textCellsArray.reduce(0, +)
-            guard totalString <= 380 else { return false }
-            selfView.remainTextCount.text = "\(totalString)/380"
+            guard totalString <= 1100 else { return false }
+            selfView.remainTextCount.text = "\(totalString)/1100"
         }
         
         return true

@@ -160,7 +160,7 @@ class LyricsPasteCreateView: BaseView {
 
     let remainTextCount: UILabel = {
        let label = UILabel()
-        label.text = "0/380"
+        label.text = "0/1100"
         label.textColor = .mainGrey4
         return label
     }()
