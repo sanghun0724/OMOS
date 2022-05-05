@@ -151,7 +151,7 @@ extension LyricsPasteViewController: UITextViewDelegate {
         if selfView.mainLyricsTextView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             selfView.mainLyricsTextView.text = "해석하고 싶은 가사를 복사해 붙여놓고,\n줄바꿈을 통해 마디구분을 해주세요."
             selfView.mainLyricsTextView.textColor = .mainGrey7
-            selfView.remainTextCount.text = "\(0)/1100"
+            selfView.remainTextCount.text = "\(0)/380"
         }
     }
 
@@ -161,14 +161,14 @@ extension LyricsPasteViewController: UITextViewDelegate {
         let newString = oldString.replacingCharacters(in: newRange, with: inputString).trimmingCharacters(in: .whitespacesAndNewlines)
         let characterCount = newString.count
 
-        guard characterCount <= 1100 else {
+        guard characterCount <= 380 else {
             let action = UIAlertAction(title: "확인", style: .default) { _ in
             }
             action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
             self.presentAlert(title: "", with: action, message: "글자 제한수를 초과하였습니다. 글자 제한수를 확인해 주세요.", isCancelActionIncluded: false, preferredStyle: .alert)
             return false
         }
-        selfView.remainTextCount.text = "\(characterCount)/1100"
+        selfView.remainTextCount.text = "\(characterCount)/380"
 
         return true
     }

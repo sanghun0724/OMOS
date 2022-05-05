@@ -53,7 +53,6 @@ class EntireViewController: BaseViewController {
         Observable.combineLatest(viewModel.track, viewModel.album, viewModel.artist) { $0.isEmpty && $1.isEmpty && $2.isEmpty }
         .withUnretained(self)
         .subscribe(onNext: { owner, empty in
-            print("여기있다 \(empty)")
             owner.selfView.emptyView.isHidden = !empty
         }).disposed(by: disposeBag)
     }
