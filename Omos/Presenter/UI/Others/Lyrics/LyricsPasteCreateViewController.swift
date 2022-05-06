@@ -136,7 +136,6 @@ class LyricsPasteCreateViewController: BaseViewController {
                 content += (desc + "\n")
             }
         }
-        print(content)
         if selfView.titleTextView.text.isEmpty || selfView.titleTextView.text == "레코드 제목을 입력해주세요" || !state {
             setAlert()
             return
@@ -419,7 +418,6 @@ class LyricsPasteCreateViewController: BaseViewController {
         let picker = YPImagePicker(configuration: config)
         picker.didFinishPicking { [unowned picker] items, cancelled in
             if let photo = items.singlePhoto {
-                print(photo.image) // Final image selected by the user
                 let cropViewController = Mantis.cropViewController(image: photo.image)
                 cropViewController.delegate = self
                 cropViewController.modalPresentationStyle = .fullScreen

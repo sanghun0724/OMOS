@@ -186,8 +186,6 @@ class AllRecordCateDetailViewController: BaseViewController, UIScrollViewDelegat
 
         // 스크롤이 테이블 뷰 Offset의 끝에 가게 되면 다음 페이지를 호출
         if offsetY > (contentHeight - height) {
-            print(viewModel.currentCateRecords)
-            print("hasNext222\(self.hasNextPage)")
             if isPaging == false && hasNextPage {
                 beginPaging()
             }

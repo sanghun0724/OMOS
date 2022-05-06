@@ -172,7 +172,6 @@ class AllrecordLyricsTableCell: UITableViewCell {
 
 extension AllrecordLyricsTableCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print( "cell count \(lyricsArr.count)")
         return lyricsArr.count
     }
 
