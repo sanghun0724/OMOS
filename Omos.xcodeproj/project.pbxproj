@@ -137,7 +137,6 @@
 		B697F20D27E0D0A700F34AB5 /* TodayRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B697F20C27E0D0A700F34AB5 /* TodayRepositoryImpl.swift */; };
 		B697F20F27E0DDAF00F34AB5 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B697F20E27E0DDAF00F34AB5 /* HomeViewModel.swift */; };
 		B69860BD27B8E85600E83DB9 /* NickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69860BC27B8E85600E83DB9 /* NickNameView.swift */; };
-		B69E42D127E3836200CAD5F1 /* Garbage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E42D027E3836200CAD5F1 /* Garbage.swift */; };
 		B69E42D327E38F8300CAD5F1 /* AllRecordDetail+Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E42D227E38F8300CAD5F1 /* AllRecordDetail+Table.swift */; };
 		B69E42D527E3A8F900CAD5F1 /* MyRecordDetail+Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E42D427E3A8F900CAD5F1 /* MyRecordDetail+Table.swift */; };
 		B6A0299C27B23D3500D3D3C9 /* OmosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */; };
@@ -353,7 +352,6 @@
 		B697F20C27E0D0A700F34AB5 /* TodayRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayRepositoryImpl.swift; sourceTree = "<group>"; };
 		B697F20E27E0DDAF00F34AB5 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		B69860BC27B8E85600E83DB9 /* NickNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameView.swift; sourceTree = "<group>"; };
-		B69E42D027E3836200CAD5F1 /* Garbage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Garbage.swift; sourceTree = "<group>"; };
 		B69E42D227E38F8300CAD5F1 /* AllRecordDetail+Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AllRecordDetail+Table.swift"; sourceTree = "<group>"; };
 		B69E42D427E3A8F900CAD5F1 /* MyRecordDetail+Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyRecordDetail+Table.swift"; sourceTree = "<group>"; };
 		B6A0299927B23D3500D3D3C9 /* OmosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OmosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -862,7 +860,6 @@
 				B682185B27B3C0BB00B58E19 /* MyError.swift */,
 				B6C3AD4427B95B1E00D5D69D /* Attributed+Stirng.swift */,
 				B6FE837727D07B4800401FC5 /* Cell.swift */,
-				B69E42D027E3836200CAD5F1 /* Garbage.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1377,7 +1374,6 @@
 				B689A9D227AE94E9005F26E4 /* Date.swift in Sources */,
 				B611825D27D45E2D004217E2 /* SearchRepositoryImpl.swift in Sources */,
 				B6D4BB1E27CA48CD00D6741B /* AllRecordDetailViewController.swift in Sources */,
-				B69E42D127E3836200CAD5F1 /* Garbage.swift in Sources */,
 				B682185A27B3AD5100B58E19 /* Search+Table.swift in Sources */,
 				B6FE837A27D07CE700401FC5 /* Category.swift in Sources */,
 				B68454F027BE2D7B00F1E6B5 /* MyRequestInterceptor.swift in Sources */,

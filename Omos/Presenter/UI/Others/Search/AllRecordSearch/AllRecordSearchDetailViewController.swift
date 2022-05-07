@@ -133,7 +133,6 @@ class AllRecordSearchDetailViewController: BaseViewController, UIScrollViewDeleg
 
     private func fetchRecord() {
         viewModel.oneMusicRecordsFetch(musicId: self.musicId, request: .init(postId: viewModel.currentOneMusicRecords.last?.recordID, size: 10, userId: Account.currentUser, sortType: filterType))
-        // 2. 바인딩 하고 도착하면 데이터 append (위에서 하고 있으니 ok)
     }
 
     private func beginPaging() {
@@ -153,7 +152,6 @@ class AllRecordSearchDetailViewController: BaseViewController, UIScrollViewDeleg
 
         // 스크롤이 테이블 뷰 Offset의 끝에 가게 되면 다음 페이지를 호출
         if offsetY > (contentHeight - height) {
-            print("hasNext222\(self.hasNextPage)")
             if isPaging == false && hasNextPage {
                 beginPaging()
             }
