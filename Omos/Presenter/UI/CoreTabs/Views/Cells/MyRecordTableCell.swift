@@ -180,8 +180,6 @@ class MyRecordTableCell: UITableViewCell {
         }
         lockImageView.sizeToFit()
 
-//        layoutIfNeeded()
-
         let wholeWidth = titleLabel.intrinsicContentSize.width + artistLabel.intrinsicContentSize.width + 16
         if wholeWidth < backGroundView.width {
             labelCoverView.snp.remakeConstraints { make in
