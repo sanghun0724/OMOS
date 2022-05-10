@@ -121,7 +121,6 @@
 		B689A9D027AE94E9005F26E4 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9CB27AE94E8005F26E4 /* UIImage.swift */; };
 		B689A9D127AE94E9005F26E4 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9CC27AE94E8005F26E4 /* Color.swift */; };
 		B689A9D227AE94E9005F26E4 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9CD27AE94E9005F26E4 /* Date.swift */; };
-		B689A9D527AE9627005F26E4 /* CustomToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9D327AE9627005F26E4 /* CustomToggleView.swift */; };
 		B689A9D627AE9627005F26E4 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9D427AE9627005F26E4 /* IndicatorView.swift */; };
 		B689A9DA27AEA835005F26E4 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9D927AEA835005F26E4 /* BaseViewModel.swift */; };
 		B689A9DC27AEA877005F26E4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689A9DB27AEA877005F26E4 /* LoginViewController.swift */; };
@@ -335,7 +334,6 @@
 		B689A9CB27AE94E8005F26E4 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		B689A9CC27AE94E8005F26E4 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		B689A9CD27AE94E9005F26E4 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
-		B689A9D327AE9627005F26E4 /* CustomToggleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomToggleView.swift; sourceTree = "<group>"; };
 		B689A9D427AE9627005F26E4 /* IndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
 		B689A9D927AEA835005F26E4 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		B689A9DB27AEA877005F26E4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -869,7 +867,6 @@
 			children = (
 				B601C53A27C0F50100DCD2AF /* Cafe24Oneprettynight.ttf */,
 				B666A90727AED1AA00BE7F92 /* EmptyView.swift */,
-				B689A9D327AE9627005F26E4 /* CustomToggleView.swift */,
 				B689A9D427AE9627005F26E4 /* IndicatorView.swift */,
 				B682185D27B3E22900B58E19 /* LoadingView.swift */,
 				B6CC1D7527BA475900B5EE7E /* UseInfoText.rtf */,
@@ -1434,7 +1431,6 @@
 				B646053427CBE1A10022E062 /* SearchArtistViewController.swift in Sources */,
 				B606195227DF0F14006508CA /* LyricsPasteViewController.swift in Sources */,
 				B642344927DCE7D500C1083D /* FollowTarget.swift in Sources */,
-				B689A9D527AE9627005F26E4 /* CustomToggleView.swift in Sources */,
 				B609138227AD3A7C00B439C3 /* SceneDelegate.swift in Sources */,
 				B611826627D465FD004217E2 /* SearchUseCase.swift in Sources */,
 				B666A90827AED1AA00BE7F92 /* EmptyView.swift in Sources */,

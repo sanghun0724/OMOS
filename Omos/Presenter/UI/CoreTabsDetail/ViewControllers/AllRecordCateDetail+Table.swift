@@ -46,7 +46,6 @@ extension AllRecordCateDetailViewController: UITableViewDelegate, UITableViewDat
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateLongDetailCell.identifier, for: indexPath) as! AllRecordCateLongDetailCell
                 cell.configureModel(record: record)
-                //cell.layoutIfNeeded()
                 if expandedIndexSet.contains(indexPath.row) {
                     cell.myView.mainLabelView.numberOfLines = 0
                     cell.myView.mainLabelView.sizeToFit()
