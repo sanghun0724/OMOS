@@ -18,12 +18,7 @@ class AllrecordLyricsTableCell: UITableViewCell {
     let selfView = LyricsRecordView()
     var lyricsText: String = "" {
         didSet {
-            lyricsText.enumerateSubstrings(in: lyricsText.startIndex..., options: .byParagraphs) { [weak self] substring, _, _, _ in
-                if  let substring = substring,
-                    !substring.isEmpty {
-                    self?.lyricsArr.append(substring)
-                }
-            }
+            parseWords()
         }
     }
     var lyricsArr: [String] = []
@@ -55,11 +50,20 @@ class AllrecordLyricsTableCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configureUI() {
+   private func configureUI() {
         self.contentView.addSubview(selfView)
 
         selfView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+    }
+    
+    private func parseWords() {
+        lyricsText.enumerateSubstrings(in: lyricsText.startIndex..., options: .byParagraphs) { [weak self] substring, _, _, _ in
+            if  let substring = substring,
+                !substring.isEmpty {
+                self?.lyricsArr.append(substring)
+            }
         }
     }
 

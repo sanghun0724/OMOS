@@ -131,6 +131,17 @@ class MyRecordDetailViewController: BaseViewController {
         }
     }
     
+    private func parseWords(_ contents:String) -> [String] {
+        var lyricsArr: [String] = []
+        contents.enumerateSubstrings(in: contents.startIndex..., options: .byParagraphs) { substring, _, _, _ in
+            if  let substring = substring,
+                !substring.isEmpty {
+                lyricsArr.append(substring)
+            }
+        }
+        return lyricsArr
+    }
+    
     @objc
     func didTapMoreButton() {
         bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = Constant.mainHeight * 0.194
@@ -226,14 +237,7 @@ class MyRecordDetailViewController: BaseViewController {
                 if self?.viewModel.currentMyRecordDetail?.category == "LYRICS" {
                     guard let contents = self?.viewModel.currentMyRecordDetail?.recordContents else { return }
                     let vm = LyricsViewModel(usecase: uc)
-                    var lyricsArr: [String] = []
-                    contents.enumerateSubstrings(in: contents.startIndex..., options: .byParagraphs) { substring, _, _, _ in
-                        if  let substring = substring,
-                            !substring.isEmpty {
-                            lyricsArr.append(substring)
-                        }
-                    }
-                    vm.lyricsStringArray = lyricsArr
+                    vm.lyricsStringArray = self?.parseWords(contents)
                     vm.modifyDefaultModel = self?.viewModel.currentMyRecordDetail
                     let vc = LyricsPasteCreateViewController(viewModel: vm, type: .modify)
                     self?.navigationController?.pushViewController( vc, animated: true)
@@ -563,6 +567,5 @@ class MyRecordDetailViewController: BaseViewController {
         let defualtUrl = String(str[startIndex..<endIndex])
         
         self.viewModel.awsDeleteImage(request: .init(directory: "record", fileName: defualtUrl))
-        print(defualtUrl)
     }
 }
