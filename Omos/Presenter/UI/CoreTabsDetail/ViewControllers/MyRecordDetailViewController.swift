@@ -237,7 +237,7 @@ class MyRecordDetailViewController: BaseViewController {
                 if self?.viewModel.currentMyRecordDetail?.category == "LYRICS" {
                     guard let contents = self?.viewModel.currentMyRecordDetail?.recordContents else { return }
                     let vm = LyricsViewModel(usecase: uc)
-                    vm.lyricsStringArray = self?.parseWords(contents)
+                    vm.lyricsStringArray = self?.parseWords(contents) ?? []
                     vm.modifyDefaultModel = self?.viewModel.currentMyRecordDetail
                     let vc = LyricsPasteCreateViewController(viewModel: vm, type: .modify)
                     self?.navigationController?.pushViewController( vc, animated: true)
