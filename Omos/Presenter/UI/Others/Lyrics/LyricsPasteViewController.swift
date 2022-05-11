@@ -79,12 +79,23 @@ class LyricsPasteViewController: BaseViewController {
 
     @objc
     func didTapDone() {
-        if selfView.mainLyricsTextView.text == "해석하고 싶은 가사를 복사해 붙여놓고,\n줄바꿈을 통해 마디구분을 해주세요." || selfView.mainLyricsTextView.text.isEmpty {
+        guard selfView.mainLyricsTextView.text != "해석하고 싶은 가사를 복사해 붙여놓고,\n줄바꿈을 통해 마디구분을 해주세요." && !selfView.mainLyricsTextView.text.isEmpty else {
             return
         }
+
+        let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+        let uc = RecordsUseCase(recordsRepository: rp)
+        let vm = LyricsViewModel(usecase: uc)
+        vm.lyricsStringArray = parseWords()
+        vm.defaultModel = self.defaultModel
+        let vc = LyricsPasteCreateViewController(viewModel: vm, type: .create)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func parseWords() -> [String] {
         var lyricsArr: [String] = []
 
-        guard let text = selfView.mainLyricsTextView.text else { return }
+        guard let text = selfView.mainLyricsTextView.text else { return  [] }
 
         text.enumerateSubstrings(in: text.startIndex..., options: .byParagraphs) { substring, _, _, _ in
             if  let substring = substring,
@@ -92,14 +103,7 @@ class LyricsPasteViewController: BaseViewController {
                     lyricsArr.append(substring)
             }
         }
-
-        let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
-        let uc = RecordsUseCase(recordsRepository: rp)
-        let vm = LyricsViewModel(usecase: uc)
-        vm.lyricsStringArray = lyricsArr
-        vm.defaultModel = self.defaultModel
-        let vc = LyricsPasteCreateViewController(viewModel: vm, type: .create)
-        self.navigationController?.pushViewController(vc, animated: true)
+        return lyricsArr
     }
 
     override func configureUI() {

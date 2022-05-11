@@ -96,6 +96,16 @@ class AllRecordCateLongDetailCell: UITableViewCell {
 //        if myView.subMusicInfoLabel.text?.first == " " {
 //            myView.subMusicInfoLabel.text?.removeFirst()
 //        }
+        
+        let textCount = Array(record.recordContents).count
+        if textCount < 80 {
+            myView.readMoreButton.isHidden = true
+        } else {
+            myView.mainLabelView.numberOfLines = 3
+            myView.mainLabelView.sizeToFit()
+            myView.readMoreButton.isHidden = false
+        }
+        
         myView.circleImageView.setImage(with: record.music.albumImageURL)
         myView.backImageView.setImage(with: record.recordImageURL ?? "" )
         myView.titleLabel.text = record.recordTitle

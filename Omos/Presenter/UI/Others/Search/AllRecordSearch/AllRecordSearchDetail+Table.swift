@@ -48,22 +48,15 @@ extension AllRecordSearchDetailViewController: UITableViewDelegate, UITableViewD
                 cell.layoutIfNeeded()
 
                 if expandedIndexSet.contains(indexPath.row) {
-                    // cell.layoutIfNeeded()
                     cell.myView.mainLabelView.numberOfLines = 0
                     cell.myView.mainLabelView.sizeToFit()
                     cell.myView.mainLabelView.setNeedsLayout()
                     cell.myView.mainLabelView.layoutIfNeeded()
                     cell.myView.readMoreButton.isHidden = true
-                } else {
-                    if  cell.myView.mainLabelView.maxNumberOfLines < 4 {
-                        cell.myView.readMoreButton.isHidden = true
-                    } else {
-                        cell.myView.mainLabelView.numberOfLines = 3
-                        cell.myView.mainLabelView.sizeToFit()
-                        cell.myView.readMoreButton.isHidden = false
-                    }
                 }
-
+                
+                cell.layer.shouldRasterize = true
+                cell.layer.rasterizationScale = UIScreen.main.scale
                 cell.selectionStyle = . none
                 longCellBind(cell: cell, data: record)
                 return cell

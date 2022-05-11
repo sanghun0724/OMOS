@@ -10,7 +10,6 @@ import UIKit
 
 extension AllRecordDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print( "cell count \(lyricsArr.count)")
         return lyricsArr.count
     }
 

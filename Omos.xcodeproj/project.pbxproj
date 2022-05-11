@@ -568,7 +568,6 @@
 			children = (
 				B6BC148527BFF6A50067D8FB /* CoreTabsDetail */,
 				B650873727AF94500020D2C1 /* Others */,
-				B650873627AF94400020D2C1 /* Posts */,
 				B612199827AE9420006AEAC9 /* Auth */,
 				B612199727AE9414006AEAC9 /* CoreTabs */,
 			);
@@ -709,13 +708,6 @@
 				B6183CC227D733350035AA06 /* SearchAlbumDetailViewModel.swift */,
 			);
 			path = SearchDetail;
-			sourceTree = "<group>";
-		};
-		B650873627AF94400020D2C1 /* Posts */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Posts;
 			sourceTree = "<group>";
 		};
 		B650873727AF94500020D2C1 /* Others */ = {

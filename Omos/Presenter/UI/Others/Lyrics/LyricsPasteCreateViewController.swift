@@ -290,10 +290,6 @@ class LyricsPasteCreateViewController: BaseViewController {
                 self?.scrollView.setContentOffset(CGPoint(x: 0, y: (self?.scrollView.contentSize.height)! - (self?.scrollView.bounds.size.height)!), animated: true)
             }).disposed(by: disposeBag)
         
-//        viewModel.loading
-//            .subscribe(onNext: { [weak self] _ in
-//            }).disposed(by: disposeBag)
-        
         selfView.lockButton.rx.tap
             .scan(false) { lastState, _ in
                 !lastState
