@@ -127,7 +127,7 @@ extension AllRecordSearchDetailViewController: UITableViewDelegate, UITableViewD
 }
 
 extension AllRecordSearchDetailViewController {
-    func lyricsCellBind(cell: AllrecordLyricsTableCell, data: OneMusicRecordRespone, indexPath: IndexPath) {
+    func lyricsCellBind(cell: AllrecordLyricsTableCell, data: RecordResponse, indexPath: IndexPath) {
         cell.selfView.reportButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] _ in
@@ -194,7 +194,7 @@ extension AllRecordSearchDetailViewController {
             }).disposed(by: cell.disposeBag)
     }
 
-    func shortCellBind(cell: AllRecordCateShortDetailCell, data: OneMusicRecordRespone) {
+    func shortCellBind(cell: AllRecordCateShortDetailCell, data: RecordResponse) {
         cell.myView.reportButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] _ in
@@ -261,7 +261,7 @@ extension AllRecordSearchDetailViewController {
             }).disposed(by: cell.disposeBag)
     }
 
-    func longCellBind(cell: AllRecordCateLongDetailCell, data: OneMusicRecordRespone) {
+    func longCellBind(cell: AllRecordCateLongDetailCell, data: RecordResponse) {
         cell.myView.reportButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] _ in

@@ -74,7 +74,7 @@ class AllrecordLyricsTableCell: UITableViewCell {
         disposeBag = DisposeBag()
     }
 
-    func configureModel(record: CategoryRespone) {
+    func configureModel(record: RecordResponse) {
         selfView.musicTitleLabel.text = record.music.musicTitle
         selfView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
         if selfView.subMusicInfoLabel.text?.first == " " {
@@ -107,7 +107,7 @@ class AllrecordLyricsTableCell: UITableViewCell {
         }
     }
 
-    func configureOneMusic(record: OneMusicRecordRespone) {
+    func configureOneMusic(record: RecordResponse) {
         selfView.musicTitleLabel.text = record.music.musicTitle
         selfView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
         if selfView.subMusicInfoLabel.text?.first == " " {

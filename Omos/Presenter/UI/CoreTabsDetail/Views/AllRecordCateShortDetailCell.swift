@@ -41,7 +41,7 @@ class AllRecordCateShortDetailCell: UITableViewCell {
         disposeBag = DisposeBag()
     }
     
-    func configureModel(record: CategoryRespone) {
+    func configureModel(record: RecordResponse) {
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
         myView.circleImageView.setImage(with: record.music.albumImageURL)
@@ -71,7 +71,7 @@ class AllRecordCateShortDetailCell: UITableViewCell {
         }
     }
     
-    func configureOneMusic(record: OneMusicRecordRespone) {
+    func configureOneMusic(record: RecordResponse) {
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
         if myView.subMusicInfoLabel.text?.first == " " {

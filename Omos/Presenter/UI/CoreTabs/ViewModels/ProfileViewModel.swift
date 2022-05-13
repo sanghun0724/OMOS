@@ -15,10 +15,10 @@ class ProfileViewModel: BaseViewModel {
     let myProfileRecord = PublishSubject<MyProfileRecordResponse>()
     var currentMyProfileRecord: MyProfileRecordResponse = .init(likedRecords: [], scrappedRecords: [])
 
-    let likeRecord = PublishSubject<[MyRecordRespone]>()
-    var currentLikeRecord: [MyRecordRespone] = []
-    let scrapRecord = PublishSubject<[MyRecordRespone]>()
-    var currentScrapRecord: [MyRecordRespone] = []
+    let likeRecord = PublishSubject<[MyRecordResponse]>()
+    var currentLikeRecord: [MyRecordResponse] = []
+    let scrapRecord = PublishSubject<[MyRecordResponse]>()
+    var currentScrapRecord: [MyRecordResponse] = []
 
     let logoutState = PublishSubject<Bool>()
     let updateProfileState = PublishSubject<Bool>()
@@ -38,7 +38,6 @@ class ProfileViewModel: BaseViewModel {
         allLoading.onNext(true)
         Observable.combineLatest(profileLoading, recordLoading) { !($0 || $1) }
         .subscribe(onNext: { [weak self] loading in
-            print("loading \(loading)")
             if loading {
                 self?.allLoading.onNext(false)
             }

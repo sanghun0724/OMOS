@@ -15,7 +15,7 @@ class MyRecordDetailViewModel: BaseViewModel {
     let modify = PublishSubject<Bool>()
     let done = PublishSubject<Bool>()
     let loading = BehaviorSubject<Bool>(value: false)
-    var recordData: MyRecordRespone?
+    var recordData: MyRecordResponse?
     let usecase: RecordsUseCase
     let errorMessage = BehaviorSubject<String?>(value: nil)
 

@@ -13,8 +13,8 @@ class AllRecordCateDetailViewModel: BaseViewModel {
     let likeFilter = PublishSubject<Bool>()
     let randomFilter = PublishSubject<Bool>()
     let loading = BehaviorSubject<Bool>(value: false)
-    let cateRecords = BehaviorSubject<[CategoryRespone]>(value: [])
-    var currentCateRecords: [CategoryRespone] = []
+    let cateRecords = BehaviorSubject<[RecordResponse]>(value: [])
+    var currentCateRecords: [RecordResponse] = []
     let reportState = PublishSubject<Bool>()
     let errorMessage = BehaviorSubject<String?>(value: nil)
     let usecase: RecordsUseCase

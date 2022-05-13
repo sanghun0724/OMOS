@@ -99,19 +99,6 @@ extension AllRecordCateDetailViewController: UITableViewDelegate, UITableViewDat
         return  longCellHeights[indexPath] ?? UITableView.automaticDimension
     }
 
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.section == 0 {
-//            if self.myCateType == .asc || self.myCateType == .lyrics {
-//                return Constant.mainHeight * 0.63
-//            }
-//        }
-//        return UITableView.automaticDimension
-//    }
-
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-     
-    }
-
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if cell.height == 44.0 { return }
         shortCellHeights[indexPath] = cell.height
@@ -128,7 +115,7 @@ extension AllRecordCateDetailViewController: UITableViewDelegate, UITableViewDat
 }
 
 extension AllRecordCateDetailViewController {
-    func lyricsCellBind(cell: AllrecordLyricsTableCell, data: CategoryRespone, indexPath: IndexPath) {
+    func lyricsCellBind(cell: AllrecordLyricsTableCell, data: RecordResponse, indexPath: IndexPath) {
         cell.selfView.reportButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] _ in
@@ -195,7 +182,7 @@ extension AllRecordCateDetailViewController {
             }).disposed(by: cell.disposeBag)
     }
 
-    func shortCellBind(cell: AllRecordCateShortDetailCell, data: CategoryRespone) {
+    func shortCellBind(cell: AllRecordCateShortDetailCell, data: RecordResponse) {
         cell.myView.reportButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] _ in
@@ -262,7 +249,7 @@ extension AllRecordCateDetailViewController {
             }).disposed(by: cell.disposeBag)
     }
 
-    func longCellBind(cell: AllRecordCateLongDetailCell, data: CategoryRespone, indexPath: IndexPath) {
+    func longCellBind(cell: AllRecordCateLongDetailCell, data: RecordResponse, indexPath: IndexPath) {
         cell.myView.reportButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] _ in

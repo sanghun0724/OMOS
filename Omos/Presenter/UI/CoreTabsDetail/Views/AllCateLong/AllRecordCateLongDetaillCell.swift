@@ -48,7 +48,7 @@ class AllRecordCateLongDetailCell: UITableViewCell {
         myView.mainLabelView.text = nil
     }
     
-    func configureModel(record: CategoryRespone) {
+    func configureModel(record: RecordResponse) {
         myView.mainLabelView.text = record.recordContents
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
@@ -90,13 +90,9 @@ class AllRecordCateLongDetailCell: UITableViewCell {
         }
     }
     
-    func configureOneMusic(record: OneMusicRecordRespone) {
+    func configureOneMusic(record: RecordResponse) {
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
-//        if myView.subMusicInfoLabel.text?.first == " " {
-//            myView.subMusicInfoLabel.text?.removeFirst()
-//        }
-        
         let textCount = Array(record.recordContents).count
         if textCount < 80 {
             myView.readMoreButton.isHidden = true
@@ -138,9 +134,6 @@ class AllRecordCateLongDetailCell: UITableViewCell {
     func configureMyDjRecord(record: MyDjResponse) {
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
-//        if myView.subMusicInfoLabel.text?.first == " " {
-//            myView.subMusicInfoLabel.text?.removeFirst()
-//        }
         myView.circleImageView.setImage(with: record.music.albumImageURL)
         myView.backImageView.setImage(with: record.recordImageURL ?? "")
         myView.titleLabel.text = record.recordTitle

@@ -23,11 +23,11 @@ class RecordsUseCase {
         recordsRepository.recordDetail(postId: postId, userId: userId)
     }
 
-    func cateFetch(type: CateType, postId: Int?, size: Int, sort: String, userid: Int) -> Single<[CategoryRespone]> {
+    func cateFetch(type: CateType, postId: Int?, size: Int, sort: String, userid: Int) -> Single<[RecordResponse]> {
         recordsRepository.cateFetch(type: type, postId: postId, size: size, sort: sort, userid: userid)
     }
 
-    func myRecordFetch(userid: Int) -> Single<[MyRecordRespone]> {
+    func myRecordFetch(userid: Int) -> Single<[MyRecordResponse]> {
         recordsRepository.myRecordFetch(userid: userid)
     }
 
@@ -47,7 +47,7 @@ class RecordsUseCase {
         recordsRepository.recordUpdate(postId: postId, request: request)
     }
 
-    func oneMusicRecordFetch(musicId: String, request: OneMusicRecordRequest) -> Single<[OneMusicRecordRespone]> {
+    func oneMusicRecordFetch(musicId: String, request: OneMusicRecordRequest) -> Single<[RecordResponse]> {
         recordsRepository.oneMusicRecordFetch(musicId: musicId, request: request)
     }
 

@@ -27,11 +27,11 @@ class MyProfileUseCase {
         myProfileRepository.updateProfile(request: request)
     }
 
-    func likeRecords(userId: Int) -> Single<[MyRecordRespone]> {
+    func likeRecords(userId: Int) -> Single<[MyRecordResponse]> {
         myProfileRepository.likeRecords(userId: userId)
     }
 
-    func scrapRecords(userId: Int) -> Single<[MyRecordRespone]> {
+    func scrapRecords(userId: Int) -> Single<[MyRecordResponse]> {
         myProfileRepository.scrapRecords(userId: userId)
     }
 

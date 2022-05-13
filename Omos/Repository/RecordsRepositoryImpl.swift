@@ -48,8 +48,8 @@ class RecordsRepositoryImpl: RecordsRepository {
         }
     }
 
-    func cateFetch(type: CateType, postId: Int?, size: Int, sort: String, userid: Int) -> Single<[CategoryRespone]> {
-        Single<[CategoryRespone]>.create { [weak self] single in
+    func cateFetch(type: CateType, postId: Int?, size: Int, sort: String, userid: Int) -> Single<[RecordResponse]> {
+        Single<[RecordResponse]>.create { [weak self] single in
             self?.recordAPI.categoryFetch(cateType: type, request: .init(postId: postId, size: size, sortType: sort, userid: userid), completion: { result in
                 switch result {
                 case .success(let data):
@@ -64,8 +64,8 @@ class RecordsRepositoryImpl: RecordsRepository {
         }
     }
 
-    func myRecordFetch(userid: Int) -> Single<[MyRecordRespone]> {
-        Single<[MyRecordRespone]>.create { [weak self] single in
+    func myRecordFetch(userid: Int) -> Single<[MyRecordResponse]> {
+        Single<[MyRecordResponse]>.create { [weak self] single in
             self?.recordAPI.myRecordFetch(userid: userid, completion: { result in
                 switch result {
                 case .success(let data):
@@ -144,8 +144,8 @@ class RecordsRepositoryImpl: RecordsRepository {
         }
     }
 
-    func oneMusicRecordFetch(musicId: String, request: OneMusicRecordRequest) -> Single<[OneMusicRecordRespone]> {
-        Single<[OneMusicRecordRespone]>.create { [weak self] single in
+    func oneMusicRecordFetch(musicId: String, request: OneMusicRecordRequest) -> Single<[RecordResponse]> {
+        Single<[RecordResponse]>.create { [weak self] single in
             self?.recordAPI.oneMusicRecordFetch(musicId: musicId, request: request, completion: { result in
                 switch result {
                 case .success(let data):

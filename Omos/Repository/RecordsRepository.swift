@@ -11,13 +11,13 @@ protocol RecordsRepository {
     init(recordAPI: RecordAPI)
     func selectRecord() -> Single<SelectResponse>
     func recordDetail(postId: Int, userId: Int) -> Single<DetailRecordResponse>
-    func cateFetch(type: CateType, postId: Int?, size: Int, sort: String, userid: Int) -> Single<[CategoryRespone]>
-    func myRecordFetch(userid: Int) -> Single<[MyRecordRespone]>
+    func cateFetch(type: CateType, postId: Int?, size: Int, sort: String, userid: Int) -> Single<[RecordResponse]>
+    func myRecordFetch(userid: Int) -> Single<[MyRecordResponse]>
     func save(saveParameter: SaveParameter) -> Single<SaveRespone>
     func recordIspublic(postId: Int) -> Single<StateRespone>
     func recordDelete(postId: Int) -> Single<StateRespone>
     func recordUpdate(postId: Int, request: UpdateRequest) -> Single<StateRespone>
-    func oneMusicRecordFetch(musicId: String, request: OneMusicRecordRequest) -> Single<[OneMusicRecordRespone]>
+    func oneMusicRecordFetch(musicId: String, request: OneMusicRecordRequest) -> Single<[RecordResponse]>
     // MARK: Interaction API
     func saveScrap(postId: Int, userId: Int) -> Single<StateRespone>
     func deleteScrap(postId: Int, userId: Int) -> Single<StateRespone>

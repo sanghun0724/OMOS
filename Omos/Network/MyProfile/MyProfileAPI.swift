@@ -45,8 +45,8 @@ class MyProfileAPI {
         }
     }
 
-    func likeRecords(userId: Int, completion:@escaping(Result<[MyRecordRespone], Error>) -> Void) {
-            AF.request(RecordTarget.likeRecords(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[MyRecordRespone]>) in
+    func likeRecords(userId: Int, completion:@escaping(Result<[MyRecordResponse], Error>) -> Void) {
+            AF.request(RecordTarget.likeRecords(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[MyRecordResponse]>) in
                 switch response.result {
                 case .success(let data):
                     completion(.success(data))
@@ -58,8 +58,8 @@ class MyProfileAPI {
             }
     }
 
-    func scrapRecords(userId: Int, completion:@escaping(Result<[MyRecordRespone], Error>) -> Void) {
-            AF.request(RecordTarget.scrapRecords(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[MyRecordRespone]>) in
+    func scrapRecords(userId: Int, completion:@escaping(Result<[MyRecordResponse], Error>) -> Void) {
+            AF.request(RecordTarget.scrapRecords(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[MyRecordResponse]>) in
                 switch response.result {
                 case .success(let data):
                     completion(.success(data))
