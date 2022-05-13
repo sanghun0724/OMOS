@@ -69,7 +69,7 @@ class RecordsUseCase {
     }
 
     // MARK: Mydj
-    func myDjAllRecord(userId: Int, myDjRequest: MyDjRequest) -> Single<[MyDjResponse]> {
+    func myDjAllRecord(userId: Int, myDjRequest: MyDjRequest) -> Single<[RecordResponse]> {
         recordsRepository.myDjAllRecord(userId: userId, myDjRequest: myDjRequest)
     }
 
@@ -89,7 +89,7 @@ class RecordsUseCase {
         recordsRepository.myDjList(userId: userId)
     }
 
-    func userRecords(fromId: Int, toId: Int) -> Single<[MyDjResponse]> {
+    func userRecords(fromId: Int, toId: Int) -> Single<[RecordResponse]> {
         recordsRepository.userRecords(fromId: fromId, toId: toId)
     }
 

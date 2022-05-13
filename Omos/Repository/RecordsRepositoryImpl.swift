@@ -224,8 +224,8 @@ class RecordsRepositoryImpl: RecordsRepository {
         }
     }
 
-    func myDjAllRecord(userId: Int, myDjRequest: MyDjRequest) -> Single<[MyDjResponse]> {
-        Single<[MyDjResponse]>.create { [weak self] single in
+    func myDjAllRecord(userId: Int, myDjRequest: MyDjRequest) -> Single<[RecordResponse]> {
+        Single<[RecordResponse]>.create { [weak self] single in
             self?.recordAPI.myDjAllRecord(userId: userId, myDjRequest: myDjRequest, completion: { result in
                 switch result {
                 case .success(let data):
@@ -239,11 +239,6 @@ class RecordsRepositoryImpl: RecordsRepository {
             return Disposables.create()
         }
     }
-//    func MyDjAllRecord(userId:Int,MyDjRequest:MyDjRequest) -> Single<[MyDjResponse]>
-//    func saveFollow(fromId:Int,toId:Int) -> Single<StateRespone>
-//    func deleteFollow(fromId:Int,toId:Int) -> Single<StateRespone>
-//    func myDjProfile(fromId:Int,toId:Int) -> Single<MyDjProfileResponse>
-//    func myDjList(userId:Int) -> Single<[MyDjListResponse]>
 
     func saveFollow(fromId: Int, toId: Int) -> Single<StateRespone> {
         Single<StateRespone>.create { [weak self] single in
@@ -309,8 +304,8 @@ class RecordsRepositoryImpl: RecordsRepository {
         }
     }
 
-    func userRecords(fromId: Int, toId: Int) -> Single<[MyDjResponse]> {
-        Single<[MyDjResponse]>.create { [weak self] single in
+    func userRecords(fromId: Int, toId: Int) -> Single<[RecordResponse]> {
+        Single<[RecordResponse]>.create { [weak self] single in
             self?.recordAPI.userRecords(fromId: fromId, toId: toId, completion: { result in
                 switch result {
                 case .success(let data):

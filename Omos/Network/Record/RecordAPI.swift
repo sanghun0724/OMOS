@@ -182,8 +182,8 @@ class RecordAPI {
     }
 
     // MARK: MyDj API
-    func myDjAllRecord(userId: Int, myDjRequest: MyDjRequest, completion:@escaping(Result<[MyDjResponse], Error>) -> Void) {
-        AF.request(RecordTarget.myDjAllRecord(userId: userId, myDjRequest), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[MyDjResponse]>) in
+    func myDjAllRecord(userId: Int, myDjRequest: MyDjRequest, completion:@escaping(Result<[RecordResponse], Error>) -> Void) {
+        AF.request(RecordTarget.myDjAllRecord(userId: userId, myDjRequest), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[RecordResponse]>) in
             switch response.result {
             case .success(let data):
                 print(data)
@@ -247,8 +247,8 @@ class RecordAPI {
         }
     }
 
-    func userRecords(fromId: Int, toId: Int, completion:@escaping(Result<[MyDjResponse], Error>) -> Void) {
-        AF.request(RecordTarget.userRecords(fromId: fromId, toId: toId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[MyDjResponse]>) in
+    func userRecords(fromId: Int, toId: Int, completion:@escaping(Result<[RecordResponse], Error>) -> Void) {
+        AF.request(RecordTarget.userRecords(fromId: fromId, toId: toId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[RecordResponse]>) in
             switch response.result {
             case .success(let data):
                 print(data)

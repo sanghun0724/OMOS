@@ -12,27 +12,6 @@ struct MyDjRequest: Codable {
     let size: Int
 }
 
-struct MyDjResponse: Codable {
-       let music: Music
-       let recordID: Int
-       let recordTitle, recordContents: String
-       let recordImageURL: String?
-       let createdDate, category: String
-       let viewsCnt, userID: Int
-       let nickname: String
-       let likeCnt, scrapCnt: Int
-       let isLiked, isScraped: Bool
-
-       enum CodingKeys: String, CodingKey {
-           case music
-           case recordID = "recordId"
-           case recordTitle, recordContents
-           case recordImageURL = "recordImageUrl"
-           case createdDate, category, viewsCnt
-           case userID = "userId"
-           case nickname, likeCnt, scrapCnt, isLiked, isScraped
-       }
-}
 
 struct MyDjProfileResponse: Codable {
     let count: Count

@@ -25,12 +25,12 @@ protocol RecordsRepository {
     func deleteLike(postId: Int, userId: Int) -> Single<StateRespone>
 
     // MARK: mydj
-    func myDjAllRecord(userId: Int, myDjRequest: MyDjRequest) -> Single<[MyDjResponse]>
+    func myDjAllRecord(userId: Int, myDjRequest: MyDjRequest) -> Single<[RecordResponse]>
     func saveFollow(fromId: Int, toId: Int) -> Single<StateRespone>
     func deleteFollow(fromId: Int, toId: Int) -> Single<StateRespone>
     func myDjProfile(fromId: Int, toId: Int) -> Single<MyDjProfileResponse>
     func myDjList(userId: Int) -> Single<[MyDjListResponse]>
-    func userRecords(fromId: Int, toId: Int) -> Single<[MyDjResponse]>
+    func userRecords(fromId: Int, toId: Int) -> Single<[RecordResponse]>
     func reportRecord(postId: Int) -> Single<StateRespone>
     func userReport(userId: Int) -> Single<StateRespone>
     func awsDeleteImage(request: AwsDeleteImageRequest) -> Single<StateRespone>
