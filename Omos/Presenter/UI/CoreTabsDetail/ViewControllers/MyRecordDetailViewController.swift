@@ -63,7 +63,7 @@ class MyRecordDetailViewController: BaseViewController {
     func didTapInstagram() {
         if category.isEmpty { return }
         showDecoView()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25 ) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2 ) {
             if let storyShareURL = URL(string: "instagram-stories://share") {
                 if UIApplication.shared.canOpenURL(storyShareURL) {
                     let renderer = UIGraphicsImageRenderer(size: self.view.bounds.size)

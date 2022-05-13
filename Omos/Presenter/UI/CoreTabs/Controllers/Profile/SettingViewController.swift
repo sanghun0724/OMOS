@@ -84,7 +84,6 @@ class SettingViewController: BaseViewController {
         viewModel.logOut(userId: Account.currentUser)
         Account.currentUser = -1
         // local
-
     }
 
     private func resetDefaults() {
