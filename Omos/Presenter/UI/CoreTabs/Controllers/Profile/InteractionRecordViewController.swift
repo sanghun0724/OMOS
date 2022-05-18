@@ -104,7 +104,7 @@ extension InteractionRecordViewController: UITableViewDelegate, UITableViewDataS
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        let data: MyRecordRespone
+        let data: MyRecordResponse
         if type == .like {
              data = viewModel.currentLikeRecord[indexPath.row]
         } else {

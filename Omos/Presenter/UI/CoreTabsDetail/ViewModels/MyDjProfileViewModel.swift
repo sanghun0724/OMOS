@@ -13,10 +13,10 @@ class MyDjProfileViewModel: BaseViewModel {
     let recordsLoading = BehaviorSubject<Bool>(value: false)
     let mydjProfile = PublishSubject<MyDjProfileResponse>()
     var currentMydjProfile: MyDjProfileResponse?
-    let userRecords = PublishSubject<[MyRecordRespone]>()
+    let userRecords = PublishSubject<[MyRecordResponse]>()
     let userReportState = PublishSubject<Bool>()
     let userBlockState = PublishSubject<Bool>()
-    var currentUserRecrods: [MyRecordRespone] = []
+    var currentUserRecrods: [MyRecordResponse] = []
     let usecase: RecordsUseCase
     let errorMessage = BehaviorSubject<String?>(value: nil)
 

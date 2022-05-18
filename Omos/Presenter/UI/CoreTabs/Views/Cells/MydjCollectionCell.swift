@@ -38,7 +38,6 @@ class MydjCollectionCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         configureUI()
-
         layoutIfNeeded()
         djImageView.layer.cornerCurve = .circular
         djImageView.layer.cornerRadius = djImageView.height / 2

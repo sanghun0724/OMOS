@@ -10,7 +10,7 @@ import UIKit
 class MyRecordViewController: BaseViewController {
     private let selfView = MyRecordView()
     let viewModel: MyRecordViewModel
-    var myRecord: [MyRecordRespone] = []
+    var myRecord: [MyRecordResponse] = []
 
     init(viewModel: MyRecordViewModel) {
         self.viewModel = viewModel

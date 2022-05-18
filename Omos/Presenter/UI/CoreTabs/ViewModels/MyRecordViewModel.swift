@@ -10,9 +10,9 @@ import RxSwift
 
 class MyRecordViewModel: BaseViewModel {
     let loading = BehaviorSubject<Bool>(value: false)
-    let myRecords = BehaviorSubject<[MyRecordRespone]>(value: [])
+    let myRecords = BehaviorSubject<[MyRecordResponse]>(value: [])
     let isEmpty = PublishSubject<Bool>()
-    var currentMyRecords: [MyRecordRespone] = []
+    var currentMyRecords: [MyRecordResponse] = []
     let errorMessage = BehaviorSubject<String?>(value: nil)
     let usecase: RecordsUseCase
 

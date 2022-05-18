@@ -10,16 +10,16 @@ import RxSwift
 
 class MyDjViewModel: BaseViewModel {
     let cellHeight = PublishSubject<IndexPath>()
-    let myDjRecord = PublishSubject<[MyDjResponse]>()
-    var currentMyDjRecord: [MyDjResponse] = []
+    let myDjRecord = PublishSubject<[RecordResponse]>()
+    var currentMyDjRecord: [RecordResponse] = []
     let myDjList = PublishSubject<[MyDjListResponse]>()
     var currentMyDjList: [MyDjListResponse] = []
     let loading = PublishSubject<Bool>()
     let isEmpty = BehaviorSubject<Bool>(value: false)
     let errorMessage = BehaviorSubject<String?>(value: nil)
 
-    let userRecords = PublishSubject<[MyDjResponse]>()
-    var currentUserRecrods: [MyDjResponse] = []
+    let userRecords = PublishSubject<[RecordResponse]>()
+    var currentUserRecrods: [RecordResponse] = []
     let recordsLoading = PublishSubject<Bool>()
 
     let reportState = PublishSubject<Bool>()

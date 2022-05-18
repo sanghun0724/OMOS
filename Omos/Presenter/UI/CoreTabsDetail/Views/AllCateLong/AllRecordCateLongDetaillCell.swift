@@ -48,7 +48,7 @@ class AllRecordCateLongDetailCell: UITableViewCell {
         myView.mainLabelView.text = nil
     }
     
-    func configureModel(record: CategoryRespone) {
+    func configureModel(record: RecordResponse) {
         myView.mainLabelView.text = record.recordContents
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
@@ -71,78 +71,6 @@ class AllRecordCateLongDetailCell: UITableViewCell {
             myView.mainLabelView.numberOfLines = 3
             myView.mainLabelView.sizeToFit()
             myView.readMoreButton.isHidden = false
-        }
-        
-        if record.isLiked {
-            myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
-            myView.likeCountLabel.textColor = .mainOrange
-        } else {
-            myView.likeButton.setImage(UIImage(named: "emptyLove"), for: .normal)
-            myView.likeCountLabel.textColor = .white
-        }
-        
-        if record.isScraped {
-            myView.scrapButton.setImage( UIImage(named: "fillStar"), for: .normal)
-            myView.scrapCountLabel.textColor = .mainOrange
-        } else {
-            myView.scrapButton.setImage( UIImage(named: "emptyStar"), for: .normal)
-            myView.scrapCountLabel.textColor = .white
-        }
-    }
-    
-    func configureOneMusic(record: OneMusicRecordRespone) {
-        myView.musicTitleLabel.text = record.music.musicTitle
-        myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
-//        if myView.subMusicInfoLabel.text?.first == " " {
-//            myView.subMusicInfoLabel.text?.removeFirst()
-//        }
-        myView.circleImageView.setImage(with: record.music.albumImageURL)
-        myView.backImageView.setImage(with: record.recordImageURL ?? "" )
-        myView.titleLabel.text = record.recordTitle
-        myView.createdLabel.text = record.createdDate.toDate()
-        myView.mainLabelView.text = record.recordContents
-        myView.nicknameLabel.text = record.nickname
-        myView.likeCountLabel.text = String(record.likeCnt)
-        myView.scrapCountLabel.text = String(record.scrapCnt)
-        myView.cateLabel.text = " | \(record.category.getReverseCate())"
-        if myView.mainLabelView.maxNumberOfLines < 3 {
-            myView.readMoreButton.isHidden = true
-        }
-        if record.isLiked {
-            myView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
-            myView.likeCountLabel.textColor = .mainOrange
-        } else {
-            myView.likeButton.setImage(UIImage(named: "emptyLove"), for: .normal)
-            myView.likeCountLabel.textColor = .white
-        }
-        
-        if record.isScraped {
-            myView.scrapButton.setImage( UIImage(named: "fillStar"), for: .normal)
-            myView.scrapCountLabel.textColor = .mainOrange
-        } else {
-            myView.scrapButton.setImage( UIImage(named: "emptyStar"), for: .normal)
-            myView.scrapCountLabel.textColor = .white
-        }
-    }
-    
-    func configureMyDjRecord(record: MyDjResponse) {
-        myView.musicTitleLabel.text = record.music.musicTitle
-        myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
-//        if myView.subMusicInfoLabel.text?.first == " " {
-//            myView.subMusicInfoLabel.text?.removeFirst()
-//        }
-        myView.circleImageView.setImage(with: record.music.albumImageURL)
-        myView.backImageView.setImage(with: record.recordImageURL ?? "")
-        myView.titleLabel.text = record.recordTitle
-        myView.createdLabel.text = record.createdDate.toDate()
-        myView.mainLabelView.text = record.recordContents
-        myView.nicknameLabel.text = record.nickname
-        myView.likeCountLabel.text = String(record.likeCnt)
-        myView.scrapCountLabel.text = String(record.scrapCnt)
-        myView.cateLabel.text = " | \(record.category.getReverseCate())"
-        
-        if myView.mainLabelView.maxNumberOfLines < 3 {
-            myView.readMoreButton.isHidden = true
         }
         
         if record.isLiked {

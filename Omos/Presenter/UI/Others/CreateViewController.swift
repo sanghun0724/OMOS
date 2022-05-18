@@ -129,9 +129,9 @@ class CreateViewController: BaseViewController {
         for subView in self.selfView.textCoverView.subviews {
             if subView.isKind(of: IRStickerView.self) {
                 let sticker = subView as! IRStickerView
-                print(sticker.contentImage!)
-                print(sticker.contentView.frame)
-                print(sticker.contentView.transform)
+//                print(sticker.contentImage!)
+//                print(sticker.contentView.frame)
+//                print(sticker.contentView.transform)
             }
         }
         var mainText: String?

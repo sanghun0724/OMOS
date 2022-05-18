@@ -6,7 +6,6 @@
 //
 
 import UIKit
-// import SnapKit
 
 class MyRecordView: BaseView {
     let emptyView = EmptyView()
@@ -18,8 +17,6 @@ class MyRecordView: BaseView {
         table.backgroundColor = .mainBlack
         table.showsVerticalScrollIndicator = false
         table.automaticallyAdjustsScrollIndicatorInsets = false
-//        table.contentInsetAdjustmentBehavior = .never
-//        table.insetsContentViewsToSafeArea = false
         return table
     }()
 

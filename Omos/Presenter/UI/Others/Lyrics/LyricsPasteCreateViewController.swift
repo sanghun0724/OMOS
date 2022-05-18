@@ -136,7 +136,6 @@ class LyricsPasteCreateViewController: BaseViewController {
                 content += (desc + "\n")
             }
         }
-        print(content)
         if selfView.titleTextView.text.isEmpty || selfView.titleTextView.text == "레코드 제목을 입력해주세요" || !state {
             setAlert()
             return
@@ -291,10 +290,6 @@ class LyricsPasteCreateViewController: BaseViewController {
                 self?.scrollView.setContentOffset(CGPoint(x: 0, y: (self?.scrollView.contentSize.height)! - (self?.scrollView.bounds.size.height)!), animated: true)
             }).disposed(by: disposeBag)
         
-//        viewModel.loading
-//            .subscribe(onNext: { [weak self] _ in
-//            }).disposed(by: disposeBag)
-        
         selfView.lockButton.rx.tap
             .scan(false) { lastState, _ in
                 !lastState
@@ -419,7 +414,6 @@ class LyricsPasteCreateViewController: BaseViewController {
         let picker = YPImagePicker(configuration: config)
         picker.didFinishPicking { [unowned picker] items, cancelled in
             if let photo = items.singlePhoto {
-                print(photo.image) // Final image selected by the user
                 let cropViewController = Mantis.cropViewController(image: photo.image)
                 cropViewController.delegate = self
                 cropViewController.modalPresentationStyle = .fullScreen
@@ -468,7 +462,7 @@ extension LyricsPasteCreateViewController: UITextViewDelegate {
             if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 textView.text = "가사해석을 적어주세요"
                 textView.textColor = .mainGrey7
-                // selfView.remainTextCount.text = "\(0)/250"
+                // selfView.remainTextCount.text = "\(0)/1100"
             }
         }
     }

@@ -70,11 +70,4 @@ class TextTableCell: UITableViewCell, UITextViewDelegate {
         }
     }
     
-    //    func textViewDidChange(_ textView: UITextView) {
-    //        if let delegate = delegate {
-    //            delegate.updateTextViewHeight(self, textView)
-    //        }
-    //        print("check")
-    //    }
-    
 }

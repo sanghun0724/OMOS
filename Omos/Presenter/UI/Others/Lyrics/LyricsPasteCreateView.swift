@@ -369,6 +369,7 @@ class LyricsPasteCreateView: BaseView {
         lastView.addSubview(stickerLabel)
     }
     
+    /// calculate adjust LastView height when Keyboard show
     private func operateLastViewHeight() {
         let remainTextHeight = remainText.height + remainTextCount.height
         let remainTitleHeight = remainTitle.height + remainTitleCount.height

@@ -92,7 +92,7 @@ class LyricsPastView: BaseView {
 
     let remainTextCount: UILabel = {
        let label = UILabel()
-        label.text = "0/250"
+        label.text = "0/380"
         label.textColor = .mainGrey4
         return label
     }()

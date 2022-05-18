@@ -180,8 +180,6 @@ class MyRecordTableCell: UITableViewCell {
         }
         lockImageView.sizeToFit()
 
-//        layoutIfNeeded()
-
         let wholeWidth = titleLabel.intrinsicContentSize.width + artistLabel.intrinsicContentSize.width + 16
         if wholeWidth < backGroundView.width {
             labelCoverView.snp.remakeConstraints { make in
@@ -202,7 +200,7 @@ class MyRecordTableCell: UITableViewCell {
         labelCoverView.layoutIfNeeded()
     }
 
-    func configureModel(record: MyRecordRespone) {
+    func configureModel(record: MyRecordResponse) {
         albumImageView.setImage(with: record.music.albumImageURL)
         titleLabel.text = record.music.musicTitle
         artistLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" }
@@ -212,7 +210,7 @@ class MyRecordTableCell: UITableViewCell {
         record.isPublic ? (lockImageView.image = UIImage(named: "unlock")) : (lockImageView.image = UIImage(named: "lock"))
     }
 
-    func configureUserRecordModel(record: MyRecordRespone) {
+    func configureUserRecordModel(record: MyRecordResponse) {
         lockImageView.isHidden = true
         albumImageView.setImage(with: record.music.albumImageURL)
         titleLabel.text = record.music.musicTitle

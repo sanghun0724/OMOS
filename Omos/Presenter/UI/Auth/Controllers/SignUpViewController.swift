@@ -190,12 +190,10 @@ class SignUpViewController: UIViewController {
                 let ok = UIAlertAction(title: "완료", style: .default, handler: { _ -> Void in
                     self?.topView.emailCheckView.labelView.gestureRecognizers?.forEach( (self?.topView.emailCheckView.labelView.removeGestureRecognizer)!)
                     if alert.textFields?.first?.text ?? "" == self?.viewModel.currentEmailCheckCode.code {
-                        print("same")
                         self?.viewModel.validEmailCheck.accept(true)
                         self?.topView.emailCheckView.labelView.isHidden = true
                         self?.topView.emailCheckView.isSuccessView.isHidden = false
                     } else {
-                        print("diff")
                         self?.viewModel.validEmailCheck.accept(false)
                             let text = NSMutableAttributedString.init(string: "인증코드가 틀렸습니다. 다시 시도해주세요")
                                 let range = NSRange(location: 0, length: text.length)

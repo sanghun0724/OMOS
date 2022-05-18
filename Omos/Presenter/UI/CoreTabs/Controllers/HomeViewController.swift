@@ -49,7 +49,6 @@ class HomeViewController: BaseViewController {
     func bind() {
         viewModel.allLoading
             .subscribe(onNext: { [weak self] loading in
-                print("loading is \(loading)")
                 self?.selfView.loadingView.isHidden = !loading
                 if !loading {
                     self?.selfView.tableView.reloadData()

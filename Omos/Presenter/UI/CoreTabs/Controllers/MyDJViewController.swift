@@ -13,7 +13,6 @@ class MyDJViewController: BaseViewController, UIScrollViewDelegate {
     let selfView = MydjView()
     var expandedIndexSet: IndexSet = []
     var expandedIndexSet2: IndexSet = []
-
     var isPaging = false
     var hasNextPage = true
     var currentPage = -1
@@ -42,21 +41,12 @@ class MyDJViewController: BaseViewController, UIScrollViewDelegate {
         selfView.collectionView.dataSource = self
         viewModel.fetchMyDjList(userId: Account.currentUser)
         viewModel.fetchMyDjRecord(userId: Account.currentUser, request: .init(postId: viewModel.currentMyDjRecord.last?.recordID, size: 6))
-//        self.timer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true, block: {[weak self] (tt) in
-//            self?.viewModel.fetchMyDjList(userId: Account.currentUser)
-//            self?.selfView.collectionView.reloadData()
-//            })
-//            timer?.fire()
         NotificationCenter.default.addObserver(self, selector: #selector(didRecieveFollowNotification), name: NSNotification.Name.follow, object: nil)
 
         NotificationCenter.default.addObserver(self, selector: #selector(didRecieveFollowCancelNotification), name: NSNotification.Name.followCancel, object: nil)
 
         NotificationCenter.default.addObserver(self, selector: #selector(didRecieveReloadNotification), name: NSNotification.Name.reload, object: nil)
     }
-//
-//    deinit {
-//        timer?.invalidate()
-//    }
 
     @objc
     func didRecieveReloadNotification() {

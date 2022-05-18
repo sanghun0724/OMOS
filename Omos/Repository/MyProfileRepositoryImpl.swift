@@ -63,8 +63,8 @@ class MyProfileRepositoryImpl: MyProfileRepository {
         }
     }
 
-    func likeRecords(userId: Int) -> Single<[MyRecordRespone]> {
-        Single<[MyRecordRespone]>.create { [weak self] single in
+    func likeRecords(userId: Int) -> Single<[MyRecordResponse]> {
+        Single<[MyRecordResponse]>.create { [weak self] single in
             self?.myProfileAPI.likeRecords(userId: userId, completion: { result in
                 switch result {
                 case .success(let data):
@@ -79,8 +79,8 @@ class MyProfileRepositoryImpl: MyProfileRepository {
         }
     }
 
-    func scrapRecords(userId: Int) -> Single<[MyRecordRespone]> {
-        Single<[MyRecordRespone]>.create { [weak self] single in
+    func scrapRecords(userId: Int) -> Single<[MyRecordResponse]> {
+        Single<[MyRecordResponse]>.create { [weak self] single in
             self?.myProfileAPI.scrapRecords(userId: userId, completion: { result in
                 switch result {
                 case .success(let data):

@@ -13,8 +13,8 @@ class AllRecordSearchDetailViewModel: BaseViewModel {
     let likeFilter = PublishSubject<Bool>()
     let randomFilter = PublishSubject<Bool>()
     let loading = BehaviorSubject<Bool>(value: false)
-    let oneMusicRecords = PublishSubject<[OneMusicRecordRespone]>()
-    var currentOneMusicRecords: [OneMusicRecordRespone] = []
+    let oneMusicRecords = PublishSubject<[RecordResponse]>()
+    var currentOneMusicRecords: [RecordResponse] = []
     let reportState = PublishSubject<Bool>()
     let errorMessage = BehaviorSubject<String?>(value: nil)
     let isEmpty = BehaviorSubject<Bool>(value: false)

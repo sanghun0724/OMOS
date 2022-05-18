@@ -31,39 +31,32 @@ extension AllRecordSearchDetailViewController: UITableViewDelegate, UITableViewD
             case "LYRICS":
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllrecordLyricsTableCell.identifier, for: indexPath) as! AllrecordLyricsTableCell
                 cell.selfView.tableHeightConstraint?.deactivate()
-                cell.configureOneMusic(record: record)
+                cell.configureModel(record: record)
                 cell.selfView.tableView.reloadData()
                 lyricsCellBind(cell: cell, data: record, indexPath: indexPath)
                 cell.selectionStyle = . none
                 return cell
             case "A_LINE":
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateShortDetailCell.identifier, for: indexPath) as! AllRecordCateShortDetailCell
-                cell.configureOneMusic(record: record)
+                cell.configureModel(record: record)
                 shortCellBind(cell: cell, data: record)
                 cell.selectionStyle = . none
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateLongDetailCell.identifier, for: indexPath) as! AllRecordCateLongDetailCell
-                cell.configureOneMusic(record: record)
+                cell.configureModel(record: record)
                 cell.layoutIfNeeded()
 
                 if expandedIndexSet.contains(indexPath.row) {
-                    // cell.layoutIfNeeded()
                     cell.myView.mainLabelView.numberOfLines = 0
                     cell.myView.mainLabelView.sizeToFit()
                     cell.myView.mainLabelView.setNeedsLayout()
                     cell.myView.mainLabelView.layoutIfNeeded()
                     cell.myView.readMoreButton.isHidden = true
-                } else {
-                    if  cell.myView.mainLabelView.maxNumberOfLines < 4 {
-                        cell.myView.readMoreButton.isHidden = true
-                    } else {
-                        cell.myView.mainLabelView.numberOfLines = 3
-                        cell.myView.mainLabelView.sizeToFit()
-                        cell.myView.readMoreButton.isHidden = false
-                    }
                 }
-
+                
+                cell.layer.shouldRasterize = true
+                cell.layer.rasterizationScale = UIScreen.main.scale
                 cell.selectionStyle = . none
                 longCellBind(cell: cell, data: record)
                 return cell
@@ -134,7 +127,7 @@ extension AllRecordSearchDetailViewController: UITableViewDelegate, UITableViewD
 }
 
 extension AllRecordSearchDetailViewController {
-    func lyricsCellBind(cell: AllrecordLyricsTableCell, data: OneMusicRecordRespone, indexPath: IndexPath) {
+    func lyricsCellBind(cell: AllrecordLyricsTableCell, data: RecordResponse, indexPath: IndexPath) {
         cell.selfView.reportButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] _ in
@@ -201,7 +194,7 @@ extension AllRecordSearchDetailViewController {
             }).disposed(by: cell.disposeBag)
     }
 
-    func shortCellBind(cell: AllRecordCateShortDetailCell, data: OneMusicRecordRespone) {
+    func shortCellBind(cell: AllRecordCateShortDetailCell, data: RecordResponse) {
         cell.myView.reportButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] _ in
@@ -268,7 +261,7 @@ extension AllRecordSearchDetailViewController {
             }).disposed(by: cell.disposeBag)
     }
 
-    func longCellBind(cell: AllRecordCateLongDetailCell, data: OneMusicRecordRespone) {
+    func longCellBind(cell: AllRecordCateLongDetailCell, data: RecordResponse) {
         cell.myView.reportButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] _ in
