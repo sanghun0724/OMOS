@@ -112,7 +112,6 @@ class AllrecordLyricsTableCell: UITableViewCell, ConfigurableCell {
         self.selectionStyle = .none
         self.selfView.tableView.reloadData()
     }
-
 }
 
 extension AllrecordLyricsTableCell: UITableViewDelegate, UITableViewDataSource {

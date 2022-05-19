@@ -91,7 +91,6 @@ class AllRecordCateLongDetailCell: UITableViewCell ,ConfigurableCell, Expandable
     }
     
     func shrinkCell(_ hasSet:Bool) {
-        print("내말이")
         if hasSet {
             self.myView.mainLabelView.numberOfLines = 0
             self.myView.mainLabelView.sizeToFit()
@@ -106,7 +105,6 @@ class AllRecordCateLongDetailCell: UITableViewCell ,ConfigurableCell, Expandable
         self.layer.rasterizationScale = UIScreen.main.scale
         self.myView.lockButton.isHidden = true
         self.selectionStyle = . none
-        print("this work")
     }
     
 }

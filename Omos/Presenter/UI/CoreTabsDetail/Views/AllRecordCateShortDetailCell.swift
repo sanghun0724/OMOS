@@ -75,5 +75,4 @@ class AllRecordCateShortDetailCell: UITableViewCell ,ConfigurableCell {
         self.selectionStyle = .none
         self.myView.lockButton.isHidden = true
     }
-    
 }

@@ -86,10 +86,13 @@ extension AllRecordCateDetailViewController {
     private func bindCell(cell: UITableViewCell, data: RecordResponse, indexPath: IndexPath) {
         switch self.myCateType {
         case .lyrics:
-            lyricsCellBind(cell: cell as! AllrecordLyricsTableCell, data: data, indexPath: indexPath)
+            guard let cell = cell as? AllrecordLyricsTableCell else { return }
+            lyricsCellBind(cell: cell, data: data, indexPath: indexPath)
         case .aLine:
+            guard let cell = cell as? AllRecordCateShortDetailCell else { return }
             shortCellBind(cell: cell as! AllRecordCateShortDetailCell, data: data)
         default:
+            guard let cell = cell as? AllRecordCateLongDetailCell else { return }
             longCellBind(cell: cell as! AllRecordCateLongDetailCell, data: data,indexPath: indexPath)
         }
     }
