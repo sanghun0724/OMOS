@@ -44,17 +44,16 @@ class AllRecordSearchDetailViewModel: BaseViewModel {
     private func appendDataToItems() {
         for record in currentOneMusicRecords {
             if record.category == "LYRICS" {
-                let cateData:LyricsCellConfig = .init(item: record)
+                let cateData: LyricsCellConfig = .init(item: record)
                 items.append(cateData)
             } else if record.category == "A_LINE" {
-                let cateData:ShortCellConfig = .init(item: record)
+                let cateData: ShortCellConfig = .init(item: record)
                 items.append(cateData)
             } else {
-                let cateData:LongCellConfig = .init(item: record)
+                let cateData: LongCellConfig = .init(item: record)
                 items.append(cateData)
             }
         }
-       
     }
 
     // Interation

@@ -24,6 +24,8 @@ class MyDjViewModel: BaseViewModel {
 
     let reportState = PublishSubject<Bool>()
     let usecase: RecordsUseCase
+    
+    var items:[CellConfigurator] = []
 
     func fetchMyDjRecord(userId: Int, request: MyDjRequest) {
         loading.onNext(true)
@@ -36,13 +38,29 @@ class MyDjViewModel: BaseViewModel {
                 switch result {
                 case .success(let data):
                     self?.currentMyDjRecord += data
+                    self?.appendDataToItems()
                     self?.myDjRecord.onNext(data)
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)
                 }
             }).disposed(by: disposeBag)
     }
-
+    
+    private func appendDataToItems() {
+        for record in currentMyDjRecord {
+            if record.category == "LYRICS" {
+                let cateData: LyricsCellConfig = .init(item: record)
+                items.append(cateData)
+            } else if record.category == "A_LINE" {
+                let cateData: ShortCellConfig = .init(item: record)
+                items.append(cateData)
+            } else {
+                let cateData: LongCellConfig = .init(item: record)
+                items.append(cateData)
+            }
+        }
+    }
+    
     func fetchUserRecords(fromId: Int, toId: Int) {
         recordsLoading.onNext(true)
         usecase.userRecords(fromId: fromId, toId: toId)

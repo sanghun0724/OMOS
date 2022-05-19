@@ -22,7 +22,7 @@ class AllRecordCateDetailViewModel: BaseViewModel {
     let reportState = PublishSubject<Bool>()
     let errorMessage = BehaviorSubject<String?>(value: nil)
     let usecase: RecordsUseCase
-    var items:[CellConfigurator] = []
+    var items: [CellConfigurator] = []
 
     func selectRecordsShow(type: CateType, postId: Int?, size: Int, sort: String, userid: Int) {
         loading.onNext(true)
@@ -44,21 +44,21 @@ class AllRecordCateDetailViewModel: BaseViewModel {
             }).disposed(by: disposeBag)
     }
     
-    private func appendDataToItems(type:CateType) {
+    private func appendDataToItems(type: CateType) {
         if type == .lyrics {
-            var tmpArr:[LyricsCellConfig] = []
+            var tmpArr: [LyricsCellConfig] = []
             for record in currentCateRecords {
                 tmpArr.append(.init(item: record))
             }
             items.append(contentsOf: tmpArr)
         } else if type == .aLine {
-            var tmpArr:[ShortCellConfig] = []
+            var tmpArr: [ShortCellConfig] = []
             for record in currentCateRecords {
                 tmpArr.append(.init(item: record))
             }
             items.append(contentsOf: tmpArr)
         } else {
-            var tmpArr:[LongCellConfig] = []
+            var tmpArr: [LongCellConfig] = []
             for record in currentCateRecords {
                 tmpArr.append(.init(item: record))
             }

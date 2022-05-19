@@ -34,7 +34,7 @@ extension AllRecordSearchDetailViewController: UITableViewDelegate, UITableViewD
         guard let records = viewModel.currentOneMusicRecords[safe:indexPath.row] else { return UITableViewCell() }
         let cell = tableView.dequeueReusableCell(withIdentifier: type(of: items).reuseId)!
         items.configure(cell: cell, expandedIndexSet.contains(indexPath.row))
-        bindCell(cell: cell, data: records, indexPath: indexPath,cate: records.category)
+        bindCell(cell: cell, data: records, indexPath: indexPath, cate: records.category)
         return cell
     }
 
@@ -99,13 +99,17 @@ extension AllRecordSearchDetailViewController {
     private func bindCell(cell: UITableViewCell, data: RecordResponse, indexPath: IndexPath, cate: String) {
         switch cate {
         case "LYRICS":
-            lyricsCellBind(cell: cell as! AllrecordLyricsTableCell, data: data,indexPath: indexPath)
+            guard let cell = cell as? AllrecordLyricsTableCell else { return }
+            lyricsCellBind(cell: cell, data: data, indexPath: indexPath)
         case "A_LINE":
-            shortCellBind(cell: cell as! AllRecordCateShortDetailCell, data: data)
+            guard let cell = cell as? AllRecordCateShortDetailCell else { return }
+            shortCellBind(cell: cell, data: data)
         default:
-            longCellBind(cell: cell as! AllRecordCateLongDetailCell, data: data)
+            guard let cell = cell as? AllRecordCateLongDetailCell else { return }
+            longCellBind(cell: cell, data: data)
         }
     }
+    
     func lyricsCellBind(cell: AllrecordLyricsTableCell, data: RecordResponse, indexPath: IndexPath) {
         cell.selfView.reportButton.rx.tap
             .asDriver()
