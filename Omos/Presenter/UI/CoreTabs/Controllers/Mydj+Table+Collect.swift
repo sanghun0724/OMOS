@@ -67,7 +67,6 @@ extension MyDJViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let record: RecordResponse
-
             if isDjcliked {
                 guard let userRecord = viewModel.currentUserRecrods[safe: indexPath.row] else { return LoadingCell() }
                  record = userRecord

@@ -11,7 +11,7 @@ import RxGesture
 import RxSwift
 import UIKit
 
-class AllrecordLyricsTableCell: UITableViewCell,ConfigurableCell {
+class AllrecordLyricsTableCell: UITableViewCell, ConfigurableCell {
     static let identifier = "AllrecordLyricsTableCell"
     var disposeBag = DisposeBag()
     var hiddenFlag = true

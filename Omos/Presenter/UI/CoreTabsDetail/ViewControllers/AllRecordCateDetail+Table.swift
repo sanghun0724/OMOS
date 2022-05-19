@@ -90,7 +90,7 @@ extension AllRecordCateDetailViewController {
         case .aLine:
             shortCellBind(cell: cell as! AllRecordCateShortDetailCell, data: data)
         default:
-            longCellBind(cell: cell as! AllRecordCateLongDetailCell, data: data, indexPath: indexPath)
+            longCellBind(cell: cell as! AllRecordCateLongDetailCell, data: data,indexPath: indexPath)
         }
     }
     
