@@ -19,6 +19,7 @@ class AllRecordSearchDetailViewModel: BaseViewModel {
     let errorMessage = BehaviorSubject<String?>(value: nil)
     let isEmpty = BehaviorSubject<Bool>(value: false)
     let usecase: RecordsUseCase
+    var items:[CellConfigurator] = []
 
     func oneMusicRecordsFetch(musicId: String, request: OneMusicRecordRequest) {
         loading.onNext(true)
@@ -37,6 +38,28 @@ class AllRecordSearchDetailViewModel: BaseViewModel {
                     self?.oneMusicRecords.onNext([])
                 }
             }).disposed(by: disposeBag)
+    }
+    
+    private func appendDataToItems(type:CateType) {
+        if type == .lyrics {
+            var tmpArr:[LyricsCellConfig] = []
+            for record in currentOneMusicRecords {
+                tmpArr.append(.init(item: record))
+            }
+            items.append(contentsOf: tmpArr)
+        } else if type == .aLine {
+            var tmpArr:[ShortCellConfig] = []
+            for record in currentOneMusicRecords {
+                tmpArr.append(.init(item: record))
+            }
+            items.append(contentsOf: tmpArr)
+        } else {
+            var tmpArr:[LongCellConfig] = []
+            for record in currentOneMusicRecords {
+                tmpArr.append(.init(item: record))
+            }
+            items.append(contentsOf: tmpArr)
+        }
     }
 
     // Interation

@@ -9,8 +9,8 @@ import Foundation
 import RxSwift
 import UIKit
 
-class AllRecordCateLongDetailCell: UITableViewCell {
-    static let identifier = "AllRecordCateDetailCell"
+class AllRecordCateLongDetailCell: UITableViewCell ,ConfigurableCell, ExpandableCellProtocol {
+    static let identifier = "AllRecordCateLongDetailCell"
     var disposeBag = DisposeBag()
     let myView = RecordLongView()
     
@@ -48,7 +48,7 @@ class AllRecordCateLongDetailCell: UITableViewCell {
         myView.mainLabelView.text = nil
     }
     
-    func configureModel(record: RecordResponse) {
+    func configure(record: RecordResponse) {
         myView.mainLabelView.text = record.recordContents
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
@@ -89,4 +89,24 @@ class AllRecordCateLongDetailCell: UITableViewCell {
             myView.scrapCountLabel.textColor = .white
         }
     }
+    
+    func shrinkCell(_ hasSet:Bool) {
+        print("내말이")
+        if hasSet {
+            self.myView.mainLabelView.numberOfLines = 0
+            self.myView.mainLabelView.sizeToFit()
+            self.myView.mainLabelView.setNeedsLayout()
+            self.myView.mainLabelView.layoutIfNeeded()
+            self.myView.readMoreButton.isHidden = true
+        }
+    }
+    
+    func cellHelper() {
+        self.layer.shouldRasterize = true
+        self.layer.rasterizationScale = UIScreen.main.scale
+        self.myView.lockButton.isHidden = true
+        self.selectionStyle = . none
+        print("this work")
+    }
+    
 }

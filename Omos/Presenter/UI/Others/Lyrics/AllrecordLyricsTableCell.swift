@@ -11,7 +11,7 @@ import RxGesture
 import RxSwift
 import UIKit
 
-class AllrecordLyricsTableCell: UITableViewCell {
+class AllrecordLyricsTableCell: UITableViewCell,ConfigurableCell {
     static let identifier = "AllrecordLyricsTableCell"
     var disposeBag = DisposeBag()
     var hiddenFlag = true
@@ -74,7 +74,7 @@ class AllrecordLyricsTableCell: UITableViewCell {
         disposeBag = DisposeBag()
     }
 
-    func configureModel(record: RecordResponse) {
+    func configure(record: RecordResponse) {
         selfView.musicTitleLabel.text = record.music.musicTitle
         selfView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
         if selfView.subMusicInfoLabel.text?.first == " " {
@@ -105,6 +105,12 @@ class AllrecordLyricsTableCell: UITableViewCell {
             selfView.scrapButton.setImage( UIImage(named: "emptyStar"), for: .normal)
             selfView.scrapCountLabel.textColor = .white
         }
+    }
+    
+    func cellHelper() {
+        self.selfView.tableHeightConstraint?.deactivate()
+        self.selectionStyle = .none
+        self.selfView.tableView.reloadData()
     }
 
 }

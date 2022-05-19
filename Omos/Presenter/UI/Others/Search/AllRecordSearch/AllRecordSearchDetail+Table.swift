@@ -31,20 +31,20 @@ extension AllRecordSearchDetailViewController: UITableViewDelegate, UITableViewD
             case "LYRICS":
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllrecordLyricsTableCell.identifier, for: indexPath) as! AllrecordLyricsTableCell
                 cell.selfView.tableHeightConstraint?.deactivate()
-                cell.configureModel(record: record)
+                cell.configure(record: record)
                 cell.selfView.tableView.reloadData()
                 lyricsCellBind(cell: cell, data: record, indexPath: indexPath)
                 cell.selectionStyle = . none
                 return cell
             case "A_LINE":
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateShortDetailCell.identifier, for: indexPath) as! AllRecordCateShortDetailCell
-                cell.configureModel(record: record)
+                cell.configure(record: record)
                 shortCellBind(cell: cell, data: record)
                 cell.selectionStyle = . none
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateLongDetailCell.identifier, for: indexPath) as! AllRecordCateLongDetailCell
-                cell.configureModel(record: record)
+                cell.configure(record: record)
                 cell.layoutIfNeeded()
 
                 if expandedIndexSet.contains(indexPath.row) {
