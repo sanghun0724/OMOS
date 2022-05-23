@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import UIKit
 
-class AllRecordCateLongDetailCell: UITableViewCell ,ConfigurableCell, ExpandableCellProtocol {
+class AllRecordCateLongDetailCell: UITableViewCell, ConfigurableCell, ExpandableCellProtocol {
     static let identifier = "AllRecordCateLongDetailCell"
     var disposeBag = DisposeBag()
     let myView = RecordLongView()

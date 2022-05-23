@@ -12,6 +12,7 @@ import UIKit
 class HomeViewController: BaseViewController {
     let selfView = HomeView()
     let viewModel: HomeViewModel
+    let localNoti = LocalNotification()
 
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -28,6 +29,9 @@ class HomeViewController: BaseViewController {
         selfView.tableView.dataSource = self
         selfView.tableView.delegate = self
         viewModel.allHomeDataFetch(userId: Account.currentUser)
+        localNoti.requestAuthNoti()
+        localNoti.requestSendNoti(seconds: 61)
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {

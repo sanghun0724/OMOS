@@ -12,7 +12,7 @@ import RxRelay
 import RxSwift
 import UIKit
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCenterDelegate {
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         if let url = URLContexts.first?.url {
             if AuthApi.isKakaoTalkLoginUrl(url) {
@@ -31,6 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: scene)
         self.window?.overrideUserInterfaceStyle = .dark
+        UNUserNotificationCenter.current().delegate = self //noti
         let uc = LoginUseCase(authRepository: AuthRepositoryImpl(loginAPI: LoginAPI()))
         let vm = LoginViewModel(usecase: uc)
 

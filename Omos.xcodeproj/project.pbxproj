@@ -174,6 +174,7 @@
 		B6D3685627B7A510008B5635 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D3685527B7A510008B5635 /* NicknameViewController.swift */; };
 		B6D4BB1E27CA48CD00D6741B /* AllRecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D4BB1D27CA48CD00D6741B /* AllRecordDetailViewController.swift */; };
 		B6D4BB2227CA5D7C00D6741B /* AllRecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D4BB2127CA5D7C00D6741B /* AllRecordDetailView.swift */; };
+		B6D4C4F5283B83FC000EAD7F /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D4C4F4283B83FC000EAD7F /* LocalNotification.swift */; };
 		B6DCFA5627E45F4B006283FE /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCFA5527E45F4B006283FE /* ProfileView.swift */; };
 		B6DCFA5827E4616E006283FE /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCFA5727E4616E006283FE /* ProfileCell.swift */; };
 		B6DCFA5B27E48647006283FE /* InteractionRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCFA5A27E48647006283FE /* InteractionRecordViewController.swift */; };
@@ -391,6 +392,7 @@
 		B6D3685527B7A510008B5635 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
 		B6D4BB1D27CA48CD00D6741B /* AllRecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordDetailViewController.swift; sourceTree = "<group>"; };
 		B6D4BB2127CA5D7C00D6741B /* AllRecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordDetailView.swift; sourceTree = "<group>"; };
+		B6D4C4F4283B83FC000EAD7F /* LocalNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
 		B6DCFA5527E45F4B006283FE /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B6DCFA5727E4616E006283FE /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		B6DCFA5A27E48647006283FE /* InteractionRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionRecordViewController.swift; sourceTree = "<group>"; };
@@ -864,6 +866,7 @@
 				B6CC1D7727BA536A00B5EE7E /* PrivateInfoText.rtf */,
 				B6183CD527D8F7490035AA06 /* BottomSheetViewController.swift */,
 				B6BFD15D27E9096800DC3722 /* InstagramShareView.swift */,
+				B6D4C4F4283B83FC000EAD7F /* LocalNotification.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1361,6 +1364,7 @@
 				B646053227CBBF050022E062 /* SearchAlbumDetailCell.swift in Sources */,
 				B6E12E8227C210E6008644B5 /* CreateViewModel.swift in Sources */,
 				B689A9D227AE94E9005F26E4 /* Date.swift in Sources */,
+				B6D4C4F5283B83FC000EAD7F /* LocalNotification.swift in Sources */,
 				B611825D27D45E2D004217E2 /* SearchRepositoryImpl.swift in Sources */,
 				B6D4BB1E27CA48CD00D6741B /* AllRecordDetailViewController.swift in Sources */,
 				B682185A27B3AD5100B58E19 /* Search+Table.swift in Sources */,

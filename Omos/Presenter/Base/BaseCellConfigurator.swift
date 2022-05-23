@@ -15,7 +15,7 @@ protocol ConfigurableCell {
 
 protocol CellConfigurator {
     static var reuseId: String { get }
-    func configure(cell: UIView,_ hasSet: Bool)
+    func configure(cell: UIView, _ hasSet: Bool)
 }
 
 protocol ExpandableCellProtocol {
@@ -31,7 +31,7 @@ class TableCellConfigurator<CellType: ConfigurableCell, DataType>: CellConfigura
         self.item = item
     }
     
-    func configure(cell: UIView,_ hasSet: Bool) {
+    func configure(cell: UIView, _ hasSet: Bool) {
         let cellType = (cell as! CellType)
         cellType.configure(record: item)
         cellType.cellHelper()
