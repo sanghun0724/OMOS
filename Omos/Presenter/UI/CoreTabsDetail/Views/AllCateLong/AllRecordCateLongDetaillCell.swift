@@ -65,10 +65,10 @@ class AllRecordCateLongDetailCell: UITableViewCell, ConfigurableCell, Expandable
         myView.scrapCountLabel.text = String(record.scrapCnt)
         
         let textCount = Array(record.recordContents).count
-        if textCount < 80 {
+        if textCount < 167 {
             myView.readMoreButton.isHidden = true
         } else {
-            myView.mainLabelView.numberOfLines = 3
+            myView.mainLabelView.numberOfLines = 5
             myView.mainLabelView.sizeToFit()
             myView.readMoreButton.isHidden = false
         }

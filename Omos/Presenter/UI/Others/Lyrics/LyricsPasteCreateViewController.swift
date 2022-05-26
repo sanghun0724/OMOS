@@ -479,7 +479,7 @@ extension LyricsPasteCreateViewController: UITextViewDelegate {
         } else {
             textCellsArray[textView.tag] = characterCount
             totalString = textCellsArray.reduce(0, +)
-            guard totalString <= 1098 else { return false }
+            guard totalString <= 1_098 else { return false }
             selfView.remainTextCount.text = "\(totalString)/1098"
         }
         
@@ -487,8 +487,8 @@ extension LyricsPasteCreateViewController: UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        var pos = textView.endOfDocument
-        var currentRect = textView.caretRect(for: pos)
+        let pos = textView.endOfDocument
+        let currentRect = textView.caretRect(for: pos)
         if currentRect.origin.x == 0.0 {
                                     UIView.setAnimationsEnabled(false)
                                     selfView.tableView.beginUpdates()
