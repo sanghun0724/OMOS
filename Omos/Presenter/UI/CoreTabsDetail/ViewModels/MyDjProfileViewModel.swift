@@ -33,6 +33,7 @@ class MyDjProfileViewModel: BaseViewModel {
                     self?.errorMessage.onNext(error.localizedDescription)
                 }
             }).disposed(by: disposeBag)
+        
     }
 
     func fetchUserRecords(toUserId: Int) {

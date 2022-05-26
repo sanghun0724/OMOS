@@ -8,7 +8,6 @@
 import UIKit
 
 class LocalNotification {
-    
     let userNotiCenter = UNUserNotificationCenter.current()
     
     // 사용자에게 알림 권한 요청
@@ -23,12 +22,16 @@ class LocalNotification {
     
     func requestSendNoti(seconds: Double) {
         let notiContent = UNMutableNotificationContent()
-        notiContent.title = "알림 title"
+        notiContent.title = "omos"
         notiContent.body = "알림 body"
         notiContent.userInfo = ["targetScene": "splash"] // 푸시 받을때 오는 데이터
         
+        var dateComponents = DateComponents()
+        dateComponents.calendar = Calendar.current
+        dateComponents.hour = 21
+        
         // 알림이 trigger되는 시간 설정
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: seconds, repeats: true)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         
         let request = UNNotificationRequest(
             identifier: UUID().uuidString,
@@ -39,7 +42,6 @@ class LocalNotification {
         userNotiCenter.add(request) { (error) in
             print(#function, error)
         }
-        
     }
 }
 
@@ -54,9 +56,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
-        
         // deep link처리 시 아래 url값 가지고 처리
-        let url = response.notification.request.content.userInfo
+        let _ = response.notification.request.content.userInfo
         
         completionHandler()
     }
