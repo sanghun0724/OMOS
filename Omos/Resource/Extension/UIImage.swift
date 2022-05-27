@@ -37,6 +37,8 @@ extension UIImageView {
             options: [.forceRefresh]
         )
     }
+    
+    
 
     // 서버에서 받아온 이미지 cornerRadius적용하기
     func download(url: String?, rounded: Bool = true) {

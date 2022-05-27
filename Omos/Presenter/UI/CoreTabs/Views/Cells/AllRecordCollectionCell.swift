@@ -120,7 +120,7 @@ class AllRecordCollectionCell: UICollectionViewCell {
         albumImageView.setImage(with: record.music.albumImageURL)
         backImageView.setImage(with: record.recordImageURL ?? "")
         nameLabel.text = "by. \(record.nickname)"
-        titleLabel.text = record.music.albumTitle
+        titleLabel.text = record.music.musicTitle
         subTitleLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
         if subTitleLabel.text?.first == " " {
             subTitleLabel.text?.removeFirst()
@@ -133,7 +133,7 @@ class AllRecordCollectionCell: UICollectionViewCell {
         albumImageView.setImage(with: record.music.albumImageURL)
         backImageView.setImage(with: record.recordImageURL) // 바까야함 
         nameLabel.text = "by. \(record.nickname)"
-        titleLabel.text = record.music.albumTitle
+        titleLabel.text = record.music.musicTitle
         subTitleLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
         if subTitleLabel.text?.first == " " {
             subTitleLabel.text?.removeFirst()

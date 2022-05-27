@@ -25,7 +25,7 @@ class CreateViewController: BaseViewController {
     private let selfView = CreateView()
     let viewModel: CreateViewModel
     let type: CreateType
-    lazy var awsHelper = AWSS3Helper()
+    let awsHelper = AWSS3Helper()
     let stickerChoiceView = StickerView()
     var animator: UIDynamicAnimator?
     var selectedSticker: IRStickerView?

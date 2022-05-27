@@ -23,7 +23,7 @@ class LocalNotification {
     func requestSendNoti(seconds: Double) {
         let notiContent = UNMutableNotificationContent()
         notiContent.title = "omos"
-        notiContent.body = "알림 body"
+        notiContent.body = "오늘 하루, 당신의 음악은 무엇이였나요? "
         notiContent.userInfo = ["targetScene": "splash"] // 푸시 받을때 오는 데이터
         
         var dateComponents = DateComponents()

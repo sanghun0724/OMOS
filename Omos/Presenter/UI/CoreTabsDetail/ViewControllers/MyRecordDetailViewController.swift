@@ -9,6 +9,7 @@ import MaterialComponents.MaterialBottomSheet
 import RxCocoa
 import RxSwift
 import UIKit
+import Kingfisher
 
 class MyRecordDetailViewController: BaseViewController {
     let scrollView = UIScrollView()

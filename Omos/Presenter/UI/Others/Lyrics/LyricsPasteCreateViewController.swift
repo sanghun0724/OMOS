@@ -26,7 +26,7 @@ class LyricsPasteCreateViewController: BaseViewController {
     var totalString = 0
     var textTagCount = 1
     var textCellsArray: [Int]
-    lazy var awsHelper = AWSS3Helper()
+    let awsHelper = AWSS3Helper()
     let stickerChoiceView = StickerView()
     var animator: UIDynamicAnimator?
     var selectedSticker: IRStickerView?

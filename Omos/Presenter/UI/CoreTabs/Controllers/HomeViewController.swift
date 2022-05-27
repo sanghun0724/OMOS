@@ -31,7 +31,6 @@ class HomeViewController: BaseViewController {
         viewModel.allHomeDataFetch(userId: Account.currentUser)
         localNoti.requestAuthNoti()
         localNoti.requestSendNoti(seconds: 61)
-        
     }
 
     override func viewWillAppear(_ animated: Bool) {
