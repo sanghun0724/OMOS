@@ -93,6 +93,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                     let vc = SettingViewController(viewModel: self!.viewModel)
                     self?.navigationController?.pushViewController(vc, animated: true)
                 }).disposed(by: header.disposeBag)
+            
 
             return header
         } else {

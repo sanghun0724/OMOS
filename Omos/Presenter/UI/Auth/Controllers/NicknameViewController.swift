@@ -38,16 +38,22 @@ class NickNameViewController: BaseViewController {
         dismissKeyboardWhenTappedAround()
         bind()
 
-//        LoginAPI.signUp(request: .init(email: "test2@email.com", nickname: "12345", password: "12345678")) { response in
-//            switch response {
-//            case .success(let data):
-//
-//                print(data)
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
-
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+        
+    }
+    
+    private func addNotification() {
+        let notificationCenter = NotificationCenter.default
+            notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
+    }
+    
+    @objc func appMovedToBackground() {
+        UserDefaults.standard.set(1, forKey: "background")
+        print("App moved to background!")
     }
 
     override func configureUI() {
