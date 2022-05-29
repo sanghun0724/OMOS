@@ -9,21 +9,10 @@ import UIKit
 
 class LocalNotification {
     let userNotiCenter = UNUserNotificationCenter.current()
-    
-    // 사용자에게 알림 권한 요청
-    func requestAuthNoti() {
-        let notiAuthOptions = UNAuthorizationOptions(arrayLiteral: [.alert, .badge, .sound])
-        userNotiCenter.requestAuthorization(options: notiAuthOptions) { (success, error) in
-            if let error = error {
-                print(#function, error)
-            }
-        }
-    }
-    
-    func requestSendNoti(seconds: Double) {
+    private lazy var requestSendNotiVar: Void = {
         let notiContent = UNMutableNotificationContent()
         notiContent.title = "omos"
-        notiContent.body = "오늘 하루, 당신의 음악은 무엇이였나요? "
+        notiContent.body = "오늘 하루, 당신의 음악은 무엇이었나요? "
         notiContent.userInfo = ["targetScene": "splash"] // 푸시 받을때 오는 데이터
         
         var dateComponents = DateComponents()
@@ -42,6 +31,20 @@ class LocalNotification {
         userNotiCenter.add(request) { (error) in
             print(#function, error)
         }
+    }()
+    
+    // 사용자에게 알림 권한 요청
+    func requestAuthNoti() {
+        let notiAuthOptions = UNAuthorizationOptions(arrayLiteral: [.alert, .badge, .sound])
+        userNotiCenter.requestAuthorization(options: notiAuthOptions) { (success, error) in
+            if let error = error {
+                print(#function, error)
+            }
+        }
+    }
+    
+    func requestSendNoti() {
+       _ = requestSendNotiVar
     }
 }
 

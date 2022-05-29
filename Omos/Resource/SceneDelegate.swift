@@ -31,15 +31,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
         guard let scene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: scene)
         self.window?.overrideUserInterfaceStyle = .dark
-        UNUserNotificationCenter.current().delegate = self //noti
         let uc = LoginUseCase(authRepository: AuthRepositoryImpl(loginAPI: LoginAPI()))
         let vm = LoginViewModel(usecase: uc)
+        UNUserNotificationCenter.current().delegate = self
 
         Observable.combineLatest(kakaoValid, appleValid, localValid) { $0 || $1 || $2 }
         .observe(on: MainScheduler.instance)
         .subscribe(onNext: { [weak self] valid in
-            print("is it valid? \(valid)")
-            if valid {
+            if UserDefaults.standard.object(forKey: "background") != nil {
+                self?.window?.rootViewController = LoginViewController(viewModel: vm)
+                self?.window?.makeKeyAndVisible()
+                self?.window?.backgroundColor = .mainBackGround
+                UserDefaults.standard.removeObject(forKey: "background")
+            } else if valid {
                 self?.window?.rootViewController = TabBarViewController()
                 self?.window?.makeKeyAndVisible()
                 self?.window?.backgroundColor = .mainBackGround

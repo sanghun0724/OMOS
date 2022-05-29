@@ -37,13 +37,13 @@ class NickNameViewController: BaseViewController {
         super.viewDidLoad()
         dismissKeyboardWhenTappedAround()
         bind()
-
+        addNotification()
     }
     
+    //viewwillDisappear작동하는지 확인필요
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
-        
+        removeObject()
     }
     
     private func addNotification() {
@@ -54,6 +54,11 @@ class NickNameViewController: BaseViewController {
     @objc func appMovedToBackground() {
         UserDefaults.standard.set(1, forKey: "background")
         print("App moved to background!")
+    }
+    
+    func removeObject() {
+        NotificationCenter.default.removeObserver(self)
+        UserDefaults.standard.removeObject(forKey: "background")
     }
 
     override func configureUI() {
@@ -81,6 +86,7 @@ class NickNameViewController: BaseViewController {
 //                  let homeVC = TabBarViewController()
 //                  homeVC.modalPresentationStyle = .fullScreen
 //                    self?.present(homeVC,animated: true)
+                    self?.removeObject()
                     NotificationCenter.default.post(name: NSNotification.Name.loginInfo, object: nil, userInfo: nil)
                 })
             } else {

@@ -29,8 +29,9 @@ class HomeViewController: BaseViewController {
         selfView.tableView.dataSource = self
         selfView.tableView.delegate = self
         viewModel.allHomeDataFetch(userId: Account.currentUser)
+        localNoti.userNotiCenter.removeAllPendingNotificationRequests()
         localNoti.requestAuthNoti()
-        localNoti.requestSendNoti(seconds: 61)
+        localNoti.requestSendNoti()
     }
 
     override func viewWillAppear(_ animated: Bool) {
