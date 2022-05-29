@@ -44,6 +44,9 @@
 		B630D2FA27C7756A00E66F22 /* MydjTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2F927C7756A00E66F22 /* MydjTableCell.swift */; };
 		B630D2FC27C7761D00E66F22 /* Mydj+Table+Collect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2FB27C7761D00E66F22 /* Mydj+Table+Collect.swift */; };
 		B630D2FF27C78C0E00E66F22 /* BestSearchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2FE27C78C0E00E66F22 /* BestSearchTableCell.swift */; };
+		B63DEC0328435FB500091E3C /* BaseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63DEC0228435FB500091E3C /* BaseListViewController.swift */; };
+		B63DEC0528435FFC00091E3C /* FollowerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63DEC0428435FFC00091E3C /* FollowerListViewController.swift */; };
+		B63DEC072843603700091E3C /* FollowingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63DEC062843603700091E3C /* FollowingListViewController.swift */; };
 		B642344527DCA9A600C1083D /* AllRecordCateDetail+Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B642344427DCA9A600C1083D /* AllRecordCateDetail+Table.swift */; };
 		B642344727DCC9B600C1083D /* AllRecordSearchDetail+Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B642344627DCC9B600C1083D /* AllRecordSearchDetail+Table.swift */; };
 		B642344927DCE7D500C1083D /* FollowTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B642344827DCE7D500C1083D /* FollowTarget.swift */; };
@@ -175,7 +178,7 @@
 		B6D4BB1E27CA48CD00D6741B /* AllRecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D4BB1D27CA48CD00D6741B /* AllRecordDetailViewController.swift */; };
 		B6D4BB2227CA5D7C00D6741B /* AllRecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D4BB2127CA5D7C00D6741B /* AllRecordDetailView.swift */; };
 		B6D4C4F5283B83FC000EAD7F /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D4C4F4283B83FC000EAD7F /* LocalNotification.swift */; };
-		B6D5EFD12840B9A8005E9302 /* FollowListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D5EFD02840B9A7005E9302 /* FollowListCell.swift */; };
+		B6D5EFD12840B9A8005E9302 /* FollowBlockListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D5EFD02840B9A7005E9302 /* FollowBlockListCell.swift */; };
 		B6D5EFD32840BC7E005E9302 /* FollowListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D5EFD22840BC7E005E9302 /* FollowListViewController.swift */; };
 		B6DCFA5627E45F4B006283FE /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCFA5527E45F4B006283FE /* ProfileView.swift */; };
 		B6DCFA5827E4616E006283FE /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCFA5727E4616E006283FE /* ProfileCell.swift */; };
@@ -259,6 +262,9 @@
 		B630D2F927C7756A00E66F22 /* MydjTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MydjTableCell.swift; sourceTree = "<group>"; };
 		B630D2FB27C7761D00E66F22 /* Mydj+Table+Collect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mydj+Table+Collect.swift"; sourceTree = "<group>"; };
 		B630D2FE27C78C0E00E66F22 /* BestSearchTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSearchTableCell.swift; sourceTree = "<group>"; };
+		B63DEC0228435FB500091E3C /* BaseListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListViewController.swift; sourceTree = "<group>"; };
+		B63DEC0428435FFC00091E3C /* FollowerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListViewController.swift; sourceTree = "<group>"; };
+		B63DEC062843603700091E3C /* FollowingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingListViewController.swift; sourceTree = "<group>"; };
 		B642344427DCA9A600C1083D /* AllRecordCateDetail+Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AllRecordCateDetail+Table.swift"; sourceTree = "<group>"; };
 		B642344627DCC9B600C1083D /* AllRecordSearchDetail+Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AllRecordSearchDetail+Table.swift"; sourceTree = "<group>"; };
 		B642344827DCE7D500C1083D /* FollowTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowTarget.swift; sourceTree = "<group>"; };
@@ -395,7 +401,7 @@
 		B6D4BB1D27CA48CD00D6741B /* AllRecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordDetailViewController.swift; sourceTree = "<group>"; };
 		B6D4BB2127CA5D7C00D6741B /* AllRecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordDetailView.swift; sourceTree = "<group>"; };
 		B6D4C4F4283B83FC000EAD7F /* LocalNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
-		B6D5EFD02840B9A7005E9302 /* FollowListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowListCell.swift; sourceTree = "<group>"; };
+		B6D5EFD02840B9A7005E9302 /* FollowBlockListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowBlockListCell.swift; sourceTree = "<group>"; };
 		B6D5EFD22840BC7E005E9302 /* FollowListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowListViewController.swift; sourceTree = "<group>"; };
 		B6DCFA5527E45F4B006283FE /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B6DCFA5727E4616E006283FE /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
@@ -666,6 +672,17 @@
 				B6ADDD04280FFAF300D90E46 /* BestHeaderView.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		B63DEC0128435F3600091E3C /* Follow_Block */ = {
+			isa = PBXGroup;
+			children = (
+				B63DEC0228435FB500091E3C /* BaseListViewController.swift */,
+				B6D5EFD22840BC7E005E9302 /* FollowListViewController.swift */,
+				B63DEC0428435FFC00091E3C /* FollowerListViewController.swift */,
+				B63DEC062843603700091E3C /* FollowingListViewController.swift */,
+			);
+			path = Follow_Block;
 			sourceTree = "<group>";
 		};
 		B64601DC27DB47B10076C2E5 /* Interaction */ = {
@@ -1026,6 +1043,7 @@
 		B6FE837D27D09BFF00401FC5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				B63DEC0128435F3600091E3C /* Follow_Block */,
 				B6BC148627BFF6C40067D8FB /* MyRecordDetailViewController.swift */,
 				B69E42D427E3A8F900CAD5F1 /* MyRecordDetail+Table.swift */,
 				B6D4BB1D27CA48CD00D6741B /* AllRecordDetailViewController.swift */,
@@ -1034,7 +1052,6 @@
 				B646051127CB3BEA0022E062 /* MydjProfile+Table.swift */,
 				B6DFD2CF27CCAF0800645F52 /* AllRecordCateDetailViewController.swift */,
 				B642344427DCA9A600C1083D /* AllRecordCateDetail+Table.swift */,
-				B6D5EFD22840BC7E005E9302 /* FollowListViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1049,7 +1066,7 @@
 				B651E8C927CA87F500996CC3 /* MydjProfileView.swift */,
 				B6DFD2CD27CCAEF100645F52 /* AllRecordCateDetailView.swift */,
 				B6ADDCFE280FE6D300D90E46 /* InstaDecoTopView.swift */,
-				B6D5EFD02840B9A7005E9302 /* FollowListCell.swift */,
+				B6D5EFD02840B9A7005E9302 /* FollowBlockListCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1276,6 +1293,7 @@
 				B6FE837827D07B4800401FC5 /* Cell.swift in Sources */,
 				B6183CD827D906300035AA06 /* MyRecordDetailViewModel.swift in Sources */,
 				B6C3AD4527B95B1E00D5D69D /* Attributed+Stirng.swift in Sources */,
+				B63DEC0528435FFC00091E3C /* FollowerListViewController.swift in Sources */,
 				B6DCFA6127E4B835006283FE /* ProfileChangeViewController.swift in Sources */,
 				B68454F527BE310100F1E6B5 /* MyAuthenticator.swift in Sources */,
 				B64601D927DB18DA0076C2E5 /* LaunchViewController.swift in Sources */,
@@ -1287,7 +1305,7 @@
 				B682185627B3A0BE00B58E19 /* SearchViewModel.swift in Sources */,
 				B693049D27C1F84200DC3E90 /* MyRecordViewModel.swift in Sources */,
 				B6183CD027D895C40035AA06 /* AllRecordSearchDetailViewModel.swift in Sources */,
-				B6D5EFD12840B9A8005E9302 /* FollowListCell.swift in Sources */,
+				B6D5EFD12840B9A8005E9302 /* FollowBlockListCell.swift in Sources */,
 				B693658427E1D0D200A8FCBA /* LyricsRecordView.swift in Sources */,
 				B6183CD627D8F7490035AA06 /* BottomSheetViewController.swift in Sources */,
 				B689A9DC27AEA877005F26E4 /* LoginViewController.swift in Sources */,
@@ -1336,6 +1354,7 @@
 				B6FE837C27D093E500401FC5 /* AllRecordCateDetailViewModel.swift in Sources */,
 				B682184E27B393BF00B58E19 /* AuthRepository.swift in Sources */,
 				B6DCFA5D27E49D20006283FE /* ProfileViewModel.swift in Sources */,
+				B63DEC072843603700091E3C /* FollowingListViewController.swift in Sources */,
 				B650873927AF948D0020D2C1 /* HomeViewController.swift in Sources */,
 				B67EF45027B7A9B80023D5D4 /* SignUpView.swift in Sources */,
 				B693658227E1C57400A8FCBA /* AllrecordLyricsTableCell.swift in Sources */,
@@ -1371,6 +1390,7 @@
 				B6FE838127D0B37F00401FC5 /* AllRecordCateShortDetailCell.swift in Sources */,
 				B646053227CBBF050022E062 /* SearchAlbumDetailCell.swift in Sources */,
 				B6E12E8227C210E6008644B5 /* CreateViewModel.swift in Sources */,
+				B63DEC0328435FB500091E3C /* BaseListViewController.swift in Sources */,
 				B689A9D227AE94E9005F26E4 /* Date.swift in Sources */,
 				B6D4C4F5283B83FC000EAD7F /* LocalNotification.swift in Sources */,
 				B611825D27D45E2D004217E2 /* SearchRepositoryImpl.swift in Sources */,
