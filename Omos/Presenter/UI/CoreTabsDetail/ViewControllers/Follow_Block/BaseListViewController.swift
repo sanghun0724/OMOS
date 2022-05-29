@@ -7,17 +7,45 @@
 
 import UIKit
 
-class BaseListViewController:BaseViewController {
-    
-    
+class BaseListViewController: BaseViewController {
+    let listTableView: UITableView = {
+        let table = UITableView()
+        table.register(FollowBlockListCell.self, forCellReuseIdentifier: FollowBlockListCell.identifier)
+        table.rowHeight = UITableView.automaticDimension
+        return table
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       print("test")
+        listTableView.delegate = self
+        listTableView.dataSource = self
+        configureUI()
+    }
+    
+    override func configureUI() {
+        super.configureUI()
+        view.addSubview(listTableView)
+    
+        listTableView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
     }
     
 }
 
-extension BaseFollowViewController:UITableViewDelegate,UITableViewDataSource {
+extension BaseListViewController:  UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: FollowBlockListCell.identifier) as? FollowBlockListCell else {
+            return UITableViewCell()
+        }
+        
+        return cell
+    }
+    
     
 }

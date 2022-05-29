@@ -7,6 +7,6 @@
 
 import UIKit
 
-class FollowerListViewController:BaseFollowViewController {
+class FollowerListViewController:BaseListViewController {
     
 }
