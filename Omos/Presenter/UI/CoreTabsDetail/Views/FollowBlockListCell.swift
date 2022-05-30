@@ -7,11 +7,11 @@
 
 import UIKit
 
-class FollowBlockListCell:UITableViewCell {
+class FollowBlockListCell: UITableViewCell {
     static let identifier = "FollowBlockListCell"
     
-    let profileImageView:  UIImageView = {
-        let view = UIImageView(image:UIImage(named: "defaultprofile"))
+    let profileImageView: UIImageView = {
+        let view = UIImageView(image: UIImage(named: "defaultprofile"))
         return view
     }()
     
@@ -58,6 +58,5 @@ class FollowBlockListCell:UITableViewCell {
             make.trailing.equalTo(listButton.snp.leading).offset(-16)
         }
     }
-    
 }
 

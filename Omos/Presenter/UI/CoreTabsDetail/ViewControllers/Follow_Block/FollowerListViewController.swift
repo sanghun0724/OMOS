@@ -9,4 +9,7 @@ import UIKit
 
 class FollowerListViewController:BaseListViewController {
     
+    override func fetchData() {
+        
+    }
 }

@@ -32,9 +32,13 @@ class BaseListViewController: BaseViewController {
         }
     }
     
+    func fetchData() { //프로토콜 하나 만들까.. 이렇게 할까 고민 (추상 메소드)
+        assertionFailure("This method must be overridden")
+    }
+    
 }
 
-extension BaseListViewController:  UITableViewDelegate, UITableViewDataSource {
+extension BaseListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         10
     }
@@ -46,6 +50,4 @@ extension BaseListViewController:  UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
-    
 }

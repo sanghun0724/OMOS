@@ -9,4 +9,7 @@ import UIKit
 
 class FollowingListViewController:BaseListViewController {
     
+    override func fetchData() {
+        
+    }
 }

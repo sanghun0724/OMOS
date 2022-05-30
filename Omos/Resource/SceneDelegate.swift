@@ -35,7 +35,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
         let vm = LoginViewModel(usecase: uc)
         UNUserNotificationCenter.current().delegate = self
         //
-        self.window?.rootViewController = BaseListViewController()
+        self.window?.rootViewController = FollowListViewController()
         self.window?.makeKeyAndVisible()
         return
         //
