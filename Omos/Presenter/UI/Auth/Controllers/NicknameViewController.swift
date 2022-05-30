@@ -36,7 +36,6 @@ class NickNameViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dismissKeyboardWhenTappedAround()
-        bind()
         addNotification()
     }
     
@@ -79,7 +78,7 @@ class NickNameViewController: BaseViewController {
         }
     }
 
-    private func bind() {
+    override func bind() {
         viewModel.validSignUp.subscribe(onNext: { [weak self] event in
             if event {
                 self?.view.window?.rootViewController?.dismiss(animated: false, completion: {

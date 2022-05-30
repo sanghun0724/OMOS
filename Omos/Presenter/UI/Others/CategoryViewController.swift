@@ -37,7 +37,6 @@ class CategoryViewController: BaseViewController {
         self.navigationItem.rightBarButtonItems?.removeAll()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "다음", style: .plain, target: self, action: #selector(createPresent))
         self.navigationItem.rightBarButtonItem?.tintColor = .white
-        bind()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -61,7 +60,7 @@ class CategoryViewController: BaseViewController {
         }
     }
     
-    private func bind() {
+    override func bind() {
         selfView.oneLineView.rx.tapGesture()
             .when(.recognized)
             .asDriver { _ in .never() }

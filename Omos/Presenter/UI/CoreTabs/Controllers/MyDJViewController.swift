@@ -34,7 +34,6 @@ class MyDJViewController: BaseViewController, UIScrollViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         selfView.collectionView.delegate = self
@@ -97,7 +96,7 @@ class MyDJViewController: BaseViewController, UIScrollViewDelegate {
         selfView.tableView.reloadData()
     }
 
-    private func bind() {
+    override func bind() {
         viewModel.myDjList
             .subscribe(onNext: { [weak self] _ in
                 self?.selfView.collectionView.reloadData()

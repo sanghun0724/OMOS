@@ -35,7 +35,6 @@ class AllRecordDetailViewController: BaseViewController {
         selfLyricsView.tableView.delegate = self
         selfLyricsView.tableView.dataSource = self
         viewModel.selectDetailFetch(postId: self.postId, userId: Account.currentUser)
-        bind()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -53,7 +52,7 @@ class AllRecordDetailViewController: BaseViewController {
         loadingView.frame = view.bounds
     }
 
-    func bind() {
+    override func bind() {
         viewModel.selectDetail
             .take(1)
             .subscribe(onNext: { [weak self] data in

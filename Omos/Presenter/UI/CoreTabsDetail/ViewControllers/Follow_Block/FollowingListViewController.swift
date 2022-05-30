@@ -12,4 +12,6 @@ class FollowingListViewController:BaseListViewController {
     override func fetchData() {
         
     }
+    
+    
 }

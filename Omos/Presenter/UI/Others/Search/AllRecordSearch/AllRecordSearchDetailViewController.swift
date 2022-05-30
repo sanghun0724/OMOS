@@ -40,7 +40,6 @@ class AllRecordSearchDetailViewController: BaseViewController, UIScrollViewDeleg
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
         bottomSheet.delegate = self
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
@@ -79,7 +78,7 @@ class AllRecordSearchDetailViewController: BaseViewController, UIScrollViewDeleg
         selfView.tableView.reloadData()
     }
 
-    private func bind() {
+    override func bind() {
         viewModel.oneMusicRecords
             .subscribe(onNext: { [weak self] _ in
                 self?.hasNextPage = self?.lastPostId == self?.viewModel.currentOneMusicRecords.last?.recordID ?? 0 ? false : true

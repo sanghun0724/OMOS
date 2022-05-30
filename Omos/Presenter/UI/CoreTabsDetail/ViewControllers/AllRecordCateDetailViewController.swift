@@ -42,7 +42,6 @@ class AllRecordCateDetailViewController: BaseViewController, UIScrollViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .mainBackGround
-        bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         let filterButton = UIBarButtonItem(image: UIImage(named: "filter"), style: .plain, target: self, action: #selector(didTapfilterButton))
@@ -90,7 +89,7 @@ class AllRecordCateDetailViewController: BaseViewController, UIScrollViewDelegat
         self.selfView.tableView.layoutIfNeeded()
     }
 
-    private func bind() {
+    override func bind() {
         viewModel.cateRecords
             .subscribe(onNext: { [weak self] _ in
                 self?.hasNextPage = self?.lastPostId == self?.viewModel.currentCateRecords.last?.recordID ?? 0 ? false : true

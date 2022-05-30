@@ -48,7 +48,6 @@ class LyricsPasteCreateViewController: BaseViewController {
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         selfView.titleTextView.delegate = self
-        bind()
         animator = UIDynamicAnimator.init(referenceView: selfView.tableView)
         
         if type == .create { setCreateViewinfo() } else { setModifyView() }
@@ -242,7 +241,7 @@ class LyricsPasteCreateViewController: BaseViewController {
         selfView.remainTextCount.text = "\(viewModel.modifyDefaultModel?.recordContents.count ?? 0)/1098"
     }
     
-    private func bind() {
+    override func bind() {
         selfView.imageAddButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] _ in

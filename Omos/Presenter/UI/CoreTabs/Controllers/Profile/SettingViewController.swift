@@ -33,7 +33,6 @@ class SettingViewController: BaseViewController {
     }
 
     override func viewDidLoad() {
-        bind()
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
@@ -55,7 +54,7 @@ class SettingViewController: BaseViewController {
         }
     }
 
-    func bind() {
+    override func bind() {
         viewModel.logoutState
             .subscribe(onNext: { [weak self] state in
                 if state {
@@ -101,7 +100,10 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        2
+        if section == 0 {
+           return 3
+        }
+        return 2
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -113,6 +115,8 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.textLabel?.text = "프로필 변경"
             case 1:
                 cell.textLabel?.text = "비밀번호 변경"
+            case 2:
+                cell.textLabel?.text = "차단된 계정"
             default:
                 print("")
             }
@@ -159,6 +163,8 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             case 1:
                 let vc = PasswordChangeViewController(viewModel: viewModel)
                 self.navigationController?.pushViewController(vc, animated: true)
+            case 2:
+                print("차단된 계정으로 갑니다")
             default:
                 print("")
             }

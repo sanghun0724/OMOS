@@ -40,7 +40,6 @@ class EmailCheckViewController: BaseViewController {
         loadingView.isHidden = true
         loadingView.backgroundColor = .clear
         dismissKeyboardWhenTappedAround()
-        bind()
         for idx in 3...6 {
             topView.stack.arrangedSubviews[idx].isHidden = true
         }
@@ -70,7 +69,7 @@ class EmailCheckViewController: BaseViewController {
         }
     }
 
-    func bind() {
+    override func bind() {
         topView.coverView.backButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in

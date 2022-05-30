@@ -23,7 +23,6 @@ class MyRecordViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         configureUI()
@@ -81,7 +80,7 @@ class MyRecordViewController: BaseViewController {
         }
     }
 
-    func bind() {
+    override func bind() {
         viewModel.myRecords.subscribe(onNext: { [weak self] info in
             self?.myRecord = info
             DispatchQueue.main.async {

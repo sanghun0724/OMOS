@@ -25,7 +25,6 @@ class HomeViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
         selfView.tableView.dataSource = self
         selfView.tableView.delegate = self
         viewModel.allHomeDataFetch(userId: Account.currentUser)
@@ -50,7 +49,7 @@ class HomeViewController: BaseViewController {
         }
     }
 
-    func bind() {
+    override func bind() {
         viewModel.allLoading
             .subscribe(onNext: { [weak self] loading in
                 self?.selfView.loadingView.isHidden = !loading

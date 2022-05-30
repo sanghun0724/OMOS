@@ -677,8 +677,8 @@
 		B63DEC0128435F3600091E3C /* Follow_Block */ = {
 			isa = PBXGroup;
 			children = (
-				B63DEC0228435FB500091E3C /* BaseListViewController.swift */,
 				B6D5EFD22840BC7E005E9302 /* FollowListViewController.swift */,
+				B63DEC0228435FB500091E3C /* BaseListViewController.swift */,
 				B63DEC0428435FFC00091E3C /* FollowerListViewController.swift */,
 				B63DEC062843603700091E3C /* FollowingListViewController.swift */,
 			);

@@ -27,7 +27,6 @@ class ProfileChangeViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
         selfView.nickNameField.text = viewModel.currentMyProfile?.profile.nickname
         guard let image = viewModel.currentMyProfile?.profile.profileURL else {
             return
@@ -46,7 +45,7 @@ class ProfileChangeViewController: BaseViewController {
         }
     }
 
-    func bind() {
+    override func bind() {
         selfView.cameraView.rx.tap
             .subscribe(onNext: { [weak self] _ in
                 let alert = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)

@@ -23,7 +23,6 @@ class ProfileViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         viewModel.allFetch()
@@ -68,7 +67,7 @@ class ProfileViewController: BaseViewController {
         }
     }
 
-    func bind() {
+    override func bind() {
         viewModel.allLoading
             .subscribe(onNext: { [weak self] loading in
                 print(loading)

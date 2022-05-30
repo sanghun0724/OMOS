@@ -12,4 +12,8 @@ class FollowerListViewController:BaseListViewController {
     override func fetchData() {
         
     }
+    
+    override func bind() {
+        
+    }
 }

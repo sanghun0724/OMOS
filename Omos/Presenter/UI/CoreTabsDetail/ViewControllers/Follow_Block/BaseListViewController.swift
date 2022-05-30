@@ -32,6 +32,10 @@ class BaseListViewController: BaseViewController {
         }
     }
     
+    override func bind() {
+        
+    }
+    
     func fetchData() { //프로토콜 하나 만들까.. 이렇게 할까 고민 (추상 메소드)
         assertionFailure("This method must be overridden")
     }
