@@ -165,6 +165,8 @@
 		B6BC148727BFF6C50067D8FB /* MyRecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BC148627BFF6C40067D8FB /* MyRecordDetailViewController.swift */; };
 		B6BC148927BFF6F80067D8FB /* MyRecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BC148827BFF6F80067D8FB /* MyRecordDetailView.swift */; };
 		B6BFD15E27E9096900DC3722 /* InstagramShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BFD15D27E9096800DC3722 /* InstagramShareView.swift */; };
+		B6C38EBA2845CB8D00F12263 /* BlockTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C38EB92845CB8D00F12263 /* BlockTarget.swift */; };
+		B6C38EBC2845D1AC00F12263 /* Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C38EBB2845D1AC00F12263 /* Lists.swift */; };
 		B6C3AD4527B95B1E00D5D69D /* Attributed+Stirng.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C3AD4427B95B1E00D5D69D /* Attributed+Stirng.swift */; };
 		B6C969B727D1B7C100BA4E58 /* MyRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C969B627D1B7C100BA4E58 /* MyRecord.swift */; };
 		B6C969B927D1F44500BA4E58 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C969B827D1F44500BA4E58 /* HomeView.swift */; };
@@ -388,6 +390,8 @@
 		B6BC148827BFF6F80067D8FB /* MyRecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordDetailView.swift; sourceTree = "<group>"; };
 		B6BFD15C27E89D8800DC3722 /* Omos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Omos.entitlements; sourceTree = "<group>"; };
 		B6BFD15D27E9096800DC3722 /* InstagramShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramShareView.swift; sourceTree = "<group>"; };
+		B6C38EB92845CB8D00F12263 /* BlockTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTarget.swift; sourceTree = "<group>"; };
+		B6C38EBB2845D1AC00F12263 /* Lists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lists.swift; sourceTree = "<group>"; };
 		B6C3AD4427B95B1E00D5D69D /* Attributed+Stirng.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attributed+Stirng.swift"; sourceTree = "<group>"; };
 		B6C969B627D1B7C100BA4E58 /* MyRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecord.swift; sourceTree = "<group>"; };
 		B6C969B827D1F44500BA4E58 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -689,6 +693,7 @@
 			isa = PBXGroup;
 			children = (
 				B64601E127DB481D0076C2E5 /* InteractionTarget.swift */,
+				B6C38EB92845CB8D00F12263 /* BlockTarget.swift */,
 			);
 			path = Interaction;
 			sourceTree = "<group>";
@@ -906,6 +911,7 @@
 			children = (
 				B697F20427E0A47C00F34AB5 /* Today.swift */,
 				B6E9B5CD27E719E30045143F /* MyProfile.swift */,
+				B6C38EBB2845D1AC00F12263 /* Lists.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -1379,6 +1385,7 @@
 				B6B1BB5E27BBD06600DF2528 /* MyRecord+Table.swift in Sources */,
 				B6D5EFD32840BC7E005E9302 /* FollowListViewController.swift in Sources */,
 				B642344527DCA9A600C1083D /* AllRecordCateDetail+Table.swift in Sources */,
+				B6C38EBC2845D1AC00F12263 /* Lists.swift in Sources */,
 				B697F20527E0A47C00F34AB5 /* Today.swift in Sources */,
 				B683A45327B0DA3500838749 /* AllRecordTableCell.swift in Sources */,
 				B69860BD27B8E85600E83DB9 /* NickNameView.swift in Sources */,
@@ -1446,6 +1453,7 @@
 				B611826F27D4B125004217E2 /* Track.swift in Sources */,
 				B6E12E7E27C21050008644B5 /* CreateViewController.swift in Sources */,
 				B6C969B727D1B7C100BA4E58 /* MyRecord.swift in Sources */,
+				B6C38EBA2845CB8D00F12263 /* BlockTarget.swift in Sources */,
 				B6540F6327C50F79002B1696 /* CategoryViewController.swift in Sources */,
 				B6CC1D7427BA437A00B5EE7E /* InfoController.swift in Sources */,
 				B646051727CB5E8C0022E062 /* EntireViewController.swift in Sources */,

@@ -29,7 +29,6 @@ class InteractionRecordViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
         selfView.tableView.dataSource = self
         selfView.tableView.delegate = self
         type == .like ? (viewModel.fetchLikesRecords(userId: Account.currentUser)):(viewModel.fetchScrapRecords(userId: Account.currentUser))
@@ -50,7 +49,7 @@ class InteractionRecordViewController: BaseViewController {
         }
     }
 
-    func bind() {
+    override func bind() {
         if type == .like {
             viewModel.likesLoading
                 .subscribe(onNext: { [weak self] loading in
