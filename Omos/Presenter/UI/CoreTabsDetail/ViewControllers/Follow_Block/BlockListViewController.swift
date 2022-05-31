@@ -1,5 +1,5 @@
 //
-//  FollowerListViewController.swift
+//  FollowingListViewController.swift
 //  Omos
 //
 //  Created by sangheon on 2022/05/29.
@@ -7,13 +7,12 @@
 
 import UIKit
 
-class FollowerListViewController: BaseListViewController {
+class BlockListViewController: BaseListViewController {
     let viewModel: FollowListViewModel
     
     init(viewModel: FollowListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        
     }
     
     required init?(coder: NSCoder) {
@@ -21,22 +20,21 @@ class FollowerListViewController: BaseListViewController {
     }
     
     override func fetchData() {
-        viewModel.fetchFollowerList(userId: Account.currentUser)
+        viewModel.fetchBlockList(userId: Account.currentUser)
     }
     
     override func bind() {
-        viewModel.followerList
+        viewModel.blockList
             .subscribe(onNext: { [weak self] data in
                 self?.listTableView.reloadData()
             }).disposed(by: disposeBag)
     }
     
     override func dataCount() -> Int {
-        viewModel.currentFollowerList.count
+        return viewModel.currentFollowingList.count
     }
     
     override func cellData() -> [ListResponse] {
-        viewModel.currentFollowerList
+        return viewModel.currentFollowingList
     }
-
 }

@@ -121,8 +121,8 @@ class MyProfileAPI {
     }
     
     //follow
-    func followerList(userId:Int, completion:@escaping(Result<ListResponse, Error>) -> Void) {
-        AF.request(FollowTarget.followers(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<ListResponse>) in
+    func followerList(userId:Int, completion:@escaping(Result<[ListResponse], Error>) -> Void) {
+        AF.request(FollowTarget.followers(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[ListResponse]>) in
             switch response.result {
             case .success(let data):
                 print(data)
@@ -134,8 +134,8 @@ class MyProfileAPI {
         }
     }
     
-    func followingList(userId:Int, completion:@escaping(Result<ListResponse, Error>) -> Void) {
-        AF.request(FollowTarget.followings(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<ListResponse>) in
+    func followingList(userId:Int, completion:@escaping(Result<[ListResponse], Error>) -> Void) {
+        AF.request(FollowTarget.followings(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[ListResponse]>) in
             switch response.result {
             case .success(let data):
                 print(data)
@@ -148,8 +148,8 @@ class MyProfileAPI {
     }
     
     //block
-    func blockList(userId:Int, completion:@escaping(Result<ListResponse, Error>) -> Void) {
-        AF.request(BlockTarget.blockList(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<ListResponse>) in
+    func blockList(userId:Int, completion:@escaping(Result<[ListResponse], Error>) -> Void) {
+        AF.request(BlockTarget.blockList(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[ListResponse]>) in
             switch response.result {
             case .success(let data):
                 print(data)

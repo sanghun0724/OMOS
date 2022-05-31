@@ -10,8 +10,8 @@ import Foundation
 
 struct ListResponse:Codable {
     let nickname: String
-    let profileURL: String
-    let userID:String
+    let profileURL: String?
+    let userID:Int
     
     enum CodingKeys:String,CodingKey {
         case nickname

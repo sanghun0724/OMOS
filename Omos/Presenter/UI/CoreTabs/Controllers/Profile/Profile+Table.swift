@@ -7,6 +7,9 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
+import RxGesture
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -79,22 +82,53 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
     }
+    
+    private func headerBind(header:MydjProfileHeader) {
+        header.followButton.isHidden = true
+        header.settingButton.isHidden = false
+        guard let headerData = viewModel.currentMyProfile else { return }
+        header.configureMyProfile(profile: headerData)
+        
+        header.settingButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                let vc = SettingViewController(viewModel: self!.viewModel)
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }).disposed(by: header.disposeBag)
+        
+        Observable.merge(
+            header.followerTitleLabel.rx.tapGesture().when(.recognized).map { $0 },
+            header.followerCountLabel.rx.tapGesture().when(.recognized).map { $0 }
+            )
+            .throttle(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
+            .subscribe(onNext: { [weak self] event in
+                let rp = MyProfileRepositoryImpl(myProfileAPI: MyProfileAPI())
+                let uc = MyProfileUseCase(myProfileRepository: rp)
+                let vm = FollowListViewModel(usecase: uc)
+                let vc = FollowListViewController(viewModel: vm, page: .first)
+                self?.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: header.disposeBag)
+        
+        Observable.merge(
+            header.followingTitleLabel.rx.tapGesture().when(.recognized).map { $0 },
+            header.followingCountLabel.rx.tapGesture().when(.recognized).map { $0 }
+            )
+            .throttle(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
+            .subscribe(onNext: { [weak self] event in
+                let rp = MyProfileRepositoryImpl(myProfileAPI: MyProfileAPI())
+                let uc = MyProfileUseCase(myProfileRepository: rp)
+                let vm = FollowListViewModel(usecase: uc)
+                let vc = FollowListViewController(viewModel: vm, page: .last)
+                self?.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: header.disposeBag)
+    }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: MydjProfileHeader.identifier) as! MydjProfileHeader
-            header.followButton.isHidden = true
-            header.settingButton.isHidden = false
-            guard let headerData = viewModel.currentMyProfile else { return header }
-            header.configureMyProfile(profile: headerData)
-
-            header.settingButton.rx.tap
-                .subscribe(onNext: { [weak self] _ in
-                    let vc = SettingViewController(viewModel: self!.viewModel)
-                    self?.navigationController?.pushViewController(vc, animated: true)
-                }).disposed(by: header.disposeBag)
+            headerBind(header: header)
             
-
             return header
         } else {
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: AllRecordHeaderView.identifier) as! AllRecordHeaderView

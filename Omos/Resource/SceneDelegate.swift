@@ -34,11 +34,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
         let uc = LoginUseCase(authRepository: AuthRepositoryImpl(loginAPI: LoginAPI()))
         let vm = LoginViewModel(usecase: uc)
         UNUserNotificationCenter.current().delegate = self
-        //
-        self.window?.rootViewController = FollowListViewController()
-        self.window?.makeKeyAndVisible()
-        return
-        //
 
         Observable.combineLatest(kakaoValid, appleValid, localValid) { $0 || $1 || $2 }
         .observe(on: MainScheduler.instance)

@@ -158,8 +158,8 @@ class MyProfileRepositoryImpl: MyProfileRepository {
         }
     }
     
-    func followerList(userId: Int) -> Single<ListResponse> {
-        Single<ListResponse>.create { [weak self] single in
+    func followerList(userId: Int) -> Single<[ListResponse]> {
+        Single<[ListResponse]>.create { [weak self] single in
             self?.myProfileAPI.followerList(userId: userId, completion: { result in
                 switch result {
                 case .success(let data):
@@ -174,8 +174,8 @@ class MyProfileRepositoryImpl: MyProfileRepository {
         }
     }
     
-    func followingList(userId: Int) -> Single<ListResponse> {
-        Single<ListResponse>.create { [weak self] single in
+    func followingList(userId: Int) -> Single<[ListResponse]> {
+        Single<[ListResponse]>.create { [weak self] single in
             self?.myProfileAPI.followingList(userId: userId, completion: { result in
                 switch result {
                 case .success(let data):
@@ -190,8 +190,8 @@ class MyProfileRepositoryImpl: MyProfileRepository {
         }
     }
     
-    func blockList(userId: Int) -> Single<ListResponse> {
-        Single<ListResponse>.create { [weak self] single in
+    func blockList(userId: Int) -> Single<[ListResponse]> {
+        Single<[ListResponse]>.create { [weak self] single in
             self?.myProfileAPI.blockList(userId: userId, completion: { result in
                 switch result {
                 case .success(let data):

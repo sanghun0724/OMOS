@@ -13,8 +13,8 @@ enum FollowTarget {
     case deleteFollow(fromId: Int, toId: Int)
     case myDjProfile(fromId: Int, toId: Int)
     case myDjList(userId: Int)
-    case followers(userId:Int)
-    case followings(userId:Int)
+    case followers(userId: Int)
+    case followings(userId: Int)
 }
 
 extension FollowTarget: TargetType {

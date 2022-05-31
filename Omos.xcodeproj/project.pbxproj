@@ -44,6 +44,7 @@
 		B630D2FA27C7756A00E66F22 /* MydjTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2F927C7756A00E66F22 /* MydjTableCell.swift */; };
 		B630D2FC27C7761D00E66F22 /* Mydj+Table+Collect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2FB27C7761D00E66F22 /* Mydj+Table+Collect.swift */; };
 		B630D2FF27C78C0E00E66F22 /* BestSearchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2FE27C78C0E00E66F22 /* BestSearchTableCell.swift */; };
+		B63A85AD2846440D00EC1DAF /* BlockListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63A85AC2846440D00EC1DAF /* BlockListViewController.swift */; };
 		B63DEC0328435FB500091E3C /* BaseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63DEC0228435FB500091E3C /* BaseListViewController.swift */; };
 		B63DEC0528435FFC00091E3C /* FollowerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63DEC0428435FFC00091E3C /* FollowerListViewController.swift */; };
 		B63DEC072843603700091E3C /* FollowingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63DEC062843603700091E3C /* FollowingListViewController.swift */; };
@@ -265,6 +266,7 @@
 		B630D2F927C7756A00E66F22 /* MydjTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MydjTableCell.swift; sourceTree = "<group>"; };
 		B630D2FB27C7761D00E66F22 /* Mydj+Table+Collect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mydj+Table+Collect.swift"; sourceTree = "<group>"; };
 		B630D2FE27C78C0E00E66F22 /* BestSearchTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSearchTableCell.swift; sourceTree = "<group>"; };
+		B63A85AC2846440D00EC1DAF /* BlockListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListViewController.swift; sourceTree = "<group>"; };
 		B63DEC0228435FB500091E3C /* BaseListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListViewController.swift; sourceTree = "<group>"; };
 		B63DEC0428435FFC00091E3C /* FollowerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListViewController.swift; sourceTree = "<group>"; };
 		B63DEC062843603700091E3C /* FollowingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingListViewController.swift; sourceTree = "<group>"; };
@@ -687,6 +689,7 @@
 				B63DEC0228435FB500091E3C /* BaseListViewController.swift */,
 				B63DEC0428435FFC00091E3C /* FollowerListViewController.swift */,
 				B63DEC062843603700091E3C /* FollowingListViewController.swift */,
+				B63A85AC2846440D00EC1DAF /* BlockListViewController.swift */,
 			);
 			path = Follow_Block;
 			sourceTree = "<group>";
@@ -1365,6 +1368,7 @@
 				B6DCFA5D27E49D20006283FE /* ProfileViewModel.swift in Sources */,
 				B63DEC072843603700091E3C /* FollowingListViewController.swift in Sources */,
 				B650873927AF948D0020D2C1 /* HomeViewController.swift in Sources */,
+				B63A85AD2846440D00EC1DAF /* BlockListViewController.swift in Sources */,
 				B67EF45027B7A9B80023D5D4 /* SignUpView.swift in Sources */,
 				B6C38EBE2845DEF100F12263 /* FollowListViewModel.swift in Sources */,
 				B693658227E1C57400A8FCBA /* AllrecordLyricsTableCell.swift in Sources */,

@@ -9,14 +9,24 @@ import Tabman
 import UIKit
 
 final class FollowListViewController: TabmanViewController {
-    // 페이징 할 뷰 컨트롤러
-    var viewControllers:[UIViewController] = [FollowerListViewController(), FollowingListViewController()]
+    let viewModel: FollowListViewModel
+    var viewControllers: [UIViewController] = []
+    let page: PageboyViewController.Page?
+    
+    init(viewModel: FollowListViewModel, page: PageboyViewController.Page?) {
+        self.page = page
+        self.viewModel = viewModel
+        viewControllers = [FollowerListViewController(viewModel: self.viewModel), FollowingListViewController(viewModel: self.viewModel)]
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.dataSource = self
-        
         // Create bar
         let bar = TMBar.ButtonBar()
         settingTabBar(ctBar: bar)
@@ -34,7 +44,7 @@ final class FollowListViewController: TabmanViewController {
         ctBar.backgroundView.style = .custom(view: TabBarBackgroundView())
         
         // 선택 / 안선택 색 + font size
-        ctBar.buttons.customize { (button) in
+        ctBar.buttons.customize { button in
             button.tintColor = .mainGrey5
             button.selectedTintColor = .mainOrange
             button.font = UIFont.systemFont(ofSize: 16)
@@ -70,6 +80,6 @@ extension FollowListViewController: PageboyViewControllerDataSource, TMBarDataSo
     }
     
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
-        nil
+        page
     }
 }

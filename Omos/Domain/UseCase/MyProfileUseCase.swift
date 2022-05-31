@@ -51,19 +51,19 @@ class MyProfileUseCase {
         myProfileRepository.signOut(userId: userId)
     }
     
-    func followerList(userId:Int) -> Single<ListResponse> {
+    func followerList(userId: Int) -> Single<[ListResponse]> {
         myProfileRepository.followerList(userId: userId)
     }
     
-    func followingList(userId:Int) -> Single<ListResponse> {
+    func followingList(userId: Int) -> Single<[ListResponse]> {
         myProfileRepository.followingList(userId: userId)
     }
     
-    func blockList(userId:Int) -> Single<ListResponse> {
+    func blockList(userId: Int) -> Single<[ListResponse]> {
         myProfileRepository.blockList(userId: userId)
     }
     
-    func blockDelete(targetId:Int) -> Single<StateRespone> {
+    func blockDelete(targetId: Int) -> Single<StateRespone> {
         myProfileRepository.blockDelete(targetId: targetId)
     }
 }

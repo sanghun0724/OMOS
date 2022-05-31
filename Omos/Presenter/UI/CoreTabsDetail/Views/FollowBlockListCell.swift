@@ -12,6 +12,8 @@ class FollowBlockListCell: UITableViewCell {
     
     let profileImageView: UIImageView = {
         let view = UIImageView(image: UIImage(named: "defaultprofile"))
+        view.backgroundColor = .mainBackGround
+        view.layer.masksToBounds = true
         return view
     }()
     
@@ -26,7 +28,8 @@ class FollowBlockListCell: UITableViewCell {
     
     let listButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .red
+        button.backgroundColor = .mainOrange
+        button.setTitle("팔로우", for: .normal)
         return button
     }()
     
@@ -39,6 +42,7 @@ class FollowBlockListCell: UITableViewCell {
         addSubview(profileImageView)
         addSubview(nicknameLabel)
         addSubview(listButton)
+        backgroundColor = .mainBackGround
         
         profileImageView.snp.makeConstraints { make in
             make.leading.top.bottom.equalToSuperview().inset(16)
@@ -57,6 +61,14 @@ class FollowBlockListCell: UITableViewCell {
             make.centerY.equalToSuperview()
             make.trailing.equalTo(listButton.snp.leading).offset(-16)
         }
+        
+        profileImageView.layoutIfNeeded()
+        profileImageView.layer.cornerRadius = profileImageView.height / 2
+    }
+    
+    func configure(data: ListResponse) {
+        profileImageView.download(url: data.profileURL)
+        nicknameLabel.text = data.nickname
     }
 }
 

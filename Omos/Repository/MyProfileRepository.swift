@@ -20,8 +20,8 @@ protocol MyProfileRepository {
     func logOut(userId: Int) -> Single<StateRespone>
     func myDjProfile(fromId: Int, toId: Int) -> Single<MyDjProfileResponse>
     func signOut(userId: Int) -> Single<StateRespone>
-    func followerList(userId:Int) -> Single<ListResponse>
-    func followingList(userId:Int) -> Single<ListResponse>
-    func blockList(userId:Int) -> Single<ListResponse>
+    func followerList(userId:Int) -> Single<[ListResponse]>
+    func followingList(userId:Int) -> Single<[ListResponse]>
+    func blockList(userId:Int) -> Single<[ListResponse]>
     func blockDelete(targetId:Int) -> Single<StateRespone>
 }
