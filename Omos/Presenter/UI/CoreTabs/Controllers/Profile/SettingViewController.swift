@@ -164,7 +164,11 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                 let vc = PasswordChangeViewController(viewModel: viewModel)
                 self.navigationController?.pushViewController(vc, animated: true)
             case 2:
-                print("차단된 계정으로 갑니다")
+                let rp = MyProfileRepositoryImpl(myProfileAPI: MyProfileAPI())
+                let uc = MyProfileUseCase(myProfileRepository: rp)
+                let vm = FollowListViewModel(usecase: uc)
+                let vc = BlockListViewController(viewModel: vm)
+                self.navigationController?.pushViewController(vc, animated: true)
             default:
                 print("")
             }

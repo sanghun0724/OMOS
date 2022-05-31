@@ -31,10 +31,10 @@ class BlockListViewController: BaseListViewController {
     }
     
     override func dataCount() -> Int {
-        return viewModel.currentFollowingList.count
+        return viewModel.currentBlockList.count
     }
     
     override func cellData() -> [ListResponse] {
-        return viewModel.currentFollowingList
+        return viewModel.currentBlockList
     }
 }
