@@ -23,4 +23,5 @@ protocol MyProfileRepository {
     func followerList(userId:Int) -> Single<ListResponse>
     func followingList(userId:Int) -> Single<ListResponse>
     func blockList(userId:Int) -> Single<ListResponse>
+    func blockDelete(targetId:Int) -> Single<StateRespone>
 }
