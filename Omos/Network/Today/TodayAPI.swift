@@ -9,8 +9,14 @@ import Alamofire
 import Foundation
 
 class TodayAPI {
+    private let session: SessionProtocol
+
+    init(session: SessionProtocol) {
+      self.session = session
+    }
+        
     func popuralRecord(completion:@escaping(Result<[PopuralResponse], Error>) -> Void) {
-        AF.request(TodayTarget.popuralRecord, interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[PopuralResponse]>) in
+        session.request(TodayTarget.popuralRecord, interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[PopuralResponse]>) in
             switch response.result {
             case .success(let data):
                 completion(.success(data))

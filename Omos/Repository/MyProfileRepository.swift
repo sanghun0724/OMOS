@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 protocol MyProfileRepository {
-    var myProfileAPI: MyProfileAPI { get }
+    var myProfileAPI: MyProfileAPI { get } 
     init(myProfileAPI: MyProfileAPI)
     func myProfile(userId: Int) -> Single<MyProfileResponse>
     func updatePassword(request: PWUpdateRequest) -> Single<StateRespone>

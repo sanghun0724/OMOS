@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		21B827FA49CA17F32C953880 /* Pods_Omos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDDD0956E1034CF6BE3CC18 /* Pods_Omos.framework */; };
+		A35D669CC837DF4B89B8FD01 /* Pods_Omos_OmosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABEC1BC3CB7BC079196C193 /* Pods_Omos_OmosTests.framework */; };
 		B601C53B27C0F50100DCD2AF /* Cafe24Oneprettynight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B601C53A27C0F50100DCD2AF /* Cafe24Oneprettynight.ttf */; };
 		B606195227DF0F14006508CA /* LyricsPasteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606195127DF0F14006508CA /* LyricsPasteViewController.swift */; };
 		B606195427DF0F57006508CA /* LyricsPasteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606195327DF0F57006508CA /* LyricsPasteView.swift */; };
@@ -149,6 +150,9 @@
 		B6ABCCFA27CF5E480003B47A /* RecordsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ABCCF927CF5E480003B47A /* RecordsRepository.swift */; };
 		B6ABCCFC27CF5E650003B47A /* RecordsRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ABCCFB27CF5E650003B47A /* RecordsRepositoryImpl.swift */; };
 		B6ABCCFE27CF5EDE0003B47A /* RecordsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ABCCFD27CF5EDE0003B47A /* RecordsUseCase.swift */; };
+		B6AD4E352847C8360000428B /* SessionStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AD4E342847C8360000428B /* SessionStub.swift */; };
+		B6AD4E372847CCDB0000428B /* SessionManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AD4E362847CCDB0000428B /* SessionManagerProtocol.swift */; };
+		B6AD4E3D2847D1520000428B /* TodayAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AD4E3C2847D1520000428B /* TodayAPITests.swift */; };
 		B6ADDCFB280FE39100D90E46 /* RecordLongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ADDCFA280FE39100D90E46 /* RecordLongView.swift */; };
 		B6ADDCFD280FE53D00D90E46 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ADDCFC280FE53D00D90E46 /* LoadingCell.swift */; };
 		B6ADDCFF280FE6D300D90E46 /* InstaDecoTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ADDCFE280FE6D300D90E46 /* InstaDecoTopView.swift */; };
@@ -228,6 +232,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		16E3A8C3A30221F2D45EACA9 /* Pods-Omos-OmosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Omos-OmosTests.debug.xcconfig"; path = "Target Support Files/Pods-Omos-OmosTests/Pods-Omos-OmosTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3ABEC1BC3CB7BC079196C193 /* Pods_Omos_OmosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Omos_OmosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		937ED644521A24F0A95E0654 /* Pods-Omos-OmosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Omos-OmosTests.release.xcconfig"; path = "Target Support Files/Pods-Omos-OmosTests/Pods-Omos-OmosTests.release.xcconfig"; sourceTree = "<group>"; };
 		B601C53A27C0F50100DCD2AF /* Cafe24Oneprettynight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Cafe24Oneprettynight.ttf; sourceTree = "<group>"; };
 		B606195127DF0F14006508CA /* LyricsPasteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsPasteViewController.swift; sourceTree = "<group>"; };
 		B606195327DF0F57006508CA /* LyricsPasteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsPasteView.swift; sourceTree = "<group>"; };
@@ -375,6 +382,11 @@
 		B6ABCCFB27CF5E650003B47A /* RecordsRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsRepositoryImpl.swift; sourceTree = "<group>"; };
 		B6ABCCFD27CF5EDE0003B47A /* RecordsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsUseCase.swift; sourceTree = "<group>"; };
 		B6AC277027BA28BB00A1FA5B /* OmosRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OmosRelease.entitlements; sourceTree = "<group>"; };
+		B6AD4E302847C19C0000428B /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6AD4E322847C28D0000428B /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6AD4E342847C8360000428B /* SessionStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStub.swift; sourceTree = "<group>"; };
+		B6AD4E362847CCDB0000428B /* SessionManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManagerProtocol.swift; sourceTree = "<group>"; };
+		B6AD4E3C2847D1520000428B /* TodayAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayAPITests.swift; sourceTree = "<group>"; };
 		B6ADDCFA280FE39100D90E46 /* RecordLongView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordLongView.swift; sourceTree = "<group>"; };
 		B6ADDCFC280FE53D00D90E46 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		B6ADDCFE280FE6D300D90E46 /* InstaDecoTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaDecoTopView.swift; sourceTree = "<group>"; };
@@ -460,6 +472,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A35D669CC837DF4B89B8FD01 /* Pods_Omos_OmosTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,7 +482,10 @@
 		5A9649AB9D7A8749E6E322D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B6AD4E322847C28D0000428B /* Alamofire.framework */,
+				B6AD4E302847C19C0000428B /* Alamofire.framework */,
 				EBDDD0956E1034CF6BE3CC18 /* Pods_Omos.framework */,
+				3ABEC1BC3CB7BC079196C193 /* Pods_Omos_OmosTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -849,6 +865,7 @@
 				B68454ED27BE228800F1E6B5 /* HTTPHeaderField.swift */,
 				B68454EF27BE2D7B00F1E6B5 /* MyRequestInterceptor.swift */,
 				B62A770627F049A800B427D0 /* AWSHelper.swift */,
+				B6AD4E362847CCDB0000428B /* SessionManagerProtocol.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -925,6 +942,8 @@
 			isa = PBXGroup;
 			children = (
 				B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */,
+				B6AD4E342847C8360000428B /* SessionStub.swift */,
+				B6AD4E3C2847D1520000428B /* TodayAPITests.swift */,
 			);
 			path = OmosTests;
 			sourceTree = "<group>";
@@ -1099,6 +1118,8 @@
 			children = (
 				CEBF3DD9CCF3DD38A49D350C /* Pods-Omos.debug.xcconfig */,
 				C215C3C79873F26B73F4F037 /* Pods-Omos.release.xcconfig */,
+				16E3A8C3A30221F2D45EACA9 /* Pods-Omos-OmosTests.debug.xcconfig */,
+				937ED644521A24F0A95E0654 /* Pods-Omos-OmosTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1134,9 +1155,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B6A029A127B23D3500D3D3C9 /* Build configuration list for PBXNativeTarget "OmosTests" */;
 			buildPhases = (
+				1E0BA5524721528189FF6E0C /* [CP] Check Pods Manifest.lock */,
 				B6A0299527B23D3500D3D3C9 /* Sources */,
 				B6A0299627B23D3500D3D3C9 /* Frameworks */,
 				B6A0299727B23D3500D3D3C9 /* Resources */,
+				874C93076BACE391E15E9BB8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1216,6 +1239,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1E0BA5524721528189FF6E0C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Omos-OmosTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		77902E746488D1AA0A59065A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1231,6 +1276,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Omos/Pods-Omos-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		874C93076BACE391E15E9BB8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Omos-OmosTests/Pods-Omos-OmosTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Omos-OmosTests/Pods-Omos-OmosTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Omos-OmosTests/Pods-Omos-OmosTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B64A13AB280960220093D817 /* Run Script */ = {
@@ -1387,6 +1449,7 @@
 				B6DCFA5627E45F4B006283FE /* ProfileView.swift in Sources */,
 				B68454EC27BE1D9800F1E6B5 /* TargetType.swift in Sources */,
 				B697F20927E0D08300F34AB5 /* TodayUseCase.swift in Sources */,
+				B6AD4E372847CCDB0000428B /* SessionManagerProtocol.swift in Sources */,
 				B606195A27DF2B85006508CA /* LyricsViewModel.swift in Sources */,
 				B689A9D127AE94E9005F26E4 /* Color.swift in Sources */,
 				B6ADDCFB280FE39100D90E46 /* RecordLongView.swift in Sources */,
@@ -1503,7 +1566,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6AD4E352847C8360000428B /* SessionStub.swift in Sources */,
 				B6A0299C27B23D3500D3D3C9 /* OmosTests.swift in Sources */,
+				B6AD4E3D2847D1520000428B /* TodayAPITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1723,6 +1788,7 @@
 		};
 		B6A0299F27B23D3500D3D3C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 16E3A8C3A30221F2D45EACA9 /* Pods-Omos-OmosTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1742,6 +1808,7 @@
 		};
 		B6A029A027B23D3500D3D3C9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 937ED644521A24F0A95E0654 /* Pods-Omos-OmosTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Apple Development";

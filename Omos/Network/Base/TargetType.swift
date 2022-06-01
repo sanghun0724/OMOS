@@ -52,3 +52,4 @@ extension Encodable {
         return dictionaryData
     }
 }
+

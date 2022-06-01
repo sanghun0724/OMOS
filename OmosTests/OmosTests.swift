@@ -4,13 +4,19 @@
 //
 //  Created by sangheon on 2022/02/08.
 //
-
+@testable import Alamofire
 import XCTest
+@testable import Omos
 
 class OmosTests: XCTestCase {
+    
+//    private let sut:FollowListViewModel!
+   // private let var profileUseCase:
+    
     override func setUpWithError() throws {
         try super.setUpWithError()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        
     }
 
     override func tearDownWithError() throws {
@@ -24,6 +30,7 @@ class OmosTests: XCTestCase {
         // Any test you write for XCTest can be annotated as throws and async.
         // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
         // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+        
     }
 
     func testPerformanceExample() throws {
