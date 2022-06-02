@@ -143,7 +143,6 @@
 		B69860BD27B8E85600E83DB9 /* NickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69860BC27B8E85600E83DB9 /* NickNameView.swift */; };
 		B69E42D327E38F8300CAD5F1 /* AllRecordDetail+Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E42D227E38F8300CAD5F1 /* AllRecordDetail+Table.swift */; };
 		B69E42D527E3A8F900CAD5F1 /* MyRecordDetail+Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E42D427E3A8F900CAD5F1 /* MyRecordDetail+Table.swift */; };
-		B6A0299C27B23D3500D3D3C9 /* OmosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */; };
 		B6ABCCF327CF44880003B47A /* Select.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ABCCF227CF44880003B47A /* Select.swift */; };
 		B6ABCCF627CF45020003B47A /* RecordAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ABCCF527CF45020003B47A /* RecordAPI.swift */; };
 		B6ABCCF827CF450D0003B47A /* RecordTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ABCCF727CF450D0003B47A /* RecordTarget.swift */; };
@@ -374,7 +373,6 @@
 		B69E42D227E38F8300CAD5F1 /* AllRecordDetail+Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AllRecordDetail+Table.swift"; sourceTree = "<group>"; };
 		B69E42D427E3A8F900CAD5F1 /* MyRecordDetail+Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyRecordDetail+Table.swift"; sourceTree = "<group>"; };
 		B6A0299927B23D3500D3D3C9 /* OmosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OmosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmosTests.swift; sourceTree = "<group>"; };
 		B6ABCCF227CF44880003B47A /* Select.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Select.swift; sourceTree = "<group>"; };
 		B6ABCCF527CF45020003B47A /* RecordAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordAPI.swift; sourceTree = "<group>"; };
 		B6ABCCF727CF450D0003B47A /* RecordTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTarget.swift; sourceTree = "<group>"; };
@@ -758,6 +756,22 @@
 			path = SearchDetail;
 			sourceTree = "<group>";
 		};
+		B64EB70E2848BFBD00D33B27 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				B6AD4E342847C8360000428B /* SessionStub.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		B64EB70F2848BFD700D33B27 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				B6AD4E3C2847D1520000428B /* TodayAPITests.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		B650873727AF94500020D2C1 /* Others */ = {
 			isa = PBXGroup;
 			children = (
@@ -941,9 +955,8 @@
 		B6A0299A27B23D3500D3D3C9 /* OmosTests */ = {
 			isa = PBXGroup;
 			children = (
-				B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */,
-				B6AD4E342847C8360000428B /* SessionStub.swift */,
-				B6AD4E3C2847D1520000428B /* TodayAPITests.swift */,
+				B64EB70E2848BFBD00D33B27 /* Mock */,
+				B64EB70F2848BFD700D33B27 /* Service */,
 			);
 			path = OmosTests;
 			sourceTree = "<group>";
@@ -1567,7 +1580,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6AD4E352847C8360000428B /* SessionStub.swift in Sources */,
-				B6A0299C27B23D3500D3D3C9 /* OmosTests.swift in Sources */,
 				B6AD4E3D2847D1520000428B /* TodayAPITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
