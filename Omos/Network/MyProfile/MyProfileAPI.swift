@@ -9,8 +9,14 @@ import Alamofire
 import Foundation
 
 class MyProfileAPI {
+    private let session: SessionProtocol
+
+    init(session: SessionProtocol) {
+      self.session = session
+    }
+    
     func myProfile(userId: Int, completion:@escaping(Result<MyProfileResponse, Error>) -> Void) {
-        AF.request(MyProfileTarget.myProfile(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<MyProfileResponse>) in
+        session.request(MyProfileTarget.myProfile(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<MyProfileResponse>) in
             switch response.result {
             case .success(let data):
                 completion(.success(data))
@@ -22,7 +28,7 @@ class MyProfileAPI {
     }
 
     func updatePassword(request: PWUpdateRequest, completion:@escaping(Result<StateRespone, Error>) -> Void) {
-        AF.request(LoginTarget.updatePassword(request), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<StateRespone>) in
+        session.request(LoginTarget.updatePassword(request), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<StateRespone>) in
             switch response.result {
             case .success(let data):
                 completion(.success(data))
@@ -34,7 +40,7 @@ class MyProfileAPI {
     }
 
     func updateProfile(request: ProfileUpdateRequest, completion:@escaping(Result<StateRespone, Error>) -> Void) {
-        AF.request(MyProfileTarget.updateProfile(request), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<StateRespone>) in
+        session.request(MyProfileTarget.updateProfile(request), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<StateRespone>) in
             switch response.result {
             case .success(let data):
                 completion(.success(data))
@@ -46,11 +52,10 @@ class MyProfileAPI {
     }
 
     func likeRecords(userId: Int, completion:@escaping(Result<[MyRecordResponse], Error>) -> Void) {
-            AF.request(RecordTarget.likeRecords(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[MyRecordResponse]>) in
+            session.request(RecordTarget.likeRecords(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[MyRecordResponse]>) in
                 switch response.result {
                 case .success(let data):
                     completion(.success(data))
-                    print(data)
                 case .failure(let error):
                     print(error.localizedDescription)
                     completion(.failure(error))
@@ -59,11 +64,10 @@ class MyProfileAPI {
     }
 
     func scrapRecords(userId: Int, completion:@escaping(Result<[MyRecordResponse], Error>) -> Void) {
-            AF.request(RecordTarget.scrapRecords(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[MyRecordResponse]>) in
+            session.request(RecordTarget.scrapRecords(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[MyRecordResponse]>) in
                 switch response.result {
                 case .success(let data):
                     completion(.success(data))
-                    print(data)
                 case .failure(let error):
                     print(error.localizedDescription)
                     completion(.failure(error))
@@ -72,7 +76,7 @@ class MyProfileAPI {
     }
 
     func myProfileRecords(userId: Int, completion:@escaping(Result<MyProfileRecordResponse, Error>) -> Void) {
-        AF.request(RecordTarget.myProfileRecords(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<MyProfileRecordResponse>) in
+        session.request(RecordTarget.myProfileRecords(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<MyProfileRecordResponse>) in
             switch response.result {
             case .success(let data):
                 completion(.success(data))
@@ -84,7 +88,7 @@ class MyProfileAPI {
     }
 
     func logOut(userId: Int, completion:@escaping(Result<StateRespone, Error>) -> Void) {
-        AF.request(LoginTarget.logOut(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<StateRespone>) in
+        session.request(LoginTarget.logOut(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<StateRespone>) in
             switch response.result {
             case .success(let data):
                 completion(.success(data))
@@ -96,10 +100,9 @@ class MyProfileAPI {
     }
 
     func myDjProfile(fromId: Int, toId: Int, completion:@escaping(Result<MyDjProfileResponse, Error>) -> Void) {
-        AF.request(FollowTarget.myDjProfile(fromId: fromId, toId: toId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<MyDjProfileResponse>) in
+        session.request(FollowTarget.myDjProfile(fromId: fromId, toId: toId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<MyDjProfileResponse>) in
             switch response.result {
             case .success(let data):
-                print(data)
                 completion(.success(data))
             case .failure(let error):
                 print(error.localizedDescription)
@@ -109,7 +112,7 @@ class MyProfileAPI {
     }
 
     func signOut(userId: Int, completion:@escaping(Result<StateRespone, Error>) -> Void) {
-        AF.request(LoginTarget.signout(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<StateRespone>) in
+        session.request(LoginTarget.signout(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<StateRespone>) in
             switch response.result {
             case .success(let data):
                 completion(.success(data))
@@ -120,12 +123,11 @@ class MyProfileAPI {
         }
     }
     
-    //follow
+    // follow
     func followerList(userId:Int, completion:@escaping(Result<[ListResponse], Error>) -> Void) {
-        AF.request(FollowTarget.followers(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[ListResponse]>) in
+        session.request(FollowTarget.followers(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[ListResponse]>) in
             switch response.result {
             case .success(let data):
-                print(data)
                 completion(.success(data))
             case .failure(let error):
                 print(error.localizedDescription)
@@ -135,10 +137,9 @@ class MyProfileAPI {
     }
     
     func followingList(userId:Int, completion:@escaping(Result<[ListResponse], Error>) -> Void) {
-        AF.request(FollowTarget.followings(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[ListResponse]>) in
+        session.request(FollowTarget.followings(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[ListResponse]>) in
             switch response.result {
             case .success(let data):
-                print(data)
                 completion(.success(data))
             case .failure(let error):
                 print(error.localizedDescription)
@@ -147,12 +148,11 @@ class MyProfileAPI {
         }
     }
     
-    //block
+    // block
     func blockList(userId:Int, completion:@escaping(Result<[ListResponse], Error>) -> Void) {
-        AF.request(BlockTarget.blockList(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[ListResponse]>) in
+        session.request(BlockTarget.blockList(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[ListResponse]>) in
             switch response.result {
             case .success(let data):
-                print(data)
                 completion(.success(data))
             case .failure(let error):
                 print(error.localizedDescription)
@@ -161,11 +161,10 @@ class MyProfileAPI {
         }
     }
     
-    func blockDelete(targetId:Int, completion:@escaping(Result<StateRespone, Error>) -> Void) {
-        AF.request(BlockTarget.blockDelete(blockId: targetId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<StateRespone>) in
+    func blockDelete(targetId: Int, completion:@escaping(Result<StateRespone, Error>) -> Void) {
+        session.request(BlockTarget.blockDelete(blockId: targetId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<StateRespone>) in
             switch response.result {
             case .success(let data):
-                print(data)
                 completion(.success(data))
             case .failure(let error):
                 print(error.localizedDescription)

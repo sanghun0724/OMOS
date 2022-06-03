@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxGesture
+import Alamofire
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -101,7 +102,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             )
             .throttle(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
             .subscribe(onNext: { [weak self] event in
-                let rp = MyProfileRepositoryImpl(myProfileAPI: MyProfileAPI())
+                let rp = MyProfileRepositoryImpl(myProfileAPI: MyProfileAPI(session: Session.default))
                 let uc = MyProfileUseCase(myProfileRepository: rp)
                 let vm = FollowListViewModel(usecase: uc)
                 let vc = FollowListViewController(viewModel: vm, page: .first)
@@ -115,7 +116,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             )
             .throttle(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
             .subscribe(onNext: { [weak self] event in
-                let rp = MyProfileRepositoryImpl(myProfileAPI: MyProfileAPI())
+                let rp = MyProfileRepositoryImpl(myProfileAPI: MyProfileAPI(session: Session.default))
                 let uc = MyProfileUseCase(myProfileRepository: rp)
                 let vm = FollowListViewModel(usecase: uc)
                 let vc = FollowListViewController(viewModel: vm, page: .last)

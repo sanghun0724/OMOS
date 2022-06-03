@@ -4,7 +4,7 @@
 //
 //  Created by sangheon on 2022/03/18.
 //
-
+import Alamofire
 import KakaoSDKAuth
 import KakaoSDKCommon
 import KakaoSDKUser
@@ -164,7 +164,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                 let vc = PasswordChangeViewController(viewModel: viewModel)
                 self.navigationController?.pushViewController(vc, animated: true)
             case 2:
-                let rp = MyProfileRepositoryImpl(myProfileAPI: MyProfileAPI())
+                let rp = MyProfileRepositoryImpl(myProfileAPI: MyProfileAPI(session: Session.default))
                 let uc = MyProfileUseCase(myProfileRepository: rp)
                 let vm = FollowListViewModel(usecase: uc)
                 let vc = BlockListViewController(viewModel: vm)

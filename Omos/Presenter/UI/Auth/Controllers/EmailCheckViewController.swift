@@ -4,7 +4,7 @@
 //
 //  Created by sangheon on 2022/04/07.
 //
-
+import Alamofire
 import Foundation
 import RxCocoa
 import RxSwift
@@ -81,7 +81,7 @@ class EmailCheckViewController: BaseViewController {
             .drive(onNext: { [weak self] in
                 guard let isSuccess = self?.topView.emailCheckView.isSuccessView.isHidden else { return }
                 if !isSuccess {
-                    let rp = MyProfileRepositoryImpl(myProfileAPI: MyProfileAPI())
+                    let rp = MyProfileRepositoryImpl(myProfileAPI: MyProfileAPI(session: Session.default))
                     let uc = MyProfileUseCase(myProfileRepository: rp)
                     let vm = ProfileViewModel(usecase: uc)
                     let vc = PasswordChangeViewController(viewModel: vm)

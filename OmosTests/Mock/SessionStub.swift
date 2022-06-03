@@ -9,10 +9,10 @@
 @testable import Omos
 
 class SessionStub: SessionProtocol {
-    var result:(convertible:URLRequestConvertible,interceptor:RequestInterceptor?)?
+    var result:(convertible:URLRequestConvertible, interceptor: RequestInterceptor?)?
     @discardableResult
     func request(_ convertible: URLRequestConvertible, interceptor: RequestInterceptor?) -> DataRequest {
-        self.result = (convertible,interceptor)
+        self.result = (convertible, interceptor)
         return DataRequest(convertible: convertible, underlyingQueue: .global(), serializationQueue: .global(), eventMonitor: nil, interceptor: interceptor, delegate: DummyClass())
     }
 }

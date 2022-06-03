@@ -31,6 +31,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCente
         guard let scene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: scene)
         self.window?.overrideUserInterfaceStyle = .dark
+        //
+        self.window?.rootViewController = LaunchViewController()
+        self.window?.makeKeyAndVisible()
+        return 
         let uc = LoginUseCase(authRepository: AuthRepositoryImpl(loginAPI: LoginAPI()))
         let vm = LoginViewModel(usecase: uc)
         UNUserNotificationCenter.current().delegate = self

@@ -7,12 +7,9 @@
 
 import Alamofire
 
-
 protocol SessionProtocol: AnyObject {
     @discardableResult
     func request(_ convertible: URLRequestConvertible, interceptor: RequestInterceptor?) -> DataRequest
 }
 
-extension Session:SessionProtocol {
-    
-}
+extension Session:SessionProtocol {}

@@ -76,6 +76,7 @@
 		B646053227CBBF050022E062 /* SearchAlbumDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646053127CBBF050022E062 /* SearchAlbumDetailCell.swift */; };
 		B646053427CBE1A10022E062 /* SearchArtistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646053327CBE1A10022E062 /* SearchArtistViewController.swift */; };
 		B646053627CBE1B40022E062 /* SearchArtistHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646053527CBE1B40022E062 /* SearchArtistHeaderView.swift */; };
+		B64EB7112848F58A00D33B27 /* MyProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64EB7102848F58A00D33B27 /* MyProfileTests.swift */; };
 		B650873927AF948D0020D2C1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650873827AF948D0020D2C1 /* HomeViewController.swift */; };
 		B650873B27AF94C60020D2C1 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650873A27AF94C60020D2C1 /* TabBarViewController.swift */; };
 		B650873D27AF969C0020D2C1 /* MyRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650873C27AF969C0020D2C1 /* MyRecordViewController.swift */; };
@@ -150,7 +151,7 @@
 		B6ABCCFC27CF5E650003B47A /* RecordsRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ABCCFB27CF5E650003B47A /* RecordsRepositoryImpl.swift */; };
 		B6ABCCFE27CF5EDE0003B47A /* RecordsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ABCCFD27CF5EDE0003B47A /* RecordsUseCase.swift */; };
 		B6AD4E352847C8360000428B /* SessionStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AD4E342847C8360000428B /* SessionStub.swift */; };
-		B6AD4E372847CCDB0000428B /* SessionManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AD4E362847CCDB0000428B /* SessionManagerProtocol.swift */; };
+		B6AD4E372847CCDB0000428B /* SessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AD4E362847CCDB0000428B /* SessionProtocol.swift */; };
 		B6AD4E3D2847D1520000428B /* TodayAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AD4E3C2847D1520000428B /* TodayAPITests.swift */; };
 		B6ADDCFB280FE39100D90E46 /* RecordLongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ADDCFA280FE39100D90E46 /* RecordLongView.swift */; };
 		B6ADDCFD280FE53D00D90E46 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ADDCFC280FE53D00D90E46 /* LoadingCell.swift */; };
@@ -303,6 +304,7 @@
 		B646053127CBBF050022E062 /* SearchAlbumDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAlbumDetailCell.swift; sourceTree = "<group>"; };
 		B646053327CBE1A10022E062 /* SearchArtistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtistViewController.swift; sourceTree = "<group>"; };
 		B646053527CBE1B40022E062 /* SearchArtistHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtistHeaderView.swift; sourceTree = "<group>"; };
+		B64EB7102848F58A00D33B27 /* MyProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileTests.swift; sourceTree = "<group>"; };
 		B650873827AF948D0020D2C1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B650873A27AF94C60020D2C1 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		B650873C27AF969C0020D2C1 /* MyRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordViewController.swift; sourceTree = "<group>"; };
@@ -383,7 +385,7 @@
 		B6AD4E302847C19C0000428B /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6AD4E322847C28D0000428B /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6AD4E342847C8360000428B /* SessionStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStub.swift; sourceTree = "<group>"; };
-		B6AD4E362847CCDB0000428B /* SessionManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManagerProtocol.swift; sourceTree = "<group>"; };
+		B6AD4E362847CCDB0000428B /* SessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionProtocol.swift; sourceTree = "<group>"; };
 		B6AD4E3C2847D1520000428B /* TodayAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayAPITests.swift; sourceTree = "<group>"; };
 		B6ADDCFA280FE39100D90E46 /* RecordLongView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordLongView.swift; sourceTree = "<group>"; };
 		B6ADDCFC280FE53D00D90E46 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
@@ -768,6 +770,7 @@
 			isa = PBXGroup;
 			children = (
 				B6AD4E3C2847D1520000428B /* TodayAPITests.swift */,
+				B64EB7102848F58A00D33B27 /* MyProfileTests.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -879,7 +882,7 @@
 				B68454ED27BE228800F1E6B5 /* HTTPHeaderField.swift */,
 				B68454EF27BE2D7B00F1E6B5 /* MyRequestInterceptor.swift */,
 				B62A770627F049A800B427D0 /* AWSHelper.swift */,
-				B6AD4E362847CCDB0000428B /* SessionManagerProtocol.swift */,
+				B6AD4E362847CCDB0000428B /* SessionProtocol.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1462,7 +1465,7 @@
 				B6DCFA5627E45F4B006283FE /* ProfileView.swift in Sources */,
 				B68454EC27BE1D9800F1E6B5 /* TargetType.swift in Sources */,
 				B697F20927E0D08300F34AB5 /* TodayUseCase.swift in Sources */,
-				B6AD4E372847CCDB0000428B /* SessionManagerProtocol.swift in Sources */,
+				B6AD4E372847CCDB0000428B /* SessionProtocol.swift in Sources */,
 				B606195A27DF2B85006508CA /* LyricsViewModel.swift in Sources */,
 				B689A9D127AE94E9005F26E4 /* Color.swift in Sources */,
 				B6ADDCFB280FE39100D90E46 /* RecordLongView.swift in Sources */,
@@ -1580,6 +1583,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6AD4E352847C8360000428B /* SessionStub.swift in Sources */,
+				B64EB7112848F58A00D33B27 /* MyProfileTests.swift in Sources */,
 				B6AD4E3D2847D1520000428B /* TodayAPITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
