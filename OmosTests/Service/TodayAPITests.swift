@@ -5,8 +5,8 @@
 //  Created by sangheon on 2022/06/02.
 //
 
-@testable import Omos
 @testable import Alamofire
+@testable import Omos
 import XCTest
 
 class TodayAPITests: XCTestCase {
