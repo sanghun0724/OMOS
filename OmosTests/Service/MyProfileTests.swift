@@ -29,7 +29,7 @@ class MyProfileTests: XCTestCase {
 
     func testmMyProfile_callsMyProfileAPIWithParameter() throws {
         // given
-        let expectedURL = "http://ec2-3-39-121-23.ap-northeast-2.compute.amazonaws.com:8080/user/\(Account.currentUser)"
+        let expectedURL = "http://ec2-3-39-121-23.ap-northeast-2.compute.amazonaws.com:8080/api/user/\(Account.currentUser)"
         let expectedMethod = HTTPMethod.get
 
         // when
@@ -53,7 +53,7 @@ class MyProfileTests: XCTestCase {
     
     func testmUpdatePassword_callsMyProfileAPIWithParameter() throws {
         // given
-        let expectedURL = "http://ec2-3-39-121-23.ap-northeast-2.compute.amazonaws.com:8080/user/\(Account.currentUser)"
+        let expectedURL = "http://ec2-3-39-121-23.ap-northeast-2.compute.amazonaws.com:8080/api/auth/update/password"
         let expectedMethod = HTTPMethod.put
 
         // when
@@ -67,37 +67,12 @@ class MyProfileTests: XCTestCase {
         XCTAssertEqual(expectedMethod, actualMethod)
         
         let params = session.result?.convertible.urlRequest?.httpBody
-        XCTAssertNil(params)
+        XCTAssertNotNil(params)
         
         let actualAccessToken = (session.result?.interceptor as? AuthenticationInterceptor<MyAuthenticator>)?.credential?.accessToken
         let actualRefreshToken = (session.result?.interceptor as? AuthenticationInterceptor<MyAuthenticator>)?.credential?.refreshToken
         XCTAssertNotNil(actualRefreshToken)
         XCTAssertNotNil(actualAccessToken)
     }
-    
-    func testmMyProfile_callsMyProfileAPIWithParameter() throws {
-        // given
-        let expectedURL = "http://ec2-3-39-121-23.ap-northeast-2.compute.amazonaws.com:8080/user/\(Account.currentUser)"
-        let expectedMethod = HTTPMethod.get
-
-        // when
-        sut.myProfile(userId: Account.currentUser, completion: { _ in })
-        
-        // then
-        let actualURL = try? session.result?.convertible.urlRequest?.url!.asURL().absoluteString
-        XCTAssertEqual(expectedURL, actualURL)
-        
-        let actualMethod = session.result?.convertible.urlRequest?.method
-        XCTAssertEqual(expectedMethod, actualMethod)
-        
-        let params = session.result?.convertible.urlRequest?.httpBody
-        XCTAssertNil(params)
-        
-        let actualAccessToken = (session.result?.interceptor as? AuthenticationInterceptor<MyAuthenticator>)?.credential?.accessToken
-        let actualRefreshToken = (session.result?.interceptor as? AuthenticationInterceptor<MyAuthenticator>)?.credential?.refreshToken
-        XCTAssertNotNil(actualRefreshToken)
-        XCTAssertNotNil(actualAccessToken)
-    }
-
 
 }
