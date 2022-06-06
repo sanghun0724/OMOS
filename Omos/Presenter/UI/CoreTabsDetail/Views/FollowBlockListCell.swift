@@ -5,10 +5,12 @@
 //  Created by sangheon on 2022/05/27.
 //
 
+import RxSwift
 import UIKit
 
 class FollowBlockListCell: UITableViewCell {
     static let identifier = "FollowBlockListCell"
+    var disposeBag = DisposeBag()
     
     let profileImageView: UIImageView = {
         let view = UIImageView(image: UIImage(named: "defaultprofile"))
@@ -29,7 +31,9 @@ class FollowBlockListCell: UITableViewCell {
     let listButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .mainOrange
-        button.setTitle("팔로우", for: .normal)
+        button.setTitle("삭제", for: .normal)
+        button.layer.masksToBounds = true
+        button.clipsToBounds = true
         return button
     }()
     
@@ -64,11 +68,19 @@ class FollowBlockListCell: UITableViewCell {
         
         profileImageView.layoutIfNeeded()
         profileImageView.layer.cornerRadius = profileImageView.height / 2
+        
+        listButton.layoutIfNeeded()
+        listButton.layer.cornerRadius = (listButton.height / 2) - 2
     }
     
     func configure(data: ListResponse) {
         profileImageView.download(url: data.profileURL)
         nicknameLabel.text = data.nickname
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = .init()
     }
 }
 

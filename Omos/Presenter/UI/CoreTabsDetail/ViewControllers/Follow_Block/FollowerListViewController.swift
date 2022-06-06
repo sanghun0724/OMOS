@@ -13,7 +13,6 @@ class FollowerListViewController: BaseListViewController {
     init(viewModel: FollowListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        
     }
     
     required init?(coder: NSCoder) {
@@ -38,5 +37,4 @@ class FollowerListViewController: BaseListViewController {
     override func cellData() -> [ListResponse] {
         viewModel.currentFollowerList
     }
-
 }

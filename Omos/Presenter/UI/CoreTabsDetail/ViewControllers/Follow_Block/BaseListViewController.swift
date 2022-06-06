@@ -37,6 +37,14 @@ class BaseListViewController: BaseViewController {
         assertionFailure("This method must be overridden")
     }
     
+    func cellBind(cell: FollowBlockListCell) {
+        cell.listButton.rx.tap
+            .asDriver()
+            .drive(onNext: { _ in
+                print("button")
+            }).disposed(by: cell.disposeBag)
+    }
+    
     func fetchData() { // 프로토콜 하나 만들까.. 이렇게 할까 고민 (추상 메소드)
         assertionFailure("This method must be overridden")
     }
@@ -66,6 +74,7 @@ extension BaseListViewController: UITableViewDelegate, UITableViewDataSource {
         guard let data = cellData()[safe:indexPath.row] else { return UITableViewCell() }
         cell.configure(data: data)
         cell.selectionStyle = .none
+        cellBind(cell: cell)
         return cell
     }
     
@@ -75,5 +84,11 @@ extension BaseListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        guard let data = cellData()[safe:indexPath.row] else { return }
+        let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+        let uc = RecordsUseCase(recordsRepository: rp)
+        let vm = MyDjProfileViewModel(usecase: uc)
+        let vc = MydjProfileViewController(viewModel: vm, toId: data.userID)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
