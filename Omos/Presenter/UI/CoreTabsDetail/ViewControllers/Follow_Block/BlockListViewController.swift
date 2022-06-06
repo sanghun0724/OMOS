@@ -25,16 +25,16 @@ class BlockListViewController: BaseListViewController {
     
     override func bind() {
         viewModel.blockList
-            .subscribe(onNext: { [weak self] data in
+            .subscribe(onNext: { [weak self] _ in
                 self?.listTableView.reloadData()
             }).disposed(by: disposeBag)
     }
     
     override func dataCount() -> Int {
-        return viewModel.currentBlockList.count
+        viewModel.currentBlockList.count
     }
     
     override func cellData() -> [ListResponse] {
-        return viewModel.currentBlockList
+        viewModel.currentBlockList
     }
 }

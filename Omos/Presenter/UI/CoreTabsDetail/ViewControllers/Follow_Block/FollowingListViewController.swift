@@ -25,16 +25,23 @@ class FollowingListViewController: BaseListViewController {
     
     override func bind() {
         viewModel.followingList
-            .subscribe(onNext: { [weak self] data in
+            .subscribe(onNext: { [weak self] _ in
                 self?.listTableView.reloadData()
             }).disposed(by: disposeBag)
     }
     
+    override func cellBind(cell:FollowBlockListCell) {
+        cell.listButton.setTitle("팔로잉", for: .normal)
+        
+    }
+    
+    
     override func dataCount() -> Int {
-        return viewModel.currentFollowingList.count
+        viewModel.currentFollowingList.count
     }
     
     override func cellData() -> [ListResponse] {
-        return viewModel.currentFollowingList
+        viewModel.currentFollowingList
     }
+    
 }

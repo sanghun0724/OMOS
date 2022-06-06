@@ -25,9 +25,13 @@ class FollowerListViewController: BaseListViewController {
     
     override func bind() {
         viewModel.followerList
-            .subscribe(onNext: { [weak self] data in
+            .subscribe(onNext: { [weak self] _ in
                 self?.listTableView.reloadData()
             }).disposed(by: disposeBag)
+    }
+    
+    override func cellBind(cell:FollowBlockListCell) {
+        
     }
     
     override func dataCount() -> Int {

@@ -36,6 +36,7 @@ final class FollowListViewController: TabmanViewController {
     private func settingTabBar (ctBar: TMBar.ButtonBar) {
         ctBar.layout.transitionStyle = .snap
         ctBar.layout.contentMode = .fit
+        
         // 왼쪽 여백주기
         ctBar.layout.contentInset = UIEdgeInsets(top: 0.0, left: 13.0, bottom: 0.0, right: 20.0)
         
