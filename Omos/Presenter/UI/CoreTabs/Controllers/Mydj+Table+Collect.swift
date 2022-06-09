@@ -31,6 +31,7 @@ extension MyDJViewController: UICollectionViewDataSource, UICollectionViewDelega
             cell.djImageView.layer.borderWidth = 0
             isDjcliked = false
             self.viewModel.currentMyDjRecord = []
+            self.viewModel.items = []
             viewModel.fetchMyDjRecord(userId: Account.currentUser, request: .init(postId: viewModel.currentMyDjRecord.last?.recordID, size: 6))
             self.selfView.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
             return
@@ -75,6 +76,7 @@ extension MyDJViewController: UITableViewDelegate, UITableViewDataSource {
                 records = myDjRecord
             }
             guard let items = viewModel.items[safe:indexPath.row] else { return UITableViewCell() }
+            print("count: \(viewModel.items.count)")
             let cell = tableView.dequeueReusableCell(withIdentifier: type(of: items).reuseId)!
             items.configure(cell: cell, expandedIndexSet.contains(indexPath.row))
             bindCell(cell: cell, data: records, indexPath: indexPath, cate: records.category)
@@ -115,22 +117,11 @@ extension MyDJViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.section == 0 {
-//            if record.category != "A_LINE" && record.category != "LYRICS" {
-//                return 500
-//            }
-//        }
-
-        return UITableView.automaticDimension
+         UITableView.automaticDimension
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.section == 0 {
-//            if record.category == "A_LINE" || record.category == "LYRICS" {
-//                return shortCellHeights[indexPath] ?? Constant.mainHeight * 0.63
-//            }
-//        }
-        return UITableView.automaticDimension
+         UITableView.automaticDimension
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

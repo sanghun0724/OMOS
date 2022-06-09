@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class FollowingListViewController: BaseListViewController {
     let viewModel: FollowListViewModel
@@ -32,9 +34,7 @@ class FollowingListViewController: BaseListViewController {
     
     override func cellBind(cell:FollowBlockListCell) {
         cell.listButton.setTitle("팔로잉", for: .normal)
-        
     }
-    
     
     override func dataCount() -> Int {
         viewModel.currentFollowingList.count

@@ -25,20 +25,17 @@ class MyDjViewModel: BaseViewModel {
     let reportState = PublishSubject<Bool>()
     let usecase: RecordsUseCase
     
-    var items:[CellConfigurator] = []
+    var items: [CellConfigurator] = []
 
     func fetchMyDjRecord(userId: Int, request: MyDjRequest) {
         loading.onNext(true)
         usecase.myDjAllRecord(userId: userId, myDjRequest: request)
-            .map {
-                $0.filter { !Account.currentReportRecordsId.contains($0.recordID) }
-            }
             .subscribe({ [weak self] result in
                 self?.loading.onNext(false)
                 switch result {
                 case .success(let data):
                     self?.currentMyDjRecord += data
-                    self?.appendDataToItems()
+                    self?.appendDataToItems(self!.currentMyDjRecord)
                     self?.myDjRecord.onNext(data)
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)
@@ -46,8 +43,8 @@ class MyDjViewModel: BaseViewModel {
             }).disposed(by: disposeBag)
     }
     
-    private func appendDataToItems() {
-        for record in currentMyDjRecord {
+    private func appendDataToItems(_ myDjRecord:[RecordResponse]) {
+        for record in myDjRecord {
             if record.category == "LYRICS" {
                 let cateData: LyricsCellConfig = .init(item: record)
                 items.append(cateData)
@@ -69,6 +66,8 @@ class MyDjViewModel: BaseViewModel {
                 switch event {
                 case .success(let data):
                     self?.currentUserRecrods = data
+                    self?.items = []
+                    self?.appendDataToItems(self!.currentUserRecrods)
                     self?.userRecords.onNext(data)
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)

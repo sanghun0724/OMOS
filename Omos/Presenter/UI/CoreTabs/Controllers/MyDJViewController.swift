@@ -41,10 +41,13 @@ class MyDJViewController: BaseViewController, UIScrollViewDelegate {
         viewModel.fetchMyDjList(userId: Account.currentUser)
         viewModel.fetchMyDjRecord(userId: Account.currentUser, request: .init(postId: viewModel.currentMyDjRecord.last?.recordID, size: 6))
         NotificationCenter.default.addObserver(self, selector: #selector(didRecieveFollowNotification), name: NSNotification.Name.follow, object: nil)
-
         NotificationCenter.default.addObserver(self, selector: #selector(didRecieveFollowCancelNotification), name: NSNotification.Name.followCancel, object: nil)
-
         NotificationCenter.default.addObserver(self, selector: #selector(didRecieveReloadNotification), name: NSNotification.Name.reload, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
 
     @objc

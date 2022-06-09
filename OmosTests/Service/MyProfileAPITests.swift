@@ -9,7 +9,7 @@
 import XCTest
 @testable import Omos
 
-class MyProfileTests: XCTestCase {
+class MyProfileAPITests: XCTestCase {
     private var sut: MyProfileAPI!
     private var session: SessionStub!
     
