@@ -55,9 +55,9 @@ extension MyDJViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             if isDjcliked {
-                return viewModel.currentUserRecrods.count
+                return viewModel.items.count
             } else {
-                return viewModel.currentMyDjRecord.count
+                return viewModel.items.count
             }
         } else if section == 1 && isPaging && hasNextPage {
             return 1
@@ -69,7 +69,7 @@ extension MyDJViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             let records: RecordResponse
             if isDjcliked {
-                guard let userRecord = viewModel.currentUserRecrods[safe: indexPath.row] else { return LoadingCell() }
+                guard let userRecord = viewModel.currentMyDjRecord[safe: indexPath.row] else { return LoadingCell() }
                  records = userRecord
             } else {
                 guard let myDjRecord = viewModel.currentMyDjRecord[safe: indexPath.row] else { return LoadingCell() }
@@ -94,7 +94,7 @@ extension MyDJViewController: UITableViewDelegate, UITableViewDataSource {
         let record: RecordResponse
 
         if isDjcliked {
-            guard let userRecord = viewModel.currentUserRecrods[safe: indexPath.row] else { return }
+            guard let userRecord = viewModel.currentMyDjRecord[safe: indexPath.row] else { return }
              record = userRecord
         } else {
             guard let myDjRecord = viewModel.currentMyDjRecord[safe: indexPath.row] else { return }

@@ -18,8 +18,8 @@ class MyDjViewModel: BaseViewModel {
     let isEmpty = BehaviorSubject<Bool>(value: false)
     let errorMessage = BehaviorSubject<String?>(value: nil)
 
-    let userRecords = PublishSubject<[RecordResponse]>()
-    var currentUserRecrods: [RecordResponse] = []
+//    let userRecords = PublishSubject<[RecordResponse]>()
+//    var currentUserRecrods: [RecordResponse] = []
     let recordsLoading = PublishSubject<Bool>()
 
     let reportState = PublishSubject<Bool>()
@@ -35,7 +35,9 @@ class MyDjViewModel: BaseViewModel {
                 switch result {
                 case .success(let data):
                     self?.currentMyDjRecord += data
-                    self?.appendDataToItems(self!.currentMyDjRecord)
+                    self?.appendDataToItems(data)
+                    print("test count\(data.count)")
+                    print("test Item:\(self?.items.count)")
                     self?.myDjRecord.onNext(data)
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)
@@ -43,7 +45,7 @@ class MyDjViewModel: BaseViewModel {
             }).disposed(by: disposeBag)
     }
     
-    private func appendDataToItems(_ myDjRecord:[RecordResponse]) {
+    private func appendDataToItems(_ myDjRecord: [RecordResponse]) {
         for record in myDjRecord {
             if record.category == "LYRICS" {
                 let cateData: LyricsCellConfig = .init(item: record)
@@ -65,10 +67,10 @@ class MyDjViewModel: BaseViewModel {
                 self?.recordsLoading.onNext(false)
                 switch event {
                 case .success(let data):
-                    self?.currentUserRecrods = data
+                    self?.currentMyDjRecord = data
                     self?.items = []
-                    self?.appendDataToItems(self!.currentUserRecrods)
-                    self?.userRecords.onNext(data)
+                    self?.appendDataToItems(self!.currentMyDjRecord)
+                    self?.myDjRecord.onNext(data)
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)
                 }
@@ -143,7 +145,7 @@ class MyDjViewModel: BaseViewModel {
         myDjRecord
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                if owner.currentMyDjRecord.isEmpty {
+                if owner.items.isEmpty {
                     owner.isEmpty.onNext(true)
                 } else {
                     owner.isEmpty.onNext(false)

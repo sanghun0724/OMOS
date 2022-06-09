@@ -106,26 +106,25 @@ class MyDJViewController: BaseViewController, UIScrollViewDelegate {
             }).disposed(by: disposeBag)
 
         viewModel.myDjRecord
-            .subscribe(onNext: { [weak self] _ in
+            .subscribe(onNext: { [weak self] data in
+                if (self?.isDjcliked)! {
+                    if !data.isEmpty {
+                        DispatchQueue.main.async { [weak self] in
+                            self?.selfView.tableView.reloadData()
+                            self?.selfView.tableView.layoutIfNeeded()
+                            self?.selfView.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                            self?.selfView.tableView.layoutIfNeeded()
+                            self?.expandedIndexSet = []
+                            self?.expandedIndexSet2 = []
+                        }
+                    }
+                } else {
                     self?.hasNextPage = self?.lastPostId == self?.viewModel.currentMyDjRecord.last?.recordID ?? 0 ? false : true
                     self?.lastPostId = self?.viewModel.currentMyDjRecord.last?.recordID ?? 0
                     self?.isPaging = false // 페이징 종료
                     self?.selfView.tableView.reloadData()
                     self?.selfView.tableView.layoutIfNeeded()
                     self?.selfView.loadingView.backgroundColor = .clear
-            }).disposed(by: disposeBag)
-
-        viewModel.userRecords
-            .subscribe(onNext: { [weak self] data in
-                if !data.isEmpty {
-                    DispatchQueue.main.async { [weak self] in
-                        self?.selfView.tableView.reloadData()
-                        self?.selfView.tableView.layoutIfNeeded()
-                        self?.selfView.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-                        self?.selfView.tableView.layoutIfNeeded()
-                        self?.expandedIndexSet = []
-                        self?.expandedIndexSet2 = []
-                    }
                 }
             }).disposed(by: disposeBag)
 
@@ -155,6 +154,7 @@ class MyDJViewController: BaseViewController, UIScrollViewDelegate {
                 })
                 self?.isDjcliked = false
                 self?.viewModel.currentMyDjRecord = []
+                self?.viewModel.items = []
                 self?.viewModel.fetchMyDjRecord(userId: Account.currentUser, request: .init(postId: self?.viewModel.currentMyDjRecord.last?.recordID, size: 6))
             }).disposed(by: disposeBag)
     }
@@ -170,7 +170,6 @@ class MyDJViewController: BaseViewController, UIScrollViewDelegate {
         DispatchQueue.main.async { [weak self]  in
             self?.selfView.tableView.reloadSections(IndexSet(integer: 1), with: .none)
         }
-
         self.fetchRecord()
     }
 
@@ -181,6 +180,7 @@ class MyDJViewController: BaseViewController, UIScrollViewDelegate {
 
         // 스크롤이 테이블 뷰 Offset의 끝에 가게 되면 다음 페이지를 호출
         if offsetY > (contentHeight - height) {
+            guard !viewModel.currentMyDjRecord.isEmpty else { return }
             if isPaging == false && hasNextPage && !isDjcliked {
                 beginPaging()
             }
