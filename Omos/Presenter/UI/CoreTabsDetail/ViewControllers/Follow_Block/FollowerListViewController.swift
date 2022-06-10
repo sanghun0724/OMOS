@@ -5,9 +5,10 @@
 //  Created by sangheon on 2022/05/29.
 //
 
+import RxSwift
 import UIKit
 
-class FollowerListViewController: BaseListViewController {
+class FollowerListViewController: BaseViewController, FollowBlockBaseProtocol {
     let viewModel: FollowListViewModel
     
     init(viewModel: FollowListViewModel) {
@@ -19,26 +20,31 @@ class FollowerListViewController: BaseListViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func fetchData() {
+    func fetchData() {
         viewModel.fetchFollowerList(userId: Account.currentUser)
     }
     
-    override func bind() {
+    func binding(listTableView:UITableView) {
         viewModel.followerList
             .subscribe(onNext: { [weak self] _ in
-                self?.listTableView.reloadData()
+                listTableView.reloadData()
+                print("test")
             }).disposed(by: disposeBag)
     }
     
-    override func cellBind(cell:FollowBlockListCell) {
+    func configureData() {
         
     }
     
-    override func dataCount() -> Int {
+    func bindingCell(cell:FollowBlockListCell) {
+        print("차단")
+    }
+    
+    func dataCount() -> Int {
         viewModel.currentFollowerList.count
     }
     
-    override func cellData() -> [ListResponse] {
+    func cellData() -> [ListResponse] {
         viewModel.currentFollowerList
     }
 }

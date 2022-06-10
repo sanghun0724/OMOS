@@ -8,6 +8,7 @@
 import UIKit
 
 class BaseListViewController: BaseViewController {
+    var decoratorAction: FollowBlockBaseProtocol
     let listTableView: UITableView = {
         let table = UITableView()
         table.register(FollowBlockListCell.self, forCellReuseIdentifier: FollowBlockListCell.identifier)
@@ -15,12 +16,22 @@ class BaseListViewController: BaseViewController {
         return table
     }()
     
+    init(decoratorAction: FollowBlockBaseProtocol) {
+        self.decoratorAction = decoratorAction
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         listTableView.delegate = self
         listTableView.dataSource = self
         configureUI()
         fetchData()
+        binding(listTableView: listTableView)
     }
     
     override func configureUI() {
@@ -33,32 +44,28 @@ class BaseListViewController: BaseViewController {
         }
     }
     
-    override func bind() {
-        assertionFailure("This method must be overridden")
+    func binding(listTableView:UITableView) {
+        decoratorAction.binding(listTableView: listTableView)
     }
     
-    func cellBind(cell: FollowBlockListCell) {
-        cell.listButton.rx.tap
-            .asDriver()
-            .drive(onNext: { _ in
-                print("button")
-            }).disposed(by: cell.disposeBag)
+    func bindingCell(cell: FollowBlockListCell) {
+        decoratorAction.bindingCell(cell: cell)
     }
     
-    func fetchData() { // 프로토콜 하나 만들까.. 이렇게 할까 고민 (추상 메소드)
-        assertionFailure("This method must be overridden")
+    func fetchData() {
+        decoratorAction.fetchData()
     }
     
     func configureData() {
-        assertionFailure("This method must be overridden")
+        decoratorAction.configureData()
     }
     
     func dataCount() -> Int {
-        0
+        decoratorAction.dataCount()
     }
     
     func cellData() -> [ListResponse] {
-        []
+        decoratorAction.cellData()
     }
 }
 
@@ -74,7 +81,7 @@ extension BaseListViewController: UITableViewDelegate, UITableViewDataSource {
         guard let data = cellData()[safe:indexPath.row] else { return UITableViewCell() }
         cell.configure(data: data)
         cell.selectionStyle = .none
-        cellBind(cell: cell)
+        bindingCell(cell: cell)
         return cell
     }
     

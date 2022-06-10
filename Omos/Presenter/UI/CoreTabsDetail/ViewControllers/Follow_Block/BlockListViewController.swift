@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BlockListViewController: BaseListViewController {
+class BlockListViewController: BaseViewController, FollowBlockBaseProtocol {
     let viewModel: FollowListViewModel
     
     init(viewModel: FollowListViewModel) {
@@ -19,22 +19,31 @@ class BlockListViewController: BaseListViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func fetchData() {
+    func fetchData() {
         viewModel.fetchBlockList(userId: Account.currentUser)
     }
     
-    override func bind() {
-        viewModel.blockList
-            .subscribe(onNext: { [weak self] _ in
-                self?.listTableView.reloadData()
-            }).disposed(by: disposeBag)
+    func bindingCell(cell:FollowBlockListCell) {
+        
     }
     
-    override func dataCount() -> Int {
+    func configureData() {
+        
+    }
+    
+    func dataCount() -> Int {
         viewModel.currentBlockList.count
     }
     
-    override func cellData() -> [ListResponse] {
+    func cellData() -> [ListResponse] {
         viewModel.currentBlockList
     }
+   
+   func binding(listTableView: UITableView) {
+       viewModel.blockList
+           .subscribe(onNext: { [weak self] _ in
+               listTableView.reloadData()
+           }).disposed(by: disposeBag)
+   }
+   
 }

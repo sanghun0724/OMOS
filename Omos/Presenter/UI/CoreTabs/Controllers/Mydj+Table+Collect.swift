@@ -54,11 +54,7 @@ extension MyDJViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            if isDjcliked {
-                return viewModel.items.count
-            } else {
-                return viewModel.items.count
-            }
+            return viewModel.items.count
         } else if section == 1 && isPaging && hasNextPage {
             return 1
         }
@@ -67,16 +63,8 @@ extension MyDJViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let records: RecordResponse
-            if isDjcliked {
-                guard let userRecord = viewModel.currentMyDjRecord[safe: indexPath.row] else { return LoadingCell() }
-                 records = userRecord
-            } else {
-                guard let myDjRecord = viewModel.currentMyDjRecord[safe: indexPath.row] else { return LoadingCell() }
-                records = myDjRecord
-            }
+            guard let records = viewModel.currentMyDjRecord[safe: indexPath.row] else { return LoadingCell() }
             guard let items = viewModel.items[safe:indexPath.row] else { return UITableViewCell() }
-            print("count: \(viewModel.items.count)")
             let cell = tableView.dequeueReusableCell(withIdentifier: type(of: items).reuseId)!
             items.configure(cell: cell, expandedIndexSet.contains(indexPath.row))
             bindCell(cell: cell, data: records, indexPath: indexPath, cate: records.category)
@@ -91,16 +79,7 @@ extension MyDJViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let record: RecordResponse
-
-        if isDjcliked {
-            guard let userRecord = viewModel.currentMyDjRecord[safe: indexPath.row] else { return }
-             record = userRecord
-        } else {
-            guard let myDjRecord = viewModel.currentMyDjRecord[safe: indexPath.row] else { return }
-            record = myDjRecord
-        }
-
+        guard let record = viewModel.currentMyDjRecord[safe: indexPath.row] else { return }
         if Account.currentUser == record.userID {
             let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
             let uc = RecordsUseCase(recordsRepository: rp)

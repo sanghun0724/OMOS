@@ -41,6 +41,7 @@
 		B6183CD227D895D30035AA06 /* AllRecordSearchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CD127D895D30035AA06 /* AllRecordSearchDetailViewController.swift */; };
 		B6183CD627D8F7490035AA06 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CD527D8F7490035AA06 /* BottomSheetViewController.swift */; };
 		B6183CD827D906300035AA06 /* MyRecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CD727D9062F0035AA06 /* MyRecordDetailViewModel.swift */; };
+		B61B9FD828524EBD006F46AA /* FollowBlockProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B9FD728524EBC006F46AA /* FollowBlockProtocol.swift */; };
 		B62A770727F049A800B427D0 /* AWSHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62A770627F049A800B427D0 /* AWSHelper.swift */; };
 		B630D2FA27C7756A00E66F22 /* MydjTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2F927C7756A00E66F22 /* MydjTableCell.swift */; };
 		B630D2FC27C7761D00E66F22 /* Mydj+Table+Collect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2FB27C7761D00E66F22 /* Mydj+Table+Collect.swift */; };
@@ -270,6 +271,7 @@
 		B6183CD127D895D30035AA06 /* AllRecordSearchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordSearchDetailViewController.swift; sourceTree = "<group>"; };
 		B6183CD527D8F7490035AA06 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		B6183CD727D9062F0035AA06 /* MyRecordDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordDetailViewModel.swift; sourceTree = "<group>"; };
+		B61B9FD728524EBC006F46AA /* FollowBlockProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowBlockProtocol.swift; sourceTree = "<group>"; };
 		B62A770627F049A800B427D0 /* AWSHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSHelper.swift; sourceTree = "<group>"; };
 		B630D2F927C7756A00E66F22 /* MydjTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MydjTableCell.swift; sourceTree = "<group>"; };
 		B630D2FB27C7761D00E66F22 /* Mydj+Table+Collect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mydj+Table+Collect.swift"; sourceTree = "<group>"; };
@@ -703,6 +705,7 @@
 		B63DEC0128435F3600091E3C /* Follow_Block */ = {
 			isa = PBXGroup;
 			children = (
+				B61B9FD728524EBC006F46AA /* FollowBlockProtocol.swift */,
 				B6D5EFD22840BC7E005E9302 /* FollowListViewController.swift */,
 				B63DEC0228435FB500091E3C /* BaseListViewController.swift */,
 				B63DEC0428435FFC00091E3C /* FollowerListViewController.swift */,
@@ -1478,6 +1481,7 @@
 				B6C38EBC2845D1AC00F12263 /* Lists.swift in Sources */,
 				B697F20527E0A47C00F34AB5 /* Today.swift in Sources */,
 				B683A45327B0DA3500838749 /* AllRecordTableCell.swift in Sources */,
+				B61B9FD828524EBD006F46AA /* FollowBlockProtocol.swift in Sources */,
 				B69860BD27B8E85600E83DB9 /* NickNameView.swift in Sources */,
 				B6E9B5D027E73CB90045143F /* MyProfileUseCase.swift in Sources */,
 				B6E9B5CC27E717A50045143F /* MyProfileAPI.swift in Sources */,

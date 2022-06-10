@@ -9,7 +9,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class FollowingListViewController: BaseListViewController {
+class FollowingListViewController: BaseViewController, FollowBlockBaseProtocol {
     let viewModel: FollowListViewModel
     
     init(viewModel: FollowListViewModel) {
@@ -21,26 +21,30 @@ class FollowingListViewController: BaseListViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func fetchData() {
+     func fetchData() {
         viewModel.fetchFollowingList(userId: Account.currentUser)
     }
     
-    override func bind() {
+    func binding(listTableView: UITableView) {
         viewModel.followingList
             .subscribe(onNext: { [weak self] _ in
-                self?.listTableView.reloadData()
+                listTableView.reloadData()
             }).disposed(by: disposeBag)
     }
     
-    override func cellBind(cell:FollowBlockListCell) {
+    func configureData() {
+        
+    }
+    
+     func bindingCell(cell:FollowBlockListCell) {
         cell.listButton.setTitle("팔로잉", for: .normal)
     }
     
-    override func dataCount() -> Int {
+     func dataCount() -> Int {
         viewModel.currentFollowingList.count
     }
     
-    override func cellData() -> [ListResponse] {
+     func cellData() -> [ListResponse] {
         viewModel.currentFollowingList
     }
     

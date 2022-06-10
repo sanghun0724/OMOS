@@ -16,7 +16,7 @@ final class FollowListViewController: TabmanViewController {
     init(viewModel: FollowListViewModel, page: PageboyViewController.Page?) {
         self.page = page
         self.viewModel = viewModel
-        viewControllers = [FollowerListViewController(viewModel: self.viewModel), FollowingListViewController(viewModel: self.viewModel)]
+        viewControllers = [BaseListViewController(decoratorAction: FollowerListViewController(viewModel: self.viewModel)), BaseListViewController(decoratorAction: FollowingListViewController(viewModel: self.viewModel))]
         super.init(nibName: nil, bundle: nil)
     }
     
