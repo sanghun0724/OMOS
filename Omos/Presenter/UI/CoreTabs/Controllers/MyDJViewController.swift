@@ -63,7 +63,7 @@ class MyDJViewController: BaseViewController, UIScrollViewDelegate {
         self.viewModel.fetchMyDjList(userId: Account.currentUser)
         self.selfView.collectionView.visibleCells.forEach({ cell in
             if let cell = cell as? MydjCollectionCell {
-                cell.djImageView.layer.borderWidth = 0
+                cell.boarderCoverView.layer.borderWidth = 0
             }
         })
         isDjcliked = false
@@ -75,7 +75,7 @@ class MyDJViewController: BaseViewController, UIScrollViewDelegate {
         self.viewModel.fetchMyDjList(userId: Account.currentUser)
         self.selfView.collectionView.visibleCells.forEach({ cell in
             if let cell = cell as? MydjCollectionCell {
-                cell.djImageView.layer.borderWidth = 0
+                cell.boarderCoverView.layer.borderWidth = 0
             }
         })
         isDjcliked = false
@@ -149,7 +149,7 @@ class MyDJViewController: BaseViewController, UIScrollViewDelegate {
             .subscribe(onNext: { [weak self] _ in
                 self?.selfView.collectionView.visibleCells.forEach({ cell in
                     if let cell = cell as? MydjCollectionCell {
-                        cell.djImageView.layer.borderWidth = 0
+                        cell.boarderCoverView.layer.borderWidth = 0
                     }
                 })
                 self?.isDjcliked = false

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BaseListViewController: BaseViewController {
+class BaseListDecorator: BaseViewController {
     var decoratorAction: FollowBlockBaseProtocol
     let listTableView: UITableView = {
         let table = UITableView()
@@ -69,7 +69,7 @@ class BaseListViewController: BaseViewController {
     }
 }
 
-extension BaseListViewController: UITableViewDelegate, UITableViewDataSource {
+extension BaseListDecorator: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         dataCount()
     }

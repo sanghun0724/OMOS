@@ -38,6 +38,7 @@ extension UIColor {
     class var mainBlack2: UIColor { UIColor(hex: 0x2C2C2E) }
     class var mainGrey8: UIColor { UIColor(hex: 0x48484A) }
     class var lyricsBack: UIColor { UIColor(hex: 0x29292A) }
+    class var mainGradient: UIColor { UIColor(hex: 0xED9630) }
 
     class var mainLikeLabelColor: UIColor { UIColor(hex: 0x858585) }
     class var mainLikeImageColor: UIColor { UIColor(hex: 0xD7D7D7) }

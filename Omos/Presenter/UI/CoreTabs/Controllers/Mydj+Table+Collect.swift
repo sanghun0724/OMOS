@@ -27,8 +27,8 @@ extension MyDJViewController: UICollectionViewDataSource, UICollectionViewDelega
         collectionView.deselectItem(at: indexPath, animated: false)
         let cellData = viewModel.currentMyDjList[indexPath.row]
         guard let cell = collectionView.cellForItem(at: indexPath) as? MydjCollectionCell else { return }
-        if cell.djImageView.layer.borderWidth == 1 {
-            cell.djImageView.layer.borderWidth = 0
+        if cell.boarderCoverView.layer.borderWidth == 3 {
+            cell.boarderCoverView.layer.borderWidth = 0
             isDjcliked = false
             self.viewModel.currentMyDjRecord = []
             self.viewModel.items = []
@@ -38,10 +38,10 @@ extension MyDJViewController: UICollectionViewDataSource, UICollectionViewDelega
         }
         collectionView.visibleCells.forEach { cell in
             if let cell = cell as? MydjCollectionCell {
-                cell.djImageView.layer.borderWidth = 0
+                cell.boarderCoverView.layer.borderWidth = 0
             }
         }
-            cell.djImageView.layer.borderWidth = 1
+            cell.boarderCoverView.layer.borderWidth = 3
             isDjcliked = true
             viewModel.fetchUserRecords(fromId: Account.currentUser, toId: cellData.userID)
     }

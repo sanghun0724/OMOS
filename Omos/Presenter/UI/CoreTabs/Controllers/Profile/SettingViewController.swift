@@ -168,7 +168,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                 let uc = MyProfileUseCase(myProfileRepository: rp)
                 let vm = FollowListViewModel(usecase: uc)
                 let vc = BlockListViewController(viewModel: vm)
-                self.navigationController?.pushViewController(BaseListViewController(decoratorAction: vc), animated: true)
+                self.navigationController?.pushViewController(BaseListDecorator(decoratorAction: vc), animated: true)
             default:
                 print("")
             }
