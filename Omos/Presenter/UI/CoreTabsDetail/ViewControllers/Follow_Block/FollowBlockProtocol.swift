@@ -10,10 +10,11 @@ import UIKit
 
 //DecoratorBase
 protocol FollowBlockBaseProtocol {
-    func binding(listTableView:UITableView)
-    func bindingCell(cell: FollowBlockListCell)
+    var cellIndexDict:[IndexPath:Int] { get set }
+    func binding(listTableView: UITableView)
+    func bindingCell(cell: FollowBlockListCell, data: ListResponse, index: IndexPath)
     func fetchData()
-    func configureData()
     func dataCount() -> Int
     func cellData() -> [ListResponse]
+    func callAction()
 }

@@ -8,12 +8,13 @@
 import RxSwift
 import UIKit
 
-class FollowerListViewController: BaseViewController, FollowBlockBaseProtocol {
+class FollowerListViewController: FollowBlockBaseProtocol {
+    var cellIndexDict: [IndexPath : Int] = [:]
     let viewModel: FollowListViewModel
+    let disposeBag = DisposeBag()
     
     init(viewModel: FollowListViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -24,20 +25,30 @@ class FollowerListViewController: BaseViewController, FollowBlockBaseProtocol {
         viewModel.fetchFollowerList(userId: Account.currentUser)
     }
     
-    func binding(listTableView:UITableView) {
+    func binding(listTableView: UITableView) {
         viewModel.followerList
-            .subscribe(onNext: { [weak self] _ in
+            .subscribe(onNext: { _ in
                 listTableView.reloadData()
-                print("test")
             }).disposed(by: disposeBag)
     }
     
-    func configureData() {
-        
-    }
-    
-    func bindingCell(cell:FollowBlockListCell) {
-        print("차단")
+    func bindingCell(cell: FollowBlockListCell, data: ListResponse ,index: IndexPath) {
+        cell.listButton.rx.tap
+            .asDriver()
+            .throttle(.seconds(1))
+            .drive(onNext: { [weak self] _ in
+                if cell.listButton.layer.borderWidth == 0 {
+                    self?.cellIndexDict.removeValue(forKey: index)
+                    cell.listButton.layer.borderWidth = 1
+                    cell.listButton.backgroundColor = .clear
+                    cell.listButton.setTitleColor(UIColor.mainGrey4, for: .normal )
+                } else {
+                    self?.cellIndexDict[index] = data.userID
+                    cell.listButton.layer.borderWidth = 0
+                    cell.listButton.backgroundColor = .mainOrange
+                    cell.listButton.setTitleColor(UIColor.white, for: .normal )
+                }
+            }).disposed(by: cell.disposeBag)
     }
     
     func dataCount() -> Int {
@@ -47,4 +58,12 @@ class FollowerListViewController: BaseViewController, FollowBlockBaseProtocol {
     func cellData() -> [ListResponse] {
         viewModel.currentFollowerList
     }
+    
+    func callAction() {
+        for dicVal in cellIndexDict {
+            viewModel.deleteFollow(fromId: dicVal.value, toId: Account.currentUser) // 팔로워를 없애는거니 id 바꿔서 넣어주면 됨 
+        }
+        NotificationCenter.default.post(name: NSNotification.Name.follow, object: nil, userInfo: nil)
+    }
+    
 }

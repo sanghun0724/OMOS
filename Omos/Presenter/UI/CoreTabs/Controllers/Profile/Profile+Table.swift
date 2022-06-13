@@ -84,7 +84,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    private func headerBind(header:MydjProfileHeader) {
+    private func headerBind(header: MydjProfileHeader) {
         header.followButton.isHidden = true
         header.settingButton.isHidden = false
         guard let headerData = viewModel.currentMyProfile else { return }
@@ -105,7 +105,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 let rp = MyProfileRepositoryImpl(myProfileAPI: MyProfileAPI(session: Session.default))
                 let uc = MyProfileUseCase(myProfileRepository: rp)
                 let vm = FollowListViewModel(usecase: uc)
-                let vc = FollowListViewController(viewModel: vm, page: .first)
+                let vc = FollowListViewController(viewModel: vm, page: .first,name: headerData.profile.nickname)
                 self?.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: header.disposeBag)
@@ -119,7 +119,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 let rp = MyProfileRepositoryImpl(myProfileAPI: MyProfileAPI(session: Session.default))
                 let uc = MyProfileUseCase(myProfileRepository: rp)
                 let vm = FollowListViewModel(usecase: uc)
-                let vc = FollowListViewController(viewModel: vm, page: .last)
+                let vc = FollowListViewController(viewModel: vm, page: .last, name: headerData.profile.nickname)
                 self?.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: header.disposeBag)

@@ -71,7 +71,6 @@ class FollowListViewModel: BaseViewModel {
         usecase.saveFollow(fromId: fromId, toId: toId)
             .subscribe({ state in
                 print(state)
-        NotificationCenter.default.post(name: NSNotification.Name.follow, object: nil, userInfo: nil)
             }).disposed(by: disposeBag)
     }
 
@@ -79,7 +78,6 @@ class FollowListViewModel: BaseViewModel {
         usecase.deleteFollow(fromId: fromId, toId: toId)
             .subscribe({ state in
                 print(state)
-        NotificationCenter.default.post(name: NSNotification.Name.followCancel, object: nil, userInfo: nil)
             }).disposed(by: disposeBag)
     }
     

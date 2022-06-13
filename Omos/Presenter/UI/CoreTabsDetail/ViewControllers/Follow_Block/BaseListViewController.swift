@@ -32,32 +32,33 @@ class BaseListDecorator: BaseViewController {
         configureUI()
         fetchData()
         binding(listTableView: listTableView)
+        self.navigationItem.title = "차단된 계정"
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        callAction()
     }
     
     override func configureUI() {
         super.configureUI()
         view.addSubview(listTableView)
-    
         listTableView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.leading.trailing.bottom.equalToSuperview()
         }
     }
     
-    func binding(listTableView:UITableView) {
+    func binding(listTableView: UITableView) {
         decoratorAction.binding(listTableView: listTableView)
     }
     
-    func bindingCell(cell: FollowBlockListCell) {
-        decoratorAction.bindingCell(cell: cell)
+    func bindingCell(cell: FollowBlockListCell, data: ListResponse, index: IndexPath) {
+        decoratorAction.bindingCell(cell: cell, data: data, index: index)
     }
     
     func fetchData() {
         decoratorAction.fetchData()
-    }
-    
-    func configureData() {
-        decoratorAction.configureData()
     }
     
     func dataCount() -> Int {
@@ -67,6 +68,11 @@ class BaseListDecorator: BaseViewController {
     func cellData() -> [ListResponse] {
         decoratorAction.cellData()
     }
+    
+    func callAction() {
+        decoratorAction.callAction()
+    }
+    
 }
 
 extension BaseListDecorator: UITableViewDelegate, UITableViewDataSource {
@@ -81,7 +87,7 @@ extension BaseListDecorator: UITableViewDelegate, UITableViewDataSource {
         guard let data = cellData()[safe:indexPath.row] else { return UITableViewCell() }
         cell.configure(data: data)
         cell.selectionStyle = .none
-        bindingCell(cell: cell)
+        bindingCell(cell: cell ,data: data, index: indexPath)
         return cell
     }
     

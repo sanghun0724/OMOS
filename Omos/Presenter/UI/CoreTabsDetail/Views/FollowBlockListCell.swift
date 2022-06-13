@@ -30,7 +30,10 @@ class FollowBlockListCell: UITableViewCell {
     
     let listButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .mainOrange
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.mainGrey4.cgColor
+        button.backgroundColor = .clear
+        button.setTitleColor(UIColor.mainGrey4, for: .normal )
         button.setTitle("삭제", for: .normal)
         button.layer.masksToBounds = true
         button.clipsToBounds = true

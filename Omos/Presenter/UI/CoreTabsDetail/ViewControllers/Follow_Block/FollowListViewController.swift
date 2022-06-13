@@ -12,11 +12,15 @@ final class FollowListViewController: TabmanViewController {
     let viewModel: FollowListViewModel
     var viewControllers: [UIViewController] = []
     let page: PageboyViewController.Page?
+    let userName:String
     
-    init(viewModel: FollowListViewModel, page: PageboyViewController.Page?) {
+    init(viewModel: FollowListViewModel, page: PageboyViewController.Page?,name: String) {
         self.page = page
         self.viewModel = viewModel
-        viewControllers = [BaseListDecorator(decoratorAction: FollowerListViewController(viewModel: self.viewModel)), BaseListDecorator(decoratorAction: FollowingListViewController(viewModel: self.viewModel))]
+        self.userName = name
+        let follower = BaseListDecorator(decoratorAction: FollowerListViewController(viewModel: self.viewModel))
+        let follow = BaseListDecorator(decoratorAction: FollowingListViewController(viewModel: self.viewModel))
+        viewControllers = [follower, follow]
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -31,6 +35,7 @@ final class FollowListViewController: TabmanViewController {
         let bar = TMBar.ButtonBar()
         settingTabBar(ctBar: bar)
         addBar(bar, dataSource: self, at: .top)
+        self.navigationItem.title = userName
     }
     
     private func settingTabBar (ctBar: TMBar.ButtonBar) {
