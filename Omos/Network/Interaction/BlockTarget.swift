@@ -8,8 +8,8 @@
 import Alamofire
 
 enum BlockTarget {
-    case blockList(userId:Int)
-    case blockDelete(blockId:Int)
+    case blockList(userId: Int)
+    case blockDelete(blockId: Int)
     case block(type: String, BlockRequest)
 }
 

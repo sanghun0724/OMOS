@@ -172,4 +172,30 @@ class MyProfileAPI {
             }
         }
     }
+    
+    func saveFollow(fromId: Int, toId: Int, completion:@escaping(Result<StateRespone, Error>) -> Void) {
+        AF.request(FollowTarget.saveFollow(fromId: fromId, toId: toId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<StateRespone>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
+
+    func deleteFollow(fromId: Int, toId: Int, completion:@escaping(Result<StateRespone, Error>) -> Void) {
+        AF.request(FollowTarget.deleteFollow(fromId: fromId, toId: toId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<StateRespone>) in
+            switch response.result {
+            case .success(let data):
+                print(data)
+                completion(.success(data))
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.failure(error))
+            }
+        }
+    }
 }

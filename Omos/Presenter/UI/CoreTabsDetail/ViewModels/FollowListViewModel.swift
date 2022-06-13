@@ -66,6 +66,33 @@ class FollowListViewModel: BaseViewModel {
             }).disposed(by: disposeBag)
     }
     
+    // follow
+    func saveFollow(fromId: Int, toId: Int) {
+        usecase.saveFollow(fromId: fromId, toId: toId)
+            .subscribe({ state in
+                print(state)
+        NotificationCenter.default.post(name: NSNotification.Name.follow, object: nil, userInfo: nil)
+            }).disposed(by: disposeBag)
+    }
+
+    func deleteFollow(fromId: Int, toId: Int) {
+        usecase.deleteFollow(fromId: fromId, toId: toId)
+            .subscribe({ state in
+                print(state)
+        NotificationCenter.default.post(name: NSNotification.Name.followCancel, object: nil, userInfo: nil)
+            }).disposed(by: disposeBag)
+    }
+    
+    func deleteBlock(targetId:Int) {
+        usecase.blockDelete(targetId: targetId)
+            .subscribe({ state in
+                print(state)
+            }).disposed(by: disposeBag)
+        //MARK: notification add--
+    }
+    
+    
+    
     init(usecase: MyProfileUseCase) {
         self.usecase = usecase
     }

@@ -66,4 +66,12 @@ class MyProfileUseCase {
     func blockDelete(targetId: Int) -> Single<StateRespone> {
         myProfileRepository.blockDelete(targetId: targetId)
     }
+    
+    func saveFollow(fromId: Int, toId: Int) -> Single<StateRespone> {
+        myProfileRepository.saveFollow(fromId: fromId, toId: toId)
+    }
+
+    func deleteFollow(fromId: Int, toId: Int) -> Single<StateRespone> {
+        myProfileRepository.deleteFollow(fromId: fromId, toId: toId)
+    }
 }
