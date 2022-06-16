@@ -22,10 +22,10 @@ enum CreateType {
 class CreateViewController: BaseViewController {
     let scrollView = UIScrollView()
     let category: String
-    private let selfView = CreateView()
+    let selfView = CreateView()
     let viewModel: CreateViewModel
     let type: CreateType
-    lazy var awsHelper = AWSS3Helper()
+    let awsHelper = AWSS3Helper()
     let stickerChoiceView = StickerView()
     var animator: UIDynamicAnimator?
     var selectedSticker: IRStickerView?
@@ -46,7 +46,6 @@ class CreateViewController: BaseViewController {
         selfView.titleTextView.delegate = self
         selfView.mainTextView.delegate = self
         selfView.mainfullTextView.delegate = self
-        bind()
         animator = UIDynamicAnimator.init(referenceView: selfView.textCoverView)
         if type == .create { setCreateViewinfo() } else { setModifyView() }
     }
@@ -220,7 +219,7 @@ class CreateViewController: BaseViewController {
         super.configureUI()
     }
 
-    private func bind() {
+    override func bind() {
         selfView.imageAddButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] _ in

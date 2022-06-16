@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 protocol MyProfileRepository {
-    var myProfileAPI: MyProfileAPI { get }
+    var myProfileAPI: MyProfileAPI { get } 
     init(myProfileAPI: MyProfileAPI)
     func myProfile(userId: Int) -> Single<MyProfileResponse>
     func updatePassword(request: PWUpdateRequest) -> Single<StateRespone>
@@ -20,4 +20,10 @@ protocol MyProfileRepository {
     func logOut(userId: Int) -> Single<StateRespone>
     func myDjProfile(fromId: Int, toId: Int) -> Single<MyDjProfileResponse>
     func signOut(userId: Int) -> Single<StateRespone>
+    func followerList(userId: Int) -> Single<[ListResponse]>
+    func followingList(userId: Int) -> Single<[ListResponse]>
+    func blockList(userId: Int) -> Single<[ListResponse]>
+    func blockDelete(targetId: Int) -> Single<StateRespone>
+    func saveFollow(fromId: Int, toId: Int) -> Single<StateRespone>
+    func deleteFollow(fromId: Int, toId: Int) -> Single<StateRespone>
 }

@@ -26,7 +26,6 @@ class AccountOutViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
     }
     
     override func configureUI() {
@@ -40,7 +39,7 @@ class AccountOutViewController: BaseViewController {
         }
     }
     
-    func bind() {
+    override func bind() {
         selfView.buttonView.rx.tap
             .subscribe(onNext: { [weak self] _ in
                 UserApi.shared.logout {error in

@@ -12,7 +12,7 @@ import RxRelay
 import RxSwift
 import UIKit
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCenterDelegate {
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         if let url = URLContexts.first?.url {
             if AuthApi.isKakaoTalkLoginUrl(url) {
@@ -33,12 +33,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.overrideUserInterfaceStyle = .dark
         let uc = LoginUseCase(authRepository: AuthRepositoryImpl(loginAPI: LoginAPI()))
         let vm = LoginViewModel(usecase: uc)
+        UNUserNotificationCenter.current().delegate = self
 
         Observable.combineLatest(kakaoValid, appleValid, localValid) { $0 || $1 || $2 }
         .observe(on: MainScheduler.instance)
         .subscribe(onNext: { [weak self] valid in
-            print("is it valid? \(valid)")
-            if valid {
+            if UserDefaults.standard.object(forKey: "background") != nil {
+                self?.window?.rootViewController = LoginViewController(viewModel: vm)
+                self?.window?.makeKeyAndVisible()
+                self?.window?.backgroundColor = .mainBackGround
+                UserDefaults.standard.removeObject(forKey: "background")
+            } else if valid {
                 self?.window?.rootViewController = TabBarViewController()
                 self?.window?.makeKeyAndVisible()
                 self?.window?.backgroundColor = .mainBackGround

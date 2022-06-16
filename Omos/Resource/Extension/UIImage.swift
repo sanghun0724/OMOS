@@ -37,7 +37,24 @@ extension UIImageView {
             options: [.forceRefresh]
         )
     }
-
+    
+//    func setImageWithPadding(with urlString: String) {
+//        guard let url = URL(string: urlString) else { return }
+//        self.kf.setImage(
+//            with: url,
+//            placeholder: UIImage(named: "albumCover")?.with(.init(top: 6, left: 6, bottom: 6, right: 6)),
+//            options: [.forceRefresh]) { result in
+//                switch result {
+//                case .success(let data):
+//                    let padding:CGFloat = 6
+//                    let dataImage = data.image.withAlignmentRectInsets(UIEdgeInsets(top: -4, left: -4, bottom: -4, right: -4))
+//                    self.image = dataImage
+//                case .failure(let error):
+//                    print(error)
+//                }
+//            }
+//    }
+    
     // 서버에서 받아온 이미지 cornerRadius적용하기
     func download(url: String?, rounded: Bool = true) {
         guard let tmpUrl = url else {
@@ -86,4 +103,39 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return newImage!
     }
+    
+     func with(_ insets: UIEdgeInsets) -> UIImage {
+         let targetWidth = size.width + insets.left + insets.right
+         let targetHeight = size.height + insets.top + insets.bottom
+         let targetSize = CGSize(width: targetWidth, height: targetHeight)
+         let targetOrigin = CGPoint(x: insets.left, y: insets.top)
+         let format = UIGraphicsImageRendererFormat()
+         format.scale = scale
+         let renderer = UIGraphicsImageRenderer(size: targetSize, format: format)
+         return renderer.image { _ in
+             draw(in: CGRect(origin: targetOrigin, size: size))
+         }.withRenderingMode(renderingMode)
+     }
+    
+    func imageWithInsets(insets: UIEdgeInsets) -> UIImage? {
+            UIGraphicsBeginImageContextWithOptions(
+                CGSize(width: self.size.width + insets.left + insets.right,
+                       height: self.size.height + insets.top + insets.bottom), false, self.scale)
+            let _ = UIGraphicsGetCurrentContext()
+            let origin = CGPoint(x: insets.left, y: insets.top)
+            self.draw(at: origin)
+            let imageWithInsets = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return imageWithInsets
+        }
+    
 }
+
+class PaddedImageView: UIImageView {
+    override var alignmentRectInsets: UIEdgeInsets {
+        return UIEdgeInsets(top: -10, left: -10, bottom: -10, right: -10)
+    }
+}
+
+
+

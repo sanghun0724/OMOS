@@ -38,6 +38,7 @@ class BaseViewController: UIViewController {
         self.view.backgroundColor = .mainBackGround
         setBarButtonItems()
         dismissKeyboardWhenTappedAround()
+        bind()
     }
 
     override func viewDidLayoutSubviews() {
@@ -65,6 +66,10 @@ class BaseViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
         self.navigationItem.leftItemsSupplementBackButton = true // backbutton 안숨기기
         self.navigationItem.backButtonTitle = ""
+    }
+    
+    func bind() {
+        
     }
 
     @objc

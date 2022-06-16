@@ -12,6 +12,7 @@ import UIKit
 class HomeViewController: BaseViewController {
     let selfView = HomeView()
     let viewModel: HomeViewModel
+    let localNoti = LocalNotification()
 
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -24,10 +25,12 @@ class HomeViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
         selfView.tableView.dataSource = self
         selfView.tableView.delegate = self
         viewModel.allHomeDataFetch(userId: Account.currentUser)
+        localNoti.userNotiCenter.removeAllPendingNotificationRequests()
+        localNoti.requestAuthNoti()
+        localNoti.requestSendNoti()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -46,7 +49,7 @@ class HomeViewController: BaseViewController {
         }
     }
 
-    func bind() {
+    override func bind() {
         viewModel.allLoading
             .subscribe(onNext: { [weak self] loading in
                 self?.selfView.loadingView.isHidden = !loading

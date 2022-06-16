@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import UIKit
 
-class AllRecordCateShortDetailCell: UITableViewCell {
+class AllRecordCateShortDetailCell: UITableViewCell ,ConfigurableCell {
     static let identifier = "AllRecordCateShortDetailCell"
     var disposeBag = DisposeBag()
     let myView = MyRecordDetailView()
@@ -41,7 +41,7 @@ class AllRecordCateShortDetailCell: UITableViewCell {
         disposeBag = DisposeBag()
     }
     
-    func configureModel(record: RecordResponse) {
+    func configure(record: RecordResponse) {
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
         myView.circleImageView.setImage(with: record.music.albumImageURL)
@@ -71,4 +71,8 @@ class AllRecordCateShortDetailCell: UITableViewCell {
         }
     }
     
+    func cellHelper() {
+        self.selectionStyle = .none
+        self.myView.lockButton.isHidden = true
+    }
 }

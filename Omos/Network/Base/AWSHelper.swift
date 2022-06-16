@@ -60,6 +60,7 @@ class AWSS3Helper {
         })
 
         futureOutput.whenFailure({ [weak self] error in
+            print("imageUpload Failed check out 'AWSHelper Object'")
             print(error.localizedDescription)
             completion(nil)
             try? self?.awsClient.syncShutdown()

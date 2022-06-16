@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		21B827FA49CA17F32C953880 /* Pods_Omos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDDD0956E1034CF6BE3CC18 /* Pods_Omos.framework */; };
+		A35D669CC837DF4B89B8FD01 /* Pods_Omos_OmosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABEC1BC3CB7BC079196C193 /* Pods_Omos_OmosTests.framework */; };
 		B601C53B27C0F50100DCD2AF /* Cafe24Oneprettynight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B601C53A27C0F50100DCD2AF /* Cafe24Oneprettynight.ttf */; };
 		B606195227DF0F14006508CA /* LyricsPasteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606195127DF0F14006508CA /* LyricsPasteViewController.swift */; };
 		B606195427DF0F57006508CA /* LyricsPasteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606195327DF0F57006508CA /* LyricsPasteView.swift */; };
@@ -40,10 +41,15 @@
 		B6183CD227D895D30035AA06 /* AllRecordSearchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CD127D895D30035AA06 /* AllRecordSearchDetailViewController.swift */; };
 		B6183CD627D8F7490035AA06 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CD527D8F7490035AA06 /* BottomSheetViewController.swift */; };
 		B6183CD827D906300035AA06 /* MyRecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6183CD727D9062F0035AA06 /* MyRecordDetailViewModel.swift */; };
+		B61B9FD828524EBD006F46AA /* FollowBlockProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B9FD728524EBC006F46AA /* FollowBlockProtocol.swift */; };
 		B62A770727F049A800B427D0 /* AWSHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62A770627F049A800B427D0 /* AWSHelper.swift */; };
 		B630D2FA27C7756A00E66F22 /* MydjTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2F927C7756A00E66F22 /* MydjTableCell.swift */; };
 		B630D2FC27C7761D00E66F22 /* Mydj+Table+Collect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2FB27C7761D00E66F22 /* Mydj+Table+Collect.swift */; };
 		B630D2FF27C78C0E00E66F22 /* BestSearchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630D2FE27C78C0E00E66F22 /* BestSearchTableCell.swift */; };
+		B63A85AD2846440D00EC1DAF /* BlockListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63A85AC2846440D00EC1DAF /* BlockListViewController.swift */; };
+		B63DEC0328435FB500091E3C /* BaseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63DEC0228435FB500091E3C /* BaseListViewController.swift */; };
+		B63DEC0528435FFC00091E3C /* FollowerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63DEC0428435FFC00091E3C /* FollowerListViewController.swift */; };
+		B63DEC072843603700091E3C /* FollowingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63DEC062843603700091E3C /* FollowingListViewController.swift */; };
 		B642344527DCA9A600C1083D /* AllRecordCateDetail+Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B642344427DCA9A600C1083D /* AllRecordCateDetail+Table.swift */; };
 		B642344727DCC9B600C1083D /* AllRecordSearchDetail+Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B642344627DCC9B600C1083D /* AllRecordSearchDetail+Table.swift */; };
 		B642344927DCE7D500C1083D /* FollowTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B642344827DCE7D500C1083D /* FollowTarget.swift */; };
@@ -71,6 +77,7 @@
 		B646053227CBBF050022E062 /* SearchAlbumDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646053127CBBF050022E062 /* SearchAlbumDetailCell.swift */; };
 		B646053427CBE1A10022E062 /* SearchArtistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646053327CBE1A10022E062 /* SearchArtistViewController.swift */; };
 		B646053627CBE1B40022E062 /* SearchArtistHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646053527CBE1B40022E062 /* SearchArtistHeaderView.swift */; };
+		B64EB7112848F58A00D33B27 /* MyProfileAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64EB7102848F58A00D33B27 /* MyProfileAPITests.swift */; };
 		B650873927AF948D0020D2C1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650873827AF948D0020D2C1 /* HomeViewController.swift */; };
 		B650873B27AF94C60020D2C1 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650873A27AF94C60020D2C1 /* TabBarViewController.swift */; };
 		B650873D27AF969C0020D2C1 /* MyRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650873C27AF969C0020D2C1 /* MyRecordViewController.swift */; };
@@ -138,13 +145,15 @@
 		B69860BD27B8E85600E83DB9 /* NickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69860BC27B8E85600E83DB9 /* NickNameView.swift */; };
 		B69E42D327E38F8300CAD5F1 /* AllRecordDetail+Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E42D227E38F8300CAD5F1 /* AllRecordDetail+Table.swift */; };
 		B69E42D527E3A8F900CAD5F1 /* MyRecordDetail+Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E42D427E3A8F900CAD5F1 /* MyRecordDetail+Table.swift */; };
-		B6A0299C27B23D3500D3D3C9 /* OmosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */; };
 		B6ABCCF327CF44880003B47A /* Select.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ABCCF227CF44880003B47A /* Select.swift */; };
 		B6ABCCF627CF45020003B47A /* RecordAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ABCCF527CF45020003B47A /* RecordAPI.swift */; };
 		B6ABCCF827CF450D0003B47A /* RecordTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ABCCF727CF450D0003B47A /* RecordTarget.swift */; };
 		B6ABCCFA27CF5E480003B47A /* RecordsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ABCCF927CF5E480003B47A /* RecordsRepository.swift */; };
 		B6ABCCFC27CF5E650003B47A /* RecordsRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ABCCFB27CF5E650003B47A /* RecordsRepositoryImpl.swift */; };
 		B6ABCCFE27CF5EDE0003B47A /* RecordsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ABCCFD27CF5EDE0003B47A /* RecordsUseCase.swift */; };
+		B6AD4E352847C8360000428B /* SessionStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AD4E342847C8360000428B /* SessionStub.swift */; };
+		B6AD4E372847CCDB0000428B /* SessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AD4E362847CCDB0000428B /* SessionProtocol.swift */; };
+		B6AD4E3D2847D1520000428B /* TodayAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AD4E3C2847D1520000428B /* TodayAPITests.swift */; };
 		B6ADDCFB280FE39100D90E46 /* RecordLongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ADDCFA280FE39100D90E46 /* RecordLongView.swift */; };
 		B6ADDCFD280FE53D00D90E46 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ADDCFC280FE53D00D90E46 /* LoadingCell.swift */; };
 		B6ADDCFF280FE6D300D90E46 /* InstaDecoTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ADDCFE280FE6D300D90E46 /* InstaDecoTopView.swift */; };
@@ -155,13 +164,16 @@
 		B6B1BB5A27BBCE1000DF2528 /* MyRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B1BB5927BBCE1000DF2528 /* MyRecordView.swift */; };
 		B6B1BB5C27BBCF6000DF2528 /* MyRecordTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B1BB5B27BBCF6000DF2528 /* MyRecordTableCell.swift */; };
 		B6B1BB5E27BBD06600DF2528 /* MyRecord+Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B1BB5D27BBD06600DF2528 /* MyRecord+Table.swift */; };
-		B6B402832833DACD0062884E /* CellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B402822833DACD0062884E /* CellConfigurator.swift */; };
+		B6B402832833DACD0062884E /* BaseCellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B402822833DACD0062884E /* BaseCellConfigurator.swift */; };
 		B6BC147B27BF98FD0067D8FB /* Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BC147A27BF98FD0067D8FB /* Refresh.swift */; };
 		B6BC147D27BFAC330067D8FB /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BC147C27BFAC330067D8FB /* SignUp.swift */; };
 		B6BC148427BFC8FE0067D8FB /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BC148327BFC8FE0067D8FB /* SignUpViewModel.swift */; };
 		B6BC148727BFF6C50067D8FB /* MyRecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BC148627BFF6C40067D8FB /* MyRecordDetailViewController.swift */; };
 		B6BC148927BFF6F80067D8FB /* MyRecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BC148827BFF6F80067D8FB /* MyRecordDetailView.swift */; };
 		B6BFD15E27E9096900DC3722 /* InstagramShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BFD15D27E9096800DC3722 /* InstagramShareView.swift */; };
+		B6C38EBA2845CB8D00F12263 /* BlockTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C38EB92845CB8D00F12263 /* BlockTarget.swift */; };
+		B6C38EBC2845D1AC00F12263 /* Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C38EBB2845D1AC00F12263 /* Lists.swift */; };
+		B6C38EBE2845DEF100F12263 /* FollowListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C38EBD2845DEF100F12263 /* FollowListViewModel.swift */; };
 		B6C3AD4527B95B1E00D5D69D /* Attributed+Stirng.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C3AD4427B95B1E00D5D69D /* Attributed+Stirng.swift */; };
 		B6C969B727D1B7C100BA4E58 /* MyRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C969B627D1B7C100BA4E58 /* MyRecord.swift */; };
 		B6C969B927D1F44500BA4E58 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C969B827D1F44500BA4E58 /* HomeView.swift */; };
@@ -171,9 +183,13 @@
 		B6CCBC9727D9E5E4009F8499 /* OneMusicRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CCBC9627D9E5E4009F8499 /* OneMusicRecord.swift */; };
 		B6CCBC9927DA5EBC009F8499 /* HomeTableMiddleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CCBC9827DA5EBB009F8499 /* HomeTableMiddleCell.swift */; };
 		B6CCBC9B27DA65F4009F8499 /* HomeTableLastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CCBC9A27DA65F4009F8499 /* HomeTableLastCell.swift */; };
+		B6D1C472284DEB8D003D60DF /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D1C471284DEB8D003D60DF /* UIButton.swift */; };
 		B6D3685627B7A510008B5635 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D3685527B7A510008B5635 /* NicknameViewController.swift */; };
 		B6D4BB1E27CA48CD00D6741B /* AllRecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D4BB1D27CA48CD00D6741B /* AllRecordDetailViewController.swift */; };
 		B6D4BB2227CA5D7C00D6741B /* AllRecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D4BB2127CA5D7C00D6741B /* AllRecordDetailView.swift */; };
+		B6D4C4F5283B83FC000EAD7F /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D4C4F4283B83FC000EAD7F /* LocalNotification.swift */; };
+		B6D5EFD12840B9A8005E9302 /* FollowBlockListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D5EFD02840B9A7005E9302 /* FollowBlockListCell.swift */; };
+		B6D5EFD32840BC7E005E9302 /* FollowListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D5EFD22840BC7E005E9302 /* FollowListViewController.swift */; };
 		B6DCFA5627E45F4B006283FE /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCFA5527E45F4B006283FE /* ProfileView.swift */; };
 		B6DCFA5827E4616E006283FE /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCFA5727E4616E006283FE /* ProfileCell.swift */; };
 		B6DCFA5B27E48647006283FE /* InteractionRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCFA5A27E48647006283FE /* InteractionRecordViewController.swift */; };
@@ -218,6 +234,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		16E3A8C3A30221F2D45EACA9 /* Pods-Omos-OmosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Omos-OmosTests.debug.xcconfig"; path = "Target Support Files/Pods-Omos-OmosTests/Pods-Omos-OmosTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3ABEC1BC3CB7BC079196C193 /* Pods_Omos_OmosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Omos_OmosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		937ED644521A24F0A95E0654 /* Pods-Omos-OmosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Omos-OmosTests.release.xcconfig"; path = "Target Support Files/Pods-Omos-OmosTests/Pods-Omos-OmosTests.release.xcconfig"; sourceTree = "<group>"; };
 		B601C53A27C0F50100DCD2AF /* Cafe24Oneprettynight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Cafe24Oneprettynight.ttf; sourceTree = "<group>"; };
 		B606195127DF0F14006508CA /* LyricsPasteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsPasteViewController.swift; sourceTree = "<group>"; };
 		B606195327DF0F57006508CA /* LyricsPasteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsPasteView.swift; sourceTree = "<group>"; };
@@ -252,10 +271,15 @@
 		B6183CD127D895D30035AA06 /* AllRecordSearchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordSearchDetailViewController.swift; sourceTree = "<group>"; };
 		B6183CD527D8F7490035AA06 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		B6183CD727D9062F0035AA06 /* MyRecordDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordDetailViewModel.swift; sourceTree = "<group>"; };
+		B61B9FD728524EBC006F46AA /* FollowBlockProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowBlockProtocol.swift; sourceTree = "<group>"; };
 		B62A770627F049A800B427D0 /* AWSHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSHelper.swift; sourceTree = "<group>"; };
 		B630D2F927C7756A00E66F22 /* MydjTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MydjTableCell.swift; sourceTree = "<group>"; };
 		B630D2FB27C7761D00E66F22 /* Mydj+Table+Collect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mydj+Table+Collect.swift"; sourceTree = "<group>"; };
 		B630D2FE27C78C0E00E66F22 /* BestSearchTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSearchTableCell.swift; sourceTree = "<group>"; };
+		B63A85AC2846440D00EC1DAF /* BlockListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListViewController.swift; sourceTree = "<group>"; };
+		B63DEC0228435FB500091E3C /* BaseListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListViewController.swift; sourceTree = "<group>"; };
+		B63DEC0428435FFC00091E3C /* FollowerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListViewController.swift; sourceTree = "<group>"; };
+		B63DEC062843603700091E3C /* FollowingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingListViewController.swift; sourceTree = "<group>"; };
 		B642344427DCA9A600C1083D /* AllRecordCateDetail+Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AllRecordCateDetail+Table.swift"; sourceTree = "<group>"; };
 		B642344627DCC9B600C1083D /* AllRecordSearchDetail+Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AllRecordSearchDetail+Table.swift"; sourceTree = "<group>"; };
 		B642344827DCE7D500C1083D /* FollowTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowTarget.swift; sourceTree = "<group>"; };
@@ -283,6 +307,7 @@
 		B646053127CBBF050022E062 /* SearchAlbumDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAlbumDetailCell.swift; sourceTree = "<group>"; };
 		B646053327CBE1A10022E062 /* SearchArtistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtistViewController.swift; sourceTree = "<group>"; };
 		B646053527CBE1B40022E062 /* SearchArtistHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtistHeaderView.swift; sourceTree = "<group>"; };
+		B64EB7102848F58A00D33B27 /* MyProfileAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileAPITests.swift; sourceTree = "<group>"; };
 		B650873827AF948D0020D2C1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B650873A27AF94C60020D2C1 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		B650873C27AF969C0020D2C1 /* MyRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordViewController.swift; sourceTree = "<group>"; };
@@ -353,7 +378,6 @@
 		B69E42D227E38F8300CAD5F1 /* AllRecordDetail+Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AllRecordDetail+Table.swift"; sourceTree = "<group>"; };
 		B69E42D427E3A8F900CAD5F1 /* MyRecordDetail+Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyRecordDetail+Table.swift"; sourceTree = "<group>"; };
 		B6A0299927B23D3500D3D3C9 /* OmosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OmosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmosTests.swift; sourceTree = "<group>"; };
 		B6ABCCF227CF44880003B47A /* Select.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Select.swift; sourceTree = "<group>"; };
 		B6ABCCF527CF45020003B47A /* RecordAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordAPI.swift; sourceTree = "<group>"; };
 		B6ABCCF727CF450D0003B47A /* RecordTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTarget.swift; sourceTree = "<group>"; };
@@ -361,6 +385,11 @@
 		B6ABCCFB27CF5E650003B47A /* RecordsRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsRepositoryImpl.swift; sourceTree = "<group>"; };
 		B6ABCCFD27CF5EDE0003B47A /* RecordsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsUseCase.swift; sourceTree = "<group>"; };
 		B6AC277027BA28BB00A1FA5B /* OmosRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OmosRelease.entitlements; sourceTree = "<group>"; };
+		B6AD4E302847C19C0000428B /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6AD4E322847C28D0000428B /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6AD4E342847C8360000428B /* SessionStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStub.swift; sourceTree = "<group>"; };
+		B6AD4E362847CCDB0000428B /* SessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionProtocol.swift; sourceTree = "<group>"; };
+		B6AD4E3C2847D1520000428B /* TodayAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayAPITests.swift; sourceTree = "<group>"; };
 		B6ADDCFA280FE39100D90E46 /* RecordLongView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordLongView.swift; sourceTree = "<group>"; };
 		B6ADDCFC280FE53D00D90E46 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		B6ADDCFE280FE6D300D90E46 /* InstaDecoTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaDecoTopView.swift; sourceTree = "<group>"; };
@@ -371,7 +400,7 @@
 		B6B1BB5927BBCE1000DF2528 /* MyRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordView.swift; sourceTree = "<group>"; };
 		B6B1BB5B27BBCF6000DF2528 /* MyRecordTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordTableCell.swift; sourceTree = "<group>"; };
 		B6B1BB5D27BBD06600DF2528 /* MyRecord+Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyRecord+Table.swift"; sourceTree = "<group>"; };
-		B6B402822833DACD0062884E /* CellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellConfigurator.swift; sourceTree = "<group>"; };
+		B6B402822833DACD0062884E /* BaseCellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCellConfigurator.swift; sourceTree = "<group>"; };
 		B6BC147A27BF98FD0067D8FB /* Refresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Refresh.swift; sourceTree = "<group>"; };
 		B6BC147C27BFAC330067D8FB /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		B6BC148327BFC8FE0067D8FB /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
@@ -379,6 +408,9 @@
 		B6BC148827BFF6F80067D8FB /* MyRecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordDetailView.swift; sourceTree = "<group>"; };
 		B6BFD15C27E89D8800DC3722 /* Omos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Omos.entitlements; sourceTree = "<group>"; };
 		B6BFD15D27E9096800DC3722 /* InstagramShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramShareView.swift; sourceTree = "<group>"; };
+		B6C38EB92845CB8D00F12263 /* BlockTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTarget.swift; sourceTree = "<group>"; };
+		B6C38EBB2845D1AC00F12263 /* Lists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lists.swift; sourceTree = "<group>"; };
+		B6C38EBD2845DEF100F12263 /* FollowListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowListViewModel.swift; sourceTree = "<group>"; };
 		B6C3AD4427B95B1E00D5D69D /* Attributed+Stirng.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attributed+Stirng.swift"; sourceTree = "<group>"; };
 		B6C969B627D1B7C100BA4E58 /* MyRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecord.swift; sourceTree = "<group>"; };
 		B6C969B827D1F44500BA4E58 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -388,9 +420,13 @@
 		B6CCBC9627D9E5E4009F8499 /* OneMusicRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneMusicRecord.swift; sourceTree = "<group>"; };
 		B6CCBC9827DA5EBB009F8499 /* HomeTableMiddleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableMiddleCell.swift; sourceTree = "<group>"; };
 		B6CCBC9A27DA65F4009F8499 /* HomeTableLastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableLastCell.swift; sourceTree = "<group>"; };
+		B6D1C471284DEB8D003D60DF /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		B6D3685527B7A510008B5635 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
 		B6D4BB1D27CA48CD00D6741B /* AllRecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordDetailViewController.swift; sourceTree = "<group>"; };
 		B6D4BB2127CA5D7C00D6741B /* AllRecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordDetailView.swift; sourceTree = "<group>"; };
+		B6D4C4F4283B83FC000EAD7F /* LocalNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
+		B6D5EFD02840B9A7005E9302 /* FollowBlockListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowBlockListCell.swift; sourceTree = "<group>"; };
+		B6D5EFD22840BC7E005E9302 /* FollowListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowListViewController.swift; sourceTree = "<group>"; };
 		B6DCFA5527E45F4B006283FE /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B6DCFA5727E4616E006283FE /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		B6DCFA5A27E48647006283FE /* InteractionRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionRecordViewController.swift; sourceTree = "<group>"; };
@@ -440,6 +476,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A35D669CC837DF4B89B8FD01 /* Pods_Omos_OmosTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,7 +486,10 @@
 		5A9649AB9D7A8749E6E322D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B6AD4E322847C28D0000428B /* Alamofire.framework */,
+				B6AD4E302847C19C0000428B /* Alamofire.framework */,
 				EBDDD0956E1034CF6BE3CC18 /* Pods_Omos.framework */,
+				3ABEC1BC3CB7BC079196C193 /* Pods_Omos_OmosTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -662,10 +702,24 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
+		B63DEC0128435F3600091E3C /* Follow_Block */ = {
+			isa = PBXGroup;
+			children = (
+				B61B9FD728524EBC006F46AA /* FollowBlockProtocol.swift */,
+				B6D5EFD22840BC7E005E9302 /* FollowListViewController.swift */,
+				B63DEC0228435FB500091E3C /* BaseListViewController.swift */,
+				B63DEC0428435FFC00091E3C /* FollowerListViewController.swift */,
+				B63DEC062843603700091E3C /* FollowingListViewController.swift */,
+				B63A85AC2846440D00EC1DAF /* BlockListViewController.swift */,
+			);
+			path = Follow_Block;
+			sourceTree = "<group>";
+		};
 		B64601DC27DB47B10076C2E5 /* Interaction */ = {
 			isa = PBXGroup;
 			children = (
 				B64601E127DB481D0076C2E5 /* InteractionTarget.swift */,
+				B6C38EB92845CB8D00F12263 /* BlockTarget.swift */,
 			);
 			path = Interaction;
 			sourceTree = "<group>";
@@ -707,6 +761,23 @@
 				B6183CC227D733350035AA06 /* SearchAlbumDetailViewModel.swift */,
 			);
 			path = SearchDetail;
+			sourceTree = "<group>";
+		};
+		B64EB70E2848BFBD00D33B27 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				B6AD4E342847C8360000428B /* SessionStub.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		B64EB70F2848BFD700D33B27 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				B6AD4E3C2847D1520000428B /* TodayAPITests.swift */,
+				B64EB7102848F58A00D33B27 /* MyProfileAPITests.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		B650873727AF94500020D2C1 /* Others */ = {
@@ -816,6 +887,7 @@
 				B68454ED27BE228800F1E6B5 /* HTTPHeaderField.swift */,
 				B68454EF27BE2D7B00F1E6B5 /* MyRequestInterceptor.swift */,
 				B62A770627F049A800B427D0 /* AWSHelper.swift */,
+				B6AD4E362847CCDB0000428B /* SessionProtocol.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -849,6 +921,7 @@
 				B682185B27B3C0BB00B58E19 /* MyError.swift */,
 				B6C3AD4427B95B1E00D5D69D /* Attributed+Stirng.swift */,
 				B6FE837727D07B4800401FC5 /* Cell.swift */,
+				B6D1C471284DEB8D003D60DF /* UIButton.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -864,6 +937,7 @@
 				B6CC1D7727BA536A00B5EE7E /* PrivateInfoText.rtf */,
 				B6183CD527D8F7490035AA06 /* BottomSheetViewController.swift */,
 				B6BFD15D27E9096800DC3722 /* InstagramShareView.swift */,
+				B6D4C4F4283B83FC000EAD7F /* LocalNotification.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -882,6 +956,7 @@
 			children = (
 				B697F20427E0A47C00F34AB5 /* Today.swift */,
 				B6E9B5CD27E719E30045143F /* MyProfile.swift */,
+				B6C38EBB2845D1AC00F12263 /* Lists.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -889,7 +964,8 @@
 		B6A0299A27B23D3500D3D3C9 /* OmosTests */ = {
 			isa = PBXGroup;
 			children = (
-				B6A0299B27B23D3500D3D3C9 /* OmosTests.swift */,
+				B64EB70E2848BFBD00D33B27 /* Mock */,
+				B64EB70F2848BFD700D33B27 /* Service */,
 			);
 			path = OmosTests;
 			sourceTree = "<group>";
@@ -958,7 +1034,7 @@
 				B666A90527AED17C00BE7F92 /* BaseView.swift */,
 				B689A9D927AEA835005F26E4 /* BaseViewModel.swift */,
 				B609138327AD3A7C00B439C3 /* BaseViewController.swift */,
-				B6B402822833DACD0062884E /* CellConfigurator.swift */,
+				B6B402822833DACD0062884E /* BaseCellConfigurator.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1019,6 +1095,7 @@
 		B6FE837D27D09BFF00401FC5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				B63DEC0128435F3600091E3C /* Follow_Block */,
 				B6BC148627BFF6C40067D8FB /* MyRecordDetailViewController.swift */,
 				B69E42D427E3A8F900CAD5F1 /* MyRecordDetail+Table.swift */,
 				B6D4BB1D27CA48CD00D6741B /* AllRecordDetailViewController.swift */,
@@ -1041,6 +1118,7 @@
 				B651E8C927CA87F500996CC3 /* MydjProfileView.swift */,
 				B6DFD2CD27CCAEF100645F52 /* AllRecordCateDetailView.swift */,
 				B6ADDCFE280FE6D300D90E46 /* InstaDecoTopView.swift */,
+				B6D5EFD02840B9A7005E9302 /* FollowBlockListCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1052,6 +1130,7 @@
 				B6183CD727D9062F0035AA06 /* MyRecordDetailViewModel.swift */,
 				B64601DA27DB32800076C2E5 /* AllRecordDetailViewModel.swift */,
 				B6163B5627DE1B1000481B63 /* MyDjProfileViewModel.swift */,
+				B6C38EBD2845DEF100F12263 /* FollowListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1061,6 +1140,8 @@
 			children = (
 				CEBF3DD9CCF3DD38A49D350C /* Pods-Omos.debug.xcconfig */,
 				C215C3C79873F26B73F4F037 /* Pods-Omos.release.xcconfig */,
+				16E3A8C3A30221F2D45EACA9 /* Pods-Omos-OmosTests.debug.xcconfig */,
+				937ED644521A24F0A95E0654 /* Pods-Omos-OmosTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1096,9 +1177,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B6A029A127B23D3500D3D3C9 /* Build configuration list for PBXNativeTarget "OmosTests" */;
 			buildPhases = (
+				1E0BA5524721528189FF6E0C /* [CP] Check Pods Manifest.lock */,
 				B6A0299527B23D3500D3D3C9 /* Sources */,
 				B6A0299627B23D3500D3D3C9 /* Frameworks */,
 				B6A0299727B23D3500D3D3C9 /* Resources */,
+				874C93076BACE391E15E9BB8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1178,6 +1261,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1E0BA5524721528189FF6E0C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Omos-OmosTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		77902E746488D1AA0A59065A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1193,6 +1298,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Omos/Pods-Omos-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		874C93076BACE391E15E9BB8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Omos-OmosTests/Pods-Omos-OmosTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Omos-OmosTests/Pods-Omos-OmosTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Omos-OmosTests/Pods-Omos-OmosTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B64A13AB280960220093D817 /* Run Script */ = {
@@ -1267,6 +1389,7 @@
 				B6FE837827D07B4800401FC5 /* Cell.swift in Sources */,
 				B6183CD827D906300035AA06 /* MyRecordDetailViewModel.swift in Sources */,
 				B6C3AD4527B95B1E00D5D69D /* Attributed+Stirng.swift in Sources */,
+				B63DEC0528435FFC00091E3C /* FollowerListViewController.swift in Sources */,
 				B6DCFA6127E4B835006283FE /* ProfileChangeViewController.swift in Sources */,
 				B68454F527BE310100F1E6B5 /* MyAuthenticator.swift in Sources */,
 				B64601D927DB18DA0076C2E5 /* LaunchViewController.swift in Sources */,
@@ -1278,6 +1401,7 @@
 				B682185627B3A0BE00B58E19 /* SearchViewModel.swift in Sources */,
 				B693049D27C1F84200DC3E90 /* MyRecordViewModel.swift in Sources */,
 				B6183CD027D895C40035AA06 /* AllRecordSearchDetailViewModel.swift in Sources */,
+				B6D5EFD12840B9A8005E9302 /* FollowBlockListCell.swift in Sources */,
 				B693658427E1D0D200A8FCBA /* LyricsRecordView.swift in Sources */,
 				B6183CD627D8F7490035AA06 /* BottomSheetViewController.swift in Sources */,
 				B689A9DC27AEA877005F26E4 /* LoginViewController.swift in Sources */,
@@ -1326,8 +1450,11 @@
 				B6FE837C27D093E500401FC5 /* AllRecordCateDetailViewModel.swift in Sources */,
 				B682184E27B393BF00B58E19 /* AuthRepository.swift in Sources */,
 				B6DCFA5D27E49D20006283FE /* ProfileViewModel.swift in Sources */,
+				B63DEC072843603700091E3C /* FollowingListViewController.swift in Sources */,
 				B650873927AF948D0020D2C1 /* HomeViewController.swift in Sources */,
+				B63A85AD2846440D00EC1DAF /* BlockListViewController.swift in Sources */,
 				B67EF45027B7A9B80023D5D4 /* SignUpView.swift in Sources */,
+				B6C38EBE2845DEF100F12263 /* FollowListViewModel.swift in Sources */,
 				B693658227E1C57400A8FCBA /* AllrecordLyricsTableCell.swift in Sources */,
 				B67EF45727B7AA220023D5D4 /* PrivateLabelView.swift in Sources */,
 				B6183CD227D895D30035AA06 /* AllRecordSearchDetailViewController.swift in Sources */,
@@ -1336,7 +1463,7 @@
 				B6183CCD27D788A60035AA06 /* ArtistAlbumViewController.swift in Sources */,
 				B68454F827BE374600F1E6B5 /* LoginAPI.swift in Sources */,
 				B6DFD2D227CCB4D800645F52 /* AllRecordCateLongDetaillCell.swift in Sources */,
-				B6B402832833DACD0062884E /* CellConfigurator.swift in Sources */,
+				B6B402832833DACD0062884E /* BaseCellConfigurator.swift in Sources */,
 				B646052327CB79D60022E062 /* AlbumView.swift in Sources */,
 				B6DFD2D027CCAF0800645F52 /* AllRecordCateDetailViewController.swift in Sources */,
 				B66AD45027C6983F0012686B /* MydjCollectionCell.swift in Sources */,
@@ -1344,13 +1471,17 @@
 				B6DCFA5627E45F4B006283FE /* ProfileView.swift in Sources */,
 				B68454EC27BE1D9800F1E6B5 /* TargetType.swift in Sources */,
 				B697F20927E0D08300F34AB5 /* TodayUseCase.swift in Sources */,
+				B6AD4E372847CCDB0000428B /* SessionProtocol.swift in Sources */,
 				B606195A27DF2B85006508CA /* LyricsViewModel.swift in Sources */,
 				B689A9D127AE94E9005F26E4 /* Color.swift in Sources */,
 				B6ADDCFB280FE39100D90E46 /* RecordLongView.swift in Sources */,
 				B6B1BB5E27BBD06600DF2528 /* MyRecord+Table.swift in Sources */,
+				B6D5EFD32840BC7E005E9302 /* FollowListViewController.swift in Sources */,
 				B642344527DCA9A600C1083D /* AllRecordCateDetail+Table.swift in Sources */,
+				B6C38EBC2845D1AC00F12263 /* Lists.swift in Sources */,
 				B697F20527E0A47C00F34AB5 /* Today.swift in Sources */,
 				B683A45327B0DA3500838749 /* AllRecordTableCell.swift in Sources */,
+				B61B9FD828524EBD006F46AA /* FollowBlockProtocol.swift in Sources */,
 				B69860BD27B8E85600E83DB9 /* NickNameView.swift in Sources */,
 				B6E9B5D027E73CB90045143F /* MyProfileUseCase.swift in Sources */,
 				B6E9B5CC27E717A50045143F /* MyProfileAPI.swift in Sources */,
@@ -1360,7 +1491,9 @@
 				B6FE838127D0B37F00401FC5 /* AllRecordCateShortDetailCell.swift in Sources */,
 				B646053227CBBF050022E062 /* SearchAlbumDetailCell.swift in Sources */,
 				B6E12E8227C210E6008644B5 /* CreateViewModel.swift in Sources */,
+				B63DEC0328435FB500091E3C /* BaseListViewController.swift in Sources */,
 				B689A9D227AE94E9005F26E4 /* Date.swift in Sources */,
+				B6D4C4F5283B83FC000EAD7F /* LocalNotification.swift in Sources */,
 				B611825D27D45E2D004217E2 /* SearchRepositoryImpl.swift in Sources */,
 				B6D4BB1E27CA48CD00D6741B /* AllRecordDetailViewController.swift in Sources */,
 				B682185A27B3AD5100B58E19 /* Search+Table.swift in Sources */,
@@ -1405,6 +1538,7 @@
 				B697F20B27E0D09C00F34AB5 /* TodayRepository.swift in Sources */,
 				B651E8CA27CA87F500996CC3 /* MydjProfileView.swift in Sources */,
 				B68454E827BE027500F1E6B5 /* LoginUseCase.swift in Sources */,
+				B6D1C472284DEB8D003D60DF /* UIButton.swift in Sources */,
 				B6ABCCFE27CF5EDE0003B47A /* RecordsUseCase.swift in Sources */,
 				B6EF88A927BD3AC2006F6A8F /* EmptyCell.swift in Sources */,
 				B650874127AF96C00020D2C1 /* MyDJViewController.swift in Sources */,
@@ -1414,6 +1548,7 @@
 				B611826F27D4B125004217E2 /* Track.swift in Sources */,
 				B6E12E7E27C21050008644B5 /* CreateViewController.swift in Sources */,
 				B6C969B727D1B7C100BA4E58 /* MyRecord.swift in Sources */,
+				B6C38EBA2845CB8D00F12263 /* BlockTarget.swift in Sources */,
 				B6540F6327C50F79002B1696 /* CategoryViewController.swift in Sources */,
 				B6CC1D7427BA437A00B5EE7E /* InfoController.swift in Sources */,
 				B646051727CB5E8C0022E062 /* EntireViewController.swift in Sources */,
@@ -1455,7 +1590,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6A0299C27B23D3500D3D3C9 /* OmosTests.swift in Sources */,
+				B6AD4E352847C8360000428B /* SessionStub.swift in Sources */,
+				B64EB7112848F58A00D33B27 /* MyProfileAPITests.swift in Sources */,
+				B6AD4E3D2847D1520000428B /* TodayAPITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1628,7 +1765,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.7;
+				MARKETING_VERSION = 3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sangheon.Omos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1663,7 +1800,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.7;
+				MARKETING_VERSION = 3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sangheon.Omos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1675,6 +1812,7 @@
 		};
 		B6A0299F27B23D3500D3D3C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 16E3A8C3A30221F2D45EACA9 /* Pods-Omos-OmosTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1694,6 +1832,7 @@
 		};
 		B6A029A027B23D3500D3D3C9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 937ED644521A24F0A95E0654 /* Pods-Omos-OmosTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Apple Development";

@@ -24,7 +24,6 @@ class EntireViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         selfView.emptyView.isHidden = !(viewModel.currentAlbum.isEmpty) && !(viewModel.currentTrack.isEmpty) && !(viewModel.currentArtist.isEmpty)
@@ -41,7 +40,7 @@ class EntireViewController: BaseViewController {
         }
     }
 
-    func bind() {
+    override func bind() {
         Observable.zip(viewModel.album, viewModel.track, viewModel.artist)
             .observe(on: MainScheduler.instance)
             .withUnretained(self)

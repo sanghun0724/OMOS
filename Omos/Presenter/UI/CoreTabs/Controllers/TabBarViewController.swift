@@ -8,6 +8,7 @@
 import RxRelay
 import RxSwift
 import UIKit
+import Alamofire
 
 class TabBarViewController: UITabBarController {
     static var titles: [(String, String)] = []
@@ -18,15 +19,14 @@ class TabBarViewController: UITabBarController {
         if #available(iOS 15.0, *) {
             UITableView.appearance().sectionHeaderTopPadding = 0
         }
-        // upload to S3
     }
 
     private func setupControllers() {
-        let home = HomeViewController(viewModel: HomeViewModel(usecase: TodayUseCase(todayRepository: TodayRepositoryImpl(todayAPI: TodayAPI()))))
+        let home = HomeViewController(viewModel: HomeViewModel(usecase: TodayUseCase(todayRepository: TodayRepositoryImpl(todayAPI: TodayAPI(session: Session.default)))))
         let myRecord = MyRecordViewController(viewModel: MyRecordViewModel(usecase: RecordsUseCase(recordsRepository: RecordsRepositoryImpl(recordAPI: RecordAPI()))))
         let allRecord = AllRecordViewController(viewModel: AllRecordViewModel(usecase: RecordsUseCase(recordsRepository: RecordsRepositoryImpl(recordAPI: RecordAPI()))))
         let myDj = MyDJViewController(viewModel: MyDjViewModel(usecase: RecordsUseCase(recordsRepository: RecordsRepositoryImpl(recordAPI: RecordAPI()))))
-        let profile = ProfileViewController(viewModel: ProfileViewModel(usecase: MyProfileUseCase(myProfileRepository: MyProfileRepositoryImpl(myProfileAPI: MyProfileAPI()))))
+        let profile = ProfileViewController(viewModel: ProfileViewModel(usecase: MyProfileUseCase(myProfileRepository: MyProfileRepositoryImpl(myProfileAPI: MyProfileAPI(session: Session.default)))))
 
         let nav1 = UINavigationController(rootViewController: home)
         let nav2 = UINavigationController(rootViewController: myRecord)

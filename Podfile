@@ -26,4 +26,6 @@ pod 'Firebase/Crashlytics'
 pod 'Firebase/Analytics'
 pod 'Firebase/Core'
 pod 'SwiftLint'
+target 'OmosTests' do
+  end
 end

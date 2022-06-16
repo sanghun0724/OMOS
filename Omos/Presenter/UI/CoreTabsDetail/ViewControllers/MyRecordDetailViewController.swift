@@ -9,6 +9,7 @@ import MaterialComponents.MaterialBottomSheet
 import RxCocoa
 import RxSwift
 import UIKit
+import Kingfisher
 
 class MyRecordDetailViewController: BaseViewController {
     let scrollView = UIScrollView()
@@ -43,7 +44,6 @@ class MyRecordDetailViewController: BaseViewController {
         selfLyricsView.tableView.dataSource = self
         setNavigationItems()
         viewModel.myRecordDetailFetch(postId: postId, userId: userId)
-        bind()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -196,7 +196,7 @@ class MyRecordDetailViewController: BaseViewController {
         }
     }
     
-    func bind() {
+    override func bind() {
         viewModel.loading
             .subscribe(onNext: { [weak self] loading in
                 self?.loadingView.isHidden = !loading

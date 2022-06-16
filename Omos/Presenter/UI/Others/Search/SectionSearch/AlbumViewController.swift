@@ -23,7 +23,6 @@ class AlbumViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         selfView.emptyView.isHidden = !(viewModel.currentAlbum.isEmpty)
@@ -40,7 +39,7 @@ class AlbumViewController: BaseViewController {
         }
     }
 
-    func bind() {
+    override func bind() {
         viewModel.album
             .subscribe({ [weak self] _ in
                 self?.selfView.emptyView.isHidden = !(self?.viewModel.currentAlbum.isEmpty)!

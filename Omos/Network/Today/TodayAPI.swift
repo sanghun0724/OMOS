@@ -9,8 +9,14 @@ import Alamofire
 import Foundation
 
 class TodayAPI {
+    private let session: SessionProtocol
+
+    init(session: SessionProtocol) {
+      self.session = session
+    }
+        
     func popuralRecord(completion:@escaping(Result<[PopuralResponse], Error>) -> Void) {
-        AF.request(TodayTarget.popuralRecord, interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[PopuralResponse]>) in
+        session.request(TodayTarget.popuralRecord, interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[PopuralResponse]>) in
             switch response.result {
             case .success(let data):
                 completion(.success(data))
@@ -22,7 +28,7 @@ class TodayAPI {
     }
 
     func lovedRecord(userId: Int, completion:@escaping(Result<LovedResponse, Error>) -> Void) {
-        AF.request(TodayTarget.lovedRecord(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<LovedResponse>) in
+        session.request(TodayTarget.lovedRecord(userId: userId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<LovedResponse>) in
             switch response.result {
             case .success(let data):
                 completion(.success(data))
@@ -34,7 +40,7 @@ class TodayAPI {
     }
 
     func recommedRecord(completion:@escaping(Result<[RecommendDjResponse], Error>) -> Void) {
-        AF.request(TodayTarget.recommendDJRecord, interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[RecommendDjResponse]>) in
+        session.request(TodayTarget.recommendDJRecord, interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[RecommendDjResponse]>) in
             switch response.result {
             case .success(let data):
                 completion(.success(data))
@@ -46,7 +52,7 @@ class TodayAPI {
     }
 
     func todayTrackRecord(completion:@escaping(Result<TodayTrackResponse, Error>) -> Void) {
-        AF.request(TodayTarget.todayRecord, interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<TodayTrackResponse>) in
+        session.request(TodayTarget.todayRecord, interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<TodayTrackResponse>) in
             switch response.result {
             case .success(let data):
                 completion(.success(data))

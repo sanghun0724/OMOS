@@ -46,7 +46,6 @@ class SearchViewController: BaseViewController {
         super.viewDidLoad()
         selfView.searchViewController.searchBar.delegate = self
         navigationItem.rightBarButtonItems?.removeAll()
-        bind()
         selfView.emptyView.isHidden = true
         selfView.emptyView.descriptionLabel.text = "검색 결과가 없습니다."
         selfView.emptyView.imageView.isHidden = true
@@ -83,7 +82,7 @@ class SearchViewController: BaseViewController {
         loadingView.frame = view.bounds
     }
 
-    func bind() {
+    override func bind() {
         let isSearchEmpty = selfView.searchViewController.searchBar.rx.text
             .throttle(RxTimeInterval.milliseconds(100), scheduler: MainScheduler.instance)
             .map { text -> Bool in

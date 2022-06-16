@@ -9,8 +9,8 @@ import Foundation
 import RxSwift
 import UIKit
 
-class AllRecordCateLongDetailCell: UITableViewCell {
-    static let identifier = "AllRecordCateDetailCell"
+class AllRecordCateLongDetailCell: UITableViewCell, ConfigurableCell, ExpandableCellProtocol {
+    static let identifier = "AllRecordCateLongDetailCell"
     var disposeBag = DisposeBag()
     let myView = RecordLongView()
     
@@ -48,7 +48,7 @@ class AllRecordCateLongDetailCell: UITableViewCell {
         myView.mainLabelView.text = nil
     }
     
-    func configureModel(record: RecordResponse) {
+    func configure(record: RecordResponse) {
         myView.mainLabelView.text = record.recordContents
         myView.musicTitleLabel.text = record.music.musicTitle
         myView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
@@ -65,10 +65,10 @@ class AllRecordCateLongDetailCell: UITableViewCell {
         myView.scrapCountLabel.text = String(record.scrapCnt)
         
         let textCount = Array(record.recordContents).count
-        if textCount < 80 {
+        if textCount < 167 {
             myView.readMoreButton.isHidden = true
         } else {
-            myView.mainLabelView.numberOfLines = 3
+            myView.mainLabelView.numberOfLines = 5
             myView.mainLabelView.sizeToFit()
             myView.readMoreButton.isHidden = false
         }
@@ -89,4 +89,22 @@ class AllRecordCateLongDetailCell: UITableViewCell {
             myView.scrapCountLabel.textColor = .white
         }
     }
+    
+    func shrinkCell(_ hasSet:Bool) {
+        if hasSet {
+            self.myView.mainLabelView.numberOfLines = 0
+            self.myView.mainLabelView.sizeToFit()
+            self.myView.mainLabelView.setNeedsLayout()
+            self.myView.mainLabelView.layoutIfNeeded()
+            self.myView.readMoreButton.isHidden = true
+        }
+    }
+    
+    func cellHelper() {
+        self.layer.shouldRasterize = true
+        self.layer.rasterizationScale = UIScreen.main.scale
+        self.myView.lockButton.isHidden = true
+        self.selectionStyle = . none
+    }
+    
 }
