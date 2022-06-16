@@ -23,10 +23,8 @@ class ProfileViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
-        print("this is profile \(Account.currentUser)")
         viewModel.allFetch()
         setRefreshControl()
         NotificationCenter.default.addObserver(self, selector: #selector(didRecieveProfileReloadNotification), name: NSNotification.Name.follow, object: nil)
@@ -69,7 +67,7 @@ class ProfileViewController: BaseViewController {
         }
     }
 
-    func bind() {
+    override func bind() {
         viewModel.allLoading
             .subscribe(onNext: { [weak self] loading in
                 print(loading)

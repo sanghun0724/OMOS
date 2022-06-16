@@ -11,7 +11,6 @@ import UIKit
 class InfoController: UIViewController {
     let infoView: UITextView = {
         let info = UITextView()
-//        info.textContainer.lineBreakMode = .byTruncatingTail
         info.adjustsFontForContentSizeCategory = true
         info.allowsEditingTextAttributes = false
         info.backgroundColor = .mainBackGround
@@ -37,7 +36,6 @@ class InfoController: UIViewController {
             [.documentType: NSAttributedString.DocumentType.rtf]
         var dic: NSDictionary?
         let attText = try? NSAttributedString(url: url, options: opts, documentAttributes: &dic)
-//        let new = NSAttributedString(string: s.string, attributes: [.foregroundColor: UIColor.red])
         self.infoView.text = attText?.string
     }
 }

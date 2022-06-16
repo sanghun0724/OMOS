@@ -13,6 +13,8 @@ enum FollowTarget {
     case deleteFollow(fromId: Int, toId: Int)
     case myDjProfile(fromId: Int, toId: Int)
     case myDjList(userId: Int)
+    case followers(userId: Int)
+    case followings(userId: Int)
 }
 
 extension FollowTarget: TargetType {
@@ -26,6 +28,8 @@ extension FollowTarget: TargetType {
         case .deleteFollow: return .delete
         case .myDjProfile: return .get
         case .myDjList: return .get
+        case .followers: return .get
+        case .followings: return .get
         }
     }
 
@@ -35,6 +39,8 @@ extension FollowTarget: TargetType {
         case let .deleteFollow(from, to): return "/delete/\(from)/\(to)"
         case let .myDjProfile(from, to): return "/select/\(from)/\(to)"
         case .myDjList(let user): return "/select/myDj/\(user)"
+        case .followers(let user): return "/select/\(user)/follower"
+        case .followings(let user): return "/select/\(user)/following"
         }
     }
 

@@ -31,7 +31,6 @@ class ArtistSongViewController: BaseViewController, UIScrollViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
     }
@@ -51,7 +50,7 @@ class ArtistSongViewController: BaseViewController, UIScrollViewDelegate {
         }
     }
 
-    func bind() {
+    override func bind() {
         viewModel.artistTrack
             .subscribe({ [weak self] _ in
                 self?.hasNextPage = self?.viewModel.currentArtistTrack.count ?? 0 > 300 ? false : true

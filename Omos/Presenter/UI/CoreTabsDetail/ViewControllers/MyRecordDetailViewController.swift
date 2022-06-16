@@ -9,6 +9,7 @@ import MaterialComponents.MaterialBottomSheet
 import RxCocoa
 import RxSwift
 import UIKit
+import Kingfisher
 
 class MyRecordDetailViewController: BaseViewController {
     let scrollView = UIScrollView()
@@ -43,7 +44,6 @@ class MyRecordDetailViewController: BaseViewController {
         selfLyricsView.tableView.dataSource = self
         setNavigationItems()
         viewModel.myRecordDetailFetch(postId: postId, userId: userId)
-        bind()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -63,7 +63,7 @@ class MyRecordDetailViewController: BaseViewController {
     func didTapInstagram() {
         if category.isEmpty { return }
         showDecoView()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25 ) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2 ) {
             if let storyShareURL = URL(string: "instagram-stories://share") {
                 if UIApplication.shared.canOpenURL(storyShareURL) {
                     let renderer = UIGraphicsImageRenderer(size: self.view.bounds.size)
@@ -131,6 +131,17 @@ class MyRecordDetailViewController: BaseViewController {
         }
     }
     
+    private func parseWords(_ contents:String) -> [String] {
+        var lyricsArr: [String] = []
+        contents.enumerateSubstrings(in: contents.startIndex..., options: .byParagraphs) { substring, _, _, _ in
+            if  let substring = substring,
+                !substring.isEmpty {
+                lyricsArr.append(substring)
+            }
+        }
+        return lyricsArr
+    }
+    
     @objc
     func didTapMoreButton() {
         bottomSheet.mdc_bottomSheetPresentationController?.preferredSheetHeight = Constant.mainHeight * 0.194
@@ -185,7 +196,7 @@ class MyRecordDetailViewController: BaseViewController {
         }
     }
     
-    func bind() {
+    override func bind() {
         viewModel.loading
             .subscribe(onNext: { [weak self] loading in
                 self?.loadingView.isHidden = !loading
@@ -226,14 +237,7 @@ class MyRecordDetailViewController: BaseViewController {
                 if self?.viewModel.currentMyRecordDetail?.category == "LYRICS" {
                     guard let contents = self?.viewModel.currentMyRecordDetail?.recordContents else { return }
                     let vm = LyricsViewModel(usecase: uc)
-                    var lyricsArr: [String] = []
-                    contents.enumerateSubstrings(in: contents.startIndex..., options: .byParagraphs) { substring, _, _, _ in
-                        if  let substring = substring,
-                            !substring.isEmpty {
-                            lyricsArr.append(substring)
-                        }
-                    }
-                    vm.lyricsStringArray = lyricsArr
+                    vm.lyricsStringArray = self?.parseWords(contents) ?? []
                     vm.modifyDefaultModel = self?.viewModel.currentMyRecordDetail
                     let vc = LyricsPasteCreateViewController(viewModel: vm, type: .modify)
                     self?.navigationController?.pushViewController( vc, animated: true)
@@ -563,6 +567,5 @@ class MyRecordDetailViewController: BaseViewController {
         let defualtUrl = String(str[startIndex..<endIndex])
         
         self.viewModel.awsDeleteImage(request: .init(directory: "record", fileName: defualtUrl))
-        print(defualtUrl)
     }
 }

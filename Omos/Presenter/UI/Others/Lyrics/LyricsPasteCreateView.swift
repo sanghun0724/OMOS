@@ -160,7 +160,7 @@ class LyricsPasteCreateView: BaseView {
 
     let remainTextCount: UILabel = {
        let label = UILabel()
-        label.text = "0/380"
+        label.text = "0/1098"
         label.textColor = .mainGrey4
         return label
     }()
@@ -335,7 +335,7 @@ class LyricsPasteCreateView: BaseView {
         tableView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(titleImageView.snp.bottom)
-            self.tableHeightConstraint = make.height.greaterThanOrEqualTo(1_200).constraint
+            self.tableHeightConstraint = make.height.greaterThanOrEqualTo(10000).constraint
             make.bottom.equalTo(dummyLastView.snp.top).priority(751)
         }
         
@@ -369,6 +369,7 @@ class LyricsPasteCreateView: BaseView {
         lastView.addSubview(stickerLabel)
     }
     
+    /// calculate adjust LastView height when Keyboard show
     private func operateLastViewHeight() {
         let remainTextHeight = remainText.height + remainTextCount.height
         let remainTitleHeight = remainTitle.height + remainTitleCount.height

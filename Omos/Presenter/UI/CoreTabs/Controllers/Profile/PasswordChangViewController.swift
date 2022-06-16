@@ -24,7 +24,6 @@ class PasswordChangeViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
     }
 
     override func configureUI() {
@@ -38,7 +37,7 @@ class PasswordChangeViewController: BaseViewController {
         }
     }
 
-    func bind() {
+    override func bind() {
         selfView.buttonView.rx.tap
             .subscribe(onNext: { [weak self] _ in
                 guard let text = self?.selfView.passwordField.text else {

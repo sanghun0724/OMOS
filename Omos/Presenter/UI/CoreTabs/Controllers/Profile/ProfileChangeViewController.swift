@@ -27,7 +27,6 @@ class ProfileChangeViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
         selfView.nickNameField.text = viewModel.currentMyProfile?.profile.nickname
         guard let image = viewModel.currentMyProfile?.profile.profileURL else {
             return
@@ -46,7 +45,7 @@ class ProfileChangeViewController: BaseViewController {
         }
     }
 
-    func bind() {
+    override func bind() {
         selfView.cameraView.rx.tap
             .subscribe(onNext: { [weak self] _ in
                 let alert = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
@@ -57,7 +56,7 @@ class ProfileChangeViewController: BaseViewController {
                     }))
 
                     alert.addAction(UIAlertAction(title: "프로필 사진 삭제", style: .default, handler: { _ in
-                        self?.selfView.profileImageView.image = UIImage(named: "profile")
+                        self?.selfView.profileImageView.image = UIImage(named: "defaultprofile")
                     }))
 
                     alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: { _ in
@@ -132,7 +131,7 @@ class ProfileChangeViewController: BaseViewController {
 
 class ProfileChangView: BaseView {
     let profileImageView: UIImageView = {
-        let view = UIImageView(image: UIImage(named: "profile"))
+        let view = UIImageView(image: UIImage(named: "defaultprofile"))
         view.clipsToBounds = true
         view.contentMode = .scaleAspectFill
         return view

@@ -24,50 +24,17 @@ extension AllRecordCateDetailViewController: UITableViewDelegate, UITableViewDat
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            guard let record = viewModel.currentCateRecords[safe:indexPath.row] else { return UITableViewCell() }
-            switch self.myCateType {
-            case .lyrics:
-                let cell = tableView.dequeueReusableCell(withIdentifier: AllrecordLyricsTableCell.identifier, for: indexPath) as! AllrecordLyricsTableCell
-                cell.selfView.tableHeightConstraint?.deactivate()
-                cell.configureModel(record: record)
-                cell.selectionStyle = .none
-                cell.selfView.tableView.reloadData()
-
-                lyricsCellBind(cell: cell, data: record, indexPath: indexPath)
-                return cell
-            case .aLine:
-                let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateShortDetailCell.identifier, for: indexPath) as! AllRecordCateShortDetailCell
-                cell.configureModel(record: record)
-                shortCellBind(cell: cell, data: record)
-                cell.selectionStyle = .none
-                cell.myView.lockButton.isHidden = true
-                return cell
-            default:
-                let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateLongDetailCell.identifier, for: indexPath) as! AllRecordCateLongDetailCell
-                cell.configureModel(record: record)
-                //cell.layoutIfNeeded()
-                if expandedIndexSet.contains(indexPath.row) {
-                    cell.myView.mainLabelView.numberOfLines = 0
-                    cell.myView.mainLabelView.sizeToFit()
-                    cell.myView.mainLabelView.setNeedsLayout()
-                    cell.myView.mainLabelView.layoutIfNeeded()
-                    cell.myView.readMoreButton.isHidden = true
-                }
-                
-                cell.layer.shouldRasterize = true
-                cell.layer.rasterizationScale = UIScreen.main.scale
-                longCellBind(cell: cell, data: record, indexPath: indexPath)
-                cell.myView.lockButton.isHidden = true
-                cell.selectionStyle = . none
-                return cell
-            }
-        } else {
+        if indexPath.section != 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: LoadingCell.identifier, for: indexPath) as! LoadingCell
-
             cell.start()
             return cell
         }
+        guard let items = viewModel.items[safe:indexPath.row] else { return UITableViewCell() }
+        guard let records = viewModel.currentCateRecords[safe:indexPath.row] else { return UITableViewCell() }
+        let cell = tableView.dequeueReusableCell(withIdentifier: type(of: items).reuseId)!
+        items.configure(cell: cell, expandedIndexSet.contains(indexPath.row))
+        bindCell(cell: cell, data: records, indexPath: indexPath)
+        return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -100,19 +67,6 @@ extension AllRecordCateDetailViewController: UITableViewDelegate, UITableViewDat
         return  longCellHeights[indexPath] ?? UITableView.automaticDimension
     }
 
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.section == 0 {
-//            if self.myCateType == .asc || self.myCateType == .lyrics {
-//                return Constant.mainHeight * 0.63
-//            }
-//        }
-//        return UITableView.automaticDimension
-//    }
-
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-     
-    }
-
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if cell.height == 44.0 { return }
         shortCellHeights[indexPath] = cell.height
@@ -129,7 +83,21 @@ extension AllRecordCateDetailViewController: UITableViewDelegate, UITableViewDat
 }
 
 extension AllRecordCateDetailViewController {
-    func lyricsCellBind(cell: AllrecordLyricsTableCell, data: CategoryRespone, indexPath: IndexPath) {
+    private func bindCell(cell: UITableViewCell, data: RecordResponse, indexPath: IndexPath) {
+        switch self.myCateType {
+        case .lyrics:
+            guard let cell = cell as? AllrecordLyricsTableCell else { return }
+            lyricsCellBind(cell: cell, data: data, indexPath: indexPath)
+        case .aLine:
+            guard let cell = cell as? AllRecordCateShortDetailCell else { return }
+            shortCellBind(cell: cell as! AllRecordCateShortDetailCell, data: data)
+        default:
+            guard let cell = cell as? AllRecordCateLongDetailCell else { return }
+            longCellBind(cell: cell as! AllRecordCateLongDetailCell, data: data,indexPath: indexPath)
+        }
+    }
+    
+    func lyricsCellBind(cell: AllrecordLyricsTableCell, data: RecordResponse, indexPath: IndexPath) {
         cell.selfView.reportButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] _ in
@@ -196,7 +164,7 @@ extension AllRecordCateDetailViewController {
             }).disposed(by: cell.disposeBag)
     }
 
-    func shortCellBind(cell: AllRecordCateShortDetailCell, data: CategoryRespone) {
+    func shortCellBind(cell: AllRecordCateShortDetailCell, data: RecordResponse) {
         cell.myView.reportButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] _ in
@@ -263,7 +231,7 @@ extension AllRecordCateDetailViewController {
             }).disposed(by: cell.disposeBag)
     }
 
-    func longCellBind(cell: AllRecordCateLongDetailCell, data: CategoryRespone, indexPath: IndexPath) {
+    func longCellBind(cell: AllRecordCateLongDetailCell, data: RecordResponse, indexPath: IndexPath) {
         cell.myView.reportButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] _ in

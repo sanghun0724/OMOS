@@ -79,13 +79,23 @@ class LyricsPasteViewController: BaseViewController {
 
     @objc
     func didTapDone() {
-        if selfView.mainLyricsTextView.text == "해석하고 싶은 가사를 복사해 붙여놓고,\n줄바꿈을 통해 마디구분을 해주세요." || selfView.mainLyricsTextView.text.isEmpty {
-            print("비어이")
+        guard selfView.mainLyricsTextView.text != "해석하고 싶은 가사를 복사해 붙여놓고,\n줄바꿈을 통해 마디구분을 해주세요." && !selfView.mainLyricsTextView.text.isEmpty else {
             return
         }
+
+        let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
+        let uc = RecordsUseCase(recordsRepository: rp)
+        let vm = LyricsViewModel(usecase: uc)
+        vm.lyricsStringArray = parseWords()
+        vm.defaultModel = self.defaultModel
+        let vc = LyricsPasteCreateViewController(viewModel: vm, type: .create)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func parseWords() -> [String] {
         var lyricsArr: [String] = []
 
-        guard let text = selfView.mainLyricsTextView.text else { return }
+        guard let text = selfView.mainLyricsTextView.text else { return  [] }
 
         text.enumerateSubstrings(in: text.startIndex..., options: .byParagraphs) { substring, _, _, _ in
             if  let substring = substring,
@@ -93,14 +103,7 @@ class LyricsPasteViewController: BaseViewController {
                     lyricsArr.append(substring)
             }
         }
-
-        let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
-        let uc = RecordsUseCase(recordsRepository: rp)
-        let vm = LyricsViewModel(usecase: uc)
-        vm.lyricsStringArray = lyricsArr
-        vm.defaultModel = self.defaultModel
-        let vc = LyricsPasteCreateViewController(viewModel: vm, type: .create)
-        self.navigationController?.pushViewController(vc, animated: true)
+        return lyricsArr
     }
 
     override func configureUI() {
@@ -152,7 +155,7 @@ extension LyricsPasteViewController: UITextViewDelegate {
         if selfView.mainLyricsTextView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             selfView.mainLyricsTextView.text = "해석하고 싶은 가사를 복사해 붙여놓고,\n줄바꿈을 통해 마디구분을 해주세요."
             selfView.mainLyricsTextView.textColor = .mainGrey7
-            selfView.remainTextCount.text = "\(0)/250"
+            selfView.remainTextCount.text = "\(0)/1098"
         }
     }
 
@@ -162,14 +165,14 @@ extension LyricsPasteViewController: UITextViewDelegate {
         let newString = oldString.replacingCharacters(in: newRange, with: inputString).trimmingCharacters(in: .whitespacesAndNewlines)
         let characterCount = newString.count
 
-        guard characterCount <= 250 else {
+        guard characterCount <= 1098 else {
             let action = UIAlertAction(title: "확인", style: .default) { _ in
             }
             action.setValue(UIColor.mainOrange, forKey: "titleTextColor")
             self.presentAlert(title: "", with: action, message: "글자 제한수를 초과하였습니다. 글자 제한수를 확인해 주세요.", isCancelActionIncluded: false, preferredStyle: .alert)
             return false
         }
-        selfView.remainTextCount.text = "\(characterCount)/250"
+        selfView.remainTextCount.text = "\(characterCount)/1098"
 
         return true
     }

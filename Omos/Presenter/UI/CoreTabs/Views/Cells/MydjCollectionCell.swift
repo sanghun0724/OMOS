@@ -16,13 +16,21 @@ class MydjCollectionCell: UICollectionViewCell {
 
     var disposeBag = DisposeBag()
     var homeInfo: RecommendDjResponse?
-
+    
+    let boarderCoverView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.layer.borderWidth = 0
+        view.layer.borderColor = UIColor.mainGradient.cgColor
+        return view
+    }()
+    
     let djImageView: UIImageView = {
-       let imageView = UIImageView(image: UIImage(named: "albumCover"))
+        let imageView = UIImageView(image: UIImage(named: "albumCover"))
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         imageView.layer.borderWidth = 0
-        imageView.layer.borderColor = UIColor.mainOrange.cgColor
+        imageView.layer.borderColor = UIColor.mainGradient.cgColor
         return imageView
     }()
 
@@ -38,11 +46,13 @@ class MydjCollectionCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         configureUI()
-
         layoutIfNeeded()
         djImageView.layer.cornerCurve = .circular
         djImageView.layer.cornerRadius = djImageView.height / 2
+        boarderCoverView.layer.cornerCurve = .circular
+        boarderCoverView.layer.cornerRadius = boarderCoverView.height / 2
         djImageView.layer.masksToBounds = true
+        boarderCoverView.layer.masksToBounds = true
     }
 
     override func prepareForReuse() {
@@ -52,18 +62,23 @@ class MydjCollectionCell: UICollectionViewCell {
     }
 
     private func configureUI() {
-        self.addSubview(djImageView)
         self.addSubview(djLabel)
+        self.addSubview(boarderCoverView)
+        boarderCoverView.addSubview(djImageView)
         djLabel.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.18)
         }
 
-        djImageView.snp.makeConstraints { make in
+        boarderCoverView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(14)
             make.bottom.equalTo(djLabel.snp.top)
-            make.width.equalTo(djImageView.snp.height)
+            make.width.equalTo(boarderCoverView.snp.height)
             make.centerX.equalToSuperview()
+        }
+        
+        djImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(5)
         }
     }
 

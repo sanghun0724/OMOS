@@ -4,7 +4,7 @@
 //
 //  Created by sangheon on 2022/04/07.
 //
-
+import Alamofire
 import Foundation
 import RxCocoa
 import RxSwift
@@ -40,7 +40,6 @@ class EmailCheckViewController: BaseViewController {
         loadingView.isHidden = true
         loadingView.backgroundColor = .clear
         dismissKeyboardWhenTappedAround()
-        bind()
         for idx in 3...6 {
             topView.stack.arrangedSubviews[idx].isHidden = true
         }
@@ -70,7 +69,7 @@ class EmailCheckViewController: BaseViewController {
         }
     }
 
-    func bind() {
+    override func bind() {
         topView.coverView.backButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in
@@ -82,7 +81,7 @@ class EmailCheckViewController: BaseViewController {
             .drive(onNext: { [weak self] in
                 guard let isSuccess = self?.topView.emailCheckView.isSuccessView.isHidden else { return }
                 if !isSuccess {
-                    let rp = MyProfileRepositoryImpl(myProfileAPI: MyProfileAPI())
+                    let rp = MyProfileRepositoryImpl(myProfileAPI: MyProfileAPI(session: Session.default))
                     let uc = MyProfileUseCase(myProfileRepository: rp)
                     let vm = ProfileViewModel(usecase: uc)
                     let vc = PasswordChangeViewController(viewModel: vm)

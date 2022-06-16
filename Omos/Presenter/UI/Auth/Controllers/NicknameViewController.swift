@@ -36,18 +36,28 @@ class NickNameViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dismissKeyboardWhenTappedAround()
-        bind()
-
-//        LoginAPI.signUp(request: .init(email: "test2@email.com", nickname: "12345", password: "12345678")) { response in
-//            switch response {
-//            case .success(let data):
-//
-//                print(data)
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
-
+        addNotification()
+    }
+    
+    //viewwillDisappear작동하는지 확인필요
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        removeObject()
+    }
+    
+    private func addNotification() {
+        let notificationCenter = NotificationCenter.default
+            notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
+    }
+    
+    @objc func appMovedToBackground() {
+        UserDefaults.standard.set(1, forKey: "background")
+        print("App moved to background!")
+    }
+    
+    func removeObject() {
+        NotificationCenter.default.removeObserver(self)
+        UserDefaults.standard.removeObject(forKey: "background")
     }
 
     override func configureUI() {
@@ -68,13 +78,14 @@ class NickNameViewController: BaseViewController {
         }
     }
 
-    private func bind() {
+    override func bind() {
         viewModel.validSignUp.subscribe(onNext: { [weak self] event in
             if event {
                 self?.view.window?.rootViewController?.dismiss(animated: false, completion: {
 //                  let homeVC = TabBarViewController()
 //                  homeVC.modalPresentationStyle = .fullScreen
 //                    self?.present(homeVC,animated: true)
+                    self?.removeObject()
                     NotificationCenter.default.post(name: NSNotification.Name.loginInfo, object: nil, userInfo: nil)
                 })
             } else {

@@ -54,6 +54,7 @@ class CreateView: BaseView {
        let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
+        view.alpha = 0.4
         return view
     }()
 

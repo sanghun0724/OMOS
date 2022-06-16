@@ -26,7 +26,6 @@ class SearchAlbumDetailViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         viewModel.albumDetailFetch(albumId: albumInfo.albumID)
@@ -47,7 +46,7 @@ class SearchAlbumDetailViewController: BaseViewController {
         }
     }
 
-    func bind() {
+    override func bind() {
         viewModel.albumDetails
             .subscribe(onNext: { [weak self] _ in
                 self?.selfView.tableView.reloadData()

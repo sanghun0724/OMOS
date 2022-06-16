@@ -8,16 +8,21 @@
 import Foundation
 import RxSwift
 
+typealias LyricsCellConfig = TableCellConfigurator<AllrecordLyricsTableCell, RecordResponse>
+typealias ShortCellConfig = TableCellConfigurator<AllRecordCateShortDetailCell, RecordResponse>
+typealias LongCellConfig = TableCellConfigurator<AllRecordCateLongDetailCell, RecordResponse>
+
 class AllRecordCateDetailViewModel: BaseViewModel {
     let recentFilter = PublishSubject<Bool>()
     let likeFilter = PublishSubject<Bool>()
     let randomFilter = PublishSubject<Bool>()
     let loading = BehaviorSubject<Bool>(value: false)
-    let cateRecords = BehaviorSubject<[CategoryRespone]>(value: [])
-    var currentCateRecords: [CategoryRespone] = []
+    let cateRecords = BehaviorSubject<[RecordResponse]>(value: [])
+    var currentCateRecords: [RecordResponse] = []
     let reportState = PublishSubject<Bool>()
     let errorMessage = BehaviorSubject<String?>(value: nil)
     let usecase: RecordsUseCase
+    var items: [CellConfigurator] = []
 
     func selectRecordsShow(type: CateType, postId: Int?, size: Int, sort: String, userid: Int) {
         loading.onNext(true)
@@ -30,6 +35,7 @@ class AllRecordCateDetailViewModel: BaseViewModel {
                 switch event {
                 case .success(let data):
                     self?.currentCateRecords += data
+                    self?.appendDataToItems(type: type)
                     self?.cateRecords.onNext(data)
                 case .failure(let error):
                     print(error.localizedDescription)
@@ -37,7 +43,29 @@ class AllRecordCateDetailViewModel: BaseViewModel {
                 }
             }).disposed(by: disposeBag)
     }
-
+    
+    private func appendDataToItems(type: CateType) {
+        if type == .lyrics {
+            var tmpArr: [LyricsCellConfig] = []
+            for record in currentCateRecords {
+                tmpArr.append(.init(item: record))
+            }
+            items.append(contentsOf: tmpArr)
+        } else if type == .aLine {
+            var tmpArr: [ShortCellConfig] = []
+            for record in currentCateRecords {
+                tmpArr.append(.init(item: record))
+            }
+            items.append(contentsOf: tmpArr)
+        } else {
+            var tmpArr: [LongCellConfig] = []
+            for record in currentCateRecords {
+                tmpArr.append(.init(item: record))
+            }
+            items.append(contentsOf: tmpArr)
+        }
+    }
+    
     func numberofRows() -> Int {
         currentCateRecords.count
     }

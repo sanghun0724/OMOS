@@ -29,7 +29,6 @@ class SongViewController: BaseViewController, UIScrollViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         selfView.emptyView.isHidden = !(viewModel.currentTrack.isEmpty)
@@ -46,7 +45,7 @@ class SongViewController: BaseViewController, UIScrollViewDelegate {
         }
     }
 
-    func bind() {
+    override func bind() {
         viewModel.track
             .subscribe({ [weak self] _ in
                 self?.hasNextPage = self?.viewModel.currentTrack.count ?? 0 > 200 ? false : true

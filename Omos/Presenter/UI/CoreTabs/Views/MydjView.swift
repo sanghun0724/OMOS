@@ -56,7 +56,7 @@ class MydjView: BaseView {
             make.top.equalTo(collectionView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
-        emptyView.descriptionLabel.text = "구독한 DJ가 없습니다."
+        emptyView.descriptionLabel.text = "구독한 DJ 레코드가 없습니다."
         loadingView.backgroundColor = .mainBackGround
     }
 

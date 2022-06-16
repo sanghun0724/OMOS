@@ -27,20 +27,21 @@ extension MyDJViewController: UICollectionViewDataSource, UICollectionViewDelega
         collectionView.deselectItem(at: indexPath, animated: false)
         let cellData = viewModel.currentMyDjList[indexPath.row]
         guard let cell = collectionView.cellForItem(at: indexPath) as? MydjCollectionCell else { return }
-        if cell.djImageView.layer.borderWidth == 1 {
-            cell.djImageView.layer.borderWidth = 0
+        if cell.boarderCoverView.layer.borderWidth == 3 {
+            cell.boarderCoverView.layer.borderWidth = 0
             isDjcliked = false
             self.viewModel.currentMyDjRecord = []
+            self.viewModel.items = []
             viewModel.fetchMyDjRecord(userId: Account.currentUser, request: .init(postId: viewModel.currentMyDjRecord.last?.recordID, size: 6))
             self.selfView.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
             return
         }
         collectionView.visibleCells.forEach { cell in
             if let cell = cell as? MydjCollectionCell {
-                cell.djImageView.layer.borderWidth = 0
+                cell.boarderCoverView.layer.borderWidth = 0
             }
         }
-            cell.djImageView.layer.borderWidth = 1
+            cell.boarderCoverView.layer.borderWidth = 3
             isDjcliked = true
             viewModel.fetchUserRecords(fromId: Account.currentUser, toId: cellData.userID)
     }
@@ -53,11 +54,7 @@ extension MyDJViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            if isDjcliked {
-                return viewModel.currentUserRecrods.count
-            } else {
-                return viewModel.currentMyDjRecord.count
-            }
+            return viewModel.items.count
         } else if section == 1 && isPaging && hasNextPage {
             return 1
         }
@@ -66,60 +63,13 @@ extension MyDJViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let record: MyDjResponse
-
-            if isDjcliked {
-                guard let userRecord = viewModel.currentUserRecrods[safe: indexPath.row] else { return LoadingCell() }
-                 record = userRecord
+            guard let records = viewModel.currentMyDjRecord[safe: indexPath.row] else { return LoadingCell() }
+            guard let items = viewModel.items[safe:indexPath.row] else { return UITableViewCell() }
+            let cell = tableView.dequeueReusableCell(withIdentifier: type(of: items).reuseId)!
+            items.configure(cell: cell, expandedIndexSet.contains(indexPath.row))
+            bindCell(cell: cell, data: records, indexPath: indexPath, cate: records.category)
+            return cell
             } else {
-                guard let myDjRecord = viewModel.currentMyDjRecord[safe: indexPath.row] else { return LoadingCell() }
-                record = myDjRecord
-            }
-            switch record.category {
-            case "LYRICS":
-                let cell = tableView.dequeueReusableCell(withIdentifier: AllrecordLyricsTableCell.identifier, for: indexPath) as! AllrecordLyricsTableCell
-                cell.selfView.tableHeightConstraint?.deactivate()
-                cell.configureMyDjRecord(record: record)
-                cell.selfView.lockButton.isHidden = true
-                cell.selfView.tableView.reloadData()
-                lyricsCellBind(cell: cell, data: record, indexPath: indexPath)
-                cell.selectionStyle = . none
-                return cell
-            case "A_LINE":
-                let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateShortDetailCell.identifier, for: indexPath) as! AllRecordCateShortDetailCell
-                cell.configureMyDjRecord(record: record)
-                shortCellBind(cell: cell, data: record)
-                cell.myView.lockButton.isHidden = true
-                cell.selectionStyle = . none
-                return cell
-            default:
-                let cell = tableView.dequeueReusableCell(withIdentifier: AllRecordCateLongDetailCell.identifier, for: indexPath) as! AllRecordCateLongDetailCell
-                cell.configureMyDjRecord(record: record)
-                cell.layoutIfNeeded()
-
-                if expandedIndexSet.contains(indexPath.row) {
-                    // cell.layoutIfNeeded()
-                    cell.myView.mainLabelView.numberOfLines = 0
-                    cell.myView.mainLabelView.sizeToFit()
-                    cell.myView.mainLabelView.setNeedsLayout()
-                    cell.myView.mainLabelView.layoutIfNeeded()
-                    cell.myView.readMoreButton.isHidden = true
-                } else {
-                    if  cell.myView.mainLabelView.maxNumberOfLines < 4 {
-                        cell.myView.readMoreButton.isHidden = true
-                    } else {
-                        cell.myView.mainLabelView.numberOfLines = 3
-                        cell.myView.mainLabelView.sizeToFit()
-                        cell.myView.readMoreButton.isHidden = false
-                    }
-                }
-
-                cell.selectionStyle = . none
-                longCellBind(cell: cell, data: record)
-                cell.myView.lockButton.isHidden = true
-                return cell
-            }
-        } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: LoadingCell.identifier, for: indexPath) as! LoadingCell
 
             cell.start()
@@ -129,16 +79,7 @@ extension MyDJViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let record: MyDjResponse
-
-        if isDjcliked {
-            guard let userRecord = viewModel.currentUserRecrods[safe: indexPath.row] else { return }
-             record = userRecord
-        } else {
-            guard let myDjRecord = viewModel.currentMyDjRecord[safe: indexPath.row] else { return }
-            record = myDjRecord
-        }
-
+        guard let record = viewModel.currentMyDjRecord[safe: indexPath.row] else { return }
         if Account.currentUser == record.userID {
             let rp = RecordsRepositoryImpl(recordAPI: RecordAPI())
             let uc = RecordsUseCase(recordsRepository: rp)
@@ -155,22 +96,11 @@ extension MyDJViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.section == 0 {
-//            if record.category != "A_LINE" && record.category != "LYRICS" {
-//                return 500
-//            }
-//        }
-
-        return UITableView.automaticDimension
+         UITableView.automaticDimension
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.section == 0 {
-//            if record.category == "A_LINE" || record.category == "LYRICS" {
-//                return shortCellHeights[indexPath] ?? Constant.mainHeight * 0.63
-//            }
-//        }
-        return UITableView.automaticDimension
+         UITableView.automaticDimension
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -192,7 +122,21 @@ extension MyDJViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension MyDJViewController {
-    func lyricsCellBind(cell: AllrecordLyricsTableCell, data: MyDjResponse, indexPath: IndexPath) {
+    private func bindCell(cell: UITableViewCell, data: RecordResponse, indexPath: IndexPath, cate: String) {
+        switch cate {
+        case "LYRICS":
+            guard let cell = cell as? AllrecordLyricsTableCell else { return }
+            lyricsCellBind(cell: cell, data: data, indexPath: indexPath)
+        case "A_LINE":
+            guard let cell = cell as? AllRecordCateShortDetailCell else { return }
+            shortCellBind(cell: cell, data: data)
+        default:
+            guard let cell = cell as? AllRecordCateLongDetailCell else { return }
+            longCellBind(cell: cell, data: data)
+        }
+    }
+    
+    func lyricsCellBind(cell: AllrecordLyricsTableCell, data: RecordResponse, indexPath: IndexPath) {
         cell.selfView.reportButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] _ in
@@ -259,7 +203,7 @@ extension MyDJViewController {
             }).disposed(by: cell.disposeBag)
     }
 
-    func shortCellBind(cell: AllRecordCateShortDetailCell, data: MyDjResponse) {
+    func shortCellBind(cell: AllRecordCateShortDetailCell, data: RecordResponse) {
         cell.myView.reportButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] _ in
@@ -326,7 +270,7 @@ extension MyDJViewController {
             }).disposed(by: cell.disposeBag)
     }
 
-    func longCellBind(cell: AllRecordCateLongDetailCell, data: MyDjResponse) {
+    func longCellBind(cell: AllRecordCateLongDetailCell, data: RecordResponse) {
         cell.myView.reportButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] _ in

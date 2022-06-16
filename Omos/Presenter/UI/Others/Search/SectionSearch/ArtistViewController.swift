@@ -23,7 +23,6 @@ class ArtistViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         selfView.emptyView.isHidden = !(viewModel.currentArtist.isEmpty)
@@ -40,7 +39,7 @@ class ArtistViewController: BaseViewController {
         }
     }
 
-    func bind() {
+    override func bind() {
         viewModel.artist
             .subscribe({ [weak self] _ in
                 self?.selfView.emptyView.isHidden = !(self?.viewModel.currentArtist.isEmpty)!

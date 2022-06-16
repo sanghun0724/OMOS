@@ -304,7 +304,7 @@ class LyricsRecordView: BaseView {
         tableView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(titleImageView.snp.bottom)
-            self.tableHeightConstraint = make.height.equalTo(1_200).constraint
+            self.tableHeightConstraint = make.height.equalTo(10000).constraint
             self.subTableHeightConstraint = make.height.equalTo(Constant.mainHeight * 0.28).constraint
             make.bottom.equalTo(lastView.snp.top).priority(751)
         }

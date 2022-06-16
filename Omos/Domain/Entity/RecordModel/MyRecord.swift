@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - MyRecordElement
-struct MyRecordRespone: Codable {
+struct MyRecordResponse: Codable {
     let category, createdDate: String
     let isPublic: Bool
     let music: Music

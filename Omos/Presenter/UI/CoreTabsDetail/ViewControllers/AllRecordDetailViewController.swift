@@ -35,8 +35,6 @@ class AllRecordDetailViewController: BaseViewController {
         selfLyricsView.tableView.delegate = self
         selfLyricsView.tableView.dataSource = self
         viewModel.selectDetailFetch(postId: self.postId, userId: Account.currentUser)
-       // setNavigationItems()
-        bind()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -49,23 +47,12 @@ class AllRecordDetailViewController: BaseViewController {
         super.viewDidDisappear(animated)
     }
 
-    private func setNavigationItems() {
-        self.navigationItem.rightBarButtonItems?.removeAll()
-        let moreButton = UIBarButtonItem(image: UIImage(named: "more"), style: .plain, target: self, action: #selector(didTapMoreButton))
-        moreButton.tintColor = .white
-        self.navigationItem.rightBarButtonItems = [moreButton]
-    }
-
-    @objc
-    func didTapMoreButton() {
-    }
-
     override func configureUI() {
         self.view.addSubview(loadingView)
         loadingView.frame = view.bounds
     }
 
-    func bind() {
+    override func bind() {
         viewModel.selectDetail
             .take(1)
             .subscribe(onNext: { [weak self] data in

@@ -26,8 +26,6 @@ class MydjProfileViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        bind()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         self.navigationItem.rightBarButtonItems?.removeAll()
@@ -86,7 +84,7 @@ class MydjProfileViewController: BaseViewController {
         }
     }
 
-    func bind() {
+    override func bind() {
         viewModel.recordsLoading
             .subscribe(onNext: { [weak self] loading in
                 self?.selfView.loadingView.isHidden = !loading

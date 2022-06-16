@@ -13,12 +13,13 @@ class AllRecordSearchDetailViewModel: BaseViewModel {
     let likeFilter = PublishSubject<Bool>()
     let randomFilter = PublishSubject<Bool>()
     let loading = BehaviorSubject<Bool>(value: false)
-    let oneMusicRecords = PublishSubject<[OneMusicRecordRespone]>()
-    var currentOneMusicRecords: [OneMusicRecordRespone] = []
+    let oneMusicRecords = PublishSubject<[RecordResponse]>()
+    var currentOneMusicRecords: [RecordResponse] = []
     let reportState = PublishSubject<Bool>()
     let errorMessage = BehaviorSubject<String?>(value: nil)
     let isEmpty = BehaviorSubject<Bool>(value: false)
     let usecase: RecordsUseCase
+    var items:[CellConfigurator] = []
 
     func oneMusicRecordsFetch(musicId: String, request: OneMusicRecordRequest) {
         loading.onNext(true)
@@ -31,12 +32,28 @@ class AllRecordSearchDetailViewModel: BaseViewModel {
                 switch event {
                 case .success(let data):
                     self?.currentOneMusicRecords += data
+                    self?.appendDataToItems()
                     self?.oneMusicRecords.onNext(data)
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)
                     self?.oneMusicRecords.onNext([])
                 }
             }).disposed(by: disposeBag)
+    }
+    
+    private func appendDataToItems() {
+        for record in currentOneMusicRecords {
+            if record.category == "LYRICS" {
+                let cateData: LyricsCellConfig = .init(item: record)
+                items.append(cateData)
+            } else if record.category == "A_LINE" {
+                let cateData: ShortCellConfig = .init(item: record)
+                items.append(cateData)
+            } else {
+                let cateData: LongCellConfig = .init(item: record)
+                items.append(cateData)
+            }
+        }
     }
 
     // Interation

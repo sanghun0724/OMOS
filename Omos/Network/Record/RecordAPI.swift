@@ -33,8 +33,8 @@ class RecordAPI {
         }
     }
 
-    func categoryFetch(cateType: CateType, request: CateRequest, completion:@escaping(Result<[CategoryRespone], Error>) -> Void) {
-        AF.request(RecordTarget.category(cate: cateType, request: request), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[CategoryRespone]>) in
+    func categoryFetch(cateType: CateType, request: CateRequest, completion:@escaping(Result<[RecordResponse], Error>) -> Void) {
+        AF.request(RecordTarget.category(cate: cateType, request: request), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[RecordResponse]>) in
             switch response.result {
             case .success(let data):
                 print(data)
@@ -47,8 +47,8 @@ class RecordAPI {
         }
     }
 
-    func myRecordFetch(userid: Int, completion:@escaping(Result<[MyRecordRespone], Error>) -> Void) {
-        AF.request(RecordTarget.myRecord(userid: userid), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[MyRecordRespone]>) in
+    func myRecordFetch(userid: Int, completion:@escaping(Result<[MyRecordResponse], Error>) -> Void) {
+        AF.request(RecordTarget.myRecord(userid: userid), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[MyRecordResponse]>) in
             switch response.result {
             case .success(let data):
                 completion(.success(data))
@@ -115,8 +115,8 @@ class RecordAPI {
         }
     }
 
-    func oneMusicRecordFetch(musicId: String, request: OneMusicRecordRequest, completion:@escaping(Result<[OneMusicRecordRespone], Error>) -> Void) {
-        AF.request(RecordTarget.oneMusicRecord(musicId: musicId, request), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[OneMusicRecordRespone]>) in
+    func oneMusicRecordFetch(musicId: String, request: OneMusicRecordRequest, completion:@escaping(Result<[RecordResponse], Error>) -> Void) {
+        AF.request(RecordTarget.oneMusicRecord(musicId: musicId, request), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[RecordResponse]>) in
             switch response.result {
             case .success(let data):
                 print(data)
@@ -182,8 +182,8 @@ class RecordAPI {
     }
 
     // MARK: MyDj API
-    func myDjAllRecord(userId: Int, myDjRequest: MyDjRequest, completion:@escaping(Result<[MyDjResponse], Error>) -> Void) {
-        AF.request(RecordTarget.myDjAllRecord(userId: userId, myDjRequest), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[MyDjResponse]>) in
+    func myDjAllRecord(userId: Int, myDjRequest: MyDjRequest, completion:@escaping(Result<[RecordResponse], Error>) -> Void) {
+        AF.request(RecordTarget.myDjAllRecord(userId: userId, myDjRequest), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[RecordResponse]>) in
             switch response.result {
             case .success(let data):
                 print(data)
@@ -247,8 +247,8 @@ class RecordAPI {
         }
     }
 
-    func userRecords(fromId: Int, toId: Int, completion:@escaping(Result<[MyDjResponse], Error>) -> Void) {
-        AF.request(RecordTarget.userRecords(fromId: fromId, toId: toId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[MyDjResponse]>) in
+    func userRecords(fromId: Int, toId: Int, completion:@escaping(Result<[RecordResponse], Error>) -> Void) {
+        AF.request(RecordTarget.userRecords(fromId: fromId, toId: toId), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[RecordResponse]>) in
             switch response.result {
             case .success(let data):
                 print(data)

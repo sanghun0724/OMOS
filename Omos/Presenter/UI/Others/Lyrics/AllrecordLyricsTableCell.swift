@@ -11,19 +11,14 @@ import RxGesture
 import RxSwift
 import UIKit
 
-class AllrecordLyricsTableCell: UITableViewCell {
+class AllrecordLyricsTableCell: UITableViewCell, ConfigurableCell {
     static let identifier = "AllrecordLyricsTableCell"
     var disposeBag = DisposeBag()
     var hiddenFlag = true
     let selfView = LyricsRecordView()
     var lyricsText: String = "" {
         didSet {
-            lyricsText.enumerateSubstrings(in: lyricsText.startIndex..., options: .byParagraphs) { [weak self] substring, _, _, _ in
-                if  let substring = substring,
-                    !substring.isEmpty {
-                    self?.lyricsArr.append(substring)
-                }
-            }
+            parseWords()
         }
     }
     var lyricsArr: [String] = []
@@ -55,11 +50,20 @@ class AllrecordLyricsTableCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configureUI() {
+   private func configureUI() {
         self.contentView.addSubview(selfView)
 
         selfView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+    }
+    
+    private func parseWords() {
+        lyricsText.enumerateSubstrings(in: lyricsText.startIndex..., options: .byParagraphs) { [weak self] substring, _, _, _ in
+            if  let substring = substring,
+                !substring.isEmpty {
+                self?.lyricsArr.append(substring)
+            }
         }
     }
 
@@ -70,7 +74,7 @@ class AllrecordLyricsTableCell: UITableViewCell {
         disposeBag = DisposeBag()
     }
 
-    func configureModel(record: CategoryRespone) {
+    func configure(record: RecordResponse) {
         selfView.musicTitleLabel.text = record.music.musicTitle
         selfView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
         if selfView.subMusicInfoLabel.text?.first == " " {
@@ -102,77 +106,16 @@ class AllrecordLyricsTableCell: UITableViewCell {
             selfView.scrapCountLabel.textColor = .white
         }
     }
-
-    func configureOneMusic(record: OneMusicRecordRespone) {
-        selfView.musicTitleLabel.text = record.music.musicTitle
-        selfView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
-        if selfView.subMusicInfoLabel.text?.first == " " {
-            selfView.subMusicInfoLabel.text?.removeFirst()
-        }
-        selfView.circleImageView.setImage(with: record.music.albumImageURL)
-        selfView.imageView.setImage(with: record.recordImageURL ?? "")
-        selfView.titleTextView.text = record.recordTitle
-        self.lyricsText = record.recordContents
-        selfView.createdField.text = record.createdDate.toDate()
-        selfView.nicknameLabel.text = record.nickname
-        selfView.likeCountLabel.text = String(record.likeCnt)
-        selfView.scrapCountLabel.text = String(record.scrapCnt)
-        selfView.cateLabel.text = " | \(record.category.getReverseCate())"
-
-        if record.isLiked {
-            selfView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
-            selfView.likeCountLabel.textColor = .mainOrange
-        } else {
-            selfView.likeButton.setImage(UIImage(named: "emptyLove"), for: .normal)
-            selfView.likeCountLabel.textColor = .white
-        }
-
-        if record.isScraped {
-            selfView.scrapButton.setImage( UIImage(named: "fillStar"), for: .normal)
-            selfView.scrapCountLabel.textColor = .mainOrange
-        } else {
-            selfView.scrapButton.setImage( UIImage(named: "emptyStar"), for: .normal)
-            selfView.scrapCountLabel.textColor = .white
-        }
-    }
-
-    func configureMyDjRecord(record: MyDjResponse) {
-        selfView.musicTitleLabel.text = record.music.musicTitle
-        selfView.subMusicInfoLabel.text = record.music.artists.map { $0.artistName }.reduce("") { $0 + " \($1)" } + "- \(record.music.albumTitle)"
-        if selfView.subMusicInfoLabel.text?.first == " " {
-            selfView.subMusicInfoLabel.text?.removeFirst()
-        }
-        selfView.circleImageView.setImage(with: record.music.albumImageURL)
-        selfView.imageView.setImage(with: record.recordImageURL ?? "")
-        selfView.titleTextView.text = record.recordTitle
-        self.lyricsText = record.recordContents
-        selfView.createdField.text = record.createdDate.toDate()
-        selfView.nicknameLabel.text = record.nickname
-        selfView.likeCountLabel.text = String(record.likeCnt)
-        selfView.scrapCountLabel.text = String(record.scrapCnt)
-        selfView.cateLabel.text = " | \(record.category.getReverseCate())"
-
-        if record.isLiked {
-            selfView.likeButton.setImage(UIImage(named: "fillLove"), for: .normal)
-            selfView.likeCountLabel.textColor = .mainOrange
-        } else {
-            selfView.likeButton.setImage(UIImage(named: "emptyLove"), for: .normal)
-            selfView.likeCountLabel.textColor = .white
-        }
-
-        if record.isScraped {
-            selfView.scrapButton.setImage( UIImage(named: "fillStar"), for: .normal)
-            selfView.scrapCountLabel.textColor = .mainOrange
-        } else {
-            selfView.scrapButton.setImage( UIImage(named: "emptyStar"), for: .normal)
-            selfView.scrapCountLabel.textColor = .white
-        }
+    
+    func cellHelper() {
+        self.selfView.tableHeightConstraint?.deactivate()
+        self.selectionStyle = .none
+        self.selfView.tableView.reloadData()
     }
 }
 
 extension AllrecordLyricsTableCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print( "cell count \(lyricsArr.count)")
         return lyricsArr.count
     }
 

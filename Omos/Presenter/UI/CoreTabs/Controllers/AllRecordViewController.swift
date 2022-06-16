@@ -27,7 +27,6 @@ class AllRecordViewController: BaseViewController {
         super.viewDidLoad()
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
-        bind()
         viewModel.selectRecordsShow()
         setRightItems()
         setRefreshControl()
@@ -79,7 +78,7 @@ class AllRecordViewController: BaseViewController {
         }
     }
 
-    func bind() {
+    override func bind() {
         viewModel.selectRecords
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in

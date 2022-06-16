@@ -10,39 +10,56 @@ import RxSwift
 
 class MyDjViewModel: BaseViewModel {
     let cellHeight = PublishSubject<IndexPath>()
-    let myDjRecord = PublishSubject<[MyDjResponse]>()
-    var currentMyDjRecord: [MyDjResponse] = []
+    let myDjRecord = PublishSubject<[RecordResponse]>()
+    var currentMyDjRecord: [RecordResponse] = []
     let myDjList = PublishSubject<[MyDjListResponse]>()
     var currentMyDjList: [MyDjListResponse] = []
     let loading = PublishSubject<Bool>()
     let isEmpty = BehaviorSubject<Bool>(value: false)
     let errorMessage = BehaviorSubject<String?>(value: nil)
 
-    let userRecords = PublishSubject<[MyDjResponse]>()
-    var currentUserRecrods: [MyDjResponse] = []
+//    let userRecords = PublishSubject<[RecordResponse]>()
+//    var currentUserRecrods: [RecordResponse] = []
     let recordsLoading = PublishSubject<Bool>()
 
     let reportState = PublishSubject<Bool>()
     let usecase: RecordsUseCase
+    
+    var items: [CellConfigurator] = []
 
     func fetchMyDjRecord(userId: Int, request: MyDjRequest) {
         loading.onNext(true)
         usecase.myDjAllRecord(userId: userId, myDjRequest: request)
-            .map {
-                $0.filter { !Account.currentReportRecordsId.contains($0.recordID) }
-            }
             .subscribe({ [weak self] result in
                 self?.loading.onNext(false)
                 switch result {
                 case .success(let data):
                     self?.currentMyDjRecord += data
+                    self?.appendDataToItems(data)
+                    print("test count\(data.count)")
+                    print("test Item:\(self?.items.count)")
                     self?.myDjRecord.onNext(data)
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)
                 }
             }).disposed(by: disposeBag)
     }
-
+    
+    private func appendDataToItems(_ myDjRecord: [RecordResponse]) {
+        for record in myDjRecord {
+            if record.category == "LYRICS" {
+                let cateData: LyricsCellConfig = .init(item: record)
+                items.append(cateData)
+            } else if record.category == "A_LINE" {
+                let cateData: ShortCellConfig = .init(item: record)
+                items.append(cateData)
+            } else {
+                let cateData: LongCellConfig = .init(item: record)
+                items.append(cateData)
+            }
+        }
+    }
+    
     func fetchUserRecords(fromId: Int, toId: Int) {
         recordsLoading.onNext(true)
         usecase.userRecords(fromId: fromId, toId: toId)
@@ -50,8 +67,10 @@ class MyDjViewModel: BaseViewModel {
                 self?.recordsLoading.onNext(false)
                 switch event {
                 case .success(let data):
-                    self?.currentUserRecrods = data
-                    self?.userRecords.onNext(data)
+                    self?.currentMyDjRecord = data
+                    self?.items = []
+                    self?.appendDataToItems(self!.currentMyDjRecord)
+                    self?.myDjRecord.onNext(data)
                 case .failure(let error):
                     self?.errorMessage.onNext(error.localizedDescription)
                 }
@@ -126,7 +145,7 @@ class MyDjViewModel: BaseViewModel {
         myDjRecord
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                if owner.currentMyDjRecord.isEmpty {
+                if owner.items.isEmpty {
                     owner.isEmpty.onNext(true)
                 } else {
                     owner.isEmpty.onNext(false)

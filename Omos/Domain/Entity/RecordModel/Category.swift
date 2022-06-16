@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: CategoryRespone
 
-struct CategoryRespone: Codable {
+struct RecordResponse: Codable {
     let music: Music
     let recordID: Int
     let recordTitle, recordContents: String

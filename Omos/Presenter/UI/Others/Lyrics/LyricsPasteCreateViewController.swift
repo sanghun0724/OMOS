@@ -26,10 +26,11 @@ class LyricsPasteCreateViewController: BaseViewController {
     var totalString = 0
     var textTagCount = 1
     var textCellsArray: [Int]
-    lazy var awsHelper = AWSS3Helper()
+    let awsHelper = AWSS3Helper()
     let stickerChoiceView = StickerView()
     var animator: UIDynamicAnimator?
     var selectedSticker: IRStickerView?
+    var previousWidth:CGFloat = 0.0
     
     init(viewModel: LyricsViewModel, type: CreateType) {
         self.viewModel = viewModel
@@ -47,7 +48,6 @@ class LyricsPasteCreateViewController: BaseViewController {
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         selfView.titleTextView.delegate = self
-        bind()
         animator = UIDynamicAnimator.init(referenceView: selfView.tableView)
         
         if type == .create { setCreateViewinfo() } else { setModifyView() }
@@ -136,7 +136,6 @@ class LyricsPasteCreateViewController: BaseViewController {
                 content += (desc + "\n")
             }
         }
-        print(content)
         if selfView.titleTextView.text.isEmpty || selfView.titleTextView.text == "레코드 제목을 입력해주세요" || !state {
             setAlert()
             return
@@ -239,10 +238,10 @@ class LyricsPasteCreateViewController: BaseViewController {
         selfView.titleTextView.textColor = .white
         selfView.imageView.setImage(with: viewModel.modifyDefaultModel?.recordImageURL ?? "")
         selfView.remainTitleCount.text = "\(viewModel.modifyDefaultModel?.recordTitle.count ?? 0)/36"
-        selfView.remainTextCount.text = "\(viewModel.modifyDefaultModel?.recordContents.count ?? 0)/380"
+        selfView.remainTextCount.text = "\(viewModel.modifyDefaultModel?.recordContents.count ?? 0)/1098"
     }
     
-    private func bind() {
+    override func bind() {
         selfView.imageAddButton.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] _ in
@@ -290,10 +289,6 @@ class LyricsPasteCreateViewController: BaseViewController {
                 self?.scrollView.layoutIfNeeded()
                 self?.scrollView.setContentOffset(CGPoint(x: 0, y: (self?.scrollView.contentSize.height)! - (self?.scrollView.bounds.size.height)!), animated: true)
             }).disposed(by: disposeBag)
-        
-//        viewModel.loading
-//            .subscribe(onNext: { [weak self] _ in
-//            }).disposed(by: disposeBag)
         
         selfView.lockButton.rx.tap
             .scan(false) { lastState, _ in
@@ -419,7 +414,6 @@ class LyricsPasteCreateViewController: BaseViewController {
         let picker = YPImagePicker(configuration: config)
         picker.didFinishPicking { [unowned picker] items, cancelled in
             if let photo = items.singlePhoto {
-                print(photo.image) // Final image selected by the user
                 let cropViewController = Mantis.cropViewController(image: photo.image)
                 cropViewController.delegate = self
                 cropViewController.modalPresentationStyle = .fullScreen
@@ -468,7 +462,7 @@ extension LyricsPasteCreateViewController: UITextViewDelegate {
             if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 textView.text = "가사해석을 적어주세요"
                 textView.textColor = .mainGrey7
-                // selfView.remainTextCount.text = "\(0)/250"
+                // selfView.remainTextCount.text = "\(0)/1100"
             }
         }
     }
@@ -484,24 +478,22 @@ extension LyricsPasteCreateViewController: UITextViewDelegate {
         } else {
             textCellsArray[textView.tag] = characterCount
             totalString = textCellsArray.reduce(0, +)
-            guard totalString <= 380 else { return false }
-            selfView.remainTextCount.text = "\(totalString)/380"
+            guard totalString <= 1_098 else { return false }
+            selfView.remainTextCount.text = "\(totalString)/1098"
         }
         
         return true
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        let size = textView.bounds.size
-        let newSize = selfView.tableView.sizeThatFits(CGSize(width: size.width,
-                                                             height: CGFloat.greatestFiniteMagnitude))
-        
-        if size.height != newSize.height {
-            UIView.setAnimationsEnabled(false)
-            selfView.tableView.beginUpdates()
-            selfView.tableHeightConstraint!.update(offset: selfView.tableView.contentSize.height )
-            selfView.tableView.endUpdates()
-            UIView.setAnimationsEnabled(true)
+        let pos = textView.endOfDocument
+        let currentRect = textView.caretRect(for: pos)
+        if currentRect.origin.x == 0.0 {
+                                    UIView.setAnimationsEnabled(false)
+                                    selfView.tableView.beginUpdates()
+                                    selfView.tableHeightConstraint!.update(offset: selfView.tableView.contentSize.height )
+                                    selfView.tableView.endUpdates()
+                                    UIView.setAnimationsEnabled(true)
         }
     }
 }
